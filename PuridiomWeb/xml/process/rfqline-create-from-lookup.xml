@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="rfqLineCreateFromLookup" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="rfqLineCreate">
+			<task synchronous="true" continue-on-failure="false" name="rfqHeader">			
+				<task-object-name>com.tsa.puridiom.rfqheader.tasks.RfqHeaderRetrieveById</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="rfqLineSetupForLookup">			
+				<task-object-name>com.tsa.puridiom.rfqline.tasks.RfqLineSetupForLookup</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="rfqLineSetup">
+				<task-object-name>com.tsa.puridiom.rfq.tasks.RfqHeaderLinesMapUdfs</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="rfqLineSetupUmFactor">
+				<task-object-name>com.tsa.puridiom.rfqline.tasks.RfqLineSetupUmFactor</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="RfqLine_rfqLine">			
+				<task-object-name>com.tsa.puridiom.rfqline.tasks.RfqLineGetNewRfqLineNumber</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="rfqLine">			
+				<task-object-name>com.tsa.puridiom.rfqline.tasks.RfqLineSetValues</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="rfqLine">			
+ 				<rule-filename>is-create-save.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.rfqline.tasks.RfqLineAdd</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="retrieveVendorList">
+			<task synchronous="true" continue-on-failure="false" name="vendorList">			
+				<task-object-name>com.tsa.puridiom.rfqvendor.tasks.RfqVendorRetrieveSetup</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="rfqVendorList">			
+				<task-object-name>com.tsa.puridiom.rfqvendor.tasks.RfqVendorRetrieveByHeader</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="rfqBidAddList">
+			<rule-filename>is-vendorlist-not-empty.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="rfqBidList">
+				<task-object-name>com.tsa.puridiom.rfqbid.tasks.RfqBidAddForLine</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="vendorRegistration" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="vendorRegisterNew">
+			<task synchronous="true" continue-on-failure="false" name="registerUser">
+				<task-object-name>com.tsa.puridiom.supplierportal.registration.tasks.RegisterUserSetVendorId</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="registerQualifiedContactSetup">
+				<task-object-name>com.tsa.puridiom.supplierportal.registration.tasks.RegisterQualifiedContact</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="addContact">
+			<task synchronous="true" continue-on-failure="false" name="contactSetup">    			
+				<task-object-name>com.tsa.puridiom.contact.tasks.ContactAddSetup</task-object-name>    
+				<post-action />    
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="Contact_contactCode">    			
+				<task-object-name>com.tsa.puridiom.contact.tasks.ContactSelectMax</task-object-name>    
+				<post-action />    
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="contact">
+				<task-object-name>com.tsa.puridiom.contact.tasks.ContactSetValues</task-object-name>    
+				<post-action />    
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="contact">    			
+				<task-object-name>com.tsa.puridiom.contact.tasks.ContactAdd</task-object-name>    
+				<post-action />    
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="bidboardUser">
+				<rule-filename check-for-false="true">is-contact-empty</rule-filename>
+				<task-object-name>com.tsa.puridiom.supplierportal.tasks.BidBoardUserSetValuesFromContact</task-object-name>
+				<post-action>exitActivity</post-action>
+			</task>  			
+		</activity>
+	</activities>
+</process>

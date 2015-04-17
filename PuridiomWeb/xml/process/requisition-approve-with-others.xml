@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="requisitionApprove" connection-type="Transaction-Required">
+	<activities>
+    <activity synchronous="true" continue-on-failure="false" name="requisitionApproveAndForward">
+    	<task synchronous="true" continue-on-failure="false" name="approvalSetup">
+        	<task-object-name>com.tsa.puridiom.requisition.tasks.RequisitionApprovalSetup</task-object-name>
+        	<post-action></post-action>
+      	</task>
+      	<task synchronous="true" continue-on-failure="false" name="requisitionHeader">
+        	<task-object-name>com.tsa.puridiom.requisitionheader.tasks.RequisitionHeaderRetrieveById</task-object-name>
+        	<post-action></post-action>
+      	</task>
+      	<task synchronous="true" continue-on-failure="false" name="requisitionForwardSetup">
+        	<task-object-name>com.tsa.puridiom.requisitionheader.tasks.RequisitionHeaderUpdateSetup</task-object-name>
+        	<post-action></post-action>
+      	</task>
+      	<task synchronous="true" continue-on-failure="false" name="requisitionLineList">
+        	<task-object-name>com.tsa.puridiom.requisitionline.tasks.RequisitionLineRetrieveByHeader</task-object-name>
+        	<post-action></post-action>
+      	</task>
+      	<task synchronous="true" continue-on-failure="false" name="approveForwardToNext">
+        	<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+        	<process-filename>requisition-forward-to-next.xml</process-filename>
+        	<post-action></post-action>
+      	</task>
+      	<task synchronous="true" continue-on-failure="false" name="requisitionSetStatus">
+        	<task-object-name>com.tsa.puridiom.requisition.tasks.RequisitionSetStatus</task-object-name>
+        	<post-action></post-action>
+      	</task>
+       	<task synchronous="true" continue-on-failure="false" name="requisitionSetRqSubType">
+        	<task-object-name>com.tsa.puridiom.requisition.tasks.RequisitionSetRqSubType</task-object-name>
+        	<post-action></post-action>
+      	</task>
+		<task synchronous="true" continue-on-failure="false" name="approveForwardToNext">
+        	<task-object-name>com.tsa.puridiom.requisition.tasks.RequisitionSetApprovedData</task-object-name>
+      	</task>
+      	<task synchronous="true" continue-on-failure="false" name="requisitionHeaderUpdate">
+        	<task-object-name>com.tsa.puridiom.requisitionheader.tasks.RequisitionHeaderUpdate</task-object-name>
+        	<post-action></post-action>
+      	</task>
+      	<task synchronous="true" continue-on-failure="false" name="requisitionLineUpdate">
+        	<task-object-name>com.tsa.puridiom.requisitionline.tasks.RequisitionLineUpdateList</task-object-name>
+        	<post-action></post-action>
+      	</task>
+    </activity>
+	<activity synchronous="true" continue-on-failure="false" name="requisitionHeaderUpdateAppBy">
+		<rule-filename>is-update-app-by-active.xml</rule-filename>
+		<task synchronous="true" continue-on-failure="false" name="requisitionHeaderUpdateAppBy">
+			<task-object-name>com.tsa.puridiom.requisitionheader.tasks.RequisitionHeaderUpdateAppBy</task-object-name>
+		</task>
+    </activity>
+    <activity synchronous="true" continue-on-failure="false" name="autorelease">
+    	<rule-filename>is-req-approved.xml</rule-filename>
+         	<task synchronous="true" continue-on-failure="false" name="autorelease">
+        	<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+        	<process-filename>requisition-is-approved.xml</process-filename>
+        	<post-action></post-action>
+      	</task>
+    </activity>
+	<activity synchronous="true" continue-on-failure="false" name="requisitionCheckRequestExtract">
+        	<rule-filename>is-req-approved.xml;is-check-request.xml</rule-filename>
+    			<task synchronous="true" continue-on-failure="false" name="extractByAccount">
+				<rule-filename>is-sungard-checkrequest-extract-active.xml</rule-filename>
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>sungard-checkrequest-extract-start.xml</process-filename>
+			</task>
+    </activity>
+    <activity synchronous="true" continue-on-failure="false" name="requisitionReflectStatus">
+    	<rule-filename check-for-false="true">is-msr-request.xml</rule-filename>
+		<task synchronous="true" continue-on-failure="false" name="requisitionReflectStatus">
+			<task-object-name>com.tsa.puridiom.requisition.tasks.RequisitionReflectStatus</task-object-name>
+			<post-action></post-action>
+		</task>
+	</activity>
+	</activities>
+</process>

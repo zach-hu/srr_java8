@@ -1,0 +1,68 @@
+<browse_po_header>
+	<columns>
+		<PoHeader_poType>
+			<label>Type</label>
+			<type>ORDER-TYPE</type>
+			<size>15</size>
+		</PoHeader_poType>
+		<PoHeader_icPoHeader>
+			<label>Ic Po Header</label>
+	        <hidden>Y</hidden>
+	        <visible>0</visible>
+		</PoHeader_icPoHeader>
+		<PoHeader_poNumber>
+			<label>PO #</label>
+			<sort>D</sort>
+			<link><![CDATA[javascript: createInvoiceFromOrder('#PoHeader_icPoHeader^','#PoHeader_poType^'); void(0);]]></link>
+			<size>8</size>
+		</PoHeader_poNumber>
+		<PoHeader_releaseNumber>
+			<label>Release</label>
+			<type>STRING</type>
+			<size>4</size>
+		</PoHeader_releaseNumber>
+		<PoHeader_status>
+			<label>Status</label>
+			<type>STATUS</type>
+			<size>15</size>
+		</PoHeader_status>
+		<PoHeader_poDate>
+			<label>PO Date</label>
+			<type>DATE</type>
+			<size>10</size>
+		</PoHeader_poDate>
+		<PoHeader_vendorId>
+			<label>Supplier</label>
+			<hidden>Y</hidden>
+		</PoHeader_vendorId>
+		<PoHeader_vendorName>
+			<label>Supplier Name</label>
+			<size>22</size>
+		</PoHeader_vendorName>
+		<!--PoHeader_buyerCode>
+			<label>Buyer</label>
+            <size>12</size>
+            <type>USER-ID</type>
+		</PoHeader_buyerCode-->
+		<PoHeader_total>
+			<label>Total</label>
+			<size>8</size>
+			<type>DollarDecimal</type>
+		</PoHeader_total>
+		<PoHeader_internalComments>
+			<label>Purpose</label>
+			<detail>Y</detail>
+		</PoHeader_internalComments>
+		<PoHeader_expirationDate>
+			<label>Expiration Date</label>
+			<type>DATE</type>
+			<size>10</size>
+			<visible>0</visible>
+		</PoHeader_expirationDate>
+	</columns>
+<sqlfrom>PoHeader as PoHeader</sqlfrom>
+<sqlwhere><![CDATA[PoHeader.status >= '3030' AND PoHeader.status < '4015' AND PoHeader.lastRevision = 'C']]></sqlwhere>
+<sqlorderby>PoHeader.poNumber DESC, PoHeader.releaseNumber DESC</sqlorderby>
+<pagesize>15</pagesize>
+<title>Purchasing Browse</title>
+</browse_po_header>

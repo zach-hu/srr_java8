@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="InvoiceCreate" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="invoiceCreate">
+			<task synchronous="true" continue-on-failure="false" name="invoiceCreateSetup">
+				<task-object-name>com.tsa.puridiom.invoice.tasks.InvoiceCreateSetup</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="invoiceCreateSetup">
+				<task-object-name>com.tsa.puridiom.supplierportal.invoice.tasks.InvoiceCreateFromBidBoardSetup</task-object-name>
+			</task>
+		</activity>
+		<activity continue-on-failure="false" synchronous="true" name="retrieveVendor">
+			<task synchronous="true" continue-on-failure="false" name="invoiceVendor">
+				<task-object-name>com.tsa.puridiom.invoicevendor.tasks.InvoiceVendorRetrieveById</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="invoiceAddress">
+				<task-object-name>com.tsa.puridiom.invoiceaddress.tasks.InvoiceAddressRetrieveRemitTo</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="invoiceAddress">
+				<rule-filename>is-invoice-address-empty</rule-filename>
+				<task-object-name>com.tsa.puridiom.invoiceaddress.tasks.InvoiceAddressRetrieveById</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="invoiceCreate">
+			<task synchronous="true" continue-on-failure="false" name="invoiceHeader">
+				<task-object-name>com.tsa.puridiom.invoiceheader.tasks.InvoiceHeaderSetValues</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="invoiceHeaderAdd">
+				<rule-filename></rule-filename>
+				<task-object-name>com.tsa.puridiom.invoiceheader.tasks.InvoiceHeaderAdd</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+	 </activities>
+</process>

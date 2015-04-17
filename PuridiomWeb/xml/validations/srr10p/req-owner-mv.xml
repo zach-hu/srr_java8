@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rule>
+	<clause type="NotEmpty">
+		<left-side>
+			<source>incomingRequestObjectMethod</source>
+			<object>header</object>
+			<name>getOwner</name>
+		</left-side>
+	</clause>
+	<logical-operator>AND</logical-operator>
+	<clause type="lookup" elementSource="true">
+		<sql> from UserProfile as userProfile where userProfile.userId = '@userid@' AND userProfile.fpe = 'Y' AND (userProfile.status = '02' OR (userProfile.status = '01' AND userProfile.dateExpires >= @today@))</sql>
+		<source>header</source>
+		<arguments>
+			<name>userid</name>
+			<source>header</source>
+			<colName>getOwner</colName>
+		</arguments>
+	</clause>
+</rule>

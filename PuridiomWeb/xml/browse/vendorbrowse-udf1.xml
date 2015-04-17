@@ -1,0 +1,21 @@
+<browse_app-udf1>
+	<columns>
+		<Vendor_vendorId>
+			<label>appruleudf1</label>
+			<link><![CDATA[javascript: returnMe('#Vendor_vendorId^'); void(0);]]></link>
+			<size>15</size>
+		</Vendor_vendorId>
+		<Vendor_vendorName>
+			<label>description</label>
+			<hidden-input>Y</hidden-input>
+			<size>45</size>
+			<sort>A</sort>
+			<filter-default>Y</filter-default>
+		</Vendor_vendorName>
+	</columns>
+<sqlfrom>Vendor as Vendor</sqlfrom>
+<sqlwhere><![CDATA[ (Vendor.status = '02' or (Vendor.status = '01' and Vendor.dateExpires >= :as_today)))]]></sqlwhere>
+<sqlorderby>Vendor.vendorId ASC</sqlorderby>
+<pagesize>15</pagesize>
+<title>Approval Rule Browse</title>
+</browse_app-udf1>

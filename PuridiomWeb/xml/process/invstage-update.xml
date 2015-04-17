@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="invStageUpdate" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="updateInvStage">
+			<task synchronous="true" continue-on-failure="false" name="invStage">
+				<task-object-name>com.tsa.puridiom.invstage.tasks.InvStageRetrieveById</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="invStage">
+				<task-object-name>com.tsa.puridiom.invstage.tasks.InvStageSetValues</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="invStage">
+				<task-object-name>com.tsa.puridiom.invstage.tasks.InvStageUpdate</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+	</activities>
+</process>

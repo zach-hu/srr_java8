@@ -1,0 +1,127 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping>
+
+<!--
+    Created by Middlegen Hibernate plugin
+
+    http://boss.bekk.no/boss/middlegen/
+    http://hibernate.sourceforge.net/
+-->
+<class
+    name="com.tsa.puridiom.entity.AppRulesExt"
+    table="APP_RULES_EXT"
+>
+    <composite-id name="comp_id" class="com.tsa.puridiom.entity.AppRulesExtPK">
+        <key-property name="ruleNumber" column="RULE_NUMBER" type="java.math.BigDecimal"/>
+        <key-property name="ruleType" column="RULE_TYPE" type="java.lang.String"/>
+    </composite-id>
+    <property
+        name="ruleOrder"
+        type="java.math.BigDecimal"
+        column="RULE_ORDER"
+        length="5"
+    />
+    <property
+        name="ruleFilename"
+        type="java.lang.String"
+        column="RULE_FILENAME"
+        length="60"
+    />
+    <property
+        name="routto"
+        type="java.lang.String"
+        column="ROUTTO"
+        length="15"
+    />
+    <property
+        name="ruleAction"
+        type="java.lang.String"
+        column="RULE_ACTION"
+        length="1"
+    />
+    <property
+        name="ruleText"
+        type="java.lang.String"
+        column="RULE_TEXT"
+        length="255"
+    />
+    <property
+        name="notes"
+        type="java.lang.String"
+        column="NOTES"
+        length="60"
+    />
+    <property
+        name="approverAmount"
+        type="java.math.BigDecimal"
+        column="APPROVER_AMOUNT"
+        length="15"
+    />
+    <property
+        name="requiredAuthority"
+        type="java.math.BigDecimal"
+        column="REQUIRED_AUTHORITY"
+        length="15"
+    />
+    <property
+        name="reqdAuthObject"
+        type="java.lang.String"
+        column="REQD_AUTH_OBJECT"
+        length="30"
+    />
+    <property
+        name="reqdAuthName"
+        type="java.lang.String"
+        column="REQD_AUTH_NAME"
+        length="30"
+    />
+    <property
+        name="reqdAuthSource"
+        type="java.lang.String"
+        column="REQD_AUTH_SOURCE"
+        length="30"
+    />
+    <property
+        name="reqdAuthValue"
+        type="java.lang.String"
+        column="REQD_AUTH_VALUE"
+        length="30"
+    />
+    <property
+        name="fyiApprover"
+        type="java.lang.String"
+        column="FYI_APPROVER"
+        length="1"
+    />
+    <property
+        name="requiredApprover"
+        type="java.lang.String"
+        column="REQUIRED_APPROVER"
+        length="1"
+    />
+    <property
+        name="advisor"
+        type="java.lang.String"
+        column="ADVISOR"
+        length="1"
+    />
+    <property
+        name="superRule"
+        type="java.lang.String"
+        column="SUPER_RULE"
+        length="1"
+    />
+    <property
+        name="enabled"
+        type="java.lang.String"
+        column="ENABLED"
+        length="1"
+    />
+    <!-- associations -->
+
+</class>
+</hibernate-mapping>

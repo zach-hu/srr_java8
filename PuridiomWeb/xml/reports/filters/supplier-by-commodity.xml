@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<supplierrbycommodity>
+  <columns>
+		<vendor_vendorId>
+			<label>Vendor</label>
+			<type>STRING</type>
+		</vendor_vendorId>
+		<vendor_vendorName>
+			<label>Vendor Name</label>
+			<type>STRING</type>
+		</vendor_vendorName>
+		<vendor_status>
+			<label>Status</label>
+			<type>STRING</type>
+		</vendor_status>
+		<vendor_vendorClass>
+			<label>Vendor Class</label>
+			<type>STRING</type>
+		</vendor_vendorClass>
+		<vendor_vendorAccount>
+			<label>Vendor Account</label>
+			<type>STRING</type>
+		</vendor_vendorAccount>
+		<vendor_comm_rel_commodityCode>
+			<label>Commodity Code</label>
+			<type>STRING</type>
+		</vendor_comm_rel_commodityCode>
+	</columns>
+	<sqlfrom>Vendor as Vendor,   VendorCommRel as VendorCommRel</sqlfrom>
+  <sqlwhere>( vendor.vendor_id = vendor_comm_rel.vendor_id ) </sqlwhere>
+  <title>Suppliers by Commodity Report</title>
+</supplierrbycommodity>
+

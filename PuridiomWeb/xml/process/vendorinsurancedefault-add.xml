@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="VendorInsuranceDefaultAdd" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="addVendorInsuranceADefaultctivity">
+			<task synchronous="true" continue-on-failure="false" name="vendorInsuranceDefault">
+				<task-object-name>com.tsa.puridiom.vendorinsurancedefault.tasks.VendorInsuranceDefaultSetValues</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="vendorInsuranceDefaultAdd">
+				<task-object-name>com.tsa.puridiom.vendorinsurancedefault.tasks.VendorInsuranceDefaultAdd</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="setVendorInsuranceDefaultInCache">
+				<task-object-name>com.tsa.puridiom.vendorinsurancedefault.tasks.VendorInsuranceDefaultSetInCache</task-object-name>
+			</task>
+		  </activity>
+	 </activities>
+</process>

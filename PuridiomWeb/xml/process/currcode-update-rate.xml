@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="currCodeUpdateRateExchange" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="updateCurrCode">
+			<task synchronous="true" continue-on-failure="false" name="currCode">
+				<task-object-name>com.tsa.puridiom.currcode.tasks.CurrCodeUpdate</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="updateCache">
+				<task-object-name>com.tsa.puridiom.currcode.tasks.CurrCodeSetInCache</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="reportQueueUpdate" connection-type="Transaction-Required">
+	<!-- Update nextRun column-->
+	<rule-filename>is-rq-status-succesful.xml</rule-filename>
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="updateNextRun">
+			<task synchronous="true" continue-on-failure="false" name="reportQueue">
+				<rule-filename>is-rq-frequency-daily.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.reportqueue.tasks.ReportQueueSetNextRunDaily</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="reportQueue">
+				<rule-filename>is-rq-frequency-weekly.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.reportqueue.tasks.ReportQueueSetNextRunWeekly</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="reportQueue">
+				<rule-filename>is-rq-frequency-monthly.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.reportqueue.tasks.ReportQueueSetNextRunMonthly</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="reportQueue">
+				<rule-filename>is-rq-frequency-quarterly.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.reportqueue.tasks.ReportQueueSetNextRunQuarterly</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="reportQueue">
+				<rule-filename>is-rq-frequency-year.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.reportqueue.tasks.ReportQueueSetNextRunYearly</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="reportQueue">
+				<rule-filename>is-rq-frequency-once.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.reportqueue.tasks.ReportQueueSetNextRunOneTime</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+	</activities>
+</process>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rule>
+	<clause type="StringCompare">
+		<left-side elementSource="true">
+			<source>incomingRequestObject</source>
+			<object>lineItem</object>
+			<name>getReqType</name>
+		</left-side>
+		<operator>EQUAL</operator>
+		<right-side>
+			<source>constant</source>
+			<value>P</value>
+		</right-side>
+	</clause>
+	<logical-operator>OR</logical-operator>
+	<clause type="StringCompare">
+		<left-side elementSource="true">
+			<source>incomingRequestObject</source>
+			<object>lineItem</object>
+			<name>getReqType</name>
+		</left-side>
+		<operator>EQUAL</operator>
+		<right-side>
+			<source>constant</source>
+			<value>M</value>
+		</right-side>
+	</clause>
+</rule>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="SendQueueRetrieveByStatus" connection-type="New-Connection">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="SendQueueRetrieveByStatus">
+			<task synchronous="true" continue-on-failure="false" name="setup">
+				<rule-filename>is-action-sendemail.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.services.tasks.EmaiNotificationAction</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="receiptLineRenumber">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>sendqueue-retrieve-by-status.xml</process-filename>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="setup">
+				<task-object-name>com.tsa.puridiom.timer.tasks.TimerSetup</task-object-name>
+			</task>
+		  </activity>
+	 </activities>
+</process>

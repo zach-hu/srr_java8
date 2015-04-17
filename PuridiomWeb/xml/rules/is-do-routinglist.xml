@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rule>
+	<!--clause type="Rule">
+		<rule-filename>is-display-routinglist-not-found.xml</rule-filename>
+	</clause>
+	<logical-operator>OR</logical-operator>
+	<clause type="Rule">
+		<rule-filename>is-routing-for-forward.xml</rule-filename>
+	</clause-->
+	<clause type="StringCompare">
+		<left-side>
+			<source>incomingRequestObjectMethod</source>
+			<object>requisitionHeader</object>
+			<name>getStatus</name>
+		</left-side>
+		<operator>LESS</operator>
+		<right-side>
+			<source>constant</source>
+			<value>1015</value>
+		</right-side>
+	</clause>
+</rule>

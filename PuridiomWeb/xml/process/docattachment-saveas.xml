@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="docAttachmentSaveas" connection-type="Connection-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="docAttachmentRetrieveByLine">
+			<task synchronous="true" continue-on-failure="false" name="docAttachmentList">			
+				<task-object-name>com.tsa.puridiom.docattachment.tasks.DocAttachmentRetrieveByHeader</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="docAttachmentList">
+				<task-object-name>com.tsa.puridiom.docattachment.tasks.DocAttachmentSaveasList</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

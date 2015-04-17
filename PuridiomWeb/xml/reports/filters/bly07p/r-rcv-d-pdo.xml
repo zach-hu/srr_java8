@@ -1,0 +1,80 @@
+<r-rcv-d-pdo>
+  <columns>
+		<PoHeader_poNumber>
+			<label>Po Number</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</PoHeader_poNumber>
+		<PoHeader_releaseNumber>
+			<label>Release Number</label>
+			<type>BIGDECIMAL</type>
+			<visible>1</visible>
+		</PoHeader_releaseNumber>
+		<PoLine_lineNumber>
+			<label>Line Number</label>
+			<type>BIGDECIMAL</type>
+			<visible>1</visible>
+		</PoLine_lineNumber>
+		<PoHeader_vendorId>
+			<label>Vendor Id</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</PoHeader_vendorId>
+		<PoHeader_vendorName>
+			<label>Vendor Name</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</PoHeader_vendorName>
+		<PoHeader_requiredDate>
+			<label>Required Date</label>
+			<type>DATE</type>
+			<visible>1</visible>
+		</PoHeader_requiredDate>
+		<PoLine_commodity>
+			<label>Commodity</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</PoLine_commodity>
+		<PoLine_umCode>
+			<label>Unit of Measure</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</PoLine_umCode>
+		<PoLine_quantity>
+			<label>Quantity Ordered</label>
+			<type>BIGDECIMAL</type>
+			<visible>1</visible>
+		</PoLine_quantity>
+		<ReceiptLine_qtyReceived>
+			<label>Quantity Received</label>
+			<type>BIGDECIMAL</type>
+			<visible>1</visible>
+		</ReceiptLine_qtyReceived>
+		<ReceiptLine_qtyReturned>
+			<label>Quantity Returned</label>
+			<type>BIGDECIMAL</type>
+			<visible>1</visible>
+		</ReceiptLine_qtyReturned>
+		<ReceiptLine_qtyRejected>
+			<label>Quantity Rejected</label>
+			<type>BIGDECIMAL</type>
+			<visible>1</visible>
+		</ReceiptLine_qtyRejected>
+		<PoLine_description>
+			<label>Description</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</PoLine_description>
+	</columns>
+<sqlfrom> PoLine as PoLine , PoHeader as PoHeader , ReceiptLine as ReceiptLine </sqlfrom>
+<sqlwhere><![CDATA[
+	( PoHeader.icPoHeader = PoLine.icPoHeader ) and
+	( PoLine.icPoLine = ReceiptLine.icPoLine ) and ( PoHeader.poDate >= :as_baseReportDate ) and
+	( PoLine.status < '9020' ) and
+	( PoLine.status > '3020' ) and
+	( PoLine.status > '4000' ) and
+	( PoHeader.lastRevision = 'C' )
+	]]></sqlwhere>
+<sqlorderby>PoLine.icPoHeader, PoLine.icPoLine</sqlorderby>
+<title>Past Due Orders Reports</title>
+</r-rcv-d-pdo>

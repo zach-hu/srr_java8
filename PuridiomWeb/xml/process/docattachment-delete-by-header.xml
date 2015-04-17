@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="docAttachmentRetrieveByHeader" connection-type="Connection-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="docAttachmentRetrieveByHeader">
+			<task synchronous="true" continue-on-failure="false" name="docAttachmentList">			
+				<task-object-name>com.tsa.puridiom.docattachment.tasks.DocAttachmentRetrieveByHeader</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="docAttachmentList">			
+				<task-object-name>com.tsa.puridiom.docattachment.tasks.DocAttachmentDeleteList</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+	</activities>
+</process>

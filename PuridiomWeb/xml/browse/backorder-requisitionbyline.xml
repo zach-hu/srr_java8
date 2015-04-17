@@ -1,0 +1,71 @@
+<browse_backorder_notifications>
+	<columns>
+		<RequisitionHeader_requisitionType>
+			<label>poType</label>
+			<type>REQUISITION-TYPE</type>
+			<size>15</size>
+		</RequisitionHeader_requisitionType>
+		<RequisitionHeader_icReqHeader>
+	        <hidden>Y</hidden>
+		</RequisitionHeader_icReqHeader>
+		<RequisitionHeader_requisitionNumber>
+			<label>brw-requisitionNumber</label>
+			<link><![CDATA[javascript: viewInventoryReqPreview('#RequisitionHeader_icReqHeader^'); void(0);]]></link>
+			<size>10</size>
+		</RequisitionHeader_requisitionNumber>
+		<RequisitionHeader_requisitionDate>
+			<label>requisitionDate</label>
+			<sort>D</sort>
+			<size>10</size>
+			<type>DATE</type>
+		</RequisitionHeader_requisitionDate>
+		<RequisitionHeader_status>
+			<label>brw-status</label>
+			<type>STATUS</type>
+			<size>10</size>
+			<visible>0</visible>
+		</RequisitionHeader_status>
+		<RequisitionHeader_itemLocation>
+			<label>brw-location</label>
+			<size>10</size>
+		</RequisitionHeader_itemLocation>
+		<RequisitionLine_icReqLine>
+			<label>icReqLine</label>
+	        <hidden>Y</hidden>
+		</RequisitionLine_icReqLine>
+		<RequisitionLine_itemNumber>
+			<label>brw-itemNumber</label>
+			<size>15</size>
+		</RequisitionLine_itemNumber>
+		<RequisitionLine_description>
+			<label>description</label>
+			<detail>Y</detail>
+		</RequisitionLine_description>
+		<RequisitionLine_quantity>
+			<label>brw-requested</label>
+			<size>10</size>
+			<type>QtyDecimal</type>
+		</RequisitionLine_quantity>
+		<RequisitionLine_backordered>
+			<label>brw-backordered</label>
+			<size>10</size>
+			<type>QtyDecimal</type>
+		</RequisitionLine_backordered>
+		<InvLocation_qtyOnHand>
+			<label>brw-onHand</label>
+			<size>10</size>
+			<type>QtyDecimal</type>
+		</InvLocation_qtyOnHand>
+	</columns>
+<sqlfrom>RequisitionHeader as RequisitionHeader, RequisitionLine as RequisitionLine, InvLocation as InvLocation</sqlfrom>
+<sqlwhere>
+	<![CDATA[  (RequisitionHeader.icReqHeader = RequisitionLine.icReqHeader) AND (RequisitionLine.itemNumber = InvLocation.id.itemNumber) AND
+					(RequisitionLine.itemLocation = InvLocation.id.itemLocation) AND	(InvLocation.qtyOnHand > InvLocation.qtyAlloc) AND
+					( (RequisitionLine.backordered > 0) AND
+					(RequisitionHeader.requisitionType = 'S' OR RequisitionHeader.requisitionType = 'Z' OR RequisitionHeader.requisitionType = 'T') AND
+					((RequisitionHeader.status <> '5010') AND (RequisitionHeader.status <> '9020')) AND
+					((RequisitionLine.status = '5005' OR  RequisitionLine.status = '5003')) )
+	]]></sqlwhere>
+<pagesize>15</pagesize>
+<title>Backorder Requisition By Line</title>
+</browse_backorder_notifications>

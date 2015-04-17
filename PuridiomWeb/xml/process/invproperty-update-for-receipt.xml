@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="InvPropertyUpdateForReceipt" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="invPropertyDeleteByIcRecLine">
+			<task synchronous="true" continue-on-failure="false" name="invPropertyDeleteByIcRecLine">
+				<task-object-name>com.tsa.puridiom.invproperty.tasks.InvPropertyDeleteByIcRecLine</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="invPropertyUpdateForReceipt">
+			<task synchronous="true" continue-on-failure="false" name="invPropertyUpdateForReceipt">
+				<task-object-name>com.tsa.puridiom.invproperty.tasks.InvPropertyUpdateForReceipt</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

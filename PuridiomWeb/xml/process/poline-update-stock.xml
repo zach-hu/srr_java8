@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="" connection-type="Connection-Required">
+	<rule-filename>is-delivery-or-blanket-order.xml</rule-filename>
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="">
+			<task synchronous="true" continue-on-failure="false" name="updateIntem">
+				<task-object-name>com.tsa.puridiom.invlocation.taks.InvItemUpdatePoNumber</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

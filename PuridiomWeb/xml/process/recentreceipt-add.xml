@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="recentreceipt-add" connection-type="New-Transaction">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="recentReceiptSetup">
+		    <task synchronous="true" continue-on-failure="false" name="recentReceiptSetup">			
+				<task-object-name>com.tsa.puridiom.recentreceipt.tasks.RecentReceiptSetupFromReceiptHeader</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="recentReceipt">
+				<task-object-name>com.tsa.puridiom.recentreceipt.tasks.RecentReceiptRetrieveById</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="recentReceiptAdd">
+			<rule-filename>is-recentreceipt-empty.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="recentReceipt">
+				<task-object-name>com.tsa.puridiom.recentreceipt.tasks.RecentReceiptSetValues</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="recentReceipt">
+				<task-object-name>com.tsa.puridiom.recentreceipt.tasks.RecentReceiptAdd</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

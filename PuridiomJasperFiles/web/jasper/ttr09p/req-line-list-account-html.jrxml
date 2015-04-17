@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created using an evaluation version of JasperAssistant (http://www.jasperassistant.com) -->
+<!DOCTYPE jasperReport PUBLIC "-//JasperReports//DTD Report Design//EN" "http://jasperreports.sourceforge.net/dtds/jasperreport.dtd">
+
+<jasperReport name="ReqEmailLineList" pageWidth="569" pageHeight="110" whenNoDataType="BlankPage" columnWidth="569" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+	<property name="com.jasperassistant.designer.GridHeight" value="24"/>
+	<property name="com.jasperassistant.designer.GridWidth" value="24"/>
+	<property name="com.jasperassistant.designer.Rulers" value="true"/>
+	<property name="com.jasperassistant.designer.DataSource" value="hilton1p"/>
+	<property name="com.jasperassistant.designer.SnapToGrid" value="false"/>
+	<property name="com.jasperassistant.designer.Margins" value="true"/>
+	<property name="com.jasperassistant.designer.Grid" value="true"/>
+	<property name="com.jasperassistant.designer.SnapToGuides" value="true"/>
+	<import value="com.tsa.puridiom.reports.datasource.*"/>
+	<import value="com.tsa.puridiom.jasperreports.*"/>
+	<reportFont name="Arial_Normal" isDefault="false" fontName="Arial" size="8" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Verdana" isDefault="true" fontName="Verdana" size="9" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Verdana_bold" isDefault="false" fontName="Verdana" size="9" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<parameter name="oid" class="java.lang.String">
+		<defaultValueExpression><![CDATA["test"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="reportTitle" class="java.lang.String"/>
+	<parameter name="userId" class="java.lang.String">
+		<defaultValueExpression><![CDATA["RRAMOS"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="uid" class="java.lang.String">
+		<defaultValueExpression><![CDATA["RRAMOS"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="headerAccountsDS" class="com.tsa.puridiom.reports.datasource.HibernateQueryResultDataSource"/>
+	<parameter name="lines" class="java.util.List"/>
+	<parameter name="commentsDS" class="com.tsa.puridiom.reports.datasource.HibernateQueryResultDataSource"/>
+	<parameter name="headerAccountsSR" class="net.sf.jasperreports.engine.JasperReport">
+		<defaultValueExpression><![CDATA[JasperReportsHelper.loadSubReport("account-summary.jasper", $P{oid})]]></defaultValueExpression>
+	</parameter>
+	<parameter name="headerCommentsAfterDS" class="com.tsa.puridiom.reports.datasource.HibernateQueryResultDataSource"/>
+	<parameter name="headerCommentsAfterSR" class="net.sf.jasperreports.engine.JasperReport">
+		<defaultValueExpression><![CDATA[JasperReportsHelper.loadSubReport("comment-line.jasper", $P{oid})]]></defaultValueExpression>
+	</parameter>
+	<parameter name="attachmentsDs" class="com.tsa.puridiom.reports.datasource.HibernateQueryResultDataSource"/>
+	<parameter name="routingListDS" class="com.tsa.puridiom.reports.datasource.HibernateQueryResultDataSource"/>
+	<parameter name="approverNotesDS" class="com.tsa.puridiom.reports.datasource.HibernateQueryResultDataSource"/>
+	<parameter name="RequisitionHeader_subtotal" class="java.math.BigDecimal">
+		<defaultValueExpression><![CDATA[new BigDecimal(0)]]></defaultValueExpression>
+	</parameter>
+	<parameter name="RequisitionHeader_total" class="java.math.BigDecimal">
+		<defaultValueExpression><![CDATA[new BigDecimal(0)]]></defaultValueExpression>
+	</parameter>
+	<parameter name="RequisitionHeader_discountAmount" class="java.math.BigDecimal">
+		<defaultValueExpression><![CDATA[new BigDecimal(0)]]></defaultValueExpression>
+	</parameter>
+	<parameter name="RequisitionHeader_taxAmount" class="java.math.BigDecimal">
+		<defaultValueExpression><![CDATA[new BigDecimal(0)]]></defaultValueExpression>
+	</parameter>
+	<parameter name="RequisitionHeader_shippingCharges" class="java.math.BigDecimal">
+		<defaultValueExpression><![CDATA[new BigDecimal(0)]]></defaultValueExpression>
+	</parameter>
+	<parameter name="RequisitionHeader_otherCharges" class="java.math.BigDecimal">
+		<defaultValueExpression><![CDATA[new BigDecimal(0)]]></defaultValueExpression>
+	</parameter>
+	<parameter name="totalsDS" class="com.tsa.puridiom.reports.datasource.EntityDataSource"/>
+	<parameter name="udf1code" class="java.lang.String"/>
+	<parameter name="currencyCode" class="java.lang.String">
+		<defaultValueExpression><![CDATA["USD"]]></defaultValueExpression>
+	</parameter>
+	<field name="RequisitionLine_commodityCode" class="java.lang.String"/>
+	<field name="RequisitionLine_description" class="java.lang.String"/>
+	<field name="RequisitionLine_itemNumber" class="java.lang.String"/>
+	<field name="RequisitionLine_lineNumber" class="java.math.BigDecimal"/>
+	<field name="RequisitionLine_lineTotal" class="java.math.BigDecimal"/>
+	<field name="RequisitionLine_quantity" class="java.math.BigDecimal"/>
+	<field name="RequisitionLine_status" class="java.lang.String"/>
+	<field name="RequisitionLine_umCode" class="java.lang.String"/>
+	<field name="RequisitionLine_unitPrice" class="java.math.BigDecimal"/>
+	<field name="RequisitionLine_docCommentList" class="java.lang.Object"/>
+	<field name="RequisitionLine_umFactor" class="java.math.BigDecimal"/>
+	<field name="RequisitionLine_accountList" class="java.lang.Object"/>
+	<field name="RequisitionLine_shipToList" class="java.lang.Object"/>
+	<field name="RequisitionLine_requisitionLine" class="java.lang.Object"/>
+	<variable name="today" class="java.util.Date">
+		<variableExpression><![CDATA[new java.util.Date()]]></variableExpression>
+		<initialValueExpression><![CDATA[new java.util.Date()]]></initialValueExpression>
+	</variable>
+	<variable name="reportTitle_var" class="java.lang.String">
+		<variableExpression><![CDATA["Requisition Line"]]></variableExpression>
+	</variable>
+	<variable name="extendedPrice" class="java.math.BigDecimal">
+		<variableExpression><![CDATA[$F{RequisitionLine_unitPrice}.multiply($F{RequisitionLine_quantity}).multiply($F{RequisitionLine_umFactor})]]></variableExpression>
+	</variable>
+	<title>
+		<band height="25">
+			<rectangle>
+				<reportElement positionType="Float" x="0" y="0" width="134" height="25" forecolor="#F3F3F3" backcolor="#F3F3F3"/>
+				<graphicElement/>
+			</rectangle>
+			<staticText>
+				<reportElement positionType="Float" mode="Opaque" x="134" y="0" width="296" height="25" backcolor="#F3F3F3"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Account Summary
+(For Internal Use Only)]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement positionType="Float" x="430" y="0" width="139" height="25" forecolor="#F3F3F3" backcolor="#F3F3F3"/>
+				<graphicElement/>
+			</rectangle>
+		</band>
+	</title>
+	<detail>
+		<band height="20">
+			<elementGroup>
+				<subreport>
+					<reportElement positionType="Float" mode="Opaque" x="0" y="0" width="567" height="20" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true" backcolor="#F3F3F3"/>
+					<parametersMapExpression><![CDATA[$P{REPORT_PARAMETERS_MAP}]]></parametersMapExpression>
+					<subreportParameter name="shipToDS">
+						<subreportParameterExpression><![CDATA[ReportUtils.getLineShipToDS($F{RequisitionLine_shipToList})]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="currencyCode">
+						<subreportParameterExpression><![CDATA[$P{currencyCode}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="oid">
+						<subreportParameterExpression><![CDATA[$P{oid}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="commentsDS">
+						<subreportParameterExpression><![CDATA[ReportUtils.getCommentsDS($F{RequisitionLine_docCommentList}, "AFTER")]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="accountDS">
+						<subreportParameterExpression><![CDATA[new HibernateQueryResultDataSource((java.util.List)$F{RequisitionLine_accountList})]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="Parameter_5"/>
+					<dataSourceExpression><![CDATA[new JREmptyDataSource(1)]]></dataSourceExpression>
+					<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[JasperReportsHelper.loadSubReport("line-subreport-account-html.jasper", $P{oid})]]></subreportExpression>
+				</subreport>
+			</elementGroup>
+		</band>
+	</detail>
+</jasperReport>

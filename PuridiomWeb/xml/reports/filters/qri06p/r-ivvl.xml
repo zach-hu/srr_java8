@@ -1,0 +1,93 @@
+<r-ivvl>
+  <columns>
+		<InvItem_commodity>
+			<label>commodity</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</InvItem_commodity>
+		<InvLocation_id_itemLocation>
+			<label>location</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</InvLocation_id_itemLocation>
+		<InvItem_udf1Code>
+			<label>Udf 1 Code</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</InvItem_udf1Code>
+		<InvItem_udf2Code>
+			<label>Udf 2 Code</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</InvItem_udf2Code>
+		<InvItem_udf3Code>
+			<label>Udf 3 Code</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</InvItem_udf3Code>
+		<InvItem_udf4Code>
+			<label>Udf 4 Code</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</InvItem_udf4Code>
+		<InvItem_udf5Code>
+			<label>Udf 5 Code</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</InvItem_udf5Code>
+		<InvItem_cost>
+			<label>bin-locbrw-inv-unitCost</label>
+			<type>BIGDECIMAL</type>
+			<visible>1</visible>
+		</InvItem_cost>
+		<InvLocation_qtyOnHand>
+			<label>quantityOnHand</label>
+			<type>BIGDECIMAL</type>
+			<visible>1</visible>
+		</InvLocation_qtyOnHand>
+		<InvItem_averageCost>
+			<label>averageCost</label>
+			<type>BIGDECIMAL</type>
+			<visible>1</visible>
+		</InvItem_averageCost>
+		<InvLocation_qtyOnOrder>
+			<label>quantityOnOrder</label>
+			<type>BIGDECIMAL</type>
+			<visible>1</visible>
+		</InvLocation_qtyOnOrder>
+		<InvItem_unitOfOrder>
+			<label>unitOfOrder</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</InvItem_unitOfOrder>
+		<InvLocation_minOnHand>
+			<label>minimumOnHand</label>
+			<type>BIGDECIMAL</type>
+			<visible>1</visible>
+		</InvLocation_minOnHand>
+		<InvLocation_maxOnHand>
+			<label>Max On Hand</label>
+			<type>BIGDECIMAL</type>
+			<visible>1</visible>
+		</InvLocation_maxOnHand>
+		<InvLocation_id_itemNumber>
+			<label>Item Number</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</InvLocation_id_itemNumber>
+		<InvItem_unitOfIssue>
+			<label>Unit Of Issue</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</InvItem_unitOfIssue>
+		<InvItem_description>
+			<label>Description</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</InvItem_description>
+	</columns>
+  <sqlfrom> InvLocation as InvLocation , InvItem as InvItem </sqlfrom>
+  <sqlwhere><![CDATA[ ( InvLocation.id.itemNumber = InvItem.itemNumber ) ]]></sqlwhere>
+  <title>Inventory Value Report (Detail)</title>
+</r-ivvl>
+

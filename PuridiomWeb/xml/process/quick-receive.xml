@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="quickReceiving" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="quickReceive">
+			<task synchronous="true" continue-on-failure="false" name="quickReceive">
+				<task-object-name>com.tsa.puridiom.receipt.tasks.QuickReceive</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

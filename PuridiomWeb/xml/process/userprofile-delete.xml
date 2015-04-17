@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="userProfileDelete" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="userProfileDelete">
+			<task synchronous="true" continue-on-failure="false" name="userProfileDelete">
+				<task-object-name>com.tsa.puridiom.userprofile.tasks.UserProfileDeleteSetup</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="userProfileDelete">
+				<task-object-name>com.tsa.puridiom.userprofile.tasks.UserProfileDeleteById</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="userRoleDelete">
+				<task-object-name>com.tsa.puridiom.usergrouprel.tasks.UserGroupRelDeleteByUserId</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="userAppRuleDelete">
+				<task-object-name>com.tsa.puridiom.apprule.tasks.AppRuleDeleteByUser</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="userProfileRemoveFromCache">
+				<task-object-name>com.tsa.puridiom.usermanager.tasks.UserManagerRemoveUserFromCache</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="deleteHostUser">
+			<task synchronous="true" continue-on-failure="false" name="deleteHostUser">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>hostuser-delete-by-id.xml</process-filename>
+			</task>
+		</activity>
+	</activities>
+</process>

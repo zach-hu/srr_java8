@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+<class name="com.tsa.puridiom.entity.sungard.BstrnHeader" table="BSTRN_HEADER">
+<id name="tranId" type="java.math.BigDecimal" column="TRAN_ID">
+	<generator class="assigned" />
+</id>
+<property name="sourceCode" column="SOURCE_CODE" type="java.lang.String" length="5" not-null="true"/>
+<property name="effectiveDate" column="EFFECTIVE_DATE" type="java.sql.Date" length="23" not-null="true"/>
+<property name="referenceData" column="REFERENCE_DATA" type="java.lang.String" length="20" not-null="true"/>
+<property name="statusCode" column="STATUS_CODE" type="java.lang.String" length="1" not-null="true"/>
+<property name="approvalId" column="APPROVAL_ID" type="java.lang.String" length="8" not-null="true"/>
+<property name="tranHdrDesc" column="TRAN_HDR_DESC" type="java.lang.String" length="50" not-null="true"/>
+</class>
+</hibernate-mapping>

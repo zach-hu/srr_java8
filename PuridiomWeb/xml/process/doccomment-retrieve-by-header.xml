@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="docCommentRetrieveByHeader" connection-type="Connection-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="docCommentRetrieveByHeader">
+			<task synchronous="true" continue-on-failure="false" name="docCommentList">
+				<task-object-name>com.tsa.puridiom.doccomment.tasks.DocCommentRetrieveByLine</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="docTextList">
+				<task-object-name>com.tsa.puridiom.doccomment.tasks.DocCommentTextRetrieveByLine</task-object-name>
+				<post-action></post-action>
+			</task>
+
+		</activity>
+	</activities>
+</process>

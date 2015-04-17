@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="userFinalizeRegistration" connection-type="None" ldap-connection-type="None">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="registrationValidations">
+			<!--task synchronous="true" continue-on-failure="false" name="processBilling">
+				<task-object-name>com.tsa.puridiom.userprofile.tasks.ProcessRegistrationBilling</task-object-name>
+			</task-->
+			<task synchronous="true" continue-on-failure="false" name="setupAuthorizeNetPaymentForm">
+				<rule-filename check-for-false="true">is-billing-processed.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.userpayments.tasks.ANPaymentFormSetup</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="processBilling">
+				<rule-filename check-for-false="true">is-billing-processed.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.usererrormsg.tasks.ErrorMsgSetInvalidCCInfo</task-object-name>
+				<post-action>exitProcess</post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="userRegistrationSetup">
+				<!-- Setup organization, user status, user role information, organization package status, etc. -->
+				<task-object-name>com.tsa.puridiom.userprofile.tasks.FinalizeRegistrationSetup</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="updateUserToTemporaryStatus">
+			<task synchronous="true" continue-on-failure="false" name="updateTempOrganization">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>organization-update.xml</process-filename>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="updateUserInfo">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>user-finalize-registration-update.xml</process-filename>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="updateTempUser">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>organizationpackage-update.xml</process-filename>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="emailAccountLoginInformation">
+			<rule-filename check-for-false="true">is-userprofile-onhold.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="sendAccountActivationEmail">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>user-finalize-registration-email.xml</process-filename>
+			</task>
+		</activity>
+	</activities>
+</process>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="userCancelSubscription" connection-type="None" ldap-connection-type="None">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="userRegistrationCancel">
+			<task synchronous="true" continue-on-failure="false" name="currentGroupPackage">
+				<task-object-name>com.tsa.puridiom.organizationpackage.tasks.OrganizationPackageRetrieveCurrentGroup</task-object-name>    
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="cancelOrganizationRecord">
+				<!-- Cancel Trial Immediately -->
+				<rule-filename>is-currentgrouppackage-trial.xml</rule-filename>
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>organization-cancel-by-id.xml</process-filename>
+				<post-action>exitActivity</post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="userRegistrationCancel">
+			<task synchronous="true" continue-on-failure="false" name="notifyPuridiom">
+				<task-object-name>com.tsa.puridiom.userregistration.tasks.QueueAddCancelSubscriptionRequestEmail</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

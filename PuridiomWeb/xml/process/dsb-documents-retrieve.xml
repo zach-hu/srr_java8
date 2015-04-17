@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="dsb-documents-retrieve" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="disbHeaderRetrive">
+			<rule-filename>is-disbheader-empty.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="disbHeader">
+				<task-object-name>com.tsa.puridiom.disbheader.tasks.DisbHeaderRetrieveById</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="disbLineListRetrieve">
+			<rule-filename check-for-false="true">is-disbheader-empty.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="disbDocumentsRetrieveSetup">
+				<task-object-name>com.tsa.puridiom.disbheader.tasks.DisbHeaderDocumentsRetrieveSetup</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="disbLineList">
+				<rule-filename>is-disblinelist-empty.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.disbline.tasks.DisbLineRetrieveByHeader</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="documentsRetrieve">
+			<rule-filename check-for-false="true">is-disb-transfer.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="disbLineTrackList">
+				<rule-filename check-for-false="true">is-disblinelist-empty.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.disbline.tasks.DisbLineTrackRetrieveByIcRcList</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="invBinLocationList">
+				<rule-filename check-for-false="true">is-disblinelist-empty.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.disbline.tasks.DisbLineListRetrieveInvBinLocationList</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="receiptLineList">
+				<rule-filename check-for-false="true">is-invbinlocation-list-empty.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.invbinlocation.tasks.InvBinLocationListRetrieveReceiptLineList</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="msrLineList">
+				<rule-filename check-for-false="true">is-receiptlinelist-empty.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.receiptline.tasks.ReceiptLineListRetrieveMsrLineList</task-object-name>
+				<post-action></post-action>
+			</task>
+			<post-action>exitProcess</post-action>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="documentsRetrieve">
+			<rule-filename check-for-false="true">is-disblinelist-empty.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="disbLineTrackList">
+				<task-object-name>com.tsa.puridiom.disbline.tasks.DisbLineTrackRetrieveByIcReqLineList</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="msrLineList">
+				<task-object-name>com.tsa.puridiom.disbline.tasks.DisbLineListRetrieveMsrLineList</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+	</activities>
+</process>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="lineinvoicetheader_reqsourced" pageWidth="115" pageHeight="15" whenNoDataType="BlankPage" columnWidth="115" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+	<property name="com.jasperassistant.designer.GridHeight" value="12"/>
+	<property name="com.jasperassistant.designer.GridWidth" value="12"/>
+	<property name="com.jasperassistant.designer.DataSource" value="oracle"/>
+	<property name="com.jasperassistant.designer.SnapToGrid" value="false"/>
+	<property name="com.jasperassistant.designer.Grid" value="false"/>
+	<import value="com.tsa.puridiom.common.documents.DocumentStatus"/>
+	<reportFont name="Arial_Normal" isDefault="false" fontName="Arial" size="8" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_bold" isDefault="false" fontName="Arial Black" size="8" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica-Bold" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Verdana" isDefault="false" fontName="Verdana" size="9" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Verdana_bold" isDefault="false" fontName="Verdana" size="9" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<parameter name="shiptocode" class="java.lang.String"/>
+	<parameter name="shipto_quantity" class="java.lang.String"/>
+	<field name="InvBinLocation_aisle" class="java.lang.String"/>
+	<field name="InvBinLocation_bin" class="java.lang.String"/>
+	<field name="InvBinLocation_tier" class="java.lang.String"/>
+	<field name="InvBinLocation_locrow" class="java.lang.String"/>
+	<field name="InvBinLocation_qtyOnHand" class="java.math.BigDecimal"/>
+	<detail>
+		<band height="15">
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" mode="Opaque" x="0" y="0" width="80" height="14" isRemoveLineWhenBlank="true" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font reportFont="Verdana_bold" size="6"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{InvBinLocation_aisle}+"-"+$F{InvBinLocation_locrow}+"-"+$F{InvBinLocation_tier}+"-"+$F{InvBinLocation_bin}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0" isBlankWhenNull="true">
+				<reportElement positionType="Float" mode="Opaque" x="80" y="0" width="35" height="14" isRemoveLineWhenBlank="true" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font reportFont="Verdana_bold" size="6"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{InvBinLocation_qtyOnHand}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

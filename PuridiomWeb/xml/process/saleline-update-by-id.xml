@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="saleLineUpdate" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="saleLineUpdate">
+			<!--task synchronous="true" continue-on-failure="false" name="saleLineUpdateSetup">
+				<task-object-name>com.tsa.puridiom.saleline.tasks.SaleLineUpdateSetup</task-object-name>
+			</task-->
+			<task synchronous="true" continue-on-failure="false" name="saleLine">
+				<task-object-name>com.tsa.puridiom.saleline.tasks.SaleLineRetrieveById</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="saleLine">
+				<task-object-name>com.tsa.puridiom.saleline.tasks.SaleLineSetValues</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="saleLine">			
+				<task-object-name>com.tsa.puridiom.saleline.tasks.SaleLineUpdateById</task-object-name>
+			</task>
+		</activity>
+		<!--activity synchronous="true" continue-on-failure="false" name="rfqBidUpdate">
+			<task synchronous="true" continue-on-failure="false" name="rfqBidList">			
+				<task-object-name>com.tsa.puridiom.rfqbid.tasks.RfqBidRetrieveByLine</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="rfqBidList">			
+				<task-object-name>com.tsa.puridiom.rfqbid.tasks.RfqBidSetValuesFromLine</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="rfqBidList">			
+				<task-object-name>com.tsa.puridiom.rfqbid.tasks.RfqBidUpdate</task-object-name>
+			</task>
+		</activity-->
+	</activities>
+</process>

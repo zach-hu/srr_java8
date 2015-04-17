@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="InvReturnOtcCreatePreview" connection-type="New-Transaction">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="create">
+			<task synchronous="true" continue-on-failure="false" name="invReturnsetup">
+				<task-object-name>com.tsa.puridiom.invreturn.tasks.InvReturnCreateSetup</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="invReturn">
+				<task-object-name>com.tsa.puridiom.invreturn.tasks.InvReturnSetValues</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="invReturn">
+				<task-object-name>com.tsa.puridiom.invreturn.tasks.InvReturnAdd</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="updateExtendedInventory">
+			<rule-filename>is-extended-inventory-module-active.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="invBinLocation">
+				<task-object-name>com.tsa.puridiom.invbinlocation.tasks.InvBinLocationRetrieveById</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="invBinLocationAdd">
+				<rule-filename>is-invbinlocation-empty</rule-filename>
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>invbinlocation-add-from-return.xml</process-filename>
+				<post-action>exitActivity</post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="invBinLocation">
+				<task-object-name>com.tsa.puridiom.invreturn.tasks.UpdateQtyInvBinLocation</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="invBinLocation">
+				<task-object-name>com.tsa.puridiom.invbinlocation.tasks.InvBinLocationUpdate</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="updateExtendedInventory">
+			<task synchronous="true" continue-on-failure="false" name="invLocation">
+				<task-object-name>com.tsa.puridiom.invlocation.tasks.InvLocationRetrieveById</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="invLocation">
+				<task-object-name>com.tsa.puridiom.invreturn.tasks.UpdateQtyInvLocation</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="invLocation">
+				<task-object-name>com.tsa.puridiom.invlocation.tasks.InvLocationUpdate</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="addProperty">
+			<task synchronous="true" continue-on-failure="false" name="setProperty">
+				<task-object-name>com.tsa.puridiom.invreturn.tasks.InvReturnSetProperty</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="addProperty">
+				<task-object-name>com.tsa.puridiom.invreturn.tasks.AddProperty</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+	</activities>
+</process>

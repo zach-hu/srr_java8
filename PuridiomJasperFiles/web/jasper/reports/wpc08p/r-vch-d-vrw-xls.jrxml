@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created using an evaluation version of JasperAssistant (http://www.jasperassistant.com) -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RVchs" pageWidth="762" pageHeight="612" orientation="Landscape" whenNoDataType="AllSectionsNoDetail" columnWidth="762" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" whenResourceMissingType="Empty">
+	<property name="com.jasperassistant.designer.GridWidth" value="12"/>
+	<property name="com.jasperassistant.designer.GridHeight" value="12"/>
+	<property name="com.jasperassistant.designer.DataSource" value="one"/>
+	<property name="com.jasperassistant.designer.SnapToGrid" value="false"/>
+	<property name="com.jasperassistant.designer.Grid" value="false"/>
+	<import value="com.tsagate.foundation.utility.Utility"/>
+	<import value="com.tsa.puridiom.entity.*"/>
+	<import value="com.tsa.puridiom.property.PropertiesManager"/>
+	<import value="com.tsa.puridiom.jasperreports.*"/>
+	<import value="com.tsa.puridiom.common.utility.HiltonUtility"/>
+	<import value="com.tsa.puridiom.common.documents.*"/>
+	<import value="com.tsa.puridiom.currcode.CurrencyManager"/>
+	<import value="java.util.*"/>
+	<import value="com.tsa.puridiom.common.documents.OrderType"/>
+	<import value="java.net.*"/>
+	<import value="net.sf.jasperreports.engine.JRDataSource"/>
+	<import value="com.tsagate.properties.*"/>
+	<reportFont name="Arial_Normal" isDefault="true" fontName="Arial" size="7" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Bold" isDefault="false" fontName="Arial Black" size="7" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica-Bold" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Bold_Big" isDefault="false" fontName="Arial Black" size="12" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica-Bold" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Big" isDefault="false" fontName="Arial" size="12" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<parameter name="oid" class="java.lang.String">
+		<defaultValueExpression><![CDATA["HILTON"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="reportTitle" class="java.lang.String">
+		<defaultValueExpression><![CDATA["Report"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="reportCriteria" class="java.lang.String"/>
+	<parameter name="userId" class="java.lang.String">
+		<defaultValueExpression><![CDATA["Puridiom"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="reportType" class="java.lang.String">
+		<defaultValueExpression><![CDATA["Y"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="companyName" class="java.lang.String">
+		<defaultValueExpression><![CDATA[PropertiesManager.getInstance($P{oid}).getProperty("COMPANY", "Name", "TSA")]]></defaultValueExpression>
+	</parameter>
+	<parameter name="currencyManager" class="com.tsa.puridiom.currcode.CurrencyManager">
+		<defaultValueExpression><![CDATA[CurrencyManager.getInstance($P{oid})]]></defaultValueExpression>
+	</parameter>
+	<parameter name="currencyBase" class="java.lang.String">
+		<defaultValueExpression><![CDATA[$P{currencyManager}.getBaseCurrencyCode()]]></defaultValueExpression>
+	</parameter>
+	<field name="InvoiceHeader_invoiceNumber" class="java.lang.String"/>
+	<field name="InvoiceHeader_invoiceDate" class="java.util.Date"/>
+	<field name="InvoiceHeader_invoiceDesc" class="java.lang.String"/>
+	<field name="InvoiceHeader_invoiceTotal" class="java.math.BigDecimal"/>
+	<field name="InvoiceHeader_invoicePrintedDate" class="java.util.Date"/>
+	<field name="InvoiceHeader_status" class="java.lang.String"/>
+	<field name="InvoiceHeader_dateEntered" class="java.util.Date"/>
+	<field name="InvoiceHeader_paymentDueDate" class="java.util.Date"/>
+	<field name="InvoiceHeader_termsCode" class="java.lang.String"/>
+	<field name="InvoiceHeader_termsDiscperc" class="java.math.BigDecimal"/>
+	<field name="InvoiceHeader_termsDiscdays" class="java.math.BigDecimal"/>
+	<field name="InvoiceHeader_poNumber" class="java.lang.String"/>
+	<field name="InvoiceHeader_poRelease" class="java.math.BigDecimal"/>
+	<field name="InvoiceHeader_vendorId" class="java.lang.String"/>
+	<field name="InvoiceHeader_vendorName" class="java.lang.String"/>
+	<field name="InvoiceHeader_shipToCode" class="java.lang.String"/>
+	<field name="InvoiceHeader_poTotal" class="java.math.BigDecimal"/>
+	<field name="InvoiceHeader_enteredBy" class="java.lang.String"/>
+	<field name="InvoiceHeader_apReference" class="java.lang.String"/>
+	<field name="InvoiceHeader_invoiceReceivedDate" class="java.util.Date"/>
+	<field name="InvoiceHeader_invoiceRejecting" class="java.math.BigDecimal"/>
+	<field name="InvoiceHeader_reasonCode" class="java.lang.String"/>
+	<field name="InvoiceHeader_invoiceType" class="java.lang.String"/>
+	<field name="InvoiceHeader_currencyCode" class="java.lang.String"/>
+	<field name="InvoiceHeader_currencyFactor" class="java.math.BigDecimal"/>
+	<variable name="totalGroup" class="java.math.BigDecimal" resetType="Group" resetGroup="Header_Group" calculation="Sum">
+		<variableExpression><![CDATA[$F{InvoiceHeader_invoiceTotal}]]></variableExpression>
+	</variable>
+	<variable name="baseTotal" class="java.math.BigDecimal">
+		<variableExpression><![CDATA[$F{InvoiceHeader_invoiceTotal}.multiply($F{InvoiceHeader_currencyFactor})]]></variableExpression>
+	</variable>
+	<variable name="amount" class="java.math.BigDecimal" resetType="Group" resetGroup="Header_Group">
+		<variableExpression><![CDATA[$F{InvoiceHeader_invoiceTotal}]]></variableExpression>
+		<initialValueExpression><![CDATA[new BigDecimal(0)]]></initialValueExpression>
+	</variable>
+	<variable name="amountGroup" class="java.math.BigDecimal" resetType="Group" resetGroup="Header_Group" calculation="Sum">
+		<variableExpression><![CDATA[$V{amount}]]></variableExpression>
+		<initialValueExpression><![CDATA[new BigDecimal(0)]]></initialValueExpression>
+	</variable>
+	<variable name="grandBaseTotal" class="java.math.BigDecimal" resetType="Group" resetGroup="Header_Group" calculation="Sum">
+		<variableExpression><![CDATA[$V{baseTotal}]]></variableExpression>
+		<initialValueExpression><![CDATA[new BigDecimal(0)]]></initialValueExpression>
+	</variable>
+	<group name="Header_Group">
+		<groupHeader>
+			<band height="54">
+				<textField hyperlinkType="None">
+					<reportElement positionType="Float" x="218" y="42" width="87" height="12"/>
+					<box padding="0">
+						<pen lineWidth="0.0" lineStyle="Solid"/>
+					</box>
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font reportFont="Arial_Normal" isBold="false" pdfFontName="Helvetica"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[DictionaryManager.getLabel($P{oid}, "invoiceNumer", "Invoice Number")]]></textFieldExpression>
+				</textField>
+				<textField hyperlinkType="None">
+					<reportElement positionType="Float" x="610" y="42" width="68" height="12"/>
+					<box padding="0">
+						<pen lineWidth="0.0" lineStyle="Solid"/>
+					</box>
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font reportFont="Arial_Normal" isBold="false" pdfFontName="Helvetica"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[DictionaryManager.getLabel($P{oid}, "invoiceDate", "Invoice Date")]]></textFieldExpression>
+				</textField>
+				<textField hyperlinkType="None">
+					<reportElement positionType="Float" x="678" y="42" width="83" height="12"/>
+					<box padding="0">
+						<pen lineWidth="0.0" lineStyle="Solid"/>
+					</box>
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font reportFont="Arial_Normal" isBold="false" pdfFontName="Helvetica"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[DictionaryManager.getLabel($P{oid}, "invoiceTotal", "Invoice Total")]]></textFieldExpression>
+				</textField>
+				<textField hyperlinkType="None">
+					<reportElement positionType="Float" x="88" y="42" width="130" height="12"/>
+					<box padding="0">
+						<pen lineWidth="0.0" lineStyle="Solid"/>
+					</box>
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font reportFont="Arial_Normal" isBold="false" pdfFontName="Helvetica"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[DictionaryManager.getLabel($P{oid}, "vendorName", "Vendor Name")]]></textFieldExpression>
+				</textField>
+				<textField hyperlinkType="None">
+					<reportElement positionType="Float" x="1" y="42" width="87" height="12"/>
+					<box padding="0">
+						<pen lineWidth="0.0" lineStyle="Solid"/>
+					</box>
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font reportFont="Arial_Normal" isBold="false" pdfFontName="Helvetica"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[DictionaryManager.getLabel($P{oid}, "label", "Vendor ID")]]></textFieldExpression>
+				</textField>
+				<textField hyperlinkType="None">
+					<reportElement positionType="Float" x="305" y="42" width="70" height="12"/>
+					<box padding="0">
+						<pen lineWidth="0.0" lineStyle="Solid"/>
+					</box>
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font reportFont="Arial_Normal" isBold="false" pdfFontName="Helvetica"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[DictionaryManager.getLabel($P{oid}, "label", "Status")]]></textFieldExpression>
+				</textField>
+				<textField hyperlinkType="None">
+					<reportElement positionType="Float" x="375" y="42" width="156" height="12"/>
+					<box padding="0">
+						<pen lineWidth="0.0" lineStyle="Solid"/>
+					</box>
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font reportFont="Arial_Normal" isBold="false" pdfFontName="Helvetica"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[DictionaryManager.getLabel($P{oid}, "label", "Purpose")]]></textFieldExpression>
+				</textField>
+				<textField hyperlinkType="None">
+					<reportElement positionType="Float" x="531" y="42" width="79" height="12"/>
+					<box padding="0">
+						<pen lineWidth="0.0" lineStyle="Solid"/>
+					</box>
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font reportFont="Arial_Normal" isBold="false" pdfFontName="Helvetica"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[DictionaryManager.getLabel($P{oid}, "label", "Terms")]]></textFieldExpression>
+				</textField>
+				<subreport isUsingCache="false">
+					<reportElement positionType="Float" x="1" y="1" width="759" height="40"/>
+					<subreportParameter name="reportTitle">
+						<subreportParameterExpression><![CDATA[$P{reportTitle}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="oid">
+						<subreportParameterExpression><![CDATA[$P{oid}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="userId">
+						<subreportParameterExpression><![CDATA[$P{userId}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="reportCriteria">
+						<subreportParameterExpression><![CDATA[$P{reportCriteria}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="companyName">
+						<subreportParameterExpression><![CDATA[$P{companyName}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[JasperReportsHelper.loadSubReport("header-no-formats.jasper", $P{oid},"", $P{reportType})]]></subreportExpression>
+				</subreport>
+			</band>
+		</groupHeader>
+	</group>
+	<detail>
+		<band height="12">
+			<textField isBlankWhenNull="true" hyperlinkType="None">
+				<reportElement x="218" y="0" width="87" height="12"/>
+				<textElement textAlignment="Left">
+					<font reportFont="Arial_Normal"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{InvoiceHeader_invoiceNumber}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true" hyperlinkType="None">
+				<reportElement x="305" y="0" width="70" height="12"/>
+				<textElement textAlignment="Left">
+					<font reportFont="Arial_Normal"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[DocumentStatus.toString($F{InvoiceHeader_status})]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true" hyperlinkType="None">
+				<reportElement x="88" y="0" width="130" height="12"/>
+				<textElement textAlignment="Left">
+					<font reportFont="Arial_Normal"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{InvoiceHeader_vendorName}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true" hyperlinkType="None">
+				<reportElement x="1" y="0" width="87" height="12"/>
+				<textElement textAlignment="Left">
+					<font reportFont="Arial_Normal"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{InvoiceHeader_vendorId}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true" hyperlinkType="None">
+				<reportElement x="610" y="0" width="68" height="12"/>
+				<textElement textAlignment="Left">
+					<font reportFont="Arial_Normal"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[HiltonUtility.getFormattedDate($F{InvoiceHeader_invoiceDate}, $P{oid})]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true" hyperlinkType="None">
+				<reportElement x="375" y="0" width="156" height="12"/>
+				<textElement textAlignment="Left">
+					<font reportFont="Arial_Normal"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{InvoiceHeader_invoiceDesc}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true" hyperlinkType="None">
+				<reportElement x="531" y="0" width="79" height="12"/>
+				<textElement textAlignment="Left">
+					<font reportFont="Arial_Normal"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{InvoiceHeader_termsCode}]]></textFieldExpression>
+			</textField>
+			<textField hyperlinkType="None">
+				<reportElement x="678" y="0" width="83" height="12"/>
+				<textElement textAlignment="Right" verticalAlignment="Top"/>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{InvoiceHeader_invoiceTotal}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

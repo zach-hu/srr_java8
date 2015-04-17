@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="disbHeaderDataRetrieve" connection-type="Conenction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="disbHeaderDataRetrieve">
+			<task synchronous="true" continue-on-failure="false" name="disbHeaderDataRetrieve">			
+				<task-object-name>com.tsa.puridiom.disbheader.tasks.DisbHeaderRetrieveSetup</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="disbLineList">			
+				<task-object-name>com.tsa.puridiom.disbline.tasks.DisbLineRetrieveByHeader</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="accountList">			
+				<task-object-name>com.tsa.puridiom.account.tasks.AccountRetrieveByLine</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="disbCommentsRetrieve">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>doccomment-retrieve-by-line.xml</process-filename>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="shipToAddressSetup">
+				<task-object-name>com.tsa.puridiom.disbheader.tasks.DisbHeaderRetrieveShipToAddressSetup</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="shipToAddress">
+				<rule-filename>is-address-code-not-empty</rule-filename>
+				<task-object-name>com.tsa.puridiom.address.tasks.AddressRetrieveShipTo</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="disbHeaderDataSet">
+			<task synchronous="true" continue-on-failure="false" name="disbHeaderDataSet">			
+				<task-object-name>com.tsa.puridiom.disbheader.tasks.DisbHeaderDataSet</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+	</activities>
+</process>

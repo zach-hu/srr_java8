@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="vendoraffiliate-update" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="vendorAffiliateUpdate">
+			<task synchronous="true" continue-on-failure="false" name="vendorAffiliateDelete">
+				<task-object-name>com.tsa.puridiom.vendoraffiliate.tasks.VendorAffiliateDeleteByVendorId</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="vendorAffiliateList">
+				<task-object-name>com.tsa.puridiom.vendoraffiliate.tasks.VendorAffiliateAddList</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

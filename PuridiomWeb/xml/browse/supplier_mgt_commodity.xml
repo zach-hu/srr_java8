@@ -1,0 +1,46 @@
+<browse_supplier_mgt_commodity>
+	<columns>
+		<Vendor_vendorId>
+			<label>brw-vendorId</label>
+			<sort>A</sort>
+			<size>15</size>
+			<link><![CDATA[javascript: viewSupplier('#Vendor_vendorId^'); void(0);]]></link>
+		</Vendor_vendorId>
+		<Vendor_vendorName>
+			<label>user-name</label>
+			<size>40</size>
+			<hidden-input>Y</hidden-input>
+		</Vendor_vendorName>
+		<Vendor_vendTerms>
+			<label>brw-terms</label>
+			<size>10</size>
+			<hidden-input>Y</hidden-input>
+		</Vendor_vendTerms>
+		<Vendor_shipVia>
+			<label>brw-shipVia</label>
+			<size>10</size>
+			<hidden-input>Y</hidden-input>
+		</Vendor_shipVia>
+		<Vendor_faxNumber>
+			<label>faxNumber</label>
+			<size>15</size>
+			<hidden-input>Y</hidden-input>
+		</Vendor_faxNumber>
+		<Vendor_taxCode>
+			<label>taxCode</label>
+			<size>10</size>
+			<hidden-input>Y</hidden-input>
+		</Vendor_taxCode>
+		<VendorCommRel_id_commodityCode>
+			<label>commodity</label>
+			<selectsql>N</selectsql>
+			<hidden>Y</hidden>
+		</VendorCommRel_id_commodityCode>
+	</columns>
+<sqlfrom>Vendor as Vendor, VendorCommRel as VendorCommRel</sqlfrom>
+<sqlwhere><![CDATA[ Vendor.vendorId = VendorCommRel.id.vendorId ]]></sqlwhere>
+<sqlorderby>Vendor.vendorId ASC</sqlorderby>
+<pagesize>15</pagesize>
+<title>Supplier Browse</title>
+</browse_supplier_mgt_commodity>
+

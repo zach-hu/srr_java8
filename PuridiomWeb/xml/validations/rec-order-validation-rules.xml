@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<validation-rules>
+  <validations>
+	<save enabled="yes">
+		<rule>
+			<filename>packages-and-qtyreceived-not-zero.xml</filename>
+			<alias>Packages</alias>
+			<msg>if # Packages is greater than 0, Quantity Received must not be 0!</msg>
+			<severity>E</severity>
+			<order>5</order>
+			<enabled>N</enabled>
+			<new>true</new>
+			<fieldname>ReceiptHeader_pkgsReceived</fieldname>
+			<link><![CDATA[javascript: doSubmit('receipts/rec_general_info.jsp', 'ReceiptHeaderRetrieveById'); void(0);]]></link>
+		</rule>
+    	<rule>
+	        <filename>rec-bin-qty-error.xml</filename>
+	        <alias>Bin Alloc Error</alias>
+	        <msg>Inventory Bin allocation error occurred on the following lines: [@processedErrorText]</msg>
+	        <severity>E</severity>
+	        <order>10</order>
+	        <enabled>N</enabled>
+			<link><![CDATA[javascript: doSubmit('receipts/rec_items.jsp', 'ReceiptLineRetrieveByHeader'); void(0);]]></link>
+      	</rule>
+      	<rule>
+	        <filename>rec-at-least-one-quantityreceived.xml</filename>
+	        <alias>atLeastOneQuantiyReceived</alias>
+	        <msg>You must receive a quantity greater than zero for at least one line!</msg>
+	        <severity>E</severity>
+	        <order>15</order>
+	        <enabled>Y</enabled>
+			<link><![CDATA[javascript: doSubmit('receipts/rec_items.jsp', 'ReceiptLineRetrieveByHeader'); void(0);]]></link>
+      	</rule>
+    </save>
+  </validations>
+</validation-rules>

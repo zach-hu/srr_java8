@@ -1,0 +1,89 @@
+<r-rfq-d-reg>
+	<columns>
+		<RfqHeader_icRfqHeader>
+			<label>Rfq Id</label>
+			<type>BIGDECIMAL</type>
+			<visible>0</visible>
+		</RfqHeader_icRfqHeader>
+		<RfqLine_icRfqLine>
+			<label>RfqLine Id</label>
+			<type>BIGDECIMAL</type>
+			<visible>0</visible>
+		</RfqLine_icRfqLine>
+		<RfqHeader_rfqNumber>
+			<label><![CDATA[rfqNumber]]></label>
+			<type>STRING</type>
+		</RfqHeader_rfqNumber>
+		<RfqHeader_rfqDate>
+			<label><![CDATA[rfqDate]]></label>
+			<type>DATE</type>
+		</RfqHeader_rfqDate>
+		<RfqHeader_dueDate>
+			<label><![CDATA[dueDate]]></label>
+			<type>DATE</type>
+		</RfqHeader_dueDate>
+		<RfqHeader_departmentCode>
+			<label><![CDATA[department]]></label>
+			<type>STRING</type>
+		</RfqHeader_departmentCode>
+		<RfqHeader_requisitionerCode>
+			<label><![CDATA[requisitioner]]></label>
+			<type>STRING</type>
+		</RfqHeader_requisitionerCode>
+		<RfqHeader_authorizationCode>
+			<label><![CDATA[authorizedBy]]></label>
+			<type>STRING</type>
+		</RfqHeader_authorizationCode>
+		<RfqHeader_buyer>
+			<label><![CDATA[buyer]]></label>
+			<type>STRING</type>
+		</RfqHeader_buyer>
+		<RfqHeader_awardDate>
+			<label><![CDATA[awardDate]]></label>
+			<type>DATE</type>
+		</RfqHeader_awardDate>
+		<RfqHeader_shipToCode>
+			<label><![CDATA[shipToCode]]></label>
+			<type>STRING</type>
+		</RfqHeader_shipToCode>
+		<RfqHeader_status>
+			<label><![CDATA[status]]></label>
+			<type>STATUS</type>
+		</RfqHeader_status>
+		<RfqLine_rfqLine>
+			<label><![CDATA[rfq-lineNumber]]></label>
+			<type>BIGDECIMAL</type>
+		</RfqLine_rfqLine>
+		<RfqLine_itemNumber>
+			<label><![CDATA[itemNumber]]></label>
+			<type>STRING</type>
+		</RfqLine_itemNumber>
+		<RfqLine_description>
+			<label><![CDATA[description]]></label>
+			<type>STRING</type>
+		</RfqLine_description>
+		<RfqLine_commodity>
+			<label><![CDATA[commodity]]></label>
+			<type>STRING</type>
+		</RfqLine_commodity>
+		<RfqLine_quantity>
+			<label><![CDATA[quantity]]></label>
+			<type>BIGDECIMAL</type>
+		</RfqLine_quantity>
+		<RfqLine_status>
+			<label><![CDATA[lineStatus]]></label>
+			<type>STATUS</type>
+		</RfqLine_status>
+		<RfqLine_vendorAwarded>
+			<label><![CDATA[vendorAwarded]]></label>
+			<type>STRING</type>
+		</RfqLine_vendorAwarded>
+	</columns>
+<sqlfrom> RfqHeader as RfqHeader, RfqLine as RfqLine </sqlfrom>
+<sqlwhere><![CDATA[
+RfqHeader.icRfqHeader = RfqLine.icRfqHeader and
+RfqLine.status > '2000' and
+RfqLine.status < '9020'
+]]></sqlwhere>
+<title>Solicitation Detail Report</title>
+</r-rfq-d-reg>

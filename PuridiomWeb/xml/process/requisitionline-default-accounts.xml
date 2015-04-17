@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="requisitionLineDefaultAccounts" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="requisitionLineDefaultAccounts">
+			<rule-filename check-for-false="true">is-autoaccounting-and-capital.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="requisitionLineAccountRetrieveSetup">
+				<task-object-name>com.tsa.puridiom.requisitionline.tasks.RequisitionLineAccountRetrieveSetup</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="accountList">
+				<task-object-name>com.tsa.puridiom.account.tasks.AccountRetrieveByLine</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="itemAccountAdd">
+				<rule-filename>is-account-list-empty.xml;is-auto-save-accounts.xml</rule-filename>
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>account-add-to-item.xml</process-filename>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="requisitionLineDefaultAccountsExternal">
+			<rule-filename>is-external-add-account.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="itemAccountAddExternal">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>account-add-to-item-external.xml</process-filename>
+			</task>
+		</activity>
+	</activities>
+</process>

@@ -1,0 +1,120 @@
+<r_poh_acc>
+  <columns>
+		<PoHeader_poNumber>
+			<label>Po Number</label>
+			<type>STRING</type>
+		</PoHeader_poNumber>
+		<PoHeader_poDate>
+			<label>Po Date</label>
+			<type>DATE</type>
+		</PoHeader_poDate>
+		<Account_fld1>
+			<label>Fld 1</label>
+			<type>STRING</type>
+		</Account_fld1>
+		<Account_fld2>
+			<label>Fld 2</label>
+			<type>STRING</type>
+		</Account_fld2>
+		<Account_fld3>
+			<label>Fld 3</label>
+			<type>STRING</type>
+		</Account_fld3>
+		<Account_fld4>
+			<label>Fld 4</label>
+			<type>STRING</type>
+		</Account_fld4>
+		<Account_fld5>
+			<label>Fld 5</label>
+			<type>STRING</type>
+		</Account_fld5>
+		<Account_fld6>
+			<label>Fld 6</label>
+			<type>STRING</type>
+		</Account_fld6>
+		<Account_fld7>
+			<label>Fld 7</label>
+			<type>STRING</type>
+		</Account_fld7>
+		<Account_fld8>
+			<label>Fld 8</label>
+			<type>STRING</type>
+		</Account_fld8>
+		<Account_fld9>
+			<label>Fld 9</label>
+			<type>STRING</type>
+		</Account_fld9>
+		<Account_fld10>
+			<label>Fld 10</label>
+			<type>STRING</type>
+		</Account_fld10>
+		<Account_fld11>
+			<label>Fld 11</label>
+			<type>STRING</type>
+		</Account_fld11>
+		<Account_fld12>
+			<label>Fld 12</label>
+			<type>STRING</type>
+		</Account_fld12>
+		<Account_fld13>
+			<label>Fld 13</label>
+			<type>STRING</type>
+		</Account_fld13>
+		<Account_fld14>
+			<label>Fld 14</label>
+			<type>STRING</type>
+		</Account_fld14>
+		<Account_fld15>
+			<label>Fld 15</label>
+			<type>STRING</type>
+		</Account_fld15>
+		<PoHeader_vendorId>
+			<label>Vendor Id</label>
+			<type>STRING</type>
+		</PoHeader_vendorId>
+		<PoHeader_departmentCode>
+			<label>Department Code</label>
+			<type>STRING</type>
+		</PoHeader_departmentCode>
+		<PoHeader_total>
+			<label>Total</label>
+			<type>BIGDECIMAL</type>
+		</PoHeader_total>
+		<PoHeader_releaseNumber>
+			<label>Release Number</label>
+			<type>BIGDECIMAL</type>
+		</PoHeader_releaseNumber>
+		<PoHeader_shipToCode>
+			<label>Ship To Code</label>
+			<type>STRING</type>
+		</PoHeader_shipToCode>
+		<Vendor_vendorClass>
+			<label>Vendor Class</label>
+			<type>STRING</type>
+		</Vendor_vendorClass>
+		<PoHeader_buyerCode>
+			<label>Buyer Code</label>
+			<type>STRING</type>
+		</PoHeader_buyerCode>
+		<!-- <PoHeader_status>
+			<label>Status</label>
+			<type>STRING</type>
+		</PoHeader_status>
+		<Account_allocAmount>
+			<label>Alloc Amount</label>
+			<type>BIGDECIMAL</type>
+		</Account_allocAmount>
+		<PoHeader_billToCode>
+			<label>Bill To Code</label>
+			<type>STRING</type>
+		</PoHeader_billToCode>
+		<PoHeader_vendorName>
+			<label>Vendor Name</label>
+			<type>STRING</type>
+		</PoHeader_vendorName> -->
+	</columns>
+  <sqlfrom>PoHeader as PoHeader ,Vendor as Vendor, Account as Account</sqlfrom>
+  <sqlwhere><![CDATA[(PoHeader.vendorId = Vendor.vendorId) and (PoHeader.icPoHeader = Account.id.icHeader) and ((PoHeader.lastRevision = 'C') and (PoHeader.status <> '99' ) and(PoHeader.poType <> 'NO' ))]]></sqlwhere>
+  <title>Purchase Order Account Transaction Report</title>
+</r_poh_acc>
+

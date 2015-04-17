@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="CheckQtyOrdered" connection-type="Connection-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="receiptHeaderListbyOrder">
+			<task synchronous="true" continue-on-failure="false" name="poHeader">
+				<task-object-name>com.tsa.puridiom.poheader.tasks.PoHeaderRetrieveById</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="poLineList">
+				<task-object-name>com.tsa.puridiom.poline.tasks.PoLineRetrieveByHeader</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="receiptLineList">
+				<rule-filename>is-receiptline-list-empty.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.receiptline.tasks.ReceiptLineRetrieveByHeader</task-object-name>
+				<post-action></post-action>
+			</task>
+			<!-- <task synchronous="true" continue-on-failure="false" name="receiptHeaderList">
+				<task-object-name>com.tsa.puridiom.receiptheader.tasks.ReceiptHeaderRetrieveByOrder</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="receiptLineListByHeaderList">
+				<task-object-name>com.tsa.puridiom.receiptline.tasks.ReceiptLineRetrieveByHeaderList</task-object-name>
+				<post-action></post-action>
+			</task> -->
+			<task synchronous="true" continue-on-failure="false" name="checkQtyOrdered">
+				<rule-filename check-for-false="true">is-polinelist-empty.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.validationrules.receipt.tasks.QtyOrderedByOrderSubType</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+	</activities>
+</process>

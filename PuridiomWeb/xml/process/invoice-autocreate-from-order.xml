@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="InvoiceCreate" connection-type="New-Transaction">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="AutoCreateInvoice" commit-after="true">
+<!--			<rule-filename>is-poheader-received.xml</rule-filename>-->
+			<task synchronous="true" continue-on-failure="false" name="invoiceCreateFromPo">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>invoice-create-from-order-ps.xml</process-filename>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="invoiceGetFormNumber">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>invoice-get-form-number.xml</process-filename>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="invoiceSetValues">
+				<task-object-name>com.tsa.puridiom.invoice.tasks.InvoiceSetValuesByOrderSubType</task-object-name>
+				<process-filename></process-filename>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="costpointSetBatch">
+				<task-object-name>com.tsa.puridiom.invoice.tasks.InvoiceSendToCostpointSetBatch</task-object-name>
+				<process-filename></process-filename>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="costpoint">
+				<task-object-name>com.tsa.puridiom.invoice.tasks.InvoiceSendToCostpoint</task-object-name>
+				<process-filename></process-filename>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="invoiceSetApproved">
+				<task-object-name>com.tsa.puridiom.invoice.tasks.InvoiceSetStatusApproved</task-object-name>
+				<process-filename></process-filename>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="invoiceLineUpdateList">
+				<task-object-name>com.tsa.puridiom.invoiceline.tasks.InvoiceLineUpdateEntityList</task-object-name>
+				<process-filename></process-filename>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="invoiceHeader">
+				<task-object-name>com.tsa.puridiom.invoiceheader.tasks.InvoiceHeaderUpdate</task-object-name>
+				<process-filename></process-filename>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="receiptLineUpdateList">
+				<task-object-name>com.tsa.puridiom.receiptline.tasks.ReceiptLineUpdateEntityList</task-object-name>
+				<process-filename></process-filename>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="receiptHeaderUpdate">
+				<task-object-name>com.tsa.puridiom.receiptheader.tasks.ReceiptHeaderUpdate</task-object-name>
+				<process-filename></process-filename>
+			</task>
+		</activity>
+		<!-- <activity synchronous="true" continue-on-failure="false" name="receiptHistory">
+		    <task synchronous="true" continue-on-failure="false" name="receiptHeaderHistory">
+				<task-object-name>com.tsa.puridiom.receiptheader.history.tasks.ReceiptHeaderHistory</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="receiptLineListHistory">
+				<task-object-name>com.tsa.puridiom.receiptline.history.tasks.ReceiptLineListHistory</task-object-name>
+			</task>
+		</activity>-->
+		<activity synchronous="true" continue-on-failure="false" name="invoiceHistory"  commit-after="true">
+		     <task synchronous="true" continue-on-failure="false" name="invoiceHeaderHistory">
+				<task-object-name>com.tsa.puridiom.invoiceheader.history.tasks.InvoiceHeaderHistory</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="invoiceLineListHistory">
+				<task-object-name>com.tsa.puridiom.invoiceline.history.tasks.InvoiceLineListHistory</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="poHeaderSetPyStatus" commit-after="true">
+			<task synchronous="true" continue-on-failure="false" name="poHeaderRetrieveFromInvoiceSetup">
+				<task-object-name>com.tsa.puridiom.poheader.tasks.PoHeaderRetrieveFromInvoiceSetup</task-object-name>
+			</task>
+			 <task synchronous="true" continue-on-failure="false" name="setPyStatus" >
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>poheader-set-pystatus-ps.xml</process-filename>
+			</task>
+		</activity>
+	 </activities>
+</process>

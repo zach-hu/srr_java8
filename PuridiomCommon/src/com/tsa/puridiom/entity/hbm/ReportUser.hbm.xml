@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 2.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+<class name="com.tsa.puridiom.entity.ReportUser" table="REPORT_USER">
+<id name="icReportUser" column="IC_REPORT_USER" type="java.math.BigDecimal">
+<generator class="assigned"/>
+</id>
+<property name="icReportQueue" column="IC_REPORT_QUEUE" type="java.math.BigDecimal" length="22"/>
+<property name="userId" column="USER_ID" type="java.lang.String" length="15"/>
+<property name="docTitle" column="DOC_TITLE" type="java.lang.String" length="255"/>
+<property name="docFilename" column="DOC_FILENAME" type="java.lang.String" length="100"/>
+<property name="dateSent" column="DATE_SENT" type="java.lang.String" length="20"/>
+<property name="timeSent" column="TIME_SENT" type="java.lang.String" length="20"/>
+<property name="publicView" column="PUBLIC_VIEW" type="java.lang.String" length="1"/>
+</class>
+</hibernate-mapping>

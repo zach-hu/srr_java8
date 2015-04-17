@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="rfqBidUpdate" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="rfqBidUpdate">
+			<task synchronous="true" continue-on-failure="false" name="rfqBidUpdate">			
+				<task-object-name>com.tsa.puridiom.rfqbid.tasks.RfqBidUpdateSetup</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="rfqHeader">
+				<task-object-name>com.tsa.puridiom.rfqheader.tasks.RfqHeaderRetrieveById</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="rfqCheckExtendMinutes">
+				<task-object-name>com.tsa.puridiom.rfqheader.tasks.RfqHeaderExtendAuctionSetup</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="rfqExtendAuction">
+				<rule-filename>is-extend-auction-required.xml</rule-filename>				
+				<task-object-name>com.tsa.puridiom.supplierportal.InvokeSupplierPortalProcessTask</task-object-name>
+				<process-filename>rfqheader-update-by-id.xml</process-filename>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="updateVendor">
+			<task synchronous="true" continue-on-failure="false" name="rfqVendor">
+				<task-object-name>com.tsa.puridiom.rfqvendor.tasks.RfqVendorRetrieveById</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="rfqVendorAdd">
+				<rule-filename>is-rfqvendor-empty.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.supplierportal.InvokeSupplierPortalProcessTask</task-object-name>
+				<process-filename>rfqvendor-add-by-id.xml</process-filename>
+				<post-action>exitActivity</post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="rfqVendor">
+				<task-object-name>com.tsa.puridiom.rfqvendor.tasks.RfqVendorSetValues</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="rfqVendor">
+				<task-object-name>com.tsa.puridiom.rfqvendor.tasks.RfqVendorUpdate</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="updateBids">
+			<task synchronous="true" continue-on-failure="false" name="rfqBidUpdate">			
+				<task-object-name>com.tsa.puridiom.rfqbid.tasks.RfqBidUpdate</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

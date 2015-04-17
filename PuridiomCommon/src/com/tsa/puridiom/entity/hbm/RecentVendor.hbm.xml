@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+    
+<hibernate-mapping>
+
+<!-- 
+    Created by Middlegen Hibernate plugin
+
+    http://boss.bekk.no/boss/middlegen/
+    http://hibernate.sourceforge.net/
+-->
+
+<class 
+    name="com.tsa.puridiom.entity.RecentVendor" 
+    table="RECENT_VENDOR"
+>
+    <composite-id name="comp_id" class="com.tsa.puridiom.entity.RecentVendorPK">
+        <key-property name="userId" column="USER_ID" type="java.lang.String" />
+        <key-property name="vendorId" column="VENDOR_ID" type="java.lang.String" />
+    </composite-id>    
+    <property
+        name="vendorName"
+        type="java.lang.String"
+        column="VENDOR_NAME"
+        length="40"
+    />
+    <property
+        name="addressCode"
+        type="java.lang.String"
+        column="ADDRESS_CODE"
+        length="15"
+    />
+    <property
+        name="contactCode"
+        type="java.lang.String"
+        column="CONTACT_CODE"
+        length="15"
+    />
+    <property
+        name="dateEntered"
+        type="java.sql.Timestamp"
+        column="DATE_ENTERED"
+        length="7"
+    />
+
+    <!-- associations -->
+
+</class>
+</hibernate-mapping>

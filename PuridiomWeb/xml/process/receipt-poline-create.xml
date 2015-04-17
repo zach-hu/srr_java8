@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="receiptPoLineCreate" connection-type="New-Transaction">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="poLineCreate">
+			<task synchronous="true" continue-on-failure="false" name="poHeader">
+				<task-object-name>com.tsa.puridiom.poheader.tasks.PoHeaderRetrieveById</task-object-name>
+				<post-action></post-action>
+			</task>
+			<!--task synchronous="true" continue-on-failure="false" name="poLineSetup">
+				<task-object-name>com.tsa.puridiom.poline.tasks.PoLineCreateSetup</task-object-name>
+				<post-action></post-action>
+			</task-->
+			<task synchronous="true" continue-on-failure="false" name="PoLine_lineNumber">
+				<task-object-name>com.tsa.puridiom.poline.tasks.PoLineGetNewLineNumber</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="poLineAdd">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>poline-add.xml</process-filename>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="history">
+			<task synchronous="true" continue-on-failure="false" name="poLineHistory">
+				<task-object-name>com.tsa.puridiom.poline.history.tasks.PoLineHistorySetup</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="poLineHistory">
+				<task-object-name>com.tsa.puridiom.poline.history.tasks.PoLineHistory</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

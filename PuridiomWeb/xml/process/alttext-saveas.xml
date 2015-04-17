@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="altTextSaveas" connection-type="Connection-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="altTextRetrieveByLine">
+			<task synchronous="true" continue-on-failure="false" name="altTextList">			
+				<task-object-name>com.tsa.puridiom.alttext.tasks.AltTextRetrieveBy</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="altTextList">			
+				<task-object-name>com.tsa.puridiom.alttext.tasks.AltTextSaveasList</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

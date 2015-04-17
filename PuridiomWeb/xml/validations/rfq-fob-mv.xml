@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rule>
+	<clause type="Rule">
+		<rule-filename>rfq-has-vendors.xml</rule-filename>
+	</clause>
+	<logical-operator>IFTHEN</logical-operator>
+	<clause type="lookup" matchAll="true">
+		<sql>from StdTable stdTable where stdTable.id.tableType = 'FOB' AND stdTable.id.tableKey = '@fob@' AND (stdTable.status = '02' or (stdTable.status = '01' and stdTable.dateExpires >= @today@))</sql>
+		<source>rfqVendorList</source>
+		<arguments>
+			<name>fob</name>
+			<source>rfqVendorList</source>
+			<colName>getFob</colName>
+		</arguments>
+	</clause>
+</rule>

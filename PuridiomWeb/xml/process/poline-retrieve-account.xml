@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="poLineAllocateAmount" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="poHeaderRetrieve">
+			<task synchronous="true" continue-on-failure="false" name="poHeader">
+				<task-object-name>com.tsa.puridiom.poheader.tasks.PoHeaderRetrieveById</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="poLineAccountDefaults">
+			<rule-filename>is-account-default-by-header.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="poHeaderAccountSetup">
+				<task-object-name>com.tsa.puridiom.poheader.tasks.PoHeaderAccountRetrieveSetup</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="poHeaderAccountList">
+				<task-object-name>com.tsa.puridiom.account.tasks.AccountRetrieveByLine</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="accountDefaultByHeader">
+				<task-object-name>com.tsa.puridiom.poline.tasks.PoLineDefaultAccount</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="poLineRetrieveById">
+			<task synchronous="true" continue-on-failure="false" name="poLine">
+				<task-object-name>com.tsa.puridiom.poline.tasks.PoLineRetrieveById</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="poAllocAmountSetup">
+				<task-object-name>com.tsa.puridiom.poline.tasks.PoLineAccountRetrieveSetup</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="amountToAllocate">
+				<task-object-name>com.tsa.puridiom.poline.tasks.PoLineAllocateAmount</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="accountList">
+				<task-object-name>com.tsa.puridiom.account.tasks.AccountRetrieveByLine</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+	</activities>
+</process>

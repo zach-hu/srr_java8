@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="printAllApprovedInvoices" connection-type="None">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="printAllApprovedInvoices">
+			<task synchronous="true" continue-on-failure="false" name="invoiceJasperList">
+				<task-object-name>com.tsa.puridiom.formpdf.tasks.InvoicePrintAllJasperApprovedPdf</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

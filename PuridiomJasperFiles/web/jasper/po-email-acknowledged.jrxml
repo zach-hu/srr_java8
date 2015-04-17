@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Order" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="575" leftMargin="10" rightMargin="10" topMargin="10" bottomMargin="1" isTitleNewPage="true">
+	<property name="com.jasperassistant.designer.Rulers" value="true"/>
+	<property name="com.jasperassistant.designer.GridHeight" value="8"/>
+	<property name="com.jasperassistant.designer.GridWidth" value="2"/>
+	<property name="com.jasperassistant.designer.SnapToGrid" value="false"/>
+	<property name="com.jasperassistant.designer.Margins" value="true"/>
+	<property name="com.jasperassistant.designer.Grid" value="true"/>
+	<property name="com.jasperassistant.designer.SnapToGuides" value="true"/>
+	<import value="com.tsa.puridiom.entity.*"/>
+	<import value="com.tsa.puridiom.reports.datasource.*"/>
+	<import value="com.tsa.puridiom.jasperreports.*"/>
+	<import value="com.tsa.puridiom.common.documents.*"/>
+	<import value="com.tsagate.properties.*"/>
+	<reportFont name="Verdana" isDefault="true" fontName="Verdana" size="9" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_black" isDefault="false" fontName="Arial Black" size="9" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica-Bold" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Verdana_big" isDefault="false" fontName="Verdana" size="11" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Verdana_bold" isDefault="false" fontName="Verdana" size="9" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<parameter name="oid" class="java.lang.String"/>
+	<parameter name="linesSR" class="net.sf.jasperreports.engine.JasperReport">
+		<defaultValueExpression><![CDATA[JasperReportsHelper.loadSubReport("po-line-list.jasper", $P{oid})]]></defaultValueExpression>
+	</parameter>
+	<parameter name="linesDS" class="com.tsa.puridiom.reports.datasource.HibernateQueryResultDataSource"/>
+	<parameter name="shipToSR" class="net.sf.jasperreports.engine.JasperReport">
+		<defaultValueExpression><![CDATA[JasperReportsHelper.loadSubReport("shipto-po.jasper", $P{oid})]]></defaultValueExpression>
+	</parameter>
+	<parameter name="shipToDS" class="com.tsa.puridiom.reports.datasource.EntityDataSource"/>
+	<parameter name="vendorSR" class="net.sf.jasperreports.engine.JasperReport">
+		<defaultValueExpression><![CDATA[JasperReportsHelper.loadSubReport("vendor-po.jasper", $P{oid})]]></defaultValueExpression>
+	</parameter>
+	<parameter name="vendorDS" class="com.tsa.puridiom.reports.datasource.EntityDataSource"/>
+	<parameter name="lines" class="java.util.List"/>
+	<parameter name="billToSR" class="net.sf.jasperreports.engine.JasperReport">
+		<defaultValueExpression><![CDATA[JasperReportsHelper.loadSubReport("shipto-po.jasper", $P{oid})]]></defaultValueExpression>
+	</parameter>
+	<parameter name="billToDS" class="com.tsa.puridiom.reports.datasource.EntityDataSource"/>
+	<parameter name="imgUrl" class="java.lang.String">
+		<defaultValueExpression><![CDATA["http://localhost:8085/hilton/images/"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="GCS_SITE_NAME" class="java.lang.String">
+		<defaultValueExpression><![CDATA["Puridiom"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="GCS_SITE_URL" class="java.lang.String">
+		<defaultValueExpression><![CDATA["http://test.puridiom.com/hilton"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="totalsSR" class="net.sf.jasperreports.engine.JasperReport">
+		<defaultValueExpression><![CDATA[JasperReportsHelper.loadSubReport("po-totals.jasper", $P{oid})]]></defaultValueExpression>
+	</parameter>
+	<parameter name="mid" class="java.lang.String"/>
+	<parameter name="uid" class="java.lang.String"/>
+	<parameter name="rddSeeBelow" class="java.lang.Boolean"/>
+	<field name="PoHeader_poNumber" class="java.lang.String"/>
+	<field name="PoHeader_releaseNumber" class="java.math.BigDecimal"/>
+	<field name="PoHeader_revisionNumber" class="java.math.BigDecimal"/>
+	<field name="PoHeader_shipToCode" class="java.lang.String"/>
+	<field name="PoHeader_billToCode" class="java.lang.String"/>
+	<field name="PoHeader_vendorId" class="java.lang.String"/>
+	<field name="PoHeader_requiredDate" class="java.util.Date"/>
+	<field name="PoHeader_poDate" class="java.util.Date"/>
+	<field name="PoHeader_shipViaCode" class="java.lang.String"/>
+	<field name="PoHeader_fobCode" class="java.lang.String"/>
+	<field name="PoHeader_termsCode" class="java.lang.String"/>
+	<field name="PoHeader_requisitionNumber" class="java.lang.String"/>
+	<field name="PoHeader_promisedDate" class="java.util.Date"/>
+	<field name="PoHeader_expirationDate" class="java.util.Date"/>
+	<field name="PoHeader_routing" class="java.lang.String"/>
+	<field name="PoHeader_internalComments" class="java.lang.String"/>
+	<field name="PoHeader_poType" class="java.lang.String"/>
+	<field name="PoHeader_total" class="java.math.BigDecimal"/>
+	<field name="PoHeader_vendContactCode" class="java.lang.String"/>
+	<field name="PoHeader_shipToContact" class="java.lang.String"/>
+	<field name="PoHeader_billToContact" class="java.lang.String"/>
+	<field name="PoHeader_buyerCode" class="java.lang.String"/>
+	<field name="PoHeader_subtotal" class="java.math.BigDecimal"/>
+	<field name="PoHeader_udf1Code" class="java.lang.String"/>
+	<field name="PoHeader_contactName" class="java.lang.String"/>
+	<field name="PoHeader_taxAmount" class="java.math.BigDecimal"/>
+	<field name="PoHeader_discountAmount" class="java.math.BigDecimal"/>
+	<field name="PoHeader_shippingCharges" class="java.math.BigDecimal"/>
+	<field name="PoHeader_otherCharges" class="java.math.BigDecimal"/>
+	<field name="PoHeader_status" class="java.lang.String"/>
+	<field name="PoHeader_icPoHeader" class="java.math.BigDecimal"/>
+	<field name="PoHeader_otherTax" class="java.math.BigDecimal"/>
+	<field name="PoHeader_shippingTax" class="java.math.BigDecimal"/>
+	<field name="PoHeader_useTaxAmount" class="java.math.BigDecimal"/>
+	<field name="PoHeader_docCommentList" class="java.util.List"/>
+	<field name="PoHeader_accountList" class="java.util.List"/>
+	<field name="PoHeader_docAttachmentList" class="java.util.List"/>
+	<field name="PoHeader_poLineList" class="java.util.List"/>
+	<field name="PoHeader_vendorName" class="java.lang.String"/>
+	<field name="PoHeader_dateAcknowledged" class="java.util.Date"/>
+	<field name="PoHeader_acknowledgedBy" class="java.lang.String"/>
+	<group name="copyright" isStartNewPage="true">
+		<groupHeader>
+			<band height="20" splitType="Stretch"/>
+		</groupHeader>
+	</group>
+	<title>
+		<band height="335" splitType="Stretch">
+			<staticText>
+				<reportElement positionType="Float" mode="Opaque" x="115" y="66" width="15" height="15" forecolor="#400040" backcolor="#FFFFFF"/>
+				<box>
+					<topPen lineColor="#000000"/>
+					<leftPen lineColor="#000000"/>
+					<bottomPen lineColor="#000000"/>
+					<rightPen lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font reportFont="Verdana_big" size="10"/>
+				</textElement>
+				<text><![CDATA[#:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" mode="Opaque" x="130" y="66" width="115" height="15" forecolor="#400040" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font reportFont="Verdana" size="10"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[(($F{PoHeader_releaseNumber}.compareTo(new BigDecimal(0)) == 0) ? $F{PoHeader_poNumber} : $F{PoHeader_poNumber}+"-"+$F{PoHeader_releaseNumber}.toString())
+]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" mode="Opaque" x="10" y="86" width="52" height="15" forecolor="#400040" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font reportFont="Verdana" size="10" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{PoHeader_releaseNumber}.compareTo(new BigDecimal(0)) == 0 ? "" : "Release #:"]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" mode="Opaque" x="61" y="106" width="52" height="15" forecolor="#400040" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font reportFont="Verdana" size="10"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{PoHeader_revisionNumber}.compareTo(new BigDecimal(0)) == 0 ? "" : $F{PoHeader_revisionNumber}.toString()]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="10" y="66" width="100" height="15"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font reportFont="Verdana_big" size="10" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[OrderType.toString($F{PoHeader_poType}, $P{oid} )]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" mode="Opaque" x="110" y="127" width="183" height="15" backcolor="#FFFFFF"/>
+				<textElement verticalAlignment="Middle">
+					<font reportFont="Verdana" size="10"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{PoHeader_vendorName}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement positionType="Float" mode="Opaque" x="10" y="126" width="100" height="15" backcolor="#FFFFFF"/>
+				<textElement verticalAlignment="Middle" markup="styled">
+					<font reportFont="Verdana_bold" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Supplier Name:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" mode="Opaque" x="10" y="146" width="100" height="15" backcolor="#FFFFFF"/>
+				<box>
+					<topPen lineColor="#000000"/>
+					<leftPen lineColor="#000000"/>
+					<bottomPen lineColor="#000000"/>
+					<rightPen lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle" markup="styled">
+					<font reportFont="Verdana_bold" size="10"/>
+				</textElement>
+				<text><![CDATA[Required Date:]]></text>
+			</staticText>
+			<textField pattern="MMM d, yyyy" isBlankWhenNull="true">
+				<reportElement positionType="Float" mode="Opaque" x="110" y="147" width="109" height="15" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression class="java.util.Date"><![CDATA[$F{PoHeader_requiredDate}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement positionType="Float" mode="Opaque" x="10" y="206" width="100" height="15" backcolor="#FFFFFF"/>
+				<box>
+					<topPen lineColor="#000000"/>
+					<leftPen lineColor="#000000"/>
+					<bottomPen lineColor="#000000"/>
+					<rightPen lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font reportFont="Verdana_bold" size="10"/>
+				</textElement>
+				<text><![CDATA[Purpose:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" mode="Opaque" x="110" y="207" width="400" height="15" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{PoHeader_internalComments}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement positionType="Float" mode="Opaque" x="10" y="166" width="100" height="15" backcolor="#FFFFFF"/>
+				<box>
+					<topPen lineColor="#000000"/>
+					<leftPen lineColor="#000000"/>
+					<bottomPen lineColor="#000000"/>
+					<rightPen lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font reportFont="Verdana_bold" size="10"/>
+				</textElement>
+				<text><![CDATA[Total:]]></text>
+			</staticText>
+			<textField pattern="¤#,##0.00;(¤#,##0.00)" isBlankWhenNull="true">
+				<reportElement positionType="Float" mode="Opaque" x="110" y="167" width="109" height="15" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{PoHeader_total}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" mode="Opaque" x="10" y="17" width="510" height="15" backcolor="#FFFFFF"/>
+				<textElement verticalAlignment="Middle">
+					<font reportFont="Verdana" size="10"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["The following order has been acknowledged by " + $F{PoHeader_acknowledgedBy} + " on "]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement positionType="Float" x="5" y="53" width="566" height="10" forecolor="#FFFFFF"/>
+			</rectangle>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" mode="Opaque" x="60" y="85" width="58" height="15" forecolor="#400040" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font reportFont="Verdana" size="10"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{PoHeader_releaseNumber}.compareTo(new BigDecimal(0)) == 0 ? "" : $F{PoHeader_releaseNumber}.toString()]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" mode="Opaque" x="10" y="106" width="52" height="15" forecolor="#400040" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font reportFont="Verdana" size="10" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{PoHeader_revisionNumber}.compareTo(new BigDecimal(0)) == 0 ? "" : "Revision #:"]]></textFieldExpression>
+			</textField>
+			<textField pattern="MMM d, yyyy" isBlankWhenNull="true">
+				<reportElement positionType="Float" mode="Opaque" x="10" y="32" width="109" height="15" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression class="java.util.Date"><![CDATA[$F{PoHeader_dateAcknowledged}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+</jasperReport>

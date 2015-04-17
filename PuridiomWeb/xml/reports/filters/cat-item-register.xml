@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CatalogItem>
+	  <columns>
+		<Catalog_catalogId>
+			<label>Catalog Id</label>
+			<type>STRING</type>
+		</Catalog_catalogId>
+		<Catalog_title>
+			<label>Title</label>
+			<type>STRING</type>
+		</Catalog_title>
+		<Catalog_vendorId>
+			<label>Supplier Id</label>
+			<type>STRING</type>
+		</Catalog_vendorId>
+		<Catalog_poNumber>
+			<label>Order Number</label>
+			<type>STRING</type>
+		</Catalog_poNumber>
+		<CatalogItem_umCode>
+			<label>Unit of Measure</label>
+			<type>STRING</type>
+		</CatalogItem_umCode>
+		<CatalogItem_commodity>
+			<label>Commodity</label>
+			<type>STRING</type>
+		</CatalogItem_commodity>
+		<CatalogItem_cost>
+			<label>Cost</label>
+			<type>STRING</type>
+		</CatalogItem_cost>
+		<CatalogItem_stdCost>
+			<label>Standard Cost</label>
+			<type>STRING</type>
+		</CatalogItem_stdCost>
+		<CatalogItem_taxable>
+			<label>Taxable</label>
+			<type>STRING</type>
+		</CatalogItem_taxable>
+		<CatalogItem_udf1Code>
+			<label>UDF 1 Code</label>
+			<type>STRING</type>
+		</CatalogItem_udf1Code>
+		<CatalogItem_udf2Code>
+			<label>UDF 2 Code</label>
+			<type>STRING</type>
+		</CatalogItem_udf2Code>
+		<CatalogItem_udf3Code>
+			<label>UDF 3 Code</label>
+			<type>STRING</type>
+		</CatalogItem_udf3Code>
+		<CatalogItem_udf4Code>
+			<label>UDF 4 Code</label>
+			<type>STRING</type>
+		</CatalogItem_udf4Code>
+		<CatalogItem_udf5Code>
+			<label>UDF 5 Code</label>
+			<type>STRING</type>
+		</CatalogItem_udf5Code>
+		<CatalogItem_description>
+			<label>Description</label>
+			<type>STRING</type>
+		</CatalogItem_description>
+		<CatalogItem_id_itemNumber>
+			<label>Item Number</label>
+			<type>STRING</type>
+		</CatalogItem_id_itemNumber>
+	</columns>
+	<sqlfrom>CatalogItem as CatalogItem, Catalog as Catalog</sqlfrom>
+	<sqlwhere>( Catalog.catalogId = CatalogItem.id.catalogId )</sqlwhere>
+	<sqlorderby>Catalog.catalogId, CatalogItem.id.itemNumber</sqlorderby>
+	<pagesize>15</pagesize>
+	<title>Catalog Item Register</title>
+</CatalogItem>
+

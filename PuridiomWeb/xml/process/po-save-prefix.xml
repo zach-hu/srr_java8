@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="poGetPoVendorList" connection-type="New-Transaction">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="RetrievePoVendorList">
+			<task synchronous="true" continue-on-failure="false" name="poDataList">
+				<task-object-name>com.tsa.puridiom.rfqline.tasks.RfqLineRetrievePartialVendorListByHeader</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

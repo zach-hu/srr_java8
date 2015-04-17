@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="poline-update-balance-from-receiptline" connection-type="Transaction-Required">
+	<rule-filename check-for-false="true">is-poline-empty.xml</rule-filename>
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="poLineSetup">
+			<task synchronous="true" continue-on-failure="false" name="poLineUpdateSetup">			
+				<task-object-name>com.tsa.puridiom.poline.tasks.PoLineUpdateSetup</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>			
+		<activity synchronous="true" continue-on-failure="false" name="poLineUpdate">
+			<task synchronous="true" continue-on-failure="false" name="poLine">			
+				<task-object-name>com.tsa.puridiom.poline.tasks.PoLineSetQtyReceived</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="poLine">			
+				<task-object-name>com.tsa.puridiom.poline.tasks.PoLineSetReceiptStatus</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="poLine">			
+				<task-object-name>com.tsa.puridiom.poline.tasks.PoLineUpdate</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="updateRequisitionStatusFromOrder">
+			<task synchronous="true" continue-on-failure="false" name="updateReqStatus">			
+				<task-object-name>com.tsa.puridiom.poline.tasks.PoLineUpdateReqLineStatus</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+	</activities>
+</process>

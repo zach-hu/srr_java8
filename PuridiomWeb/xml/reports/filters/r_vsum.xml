@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<r_vsum>
+
+  <columns>
+		<VoucherHeader_voucherType>
+			<label>Voucher Type</label>
+			<type>STRING</type>
+		</VoucherHeader_voucherType>
+		<VoucherHeader_controlNumber>
+			<label>Control Number</label>
+			<type>STRING</type>
+		</VoucherHeader_controlNumber>
+		<VoucherHeader_invoiceNumber>
+			<label>Invoice Number</label>
+			<type>STRING</type>
+		</VoucherHeader_invoiceNumber>
+		<VoucherHeader_voucherNumber>
+			<label>Voucher Number</label>
+			<type>STRING</type>
+		</VoucherHeader_voucherNumber>
+		<VoucherHeader_poNumber>
+			<label>Po Number</label>
+			<type>STRING</type>
+		</VoucherHeader_poNumber>
+		<VoucherHeader_poRelease>
+			<label>Po Release</label>
+			<type>STRING</type>
+		</VoucherHeader_poRelease>
+		<VoucherHeader_invoiceDate>
+			<label>Invoice Date</label>
+			<type>DATE</type>
+		</VoucherHeader_invoiceDate>
+		<VoucherHeader_dateEntered>
+			<label>Date Entered</label>
+			<type>STRING</type>
+		</VoucherHeader_dateEntered>
+		<VoucherHeader_vendorId>
+			<label>Vendor Id</label>
+			<type>STRING</type>
+		</VoucherHeader_vendorId>
+		<VoucherHeader_invoiceUdf01>
+			<label>Invoice Udf 01</label>
+			<type>STRING</type>
+		</VoucherHeader_invoiceUdf01>
+		<VoucherHeader_invoiceUdf02>
+			<label>Invoice Udf 02</label>
+			<type>STRING</type>
+		</VoucherHeader_invoiceUdf02>
+		<VoucherHeader_invoiceUdf03>
+			<label>Invoice Udf 03</label>
+			<type>STRING</type>
+		</VoucherHeader_invoiceUdf03>
+		<VoucherHeader_invoiceUdf04>
+			<label>Invoice Udf 04</label>
+			<type>STRING</type>
+		</VoucherHeader_invoiceUdf04>
+		<VoucherHeader_invoiceUdf05>
+			<label>Invoice Udf 05</label>
+			<type>STRING</type>
+		</VoucherHeader_invoiceUdf05>
+		<VoucherHeader_invoiceTotal>
+			<label>Invoice Total</label>
+			<type>STRING</type>
+		</VoucherHeader_invoiceTotal>
+		<VoucherHeader_taxApp>
+			<label>Tax App</label>
+			<type>STRING</type>
+		</VoucherHeader_taxApp>
+		<VoucherHeader_shipApp>
+			<label>Ship App</label>
+			<type>STRING</type>
+		</VoucherHeader_shipApp>
+		<VoucherHeader_otherApp>
+			<label>Other App</label>
+			<type>STRING</type>
+		</VoucherHeader_otherApp>
+		<VoucherHeader_subtotalApp>
+			<label>Subtotal App</label>
+			<type>STRING</type>
+		</VoucherHeader_subtotalApp>
+		<Vendor_vendorName>
+			<label>Vendor Name</label>
+			<type>STRING</type>
+		</Vendor_vendorName>
+		<PoHeader_currencyFactor>
+			<label>Currency Factor</label>
+			<type>STRING</type>
+		</PoHeader_currencyFactor>
+	</columns>
+
+  <sqlfrom>voucher_header , vendor , po_header</sqlfrom>
+
+  <sqlwhere> ( po_header.ic_po_header = voucher_header.ic_po_header ) and  ( voucher_header.vendor_id = vendor.vendor_id ) </sqlwhere>
+
+  <sqlorderby> voucher_header.voucher_type ASC </sqlorderby>
+
+  <pagesize>15</pagesize>
+
+  <title>Voucher Summary Report (Voucher Type)</title>
+
+
+</r_vsum>
+

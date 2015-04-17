@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created using JasperAssistant (http://www.jasperassistant.com) -->
+<!DOCTYPE jasperReport PUBLIC "-//JasperReports//DTD Report Design//EN" "http://jasperreports.sourceforge.net/dtds/jasperreport.dtd">
+
+<jasperReport name="ProjectNotes" pageWidth="595" pageHeight="842" columnWidth="565" leftMargin="20" rightMargin="10" topMargin="10" bottomMargin="30">
+	<property name="com.jasperassistant.designer.GridHeight" value="12"/>
+	<property name="com.jasperassistant.designer.GridWidth" value="12"/>
+	<property name="com.jasperassistant.designer.DataSource" value="empty"/>
+	<property name="com.jasperassistant.designer.SnapToGrid" value="false"/>
+	<property name="com.jasperassistant.designer.Grid" value="false"/>
+	<reportFont name="Arial_Normal" isDefault="false" fontName="Arial" size="8" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<parameter name="reportTitle" class="java.lang.String">
+		<defaultValueExpression><![CDATA["Project Po Payments"]]></defaultValueExpression>
+	</parameter>
+	<field name="ProjectTrackingView_fld4" class="java.lang.String">
+	</field>
+	<field name="ProjectTrackingView_poNumber" class="java.lang.String">
+	</field>
+	<field name="ProjectTrackingView_vendorName" class="java.lang.String">
+	</field>
+	<field name="ProjectTrackingView_fld2" class="java.lang.String">
+	</field>
+	<field name="ProjectTrackingView_fld1" class="java.lang.String">
+	</field>
+	<field name="ProjectTrackingView_vendorId" class="java.lang.String">
+	</field>
+	<field name="ProjectTrackingView_awarded" class="java.math.BigDecimal">
+	</field>
+	<field name="ProjectTrackingView_spentTodate" class="java.math.BigDecimal">
+	</field>
+	<field name="ProjectTrackingView_allocPercent" class="java.math.BigDecimal">
+	</field>
+	<field name="ProjectTrackingView_poType" class="java.lang.String">
+	</field>
+	<field name="ProjectTrackingView_status" class="java.lang.String">
+	</field>
+	<field name="ProjectTrackingView_poDate" class="java.util.Date">
+	</field>
+	<field name="ProjectTrackingView_appDate" class="java.util.Date">
+	</field>
+	<field name="ProjectTracking_internalComments" class="java.lang.String">
+	</field>
+	<variable name="today" class="java.util.Date">
+		<variableExpression><![CDATA[new Date()]]></variableExpression>
+		<initialValueExpression><![CDATA[new Date()]]></initialValueExpression>
+	</variable>
+	<group name="Group_1">
+		<groupExpression><![CDATA[$F{ProjectTrackingView_fld4}]]></groupExpression>
+		<groupHeader>
+		<band height="16">
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" x="42" y="1" width="55" height="14"/>
+				<textElement verticalAlignment="Middle">
+					<font reportFont="Arial_Normal"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{ProjectTrackingView_fld4}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" x="99" y="1" width="458" height="14" isRemoveLineWhenBlank="true"/>
+				<textElement verticalAlignment="Middle">
+					<font reportFont="Arial_Normal"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{ProjectTracking_internalComments}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement positionType="Float" x="2" y="1" width="40" height="14"/>
+				<textElement verticalAlignment="Middle">
+					<font reportFont="Arial_Normal" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Project #:]]></text>
+			</staticText>
+		</band>
+		</groupHeader>
+		<groupFooter>
+		<band height="2">
+		</band>
+		</groupFooter>
+	</group>
+	<title>
+		<band height="31">
+			<textField pattern="dd-MM-yyyy hh:mm:ss" isBlankWhenNull="true">
+				<reportElement positionType="Float" mode="Opaque" x="1" y="2" width="97" height="16"/>
+				<textElement>
+					<font reportFont="Arial_Normal"/>
+				</textElement>
+				<textFieldExpression class="java.util.Date"><![CDATA[$V{today}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement positionType="Float" x="98" y="0" width="329" height="27"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="16" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{reportTitle}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement positionType="Float" x="480" y="4" width="49" height="20"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression class="java.lang.String"><![CDATA["Page " + String.valueOf($V{PAGE_NUMBER}) + " of" + " "]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement positionType="Float" x="528" y="4" width="25" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[" " + String.valueOf($V{PAGE_NUMBER})]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="16">
+			<staticText>
+				<reportElement positionType="Float" x="2" y="1" width="55" height="14"/>
+				<box topBorder="None" leftBorder="None" bottomBorder="1Point" rightBorder="None"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font reportFont="Arial_Normal"/>
+				</textElement>
+				<text><![CDATA[PO Number]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="59" y="1" width="128" height="14"/>
+				<box topBorder="None" leftBorder="None" bottomBorder="1Point" rightBorder="None"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font reportFont="Arial_Normal"/>
+				</textElement>
+				<text><![CDATA[Supplier]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="235" y="1" width="44" height="14"/>
+				<box topBorder="None" leftBorder="None" bottomBorder="1Point" rightBorder="None"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font reportFont="Arial_Normal"/>
+				</textElement>
+				<text><![CDATA[Account]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="280" y="1" width="54" height="14"/>
+				<box topBorder="None" leftBorder="None" bottomBorder="1Point" rightBorder="None"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font reportFont="Arial_Normal"/>
+				</textElement>
+				<text><![CDATA[Committed]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="335" y="1" width="45" height="14"/>
+				<box topBorder="None" leftBorder="None" bottomBorder="1Point" rightBorder="None"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font reportFont="Arial_Normal"/>
+				</textElement>
+				<text><![CDATA[Obligated]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="381" y="1" width="48" height="14"/>
+				<box topBorder="None" leftBorder="None" bottomBorder="1Point" rightBorder="None"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font reportFont="Arial_Normal"/>
+				</textElement>
+				<text><![CDATA[Status]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="432" y="1" width="44" height="14"/>
+				<box topBorder="None" leftBorder="None" bottomBorder="1Point" rightBorder="None"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font reportFont="Arial_Normal"/>
+				</textElement>
+				<text><![CDATA[PO Date]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="476" y="1" width="41" height="14"/>
+				<box topBorder="None" leftBorder="None" bottomBorder="1Point" rightBorder="None"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font reportFont="Arial_Normal"/>
+				</textElement>
+				<text><![CDATA[Awarded]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="189" y="1" width="47" height="14"/>
+				<box topBorder="None" leftBorder="None" bottomBorder="1Point" rightBorder="None"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font reportFont="Arial_Normal"/>
+				</textElement>
+				<text><![CDATA[CostCntr]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="17">
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" x="2" y="1" width="55" height="14"/>
+				<textElement>
+					<font reportFont="Arial_Normal"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{ProjectTrackingView_poNumber}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" x="59" y="1" width="128" height="14"/>
+				<textElement>
+					<font reportFont="Arial_Normal"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{ProjectTrackingView_vendorName}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" x="189" y="1" width="47" height="14"/>
+				<textElement>
+					<font reportFont="Arial_Normal"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{ProjectTrackingView_fld2}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" x="235" y="1" width="44" height="14"/>
+				<textElement>
+					<font reportFont="Arial_Normal"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{ProjectTrackingView_fld1}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.###" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="280" y="1" width="54" height="14"/>
+				<textElement textAlignment="Right">
+					<font reportFont="Arial_Normal"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{ProjectTrackingView_awarded}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.###" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="335" y="1" width="45" height="14"/>
+				<textElement textAlignment="Right">
+					<font reportFont="Arial_Normal"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{ProjectTrackingView_spentTodate}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" x="383" y="1" width="46" height="14"/>
+				<textElement>
+					<font reportFont="Arial_Normal"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[com.tsa.puridiom.common.documents.DocumentStatus.toString($F{ProjectTrackingView_status})]]></textFieldExpression>
+			</textField>
+			<textField pattern="MM/dd/yyyy" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="432" y="1" width="44" height="14"/>
+				<textElement>
+					<font reportFont="Arial_Normal"/>
+				</textElement>
+				<textFieldExpression class="java.util.Date"><![CDATA[$F{ProjectTrackingView_poDate}]]></textFieldExpression>
+			</textField>
+			<textField pattern="MM/dd/yyyy" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="476" y="1" width="41" height="14"/>
+				<textElement>
+					<font reportFont="Arial_Normal"/>
+				</textElement>
+				<textFieldExpression class="java.util.Date"><![CDATA[$F{ProjectTrackingView_appDate}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

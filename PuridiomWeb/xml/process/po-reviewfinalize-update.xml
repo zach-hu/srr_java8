@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="PoReviewFinalizeUpdate" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="delete">
+			<task synchronous="true" continue-on-failure="false" name="delete">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>po-reviewfinalize-delete-by-header.xml</process-filename>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="update">
+			<task synchronous="true" continue-on-failure="false" name="setReviewFinalize">
+				<task-object-name>com.puridiom.reviewfinalize.po.tasks.PoReviewFinalizeUpdateByLine</task-object-name>
+				<post-action></post-action>
+			</task>
+		  </activity>
+	 </activities>
+</process>

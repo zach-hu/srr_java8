@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="InspectionDisposUpdate" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="receiptRetrieve">
+			<task synchronous="true" continue-on-failure="false" name="receiptHeader">
+				<task-object-name>com.tsa.puridiom.receiptheader.tasks.ReceiptHeaderRetrieveById</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="receiptLine">
+				<task-object-name>com.tsa.puridiom.receiptline.tasks.ReceiptLineRetrieveById</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="ReceiptLineDataRetrieve">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>receiptlinedata-retrieve.xml</process-filename>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="InspectionDisposRetrieve">
+			<task synchronous="true" continue-on-failure="false" name="inspectionDisposRetrieveSetup">
+				<task-object-name>com.tsa.puridiom.inspectiondispos.tasks.InspectionDisposRetrieveSetup</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="inspectionDisposList">
+				<task-object-name>com.tsa.puridiom.inspectiondispos.tasks.InspectionDisposRetrieveByIcInspDiscrep</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="InspectionDisposDelete">
+			<task synchronous="true" continue-on-failure="false" name="InspectionDisposDeleteList">
+				<task-object-name>com.tsa.puridiom.inspectiondispos.tasks.InspectionDisposDeleteList</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="InspectionDisposSaveActivity">
+			<task synchronous="true" continue-on-failure="false" name="InspectionDisposSave">
+				<task-object-name>com.tsa.puridiom.inspectiondispos.tasks.InspectionDisposSave</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+	</activities>
+</process>

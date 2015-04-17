@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="browseRetrieve" connection-type="None">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="browseRetrieve">
+			<task synchronous="true" continue-on-failure="false" name="browse">
+				<task-object-name>com.tsa.puridiom.browse.tasks.BrowseSetInputRequestValues</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="browse">
+				<task-object-name>com.tsa.puridiom.browse.tasks.BrowseSetPage</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="setBrowseInCache">
+				<task-object-name>com.tsa.puridiom.browse.tasks.SetBrowseInCache</task-object-name>
+			</task>			
+		</activity>
+	</activities>
+</process>

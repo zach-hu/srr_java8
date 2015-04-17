@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="invoiceRoutingList" connection-type="Connection-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="retrieveInvoice">
+			<task synchronous="true" continue-on-failure="false" name="invoiceHeader">
+				<task-object-name>com.tsa.puridiom.invoiceheader.tasks.InvoiceHeaderRetrieveById</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="invoiceRoutingListSetup">
+			<task synchronous="true" continue-on-failure="false" name="invoiceRoutingSetup">
+				<task-object-name>com.tsa.puridiom.invoice.approvals.tasks.InvoiceRoutingSetup</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="invoiceLineList">
+				<task-object-name>com.tsa.puridiom.invoiceline.tasks.InvoiceLineRetrieveByHeader</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="accountList">
+				<task-object-name>com.tsa.puridiom.account.tasks.AccountRetrieveByHeader</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="routingList">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>routing-list-build-extended.xml</process-filename>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="routingList">
+				<task-object-name>com.tsa.puridiom.approvals.tasks.ApprovalLogListBuild</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="routingSetupLastApprovers">
+				<rule-filename>is-approvers-posubtype.xml</rule-filename>
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>setup-approvers-from-posubtype.xml</process-filename>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="routingListGroups">
+				<task-object-name>com.tsa.puridiom.approvals.tasks.ApprovalLogListGroupByRule</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="routingList">
+				<task-object-name>com.tsa.puridiom.invoice.approvals.tasks.InvoiceApproverLogSetup</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="routingListUpdate">
+				<rule-filename>is-routing-for-forward.xml</rule-filename>
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>approvallog-update-temp-list.xml</process-filename>
+			</task>
+			<task continue-on-failure="false" name="queueAddOrderRequest" synchronous="true">
+        		<task-object-name>com.tsa.puridiom.invoice.approvals.tasks.QueueAddInvoiceApproverEmail</task-object-name>
+      		</task>
+		</activity>
+	</activities>
+</process>

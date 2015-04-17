@@ -1,0 +1,25 @@
+<rule>
+	<clause type="StringCompare">
+		<left-side>
+			<source>incomingRequest</source>
+			<name>useTaxAccountList</name>
+		</left-side>
+		<operator>NOTEQUAL</operator>
+		<right-side>
+			<source>constant</source>
+		</right-side>
+	</clause>
+	<logical-operator>AND</logical-operator>
+	<clause type="IntegerCompare">
+		<left-side>
+			<source>incomingRequestObjectMethod</source>
+			<object>useTaxAccountList</object>
+			<name>size</name>
+		</left-side>
+		<operator>NOTEQUAL</operator>
+		<right-side>
+			<source>constant</source>
+			<value>0</value>
+		</right-side>
+	</clause>
+</rule>

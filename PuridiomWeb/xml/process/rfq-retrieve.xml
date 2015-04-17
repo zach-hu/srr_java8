@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="rfqRetrieve" connection-type="Connection-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="rfqHeaderDataRetrieveById">
+			<task synchronous="true" continue-on-failure="false" name="rfqHeaderDataRetrieve">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>rfqheaderdata-retrieve.xml</process-filename>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="rfqLineListRetrieve">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>rfqlinedata-retrieve.xml</process-filename>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="rfqHeader">
+				<task-object-name>com.tsa.puridiom.rfqheader.tasks.RfqHeaderDataSetLines</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="rfqLineSetLowestBid">
+				<task-object-name>com.tsa.puridiom.rfqline.tasks.RfqLineSetLowestBids</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="buyerShipToAddressRetrieve">
+			<task synchronous="true" continue-on-failure="false" name="buyerShipToAddressRetrieve">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>user-address-retrieve.xml</process-filename>
+			</task>
+		</activity>
+	</activities>
+</process>

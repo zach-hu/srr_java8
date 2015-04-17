@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="invItemAdd" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="addAssetPoLine">
+			<task synchronous="true" continue-on-failure="false" name="asset">
+        		<task-object-name>com.tsa.puridiom.asset.serv.tasks.AssetPoLineCreateSetup</task-object-name>
+      		</task>
+			<task synchronous="true" continue-on-failure="false" name="asset">
+        		<task-object-name>com.tsa.puridiom.asset.tasks.AssetAdd</task-object-name>
+      		</task>
+      		<task synchronous="true" continue-on-failure="false" name="Asset_number">
+        		<task-object-name>com.tsa.puridiom.asset.serv.tasks.AssetAddQuantity</task-object-name>
+      		</task>
+      		<task synchronous="true" continue-on-failure="false" name="assetList">
+        		<task-object-name>com.tsa.puridiom.asset.serv.tasks.AssetPoLineCopyCreateSetup</task-object-name>
+      		</task>
+      		<task synchronous="true" continue-on-failure="false" name="assetList">
+        		<task-object-name>com.tsa.puridiom.asset.serv.tasks.AssetListAdd</task-object-name>
+      		</task>
+			<task synchronous="true" continue-on-failure="false" name="assetCostList">
+        		<task-object-name>com.tsa.puridiom.assetcost.serv.tasks.AssetCostPoLineCreateSetup</task-object-name>
+      		</task>
+			<task synchronous="true" continue-on-failure="false" name="assetCostList">
+        		<task-object-name>com.tsa.puridiom.assetcost.tasks.AssetCostListAdd</task-object-name>
+      		</task>
+		</activity>
+	</activities>
+</process>

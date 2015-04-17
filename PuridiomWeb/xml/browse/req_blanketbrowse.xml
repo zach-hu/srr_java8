@@ -1,0 +1,70 @@
+<browse_req_blanketbrowse>
+	<columns>
+		<PoHeader_icPoHeader>
+			<label>Ic Po Header</label>
+	        <hidden>Y</hidden>
+	        <visible>0</visible>
+		</PoHeader_icPoHeader>
+		<PoHeader_poNumber>
+			<label>PO #</label>
+			<link><![CDATA[javascript: createReleaseReq('#PoHeader_icPoHeader^','#PoHeader_poType^'); void(0);]]></link>
+			<size>10</size>
+		</PoHeader_poNumber>
+		<PoHeader_revisionNumber>
+			<label>Rev</label>
+			<type>STRING</type>
+			<size>5</size>
+		</PoHeader_revisionNumber>
+		<PoHeader_poType>
+			<label>Type</label>
+			<type>ORDER-TYPE</type>
+			<size>15</size>
+		</PoHeader_poType>
+		<PoHeader_status>
+			<label>brw-status</label>
+			<type>STATUS</type>
+			<size>10</size>
+		</PoHeader_status>
+		<PoHeader_poDate>
+			<label>PO Date</label>
+			<type>DATE</type>
+			<size>12</size>
+		</PoHeader_poDate>
+		<PoHeader_vendorId>
+			<label>brw-vendorId</label>
+			<hidden>Y</hidden>
+		</PoHeader_vendorId>
+		<PoHeader_vendorName>
+			<label>brw-vendorName</label>
+			<size>20</size>
+		</PoHeader_vendorName>
+		<PoHeader_buyerCode>
+			<label>brw-buyer</label>
+            <size>15</size>
+            <type>USER-ID</type>
+		</PoHeader_buyerCode>
+		<PoHeader_effectiveDate>
+			<label>Effective Date</label>
+			<type>DATE</type>
+	        <hidden>Y</hidden>
+		</PoHeader_effectiveDate>
+		<PoHeader_expirationDate>
+			<label>Expiration Date</label>
+			<type>DATE</type>
+			<size>13</size>
+		</PoHeader_expirationDate>
+		<PoHeader_internalComments>
+			<label>Purpose</label>
+			<detail>Y</detail>
+		</PoHeader_internalComments>
+	</columns>
+<sqlfrom>PoHeader as PoHeader,  PoSecurity as PoSecurity</sqlfrom>
+<sqlwhere>
+	<![CDATA[PoHeader.poNumber = PoSecurity.id.poNumber and
+				(PoHeader.poType = 'BO' or PoHeader.poType = 'DO' or PoHeader.poType = 'SB') and
+				PoHeader.lastRevision = 'C' and
+				(PoHeader.status >= '3030' and PoHeader.status < '9000' and PoHeader.status <> '3045')]]>
+</sqlwhere>
+<pagesize>15</pagesize>
+<title>Blanket Order Selection</title>
+</browse_req_blanketbrowse>

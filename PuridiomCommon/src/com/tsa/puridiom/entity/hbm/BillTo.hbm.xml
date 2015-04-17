@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+    
+<hibernate-mapping>
+
+<class 
+    name="com.tsa.puridiom.entity.BillTo" 
+    table="BILL_TO"
+>
+    <composite-id name="comp_id" class="com.tsa.puridiom.entity.BillToPK">
+        <key-property name="icHeader" column="IC_HEADER" type="java.math.BigDecimal"/>
+        <key-property name="icLine" column="IC_LINE" type="java.math.BigDecimal"/>
+        <key-property name="billToCode" column="BILL_TO_CODE" type="java.lang.String"/>
+    </composite-id>    
+    <property
+        name="quantity"
+        type="java.math.BigDecimal"
+        column="QUANTITY"
+        length="15"
+    />
+    <property
+        name="attention"
+        type="java.lang.String"
+        column="ATTENTION"
+        length="40"
+    />
+
+    <!-- associations -->
+
+</class>
+</hibernate-mapping>

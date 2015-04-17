@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="AddressDefaultRetrieveByVendorId" connection-type="Connection-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="AddressDefaultRetrieveByVendorId">
+			<task synchronous="true" continue-on-failure="false" name="AddressDefaultRetrieveSetup">
+				<task-object-name>com.tsa.puridiom.address.tasks.AddressDefaultRetrieveSetup</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="address">
+				<task-object-name>com.tsa.puridiom.address.tasks.AddressRetrieveById</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

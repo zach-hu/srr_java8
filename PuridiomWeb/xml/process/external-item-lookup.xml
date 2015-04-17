@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="catalogitem-lookup" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="externalCatalogAccountSetup">
+			<rule-filename>is-organization-wpc.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="externalCatalogSetup">
+				<task-object-name>com.tsa.puridiom.catalog.tasks.CatalogRetrieveById</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="externalCatalogAccountSetup">
+				<task-object-name>com.tsa.puridiom.account.tasks.AccountExternalCatalogSetup</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="catalogItemLookupActivity">
+			<task synchronous="true" continue-on-failure="false" name="catalogItemLookup">
+				<task-object-name>com.tsa.puridiom.punchoutcatalog.tasks.ExternalItemLookup</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<!--activity synchronous="true" continue-on-failure="false" name="totalsActivity">
+			<rule-filename check-for-false="true">is-rfq.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="recalculate">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>recalculate.xml</process-filename>
+			</task>
+		</activity-->
+	</activities>
+</process>

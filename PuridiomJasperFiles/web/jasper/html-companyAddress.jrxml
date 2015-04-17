@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created using an evaluation version of JasperAssistant (http://www.jasperassistant.com) -->
+<!DOCTYPE jasperReport PUBLIC "-//JasperReports//DTD Report Design//EN" "http://jasperreports.sourceforge.net/dtds/jasperreport.dtd">
+
+<jasperReport name="companyAddress" pageWidth="226" pageHeight="56" columnWidth="226" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+	<property name="com.jasperassistant.designer.GridHeight" value="12"/>
+	<property name="com.jasperassistant.designer.GridWidth" value="12"/>
+	<property name="com.jasperassistant.designer.DataSource" value="oracle"/>
+	<property name="com.jasperassistant.designer.SnapToGrid" value="false"/>
+	<property name="com.jasperassistant.designer.Grid" value="false"/>
+	<import value="com.tsa.puridiom.property.PropertiesManager"/>
+	<import value="com.tsa.puridiom.common.utility.HiltonUtility"/>
+	<reportFont name="Arial_Normal" isDefault="true" fontName="Arial" size="8" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Verdana" isDefault="false" fontName="Verdana" size="9" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<parameter name="oid" class="java.lang.String"></parameter>
+	<variable name="props" class="com.tsa.puridiom.property.PropertiesManager">
+		<variableExpression><![CDATA[PropertiesManager.getInstance($P{oid})]]></variableExpression>
+		<initialValueExpression><![CDATA[PropertiesManager.getInstance($P{oid})]]></initialValueExpression>
+	</variable>
+	<variable name="addr1" class="java.lang.String">
+		<variableExpression><![CDATA[$V{props}.getProperty("COMPANY", "ADDR1", "")]]></variableExpression>
+		<initialValueExpression><![CDATA[$V{props}.getProperty("COMPANY", "ADDR1", "")]]></initialValueExpression>
+	</variable>
+	<variable name="addr2" class="java.lang.String">
+		<variableExpression><![CDATA[$V{props}.getProperty("COMPANY", "ADDR2", "")]]></variableExpression>
+		<initialValueExpression><![CDATA[$V{props}.getProperty("COMPANY", "ADDR2", "")]]></initialValueExpression>
+	</variable>
+	<variable name="addr3" class="java.lang.String">
+		<variableExpression><![CDATA[$V{props}.getProperty("COMPANY", "ADD3", "")]]></variableExpression>
+		<initialValueExpression><![CDATA[$V{props}.getProperty("COMPANY", "ADD3", "")]]></initialValueExpression>
+	</variable>
+	<variable name="city" class="java.lang.String">
+		<variableExpression><![CDATA[$V{props}.getProperty("COMPANY", "CITY", "")]]></variableExpression>
+		<initialValueExpression><![CDATA[$V{props}.getProperty("COMPANY", "CITY", "")]]></initialValueExpression>
+	</variable>
+	<variable name="state" class="java.lang.String">
+		<variableExpression><![CDATA[$V{props}.getProperty("COMPANY", "STATE", "")]]></variableExpression>
+		<initialValueExpression><![CDATA[$V{props}.getProperty("COMPANY", "STATE", "")]]></initialValueExpression>
+	</variable>
+	<variable name="zip" class="java.lang.String">
+		<variableExpression><![CDATA[$V{props}.getProperty("COMPANY", "POSTALCODE", "")]]></variableExpression>
+		<initialValueExpression><![CDATA[$V{props}.getProperty("COMPANY", "POSTALCODE", "")]]></initialValueExpression>
+	</variable>
+	<variable name="name" class="java.lang.String">
+		<variableExpression><![CDATA[$V{props}.getProperty("COMPANY", "NAME", "")]]></variableExpression>
+		<initialValueExpression><![CDATA[$V{props}.getProperty("COMPANY", "NAME", "")]]></initialValueExpression>
+	</variable>
+	<group name="companyName">
+		<groupHeader>
+			<band height="12">
+				<textField isBlankWhenNull="true">
+					<reportElement positionType="Float" x="0" y="0" width="224" height="12" isRemoveLineWhenBlank="true"/>
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font reportFont="Verdana" isItalic="false"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$V{name}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+	</group>
+	<group name="addr1">
+		<groupHeader>
+			<band height="12">
+				<printWhenExpression><![CDATA[new Boolean(!HiltonUtility.isEmpty($V{addr1}))]]></printWhenExpression>
+				<textField isBlankWhenNull="true">
+					<reportElement positionType="Float" x="0" y="0" width="224" height="12" isRemoveLineWhenBlank="true"/>
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font reportFont="Verdana" isItalic="false"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$V{addr1}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+	</group>
+	<group name="addr2">
+		<groupHeader>
+			<band height="12">
+				<printWhenExpression><![CDATA[new Boolean(!HiltonUtility.isEmpty($V{addr2}))]]></printWhenExpression>
+				<textField isBlankWhenNull="true">
+					<reportElement positionType="Float" x="0" y="0" width="224" height="12" isRemoveLineWhenBlank="true"/>
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font reportFont="Verdana" isItalic="false"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$V{addr2}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+	</group>
+	<group name="addr3">
+		<groupHeader>
+			<band height="12">
+				<printWhenExpression><![CDATA[new Boolean(!HiltonUtility.isEmpty($V{addr3}))]]></printWhenExpression>
+				<textField isBlankWhenNull="true">
+					<reportElement positionType="Float" x="0" y="0" width="224" height="12" isRemoveLineWhenBlank="true"/>
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font reportFont="Verdana" isItalic="false"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$V{addr3}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+	</group>
+	<group name="zipState">
+		<groupHeader>
+			<band height="12">
+				<textField isBlankWhenNull="true">
+					<reportElement positionType="Float" x="0" y="0" width="224" height="12" isRemoveLineWhenBlank="true"/>
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font reportFont="Verdana" isItalic="false"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$V{city} + " " + $V{state} + " " + $V{zip}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+	</group>
+</jasperReport>

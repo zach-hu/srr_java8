@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="InvBinLocHistoryAdd" connection-type="New-Transaction">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="addInvBinLocHistoryActivity">
+			<!-- task synchronous="true" continue-on-failure="false" name="invBinLocHistory">
+				<task-object-name>com.tsa.puridiom.invbinlochistory.tasks.InvBinLocHistorySetup</task-object-name>
+				<post-action></post-action>
+			</task-->
+			<task synchronous="true" continue-on-failure="false" name="invBinLocHistory">
+				<task-object-name>com.tsa.puridiom.invbinlochistory.tasks.InvBinLocHistoryAddSetup</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="invBinLocHistory">
+				<task-object-name>com.tsa.puridiom.invbinlochistory.tasks.InvBinLocHistorySetupFromBin</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="invBinLocHistory">
+				<task-object-name>com.tsa.puridiom.invbinlochistory.tasks.InvBinLocHistorySetValues</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="invBinLocHistory">
+				<task-object-name>com.tsa.puridiom.invbinlochistory.tasks.InvBinLocHistoryAdd</task-object-name>
+				<post-action />
+			   </task>
+		  </activity>
+	 </activities>
+</process>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="CurrCodeAdd" connection-type="New-Transaction">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="checkDupCurrCode">
+			<task synchronous="true" continue-on-failure="false" name="existingCurrCode">
+				<task-object-name>com.tsa.puridiom.currcode.tasks.CurrCodeRetrieveById</task-object-name>
+				<post-action />
+			 </task>
+			<task synchronous="true" continue-on-failure="false" name="currCode">
+				<task-object-name>com.tsa.puridiom.currcode.tasks.CurrCodeSetValues</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="currCodeValidation">
+			<rule-filename check-for-false="true">is-existing-currcode-empty.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="setErrorMsg">
+				<task-object-name>com.tsa.puridiom.currcodeerrormsg.tasks.ErrorMsgSetDuplicateCurrCode</task-object-name>
+			</task>
+			<post-action>exitProcess</post-action>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="CurrCodeAdd">
+			<task synchronous="true" continue-on-failure="false" name="currCode">
+				<task-object-name>com.tsa.puridiom.currcode.tasks.CurrCodeAdd</task-object-name>
+				<post-action />
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="updateCache">
+				<task-object-name>com.tsa.puridiom.currcode.tasks.CurrCodeSetInCache</task-object-name>
+			</task>
+		  </activity>
+	 </activities>
+</process>

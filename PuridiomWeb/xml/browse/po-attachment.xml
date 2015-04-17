@@ -1,0 +1,41 @@
+<browse_poattachment>
+	<columns>
+		<PoHeader_icPoHeader>
+			<hidden>Y</hidden>
+		</PoHeader_icPoHeader>
+		<PoHeader_poNumber>
+			<label>brw-poNumber</label>
+			<size>15</size>
+			<link><![CDATA[javascript: viewPo('#PoHeader_icPoHeader^','#PoHeader_poType^'); void(0);]]></link>
+		</PoHeader_poNumber>
+		<PoHeader_releaseNumber>
+			<label>brw-releaseNumber</label>
+			<size>5</size>
+		</PoHeader_releaseNumber>
+		<PoHeader_revisionNumber>
+			<label>brw-revisionNumber</label>
+			<size>10</size>
+			<type>STRING</type>
+		</PoHeader_revisionNumber>
+		<PoHeader_status>
+			<label>brw-status</label>
+			<size>10</size>
+			<type>STATUS</type>
+		</PoHeader_status>
+		<PoHeader_buyerCode>
+			<label>brw-buyer</label>
+			<size>25</size>
+			<type>USER-ID</type>
+		</PoHeader_buyerCode>
+		<DocAttachment_docTitle>
+			<label>user-title</label>
+			<size>40</size>
+		</DocAttachment_docTitle>
+	</columns>
+<sqlfrom>PoHeader as PoHeader, DocAttachment as DocAttachment</sqlfrom>
+<sqlwhere>
+		<![CDATA[ PoHeader.icPoHeader = DocAttachment.id.icHeader and PoHeader.poNumber != 'N/A' ]]>
+</sqlwhere>
+<pagesize>10</pagesize>
+<title>Purchase Order Documents</title>
+</browse_poattachment>

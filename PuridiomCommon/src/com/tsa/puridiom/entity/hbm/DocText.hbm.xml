@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+    
+<hibernate-mapping>
+
+<class 
+    name="com.tsa.puridiom.entity.DocText" 
+    table="DOC_TEXT"
+>
+    <id
+        name="icText"
+        type="java.math.BigDecimal"
+        column="IC_TEXT"
+    >
+        <generator class="assigned" />
+    </id>
+    <property
+        name="stdText"
+        type="java.lang.String"
+        column="STD_TEXT"
+        length="2000"
+    />
+    <property
+        name="referenceType"
+        type="java.lang.String"
+        column="REFERENCE_TYPE"
+        length="3"
+    />
+    <property
+        name="idReference"
+        type="java.lang.String"
+        column="ID_REFERENCE"
+        length="70"
+    />
+
+    <!-- associations -->
+
+</class>
+</hibernate-mapping>

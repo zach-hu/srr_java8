@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="rfqQuestionAdd" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="rfqQuestionAdd">
+			<task synchronous="true" continue-on-failure="false" name="rfqQuestion">
+				<task-object-name>com.tsa.puridiom.rfqquestion.tasks.RfqQuestionSetValues</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="rfqQuestion">
+				<task-object-name>com.tsa.puridiom.rfqquestion.tasks.RfqQuestionAdd</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="rfqHeaderUpdateMaxPoints">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>rfqheader-update-maxpoints.xml</process-filename>
+			</task>
+		</activity>
+	</activities>
+</process>

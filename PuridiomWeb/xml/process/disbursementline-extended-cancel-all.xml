@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="CancelExtendedDisbursementLine" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="UpdateExtras">
+			<task synchronous="true" continue-on-failure="false" name="disbLine">
+				<task-object-name>com.tsa.puridiom.disbline.tasks.DisbLineRetrieveById</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="setup">
+				<task-object-name>com.tsa.puridiom.disbline.tasks.DisbLineExtendedCancelSetupExtra</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="invLocation">
+				<task-object-name>com.tsa.puridiom.invlocation.tasks.InvLocationRetrieveById</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="invLocation">
+				<task-object-name>com.tsa.puridiom.disbline.tasks.DisbLineExtendedCancelUpdateLocation</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="invLocation">
+				<task-object-name>com.tsa.puridiom.invlocation.tasks.InvLocationUpdate</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="requisitionLineSetCancelled">
+			<task synchronous="true" continue-on-failure="false" name="qtyDisbursed">
+				<task-object-name>com.tsa.puridiom.disbline.tasks.DisbLineAllQtyDisbursed</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="reqLine">
+				<task-object-name>com.tsa.puridiom.requisitionline.tasks.RequisitionLineRetrieveById</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="requisitionLine">
+				<task-object-name>com.tsa.puridiom.disbline.tasks.DisbLineExtendedCancelUpdateReqLine</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="requisitionLine">
+				<task-object-name>com.tsa.puridiom.requisitionline.tasks.RequisitionLineUpdate</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="requisitionHeaderUpdateStatus">
+			<task synchronous="true" continue-on-failure="false" name="reqLine_icReqHeader">
+				<task-object-name>com.tsa.puridiom.requisitionline.tasks.RequisitionLineGetIcReqHeader</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="reqLineList">
+				<task-object-name>com.tsa.puridiom.requisitionline.tasks.RequisitionLineRetrieveByHeader</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="requisitionGetStatus">
+				<task-object-name>com.tsa.puridiom.requisitionheader.tasks.RequisitionHeaderUpdateStatusSetup</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="updateRequisitionHeader">
+				<rule-filename>is-status-changed.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.requisitionheader.tasks.RequisitionHeaderUpdateStatus</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="disbHeaderUpdateStatus">
+			<task synchronous="true" continue-on-failure="false" name="disbLineList">
+				<task-object-name>com.tsa.puridiom.disbline.tasks.DisbLineRetrieveByHeader</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="disbGetStatus">
+				<task-object-name>com.tsa.puridiom.disbheader.tasks.DisbHeaderUpdateStatusSetup</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="updateDisbHeader">
+				<rule-filename>is-status-changed</rule-filename>
+				<task-object-name>com.tsa.puridiom.disbheader.tasks.DisbHeaderUpdateStatus</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="updateRequisitionHeader">
+				<rule-filename>is-status-changed.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.requisitionheader.tasks.RequisitionHeaderUpdateStatus</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+	</activities>
+</process>

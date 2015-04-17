@@ -1,0 +1,65 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+    
+<hibernate-mapping>
+
+<!-- 
+    Created by Middlegen Hibernate plugin
+
+    http://boss.bekk.no/boss/middlegen/
+    http://hibernate.sourceforge.net/
+-->
+
+<class 
+    name="com.tsa.puridiom.entity.RfqQuestion" 
+    table="RFQ_QUESTION"
+>
+    <composite-id name="comp_id" class="com.tsa.puridiom.entity.RfqQuestionPK">
+        <key-property name="icRfqHeader" column="IC_RFQ_HEADER" type="java.math.BigDecimal"/>
+        <key-property name="icQuestion" column="IC_QUESTION" type="java.math.BigDecimal"/>
+    </composite-id>    
+    <property
+        name="sequence"
+        type="java.math.BigDecimal"
+        column="SEQUENCE"
+        not-null="true"
+        length="5"
+    />
+    <property
+        name="questionText"
+        type="java.lang.String"
+        column="QUESTION_TEXT"
+        length="250"
+    />
+    <property
+        name="responseType"
+        type="java.lang.String"
+        column="RESPONSE_TYPE"
+        length="5"
+    />
+    <property
+        name="ratingMethod"
+        type="java.lang.String"
+        column="RATING_METHOD"
+        length="3"
+    />
+    <property
+        name="weight"
+        type="java.math.BigDecimal"
+        column="WEIGHT"
+        length="10"
+    />
+    <property
+        name="maxPoints"
+        type="java.math.BigDecimal"
+        column="MAX_POINTS"
+        length="10"
+    />
+
+    <!-- associations -->
+    <!-- bi-directional many-to-one association to RfqHeader -->
+
+</class>
+</hibernate-mapping>

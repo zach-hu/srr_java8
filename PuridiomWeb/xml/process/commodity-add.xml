@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="CommodityAdd" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="checkDupCommodity">
+			<task synchronous="true" continue-on-failure="false" name="existingCommodity">
+				<task-object-name>com.tsa.puridiom.commodity.tasks.CommodityRetrieveById</task-object-name>
+				<post-action />
+			 </task>
+			<task synchronous="true" continue-on-failure="false" name="commodityClassLevels">
+				<task-object-name>com.tsa.puridiom.commodity.tasks.CommoditySetClassLevels</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="commodityClassLevels">
+				<rule-filename>is-commoditytype-nigp.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.commodity.tasks.CommoditySetNIGPLevel</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="commodity">
+				<task-object-name>com.tsa.puridiom.commodity.tasks.CommoditySetValues</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="commodityValidation">
+			<rule-filename check-for-false="true">is-existing-commodity-empty.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="setErrorMsg">
+				<task-object-name>com.tsa.puridiom.commodityerrormsg.tasks.ErrorMsgSetDuplicateCommodity</task-object-name>
+			</task>
+			<post-action>exitProcess</post-action>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="CommodityAdd">
+			<task synchronous="true" continue-on-failure="false" name="commodity">
+				<task-object-name>com.tsa.puridiom.commodity.tasks.CommodityAdd</task-object-name>
+				<post-action />
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="setCommodityInCache">
+				<task-object-name>com.tsa.puridiom.commodity.tasks.CommoditySetInCache</task-object-name>
+				<post-action></post-action>
+			</task>
+		  </activity>
+	 </activities>
+</process>

@@ -1,0 +1,36 @@
+<browse_req_header>
+	<columns>
+		<RequisitionLine_requisitionNumber>
+			<label>brw-requisitionNumber</label>
+			<size>15</size>
+		</RequisitionLine_requisitionNumber>
+		<RequisitionLine_lineNumber>
+			<label>hdg-lineNumber</label>
+		</RequisitionLine_lineNumber>
+		<RequisitionLine_itemNumber>
+			<link><![CDATA[javascript: createInvReturn('#RequisitionLine_icReqLine^'); void(0);]]></link>
+			<label>brw-itemNumber</label>
+			<size>15</size>
+		</RequisitionLine_itemNumber>
+		<RequisitionLine_description>
+			<label>description</label>
+			<size>15</size>
+		</RequisitionLine_description>
+		<RequisitionLine_quantity>
+			<label>brw-quantity</label>
+			<size>15</size>
+		</RequisitionLine_quantity>
+		<RequisitionLine_icReqLine>
+			<visible>0</visible>
+		</RequisitionLine_icReqLine>
+		<RequisitionLine_icReqHeader>
+			<visible>0</visible>
+		</RequisitionLine_icReqHeader>
+	</columns>
+	<sqlfrom>RequisitionLine as RequisitionLine</sqlfrom>
+	<sqlwhere><![CDATA[(RequisitionLine.status = '5155') AND (RequisitionLine.reqType = 'I')  ]]></sqlwhere>
+	<sqlorderby default="Y">RequisitionLine.requisitionNumber ASC, RequisitionLine.lineNumber ASC</sqlorderby>
+	<pagesize>15</pagesize>
+	<title>New Return to Inventory Browse</title>
+</browse_req_header>
+

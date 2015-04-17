@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created using JasperAssistant (http://www.jasperassistant.com) -->
+<!DOCTYPE jasperReport PUBLIC "-//JasperReports//DTD Report Design//EN" "http://jasperreports.sourceforge.net/dtds/jasperreport.dtd">
+
+<jasperReport name="jssettings" language="java" pageWidth="569" pageHeight="842" columnWidth="569" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+	<property name="com.jasperassistant.designer.GridWidth" value="12"/>
+	<property name="com.jasperassistant.designer.GridHeight" value="12"/>
+	<property name="com.jasperassistant.designer.DataSource" value="oneelement"/>
+	<property name="com.jasperassistant.designer.SnapToGrid" value="false"/>
+	<property name="com.jasperassistant.designer.Grid" value="false"/>
+	<import value="com.tsa.puridiom.jasperreports.*"/>
+	<reportFont name="Verdana" isDefault="true" fontName="Verdana" size="9" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Verdana_bold" isDefault="false" fontName="Verdana" size="9" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<parameter name="oid" class="java.lang.String">
+		<defaultValueExpression><![CDATA["hilton"]]></defaultValueExpression>
+	</parameter>
+	<detail>
+		<band height="100">
+			<textField>
+				<reportElement positionType="Float" mode="Opaque" x="101" y="16" width="320" height="24" backcolor="#ffff00"/>
+				<textElement>
+					<font reportFont="Verdana_bold"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Do your current security settings not allow you to send HTML forms?"]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement positionType="Float" x="0" y="0" width="569" height="5" forecolor="#ffffff"/>
+				<textElement/>
+				<text><![CDATA[sep]]></text>
+			</staticText>
+			<textField>
+				<reportElement positionType="Float" mode="Opaque" x="101" y="40" width="320" height="14" backcolor="#ffff00"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA["- Select Tools > Options > Security."]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement positionType="Float" mode="Opaque" x="101" y="54" width="320" height="25" backcolor="#ffff00"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA["- Change the pulldown in Security Zones from Restricted Sites to\n Internet"]]></textFieldExpression>
+			</textField>
+			<image isLazy="true">
+				<reportElement positionType="Float" mode="Opaque" x="81" y="6" width="10" height="10" backcolor="#ffff00"/>
+				<graphicElement/>
+				<imageExpression class="java.lang.String"><![CDATA[JasperReportsHelper.getImgUrl($P{oid}, "round_corner_lt.gif")]]></imageExpression>
+			</image>
+			<image isLazy="true">
+				<reportElement positionType="Float" mode="Opaque" x="432" y="6" width="10" height="10" backcolor="#ffff00"/>
+				<graphicElement/>
+				<imageExpression class="java.lang.String"><![CDATA[JasperReportsHelper.getImgUrl($P{oid}, "round_corner_rt.gif")]]></imageExpression>
+			</image>
+			<rectangle>
+				<reportElement positionType="Float" x="81" y="16" width="20" height="63" forecolor="#ffff00" backcolor="#ffff00"/>
+				<graphicElement/>
+			</rectangle>
+			<image isLazy="true">
+				<reportElement positionType="Float" mode="Opaque" x="81" y="79" width="10" height="10" backcolor="#ffff00"/>
+				<graphicElement/>
+				<imageExpression class="java.lang.String"><![CDATA[JasperReportsHelper.getImgUrl($P{oid}, "round_corner_lb.gif")]]></imageExpression>
+			</image>
+			<image isLazy="true">
+				<reportElement positionType="Float" mode="Opaque" x="432" y="79" width="10" height="10" backcolor="#ffff00"/>
+				<graphicElement/>
+				<imageExpression class="java.lang.String"><![CDATA[JasperReportsHelper.getImgUrl($P{oid}, "round_corner_rb.gif")]]></imageExpression>
+			</image>
+			<rectangle>
+				<reportElement positionType="Float" x="91" y="6" width="341" height="10" forecolor="#ffff00" backcolor="#ffff00"/>
+				<graphicElement/>
+			</rectangle>
+			<rectangle>
+				<reportElement positionType="Float" x="91" y="79" width="341" height="10" forecolor="#ffff00" backcolor="#ffff00"/>
+				<graphicElement/>
+			</rectangle>
+			<rectangle>
+				<reportElement positionType="Float" x="421" y="16" width="20" height="63" forecolor="#ffff00" backcolor="#ffff00"/>
+				<graphicElement/>
+			</rectangle>
+		</band>
+	</detail>
+</jasperReport>

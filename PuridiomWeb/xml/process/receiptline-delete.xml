@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="receiptLineDelete" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="receiptLineDelete">
+			<task synchronous="true" continue-on-failure="false" name="receiptLineDeleteSetup">
+				<task-object-name>com.tsa.puridiom.receiptline.tasks.ReceiptLineDeleteSetup</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="docCommentDelete">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>doccomment-delete-by-line.xml</process-filename>				
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="receiptLine">			
+				<task-object-name>com.tsa.puridiom.receiptline.tasks.ReceiptLineDeleteById</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="receiptLineRenumber">
+			<task synchronous="true" continue-on-failure="false" name="receiptLineRenumber">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>receiptline-renumber.xml</process-filename>				
+			</task>
+		</activity>
+	</activities>
+</process>

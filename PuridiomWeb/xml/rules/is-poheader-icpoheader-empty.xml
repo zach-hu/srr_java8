@@ -1,0 +1,20 @@
+<rule>
+	<clause type="Empty">
+		<left-side>
+			<source>incomingRequest</source>
+			<name>PoHeader_icPoHeader</name>
+		</left-side>
+	</clause>
+	<logical-operator>OR</logical-operator>
+	<clause type="StringCompare">
+		<left-side>
+			<source>incomingRequest</source>
+			<name>PoHeader_icPoHeader</name>
+		</left-side>
+		<operator>EQUALS</operator>
+		<right-side>
+			<source>constant</source>
+			<value>0</value>
+		</right-side>
+	</clause>
+</rule>

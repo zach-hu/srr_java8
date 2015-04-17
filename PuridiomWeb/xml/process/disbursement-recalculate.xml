@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="disbursement-recalculate" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="disbRecalculateSetupActivity">
+			<task synchronous="true" continue-on-failure="false" name="disbHeader">			
+				<rule-filename>is-disbheader-empty</rule-filename>
+				<task-object-name>com.tsa.puridiom.disbheader.tasks.DisbHeaderRetrieveById</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="disbHeaderUpdateSetup">			
+				<task-object-name>com.tsa.puridiom.disbheader.tasks.DisbHeaderUpdateSetup</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="disbLineList">			
+				<rule-filename>is-disblinelist-empty</rule-filename>
+				<task-object-name>com.tsa.puridiom.disbline.tasks.DisbLineRetrieveByHeader</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="disbCalculateTotalsActivity">
+			<task synchronous="true" continue-on-failure="false" name="disbCalculateTotals">
+				<task-object-name>com.tsa.puridiom.disbursement.tasks.DisbursementCalculateTotals</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="accountReallocationActivity">
+			<task synchronous="true" continue-on-failure="false" name="allocatedTotal">			
+				<task-object-name>com.tsa.puridiom.account.tasks.AccountAllocatedForLines</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="accountList">			
+				<task-object-name>com.tsa.puridiom.account.tasks.AccountRetrieveByLine</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="accountRecalculate">			
+				<task-object-name>com.tsa.puridiom.account.tasks.AccountRecalculate</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="accountListUpdate">			
+				<task-object-name>com.tsa.puridiom.account.tasks.AccountListUpdate</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="disbRecalculateSetupActivity">
+			<task synchronous="true" continue-on-failure="false" name="disbHeader">			
+				<rule-filename check-for-false="true">is-disbheader-empty</rule-filename>
+				<task-object-name>com.tsa.puridiom.disbheader.tasks.DisbHeaderUpdate</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="disbLineList">			
+				<rule-filename check-for-false="true">is-disblinelist-empty</rule-filename>
+				<task-object-name>com.tsa.puridiom.disbline.tasks.DisbLineUpdateList</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+	</activities>
+</process>

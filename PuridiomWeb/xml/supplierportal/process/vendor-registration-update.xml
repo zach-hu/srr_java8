@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="vendorRegistration" connection-type="New-Transaction">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="vendorRegistrationCheckExistingEmail">
+			<task synchronous="true" continue-on-failure="false" name="vendorRegistrationCheckExistingEmail">
+				<task-object-name>com.tsa.puridiom.supplierportal.InvokeSupplierPortalProcessTask</task-object-name>
+				<process-filename>vendor-registration-check-existing-email.xml</process-filename>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="vendorRegisterNew">
+			<rule-filename check-for-false="true">is-registeruser-emailduplicated.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="registration">
+				<task-object-name>com.tsa.puridiom.supplierportal.InvokeSupplierPortalProcessTask</task-object-name>
+				<process-filename>vendor-registration-check-existing-codes.xml</process-filename>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="determineRegistrationType">
+			<rule-filename check-for-false="true">is-registeruser-registered.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="registration">
+				<rule-filename>is-registeruser-qualified.xml;is-registeruser-einvalid.xml</rule-filename>	
+				<task-object-name>com.tsa.puridiom.supplierportal.InvokeSupplierPortalProcessTask</task-object-name>
+				<process-filename>vendor-registration-register-qualified.xml</process-filename>
+				<post-action>exitProcess</post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="registration">
+				<rule-filename>is-registeruser-einvalid.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.supplierportal.InvokeSupplierPortalProcessTask</task-object-name>
+				<process-filename>vendor-registration-register-alternate.xml</process-filename>
+				<post-action>exitProcess</post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="registration">
+				<rule-filename check-for-false="true">is-registeruser-alternate.xml;is-registeruser-qualified.xml;</rule-filename>
+				<task-object-name>com.tsa.puridiom.supplierportal.InvokeSupplierPortalProcessTask</task-object-name>
+				<process-filename>vendor-registration-register-new.xml</process-filename>
+				<post-action>exitProcess</post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="determineRegistrationMessages">
+			<rule-filename>is-registeruser-emailduplicated</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="setErrorMessage">
+				<rule-filename>is-registeruser-registered.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.supplierportal.registration.tasks.ErrorMsgSetPreviouslyRegistered</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="setErrorMessage">
+				<rule-filename check-for-false="true">is-registeruser-registered</rule-filename>
+				<task-object-name>com.tsa.puridiom.supplierportal.registration.tasks.ErrorMsgSetDuplicateEmail</task-object-name>
+			</task>
+			<post-action>exitProcess</post-action>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="determineRegistrationMessages">
+			<rule-filename>is-registeruser-qualified.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="setErrorMessage">
+				<task-object-name>com.tsa.puridiom.supplierportal.registration.tasks.ErrorMsgSetVendorQualified</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="setErrorMessage">
+				<rule-filename check-for-false="true">is-registeruser-einvalid.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.supplierportal.registration.tasks.ErrorMsgSetInvalidEin</task-object-name>
+			</task>
+			<post-action>exitProcess</post-action>
+		</activity>		
+	</activities>
+</process>

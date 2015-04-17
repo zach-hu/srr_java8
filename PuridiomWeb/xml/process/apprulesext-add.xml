@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="appRulesExtAdd" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="appRulesExtAdd">
+			<task synchronous="true" continue-on-failure="false" name="appRulesExt">
+				<task-object-name>com.tsa.puridiom.apprulesext.tasks.AppRulesExtSetValues</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="appRulesExt">
+				<task-object-name>com.tsa.puridiom.apprulesext.tasks.AppRulesExtAdd</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+	</activities>
+</process>

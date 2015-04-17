@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="AddressAdd" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="checkDupAddress">
+			<task synchronous="true" continue-on-failure="false" name="existingAddress">
+				<task-object-name>com.tsa.puridiom.address.tasks.AddressRetrieveById</task-object-name>
+				<post-action />
+			 </task>
+			<task synchronous="true" continue-on-failure="false" name="addressSetup">    			
+				<task-object-name>com.tsa.puridiom.address.tasks.AddressAddSetup</task-object-name>    
+				<post-action />    
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="address">
+				<task-object-name>com.tsa.puridiom.address.tasks.AddressSetValues</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="addressValidation">
+			<rule-filename check-for-false="true">is-existing-address-empty.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="setErrorMsg">
+				<task-object-name>com.tsa.puridiom.addresserrormsg.tasks.ErrorMsgSetDuplicateAddress</task-object-name>
+			</task>
+			<post-action>exitProcess</post-action>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="addAddressActivity">
+			<task synchronous="true" continue-on-failure="false" name="addAddress">
+				<task-object-name>com.tsa.puridiom.address.tasks.AddressAdd</task-object-name>
+				<post-action />
+			   </task>
+		  </activity>
+	 </activities>
+</process>

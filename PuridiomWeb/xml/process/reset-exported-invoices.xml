@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="printCheckInvoices" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="resetExportedInvoices">
+			<task synchronous="true" continue-on-failure="false" name="exportedInvoicesList">
+				<task-object-name>com.tsa.puridiom.invoice.tasks.ResetExportedInvoices</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

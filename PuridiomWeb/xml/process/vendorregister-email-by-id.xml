@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="vendorregisterEmailById" connection-type="Transaction-Required" ldap-connection-type="None">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="vendorregisterEmailById">
+			<task synchronous="true" continue-on-failure="false" name="vendorRegister">
+				<task-object-name>com.tsa.puridiom.vendorregister.tasks.VendorRegisterRetrieveMainByVendorId</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="vendorRegisterAccoutingNotification">
+				<task-object-name>com.tsa.puridiom.vendorqualification.tasks.VendorRegisterAccoutingNotification</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

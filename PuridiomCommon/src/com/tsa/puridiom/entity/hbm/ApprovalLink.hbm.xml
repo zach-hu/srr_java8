@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping>
+
+<class
+    name="com.tsa.puridiom.entity.ApprovalLink"
+    table="APPROVAL_LINK"
+>
+    <id
+        name="icApprovalLink"
+        type="java.math.BigDecimal"
+        column="IC_APPROVAL_LINK"
+    >
+        <generator class="assigned" />
+    </id>
+    <property
+        name="doctype"
+        type="java.lang.String"
+        column="DOCTYPE"
+        length="3"
+    />
+    <property
+        name="icHeader"
+        type="java.math.BigDecimal"
+        column="IC_HEADER"
+        length="22"
+    />
+    <property
+        name="documentNumber"
+        type="java.lang.String"
+        column="DOC_NUMBER"
+        length="20"
+    />
+    <property
+        name="userId"
+        type="java.lang.String"
+        column="USER_ID"
+        length="15"
+    />
+    <property
+        name="organizationId"
+        type="java.lang.String"
+        column="ORGANIZATION_ID"
+        length="15"
+    />
+    <property
+        name="action"
+        type="java.lang.String"
+        column="ACTION"
+        length="15"
+    />
+    <property
+        name="logDate"
+        type="java.lang.String"
+        column="LOG_DATE"
+        length="10"
+    />
+    <property
+        name="logTime"
+        type="java.lang.String"
+        column="LOG_TIME"
+        length="15"
+    />
+    <!-- associations -->
+
+</class>
+</hibernate-mapping>
+

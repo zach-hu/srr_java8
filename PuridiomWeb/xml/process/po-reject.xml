@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="poReject" connection-type="Transaction-Required">
+	<activities>
+    	<activity synchronous="true" continue-on-failure="false" name="poReject">
+      		<task synchronous="true" continue-on-failure="false" name="approvalSetup">
+        		<task-object-name>com.tsa.puridiom.po.tasks.PoApprovalSetup</task-object-name>
+        		<post-action></post-action>
+     		</task>
+      		<task synchronous="true" continue-on-failure="false" name="poHeader">
+		        <task-object-name>com.tsa.puridiom.poheader.tasks.PoHeaderRetrieveById</task-object-name>
+		        <post-action></post-action>
+      		</task>
+	      	<task synchronous="true" continue-on-failure="false" name="poForwardSetup">
+	       		<task-object-name>com.tsa.puridiom.poheader.tasks.PoHeaderUpdateSetup</task-object-name>
+	        	<post-action></post-action>
+	      	</task>
+	      	<task synchronous="true" continue-on-failure="false" name="poLineList">
+	        	<task-object-name>com.tsa.puridiom.poline.tasks.PoLineRetrieveByHeader</task-object-name>
+	        	<post-action></post-action>
+	      	</task>
+	      	<task synchronous="true" continue-on-failure="false" name="routingList">
+	        	<task-object-name>com.tsa.puridiom.approvals.tasks.ApprovalLogRetrieveByHeader</task-object-name>
+	        	<post-action></post-action>
+	      	</task>
+	      	<task synchronous="true" continue-on-failure="false" name="routingList">
+	        	<task-object-name>com.tsa.puridiom.po.approvals.tasks.PoApprovalLogReject</task-object-name>
+	        	<post-action></post-action>
+	      	</task>
+	      	<task synchronous="true" continue-on-failure="false" name="poSetStatus">
+	        	<task-object-name>com.tsa.puridiom.po.tasks.PoSetStatus</task-object-name>
+	        	<post-action></post-action>
+	      	</task>
+	      	<task synchronous="true" continue-on-failure="false" name="poHeaderUpdate">
+	        	<task-object-name>com.tsa.puridiom.poheader.tasks.PoHeaderUpdate</task-object-name>
+	        	<post-action></post-action>
+	      	</task>
+	      	<task synchronous="true" continue-on-failure="false" name="poLineUpdate">
+	        	<task-object-name>com.tsa.puridiom.poline.tasks.PoLineUpdateList</task-object-name>
+	        	<post-action></post-action>
+	      	</task>
+    	</activity>
+    	<activity continue-on-failure="false" name="email" synchronous="true">
+      	<!-- email -->
+        	<task continue-on-failure="false" name="queueAddOrderRequest" synchronous="true">
+         		<task-object-name>com.tsa.puridiom.po.approvals.tasks.QueueAddPoRejectEmail</task-object-name>
+        	</task>
+      	</activity>
+      	<!-- history -->
+      	<activity synchronous="true" continue-on-failure="false" name="history">
+        	<task synchronous="true" continue-on-failure="false" name="poHeaderHistory">
+            	<task-object-name>com.tsa.puridiom.poheader.history.tasks.PoHeaderHistory</task-object-name>
+          	</task>
+      		<task synchronous="true" continue-on-failure="false" name="poLineListHistory">
+        		<task-object-name>com.tsa.puridiom.poline.history.tasks.PoLineListHistory</task-object-name>
+      		</task>
+		</activity>
+	</activities>
+</process>

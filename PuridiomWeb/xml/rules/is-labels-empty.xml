@@ -1,0 +1,24 @@
+<rule>
+	<clause type="StringCompare">
+		<left-side>
+			<source>incomingRequest</source>
+			<name>labels</name>
+		</left-side>
+		<operator>EQUALS</operator>
+		<right-side>
+			<source>constant</source>
+		</right-side>
+	</clause>
+	<logical-operator>OR</logical-operator>
+	<clause type="StringCompare">
+		<left-side>
+			<source>incomingRequestObjectMethod</source>
+			<object>labels</object>
+			<name>getLabelCode</name>
+		</left-side>
+		<operator>EQUALS</operator>
+		<right-side>
+			<source>constant</source>
+		</right-side>
+	</clause>
+</rule>

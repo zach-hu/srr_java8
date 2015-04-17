@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="rfqRetrieve" connection-type="Connection-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="rfqBidHistoryUnitPriceListRetrieveByLine">
+			<task synchronous="true" continue-on-failure="false" name="rfqVendorId">
+				<task-object-name>com.tsa.puridiom.rfqbidhistory.tasks.RfqVendorSetIcRfqHeader</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="rfqVendorList">
+				<task-object-name>com.tsa.puridiom.rfqbidhistory.tasks.RfqBidHistorySetVendor</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="unitPricesList">
+				<task-object-name>com.tsa.puridiom.rfqbidhistory.tasks.RfqBidHistoryUnitPriceListRetrieveByLine</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

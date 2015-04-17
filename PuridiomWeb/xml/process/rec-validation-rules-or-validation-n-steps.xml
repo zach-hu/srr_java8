@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="ReceiptValidate" connection-type="Connection-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="receiptHeader">
+			<task synchronous="true" continue-on-failure="false" name="receiptHeader">
+				<task-object-name>com.tsa.puridiom.receiptheader.tasks.ReceiptHeaderRetrieveById</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="validateRules">
+			<rule-filename>is-rectype-p.xml;is-rec-status-less-than-received.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="receiptLineList">
+				<task-object-name>com.tsa.puridiom.receiptline.tasks.ReceiptLineRetrieveByHeader</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="receiptAtLeastOneQuantiyReceivedRules">
+				<task-object-name>com.tsa.puridiom.validationrules.receipt.tasks.ReceiptAtLeastOneQuantityReceivedNStepRules</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="QtyOrderedByOrderSubType">
+<!--				<rule-filename>is-receiptmethod-receivebyorder</rule-filename>-->
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>receipt-validation-by-order-sub-type.xml</process-filename>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="rules">
+				<task-object-name>com.tsa.puridiom.validationrules.tasks.ValidationRulesTask</task-object-name>
+				<process-filename>rec-validation-rules-n-step.xml</process-filename>
+				<post-action>exitProcess</post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="validateRules">
+			<rule-filename check-for-false="true">is-rectype-p.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="recValidationRules">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>rec-validation-rules.xml</process-filename>
+				<post-action>exitProcess</post-action>
+			</task>
+		</activity>
+	</activities>
+</process>

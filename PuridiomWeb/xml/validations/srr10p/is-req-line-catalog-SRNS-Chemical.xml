@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rule>
+	<clause type="StringCompare">
+		<left-side elementSource="true">
+			<source>incomingRequestObjectMethod</source>
+			<object>lineItem</object>
+			<name>getCatalogId</name>
+		</left-side>
+		<operator>NOTEQUAL</operator>
+		<right-side>
+			<source>constant</source>
+			<value>SRNS-CHEMICAL</value>
+		</right-side>
+	</clause>
+	<logical-operator>AND</logical-operator>
+	<clause type="StringCompare">
+		<left-side elementSource="true">
+			<source>incomingRequestObjectMethod</source>
+			<object>lineItem</object>
+			<name>getCatalogId</name>
+		</left-side>
+		<operator>NOTEQUAL</operator>
+		<right-side>
+			<source>constant</source>
+			<value>CHEM-NO-STOCK</value>
+		</right-side>
+	</clause>
+</rule>

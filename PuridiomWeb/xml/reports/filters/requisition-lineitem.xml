@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<browse_po_reqbrowse>
+  <columns>
+    <RequisitionHeader_requisitionNumber>
+      <label>Requisition Number</label>
+      <type>STRING</type>
+    </RequisitionHeader_requisitionNumber>
+    <RequisitionLine_lineNumber>
+      <label>Line Number</label>
+      <type>BIGDECIMAL</type>
+    </RequisitionLine_lineNumber>
+    <RequisitionLine_description>
+      <label>Description</label>
+      <type>STRING</type>
+    </RequisitionLine_description>
+    <RequisitionLine_itemNumber>
+      <label>Item Number</label>
+      <type>STRING</type>
+    </RequisitionLine_itemNumber>
+    <RequisitionLine_quantity>
+      <label>Quantity</label>
+      <type>BIGDECIMAL</type>
+    </RequisitionLine_quantity>
+    <RequisitionHeader_requiredDate>
+      <label>Required Date</label>
+      <type>STRING</type>
+    </RequisitionHeader_requiredDate>
+    <RequisitionLine_status>
+      <label>Status</label>
+      <type>STATUS</type>
+    </RequisitionLine_status>
+    <RequisitionHeader_requisitionType>
+      <label>Requisition Type</label>
+      <type>STRING</type>
+    </RequisitionHeader_requisitionType>
+    <Account_fld2>
+      <label>Cost Center</label>
+      <type>STRING</type>
+    </Account_fld2>
+    <RequisitionLine_lineTotal>
+      <label>line Total</label>
+      <type>BIGDECIMAL</type>
+    </RequisitionLine_lineTotal>
+    <RequisitionHeader_requisitionDate>
+      <label>Requisition Date</label>
+      <type>DATE</type>
+    </RequisitionHeader_requisitionDate>
+    <RequisitionHeader_icReqHeader>
+      <label>Ic Header</label>
+      <type>BIGDECIMAL</type>
+      <visible>0</visible>
+    </RequisitionHeader_icReqHeader>
+    <RequisitionHeader_shipToCode>
+      <label>Ship To Code</label>
+      <type>STRING</type>
+    </RequisitionHeader_shipToCode>
+    <RequisitionHeader_shipAttn>
+      <label>Ship Attn.</label>
+      <type>STRING</type>
+    </RequisitionHeader_shipAttn>
+    <RequisitionLine_icReqLine>
+      <label>Ic Line</label>
+      <type>BIGDECIMAL</type>
+      <visible>0</visible>
+    </RequisitionLine_icReqLine>
+  </columns>
+  <sqlfrom>RequisitionLine as RequisitionLine, Account as Account, RequisitionHeader as RequisitionHeader</sqlfrom>
+  <sqlwhere> <![CDATA[ ( RequisitionHeader.icReqHeader = RequisitionLine.icReqHeader ) AND RequisitionLine.icReqLine = Account.id.icLine (+) AND (RequisitionHeader.requisitionNumber <> 'N/A') ]]></sqlwhere>
+  <pagesize>15</pagesize>
+  <title>Requisition Line Item Report</title>
+</browse_po_reqbrowse>
+

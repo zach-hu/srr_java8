@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="poline-update" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="poLineSetup">
+			<task synchronous="true" continue-on-failure="false" name="poLine">
+				<rule-filename>is-poline-empty.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.poline.tasks.PoLineRetrieveById</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="poLineUpdateSetup">
+				<task-object-name>com.tsa.puridiom.poline.tasks.PoLineUpdateSetup</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="setLineRevNo">
+				<task-object-name>com.tsa.puridiom.poline.tasks.PoLineUpdateRevisonNumber</task-object-name>
+				<post-action></post-action>
+			</task>
+			<!-- <task synchronous="true" continue-on-failure="false" name="poLineRecalculate">
+				<task-object-name>com.tsa.puridiom.poline.tasks.PoLineRecalculate</task-object-name>
+				<post-action></post-action>
+			</task> -->
+		</activity>
+		<!-- <activity synchronous="true" continue-on-failure="false" name="poLineAccounts">
+		    <rule-filename>is-recalculate-required.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="accountList">
+				<task-object-name>com.tsa.puridiom.account.tasks.AccountRetrieveByLine</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="accountRecalculate">
+				<task-object-name>com.tsa.puridiom.account.tasks.AccountRecalculate</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="accountListUpdate">
+				<task-object-name>com.tsa.puridiom.account.tasks.AccountListUpdate</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity> -->
+		<activity synchronous="true" continue-on-failure="false" name="poLineTaxUpdateActivity">
+			<rule-filename>is-poline-commodity-not-empty.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="Commodity_commodity">
+				<task-object-name>com.tsa.puridiom.poline.tasks.PoLineGetCommodity</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="commodityRetrieve">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>commodity-retrieve-by-id.xml</process-filename>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="TaxCode_taxCode">
+				<rule-filename>is-commodity-taxcode-not-empty.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.commodity.tasks.CommodityGetTaxCode</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="Commodity_ReceiptRequired">
+				<rule-filename>is-commodity-receiptrequired-not-empty.xml;is-currentpage-item.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.commodity.tasks.CommodityGetReceiptRequired</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="taxCode">
+				<task-object-name>com.tsa.puridiom.taxcode.tasks.TaxCodeRetrieveById</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="setPromisedDateByCatalogItem">
+				<rule-filename>is-promised-date-active.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.poline.tasks.PromisedDateFromCatalogItem</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="poLineTaxSetupActivity">
+			<rule-filename check-for-false="true">is-taxcode-empty.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="PoLine_taxCode">
+				<task-object-name>com.tsa.puridiom.taxcode.tasks.TaxCodeGetTaxCode</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="PoLine_taxPercent">
+				<task-object-name>com.tsa.puridiom.taxcode.tasks.TaxCodeGetTaxRate</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="setPromisedDateByCatalogItem">
+			<task synchronous="true" continue-on-failure="false" name="setPromisedDateByCatalogItem">
+				<rule-filename>is-promised-date-active.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.poline.tasks.PromisedDateFromCatalogItem</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="poLineUpdate">
+			<task synchronous="true" continue-on-failure="false" name="poLine">
+				<task-object-name>com.tsa.puridiom.poline.tasks.PoLineSetValues</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="poLine">
+				<task-object-name>com.tsa.puridiom.poline.tasks.PoLineUpdate</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="requisitionSetupDefaultAccount">
+			<task synchronous="true" continue-on-failure="false" name="itemAccountAdd">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>poline-default-accounts-from-commodity.xml</process-filename>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="poHeaderUpdate">
+		    <!-- <rule-filename>is-recalculate-required.xml</rule-filename> -->
+			<task synchronous="true" continue-on-failure="false" name="poHeaderUpdate">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>po-update-all.xml</process-filename>
+			</task>
+		</activity>
+
+		<activity synchronous="true" continue-on-failure="false" name="history">
+			<rule-filename>is-writehistory.xml</rule-filename>
+		    <!--<task synchronous="true" continue-on-failure="false" name="poHeaderHistory">
+				<task-object-name>com.tsa.puridiom.poheader.history.tasks.PoHeaderHistory</task-object-name>
+			</task>-->
+			<task synchronous="true" continue-on-failure="false" name="poLineListHistory">
+				<task-object-name>com.tsa.puridiom.poline.history.tasks.PoLineListHistory</task-object-name>
+			</task>
+		</activity>
+
+		<activity synchronous="true" continue-on-failure="false" name="historyLineReq">
+			<task synchronous="true" continue-on-failure="false" name="poLine">
+				<task-object-name>com.tsa.puridiom.poline.tasks.PoLineRetrieveById</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="PoLineSetIcReqHeader">
+				<task-object-name>com.tsa.puridiom.poline.tasks.PoLineSetIcReqHeader</task-object-name>
+			</task>
+
+    	    <task synchronous="true" continue-on-failure="false" name="poLineHistoryReq">
+	    	    <rule-filename >is-writehistory-req.xml</rule-filename>
+		    	<task-object-name>com.tsa.puridiom.poline.history.tasks.PoLineSetHistory</task-object-name>
+	        </task>
+
+			<task synchronous="true" continue-on-failure="false" name="reqUpdateStatus">
+	    	    <rule-filename >is-writehistory-req.xml</rule-filename>
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>requisitionline-update-status.xml</process-filename>
+			</task>
+        </activity>
+
+	</activities>
+</process>

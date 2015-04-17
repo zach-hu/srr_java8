@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="InvPropertyAddList" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="addInvPropertyListActivity">
+			<task synchronous="true" continue-on-failure="false" name="invPropertyList">
+				<rule-filename></rule-filename>
+				<task-object-name>com.tsa.puridiom.invproperty.tasks.InvPropertyAddList</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+	</activities>
+</process>

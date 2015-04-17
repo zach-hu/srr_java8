@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="InvUsageUpdateUsage" connection-type="Transaction-Required">
+	<rule-filename>is-disbline-status-disbursed.xml</rule-filename>
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="updateUsage">
+			<task synchronous="true" continue-on-failure="false" name="Setup">
+				<rule-filename></rule-filename>
+				<task-object-name>com.tsa.puridiom.reports.itemusage.tasks.InvUsageUpdateUsageSetup</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="invUsage">
+				<task-object-name>com.tsa.puridiom.reports.itemusage.tasks.InvUsageRetrieveById</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="updateusage">
+			<task synchronous="true" continue-on-failure="false" name="updateUsage">
+				<rule-filename>is-more-than-one-invUsage.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.reports.itemusage.tasks.InvUsageUpdateQty</task-object-name>
+				<post-action>exitactivity</post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="addUsage">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>invusage-add.xml</process-filename>
+				<post-action>exitactivity</post-action>
+			</task>
+		</activity>
+	</activities>
+</process>

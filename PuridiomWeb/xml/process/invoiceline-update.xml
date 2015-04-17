@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="invoiceLineUpdate" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="invoiceLineCreate">
+			<rule-filename>is-invoiceline-line-ic-empty.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="invoiceLineCreate">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>invoiceline-create.xml</process-filename>
+			</task>
+			<post-action>exitProcess</post-action>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="invoiceLineCalculate">
+			<rule-filename>is-distribution-by-invoice-line.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="invoiceLine">
+				<task-object-name>com.tsa.puridiom.invoiceline.tasks.InvoiceLineRetrieveById</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="poHeader">
+				<rule-filename>exist-ic-poheader.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.poheader.tasks.PoHeaderRetrieveById</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="poLine">
+				<rule-filename>exist-ic-poline.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.poline.tasks.PoLineRetrieveById</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="invoiceHeader">
+				<rule-filename>exist-ic-invoiceheader.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.invoiceheader.tasks.InvoiceHeaderRetrieveById</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="invoiceLineCalculate">
+				<task-object-name>com.tsa.puridiom.invoiceline.tasks.InvoiceLineCalculate</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="invoiceLineUpdate">
+			<task synchronous="true" continue-on-failure="false" name="invoiceLine">
+				<task-object-name>com.tsa.puridiom.invoiceline.tasks.InvoiceLineRetrieveById</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="invoiceLine">
+				<task-object-name>com.tsa.puridiom.invoiceline.tasks.InvoiceLineSetValues</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="invoiceLine">
+				<task-object-name>com.tsa.puridiom.invoiceline.tasks.InvoiceLineUpdate</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="invoiceLineAccountUpdate">
+			<task synchronous="true" continue-on-failure="false" name="invoiceLineAccountUpdate">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>invoiceline-account-update.xml</process-filename>
+			</task>
+		</activity>
+	</activities>
+</process>
+

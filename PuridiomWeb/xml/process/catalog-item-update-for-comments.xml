@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="catalogItemUpdate" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="catalogRetrieve">
+			<task synchronous="true" continue-on-failure="false" name="catalog">			
+				<task-object-name>com.tsa.puridiom.catalog.tasks.CatalogRetrieveById</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="catalogItem">			
+				<task-object-name>com.tsa.puridiom.catalog.tasks.CatalogItemRetrieveByPK</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="catalogSetupForComments">
+			<task synchronous="true" continue-on-failure="false" name="catalogSetupForComments">			
+				<task-object-name>com.tsa.puridiom.catalog.tasks.CatalogSetupForComments</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>	
+		<activity synchronous="true" continue-on-failure="false" name="catalogUpdate">
+			<rule-filename check-for-false="true">is-catalog-icheadercomment-not-empty.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="catalog">			
+				<task-object-name>com.tsa.puridiom.catalog.tasks.CatalogSetValues</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="catalog">			
+				<task-object-name>com.tsa.puridiom.catalog.tasks.CatalogUpdate</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>	
+		<activity synchronous="true" continue-on-failure="false" name="catalogItemUpdate">
+			<rule-filename check-for-false="true">is-catalog-item-iclinecomment-not-empty.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="catalogItem">			
+				<task-object-name>com.tsa.puridiom.catalog.tasks.CatalogItemSetValues</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="catalogItem">			
+				<task-object-name>com.tsa.puridiom.catalog.tasks.CatalogItemUpdate</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="catalogSetupForComments">
+			<task synchronous="true" continue-on-failure="false" name="catalogSetupForComments">			
+				<task-object-name>com.tsa.puridiom.catalog.tasks.CatalogItemSetupCommentValues</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>	
+	</activities>
+</process>

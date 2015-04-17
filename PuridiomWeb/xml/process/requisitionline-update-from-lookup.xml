@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="requisitionline-update-from-lookup" connection-type="Connection-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="requisitionLineSetupActivity">
+		    <task synchronous="true" continue-on-failure="false" name="requisitionLineLookupSetup">
+				<task-object-name>com.tsa.puridiom.requisitionline.tasks.RequisitionLineLookupSetup</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="currencyConversionActivity">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>item-lookup-currency-conversion.xml</process-filename>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="requisitionLineUpdateActivity">
+		    <task synchronous="true" continue-on-failure="false" name="requisitionLine">
+				<rule-filename>is-requisitionline-icreqline-not-empty.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.requisitionline.tasks.RequisitionLineRetrieveById</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="vendor">
+				<task-object-name>com.tsa.puridiom.vendor.tasks.VendorRetrieveById</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="vendorContactSetup">
+				<rule-filename check-for-false="true">is-vendor-empty.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.vendor.tasks.ContactRetrieveSetup</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="contact">
+				<rule-filename check-for-false="true">is-vendor-empty.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.contact.tasks.ContactRetrievePrimary</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="requisitionLineLookupSetValues">
+				<rule-filename>is-item-found.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.requisitionline.tasks.RequisitionLineLookupSetValues</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="requisitionLineSetCommodityDefault">
+				<rule-filename>is-item-found.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.requisitionline.tasks.RequisitionLineSetCommodityDefault</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="PoLineSetValuesFromRecentOrderItem">
+				<rule-filename>is-item-not-found.xml;is-recentitem-desc-notempty.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.requisitionline.tasks.RequisitionLineSetValuesFromRecentRequestedItem</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="requisitionLineCreate">
+				<rule-filename>is-requisitionline-empty.xml</rule-filename>
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>requisitionline-create-from-lookup.xml</process-filename>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="setupShiptoCodeInHeader">
+				<rule-filename>is-inventory-return.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.requisitionheader.tasks.RequisitionHeaderSetupShipToCode</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="itemAccountUpdate">
+			<task synchronous="true" continue-on-failure="false" name="itemAccountAdd">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>requisitionline-default-accounts.xml</process-filename>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="requisitionLineSaveas">
+			<rule-filename>can-create-comments-from-item.xml;is-item-found.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="requisitionLineSaveasFromLookup">
+				<task-object-name>com.tsa.puridiom.requisitionline.tasks.RequisitionLineSaveasFromLookup</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="requisitionLineCommentSaveas">
+	        	<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+	        	<process-filename>doccomment-saveas.xml</process-filename>
+	        </task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="requisitionlineUpdate">
+			<task synchronous="true" continue-on-failure="false" name="requisitionLineUpdate">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>requisitionline-update.xml</process-filename>
+			</task>
+		</activity>
+	</activities>
+</process>

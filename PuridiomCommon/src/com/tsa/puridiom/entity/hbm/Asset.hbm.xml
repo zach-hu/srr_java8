@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 2.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+<class name="com.tsa.puridiom.entity.Asset" table="ASSET">
+<id name="tagNumber" column="TAG_NUMBER" type="java.lang.String">
+<generator class="assigned"/>
+</id>
+<property name="assetClass" column="ASSET_CLASS" type="java.lang.String" length="15"/>
+<property name="securityCode" column="SECURITY_CODE" type="java.lang.String" length="15"/>
+<property name="commodity" column="COMMODITY" type="java.lang.String" length="15"/>
+<property name="manufacturer" column="MANUFACTURER" type="java.lang.String" length="20"/>
+<property name="model" column="MODEL" type="java.lang.String" length="20"/>
+<property name="serialNumber" column="SERIAL_NUMBER" type="java.lang.String" length="25"/>
+<property name="assetCost" column="ASSET_COST" type="java.math.BigDecimal" length="15"/>
+<property name="dateInService" column="DATE_IN_SERVICE" type="java.sql.Timestamp" length="7"/>
+<property name="trackingNumber" column="TRACKING_NUMBER" type="java.lang.String" length="25"/>
+<property name="deprecMethod" column="DEPREC_METHOD" type="java.lang.String" length="15"/>
+<property name="warrantyStart" column="WARRANTY_START" type="java.sql.Timestamp" length="7"/>
+<property name="warrantyEnd" column="WARRANTY_END" type="java.sql.Timestamp" length="7"/>
+<property name="upgradeReqs" column="UPGRADE_REQS" type="java.lang.String" length="15"/>
+<property name="contractService" column="CONTRACT_SERVICE" type="java.lang.String" length="20"/>
+<property name="purchaseOrder" column="PURCHASE_ORDER" type="java.lang.String" length="30"/>
+<property name="dateEntered" column="DATE_ENTERED" type="java.sql.Timestamp" length="7"/>
+<property name="assetStatus" column="ASSET_STATUS" type="java.lang.String" length="15"/>
+<property name="assetUdf1" column="ASSET_UDF1" type="java.lang.String" length="15"/>
+<property name="assetUdf2" column="ASSET_UDF2" type="java.lang.String" length="15"/>
+<property name="assetUdf3" column="ASSET_UDF3" type="java.lang.String" length="15"/>
+<property name="assetUdf4" column="ASSET_UDF4" type="java.lang.String" length="15"/>
+<property name="assetUdf5" column="ASSET_UDF5" type="java.lang.String" length="15"/>
+<property name="totalCost" column="TOTAL_COST" type="java.math.BigDecimal" length="15"/>
+<property name="icText" column="IC_TEXT" type="java.math.BigDecimal" length="22"/>
+<property name="imageFile" column="IMAGE_FILE" type="java.lang.String" length="40"/>
+<property name="poVendor" column="PO_VENDOR" type="java.lang.String" length="40"/>
+<property name="contractorName" column="CONTRACTOR_NAME" type="java.lang.String" length="40"/>
+<property name="owner" column="OWNER" type="java.lang.String" length="15"/>
+<property name="deprecTerm" column="DEPREC_TERM" type="java.math.BigDecimal" length="5"/>
+<property name="dateReceived" column="DATE_RECEIVED" type="java.sql.Timestamp" length="7"/>
+<property name="icReceipt" column="IC_RECEIPT" type="java.math.BigDecimal" length="22"/>
+<property name="assetUdf6" column="ASSET_UDF6" type="java.lang.String" length="15"/>
+<property name="assetUdf7" column="ASSET_UDF7" type="java.lang.String" length="15"/>
+<property name="assetUdf8" column="ASSET_UDF8" type="java.lang.String" length="15"/>
+<property name="assetUdf9" column="ASSET_UDF9" type="java.lang.String" length="15"/>
+<property name="assetUdf10" column="ASSET_UDF10" type="java.lang.String" length="15"/>
+<property name="icLineKey" column="IC_LINE_KEY" type="java.math.BigDecimal" length="22"/>
+<property name="itemNumber" column="ITEM_NUMBER" type="java.lang.String" length="30"/>
+<property name="itemLocation" column="ITEM_LOCATION" type="java.lang.String" length="15"/>
+<property name="icAccount" column="IC_ACCOUNT" type="java.math.BigDecimal" length="22"/>
+<property name="icDsbHeader" column="IC_DSB_HEADER" type="java.math.BigDecimal" length="22"/>
+<property name="icDsbLine" column="IC_DSB_LINE" type="java.math.BigDecimal" length="22"/>
+<property name="localCurrencyPrice" column="LOCAL_CURRENCY_PRICE" type="java.math.BigDecimal" length="15"/>
+<property name="originalCost" column="ORIGINAL_COST" type="java.math.BigDecimal" length="15"/>
+<property name="exitValue" column="EXIT_VALUE" type="java.math.BigDecimal" length="15"/>
+<property name="dateInactive" column="DATE_INACTIVE" type="java.sql.Timestamp" length="7"/>
+<property name="lastChgBy" column="LAST_CHG_BY" type="java.lang.String" length="25"/>
+<property name="dateChanged" column="DATE_CHANGED" type="java.sql.Timestamp" length="7"/>
+<property name="description" column="DESCRIPTION" type="java.lang.String" length="255"/>
+<property name="lease" column="LEASE" type="java.lang.String" length="1"/>
+<property name="leaseType" column="LEASE_TYPE" type="java.lang.String" length="25"/>
+<property name="leaseTerm" column="LEASE_TERM" type="java.lang.String" length="25"/>
+<property name="monthlyPayment" column="MONTHLY_PAYMENT" type="java.sql.Timestamp" length="7"/>
+<property name="leasingCompany" column="LEASING_COMPANY" type="java.math.BigDecimal" length="22"/>
+<property name="renewalDate" column="RENEWAL_DATE" type="java.sql.Timestamp" length="7"/>
+<property name="financing" column="FINANCING" type="java.math.BigDecimal" length="22"/>
+<property name="printed" column="PRINTED" type="java.lang.String" length="1"/>
+<property name="fiscalYear" column="FISCAL_YEAR" type="java.lang.String" length="4"/>
+
+</class>
+</hibernate-mapping>

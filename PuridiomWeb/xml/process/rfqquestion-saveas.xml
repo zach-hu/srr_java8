@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="rfqQuestionSaveas" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="rfqQuestionRetrieveByLine">
+			<task synchronous="true" continue-on-failure="false" name="rfqQuestionList">			
+				<task-object-name>com.tsa.puridiom.rfqquestion.tasks.RfqQuestionRetrieveByHeader</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="rfqQuestionSaveas">			
+				<task-object-name>com.tsa.puridiom.rfqquestion.tasks.RfqQuestionSaveasList</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

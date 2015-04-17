@@ -1,0 +1,20 @@
+<rule>
+	<clause type="empty">
+		<left-side>
+			<source>incomingRequest</source>
+			<name>RequisitionHeader_requisitionNumber</name>
+		</left-side>
+	</clause>
+	<logical-operator>OR</logical-operator>
+	<clause type="StringCompare">
+		<left-side>
+			<source>incomingRequest</source>
+			<name>RequisitionHeader_requisitionNumber</name>
+		</left-side>
+		<operator>EQUALS</operator>
+		<right-side>
+			<source>constant</source>
+			<value>N/A</value>
+		</right-side>
+	</clause>
+</rule>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="requisitionCancel" connection-type="None">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="requisitionCancel">
+			<task synchronous="true" continue-on-failure="false" name="requisitionCancel">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>requisition-rfqlines-polines-cancel.xml</process-filename>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="rfqPoCancel">
+			<task synchronous="true" continue-on-failure="false" name="rfqPoCancel">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>rfq-po-cancel-from-req.xml</process-filename>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="sendQueueRequisitionCancel">
+			<rule-filename check-for-false="true">is-organization-hoy.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="sendQueueCancel">
+				<task-object-name>com.tsa.puridiom.requisition.notifications.tasks.QueueCancelRequisitionEmail</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

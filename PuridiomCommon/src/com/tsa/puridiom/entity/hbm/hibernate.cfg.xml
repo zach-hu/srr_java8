@@ -1,0 +1,20 @@
+<?xml version='1.0' encoding='utf-8'?>
+	<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-configuration-2.0.dtd">
+<hibernate-configuration>
+	<session-factory>
+		<property name="testconnection.datasource">java:comp/env/jdbc/quickstart</property>
+		<property name="dialect">net.sf.hibernate.dialect.OracleDialect</property>
+		<property name="connection.driver_class">oracle.jdbc.driver.OracleDriver</property>
+		<property name="connection.username">hostuser</property>
+		<property name="connection.password">hostuser</property>
+		<property name="connection.url">jdbc:oracle:thin:@crimson:1521:crimson</property>
+		
+		<property name="show_sql">true</property>
+		<!-- Mapping files -->
+		<mapping resource="Department.hbm.xml"/>
+		<mapping resource="Catalog.hbm.xml"/>
+		<mapping resource="CatalogItem.hbm.xml"/>
+		<mapping resource="HistoryLog.hbm.xml"/>
+	</session-factory>
+</hibernate-configuration>

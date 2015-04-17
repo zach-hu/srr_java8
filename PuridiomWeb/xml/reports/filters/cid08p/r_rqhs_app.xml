@@ -1,0 +1,100 @@
+<r_rqhs_app>
+  <columns>
+		<RequisitionHeader_requisitionNumber>
+			<label>Requisition #</label>
+			<type>STRING</type>
+		</RequisitionHeader_requisitionNumber>
+		<RequisitionHeader_requiredDate>
+			<label>Required Date</label>
+			<type>DATE</type>
+		</RequisitionHeader_requiredDate>
+		<RequisitionHeader_requisitionType>
+			<label>Requisition Type</label>
+			<type>REQUISITION-TYPE</type>
+		</RequisitionHeader_requisitionType>
+		<RequisitionHeader_shipToCode>
+			<label>Ship To</label>
+			<type>STRING</type>
+		</RequisitionHeader_shipToCode>
+		<RequisitionHeader_requisitionDate>
+			<label>Request Date</label>
+			<type>DATE</type>
+		</RequisitionHeader_requisitionDate>
+		<RequisitionHeader_shipToContact>
+			<label>Ship To Contact</label>
+			<type>STRING</type>
+		</RequisitionHeader_shipToContact>
+		<RequisitionHeader_vendorName>
+			<label>Vendor Name</label>
+			<type>STRING</type>
+		</RequisitionHeader_vendorName>
+		<RequisitionHeader_itemLocation>
+			<label>Item Location</label>
+			<type>STRING</type>
+		</RequisitionHeader_itemLocation>
+		<RequisitionHeader_receiptRequired>
+			<label>Receipt Required</label>
+			<type>STRING</type>
+		</RequisitionHeader_receiptRequired>
+		<RequisitionHeader_departmentCode>
+			<label>Department</label>
+			<type>STRING</type>
+		</RequisitionHeader_departmentCode>
+		<RequisitionHeader_requisitionerCode>
+			<label>Requisitioner Code</label>
+			<type>STRING</type>
+		</RequisitionHeader_requisitionerCode>
+		<RequisitionHeader_assignedBuyer>
+			<label>Assigned To</label>
+			<type>STRING</type>
+		</RequisitionHeader_assignedBuyer>
+		<RequisitionHeader_appBy>
+			<label>Approved By Code</label>
+			<type>STRING</type>
+		</RequisitionHeader_appBy>
+		<RequisitionHeader_total>
+			<label>Total</label>
+			<type>BIGDECIMAL</type>
+		</RequisitionHeader_total>
+		<RequisitionHeader_status>
+			<label>Status</label>
+			<type>STATUS</type>
+		</RequisitionHeader_status>
+		<RequisitionHeader_fiscalYear>
+			<label>Fiscal Year</label>
+			<type>STRING</type>
+		</RequisitionHeader_fiscalYear>
+		<ApprovalLog_id_userId>
+			<label>User Id</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</ApprovalLog_id_userId>
+		<ApprovalLog_callForward>
+			<label>Call Forward</label>
+			<type>STRING</type>
+		</ApprovalLog_callForward>
+		<RequisitionHeader_currencyCode>
+			<label>Currency Code</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</RequisitionHeader_currencyCode>
+		<RequisitionHeader_currencyFactor>
+			<label>Currency Factor</label>
+			<type>BIGDECIMAL</type>
+			<visible>1</visible>
+		</RequisitionHeader_currencyFactor>
+		<Account_fld2>
+			<label>AC02</label>
+			<type>STRING</type>
+		</Account_fld2>
+		<Account_fld4>
+			<label>AC04</label>
+			<type>STRING</type>
+		</Account_fld4>
+</columns>
+  <sqlfrom> RequisitionHeader as RequisitionHeader, ApprovalLog as ApprovalLog, Account as Account </sqlfrom>
+  <sqlwhere><![CDATA[ ( RequisitionHeader.icReqHeader = ApprovalLog.id.icHeader ) and (RequisitionHeader.icReqHeader = Account.id.icHeader) and (RequisitionHeader.status >= 1035) and (RequisitionHeader.status < 9020) and (RequisitionHeader.status <> 2030) ]]></sqlwhere>
+  <sqlorderby>ApprovalLog.callForward</sqlorderby>
+  <title>Requisition Summary By Approver Report</title>
+</r_rqhs_app>
+

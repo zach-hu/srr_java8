@@ -1,0 +1,149 @@
+<browse_invoiceheader>
+	<columns>
+<!--		<c_checkbox>-->
+<!--			<label>Pay</label>-->
+<!--			<type>Checkbox</type>-->
+<!--			<size>3</size>-->
+<!--			<selectsql>N</selectsql>-->
+<!--			<store-request-value>Y</store-request-value>-->
+<!--		</c_checkbox>-->
+		<InvoiceHeader_vendorName>
+			<label>brw-vendorName</label>
+<!--			<link><![CDATA[javascript: void(0);]]></link>-->
+			<size>10</size>
+		</InvoiceHeader_vendorName>
+		<InvoiceAddress_city>
+			<label>Remit Addr</label>
+<!--			<link><![CDATA[javascript: void(0);]]></link>-->
+			<size>10</size>
+		</InvoiceAddress_city>
+		<InvoiceHeader_icIvcHeader>
+			<visible>0</visible>
+			<hidden-input>Y</hidden-input>
+			<key>Y</key>
+		</InvoiceHeader_icIvcHeader>
+		<InvoiceHeader_invoiceNumber>
+			<label>Inv #</label>
+			<link><![CDATA[javascript: viewInvoice('#InvoiceHeader_icIvcHeader^'); void(0);]]></link>
+			<size>10</size>
+		</InvoiceHeader_invoiceNumber>
+		<InvoiceHeader_invoiceDate>
+			<label>InvDate</label>
+			<hidden-input>Y</hidden-input>
+			<type>DATE</type>
+			<sort>D</sort>
+			<size>12</size>
+		</InvoiceHeader_invoiceDate>
+		<InvoiceHeader_paymentDueDate>
+			<label>NetDate</label>
+			<hidden-input>Y</hidden-input>
+			<type>DATE</type>
+			<size>12</size>
+		</InvoiceHeader_paymentDueDate>
+		<InvoiceHeader_invoiceTotal>
+			<label>Inv Amt</label>
+			<text-input>Y</text-input>
+			<size>5</size>
+			<type>DollarDecimal</type>
+		</InvoiceHeader_invoiceTotal>
+		<InvoiceHeader_invoiceDiscount>
+			<label>Disc Amt</label>
+			<size>5</size>
+			<text-input>Y</text-input>
+			<type>DollarDecimal</type>
+		</InvoiceHeader_invoiceDiscount>
+		<InvoiceHeader_invoiceAdjustment>
+			<label>Adjustm</label>
+			<size>5</size>
+			<text-input>Y</text-input>
+			<type>DollarDecimal</type>
+		</InvoiceHeader_invoiceAdjustment>
+		<InvoiceHeader_invoicePaid>
+			<label>Paid Amt</label>
+			<size>5</size>
+			<text-input>Y</text-input>
+			<type>DollarDecimal</type>
+		</InvoiceHeader_invoicePaid>
+		<InvoiceHeader_termsCode>
+			<label>Terms</label>
+			<size>16</size>
+		</InvoiceHeader_termsCode>
+		<InvoiceAddress_addressLine1>
+			<detail>Y</detail>
+			<label>ivc-remitToAddress</label>
+			<size>100</size>
+		</InvoiceAddress_addressLine1>
+		<InvoiceAddress_addressLine2>
+			<detail>Y</detail>
+			<label>ivc-sup-addressLine2</label>
+			<size>40</size>
+		</InvoiceAddress_addressLine2>
+		<InvoiceAddress_addressLine3>
+			<detail>Y</detail>
+			<label>ivc-sup-addressLine3</label>
+			<size>20</size>
+		</InvoiceAddress_addressLine3>
+		<InvoiceAddress_state>
+			<detail>Y</detail>
+			<label>ivc-sup-state</label>
+			<size>20</size>
+		</InvoiceAddress_state>
+		<InvoiceAddress_country>
+			<detail>Y</detail>
+			<label>ivc-sup-country</label>
+			<size>20</size>
+		</InvoiceAddress_country>
+		<PaymentTerm_termDescription>
+			<detail>Y</detail>
+			<label>brw-termsDescription</label>
+			<size>40</size>
+		</PaymentTerm_termDescription>
+<!--		<PaymentTerm_termDays>-->
+<!--			<detail>Y</detail>-->
+<!--			<label>Terms Days</label>-->
+<!--			<size>20</size>-->
+<!--		</PaymentTerm_termDays>-->
+<!--		<PaymentTerm_discount>-->
+<!--			<detail>Y</detail>-->
+<!--			<label>Discount</label>-->
+<!--			<size>20</size>-->
+<!--		</PaymentTerm_discount>-->
+<!--		<PaymentTerm_discountDays>-->
+<!--			<detail>Y</detail>-->
+<!--			<label>Discount Days</label>-->
+<!--			<size>20</size>-->
+<!--		</PaymentTerm_discountDays>-->
+		<InvoiceHeader_termsDiscperc>
+			<detail>Y</detail>
+			<label>discountAmount</label>
+			<size>30</size>
+			<hidden-input>Y</hidden-input>
+		</InvoiceHeader_termsDiscperc>
+		<InvoiceHeader_termsDiscdays>
+			<detail>Y</detail>
+			<label>brw-termsDays</label>
+			<size>30</size>
+			<hidden-input>Y</hidden-input>
+		</InvoiceHeader_termsDiscdays>
+		<InvoiceHeader_invoiceSubtotal>
+			<visible>0</visible>
+			<hidden-input>Y</hidden-input>
+		</InvoiceHeader_invoiceSubtotal>
+		<InvoiceHeader_udf9Code>
+			<visible>0</visible>
+			<hidden-input>Y</hidden-input>
+		</InvoiceHeader_udf9Code>
+		<InvoiceHeader_udf10Code>
+			<visible>0</visible>
+			<hidden-input>Y</hidden-input>
+		</InvoiceHeader_udf10Code>
+	</columns>
+<sqlfrom>InvoiceHeader as InvoiceHeader, InvoiceVendor as InvoiceVendor, InvoiceAddress as InvoiceAddress, PaymentTerm as PaymentTerm</sqlfrom>
+<sqlwhere><![CDATA[InvoiceHeader.vendorId=InvoiceVendor.vendorId AND
+InvoiceHeader.vendorId=InvoiceAddress.id.vendorId AND InvoiceHeader.vendorAddrCode=InvoiceAddress.id.addressCode AND
+InvoiceHeader.termsCode=PaymentTerm.termsCode AND
+InvoiceHeader.invoiceNumber <> 'N/A' AND InvoiceHeader.status = '6010' ]]></sqlwhere>
+<sqlorderby>InvoiceHeader.vendorName ASC, InvoiceAddress.city ASC, InvoiceHeader.invoiceNumber</sqlorderby>
+<pagesize>100</pagesize>
+<title>Create Check for Payment</title>
+</browse_invoiceheader>

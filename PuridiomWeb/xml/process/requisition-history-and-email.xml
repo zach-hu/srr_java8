@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="requisitionRetrieveById" connection-type="New-Transaction">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="setup">
+			<task synchronous="true" continue-on-failure="false" name="historyLog">
+        		<task-object-name>com.tsa.puridiom.requisitionheader.history.tasks.RequisitionHeaderGetHistory</task-object-name>
+        		<post-action></post-action>
+      		</task>
+	  		<task synchronous="true" continue-on-failure="false" name="historyLogAdd">
+	    		<rule-filename check-for-false="true">is-historylog-null.xml</rule-filename>
+	    		<task-object-name>com.tsa.puridiom.historylog.tasks.HistoryLogAdd</task-object-name>
+	      		<post-action></post-action>
+	  		</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="requisitionLineUpdateSetup">
+			<task synchronous="true" continue-on-failure="false" name="requisitionLineList">
+				<task-object-name>com.tsa.puridiom.requisitionline.tasks.RequisitionLineRetrieveByHeader</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="requisitionLineUpdateStatusList">
+				<task-object-name>com.tsa.puridiom.requisitionline.tasks.RequisitionLineAllUpdateStatus</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="sendQueueReqRejectEmployeeInvalid">
+			<task synchronous="true" continue-on-failure="false" name="sendQueueReqRejectEmployeeInvalid">
+      			<task-object-name>com.tsa.puridiom.approvals.QueueReqRejectEmployeeInvalid</task-object-name>
+      			<post-action></post-action>
+      		</task>
+    	</activity>
+  </activities>
+</process>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="checkReleaseLimits" connection-type="Transaction-Required">
+	<rule-filename>is-po-release-order.xml</rule-filename>
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="checkBlanketInfo">
+			<task synchronous="true" continue-on-failure="false" name="setup">			
+				<task-object-name>com.tsa.puridiom.po.tasks.PoCheckReleaseLimitsSetup</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="blanketInfo">			
+				<task-object-name>com.tsa.puridiom.po.tasks.PoRetrieveBlanketInfo</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="checkBlanketInfo">			
+				<task-object-name>com.tsa.puridiom.po.tasks.PoCheckBlanketInfo</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="checkLimits">
+			<rule-filename>is-po-checkrellimits.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="checkReleaseLimit">
+				<task-object-name>com.tsa.puridiom.po.tasks.PoCheckReleaseLimit</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="PoTotalReleased">
+				<task-object-name>com.tsa.puridiom.po.tasks.PoTotalReleased</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+	</activities>
+</process>

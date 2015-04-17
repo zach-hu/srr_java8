@@ -1,0 +1,39 @@
+<r-sup-s-sbc>
+  <columns>
+		<Vendor_vendorId>
+			<label>Vendor Id</label>
+			<type>STRING</type>
+			<distinct>Y</distinct>
+		</Vendor_vendorId>
+		<Vendor_vendorName>
+			<label>Vendor Name</label>
+			<type>STRING</type>
+		</Vendor_vendorName>
+		<Contact_lastName>
+			<label>Last Name</label>
+			<type>STRING</type>
+		</Contact_lastName>
+		<Contact_firstName>
+			<label>First Name</label>
+			<type>STRING</type>
+		</Contact_firstName>
+		<Contact_middleInit>
+			<label>Middle Initial</label>
+			<type>STRING</type>
+		</Contact_middleInit>
+		<Contact_phoneNumber>
+			<label>Phone Number</label>
+			<type>STRING</type>
+		</Contact_phoneNumber>
+		<Vendor_vendorClass>
+			<label>Vendor Class</label>
+			<type>VSBA</type>
+		</Vendor_vendorClass>
+	</columns>
+	<sqlfrom> Vendor as Vendor , Contact as Contact</sqlfrom>
+  <sqlwhere><![CDATA[	
+		( Vendor.vendorId = Contact.id.vendorId  )
+	]]></sqlwhere>  
+  <sqlorderby>Vendor.vendorId</sqlorderby>
+<title>Supplier Business Class Report</title>
+</r-sup-s-sbc>

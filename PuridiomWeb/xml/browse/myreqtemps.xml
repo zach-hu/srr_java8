@@ -1,0 +1,53 @@
+<browse_requisition_header>
+	<columns>
+		<RequisitionHeader_icReqHeader>
+			<label>Ic Req Header</label>
+	        <hidden>Y</hidden>
+		</RequisitionHeader_icReqHeader>
+		<RequisitionHeader_requisitionType>
+			<label>type</label>
+			<hidden>Y</hidden>
+		</RequisitionHeader_requisitionType>
+		<RequisitionHeader_owner>
+			<label>Owner</label>
+	        <hidden>Y</hidden>
+		</RequisitionHeader_owner>
+		<RequisitionHeader_requisitionNumber>
+			<label>reqnumber</label>
+			<link><![CDATA[javascript: void(0);" onMouseOut="popDown('Menu99')" onMouseOver="popUp('Menu99',event);Template('#RequisitionHeader_icReqHeader^','#RequisitionHeader_requisitionNumber^','#RequisitionHeader_requisitionType^')"]]></link>
+			<size>10</size>
+		</RequisitionHeader_requisitionNumber>
+		<RequisitionHeader_internalComments>
+			<label>Description</label>
+			<sort>D</sort>
+			<size>50</size>
+		</RequisitionHeader_internalComments>
+		<RequisitionHeader_requisitionDate>
+			<label>request-Date</label>
+			<size>15</size>
+			<type>DATE</type>
+		</RequisitionHeader_requisitionDate>
+		<RequisitionHeader_total>
+			<label>Total</label>
+			<type>CurrencyFormat</type>
+			<arguments>
+				<col type="BrowseColumn">RequisitionHeader_currencyCode</col>
+			</arguments>
+			<size>15</size>
+		</RequisitionHeader_total>
+		<RequisitionHeader_currencyCode>
+			<hidden>Y</hidden>
+		</RequisitionHeader_currencyCode>
+		<RequisitionHeader_requisitionerCode>
+			<label>Requisitioner</label>
+            <size>15</size>
+            <type>USER-ID</type>
+		</RequisitionHeader_requisitionerCode>
+	</columns>
+<sqlfrom>RequisitionHeader as RequisitionHeader</sqlfrom>
+<sqlwhere><![CDATA[RequisitionHeader.status = '9050' AND (RequisitionHeader.rqSubType = 'U' OR ( RequisitionHeader.rqSubType = 'R' AND ( RequisitionHeader.requisitionerCode = :as_userid OR RequisitionHeader.owner = :as_userid ))) ]]></sqlwhere>
+<sqlorderby>RequisitionHeader.internalComments DESC</sqlorderby>
+<pagesize>15</pagesize>
+<title>Requisition Browse</title>
+</browse_requisition_header>
+

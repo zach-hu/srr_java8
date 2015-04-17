@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="VendorUpdate" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="updateVendorActivity">
+			<task synchronous="true" continue-on-failure="false" name="vendor">
+				<task-object-name>com.tsa.puridiom.vendor.tasks.VendorRetrieveById</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="vendor">
+				<task-object-name>com.tsa.puridiom.vendor.tasks.VendorSetValues</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="vendorUpdate">
+				<task-object-name>com.tsa.puridiom.vendor.tasks.VendorUpdate</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="vendorInCache">
+				<task-object-name>com.tsa.puridiom.vendor.tasks.VendorManagerSetVendorInCache</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="vendorBuyerRelUpdate">
+				<task-object-name>com.tsa.puridiom.vendor.tasks.VendorBuyerRelInsertOrUpdate</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="updateContactVendor">
+			<rule-filename>is-vendor-status-inactive.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="contactVendorList">
+				<task-object-name>com.tsa.puridiom.contact.tasks.ContactVendorList</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="contactVendorSetupList">
+				<task-object-name>com.tsa.puridiom.contact.tasks.ContactVendorSetupList</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="contactVendorUpdateList">
+				<task-object-name>com.tsa.puridiom.contact.tasks.ContactVendorUpdateList</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="updateAddressVendor">
+			<rule-filename>is-vendor-status-inactive.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="addressVendorList">
+				<task-object-name>com.tsa.puridiom.address.tasks.AddressVendorList</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="addressVendorSetupList">
+				<task-object-name>com.tsa.puridiom.address.tasks.AddressVendorSetupList</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="addressVendorUpdateList">
+				<task-object-name>com.tsa.puridiom.address.tasks.AddressVendorUpdateList</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="updateCatalog">
+			<rule-filename>is-organization-bly.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="updateCatalog">
+				<task-object-name>com.tsa.puridiom.catalog.tasks.CatalogUpdateStatusByVendor</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="auditTrail">
+			<rule-filename>is-audit-save-add.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="SaveAuditFields">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>audit-save-add.xml</process-filename>
+			</task>
+		</activity>
+	 </activities>
+</process>

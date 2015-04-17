@@ -1,0 +1,813 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created using an evaluation version of JasperAssistant (http://www.jasperassistant.com) -->
+<!DOCTYPE jasperReport PUBLIC "-//JasperReports//DTD Report Design//EN" "http://jasperreports.sourceforge.net/dtds/jasperreport.dtd">
+
+<jasperReport name="PoQri" pageWidth="612" pageHeight="791" whenNoDataType="AllSectionsNoDetail" columnWidth="592" leftMargin="10" rightMargin="10" topMargin="10" bottomMargin="10">
+	<property name="com.jasperassistant.designer.GridWidth" value="2"/>
+	<property name="com.jasperassistant.designer.GridHeight" value="8"/>
+	<property name="com.jasperassistant.designer.Rulers" value="true"/>
+	<property name="com.jasperassistant.designer.SnapToGrid" value="false"/>
+	<property name="com.jasperassistant.designer.Margins" value="true"/>
+	<property name="com.jasperassistant.designer.Grid" value="true"/>
+	<property name="com.jasperassistant.designer.SnapToGuides" value="true"/>
+	<import value="com.tsa.puridiom.common.documents.*"/>
+	<import value="com.tsa.puridiom.entity.*"/>
+	<import value="net.sf.jasperreports.engine.JRDataSource"/>
+	<import value="com.tsa.puridiom.common.utility.HiltonUtility"/>
+	<import value="com.tsa.puridiom.usermanager.*"/>
+	<import value="com.tsagate.properties.*"/>
+	<import value="com.tsa.puridiom.jasperreports.*"/>
+	<import value="java.net.*"/>
+	<import value="com.tsa.puridiom.reports.datasource.*"/>
+	<reportFont name="Arial_Normal" isDefault="true" fontName="Arial" size="8" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Bold" isDefault="false" fontName="Arial Black" size="8" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica-Bold" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Bold_Big" isDefault="false" fontName="Arial Black" size="9" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica-Bold" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Big" isDefault="false" fontName="Arial" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<parameter name="oid" class="java.lang.String">
+		<defaultValueExpression><![CDATA["qri06p"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="linesSR" class="net.sf.jasperreports.engine.JasperReport">
+		<defaultValueExpression><![CDATA[JasperReportsHelper.loadSubReport("po-line-list-pdf.jasper", $P{oid})]]></defaultValueExpression>
+	</parameter>
+	<parameter name="attachmentsDS" class="com.tsa.puridiom.reports.datasource.HibernateQueryResultDataSource"/>
+	<parameter name="linesDS" class="com.tsa.puridiom.reports.datasource.HibernateQueryResultDataSource"/>
+	<parameter name="shipToSR" class="net.sf.jasperreports.engine.JasperReport">
+		<defaultValueExpression><![CDATA[JasperReportsHelper.loadSubReport("vendor-req-pdf.jasper", $P{oid})]]></defaultValueExpression>
+	</parameter>
+	<parameter name="shipToDS" class="com.tsa.puridiom.reports.datasource.EntityDataSource"/>
+	<parameter name="vendorSR" class="net.sf.jasperreports.engine.JasperReport">
+		<defaultValueExpression><![CDATA[JasperReportsHelper.loadSubReport("vendor-req-pdf.jasper", $P{oid})]]></defaultValueExpression>
+	</parameter>
+	<parameter name="vendorDS" class="com.tsa.puridiom.reports.datasource.EntityDataSource"/>
+	<parameter name="accountsSR" class="net.sf.jasperreports.engine.JasperReport">
+		<defaultValueExpression><![CDATA[JasperReportsHelper.loadSubReport("account-summary-pdf.jasper", $P{oid})]]></defaultValueExpression>
+	</parameter>
+	<parameter name="accountsDS" class="com.tsa.puridiom.reports.datasource.HibernateQueryResultDataSource"/>
+	<parameter name="commentsBeforeSR" class="net.sf.jasperreports.engine.JasperReport">
+		<defaultValueExpression><![CDATA[JasperReportsHelper.loadSubReport("comment-pdf.jasper", $P{oid})]]></defaultValueExpression>
+	</parameter>
+	<parameter name="commentsBeforeDS" class="com.tsa.puridiom.reports.datasource.HibernateQueryResultDataSource"/>
+	<parameter name="commentsAfterSR" class="net.sf.jasperreports.engine.JasperReport">
+		<defaultValueExpression><![CDATA[JasperReportsHelper.loadSubReport("comment-pdf.jasper", $P{oid})]]></defaultValueExpression>
+	</parameter>
+	<parameter name="commentsAfterDS" class="com.tsa.puridiom.reports.datasource.HibernateQueryResultDataSource"/>
+	<parameter name="lines" class="java.util.List"/>
+	<parameter name="billToSR" class="net.sf.jasperreports.engine.JasperReport">
+		<defaultValueExpression><![CDATA[JasperReportsHelper.loadSubReport("vendor-req-pdf.jasper", $P{oid})]]></defaultValueExpression>
+	</parameter>
+	<parameter name="billToDS" class="com.tsa.puridiom.reports.datasource.EntityDataSource"/>
+	<parameter name="imgUrl" class="java.lang.String">
+		<defaultValueExpression><![CDATA["http://localhost:8085/hilton/images/"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="rddSeeBelow" class="java.lang.Boolean"/>
+	<field name="PoHeader_poNumber" class="java.lang.String"/>
+	<field name="PoHeader_releaseNumber" class="java.math.BigDecimal"/>
+	<field name="PoHeader_revisionNumber" class="java.math.BigDecimal"/>
+	<field name="PoHeader_shipToCode" class="java.lang.String"/>
+	<field name="PoHeader_billToCode" class="java.lang.String"/>
+	<field name="PoHeader_vendorId" class="java.lang.String"/>
+	<field name="PoHeader_requiredDate" class="java.util.Date"/>
+	<field name="PoHeader_poDate" class="java.util.Date"/>
+	<field name="PoHeader_shipViaCode" class="java.lang.String"/>
+	<field name="PoHeader_fobCode" class="java.lang.String"/>
+	<field name="PoHeader_termsCode" class="java.lang.String"/>
+	<field name="PoHeader_requisitionNumber" class="java.lang.String"/>
+	<field name="PoHeader_promisedDate" class="java.util.Date"/>
+	<field name="PoHeader_expirationDate" class="java.util.Date"/>
+	<field name="PoHeader_routing" class="java.lang.String"/>
+	<field name="PoHeader_internalComments" class="java.lang.String"/>
+	<field name="PoHeader_poType" class="java.lang.String"/>
+	<field name="PoHeader_total" class="java.math.BigDecimal"/>
+	<field name="PoHeader_vendContactCode" class="java.lang.String"/>
+	<field name="PoHeader_shipToContact" class="java.lang.String"/>
+	<field name="PoHeader_billToContact" class="java.lang.String"/>
+	<field name="PoHeader_buyerCode" class="java.lang.String"/>
+	<field name="PoHeader_subtotal" class="java.math.BigDecimal"/>
+	<field name="PoHeader_udf1Code" class="java.lang.String"/>
+	<field name="PoHeader_contactName" class="java.lang.String"/>
+	<field name="PoHeader_taxAmount" class="java.math.BigDecimal"/>
+	<field name="PoHeader_discountAmount" class="java.math.BigDecimal"/>
+	<field name="PoHeader_shippingCharges" class="java.math.BigDecimal"/>
+	<field name="PoHeader_otherCharges" class="java.math.BigDecimal"/>
+	<field name="PoHeader_status" class="java.lang.String"/>
+	<field name="PoHeader_effectiveDate" class="java.util.Date"/>
+	<field name="PoHeader_udf7Code" class="java.lang.String"/>
+	<field name="PoHeader_requisitionerCode" class="java.lang.String"/>
+	<field name="PoHeader_confirming" class="java.lang.String"/>
+	<field name="PoHeader_confirmNameCode" class="java.lang.String"/>
+	<field name="PoHeader_confirmDate" class="java.util.Date"/>
+	<field name="PoHeader_useTaxAmount" class="java.math.BigDecimal"/>
+	<field name="PoHeader_udf3Code" class="java.lang.String"/>
+	<field name="PoHeader_shippingTax" class="java.math.BigDecimal"/>
+	<field name="PoHeader_otherTax" class="java.math.BigDecimal"/>
+	<field name="PoHeader_docCommentList" class="java.util.List"/>
+	<field name="PoHeader_accountList" class="java.util.List"/>
+	<field name="PoHeader_docAttachmentList" class="java.util.List"/>
+	<field name="PoHeader_poLineList" class="java.util.List"/>
+	<field name="PoHeader_currencyCode" class="java.lang.String"/>
+	<variable name="title1" class="java.lang.String">
+		<initialValueExpression><![CDATA["Puridiom Purchasing Center Home"]]></initialValueExpression>
+	</variable>
+	<variable name="siteName" class="java.lang.String">
+		<initialValueExpression><![CDATA["Puridiom"]]></initialValueExpression>
+	</variable>
+	<variable name="siteUrl" class="java.lang.String">
+		<initialValueExpression><![CDATA["http://localhost:8085/hilton/"]]></initialValueExpression>
+	</variable>
+	<group name="title1" isReprintHeaderOnEachPage="true">
+		<groupHeader>
+			<band height="76">
+				<textField isBlankWhenNull="true">
+					<reportElement positionType="Float" x="447" y="22" width="52" height="20"/>
+					<box topBorder="1Point" leftBorder="1Point" bottomBorder="1Point" rightBorder="None"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{PoHeader_revisionNumber}.compareTo(new BigDecimal(0)) == 0 ? "" : $F{PoHeader_revisionNumber}.toString()]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement positionType="Float" mode="Opaque" x="499" y="3" width="67" height="20"/>
+					<box topBorder="None" leftBorder="1Point" bottomBorder="None" rightBorder="1Point"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font reportFont="Arial_Normal" size="9" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Page]]></text>
+				</staticText>
+				<image isLazy="true">
+					<reportElement positionType="Float" x="6" y="5" width="262" height="68"/>
+					<graphicElement/>
+					<imageExpression class="java.net.URL"><![CDATA[new URL(JasperReportsHelper.getImgUrl($P{oid}, "logo.gif"))]]></imageExpression>
+				</image>
+				<staticText>
+					<reportElement positionType="Float" x="394" y="3" width="53" height="20"/>
+					<box topBorder="None" leftBorder="1Point" bottomBorder="None" rightBorder="None"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font reportFont="Arial_Normal" size="9" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Release]]></text>
+				</staticText>
+				<textField>
+					<reportElement positionType="Float" mode="Opaque" x="280" y="3" width="115" height="20" forecolor="#FFFFFF" backcolor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font reportFont="Arial_Bold"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[DictionaryManager.getLabel($P{oid}, "pdf-po-ponumber", "Order Number")]]></textFieldExpression>
+				</textField>
+				<textField evaluationTime="Report">
+					<reportElement positionType="Float" x="539" y="22" width="27" height="20"/>
+					<box topBorder="1Point" leftBorder="None" bottomBorder="1Point" rightBorder="1Point"/>
+					<textElement verticalAlignment="Middle"/>
+					<textFieldExpression class="java.lang.String"><![CDATA["   " + String.valueOf($V{PAGE_NUMBER})]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement positionType="Float" x="395" y="22" width="52" height="20"/>
+					<box topBorder="1Point" leftBorder="None" bottomBorder="1Point" rightBorder="None"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{PoHeader_releaseNumber}.compareTo(new BigDecimal(0)) == 0 ? "" : $F{PoHeader_releaseNumber}.toString()]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement positionType="Float" x="280" y="22" width="115" height="20"/>
+					<box topBorder="None" leftBorder="1Point" bottomBorder="1Point" rightBorder="1Point"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{PoHeader_poNumber}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement positionType="Float" x="499" y="22" width="41" height="20"/>
+					<box topBorder="1Point" leftBorder="1Point" bottomBorder="1Point" rightBorder="None"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle"/>
+					<textFieldExpression class="java.lang.String"><![CDATA[String.valueOf($V{PAGE_NUMBER}) + " of "]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement positionType="Float" x="280" y="45" width="285" height="19"/>
+					<textElement>
+						<font reportFont="Arial_Bold"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA["For invoicing and shipping purposes, please indicate PO#, AFE #, GL Account, Project Name and Quicksilver Contact.  Failure to due so will delay invoicing processing."]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement positionType="Float" x="447" y="3" width="52" height="20"/>
+					<box topBorder="None" leftBorder="1Point" bottomBorder="None" rightBorder="None"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font reportFont="Arial_Normal" size="9" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Revision]]></text>
+				</staticText>
+			</band>
+		</groupHeader>
+	</group>
+	<group name="title2">
+		<groupHeader>
+			<band height="80">
+				<elementGroup>
+					<textField isBlankWhenNull="true">
+						<reportElement positionType="Float" x="4" y="0" width="272" height="32" isPrintWhenDetailOverflows="true"/>
+						<box border="None"/>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font reportFont="Arial_Normal" size="15" isBold="true"/>
+						</textElement>
+						<textFieldExpression class="java.lang.String"><![CDATA[OrderType.toString($F{PoHeader_poType}, $P{oid} )]]></textFieldExpression>
+					</textField>
+					<textField>
+						<reportElement positionType="Float" x="293" y="1" width="35" height="14"/>
+						<textElement verticalAlignment="Middle">
+							<font reportFont="Arial_Bold" isItalic="false"/>
+						</textElement>
+						<textFieldExpression class="java.lang.String"><![CDATA["Attn:"]]></textFieldExpression>
+					</textField>
+					<textField isBlankWhenNull="true">
+						<reportElement positionType="Float" x="331" y="1" width="235" height="14"/>
+						<textElement verticalAlignment="Middle">
+							<font reportFont="Arial_Normal"/>
+						</textElement>
+						<textFieldExpression class="java.lang.String"><![CDATA[$F{PoHeader_shipToContact}]]></textFieldExpression>
+					</textField>
+					<staticText>
+						<reportElement positionType="Float" stretchType="RelativeToBandHeight" mode="Opaque" x="281" y="0" width="10" height="80" forecolor="#FFFFFF" backcolor="#000000"/>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font reportFont="Arial_Normal" size="9" isBold="true"/>
+						</textElement>
+						<text><![CDATA[S
+H
+I
+P
+
+T
+O]]></text>
+					</staticText>
+					<subreport>
+						<reportElement x="293" y="0" width="273" height="1" isPrintWhenDetailOverflows="true"/>
+						<subreportParameter name="oid">
+							<subreportParameterExpression><![CDATA[$P{oid}]]></subreportParameterExpression>
+						</subreportParameter>
+						<dataSourceExpression><![CDATA[$P{shipToDS}]]></dataSourceExpression>
+						<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[JasperReportsHelper.loadSubReport("address.jasper", $P{oid})]]></subreportExpression>
+					</subreport>
+				</elementGroup>
+			</band>
+		</groupHeader>
+	</group>
+	<group name="Group_2">
+		<groupHeader>
+			<band height="93">
+				<elementGroup>
+					<staticText>
+						<reportElement positionType="Float" stretchType="RelativeToBandHeight" mode="Opaque" x="5" y="3" width="10" height="88" forecolor="#FFFFFF" backcolor="#000000"/>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font reportFont="Arial_Normal" size="9" isBold="true"/>
+						</textElement>
+						<text><![CDATA[S
+U
+P
+P
+L
+I
+E
+R]]></text>
+					</staticText>
+				</elementGroup>
+				<subreport>
+					<reportElement x="17" y="3" width="265" height="90" isPrintWhenDetailOverflows="true"/>
+					<subreportParameter name="datasource">
+						<subreportParameterExpression><![CDATA[$P{vendorDS}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="PoHeader_vendorId">
+						<subreportParameterExpression><![CDATA[$F{PoHeader_vendorId}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="oid">
+						<subreportParameterExpression><![CDATA[$P{oid}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="PoHeader_contactName">
+						<subreportParameterExpression><![CDATA[$F{PoHeader_contactName}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="PoHeader_vendContactCode">
+						<subreportParameterExpression><![CDATA[$F{PoHeader_vendContactCode}]]></subreportParameterExpression>
+					</subreportParameter>
+					<dataSourceExpression><![CDATA[$P{vendorDS}]]></dataSourceExpression>
+					<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[JasperReportsHelper.loadSubReport("address-supplier.jasper", $P{oid})]]></subreportExpression>
+				</subreport>
+				<subreport>
+					<reportElement x="294" y="3" width="265" height="90" isPrintWhenDetailOverflows="true"/>
+					<subreportParameter name="PoHeader_shipToContact">
+						<subreportParameterExpression><![CDATA[$F{PoHeader_shipToContact}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="datasource">
+						<subreportParameterExpression><![CDATA[$P{vendorDS}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="oid">
+						<subreportParameterExpression><![CDATA[$P{oid}]]></subreportParameterExpression>
+					</subreportParameter>
+					<dataSourceExpression><![CDATA[$P{billToDS}]]></dataSourceExpression>
+					<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[JasperReportsHelper.loadSubReport("address-billto.jasper", $P{oid})]]></subreportExpression>
+				</subreport>
+				<staticText>
+					<reportElement positionType="Float" stretchType="RelativeToBandHeight" mode="Opaque" x="281" y="3" width="10" height="88" forecolor="#FFFFFF" backcolor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="9" isBold="true"/>
+					</textElement>
+					<text><![CDATA[B
+I
+L
+L
+
+T
+O]]></text>
+				</staticText>
+			</band>
+		</groupHeader>
+	</group>
+	<group name="title3">
+		<groupHeader>
+			<band height="60">
+				<staticText>
+					<reportElement positionType="Float" mode="Opaque" x="140" y="30" width="105" height="15" forecolor="#FFFFFF" backcolor="#000000"/>
+					<box topBorder="None" topPadding="0" leftBorder="None" leftPadding="1" bottomBorder="None" bottomPadding="0" rightBorder="1Point" rightPadding="1"/>
+					<textElement verticalAlignment="Middle">
+						<font reportFont="Arial_Big" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Phone]]></text>
+				</staticText>
+				<staticText>
+					<reportElement positionType="Float" mode="Opaque" x="310" y="2" width="105" height="14" forecolor="#FFFFFF" backcolor="#000000"/>
+					<box topBorder="None" topPadding="0" leftBorder="None" leftPadding="1" bottomBorder="None" bottomPadding="0" rightBorder="1Point" rightPadding="1"/>
+					<textElement verticalAlignment="Middle">
+						<font reportFont="Arial_Big" isBold="true"/>
+					</textElement>
+					<text><![CDATA[FOB/Freight Terms]]></text>
+				</staticText>
+				<textField pattern="MMM d, yyyy" isBlankWhenNull="true">
+					<reportElement positionType="Float" x="464" y="45" width="101" height="14"/>
+					<box topBorder="None" topPadding="0" leftBorder="None" leftPadding="5" bottomBorder="None" bottomPadding="0" rightBorder="1Point" rightPadding="0"/>
+					<textElement verticalAlignment="Middle">
+						<font reportFont="Arial_Normal" size="8"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[ReportUtils.getStdTableDescription($P{oid}, "PO03", $F{PoHeader_udf3Code})]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement positionType="Float" mode="Opaque" x="337" y="30" width="127" height="15" forecolor="#FFFFFF" backcolor="#000000"/>
+					<box topBorder="None" topPadding="0" leftBorder="None" leftPadding="1" bottomBorder="None" bottomPadding="0" rightBorder="1Point" rightPadding="1"/>
+					<textElement verticalAlignment="Middle">
+						<font reportFont="Arial_Big" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Email]]></text>
+				</staticText>
+				<textField isBlankWhenNull="true">
+					<reportElement positionType="Float" x="3" y="45" width="137" height="14"/>
+					<box topBorder="None" topPadding="0" leftBorder="None" leftPadding="5" bottomBorder="None" bottomPadding="0" rightBorder="1Point" rightPadding="0"/>
+					<textElement verticalAlignment="Middle">
+						<font reportFont="Arial_Normal" size="8"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[ReportUtils.getUserName($F{PoHeader_buyerCode}, $P{oid})]]></textFieldExpression>
+				</textField>
+				<textField pattern="MMM d, yyyy" isBlankWhenNull="true">
+					<reportElement positionType="Float" x="104" y="16" width="101" height="14"/>
+					<box topBorder="None" topPadding="0" leftBorder="None" leftPadding="5" bottomBorder="None" bottomPadding="0" rightBorder="1Point" rightPadding="0"/>
+					<textElement verticalAlignment="Middle">
+						<font reportFont="Arial_Normal" size="8"/>
+					</textElement>
+					<textFieldExpression class="java.util.Date"><![CDATA[$F{PoHeader_requiredDate}]]></textFieldExpression>
+				</textField>
+				<textField pattern="MMM d, yyyy" isBlankWhenNull="true">
+					<reportElement positionType="Float" x="337" y="45" width="127" height="14"/>
+					<box topBorder="None" topPadding="0" leftBorder="None" leftPadding="5" bottomBorder="None" bottomPadding="0" rightBorder="1Point" rightPadding="0"/>
+					<textElement verticalAlignment="Middle">
+						<font reportFont="Arial_Normal" size="8"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[ReportUtils.getUserEmail($F{PoHeader_buyerCode}, $P{oid})]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement positionType="Float" mode="Opaque" x="245" y="30" width="92" height="15" forecolor="#FFFFFF" backcolor="#000000"/>
+					<box topBorder="None" topPadding="0" leftBorder="None" leftPadding="1" bottomBorder="None" bottomPadding="0" rightBorder="1Point" rightPadding="1"/>
+					<textElement verticalAlignment="Middle">
+						<font reportFont="Arial_Big" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Fax]]></text>
+				</staticText>
+				<textField isBlankWhenNull="true">
+					<reportElement positionType="Float" x="310" y="16" width="105" height="14"/>
+					<box topBorder="None" topPadding="0" leftBorder="None" leftPadding="5" bottomBorder="None" bottomPadding="0" rightBorder="1Point" rightPadding="0"/>
+					<textElement verticalAlignment="Middle">
+						<font reportFont="Arial_Normal" size="8"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{PoHeader_fobCode}]]></textFieldExpression>
+				</textField>
+				<textField pattern="MMM d, yyyy" isBlankWhenNull="true">
+					<reportElement positionType="Float" x="245" y="45" width="92" height="14"/>
+					<box topBorder="None" topPadding="0" leftBorder="None" leftPadding="5" bottomBorder="None" bottomPadding="0" rightBorder="1Point" rightPadding="0"/>
+					<textElement verticalAlignment="Middle">
+						<font reportFont="Arial_Normal" size="8"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[UserManager.getInstance().getUser($P{oid}, $F{PoHeader_buyerCode}).getFaxNumber()]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement positionType="Float" x="415" y="16" width="151" height="14"/>
+					<box topBorder="None" topPadding="0" leftBorder="None" leftPadding="5" bottomBorder="None" bottomPadding="0" rightBorder="1Point" rightPadding="0"/>
+					<textElement verticalAlignment="Middle">
+						<font reportFont="Arial_Normal" size="8"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[ReportUtils.getPaymentTerms($P{oid}, $F{PoHeader_termsCode})]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement positionType="Float" x="140" y="45" width="105" height="14"/>
+					<box topBorder="None" topPadding="0" leftBorder="None" leftPadding="5" bottomBorder="None" bottomPadding="0" rightBorder="1Point" rightPadding="0"/>
+					<textElement verticalAlignment="Middle">
+						<font reportFont="Arial_Normal" size="8"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[ReportUtils.getUserPhone($F{PoHeader_buyerCode}, $P{oid})]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement positionType="Float" mode="Opaque" x="3" y="30" width="137" height="15" forecolor="#FFFFFF" backcolor="#000000"/>
+					<box topBorder="None" topPadding="0" leftBorder="None" leftPadding="1" bottomBorder="None" bottomPadding="0" rightBorder="1Point" rightPadding="1"/>
+					<textElement verticalAlignment="Middle">
+						<font reportFont="Arial_Big" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Buyer]]></text>
+				</staticText>
+				<staticText>
+					<reportElement positionType="Float" mode="Opaque" x="104" y="2" width="101" height="14" forecolor="#FFFFFF" backcolor="#000000"/>
+					<box topBorder="None" topPadding="0" leftBorder="None" leftPadding="1" bottomBorder="None" bottomPadding="0" rightBorder="1Point" rightPadding="1"/>
+					<textElement verticalAlignment="Middle">
+						<font reportFont="Arial_Big" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Date Required]]></text>
+				</staticText>
+				<staticText>
+					<reportElement positionType="Float" mode="Opaque" x="205" y="2" width="105" height="14" forecolor="#FFFFFF" backcolor="#000000"/>
+					<box topBorder="None" topPadding="0" leftBorder="None" leftPadding="1" bottomBorder="None" bottomPadding="0" rightBorder="1Point" rightPadding="1"/>
+					<textElement verticalAlignment="Middle">
+						<font reportFont="Arial_Big" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Ship Via]]></text>
+				</staticText>
+				<staticText>
+					<reportElement positionType="Float" mode="Opaque" x="464" y="30" width="101" height="15" forecolor="#FFFFFF" backcolor="#000000"/>
+					<box topBorder="None" topPadding="0" leftBorder="None" leftPadding="1" bottomBorder="None" bottomPadding="0" rightBorder="1Point" rightPadding="1"/>
+					<textElement verticalAlignment="Middle">
+						<font reportFont="Arial_Big" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Project Name]]></text>
+				</staticText>
+				<staticText>
+					<reportElement positionType="Float" mode="Opaque" x="3" y="2" width="101" height="14" forecolor="#FFFFFF" backcolor="#000000"/>
+					<box topBorder="None" topPadding="0" leftBorder="None" leftPadding="1" bottomBorder="None" bottomPadding="0" rightBorder="1Point" rightPadding="1"/>
+					<textElement verticalAlignment="Middle">
+						<font reportFont="Arial_Big" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Order Date]]></text>
+				</staticText>
+				<staticText>
+					<reportElement positionType="Float" mode="Opaque" x="415" y="2" width="151" height="14" forecolor="#FFFFFF" backcolor="#000000"/>
+					<box topBorder="None" topPadding="0" leftBorder="None" leftPadding="1" bottomBorder="None" bottomPadding="0" rightBorder="1Point" rightPadding="1"/>
+					<textElement verticalAlignment="Middle">
+						<font reportFont="Arial_Big" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Payment Terms]]></text>
+				</staticText>
+				<textField isBlankWhenNull="true">
+					<reportElement positionType="Float" x="205" y="16" width="105" height="14"/>
+					<box topBorder="None" topPadding="0" leftBorder="None" leftPadding="5" bottomBorder="None" bottomPadding="0" rightBorder="1Point" rightPadding="0"/>
+					<textElement verticalAlignment="Middle">
+						<font reportFont="Arial_Normal" size="8"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[ReportUtils.getStdTableDescription($P{oid}, "SHP", $F{PoHeader_shipViaCode})]]></textFieldExpression>
+				</textField>
+				<textField pattern="MMM d, yyyy" isBlankWhenNull="true">
+					<reportElement positionType="Float" x="3" y="16" width="101" height="14"/>
+					<box topBorder="None" topPadding="0" leftBorder="None" leftPadding="5" bottomBorder="None" bottomPadding="0" rightBorder="1Point" rightPadding="0"/>
+					<textElement verticalAlignment="Middle">
+						<font reportFont="Arial_Normal" size="8"/>
+					</textElement>
+					<textFieldExpression class="java.util.Date"><![CDATA[$F{PoHeader_poDate}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+	</group>
+	<group name="itemTitle" isReprintHeaderOnEachPage="true">
+		<groupHeader>
+			<band height="14">
+				<staticText>
+					<reportElement positionType="Float" mode="Opaque" x="3" y="0" width="46" height="14" forecolor="#FFFFFF" backcolor="#000000"/>
+					<box border="None"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font reportFont="Arial_Big" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Line #]]></text>
+				</staticText>
+				<staticText>
+					<reportElement positionType="Float" mode="Opaque" x="49" y="0" width="51" height="14" forecolor="#FFFFFF" backcolor="#000000"/>
+					<box border="None"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font reportFont="Arial_Big" size="10" isBold="true" isItalic="false"/>
+					</textElement>
+					<text><![CDATA[Quantity]]></text>
+				</staticText>
+				<staticText>
+					<reportElement positionType="Float" mode="Opaque" x="100" y="0" width="34" height="14" forecolor="#FFFFFF" backcolor="#000000"/>
+					<box border="None"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font reportFont="Arial_Big" isBold="true"/>
+					</textElement>
+					<text><![CDATA[U/M]]></text>
+				</staticText>
+				<staticText>
+					<reportElement positionType="Float" mode="Opaque" x="134" y="0" width="297" height="14" forecolor="#FFFFFF" backcolor="#000000"/>
+					<box border="None"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font reportFont="Arial_Big" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Description]]></text>
+				</staticText>
+				<staticText>
+					<reportElement positionType="Float" mode="Opaque" x="431" y="0" width="61" height="14" forecolor="#FFFFFF" backcolor="#000000"/>
+					<box border="None"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font reportFont="Arial_Big" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Unit Price]]></text>
+				</staticText>
+				<staticText>
+					<reportElement positionType="Float" mode="Opaque" x="492" y="0" width="74" height="14" forecolor="#FFFFFF" backcolor="#000000"/>
+					<box border="None"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font reportFont="Arial_Big" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Extended Price]]></text>
+				</staticText>
+			</band>
+		</groupHeader>
+	</group>
+	<group name="effectiveDate">
+		<groupHeader>
+			<band height="14">
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement positionType="Float" x="134" y="0" width="297" height="14" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true"/>
+					<textElement verticalAlignment="Middle"/>
+					<textFieldExpression class="java.lang.String"><![CDATA[ReportUtils.getPrintEffectiveDates($F{PoHeader_effectiveDate}, $F{PoHeader_expirationDate}, $F{PoHeader_poType}, $P{oid})]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+	</group>
+	<group name="poConfirming">
+		<groupHeader>
+			<band height="14">
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement positionType="Float" x="134" y="0" width="297" height="14" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true"/>
+					<textElement verticalAlignment="Middle"/>
+					<textFieldExpression class="java.lang.String"><![CDATA[ReportUtils.getPoConfirming($F{PoHeader_confirming}, $F{PoHeader_poType}, $F{PoHeader_confirmNameCode}, $F{PoHeader_confirmDate}, $P{oid})]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+	</group>
+	<group name="replaceOrder">
+		<groupHeader>
+			<band height="14">
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement positionType="Float" x="134" y="0" width="297" height="14" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true">
+						<printWhenExpression><![CDATA[new Boolean($F{PoHeader_revisionNumber}.compareTo(new BigDecimal(0)) > 0)]]></printWhenExpression>
+					</reportElement>
+					<textElement verticalAlignment="Middle"/>
+					<textFieldExpression class="java.lang.String"><![CDATA[ReportUtils.getPrintReplaceOrder($F{PoHeader_udf7Code}, $P{oid})]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+	</group>
+	<group name="revisionWarning">
+		<groupHeader>
+			<band height="14">
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement positionType="Float" x="134" y="0" width="297" height="14" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true"/>
+					<textElement verticalAlignment="Middle"/>
+					<textFieldExpression class="java.lang.String"><![CDATA[ReportUtils.getPrintRevisionWarning($F{PoHeader_revisionNumber},$P{oid})]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+	</group>
+	<group name="commentsBefore">
+		<groupHeader>
+			<band height="1">
+				<subreport>
+					<reportElement positionType="Float" mode="Opaque" x="5" y="0" width="547" height="1" isRemoveLineWhenBlank="true"/>
+					<subreportParameter name="oid">
+						<subreportParameterExpression><![CDATA[$P{oid}]]></subreportParameterExpression>
+					</subreportParameter>
+					<dataSourceExpression><![CDATA[new HibernateQueryResultDataSource($F{PoHeader_docCommentList})]]></dataSourceExpression>
+					<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[JasperReportsHelper.loadSubReport("comment-before-pdf.jasper", $P{oid})]]></subreportExpression>
+				</subreport>
+			</band>
+		</groupHeader>
+	</group>
+	<group name="lines">
+		<groupHeader>
+			<band height="2">
+				<subreport>
+					<reportElement positionType="Float" x="3" y="0" width="563" height="1"/>
+					<subreportParameter name="vendorId">
+						<subreportParameterExpression><![CDATA[$F{PoHeader_vendorId}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="requisitionNumber">
+						<subreportParameterExpression><![CDATA[$F{PoHeader_requisitionNumber}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="PoHeader_currencyCode">
+						<subreportParameterExpression><![CDATA[$F{PoHeader_currencyCode}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="oid">
+						<subreportParameterExpression><![CDATA[$P{oid}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="requisitionerCode">
+						<subreportParameterExpression><![CDATA[$F{PoHeader_requisitionerCode}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="rddSeeBelow">
+						<subreportParameterExpression><![CDATA[$P{rddSeeBelow}]]></subreportParameterExpression>
+					</subreportParameter>
+					<dataSourceExpression><![CDATA[$P{linesDS}]]></dataSourceExpression>
+					<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[JasperReportsHelper.loadSubReport("po-line-list-pdf.jasper", $P{oid})]]></subreportExpression>
+				</subreport>
+			</band>
+		</groupHeader>
+	</group>
+	<group name="Group_1">
+		<groupHeader>
+			<band height="10">
+				<rectangle>
+					<reportElement x="12" y="0" width="501" height="9" forecolor="#FFFFFF"/>
+					<graphicElement/>
+				</rectangle>
+			</band>
+		</groupHeader>
+	</group>
+	<group name="commentsAfter" isStartNewPage="true">
+		<groupExpression><![CDATA["a"]]></groupExpression>
+		<groupHeader>
+			<band height="16" isSplitAllowed="false">
+				<subreport>
+					<reportElement positionType="Float" mode="Opaque" x="5" y="0" width="555" height="14" isPrintWhenDetailOverflows="true" forecolor="#FFFFFF"/>
+					<subreportParameter name="oid">
+						<subreportParameterExpression><![CDATA[$P{oid}]]></subreportParameterExpression>
+					</subreportParameter>
+					<dataSourceExpression><![CDATA[new HibernateQueryResultDataSource($F{PoHeader_docCommentList})]]></dataSourceExpression>
+					<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[JasperReportsHelper.loadSubReport("po-comment-after-pdf-new.jasper", $P{oid})]]></subreportExpression>
+				</subreport>
+			</band>
+		</groupHeader>
+	</group>
+	<group name="accounts">
+		<groupHeader>
+			<band height="17" isSplitAllowed="false">
+				<printWhenExpression><![CDATA[new Boolean($F{PoHeader_accountList}.size() > 0)]]></printWhenExpression>
+				<staticText>
+					<reportElement positionType="Float" x="5" y="0" width="420" height="15"/>
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font reportFont="Arial_Bold_Big"/>
+					</textElement>
+					<text><![CDATA[Account Coding]]></text>
+				</staticText>
+				<subreport>
+					<reportElement positionType="Float" mode="Opaque" x="5" y="15" width="547" height="1" forecolor="#FFFFFF"/>
+					<subreportParameter name="labelPrefix">
+						<subreportParameterExpression><![CDATA["PO"]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="oid">
+						<subreportParameterExpression><![CDATA[$P{oid}]]></subreportParameterExpression>
+					</subreportParameter>
+					<dataSourceExpression><![CDATA[new HibernateQueryResultDataSource($F{PoHeader_accountList})]]></dataSourceExpression>
+					<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[JasperReportsHelper.loadSubReport("po-account-summary-pdf.jasper", $P{oid})]]></subreportExpression>
+				</subreport>
+			</band>
+		</groupHeader>
+	</group>
+	<group name="lineaccounts">
+		<groupHeader>
+			<band height="1" isSplitAllowed="false">
+				<subreport>
+					<reportElement positionType="Float" mode="Opaque" x="5" y="0" width="547" height="1" isPrintWhenDetailOverflows="true" forecolor="#FFFFFF"/>
+					<subreportParameter name="labelPrefix">
+						<subreportParameterExpression><![CDATA["PO"]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="oid">
+						<subreportParameterExpression><![CDATA[$P{oid}]]></subreportParameterExpression>
+					</subreportParameter>
+					<dataSourceExpression><![CDATA[new HibernateQueryResultDataSource($F{PoHeader_poLineList})]]></dataSourceExpression>
+					<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[JasperReportsHelper.loadSubReport("po-line-account-pdf.jasper", $P{oid})]]></subreportExpression>
+				</subreport>
+			</band>
+		</groupHeader>
+	</group>
+	<group name="attachments">
+		<groupHeader>
+			<band height="1" isSplitAllowed="false">
+				<subreport isUsingCache="false">
+					<reportElement positionType="Float" x="5" y="0" width="555" height="1" isRemoveLineWhenBlank="true"/>
+					<subreportParameter name="oid">
+						<subreportParameterExpression><![CDATA[$P{oid}]]></subreportParameterExpression>
+					</subreportParameter>
+					<dataSourceExpression><![CDATA[$P{attachmentsDS}]]></dataSourceExpression>
+					<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[JasperReportsHelper.loadSubReport("docattachment-pdf.jasper", $P{oid})]]></subreportExpression>
+				</subreport>
+			</band>
+		</groupHeader>
+	</group>
+	<group name="totals">
+		<groupHeader>
+			<band height="2" isSplitAllowed="false">
+				<subreport isUsingCache="false">
+					<reportElement positionType="Float" x="388" y="0" width="158" height="1" isRemoveLineWhenBlank="true"/>
+					<subreportParameter name="shipping">
+						<subreportParameterExpression><![CDATA[$F{PoHeader_shippingCharges}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="other">
+						<subreportParameterExpression><![CDATA[$F{PoHeader_otherCharges}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="total">
+						<subreportParameterExpression><![CDATA[$F{PoHeader_total}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="othertax">
+						<subreportParameterExpression><![CDATA[$F{PoHeader_otherTax}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="discount">
+						<subreportParameterExpression><![CDATA[$F{PoHeader_discountAmount}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="oid">
+						<subreportParameterExpression><![CDATA[$P{oid}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="shippingtax">
+						<subreportParameterExpression><![CDATA[$F{PoHeader_shippingTax}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="subtotal">
+						<subreportParameterExpression><![CDATA[$F{PoHeader_subtotal}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="tax">
+						<subreportParameterExpression><![CDATA[$F{PoHeader_taxAmount}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="currencyCode">
+						<subreportParameterExpression><![CDATA[$F{PoHeader_currencyCode}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="udf1Code">
+						<subreportParameterExpression><![CDATA[$F{PoHeader_udf1Code}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="usetax">
+						<subreportParameterExpression><![CDATA[$F{PoHeader_useTaxAmount}]]></subreportParameterExpression>
+					</subreportParameter>
+					<dataSourceExpression><![CDATA[new JREmptyDataSource(1)]]></dataSourceExpression>
+					<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[JasperReportsHelper.loadSubReport("totals.jasper", $P{oid})]]></subreportExpression>
+				</subreport>
+			</band>
+		</groupHeader>
+	</group>
+	<background>
+		<band height="754">
+			<rectangle>
+				<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="3" y="0" width="563" height="742" isPrintWhenDetailOverflows="true">
+					<printWhenExpression><![CDATA[new Boolean($V{PAGE_NUMBER}.compareTo(new Integer(1)) > 0)]]></printWhenExpression>
+				</reportElement>
+				<graphicElement/>
+			</rectangle>
+			<staticText>
+				<reportElement positionType="Float" x="96" y="72" width="400" height="640" forecolor="#FF0000">
+					<printWhenExpression><![CDATA[new Boolean($F{PoHeader_status}.equalsIgnoreCase("9020"))]]></printWhenExpression>
+				</reportElement>
+				<box border="1Point" borderColor="#000000"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font reportFont="Arial_Bold" size="24"/>
+				</textElement>
+				<text><![CDATA[CANCELLED]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="3" y="0" width="563" height="711" isPrintWhenDetailOverflows="true">
+					<printWhenExpression><![CDATA[new Boolean($V{PAGE_NUMBER}.equals(new Integer(1)))]]></printWhenExpression>
+				</reportElement>
+				<graphicElement/>
+			</rectangle>
+		</band>
+	</background>
+	<pageFooter>
+		<band height="65">
+			<staticText>
+				<reportElement positionType="Float" x="3" y="3" width="562" height="14"/>
+				<textElement verticalAlignment="Middle">
+					<font reportFont="Arial_Normal"/>
+				</textElement>
+				<text><![CDATA[This Order is subject to the attached terms and conditions, unless otherwise specified in this Order.]]></text>
+			</staticText>
+			<textField>
+				<reportElement positionType="Float" x="97" y="38" width="233" height="15">
+					<printWhenExpression><![CDATA[new Boolean($F{PoHeader_status}.compareTo(DocumentStatus.PO_AWARDED) > -1)]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[ReportUtils.getUserName($F{PoHeader_buyerCode}, $P{oid})]]></textFieldExpression>
+			</textField>
+			<image isLazy="true">
+				<reportElement positionType="Float" x="333" y="19" width="232" height="45">
+					<printWhenExpression><![CDATA[new Boolean($F{PoHeader_status}.compareTo(DocumentStatus.PO_AWARDED) > -1)]]></printWhenExpression>
+				</reportElement>
+				<graphicElement/>
+				<imageExpression class="java.lang.String"><![CDATA[JasperReportsHelper.getSigUrl($F{PoHeader_buyerCode}, $P{oid})]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement positionType="Float" x="273" y="18" width="58" height="20">
+					<printWhenExpression><![CDATA[new Boolean($F{PoHeader_status}.compareTo(DocumentStatus.PO_AWARDED) > -1)]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font reportFont="Arial_Bold"/>
+				</textElement>
+				<text><![CDATA[Buyer : ]]></text>
+			</staticText>
+		</band>
+	</pageFooter>
+</jasperReport>

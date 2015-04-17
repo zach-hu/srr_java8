@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="receiptForward" connection-type="New-Transaction">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="poRetrieve">
+			<task synchronous="true" continue-on-failure="false" name="poHeader">
+				<rule-filename>exist-ic-poheader.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.poheader.tasks.PoHeaderRetrieveById</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="poHeaderVerifyStatusAmended">
+				<task-object-name>com.tsa.puridiom.poheader.tasks.PoHeaderVerifyStatusAmended</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="setMessageErrorReceiptCreate">
+				<rule-filename>is-verify-status-amended.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.receipterrormsg.tasks.SetMessageErrorReceiptCreate</task-object-name>
+				<post-action>exitProcess</post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="receiptHeaderUpdate">
+			<task synchronous="true" continue-on-failure="false" name="receiptHeaderUpdate">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>receiptheader-update.xml</process-filename>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="receiptOrderRetrieveSetup">
+				<task-object-name>com.tsa.puridiom.receipt.tasks.ReceiptOrderRetrieveSetup</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="poHeaderUpdateStatus">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>poheader-update-receipt-status.xml</process-filename>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="history">
+			<task synchronous="true" continue-on-failure="false" name="receiptHeaderHistory">
+				<task-object-name>com.tsa.puridiom.receiptheader.history.tasks.ReceiptHeaderHistory</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

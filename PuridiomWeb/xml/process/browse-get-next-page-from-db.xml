@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="browseRetrieve" connection-type="Connection-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="browseRetrieve">
+			<task synchronous="true" continue-on-failure="false" name="browse">
+				<task-object-name>com.tsa.puridiom.browse.tasks.BrowseSetInputRequestValues</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="browse">
+				<task-object-name>com.tsa.puridiom.browse.tasks.BrowseSetPage</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="browseObject">
+				<task-object-name>com.tsa.puridiom.browse.tasks.BrowseObjectSetCurrentPage</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="verifyAuthentication">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>browse-retrieve-execute.xml</process-filename>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="browse">
+				<task-object-name>com.tsa.puridiom.browse.tasks.SetBrowseList</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="setBrowseInCache">
+				<task-object-name>com.tsa.puridiom.browse.tasks.SetBrowseInCache</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

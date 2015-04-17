@@ -1,0 +1,67 @@
+<r_rfqs>
+	<columns>
+		<RfqHeader_rfqNumber>
+			<label>solicitationNumber</label>
+			<type>STRING</type>
+		</RfqHeader_rfqNumber>
+		<RfqHeader_rfqType>
+			<label>Type</label>
+			<type>RFQ-TYPE</type>
+		</RfqHeader_rfqType>
+		<RfqHeader_rfqDate>
+			<label>solicitationDate</label>
+			<type>DATE</type>
+		</RfqHeader_rfqDate>
+		<RfqHeader_dueDate>
+			<label>dueDate</label>
+			<type>DATE</type>
+		</RfqHeader_dueDate>
+		<RfqHeader_departmentCode>
+			<label>department</label>
+			<type>STRING</type>
+		</RfqHeader_departmentCode>
+		<RfqHeader_requisitionerCode>
+			<label>requisitioner</label>
+			<type>STRING</type>
+		</RfqHeader_requisitionerCode>
+		<RfqHeader_buyer>
+			<label>buyer</label>
+			<type>STRING</type>
+		</RfqHeader_buyer>
+		<RfqHeader_status>
+			<label>status</label>
+			<type>STATUS</type>
+		</RfqHeader_status>
+		<RfqHeader_vendorAwarded>
+			<label>Vendor Awarded</label>
+			<type>STRING</type>
+		</RfqHeader_vendorAwarded>
+		<RfqHeader_awardDate>
+			<label>Award Date</label>
+			<type>DATE</type>
+		</RfqHeader_awardDate>
+		<RfqHeader_requisitionNumber>
+			<label>Ship To Code</label>
+			<type>STRING</type>
+		</RfqHeader_requisitionNumber>
+		<RfqHeader_appBy>
+			<label>App By</label>
+			<type>STRING</type>
+		</RfqHeader_appBy>
+		<RfqHeader_shipToCode>
+			<label>Ship To Code</label>
+			<type>STRING</type>
+		</RfqHeader_shipToCode>
+		<RfqHeader_rfqDescription>
+			<label>Description</label>
+			<type>STRING</type>
+		</RfqHeader_rfqDescription>
+	</columns>
+<sqlfrom> RfqHeader as RfqHeader </sqlfrom>
+<sqlwhere><![CDATA[
+RfqHeader.status > '2000' and
+RfqHeader.status < '9020'
+]]></sqlwhere>
+<sqlorderby>RfqHeader.rfqType</sqlorderby>
+<title>Solicitation Summary Report</title>
+</r_rfqs>

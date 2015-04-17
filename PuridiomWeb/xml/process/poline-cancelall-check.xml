@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="CancelPoLine" connection-type="Connection-Required">
+  <activities>
+    <activity synchronous="true" continue-on-failure="false" name="cancelLineCheckSetup">
+		<task synchronous="true" continue-on-failure="false" name="poLineList">
+			<rule-filename>is-polinelist-empty.xml</rule-filename>
+			<task-object-name>com.tsa.puridiom.poline.tasks.PoLineRetrieveByHeader</task-object-name>
+			<post-action></post-action>
+		  </task>
+		<task synchronous="true" continue-on-failure="false" name="cancelAll">
+		  <task-object-name>com.tsa.puridiom.poline.tasks.PoLineCancelAllCheck</task-object-name>
+		  <post-action></post-action>
+		</task>
+    </activity>
+	<activity synchronous="true" continue-on-failure="false" name="cancelLineCheckSetup">
+	  <rule-filename>is-poline-cancel-all.xml</rule-filename>
+	  <task synchronous="true" continue-on-failure="false" name="cancelPo">
+	  	<rule-filename>is-po-cancel.xml</rule-filename>
+        <task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+        <process-filename>po-cancel.xml</process-filename>
+      </task>
+      <task synchronous="true" continue-on-failure="false" name="closePo">
+      	<rule-filename>is-po-close.xml</rule-filename>
+        <task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+        <process-filename>po-close.xml</process-filename>
+      </task>
+	</activity>
+  </activities>
+</process>

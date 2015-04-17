@@ -1,0 +1,102 @@
+<browse_po_header>
+	<columns>
+		<PoHeader_icPoHeader>
+			<label>Ic Po Header</label>
+	        <hidden>Y</hidden>
+	        <visible>0</visible>
+		</PoHeader_icPoHeader>
+		<PoHeader_poNumber>
+			<label>PO #</label>
+			<sort>D</sort>
+			<link><![CDATA[javascript: createRevisionReq('#PoHeader_icPoHeader^','#PoHeader_poType^'); void(0);]]></link>
+			<size>15</size>
+		</PoHeader_poNumber>
+		<PoHeader_releaseNumber>
+			<label>brw-releaseNumber</label>
+			<type>NoDecimal</type>
+			<size>4</size>
+		</PoHeader_releaseNumber>
+		<PoHeader_revisionNumber>
+			<label>brw-revisionNumber</label>
+			<type>NoDecimal</type>
+			<size>4</size>
+		</PoHeader_revisionNumber>
+		<PoHeader_status>
+			<label>brw-status</label>
+			<type>STATUS</type>
+			<size>12</size>
+		</PoHeader_status>
+		<PoHeader_poDate>
+			<label>PO Date</label>
+			<type>DATE</type>
+			<size>10</size>
+		</PoHeader_poDate>
+		<PoHeader_buyerCode>
+			<label>brw-buyer</label>
+            <size>12</size>
+            <type>USER-ID</type>
+		</PoHeader_buyerCode>
+		<PoHeader_total>
+			<label>brw-total</label>
+			<size>10</size>
+			<type>DollarDecimal</type>
+		</PoHeader_total>
+		<PoHeader_vendorId>
+			<label>Supplier ID</label>
+			<detail>Y</detail>
+			<size>25</size>
+		</PoHeader_vendorId>
+		<PoHeader_vendorName>
+			<label>brw-vendorName</label>
+			<detail>Y</detail>
+			<size>50</size>
+		</PoHeader_vendorName>
+		<PoHeader_rfqNumber>
+			<label>Solicitation #</label>
+			<detail>Y</detail>
+			<size>25</size>
+		</PoHeader_rfqNumber>
+		<PoHeader_requisitionNumber>
+			<label>Req. #</label>
+			<detail>Y</detail>
+			<size>25</size>
+		</PoHeader_requisitionNumber>
+		<PoHeader_requisitionerCode>
+			<label>Requisitioner</label>
+			<detail>Y</detail>
+			<size>50</size>
+			<type>USER-ID</type>
+		</PoHeader_requisitionerCode>
+		<PoHeader_departmentCode>
+			<label>Department</label>
+			<detail>Y</detail>
+			<size>25</size>
+		</PoHeader_departmentCode>
+		<PoHeader_internalComments>
+			<label>Purpose</label>
+			<detail>Y</detail>
+			<size>100</size>
+		</PoHeader_internalComments>
+		<PoHeader_expirationDate>
+			<label>Expiration Date</label>
+			<type>DATE</type>
+			<size>10</size>
+			<visible>0</visible>
+		</PoHeader_expirationDate>
+		<PoHeader_owner>
+			<label>Owner</label>
+			<detail>Y</detail>
+            <type>USER-ID</type>
+		</PoHeader_owner>
+		<PoHeader_requiredDate>
+			<label>Required By</label>
+			<type>DATE</type>
+			<hidden>Y</hidden>
+		</PoHeader_requiredDate>
+	</columns>
+<sqlfrom>PoHeader as PoHeader</sqlfrom>
+<sqlwhere><![CDATA[PoHeader.poNumber <> 'N/A'  AND PoHeader.poType = 'PO'  ]]></sqlwhere>
+<sqlorderby>PoHeader.poNumber DESC, PoHeader.releaseNumber DESC</sqlorderby>
+<pagesize>15</pagesize>
+<title>Purchasing Browse</title>
+</browse_po_header>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="vendorRetrieve" connection-type="Connection-Required">
+	<!--Retrieve a vendor with contact and address, retrieve defaults if contact or address is not found -->
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="vendorRetrieve">
+			  <task synchronous="true" continue-on-failure="false" name="vendorsetup">    			
+				<task-object-name>com.tsa.puridiom.vendor.tasks.VendorRetrieveSetup</task-object-name>    
+				<post-action></post-action>    
+			  </task>
+			  <task synchronous="true" continue-on-failure="false" name="vendor">
+				<task-object-name>com.tsa.puridiom.vendor.tasks.VendorRetrieveById</task-object-name>    
+				<post-action></post-action>
+			  </task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="contactRetrieve">
+			<task synchronous="true" continue-on-failure="false" name="contact">
+			  	<rule-filename>is-contact-code-not-empty</rule-filename>
+				<task-object-name>com.tsa.puridiom.contact.tasks.ContactRetrieveByCode</task-object-name>    
+				<post-action>exitActivity</post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="contact">
+				<task-object-name>com.tsa.puridiom.contact.tasks.ContactRetrievePrimary</task-object-name>    
+				<post-action>exitActivity</post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="addressRetrieve">
+			 <task synchronous="true" continue-on-failure="false" name="addressRetrieveSetup">
+				<task-object-name>com.tsa.puridiom.contact.tasks.ContactAddressRetrieveSetup</task-object-name>    
+				<post-action></post-action>
+			</task>
+			 <task synchronous="true" continue-on-failure="false" name="remittoaddress">    			
+				<task-object-name>com.tsa.puridiom.address.tasks.AddressRetrieveRemitTo</task-object-name>    
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="address">
+			  	<rule-filename>is-address-code-not-empty;is-address-type-not-empty</rule-filename>	
+				<task-object-name>com.tsa.puridiom.address.tasks.AddressRetrieveById</task-object-name>    
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="address">
+			  	<rule-filename>is-address-empty.xml</rule-filename>	
+				<task-object-name>com.tsa.puridiom.address.tasks.AddressRetrievePrimary</task-object-name>    
+				<post-action></post-action>
+			</task>
+		</activity>
+	</activities> 
+</process>

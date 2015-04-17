@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="BudgetServiceUpdateBudgetCenter" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="updateBudgetCenter">
+			<task synchronous="true" continue-on-failure="false" name="budgetCenter">
+				<task-object-name>com.puridiom.service.budget.tasks.BudgetUpdateFromService</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="setupBudgetAuditUpdate">
+				<task-object-name>com.puridiom.service.budget.tasks.BudgetAuditCreateFromService</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="budgetAudit">
+				<task-object-name>com.tsa.puridiom.budgetaudit.tasks.BudgetAuditUpdate</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

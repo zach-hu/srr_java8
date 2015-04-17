@@ -1,0 +1,45 @@
+<browse_inv_item>
+	<columns>
+		<InvItem_itemNumber>
+			<label>brw-itemNumber</label>
+			<size>15</size>
+			<link><![CDATA[javascript: returnMe('#InvItem_itemNumber^'); void(0);]]></link>
+			<hidden-input>Y</hidden-input>
+		</InvItem_itemNumber>
+		<InvItem_commodity>
+			<label>commodity</label>
+			<size>15</size>
+			<hidden-input>Y</hidden-input>
+		</InvItem_commodity>
+		<InvItem_description>
+			<label>description</label>
+			<size>60</size>
+		</InvItem_description>
+		<InvItem_unitOfOrder>
+			<label>Unit of Order</label>
+			<size>4</size>
+		</InvItem_unitOfOrder>
+		<InvItem_unitOfIssue>
+			<label>Unit of Issue</label>
+			<size>4</size>
+			<hidden-input>Y</hidden-input>
+		</InvItem_unitOfIssue>
+		<InvItem_cost>
+			<label>Cost</label>
+			<type>BigDecimal</type>
+			<size>6</size>
+		</InvItem_cost>
+		<InvItem_imageFile>
+			<hidden>Y</hidden>
+		</InvItem_imageFile>
+		<InvItem_source>
+			<hidden>Y</hidden>
+			<hidden-input>Y</hidden-input>
+		</InvItem_source>
+	</columns>
+	<sqlfrom>InvItem as InvItem</sqlfrom>
+	<sqlorderby>InvItem.itemNumber ASC</sqlorderby>
+	<sqlwhere><![CDATA[ ]]></sqlwhere>
+	<title>Inventory Items</title>
+	<pagesize>10</pagesize>
+</browse_inv_item>

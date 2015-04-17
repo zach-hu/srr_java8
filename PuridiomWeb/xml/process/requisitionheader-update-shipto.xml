@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="requisitionHeaderUpdate" connection-type="Transaction-Required">
+	<activities>
+		<!--  special activity added for VSE; allows them to enter a new shipto or supplier address on the req-->
+		<activity synchronous="true" continue-on-failure="false" name="updateAddress">
+			<rule-filename>is-update-address.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="existingAddress">
+				<task-object-name>com.tsa.puridiom.address.tasks.AddressRetrieveById</task-object-name>
+				<post-action />
+			 </task>
+			<task synchronous="true" continue-on-failure="false" name="setErrorMsg">
+				<rule-filename>is-existing-address-empty.xml</rule-filename>
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>address-add.xml</process-filename>
+				<post-action>exitActivity</post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="setErrorMsg">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>address-update.xml</process-filename>
+				<post-action />
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="requisitionHeaderUpdate">
+			<task synchronous="true" continue-on-failure="false" name="requisitionHeader">
+				<task-object-name>com.tsa.puridiom.requisitionheader.tasks.RequisitionHeaderRetrieveById</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="requisitionHeaderUpdateSetup">
+				<task-object-name>com.tsa.puridiom.requisitionheader.tasks.RequisitionHeaderUpdateSetup</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="requisitionLineList">
+				<task-object-name>com.tsa.puridiom.requisitionline.tasks.RequisitionLineRetrieveByHeader</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="requisitionHeaderShipToTaxActivity">
+			<rule-filename>is-req-taxcode-from-shipto.xml;is-requisitionheader-shiptocode-not-empty.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="setShipToTaxInfo">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>requisitionheader-set-tax-from-shipto.xml</process-filename>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="requisitionLineList">
+				<task-object-name>com.tsa.puridiom.requisitionline.tasks.RequisitionLineSetShippingTaxCodeFromHeader</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="requisitionHeader">
+				<task-object-name>com.tsa.puridiom.requisitionheader.tasks.RequisitionHeaderSetValues</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="requisitionHeader">
+				<task-object-name>com.tsa.puridiom.requisitionheader.tasks.RequisitionHeaderUpdate</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="recalculate">
+			<task synchronous="true" continue-on-failure="false" name="recalculate">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>requisition-recalculate.xml</process-filename>
+				<post-action />
+			</task>
+		</activity>
+	</activities>
+</process>

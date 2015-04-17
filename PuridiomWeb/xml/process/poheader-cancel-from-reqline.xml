@@ -1,0 +1,33 @@
+<process name="poLineCancel" connection-type="New-Transaction">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="poLineCancel">
+			<task synchronous="true" continue-on-failure="false" name="poHeader">
+				<task-object-name>com.tsa.puridiom.poheader.tasks.PoHeaderRetrieveById</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="poLineList">
+				<task-object-name>com.tsa.puridiom.poline.tasks.PoLineRetrieveByHeader</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="poHeaderSetup">
+				<task-object-name>com.tsa.puridiom.poheader.tasks.PoHeaderSetStatusByLineList</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="poHeader">
+				<task-object-name>com.tsa.puridiom.poheader.tasks.PoHeaderSetValues</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="poHeader">
+				<task-object-name>com.tsa.puridiom.poheader.tasks.PoHeaderUpdate</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="poHeaderHistoryCancel">
+			<rule-filename>is-poheader-cancel.xml</rule-filename>
+			<task continue-on-failure="false" synchronous="true" name="poHeaderHistory">
+				<task-object-name>com.tsa.puridiom.poheader.history.tasks.PoHeaderHistory</task-object-name>
+			</task>
+		</activity>
+		<!-- EMAIL SET -->
+		<activity synchronous="true" continue-on-failure="false" name="sendQueueSettings">
+			<task synchronous="true" continue-on-failure="false" name="SendQueue_messagetext">
+				<task-object-name>com.tsa.puridiom.po.notifications.tasks.SetMessageTextToPoHeaderCancel</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

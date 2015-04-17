@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="poLineInvItemLookup" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="poLineUpdate">
+		    <task synchronous="true" continue-on-failure="false" name="poLineUpdateSetup">
+				<task-object-name>com.tsa.puridiom.poline.tasks.PoLineLookupSetup</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="currencyConversionActivity">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>item-lookup-currency-conversion.xml</process-filename>
+			</task>
+		    <task synchronous="true" continue-on-failure="false" name="poLine">
+				<rule-filename>is-poline-icpoline-not-empty.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.poline.tasks.PoLineRetrieveById</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="poLineLookupSetValues">
+				<rule-filename>is-item-found.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.poline.tasks.PoLineLookupSetValues</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="PoLineSetValuesFromRecentOrderItem">
+				<rule-filename>is-item-not-found.xml;is-recentitem-desc-notempty.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.poline.tasks.PoLineSetValuesFromRecentOrderItem</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="poLineCreate">
+				<rule-filename>is-poline-empty.xml</rule-filename>
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>poline-create-from-lookup.xml</process-filename>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="itemAccountUpdate">
+			<task synchronous="true" continue-on-failure="false" name="itemAccountAdd">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>poline-default-accounts.xml</process-filename>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="poLineSaveas">
+			<rule-filename>can-create-comments-from-item.xml;is-item-found.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="poLineSaveasFromLookup">
+				<task-object-name>com.tsa.puridiom.poline.tasks.PoLineSaveasFromLookup</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="poLineCommentSaveas">
+	        	<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+	        	<process-filename>doccomment-saveas.xml</process-filename>
+	        </task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="poLineUpdate">
+			<task synchronous="true" continue-on-failure="false" name="poLineUpdate">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>poline-update.xml</process-filename>
+			</task>
+		</activity>
+	</activities>
+</process>

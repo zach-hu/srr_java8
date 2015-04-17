@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="vendorregisterQualifyAltContact" connection-type="Transaction-Required" ldap-connection-type="None">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="retrieveVendorRegister">
+			<task synchronous="true" continue-on-failure="false" name="vendorQualificationSetup">
+				<task-object-name>com.tsa.puridiom.vendorqualification.tasks.VendorAltContactQualificationSetup</task-object-name>
+			</task>
+		    <task synchronous="true" continue-on-failure="false" name="contactAddressAdd">
+    			<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+    			<process-filename>vendorregister-qualify-contact.xml</process-filename>
+    		</task>
+		</activity>
+	</activities>
+</process>

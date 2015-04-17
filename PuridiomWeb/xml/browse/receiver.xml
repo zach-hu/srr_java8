@@ -1,0 +1,43 @@
+<browse_receiver>
+	<columns>
+		<UserProfile_userId>
+			<label>user-userId</label>
+			<sort>A</sort>
+			<link><![CDATA[javascript: returnMe('#UserProfile_userId^'); void(0);]]></link>
+			<size>15</size>
+		</UserProfile_userId>
+		<UserProfile_firstName>
+			<label>firstName</label>
+			<size>15</size>
+		</UserProfile_firstName>
+		<UserProfile_middleInit>
+			<label>middleInitial</label>
+			<size>5</size>
+		</UserProfile_middleInit>
+		<UserProfile_lastName>
+			<label>lastName</label>
+			<size>20</size>
+		</UserProfile_lastName>
+		<UserProfile_mailId>
+			<label>emailAddress</label>
+			<size>25</size>
+		</UserProfile_mailId>
+		<UserProfile_department>
+			<label>brw-department</label>
+			<hidden-input>Y</hidden-input>
+			<size>20</size>
+		</UserProfile_department>
+		<UserProfile_displayName>
+			<userName>
+				<col>UserProfile_userId</col>
+			</userName>
+			<hidden>Y</hidden>
+			<hidden-input>Y</hidden-input>
+			<selectsql>N</selectsql>
+		</UserProfile_displayName>
+	</columns>
+<sqlfrom>UserProfile as UserProfile</sqlfrom>
+<sqlwhere><![CDATA[ (UserProfile.receiver = 'Y') AND (UserProfile.status <> '03') AND (UserProfile.userId <> 'SYSADM') ]]></sqlwhere>
+<pagesize>15</pagesize>
+<title>Receipt Authority User Browse</title>
+</browse_receiver>

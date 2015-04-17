@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="ContactAdd" connection-type="Transaction-Required"> 
+	<activities>  
+		<activity synchronous="true" continue-on-failure="false" name="addContactActivity">
+			<task synchronous="true" continue-on-failure="false" name="contactSetup">    			
+				<task-object-name>com.tsa.puridiom.contact.tasks.ContactAddSetup</task-object-name>    
+				<post-action />    
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="contactSetup">    			
+				<rule-filename check-for-false="true">is-vendorqualification.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.contact.tasks.ContactAdminUpdateSetup</task-object-name>    
+				<post-action />    
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="Contact_contactCode">    			
+				<task-object-name>com.tsa.puridiom.contact.tasks.ContactSelectMax</task-object-name>    
+				<post-action />    
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="contact">
+				<task-object-name>com.tsa.puridiom.contact.tasks.ContactSetValues</task-object-name>    
+				<post-action />    
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="contact">    			
+				<task-object-name>com.tsa.puridiom.contact.tasks.ContactAdd</task-object-name>    
+				<post-action />    
+			</task>   
+		  </activity>  
+	 </activities> 
+</process>

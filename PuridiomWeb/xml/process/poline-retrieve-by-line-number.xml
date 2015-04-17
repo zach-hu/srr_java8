@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="poLineRetrieveByLineNumber" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="poLineRetrieveByLineNumber">
+			<task synchronous="true" continue-on-failure="false" name="poLine">
+				<task-object-name>com.tsa.puridiom.poline.tasks.PoLineRetrieveByLineNumber</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="poLineDataRetrieve">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>polinedata-retrieve.xml</process-filename>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="catalogItemReview">
+				<task-object-name>com.tsa.puridiom.catalog.tasks.CatalogItemReview</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

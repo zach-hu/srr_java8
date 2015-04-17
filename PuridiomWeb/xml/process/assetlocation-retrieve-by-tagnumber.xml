@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="assetLocationRetrieveByTagNumber" connection-type="Connection-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="assetLocationRetrieveByTagNumber">
+
+			<task synchronous="true" continue-on-failure="false" name="checkTagNumber">
+				<task-object-name>com.tsa.puridiom.assetlocation.serv.tasks.AssetLocationTagNumberCheck</task-object-name>
+			</task>
+
+			<task synchronous="true" continue-on-failure="false" name="assetLocationList">
+				<task-object-name>com.tsa.puridiom.assetlocation.serv.tasks.AssetLocationRetrieveByTagNumber</task-object-name>
+			</task>
+
+		</activity>
+	</activities>
+</process>

@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dashboard>
+	<graph>
+		<name>reqs</name>
+		<sql><![CDATA[SELECT count(*), header.status FROM RequisitionHeader as header WHERE header.status >= '1035' and header.status < '4010' and 2 = 2 GROUP BY header.status ORDER BY header.status]]></sql>
+		<title>Open Requisitions</title>
+		<type>bar</type>
+		 <typeData>integer,status</typeData>
+		<xTitle>Status</xTitle>
+		<height>300</height>
+		<width>300</width>
+		<enabled>true</enabled>
+		<link>viewReqs</link>
+		<userWhere>
+			<column>header.requisitionDate</column>
+			<operand><![CDATA[=]]></operand>
+			<value>:thisyear:thismonth:thisweek</value>
+		</userWhere>
+	</graph>
+	<graph>
+	<name>rfqstatus</name>
+		<sql><![CDATA[SELECT count(*), header.status FROM RfqHeader as header WHERE header.status >= '2000' and header.status <= '2020' and header.rfqNumber <> 'N/A'  and 2 = 2 GROUP BY header.status ORDER BY header.status]]></sql>
+		<title>Open Solicitations</title>
+		<type>bar</type>
+		 <typeData>integer,status</typeData>
+		<xTitle>Status</xTitle>
+		<height>300</height>
+		<width>400</width>
+		<enabled>true</enabled>
+		<link>viewRfqsByStatus</link>
+		<userWhere>
+			<column>header.rfqDate</column>
+			<operand><![CDATA[=]]></operand>
+			<value>:thisyear:thismonth:thisweek</value>
+		</userWhere>
+	</graph>
+	<graph>
+		<name>postatus</name>
+		<sql><![CDATA[SELECT count(*), header.status FROM PoHeader as header WHERE header.status >= '3000' and header.status <= '6025' and header.poNumber <> 'N/A' and 2 = 2 GROUP BY header.status ORDER BY header.status ]]></sql>
+		<title>Open Purchase Orders</title>
+		<type>bar</type>
+		 <typeData>integer,status</typeData>
+		<xTitle>Status</xTitle>
+		<height>300</height>
+		<width>400</width>
+		<enabled>true</enabled>
+		<link>viewPOsByStatus</link>
+		<userWhere>
+			<column>header.poDate</column>
+			<operand><![CDATA[>=]]></operand>
+			<value>:thisyear:thismonth:thisweek</value>
+		</userWhere>
+	</graph>
+	<graph>
+		<name>reqapptime</name>
+		<sql><![CDATA[SELECT avg(app.appLead) FROM AppLeadTimeView as app, RequisitionHeader as RequisitionHeader WHERE app.icHeader = RequisitionHeader.icReqHeader and RequisitionHeader.status >= '1035' and RequisitionHeader.status < '9020' and 2 = 2 ]]></sql>
+	  	<typeData />
+	  	<title>Request Approval Lead Time</title>
+	  	<type>meter</type>
+	 	<interval>
+	  		<start>0</start>
+	  		<normal>40</normal>
+	  		<warning>50</warning>
+	  		<critical>90</critical>
+	  		<end>100</end>
+	  	</interval>
+	  	<xTitle></xTitle>
+	  	<height>200</height>
+	  	<width>300</width>
+	  	<enabled>true</enabled>
+	  	<userWhere>
+			<column>RequisitionHeader.requisitionDate</column>
+			<operand><![CDATA[=]]></operand>
+			<value>:thisyear:thismonth:thisweek</value>
+		</userWhere>
+  </graph>
+  <graph>
+  	<name>poapptime</name>
+  <title>Purchase Order Approval Lead Time</title>
+	<sql><![CDATA[SELECT avg(app.appLead) FROM AppLeadTimeView as app, PoHeader as PoHeader WHERE app.icHeader = PoHeader.icPoHeader and PoHeader.status >= '3030' and PoHeader.status < '9020' and 2 = 2 ]]></sql>
+  	<typeData />
+  	<type>meter</type>
+ 	<interval>
+  		<start>0</start>
+  		<normal>40</normal>
+  		<warning>50</warning>
+  		<critical>90</critical>
+  		<end>100</end>
+  	</interval>
+  	<xTitle></xTitle>
+  	<height>200</height>
+  	<width>300</width>
+  	<enabled>true</enabled>
+  	<userWhere>
+		<column>PoHeader.poDate</column>
+		<operand><![CDATA[=]]></operand>
+		<value>:thisyear:thismonth:thisweek</value>
+	</userWhere>
+  </graph>
+</dashboard>
+

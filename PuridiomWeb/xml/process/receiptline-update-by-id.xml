@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="receiptLineUpdate" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="receiptLineRetrieve">
+			<task synchronous="true" continue-on-failure="false" name="receiptLine">
+				<task-object-name>com.tsa.puridiom.receiptline.tasks.ReceiptLineRetrieveById</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="receiptHeader">
+                <rule-filename>is-receiptheader-empty.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.receiptheader.tasks.ReceiptHeaderRetrieveById</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="receiptLineCreate">
+			<rule-filename>is-receiptline-empty</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="receiptLineAdd">
+				<rule-filename>is-receiptline-create-valid.xml</rule-filename>
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>receiptline-create.xml</process-filename>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="inspectionDetailUpdateLocation">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>inspection-detail-update-location.xml</process-filename>
+				<post-action></post-action>
+			</task>
+
+			<post-action>exitProcess</post-action>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="lineUpdate">
+			<rule-filename check-for-false="true">is-receiptline-qtyaccepted-zero.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="poLineSetup">
+				<task-object-name>com.tsa.puridiom.receiptline.tasks.ReceiptLineRetrieveSetup</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="requisitionLineUpdateBalance">
+				<rule-filename>is-receiptmethod-receivebytransfer.xml</rule-filename>
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>requisitionline-update-balance-receiptline.xml</process-filename>
+				<post-action>exitActivity</post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="poLineUpdateBalance">
+				<rule-filename>is-receiptmethod-finalizereceipt.xml</rule-filename>
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>poline-update-balance-receiptline.xml</process-filename>
+<!--				<post-action>exitActivity</post-action>-->
+			</task>
+			<!-- Removing the task below b/c PO Line quantities should not be updated until the receipt is finalized (KK - 02/13/2011) -->
+			<!--task synchronous="true" continue-on-failure="false" name="poLineUpdateBalance">
+				<rule-filename>is-receiptmethod-receivebyorder.xml</rule-filename>
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>poline-update-balance-receiptline.xml</process-filename>
+			</task-->
+		</activity>
+		<!-- <activity synchronous="true" continue-on-failure="false" name="inventoryUpdate">
+			<rule-filename>is-receiptmethod-finalizereceipt.xml;is-inventory-module-active.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="poLineSetup">
+				<rule-filename check-for-false="true">is-receiptline-qtyaccepted-zero.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.receiptline.tasks.ReceiptLineRetrieveSetup</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="requisitionLine">
+				<rule-filename>is-receiptmethod-receivebytransfer.xml</rule-filename>
+				<rule-filename check-for-false="true">is-receiptline-qtyaccepted-zero.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.requisitionline.tasks.RequisitionLineRetrieveById</task-object-name>
+				<post-action>exitActivity</post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="poLine">
+				<rule-filename check-for-false="true">is-receiptline-qtyaccepted-zero.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.poline.tasks.PoLineRetrieveById</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity> -->
+		<!-- <activity synchronous="true" continue-on-failure="false" name="inventoryUpdate">
+			<rule-filename>is-receiptmethod-finalizereceipt.xml;is-inventory-module-active.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="finalizeTempBins">
+				<rule-filename check-for-false="true">is-receiptline-qtyaccepted-zero.xml</rule-filename>
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>invbinlocation-finalize-temp-bins-by-recline.xml</process-filename>
+			</task>
+		</activity> -->
+		<!-- <activity synchronous="true" continue-on-failure="false" name="inventoryUpdate">
+			<rule-filename>is-receiptmethod-temp-finalizereceipt.xml;is-inventory-module-active.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="finalizeTempBins">
+				<rule-filename check-for-false="true">is-receiptline-qtyaccepted-zero.xml</rule-filename>
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>invbinlocation-finalize-temp-bins-by-recline.xml</process-filename>
+			</task>
+		</activity> -->
+		<!-- <activity synchronous="true" continue-on-failure="false" name="propertyUpdate">
+			<rule-filename>is-receiptmethod-finalizereceipt.xml;is-inventory-module-active.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="finalizeTempProperty">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>invproperty-finalize.xml</process-filename>
+			</task>
+		</activity> -->
+		<activity synchronous="true" continue-on-failure="false" name="receiptLineUpdate">
+			<rule-filename>is-not-single-page-receipt.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="receiptLine">
+				<task-object-name>com.tsa.puridiom.receiptline.tasks.ReceiptLineSetValues</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="receiptLine">
+				<task-object-name>com.tsa.puridiom.receiptline.tasks.ReceiptLineUpdateById</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="receiptLineReturn">
+				<!-- Create Temp Return Receipt for Rejected Item Quantities to be finalized on Forward -->
+				<rule-filename check-for-false="true">is-receiptmethod-finalizereceipt.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.receiptline.tasks.ReceiptLineProcessRejectedLine</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="inspectionDetailUpdateLocationActivity">
+			<task synchronous="true" continue-on-failure="false" name="inspectionDetailUpdateLocation">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>inspection-detail-update-location.xml</process-filename>
+				<post-action></post-action>
+			</task>
+		</activity>
+
+		<!-- Comment because of duplicate received value -->
+		<!-- <activity synchronous="true" continue-on-failure="false" name="receiptLineUpdate">
+			<rule-filename>is-receipt-final-step.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="receiptLineEndStepUpdate">
+				<task-object-name>com.tsa.puridiom.receiptline.tasks.ReceiptLineEndStepUpdate</task-object-name>
+			</task>
+		</activity> -->
+	</activities>
+</process>

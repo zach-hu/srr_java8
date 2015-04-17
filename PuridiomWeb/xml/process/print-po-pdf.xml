@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="Print-po-Pdf" connection-type="Connection-Required">
+  <activities>
+    <activity synchronous="true" continue-on-failure="false" name="print-po-pdf">
+      <task synchronous="true" continue-on-failure="false" name="datasource">
+        <task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+        <process-filename>po-retrieve.xml</process-filename>
+      </task>
+   </activity>
+   <activity synchronous="true" continue-on-failure="false" name="getRequisitionerApprover">
+   	<rule-filename>is-po-from-req.xml</rule-filename>
+	   <task synchronous="true" continue-on-failure="false" name="ReqApproverSetup">
+			<task-object-name>com.tsa.puridiom.po.tasks.PoGetLastReqApproverSetup</task-object-name>
+			<post-action></post-action>
+		</task>
+		<task synchronous="true" continue-on-failure="false" name="Requisition_lastApprover">
+			<task-object-name>com.tsa.puridiom.po.tasks.PoGetLastReqApprover</task-object-name>
+			<post-action></post-action>
+		</task>
+		<task synchronous="true" continue-on-failure="false" name="Requisition_userApprover">
+			<task-object-name>com.tsa.puridiom.po.tasks.PoGetUserReqApprover</task-object-name>
+			<post-action></post-action>
+		</task>
+	</activity>
+
+	<activity synchronous="true" continue-on-failure="false" name="getDescriptionShipViaTerms">
+	   <task synchronous="true" continue-on-failure="false" name="ReqDescShipVia">
+			<task-object-name>com.tsa.puridiom.po.tasks.PoGetDescriptionShipVia</task-object-name>
+			<post-action></post-action>
+		</task>
+		<task synchronous="true" continue-on-failure="false" name="ReqDescTerms">
+			<task-object-name>com.tsa.puridiom.po.tasks.PoGetDescriptionTerms</task-object-name>
+			<post-action></post-action>
+		</task>
+	</activity>
+
+		<activity synchronous="true" continue-on-failure="false" name="stdDocumentRetrieveBy">
+			<task synchronous="true" continue-on-failure="false" name="stdDocumentList">
+				<task-object-name>com.tsa.puridiom.stddocument.tasks.StdDocumentRetrieveBy</task-object-name>
+			</task>
+		</activity>
+
+   <activity synchronous="true" continue-on-failure="false" name="print-po-pdf">
+      <task synchronous="true" continue-on-failure="false" name="rddSeeBelow">
+			<task-object-name>com.tsa.puridiom.report.rdd.tasks.PoRdd</task-object-name>
+	 </task>
+	 <task synchronous="true" continue-on-failure="false" name="poLinesWithQuantity">
+	 		<rule-filename>is-organization-bly.xml</rule-filename>
+			<task-object-name>com.tsa.puridiom.po.tasks.PoHeaderGetLinesWithQuantity</task-object-name>
+			<post-action></post-action>
+	  </task>
+	  <task synchronous="true" continue-on-failure="false" name="poLineLabelSetup">
+			<task-object-name>com.tsa.puridiom.formpdf.tasks.PoLineLabelPdfSetup</task-object-name>
+			<post-action></post-action>
+	  </task>
+      <task synchronous="true" continue-on-failure="false" name="report">
+        <task-object-name>com.tsa.puridiom.formpdf.tasks.PrintPoPdf</task-object-name>
+      </task>
+      <task name="messageText" synchronous="true" continue-on-failure="false">
+        <rule-filename check-for-false="true">is-view-now.xml</rule-filename>
+        <task-object-name>com.tsa.puridiom.formpdf.tasks.PoPdfMessageText</task-object-name>
+      </task>
+    </activity>
+  </activities>
+</process>

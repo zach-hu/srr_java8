@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="InvBinLocationAdd" connection-type="None"> 
+	<activities>
+		  <activity synchronous="true" continue-on-failure="false" name="invLocationAdd">
+			<task synchronous="true" continue-on-failure="false" name="invLocationAddById">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>invbinlocation-add-by-id.xml</process-filename>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="recalculateQties">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>invlocation-update-quantities.xml</process-filename>
+			</task>
+		</activity>  
+	 </activities> 
+</process>

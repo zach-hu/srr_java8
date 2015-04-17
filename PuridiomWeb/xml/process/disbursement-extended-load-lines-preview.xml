@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="disbextendedLoadLines" connection-type="Connection-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="DisbursementCreate">
+			<task synchronous="true" continue-on-failure="false" name="DisbursementLineCreateCheck">
+				<rule-filename></rule-filename>
+				<task-object-name>com.tsa.puridiom.disbline.tasks.DisbLineExtendedCreateCheck</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="invLocation">
+				<task-object-name>com.tsa.puridiom.invlocation.tasks.InvLocationRetrieveById</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="invBinLocations">
+				<task-object-name>com.tsa.puridiom.invbinlocation.tasks.InvBinLocationRetrieveBy</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="binSetup">
+				<task-object-name>com.tsa.puridiom.inventory.tasks.BinSetupPreview</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="transferRequest">
+			<rule-filename>is-transfer-request.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="invItem">
+				<task-object-name>com.tsa.puridiom.invitem.tasks.InvItemRetrieveById</task-object-name>
+				<post-action/>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="setUnitPrice">
+				<task-object-name>com.tsa.puridiom.inventory.tasks.TransferReqUnitPrice</task-object-name>
+				<post-action/>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="binsetup">
+			<!--task to delete bins with qtyonhand of 0-->
+			<task synchronous="true" continue-on-failure="false" name="disbLines">
+				<task-object-name>com.tsa.puridiom.disbline.tasks.DisbLineCreatePreview</task-object-name>
+				<post-action></post-action>
+			</task>
+			<!--
+			<task synchronous="true" continue-on-failure="false" name="accountList">
+				<task-object-name>com.tsa.puridiom.account.tasks.AccountRetrieveByLine</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="loadLineAccount">
+				<task-object-name>com.tsa.puridiom.disbline.tasks.DisbLineSaveasAccount</task-object-name>
+				<post-action></post-action>
+			</task>
+			-->
+		</activity>
+	</activities>
+</process>

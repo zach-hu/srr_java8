@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="InvReturnCreatePreview" connection-type="New-Connection">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="cancelReqLine">
+			<task synchronous="true" continue-on-failure="false" name="Setup">
+				<task-object-name>com.tsa.puridiom.invreturn.tasks.InvReturnCancelLineSetup</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="requisitionHeader">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>requisitionline-cancel.xml</process-filename>
+			</task>
+		</activity>
+	</activities>
+</process>

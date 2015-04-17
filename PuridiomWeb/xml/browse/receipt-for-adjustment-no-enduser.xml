@@ -1,0 +1,66 @@
+<browse-receipt-for-adjustment>
+<columns>
+<ReceiptHeader_icRecHeader>
+	<hidden>Y</hidden>
+</ReceiptHeader_icRecHeader>
+<ReceiptHeader_icPoHeader>
+	<hidden>Y</hidden>
+</ReceiptHeader_icPoHeader>
+<ReceiptHeader_receiptNumber>
+	<label>brw-receiptNumber</label>
+	<link><![CDATA[javascript: receiptAdjustment('#ReceiptHeader_icRecHeader^'); void(0);]]></link>
+	<size>10</size>
+</ReceiptHeader_receiptNumber>
+<ReceiptHeader_receiptDate>
+	<label>brw-receiptDate</label>
+	<size>10</size>
+	<type>DATE</type>
+</ReceiptHeader_receiptDate>
+<ReceiptHeader_packingSlip>
+	<label>packingSlip</label>
+	<size>10</size>
+</ReceiptHeader_packingSlip>
+<ReceiptHeader_refNumber>
+	<label>brw-poNumber</label>
+	<size>10</size>
+</ReceiptHeader_refNumber>
+<ReceiptHeader_refRelease>
+	<label>brw-releaseNumber</label>
+	<size>5</size>
+</ReceiptHeader_refRelease>
+<ReceiptHeader_receiptStatus>
+	<label>brw-receiptStatus</label>
+	<type>STATUS</type>
+	<size>15</size>
+</ReceiptHeader_receiptStatus>
+<ReceiptHeader_vendorName>
+	<label>brw-vendorName</label>
+	<size>20</size>
+</ReceiptHeader_vendorName>
+<ReceiptHeader_pkgsReceived>
+	<label>brw-receiptPkgs</label>
+	<size>10</size>
+	<type>QtyDecimal</type>
+</ReceiptHeader_pkgsReceived>
+<ReceiptHeader_carrierCode>
+	<label>brw-carrierCode</label>
+	<size>13</size>
+</ReceiptHeader_carrierCode>
+<ReceiptHeader_receiptStatus>
+	<hidden>Y</hidden>
+</ReceiptHeader_receiptStatus>
+<ReceiptHeader_forwardTo>
+	<hidden>Y</hidden>
+</ReceiptHeader_forwardTo>
+</columns>
+<sqlfrom>ReceiptHeader as ReceiptHeader</sqlfrom>
+<sqlwhere><![CDATA[ReceiptHeader.receiptNumber is not null
+	and ReceiptHeader.receiptNumber <> 'null'
+	and ReceiptHeader.receiptNumber <> ''
+	and ReceiptHeader.receiptType <> 'T'
+	and (ReceiptHeader.receiptStatus = '4100' or ReceiptHeader.receiptStatus = '4150' or ReceiptHeader.receiptStatus = '4200')
+]]></sqlwhere>
+<sqlorderby>ReceiptHeader.receiptDate DESC</sqlorderby>
+<pagesize>15</pagesize>
+<title>Receipts Available for Adjustments</title>
+</browse-receipt-for-adjustment>

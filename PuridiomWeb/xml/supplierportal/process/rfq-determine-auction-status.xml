@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="rfqRetrieve" connection-type="Connection-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="rfqHeaderDataRetrieveById">
+			<task synchronous="true" continue-on-failure="false" name="rfqHeader">
+				<rule-filename>is-rfqheader-empty.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.rfqheader.tasks.RfqHeaderRetrieveById</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="auctionStatus">			
+				<task-object-name>com.tsa.puridiom.rfqheader.tasks.RfqHeaderGetAuctionStatus</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

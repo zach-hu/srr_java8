@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="invFormStateUpdateById" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="invFormStateUpdateById">
+			<task synchronous="true" continue-on-failure="false" name="invFormState">			
+				<task-object-name>com.tsa.puridiom.invformstate.tasks.InvFormStateSetValues</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="invFormStateAdd">			
+				<task-object-name>com.tsa.puridiom.invformstate.tasks.InvFormStateAdd</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+	</activities>
+</process>

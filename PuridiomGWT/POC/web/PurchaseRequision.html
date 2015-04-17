@@ -1,0 +1,275 @@
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Drag and drop plug-in : Drag and drop with CellList</title>
+<style type="text/css">
+.demo {
+	width: 1200px;
+	margin-right: auto;
+	margin-left: auto;
+	padding: 10px;
+	border: black solid 1px;
+}
+
+.main-pager {
+	border: 1px solid #CCCCCC;
+	height: 600px;
+	text-align: left;
+	width: 900px;
+	margin: 10px;
+}
+
+.pager {
+	border: 1px solid #CCCCCC;
+	height: 50px;
+	text-align: left;
+	width: 200px;
+	margin: 10px;
+}
+
+.gwt-Label{
+	margin-left: 10px;
+	margin-top: 10px;
+	font-size: 14px;
+	font-weight: bold;
+}
+
+.pagerWrapper {
+	float:left;
+}
+
+.yellow-border div.pager {
+    border: 1px solid #FFE45C;
+}
+
+.orange-border div.pager {
+	border: 1px solid #F6A828;
+    background-color:#C1DEFD;
+}
+.popup {
+  background-color: gray;
+  border-color: gray gray gray gray;
+  border-width: 1px 3px 3px 1px;
+  border-style: solid solid solid solid;
+}
+ 
+.popup-item {
+  font-weight: normal;
+  font-size: 80%;
+}
+
+</style>
+<script language="javascript" src="PurchaseRequision.nocache.js"></script>
+<script>
+
+	function getColumns() {
+		var myColumns=["Type","Req. #","Date Assigned","Total","Current Approver","Requisitioner","Supplier Code","Supplier Name","Suggested Buyer"];
+		return myColumns;
+	}
+	
+	function getTypes() {
+		var myColumns=["Purchase Request","Purchase Request","Purchase Request","Purchase Request","Purchase Request","Purchase Request","Purchase Request","Purchase Request"];
+		return myColumns;
+	}
+	
+	function getRequitionNumber() {
+		var myColumns=["000045","000031","000030","000023-2010","000019-2010","000017-2010","000010-2010","000003-2010"];
+		return myColumns;
+	}
+	
+	function getDateAssigned() {
+		var myColumns=["10-11-2009","10-07-2009","03-31-2010","04-21-2010","04-14-2010","04-13-2010","03-19-2010","02-15-2010"];
+		return myColumns;
+	}
+	
+	function getTotal() {
+		var myColumns=["449.18","1,000.56","719.05","3,027.00","47.30","616.00","0.00","798.00"];
+		return myColumns;
+	}
+	
+	function getCurrentApprover() {
+		var myColumns=["Reggie Buyers","Robert Royer","Shelley Sherony","Robert Royer","Robert Royer","Albert Jacobs","SYSTEM ADMINISTRATOR","Jeff Bowman"];
+		return myColumns;
+	}
+	
+	function getRequisitioner() {
+		var myColumns=["Reggie Buyers","Kelli Knisely","SYSTEM ADMINISTRATOR","Albert Jacobs","Albert Jacobs","Shelley Sherony","Sangeeth Nair","SYSTEM ADMINISTRATOR"];
+		return myColumns;
+	}
+	
+	function getSupplierCode() {
+		var myColumns=["COMPUSA","COMPUSA","TSA","DELL","BERGO","STAPLES","STAPLES","ACME"];
+		return myColumns;
+	}
+	
+	function getSupplierName() {
+		var myColumns=["CompUSA, Inc.","","Technical Services Associates","Dell Computers","Bergo Janitorial Supply Inc.","","Staples Office Supplies","ACME, Inc.","$798.00"];
+		return myColumns;
+	}
+	
+	function getSuggestedBuyer() {
+		var myColumns=["","Kelli Knisely","","","","Reggie Buyers","","","Jeff Bowman"];
+		return myColumns;
+	}
+	
+	function getPurpose() {
+		var myColumns=["NEED TO UPGRADE 3 COMPUTERS IN HR DEPARTMENT","MISC IT EQUIPMENT","OFFICE FURNITURE FOR HR","SUPPLIES","TO BUY THINGS","MONITORS FOR NEW HIRES","","MISCELLANEOUS","SYSTEM ADMINISTRATOR"];
+		return myColumns;
+	}
+	
+	var browser = browserCheck();
+
+	function browserCheck() {
+		var bw = "";
+
+		if (navigator.appName == "Netscape") {
+			bw = "NS";
+			if (navigator.appVersion.charAt(0) == "5") {
+				bw = "NS6";
+			}
+		}
+		else if (navigator.appVersion.indexOf("MSIE") != -1) {
+			bw = "IE";
+		}
+		return bw;
+	}
+	
+	function showDetails(row) {
+		displayArea("details" + row);
+	}
+	
+	function hideDetails(row) {
+		hideArea("details" + row);
+	}
+	
+	function hideArea(areaName) {
+		setupAreaDisplay(areaName, "hidden", "none");
+	}
+
+	function displayArea(areaName) {
+		setupAreaDisplay(areaName, "visible", "block");
+	}
+
+	function setupAreaDisplay(areaName, visibilityType, displayType) {
+		if (browser == "NS") {
+			//The option to display/hide areas is currently not working in this version of Netscape.
+		}
+		else if ( browser == "IE" ) {
+			var d = document.all(areaName);
+			var i = 0;
+			var multiple = false;
+			if (d == null) {
+				d = document.all(areaName + i);
+				multiple = true;
+			}
+			while (d != null) {
+				if (d.length > 1) {
+					for (var i=0; i < d.length; i++) {
+						d[i].style.visibility = visibilityType;
+						d[i].style.display = displayType;
+					}
+				} else {
+						d.style.visibility = visibilityType;
+						d.style.display = displayType;
+				}
+				if (multiple) {
+					i++;
+					d = document.all(areaName + i);
+				} else {
+					d = null;
+				}
+			}
+		}
+		else if ( browser == "NS6" ) {
+			var d = document.getElementById(areaName);
+			var i = 0;
+			var multiple = false;
+			if (d == null) {
+				d = document.getElementById(areaName + i);
+				multiple = true;
+			}
+			while (d != null) {
+				if (d.length > 1){ 
+					for (var i=0; i < d.length; i++) {
+						d[i].style.visibility = visibilityType;
+						d[i].style.display = displayType;
+					}
+				}else{
+				d.style.visibility = visibilityType;
+				d.style.display = displayType;
+				}
+				if (multiple) {
+					i++;
+					d = document.getElementById(areaName + i);
+				} else {
+					d = null;
+				}
+			}
+		}
+		else if (document.ids) {
+			eval("document.ids." + areaName +".visibility='" + visibilityType + "'")
+			eval("document.ids." + areaName +".display='" + displayType + "'")
+		}
+		else {
+			eval("document.all." + areaName +".style.visibility='" + visibilityType + "'")
+			eval("document.all." + areaName +".display='" + displayType + "'")
+		}
+	}
+</script>
+</head>
+
+<body oncontextmenu="return false;">
+
+
+<div class="demo">
+<table width="100%">
+	<tr>
+		<td valign="top" width="75%"><div id="cell"></div></td>
+		<td valign="top" width="25%">
+			<table>
+				<tr>
+					<td align="right"><div id="link"></div></td>
+				</tr>
+				<tr>
+					<td><div id="order1"></div></td>
+				</tr>
+				<tr>
+					<td><div id="order2"></div></td>
+				</tr>
+				<tr>
+					<td><div id="order3"></div></td>
+				</tr>
+				<tr>
+					<td><div id="order4"></div></td>
+				</tr>
+				<tr>
+					<td><div id="order5"></div></td>
+				</tr>
+				<tr>
+					<td><div id="order6"></div></td>
+				</tr>
+				<tr>
+					<td><div id="order7"></div></td>
+				</tr>
+				<tr>
+					<td><div id="order8"></div></td>
+				</tr>
+				<tr>
+					<td><div id="order9"></div></td>
+				</tr>
+				<tr>
+					<td><div id="order10"></div></td>
+				</tr>
+				<tr>
+					<td align="center"><div id="button"></div></td>
+				</tr>
+			</table>
+		</td>
+	</tr>
+</table>
+
+<br />
+<div style="clear: left"></div>
+</body>
+</html>

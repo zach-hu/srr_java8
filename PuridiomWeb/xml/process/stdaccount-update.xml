@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="stdAccountUpdate" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="accountCreateSetup">
+			<rule-filename>is-new-account</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="accountCreateSetup">			
+				<task-object-name>com.tsa.puridiom.account.tasks.StdAccountCreateSetup</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="accountDeleteByLine">
+			<task synchronous="true" continue-on-failure="false" name="accountDeleteByLine">			
+				<task-object-name>com.tsa.puridiom.account.tasks.AccountDeleteByLine</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="accountUpdateByLine">
+			<rule-filename>is-not-delete-all</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="accountUpdateByLine">			
+				<task-object-name>com.tsa.puridiom.account.tasks.StdAccountUpdateByLine</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+	</activities>
+</process>

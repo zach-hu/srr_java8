@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="catalogItemExplodeKit" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="catalogItemExplodeKit">
+			<task synchronous="true" continue-on-failure="false" name="catalogItemExplodeKitSetup">
+				<task-object-name>com.tsa.puridiom.catalog.tasks.CatalogItemExplodeKitSetup</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="kitItemList">
+				<task-object-name>com.tsa.puridiom.kititem.tasks.KitItemRetrieveBy</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="catalogItemExplodeKit">
+				<task-object-name>com.tsa.puridiom.catalog.tasks.CatalogItemExplodeKit</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+	</activities>
+</process>

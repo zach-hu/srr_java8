@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rule>
+	<clause type="StringCompare">
+		<left-side>
+			<source>incomingRequestObjectMethod</source>
+			<object>header</object>
+			<name>getPriorityCode</name>
+		</left-side>
+		<operator>NOTEQUAL</operator>
+		<right-side>
+			<source>constant</source>
+			<value>ER</value>
+		</right-side>
+	</clause>
+	<logical-operator>AND</logical-operator>
+	<clause type="Rule">
+		<rule-filename>has-items.xml</rule-filename>
+	</clause>
+	<logical-operator>AND</logical-operator>
+	<clause type="ElementRule" matchAll="true">
+		<left-side>
+			<source>incomingRequestList</source>
+			<object>lineitems</object>
+			<rule-filename>is-req-line-procurement-level-not-ER.xml</rule-filename>
+		</left-side>
+	</clause>
+</rule>

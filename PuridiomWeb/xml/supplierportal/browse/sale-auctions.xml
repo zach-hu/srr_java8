@@ -1,0 +1,69 @@
+<sale-auctions>
+	<columns>
+		<SaleHeader_icSaleHeader>
+			<hidden>Y</hidden>
+		</SaleHeader_icSaleHeader>
+		<SaleLine_icSaleHeader>
+			<hidden>Y</hidden>
+			<hidden-input>Y</hidden-input>
+		</SaleLine_icSaleHeader>
+		<SaleLine_icSaleLine>
+			<hidden>Y</hidden>
+			<hidden-input>Y</hidden-input>
+		</SaleLine_icSaleLine>
+		<SaleLine_description>
+			<label>Description</label>
+			<size>45</size>
+			<link><![CDATA[javascript: viewSale('#SaleHeader_icSaleHeader^','#SaleLine_icSaleLine^'); void(0);]]></link>
+		</SaleLine_description>
+		<SaleLine_saleNumber>
+			<label>Transaction #</label>
+			<size>16</size>
+			<concatenate>
+				<col>SaleHeader_saleNumber</col>
+				<col type="constant"><![CDATA[ - ]]></col>
+				<col>SaleHeader_amendment</col>
+			</concatenate>
+		</SaleLine_saleNumber>
+		<SaleHeader_saleDate>
+			<type>DATE</type>
+			<label>Date Posted</label>
+			<size>12</size>
+		</SaleHeader_saleDate>
+		<SaleHeader_auctionEndDate>
+			<type>DATE</type>
+			<label>Close Date</label>
+			<size>12</size>
+		</SaleHeader_auctionEndDate>
+		<SaleHeader_status>
+			<hidden>Y</hidden>
+		</SaleHeader_status>
+		<SaleHeader_contact>
+			<hidden>Y</hidden>
+		</SaleHeader_contact>
+		<SaleHeader_webpost>
+			<hidden>Y</hidden>
+		</SaleHeader_webpost>
+		<SaleHeader_auctionEndTime>
+			<hidden>Y</hidden>
+			<hidden-input>Y</hidden-input>
+		</SaleHeader_auctionEndTime>
+		<SaleHeader_timeZone>
+			<hidden>Y</hidden>
+		</SaleHeader_timeZone>
+		<Input_time>
+			<label>Time Remaining</label>
+			<size>15</size>
+			<input-size>20</input-size>
+		</Input_time>
+	</columns>
+<sqlfrom>SaleHeader as SaleHeader, SaleLine as SaleLine</sqlfrom>
+<sqlwhere>
+<![CDATA[  (SaleHeader.icSaleHeader = SaleLine.icSaleHeader (+)) AND
+         SaleHeader.webpost <> 'N' AND  
+         SaleHeader.webpost <> ' ' AND  
+         SaleHeader.status = '8005']]>
+</sqlwhere>
+<pagesize>10</pagesize>
+<title>Surplus Auctions</title>
+</sale-auctions>

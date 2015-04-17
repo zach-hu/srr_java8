@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="AuditTrailSetup" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="auditTrail">
+			<task synchronous="true" continue-on-failure="false" name="entityList">
+				<task-object-name>com.tsagate.foundation.processengine.SetAuditEntitiesTask</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

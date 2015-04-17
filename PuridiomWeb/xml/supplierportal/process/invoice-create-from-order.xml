@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="invoiceCreateFromOrder" connection-type="New-Transaction">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="RetrieveSourceCreate">
+			<task synchronous="true" continue-on-failure="false" name="poHeader">
+				<task-object-name>com.tsa.puridiom.poheader.tasks.PoHeaderRetrieveById</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="invoiceCreate">
+			<task synchronous="true" continue-on-failure="false" name="invoiceCreateSetup">
+				<task-object-name>com.tsa.puridiom.invoice.tasks.InvoiceCreateSetup</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="invoiceCreateFromOrderSetup">
+				<task-object-name>com.tsa.puridiom.invoice.tasks.InvoiceCreateFromOrderSetup</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="setPaymentTerms">
+			<rule-filename check-for-false="true">is-paymentterm-empty.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="paymentTerm">
+				<task-object-name>com.tsa.puridiom.paymentterm.tasks.PaymentTermRetrieveById</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="setInvoicePaymentTerms">
+				<task-object-name>com.tsa.puridiom.invoiceheader.tasks.InvoiceHeaderSetPaymentTerms</task-object-name>
+			</task>
+		</activity>
+		<activity continue-on-failure="false" synchronous="true" name="retrieveVendor">
+			<task synchronous="true" continue-on-failure="false" name="invoiceVendor">
+				<task-object-name>com.tsa.puridiom.invoicevendor.tasks.InvoiceVendorRetrieveById</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="invoiceAddress">
+				<task-object-name>com.tsa.puridiom.invoiceaddress.tasks.InvoiceAddressRetrieveRemitTo</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="invoiceAddress">
+				<rule-filename>is-invoice-address-empty.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.invoiceaddress.tasks.InvoiceAddressRetrieveDefault</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="invoiceAddress">
+				<rule-filename>is-invoice-address-empty.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.invoiceaddress.tasks.InvoiceAddressRetrieveByVendor</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity continue-on-failure="false" synchronous="true" name="loadSupplier">
+		    <task synchronous="true" continue-on-failure="false" name="loadSupplier">
+				<rule-filename>is-invoicevendor-empty.xml</rule-filename>
+    			<task-object-name>com.tsa.puridiom.supplierportal.InvokeSupplierPortalProcessTask</task-object-name>
+    			<process-filename>invoice-load-supplier.xml</process-filename>
+				<post-action>exitActivity</post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="SetApReference">
+				<task-object-name>com.tsa.puridiom.invoiceheader.tasks.InvoiceHeaderSetApReference</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="CreateInvoice">
+			<task synchronous="true" continue-on-failure="false" name="loadSupplier">
+    			<task-object-name>com.tsa.puridiom.supplierportal.InvokeSupplierPortalProcessTask</task-object-name>
+    			<process-filename>invoiceheader-add.xml</process-filename>
+			</task>
+		</activity>
+		<!--<activity synchronous="true" continue-on-failure="false" name="AccountSaveAs">
+			<task synchronous="true" continue-on-failure="false" name="invoiceHeaderAccountSaveas">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>account-saveas.xml</process-filename>
+			</task>
+		</activity>-->
+		<activity synchronous="true" continue-on-failure="false" name="InvoiceLineCreateFromOrder">
+			<task synchronous="true" continue-on-failure="false" name="poLines">
+				<task-object-name>com.tsa.puridiom.poline.tasks.PoLineRetrieveByHeader</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="InvoiceLineCreateFromOrder">
+			<task synchronous="true" continue-on-failure="false" name="invoiceLineCreateFromOrder">
+				<task-object-name>com.tsa.puridiom.invoiceline.tasks.InvoiceLineLoadOrderLines</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="createInvoiceFromOrder">
+			<task synchronous="true" continue-on-failure="false" name="createInvoiceFromOrder">
+				<task-object-name>com.tsa.puridiom.supplierportal.InvokeSupplierPortalProcessTask</task-object-name>
+				<process-filename>invoiceheader-shipto-retrieve-by-id.xml</process-filename>
+			</task>
+		</activity>
+	</activities>
+</process>

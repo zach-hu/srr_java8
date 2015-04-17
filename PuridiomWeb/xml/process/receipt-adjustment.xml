@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="receipt-adjustment" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="receiptHeaderRetrieveOriginal">
+			<task synchronous="true" continue-on-failure="false" name="originalReceiptHeader">
+				<task-object-name>com.tsa.puridiom.receiptheader.tasks.ReceiptHeaderRetrieveById</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="poHeader">
+				<task-object-name>com.tsa.puridiom.poheader.tasks.PoHeaderRetrieveById</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="receiptHeaderUpdate">
+			<rule-filename>is-receiptmethod-adjustment</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="receiptHeaderAdjustmentSetup">
+				<task-object-name>com.tsa.puridiom.receiptheader.tasks.ReceiptHeaderAdjustmentSetup</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="ReceiptHeader_releaseNumber">
+				<task-object-name>com.tsa.puridiom.receipt.tasks.ReceiptGenerateReleaseNumber</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="receiptHeaderSetReceived">
+				<task-object-name>com.tsa.puridiom.receiptheader.tasks.ReceiptHeaderSetReceived</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="receiptHeader">
+				<task-object-name>com.tsa.puridiom.receiptheader.tasks.ReceiptHeaderSetValues</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="receiptHeaderAdd">
+				<rule-filename>is-create-save</rule-filename>
+				<task-object-name>com.tsa.puridiom.receiptheader.tasks.ReceiptHeaderAdd</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="receiptLineUpdate">
+			<task synchronous="true" continue-on-failure="false" name="receiptLineUpdate">
+				<task-object-name>com.tsa.puridiom.receiptline.tasks.ReceiptLineUpdateList</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="receiptOrderRetrieve">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>receipt-order-retrieve.xml</process-filename>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="poHeaderUpdateStatus">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>poheader-update-receipt-status.xml</process-filename>
+			</task>
+		</activity>
+	</activities>
+</process>

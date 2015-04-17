@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rule>
+	<clause type="BigDecimalCompare">
+		<left-side>
+			<source>incomingRequestObjectMethod</source>
+			<object>header</object>
+			<name>getAccountList</name>
+			<argument-value>size</argument-value>
+			<argument-value>fromObject</argument-value>
+		</left-side>
+		<operator>GREATER</operator>
+		<right-side>
+			<source>constant</source>
+			<value>0</value>
+		</right-side>
+	</clause>
+	<logical-operator>IFTHEN</logical-operator>
+	<clause type="Rule">
+		<rule-filename>req-ac02-04-05-list-empty-check.xml</rule-filename>
+	</clause>
+</rule>

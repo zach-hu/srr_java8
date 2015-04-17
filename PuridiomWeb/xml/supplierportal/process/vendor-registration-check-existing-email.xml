@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="vendorRegistrationCheckExistingEmail" connection-type="Connection-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="contactSearch">
+			<task synchronous="true" continue-on-failure="false" name="contact">
+				<task-object-name>com.tsa.puridiom.contact.tasks.ContactRetrieveByEmailAddr</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="contactVerification">
+			<rule-filename check-for-false="true">is-contact-empty</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="vendorRetrieveSetup">
+				<task-object-name>com.tsa.puridiom.vendor.tasks.VendorRetrieveSetupByContact</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="vendor">
+				<task-object-name>com.tsa.puridiom.vendor.tasks.VendorRetrieveById</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="registrationStatus">
+				<task-object-name>com.tsa.puridiom.supplierportal.registration.tasks.RegisterUserSetEmailAddressIsDuplicated</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="registrationStatus">
+				<task-object-name>com.tsa.puridiom.supplierportal.registration.tasks.RegisterUserSetIsQualified</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="registrationStatus">
+				<rule-filename>is-contact-registered;</rule-filename>	
+				<task-object-name>com.tsa.puridiom.supplierportal.registration.tasks.RegisterUserSetIsRegistered</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="registrationStatus">
+				<rule-filename>is-registeruser-vendor-vendorein-valid</rule-filename>
+				<task-object-name>com.tsa.puridiom.supplierportal.registration.tasks.RegisterUserSetIsEinValid</task-object-name>
+			</task>
+			<post-action>exitProcess</post-action>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="vendorRegisterSearch">
+			<!-- Email address must not have been found in contact table... continue looking -->
+			<task synchronous="true" continue-on-failure="false" name="vendorRegister">
+				<task-object-name>com.tsa.puridiom.vendorregister.tasks.VendorRegisterRetrieveByContactEmailAddr</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="vendorRegisterVerification">
+			<rule-filename check-for-false="true">is-vendorregister-empty</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="registrationStatus">
+				<task-object-name>com.tsa.puridiom.supplierportal.registration.tasks.RegisterUserSetEmailAddressIsDuplicated</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="registrationStatus">
+				<rule-filename>is-vendorregister-contact-registered;</rule-filename>	
+				<task-object-name>com.tsa.puridiom.supplierportal.registration.tasks.RegisterUserSetIsRegistered</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="registrationStatus">
+				<rule-filename>is-registeruser-vendorregister-vendorein-valid</rule-filename>
+				<task-object-name>com.tsa.puridiom.supplierportal.registration.tasks.RegisterUserSetIsEinValid</task-object-name>
+			</task>
+			<post-action>exitProcess</post-action>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="vendorRegisterAlternateSearch">
+			<!-- Email address still not found... continue looking -->
+			<task synchronous="true" continue-on-failure="false" name="vendorRegister">
+				<task-object-name>com.tsa.puridiom.vendorregister.tasks.VendorRegisterRetrieveByAltEmailAddr</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="vendorRegisterAlternateVerification">
+			<rule-filename check-for-false="true">is-vendorregister-empty</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="registrationStatus">
+				<task-object-name>com.tsa.puridiom.supplierportal.registration.tasks.RegisterUserSetEmailAddressIsDuplicated</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="registrationStatus">
+				<task-object-name>com.tsa.puridiom.supplierportal.registration.tasks.RegisterUserSetIsAlternate</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="registrationStatus">
+				<rule-filename>is-registeruser-vendorregister-vendorein-valid</rule-filename>
+				<task-object-name>com.tsa.puridiom.supplierportal.registration.tasks.RegisterUserSetIsEinValid</task-object-name>
+			</task>
+			<post-action>exitProcess</post-action>
+		</activity>
+	</activities>
+</process>

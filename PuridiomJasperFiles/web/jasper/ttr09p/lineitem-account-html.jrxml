@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created using an evaluation version of JasperAssistant (http://www.jasperassistant.com) -->
+<!DOCTYPE jasperReport PUBLIC "-//JasperReports//DTD Report Design//EN" "http://jasperreports.sourceforge.net/dtds/jasperreport.dtd">
+
+<jasperReport name="lineitem_account" pageWidth="569" pageHeight="18" columnWidth="569" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+	<import value="com.tsa.puridiom.common.utility.HiltonUtility"/>
+	<import value="com.tsa.puridiom.jasperreports.*"/>
+	<reportFont name="Arial_Normal" isDefault="false" fontName="Arial" size="8" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Verdana" isDefault="true" fontName="Verdana" size="9" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Verdana_bold" isDefault="false" fontName="Verdana" size="9" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<parameter name="reportTitle" class="java.lang.String">
+		<defaultValueExpression><![CDATA["Account Summary"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="oid" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["test"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="currencyCode" class="java.lang.String">
+		<defaultValueExpression><![CDATA["USD"]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="Account_acctString" class="java.lang.String"/>
+	<field name="Account_allocAmount" class="java.math.BigDecimal"/>
+	<field name="Account_fld1" class="java.lang.String"/>
+	<field name="Account_fld2" class="java.lang.String"/>
+	<field name="Account_fld3" class="java.lang.String"/>
+	<field name="Account_fld4" class="java.lang.String"/>
+	<field name="Account_fld5" class="java.lang.String"/>
+	<field name="Account_fld6" class="java.lang.String"/>
+	<field name="Account_fld7" class="java.lang.String"/>
+	<field name="Account_fld8" class="java.lang.String"/>
+	<field name="Account_fld9" class="java.lang.String"/>
+	<field name="Account_fld10" class="java.lang.String"/>
+	<field name="Account_fld11" class="java.lang.String"/>
+	<field name="Account_fld12" class="java.lang.String"/>
+	<field name="Account_fld13" class="java.lang.String"/>
+	<field name="Account_fld14" class="java.lang.String"/>
+	<field name="Account_fld15" class="java.lang.String"/>
+	<detail>
+		<band height="15">
+			<rectangle>
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="2" height="15" forecolor="#F3F3F3" backcolor="#F3F3F3"/>
+				<graphicElement/>
+			</rectangle>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" mode="Opaque" x="51" y="0" width="350" height="15" isRemoveLineWhenBlank="true" backcolor="#F3F3F3"/>
+				<textElement verticalAlignment="Middle">
+					<font reportFont="Verdana"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[ReportUtils.getAcctString($F{Account_fld1}, $F{Account_fld2}, $F{Account_fld3}, $F{Account_fld4}, $F{Account_fld5}, $F{Account_fld6}, $F{Account_fld7}, $F{Account_fld8}, $F{Account_fld9}, $F{Account_fld10}, $F{Account_fld11}, $F{Account_fld12},$F{Account_fld13}, $F{Account_fld14}, $F{Account_fld15}, $P{oid})]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00#" isBlankWhenNull="true">
+				<reportElement positionType="Float" mode="Opaque" x="401" y="0" width="76" height="15" isRemoveLineWhenBlank="true" backcolor="#F3F3F3"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font reportFont="Verdana"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[HiltonUtility.getCurrency($F{Account_allocAmount}, $P{currencyCode}, $P{oid})]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement positionType="Float" mode="Opaque" x="2" y="0" width="49" height="15" backcolor="#F3F3F3">
+					<printWhenExpression><![CDATA[new Boolean($V{REPORT_COUNT}.equals(new Integer(1)))]]></printWhenExpression>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font reportFont="Verdana_bold"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Account: "]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="2" y="0" width="49" height="15" backcolor="#F3F3F3">
+					<printWhenExpression><![CDATA[new Boolean($V{REPORT_COUNT}.compareTo(new Integer(1)) > 0)]]></printWhenExpression>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font reportFont="Verdana_bold"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[""]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="477" y="0" width="92" height="15" forecolor="#F3F3F3" backcolor="#F3F3F3"/>
+				<graphicElement/>
+			</rectangle>
+		</band>
+	</detail>
+	<summary>
+		<band height="3">
+			<rectangle>
+				<reportElement positionType="Float" x="0" y="0" width="569" height="3" forecolor="#F3F3F3" backcolor="#F3F3F3"/>
+				<graphicElement/>
+			</rectangle>
+		</band>
+	</summary>
+</jasperReport>

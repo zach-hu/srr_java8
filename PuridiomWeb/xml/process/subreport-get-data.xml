@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="ExecuteReport" connection-type="Connection-Required">
+  <activities>
+	  <activity synchronous="true" continue-on-failure="false" name="setup">
+		  <task synchronous="true" continue-on-failure="false" name="datasource">
+	        <task-object-name>com.tsa.puridiom.report.tasks.ReportGetHibernateDataSetup</task-object-name>
+		  </task>
+	 </activity>
+    <activity synchronous="true" continue-on-failure="false" name="getBrowseObject">
+      <task synchronous="true" continue-on-failure="false" name="browseObject">
+        <task-object-name>com.tsa.puridiom.browse.tasks.GenerateReportObject</task-object-name>
+      </task>
+	  <task synchronous="true" continue-on-failure="false" name="browseObject">
+				<task-object-name>com.tsa.puridiom.browse.tasks.GenerateBrowseFilter</task-object-name>
+		</task>
+		<task synchronous="true" continue-on-failure="false" name="sqlWhere">
+			<task-object-name>com.tsa.puridiom.browse.tasks.BrowseRetrieve</task-object-name>
+		</task>
+    </activity>
+	  <activity synchronous="true" continue-on-failure="false" name="getDatasources">
+        <task synchronous="true" continue-on-failure="false" name="datasource">
+			<task-object-name>com.tsa.puridiom.report.tasks.ReportGetHibernateData</task-object-name>
+		</task>
+	</activity>
+  </activities>
+</process>

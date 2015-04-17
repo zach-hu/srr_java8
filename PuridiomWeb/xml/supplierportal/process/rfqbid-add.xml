@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="rfqBidAdd" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="rfqBidAdd">
+			<task synchronous="true" continue-on-failure="false" name="rfqBidSetup">
+				<task-object-name>com.tsa.puridiom.rfqbid.tasks.RfqBidSetup</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="rfqBidSetDefaultsFromLine">
+				<task-object-name>com.tsa.puridiom.rfqbid.tasks.RfqBidSetDefaultsFromLine</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="rfqBidSetDefaultsFromVendor">
+				<task-object-name>com.tsa.puridiom.rfqbid.tasks.RfqBidSetDefaultsFromVendor</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="rfqBid">
+				<task-object-name>com.tsa.puridiom.rfqbid.tasks.RfqBidSetValues</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="rfqBid">
+				<task-object-name>com.tsa.puridiom.rfqbid.tasks.RfqBidAdd</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

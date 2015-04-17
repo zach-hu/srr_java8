@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created using an evaluation version of JasperAssistant (http://www.jasperassistant.com) -->
+<!DOCTYPE jasperReport PUBLIC "-//JasperReports//DTD Report Design//EN" "http://jasperreports.sourceforge.net/dtds/jasperreport.dtd">
+
+<jasperReport name="CostCenterApproversXls" pageWidth="791" pageHeight="612" orientation="Landscape" whenNoDataType="BlankPage" columnWidth="791" leftMargin="0" rightMargin="0" topMargin="15" bottomMargin="15">
+	<import value="com.tsa.puridiom.common.documents.OrderType"/>
+	<import value="com.tsa.puridiom.property.PropertiesManager"/>
+	<import value="com.tsa.puridiom.common.documents.*"/>
+	<import value="java.util.*"/>
+	<import value="com.tsa.puridiom.entity.*"/>
+	<import value="net.sf.jasperreports.engine.JRDataSource"/>
+	<import value="com.tsa.puridiom.common.utility.HiltonUtility"/>
+	<import value="com.tsagate.foundation.utility.Utility"/>
+	<import value="com.tsa.puridiom.currcode.CurrencyManager"/>
+	<import value="com.tsagate.properties.*"/>
+	<import value="com.tsa.puridiom.jasperreports.*"/>
+	<import value="java.net.*"/>
+	<reportFont name="Arial_Normal" isDefault="true" fontName="Arial" size="7" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Bold" isDefault="false" fontName="Arial Black" size="8" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica-Bold" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Bold_Big" isDefault="false" fontName="Arial Black" size="12" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica-Bold" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Big" isDefault="false" fontName="Arial" size="12" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<parameter name="oid" class="java.lang.String">
+		<defaultValueExpression><![CDATA["HILTON"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="reportTitle" class="java.lang.String">
+		<defaultValueExpression><![CDATA["Report"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="reportCriteria" class="java.lang.String"/>
+	<parameter name="userId" class="java.lang.String">
+		<defaultValueExpression><![CDATA["PURIDIOM"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="reportType" class="java.lang.String">
+		<defaultValueExpression><![CDATA["Y"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="companyName" class="java.lang.String">
+		<defaultValueExpression><![CDATA[PropertiesManager.getInstance($P{oid}).getProperty("COMPANY", "Name", "TSA")]]></defaultValueExpression>
+	</parameter>
+	<parameter name="currencyManager" class="com.tsa.puridiom.currcode.CurrencyManager">
+		<defaultValueExpression><![CDATA[CurrencyManager.getInstance($P{oid})]]></defaultValueExpression>
+	</parameter>
+	<field name="UserProfile_userId" class="java.lang.String"/>
+	<field name="UserProfile_title" class="java.lang.String"/>
+	<field name="UserProfile_firstName" class="java.lang.String"/>
+	<field name="UserProfile_lastName" class="java.lang.String"/>
+	<field name="UserProfile_approvalAmount" class="java.math.BigDecimal"/>
+	<field name="UserProfile_owner" class="java.lang.String"/>
+	<field name="AppRule_id_udf1Code" class="java.lang.String"/>
+	<field name="AppRule_id_udf2Code" class="java.lang.String"/>
+	<field name="AppRule_id_udf3Code" class="java.lang.String"/>
+	<field name="AppRule_id_udf4Code" class="java.lang.String"/>
+	<field name="UserProfile_callForward" class="java.lang.String"/>
+	<group name="Header_Group">
+		<groupHeader>
+			<band height="52">
+				<subreport isUsingCache="false">
+					<reportElement positionType="Float" x="0" y="0" width="791" height="40"/>
+					<subreportParameter name="reportTitle">
+						<subreportParameterExpression><![CDATA[$P{reportTitle}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="reportCriteria">
+						<subreportParameterExpression><![CDATA[$P{reportCriteria}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="userId">
+						<subreportParameterExpression><![CDATA[$P{userId}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="oid">
+						<subreportParameterExpression><![CDATA[$P{oid}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="companyName">
+						<subreportParameterExpression><![CDATA[$P{companyName}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[JasperReportsHelper.loadSubReport("header-no-formats.jasper", $P{oid},"", $P{reportType})]]></subreportExpression>
+				</subreport>
+				<textField>
+					<reportElement positionType="Float" x="0" y="40" width="80" height="12"/>
+					<box border="None" topPadding="0" leftPadding="3" bottomPadding="0" rightPadding="3"/>
+					<textElement textAlignment="Center">
+						<font reportFont="Arial_Normal" size="7" isBold="false" isUnderline="false"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[DictionaryManager.getLabel($P{oid}, "appruleudf1", "Cost Center")]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement positionType="Float" x="80" y="40" width="80" height="12"/>
+					<box border="None" topPadding="0" leftPadding="3" bottomPadding="0" rightPadding="3"/>
+					<textElement textAlignment="Center">
+						<font reportFont="Arial_Normal" size="7" isBold="false" isUnderline="false"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[DictionaryManager.getLabel($P{oid}, "user-approvalAmount", "Amount")]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement positionType="Float" x="160" y="40" width="80" height="12"/>
+					<box border="None" topPadding="0" leftPadding="3" bottomPadding="0" rightPadding="3"/>
+					<textElement textAlignment="Center">
+						<font reportFont="Arial_Normal" size="7" isBold="false" isUnderline="false"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[DictionaryManager.getLabel($P{oid}, "user-userId", "Approver")]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement positionType="Float" x="400" y="40" width="60" height="12"/>
+					<box border="None" topPadding="0" leftPadding="3" bottomPadding="0" rightPadding="3"/>
+					<textElement textAlignment="Center">
+						<font reportFont="Arial_Normal" size="7" isBold="false" isUnderline="false"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[DictionaryManager.getLabel($P{oid}, "appruleudf2", "Capital")]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement positionType="Float" x="460" y="40" width="60" height="12"/>
+					<box border="None" topPadding="0" leftPadding="3" bottomPadding="0" rightPadding="3"/>
+					<textElement textAlignment="Center">
+						<font reportFont="Arial_Normal" size="7" isBold="false" isUnderline="false"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[DictionaryManager.getLabel($P{oid}, "appruleudf3", "Catalog")]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement positionType="Float" x="520" y="40" width="60" height="12"/>
+					<box border="None" topPadding="0" leftPadding="3" bottomPadding="0" rightPadding="3"/>
+					<textElement textAlignment="Center">
+						<font reportFont="Arial_Normal" size="7" isBold="false" isUnderline="false"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[DictionaryManager.getLabel($P{oid}, "appruleudf4", "Owner")]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement positionType="Float" x="240" y="40" width="160" height="12"/>
+					<box border="None" topPadding="0" leftPadding="3" bottomPadding="0" rightPadding="3"/>
+					<textElement textAlignment="Center">
+						<font reportFont="Arial_Normal" size="7" isBold="false" isUnderline="false"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[DictionaryManager.getLabel($P{oid}, "user-name", "Approver Name")]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement positionType="Float" x="580" y="40" width="130" height="12"/>
+					<box border="None" topPadding="0" leftPadding="3" bottomPadding="0" rightPadding="3"/>
+					<textElement textAlignment="Center">
+						<font reportFont="Arial_Normal" size="7" isBold="false" isUnderline="false"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[DictionaryManager.getLabel($P{oid}, "title", "Title")]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement positionType="Float" x="710" y="40" width="81" height="12"/>
+					<box border="None" topPadding="0" leftPadding="3" bottomPadding="0" rightPadding="3"/>
+					<textElement textAlignment="Center">
+						<font reportFont="Arial_Normal" size="7" isBold="false" isUnderline="false"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[DictionaryManager.getLabel($P{oid}, "user-callForward", "Call Forward")]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+	</group>
+	<detail>
+		<band height="12">
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" x="160" y="0" width="80" height="12" forecolor="#000000"/>
+				<box border="None" topPadding="0" leftPadding="3" bottomPadding="0" rightPadding="3"/>
+				<textElement textAlignment="Center">
+					<font reportFont="Arial_Normal" size="7"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{UserProfile_userId}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" x="400" y="0" width="60" height="12" forecolor="#000000"/>
+				<box border="None" topPadding="0" leftPadding="3" bottomPadding="0" rightPadding="3"/>
+				<textElement textAlignment="Center">
+					<font reportFont="Arial_Normal" size="7"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{AppRule_id_udf2Code}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" x="580" y="0" width="130" height="12" forecolor="#000000"/>
+				<box border="None" topPadding="0" leftPadding="3" bottomPadding="0" rightPadding="3"/>
+				<textElement textAlignment="Left">
+					<font reportFont="Arial_Normal" size="7"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{UserProfile_title}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" x="240" y="0" width="160" height="12" forecolor="#000000"/>
+				<box border="None" topPadding="0" leftPadding="3" bottomPadding="0" rightPadding="3"/>
+				<textElement textAlignment="Left">
+					<font reportFont="Arial_Normal" size="7"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{UserProfile_lastName}+' '+$F{UserProfile_firstName}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" x="80" y="0" width="80" height="12" forecolor="#000000"/>
+				<box border="None" topPadding="0" leftPadding="3" bottomPadding="0" rightPadding="3"/>
+				<textElement textAlignment="Right">
+					<font reportFont="Arial_Normal" size="7"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{UserProfile_approvalAmount}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" isPrintRepeatedValues="false" x="0" y="0" width="80" height="12" isPrintInFirstWholeBand="true" forecolor="#000000"/>
+				<box border="None" topPadding="0" leftPadding="3" bottomPadding="0" rightPadding="3"/>
+				<textElement textAlignment="Center">
+					<font reportFont="Arial_Normal" size="7"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{AppRule_id_udf1Code}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" x="460" y="0" width="60" height="12" forecolor="#000000"/>
+				<box border="None" topPadding="0" leftPadding="3" bottomPadding="0" rightPadding="3"/>
+				<textElement textAlignment="Center">
+					<font reportFont="Arial_Normal" size="7"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{AppRule_id_udf3Code}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" x="520" y="0" width="60" height="12" forecolor="#000000"/>
+				<box border="None" topPadding="0" leftPadding="3" bottomPadding="0" rightPadding="3"/>
+				<textElement textAlignment="Center">
+					<font reportFont="Arial_Normal" size="7"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{AppRule_id_udf4Code}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" x="710" y="0" width="81" height="12" forecolor="#000000"/>
+				<box border="None" topPadding="0" leftPadding="3" bottomPadding="0" rightPadding="3"/>
+				<textElement textAlignment="Center">
+					<font reportFont="Arial_Normal" size="7"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{UserProfile_callForward}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

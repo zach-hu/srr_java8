@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created using an evaluation version of JasperAssistant (http://www.jasperassistant.com) -->
+<!DOCTYPE jasperReport PUBLIC "-//JasperReports//DTD Report Design//EN" "http://jasperreports.sourceforge.net/dtds/jasperreport.dtd">
+
+<jasperReport name="shiptosb" language="java" pageWidth="595" pageHeight="110" columnWidth="595" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+	<property name="com.jasperassistant.designer.GridWidth" value="12"/>
+	<property name="com.jasperassistant.designer.GridHeight" value="12"/>
+	<property name="com.jasperassistant.designer.DataSource" value="oracle"/>
+	<property name="com.jasperassistant.designer.SnapToGrid" value="false"/>
+	<property name="com.jasperassistant.designer.Grid" value="false"/>
+	<reportFont name="Arial_Normal" isDefault="false" fontName="Arial" size="8" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_bold" isDefault="false" fontName="Arial Black" size="8" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica-Bold" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<parameter name="shiptocode" class="java.lang.String">
+	</parameter>
+	<parameter name="shipto_quantity" class="java.lang.String">
+	</parameter>
+	<queryString><![CDATA[select ADDRESS_LINE_1 AddressLine1, ADDRESS_LINE_2 AddressLine2, ADDRESS_LINE_3 AddressLine3, city, STATE, POSTAL_CODE, COUNTRY  from ADDRESS where ADDRESS_TYPE = 'ADDR' AND ADDRESS_CODE =  $P{shiptocode} AND SHIP_TO = 'Y']]></queryString>
+	<field name="Address_addressLine1" class="java.lang.String">
+	</field>
+	<field name="Address_addressLine2" class="java.lang.String">
+	</field>
+	<field name="Address_addressLine3" class="java.lang.String">
+	</field>
+	<field name="Address_city" class="java.lang.String">
+	</field>
+	<field name="Address_country" class="java.lang.String">
+	</field>
+	<field name="Address_postalCode" class="java.lang.String">
+	</field>
+	<field name="Address_state" class="java.lang.String">
+	</field>
+	<field name="Address_cityStatePostal" class="java.lang.String">
+	</field>
+	<field name="Address_shipToCode" class="java.lang.String">
+	</field>
+	<field name="Address_quantity" class="java.math.BigDecimal">
+	</field>
+	<field name="Address_attention" class="java.lang.String">
+	</field>
+	<detail>
+		<band height="99">
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" x="134" y="28" width="224" height="14" isRemoveLineWhenBlank="true"/>
+				<textElement>
+					<font reportFont="Arial_Normal"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{Address_addressLine1}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" x="134" y="42" width="224" height="14" isRemoveLineWhenBlank="true"/>
+				<textElement>
+					<font reportFont="Arial_Normal"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{Address_addressLine2}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" x="134" y="56" width="224" height="14" isRemoveLineWhenBlank="true"/>
+				<textElement>
+					<font reportFont="Arial_Normal"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{Address_addressLine3}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" x="134" y="69" width="224" height="14" isRemoveLineWhenBlank="true"/>
+				<textElement>
+					<font reportFont="Arial_Normal"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{Address_cityStatePostal}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" x="134" y="83" width="224" height="14" isRemoveLineWhenBlank="true"/>
+				<textElement>
+					<font reportFont="Arial_Normal"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{Address_country}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" x="134" y="14" width="224" height="14"/>
+				<textElement>
+					<font reportFont="Arial_bold"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{Address_attention}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement positionType="Float" x="134" y="0" width="26" height="14"/>
+				<textElement verticalAlignment="Middle">
+					<font reportFont="Arial_Normal"/>
+				</textElement>
+				<text><![CDATA[Ship]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" pattern="#,##0.00#" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="165" y="0" width="33" height="14"/>
+				<textElement verticalAlignment="Middle">
+					<font reportFont="Arial_bold"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{Address_quantity}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement positionType="Float" x="202" y="0" width="22" height="14"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font reportFont="Arial_Normal"/>
+				</textElement>
+				<text><![CDATA[to:]]></text>
+			</staticText>
+		</band>
+	</detail>
+</jasperReport>

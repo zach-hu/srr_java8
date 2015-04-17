@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="requisitionForwardSplit" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="requisitionForwardSplit">
+			<task synchronous="true" continue-on-failure="false" name="splitRequisitionList">			
+				<task-object-name>com.tsa.puridiom.requisitionline.tasks.RequisitionSplitItems</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="splitRequisitionList">			
+				<rule-filename>is-intelligent-request-enabled.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.requisitionline.tasks.RequisitionSplitItemsByAction</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="requisitionCreateSplit">			
+			    <rule-filename>is-requisition-split-required.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.requisition.tasks.RequisitionCreateSplit</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="requisitionSplitForward">
+				<rule-filename>is-requisition-split-required.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.requisition.tasks.RequisitionForwardSplitList</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

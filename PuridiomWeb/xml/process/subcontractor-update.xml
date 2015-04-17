@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="SubContractorUpdate" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="updateSubContractorActivity">
+			<task synchronous="true" continue-on-failure="false" name="subContractor">
+				<task-object-name>com.tsa.puridiom.po.subcontractor.tasks.SubContractorRetrieveById</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="subContractor">
+				<task-object-name>com.tsa.puridiom.po.subcontractor.tasks.SubContractorSetValues</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="updateSubContractor">
+				<task-object-name>com.tsa.puridiom.po.subcontractor.tasks.SubContractorUpdate</task-object-name>
+				<post-action />
+			   </task>
+		  </activity>
+	 </activities>
+</process>

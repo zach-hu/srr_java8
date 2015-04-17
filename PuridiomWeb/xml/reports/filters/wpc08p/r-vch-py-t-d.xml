@@ -1,0 +1,68 @@
+<r-vch-py-t-d>
+	<columns>
+		<InvoiceHeader_invoiceNumber>
+			<label>Invoice Number</label>
+			<type>STRING</type>
+
+		</InvoiceHeader_invoiceNumber>
+		<InvoiceHeader_invoiceDate>
+			<label>Invoice Date</label>
+			<type>DATE</type>
+
+		</InvoiceHeader_invoiceDate>
+		<Vendor_vendorName>
+			<label>Supplier</label>
+			<type>STRING</type>
+		</Vendor_vendorName>
+
+		<InvoiceHeader_poNumber>
+			<label>PO Number</label>
+			<type>STRING</type>
+
+		</InvoiceHeader_poNumber>
+		<InvoiceHeader_termsCode><!-- InvoiceHeader_termsCode -->
+			<label>Invoice Payment Terms</label>
+			<type>STRING</type>
+
+		</InvoiceHeader_termsCode>
+		<Vendor_vendTerms>
+			<label>Supplier Payment Terms</label>
+			<type>STRING</type>
+
+		</Vendor_vendTerms>
+		<InvoiceHeader_invoiceTotal>
+			<label>Invoice Amount</label>
+			<type>BIGDECIMAL</type>
+		</InvoiceHeader_invoiceTotal>
+		<InvoiceHeader_invoiceDiscount>
+			<label>Invoice Discount Amount</label>
+			<type>BIGDECIMAL</type>
+
+		</InvoiceHeader_invoiceDiscount>
+		<InvoiceHeader_invoiceAdjustment>
+			<label>Invoice Adjustment</label>
+			<type>BIGDECIMAL</type>
+
+		</InvoiceHeader_invoiceAdjustment>
+		<InvoiceHeader_invoiceTax>
+			<label>Invoice Tax</label>
+			<type>BIGDECIMAL</type>
+
+		</InvoiceHeader_invoiceTax>
+		<InvoiceHeader_invoiceOther>
+			<label>Invoice Other</label>
+			<type>BIGDECIMAL</type>
+			<size>15</size>
+		</InvoiceHeader_invoiceOther>
+		<InvoiceHeader_invoicePaid>
+			<label>Invoice Amount to be Paid</label>
+			<type>BIGDECIMAL</type>
+
+		</InvoiceHeader_invoicePaid>
+	</columns>
+	<sqlfrom>InvoiceHeader as InvoiceHeader,Vendor as Vendor</sqlfrom>
+	<sqlwhere><![CDATA[(InvoiceHeader.vendorId = Vendor.vendorId)]]></sqlwhere>
+	<sqlorderby>InvoiceHeader.invoiceNumber ASC</sqlorderby>
+	<pagesize></pagesize>
+	<title>Invoice Payment Terms Discrepency Report</title>
+</r-vch-py-t-d>

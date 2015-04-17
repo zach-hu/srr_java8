@@ -1,0 +1,424 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created using JasperAssistant (http://www.jasperassistant.com) -->
+<!DOCTYPE jasperReport PUBLIC "-//JasperReports//DTD Report Design//EN" "http://jasperreports.sourceforge.net/dtds/jasperreport.dtd">
+
+<jasperReport name="bpohs" pageWidth="842" pageHeight="595" orientation="Landscape" whenNoDataType="BlankPage" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="10" bottomMargin="30">
+	<property name="com.jasperassistant.designer.GridHeight" value="2"/>
+	<property name="com.jasperassistant.designer.GridWidth" value="2"/>
+	<property name="com.jasperassistant.designer.Rulers" value="true"/>
+	<property name="com.jasperassistant.designer.DataSource" value="hilton1p"/>
+	<property name="com.jasperassistant.designer.SnapToGrid" value="false"/>
+	<property name="com.jasperassistant.designer.Margins" value="true"/>
+	<property name="com.jasperassistant.designer.Grid" value="true"/>
+	<property name="com.jasperassistant.designer.SnapToGuides" value="true"/>
+	<import value="java.util.*"/>
+	<import value="com.tsa.puridiom.jasperreports.*"/>
+	<reportFont name="Arial_Normal" isDefault="true" fontName="Arial" size="9" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<parameter name="reportTitle" class="java.lang.String">
+		<defaultValueExpression><![CDATA["Procurement Action Register"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="subTitle" class="java.lang.String">
+		<defaultValueExpression><![CDATA["(Summary By Buyer)"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="organizationId" class="java.lang.String">
+		<defaultValueExpression><![CDATA["HILTON"]]></defaultValueExpression>
+	</parameter>
+	<field name="PoHeader_buyer" class="java.lang.String">
+	</field>
+	<field name="PoHeader_poType" class="java.lang.String">
+	</field>
+	<field name="PoHeader_releaseNumber" class="java.math.BigDecimal">
+	</field>
+	<field name="PoHeader_revisionNumber" class="java.math.BigDecimal">
+	</field>
+	<field name="PoHeader_departmentCode" class="java.lang.String">
+	</field>
+	<field name="PoHeader_poDate" class="java.util.Date">
+	</field>
+	<field name="PoHeader_requiredDate" class="java.util.Date">
+	</field>
+	<field name="PoHeader_buyerCode" class="java.lang.String">
+	</field>
+	<field name="PoHeader_total" class="java.math.BigDecimal">
+	</field>
+	<field name="PoHeader_currency" class="java.lang.String">
+	</field>
+	<field name="PoHeader_status" class="java.lang.String">
+	</field>
+	<field name="RequisitionHeader_assignedDate" class="java.util.Date">
+	</field>
+	<field name="PoHeader_currencyFactor" class="java.math.BigDecimal">
+	</field>
+	<field name="PoHeader_poNumber" class="java.lang.String">
+	</field>
+	<field name="PoHeader_vendorId" class="java.lang.String">
+	</field>
+	<field name="PoHeader_contractNo" class="java.lang.String">
+	</field>
+	<variable name="today" class="java.util.Date">
+		<variableExpression><![CDATA[new Date()]]></variableExpression>
+		<initialValueExpression><![CDATA[new Date()]]></initialValueExpression>
+	</variable>
+	<variable name="poCount" class="java.math.BigDecimal" resetType="Group" resetGroup="buyer" calculation="Count">
+		<variableExpression><![CDATA[$F{PoHeader_poNumber}]]></variableExpression>
+	</variable>
+	<variable name="baseTotal" class="java.math.BigDecimal" resetType="None">
+		<variableExpression><![CDATA[com.tsa.puridiom.jasperreports.ReportUtils.divide($F{PoHeader_total}, $F{PoHeader_currencyFactor})]]></variableExpression>
+	</variable>
+	<variable name="grandBaseTotal" class="java.math.BigDecimal" resetType="Group" resetGroup="buyer" calculation="Sum">
+		<variableExpression><![CDATA[$V{baseTotal}]]></variableExpression>
+	</variable>
+	<variable name="reportPoCount" class="java.math.BigDecimal" resetType="None" calculation="Sum">
+		<variableExpression><![CDATA[$V{poCount}]]></variableExpression>
+	</variable>
+	<variable name="reportTotal" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$V{baseTotal}]]></variableExpression>
+		<initialValueExpression><![CDATA[new BigDecimal(0)]]></initialValueExpression>
+	</variable>
+	<variable name="releaseNumber" class="java.lang.String">
+		<variableExpression><![CDATA[$F{PoHeader_releaseNumber}.compareTo(new BigDecimal(0)) > 0 ? $F{PoHeader_releaseNumber}.toString(): ""]]></variableExpression>
+	</variable>
+	<variable name="revisionNumber" class="java.lang.String">
+		<variableExpression><![CDATA[$F{PoHeader_revisionNumber}.compareTo(new BigDecimal(0)) > 0 ? $F{PoHeader_revisionNumber}.toString(): ""]]></variableExpression>
+	</variable>
+	<group name="buyer">
+		<groupExpression><![CDATA[$F{PoHeader_buyerCode}]]></groupExpression>
+		<groupHeader>
+		<band height="15">
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" mode="Opaque" x="51" y="0" width="88" height="14" forecolor="#ffffff" backcolor="#0"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA["   " + ReportUtils.getUserName($F{PoHeader_buyerCode},  $P{organizationId})]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement positionType="Float" mode="Opaque" x="1" y="0" width="50" height="14" forecolor="#ffffff" backcolor="#0"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Buyer:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" mode="Opaque" x="139" y="0" width="307" height="14" backcolor="#0"/>
+				<textElement/>
+				<text><![CDATA[ ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" mode="Opaque" x="446" y="0" width="315" height="14" backcolor="#0"/>
+				<textElement/>
+				<text><![CDATA[ ]]></text>
+			</staticText>
+		</band>
+		</groupHeader>
+		<groupFooter>
+		<band height="15">
+			<staticText>
+				<reportElement positionType="Float" x="44" y="1" width="85" height="14"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Purchase Orders:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" x="131" y="1" width="80" height="14"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$V{buyer_COUNT}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement positionType="Float" x="542" y="1" width="60" height="14"/>
+				<textElement/>
+				<text><![CDATA[Base Total:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" x="605" y="1" width="60" height="14"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{grandBaseTotal}]]></textFieldExpression>
+			</textField>
+		</band>
+		</groupFooter>
+	</group>
+	<group name="evenGroup">
+		<groupExpression><![CDATA[$V{REPORT_COUNT}]]></groupExpression>
+		<groupHeader>
+		<band height="15">
+			<printWhenExpression><![CDATA[$V{REPORT_COUNT}.intValue() % 2 == 1 ? Boolean.TRUE : Boolean.FALSE]]></printWhenExpression>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" x="1" y="1" width="50" height="14"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{PoHeader_poType}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" x="51" y="1" width="89" height="14"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{PoHeader_poNumber}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement positionType="Float" x="140" y="1" width="65" height="14"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$V{releaseNumber} == null? "": $V{releaseNumber} + "-" + $V{revisionNumber} == null?"":$V{revisionNumber}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" x="205" y="1" width="41" height="14"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{PoHeader_contractNo}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" x="246" y="1" width="59" height="14"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{PoHeader_departmentCode}]]></textFieldExpression>
+			</textField>
+			<textField pattern="MM/dd/yyyy" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="305" y="1" width="48" height="14"/>
+				<textElement/>
+				<textFieldExpression class="java.util.Date"><![CDATA[$F{PoHeader_poDate}]]></textFieldExpression>
+			</textField>
+			<textField pattern="MM/dd/yyyy" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="353" y="1" width="42" height="14"/>
+				<textElement/>
+				<textFieldExpression class="java.util.Date"><![CDATA[$F{PoHeader_requiredDate}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" x="395" y="1" width="65" height="14"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{PoHeader_vendorId}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" x="460" y="1" width="56" height="14"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{PoHeader_total}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" x="516" y="1" width="54" height="14"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{PoHeader_currency}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" x="570" y="1" width="59" height="14"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{baseTotal}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" x="629" y="1" width="63" height="14"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[com.tsa.puridiom.common.documents.DocumentStatus.toString($F{PoHeader_status})]]></textFieldExpression>
+			</textField>
+			<textField pattern="MM/dd/yyyy" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="692" y="1" width="69" height="14"/>
+				<textElement/>
+				<textFieldExpression class="java.util.Date"><![CDATA[$F{RequisitionHeader_assignedDate}]]></textFieldExpression>
+			</textField>
+		</band>
+		</groupHeader>
+	</group>
+	<group name="oddGroup">
+		<groupExpression><![CDATA[$V{REPORT_COUNT}]]></groupExpression>
+		<groupHeader>
+		<band height="15">
+			<printWhenExpression><![CDATA[$V{REPORT_COUNT}.intValue() % 2 == 0 ? Boolean.TRUE : Boolean.FALSE]]></printWhenExpression>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" mode="Opaque" x="1" y="0" width="50" height="14" backcolor="#c0c0c0"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{PoHeader_poType}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" mode="Opaque" x="51" y="0" width="89" height="14" backcolor="#c0c0c0"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{PoHeader_poNumber}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement positionType="Float" mode="Opaque" x="140" y="0" width="65" height="14" backcolor="#c0c0c0"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$V{releaseNumber} == null? "": $V{releaseNumber} + "-" + $V{revisionNumber} == null?"":$V{revisionNumber}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" mode="Opaque" x="205" y="0" width="41" height="14" backcolor="#c0c0c0"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{PoHeader_contractNo}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" mode="Opaque" x="246" y="0" width="59" height="14" backcolor="#c0c0c0"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{PoHeader_departmentCode}]]></textFieldExpression>
+			</textField>
+			<textField pattern="MM/dd/yyyy" isBlankWhenNull="true">
+				<reportElement positionType="Float" mode="Opaque" x="305" y="0" width="48" height="14" backcolor="#c0c0c0"/>
+				<textElement/>
+				<textFieldExpression class="java.util.Date"><![CDATA[$F{PoHeader_poDate}]]></textFieldExpression>
+			</textField>
+			<textField pattern="MM/dd/yyyy" isBlankWhenNull="true">
+				<reportElement positionType="Float" mode="Opaque" x="353" y="0" width="42" height="14" backcolor="#c0c0c0"/>
+				<textElement/>
+				<textFieldExpression class="java.util.Date"><![CDATA[$F{PoHeader_requiredDate}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" mode="Opaque" x="395" y="0" width="65" height="14" backcolor="#c0c0c0"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{PoHeader_vendorId}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" mode="Opaque" x="460" y="0" width="56" height="14" backcolor="#c0c0c0"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{PoHeader_total}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" mode="Opaque" x="516" y="0" width="54" height="14" backcolor="#c0c0c0"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{PoHeader_currency}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" mode="Opaque" x="570" y="0" width="59" height="14" backcolor="#c0c0c0"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{baseTotal}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" mode="Opaque" x="629" y="0" width="63" height="14" backcolor="#c0c0c0"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[com.tsa.puridiom.common.documents.DocumentStatus.toString($F{PoHeader_status})]]></textFieldExpression>
+			</textField>
+			<textField pattern="MM/dd/yyyy" isBlankWhenNull="true">
+				<reportElement positionType="Float" mode="Opaque" x="692" y="0" width="69" height="14" backcolor="#c0c0c0"/>
+				<textElement/>
+				<textFieldExpression class="java.util.Date"><![CDATA[$F{RequisitionHeader_assignedDate}]]></textFieldExpression>
+			</textField>
+		</band>
+		</groupHeader>
+	</group>
+	<pageHeader>
+		<band height="67">
+			<textField pattern="dd-MM-yyyy hh:mm:ss" isBlankWhenNull="true">
+				<reportElement positionType="Float" mode="Opaque" x="1" y="2" width="97" height="16"/>
+				<textElement/>
+				<textFieldExpression class="java.util.Date"><![CDATA[$V{today}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement positionType="Float" x="242" y="1" width="329" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="16" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{reportTitle}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement positionType="Float" x="728" y="1" width="49" height="20"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression class="java.lang.String"><![CDATA["Page " + String.valueOf($V{PAGE_NUMBER}) + " of" + " "]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement positionType="Float" x="776" y="1" width="25" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[String.valueOf($V{PAGE_NUMBER})]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement positionType="Float" x="1" y="49" width="50" height="15"/>
+				<box topBorder="None" leftBorder="None" bottomBorder="1Point" rightBorder="None"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Type]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="51" y="49" width="89" height="15"/>
+				<box topBorder="None" leftBorder="None" bottomBorder="1Point" rightBorder="None"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Order Number]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="140" y="49" width="65" height="15"/>
+				<box topBorder="None" leftBorder="None" bottomBorder="1Point" rightBorder="None"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Rel./Rev. No.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="246" y="49" width="59" height="15"/>
+				<box topBorder="None" leftBorder="None" bottomBorder="1Point" rightBorder="None"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Dept.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="305" y="49" width="48" height="15"/>
+				<box topBorder="None" leftBorder="None" bottomBorder="1Point" rightBorder="None"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[PO Date]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="353" y="49" width="42" height="15"/>
+				<box topBorder="None" leftBorder="None" bottomBorder="1Point" rightBorder="None"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Req'd]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="460" y="49" width="56" height="15"/>
+				<box topBorder="None" leftBorder="None" bottomBorder="1Point" rightBorder="None"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Order Total]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="516" y="49" width="54" height="15"/>
+				<box topBorder="None" leftBorder="None" bottomBorder="1Point" rightBorder="None"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Currency]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="570" y="49" width="59" height="15"/>
+				<box topBorder="None" leftBorder="None" bottomBorder="1Point" rightBorder="None"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Base Total]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="692" y="49" width="69" height="15"/>
+				<box topBorder="None" leftBorder="None" bottomBorder="1Point" rightBorder="None"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Assigned Date]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="629" y="49" width="63" height="15"/>
+				<box topBorder="None" leftBorder="None" bottomBorder="1Point" rightBorder="None"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Status]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="395" y="49" width="65" height="15"/>
+				<box topBorder="None" leftBorder="None" bottomBorder="1Point" rightBorder="None"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Supplier]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="205" y="49" width="41" height="15"/>
+				<box topBorder="None" leftBorder="None" bottomBorder="1Point" rightBorder="None"/>
+				<textElement/>
+				<text><![CDATA[Contract No.]]></text>
+			</staticText>
+			<textField>
+				<reportElement positionType="Float" x="242" y="21" width="329" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="15" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{subTitle}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<detail>
+		<band>
+		</band>
+	</detail>
+	<summary>
+		<band height="16">
+			<staticText>
+				<reportElement positionType="Float" x="542" y="1" width="60" height="14"/>
+				<textElement/>
+				<text><![CDATA[Total:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="18" y="1" width="111" height="14"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total Purchase Orders:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" x="132" y="1" width="60" height="14"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$V{REPORT_COUNT}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" x="605" y="1" width="60" height="13"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{reportTotal}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

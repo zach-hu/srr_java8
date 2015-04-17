@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="CancelExtendedDisbursementLine" connection-type="Requires-Transaction">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="DisbursementLineCancelInventory">
+			<task synchronous="true" continue-on-failure="false" name="updateinventory">
+				<task-object-name>com.tsa.puridiom.disbline.tasks.DisbLineExtendedCancelUpdateInventory</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="setup">
+				<task-object-name>com.tsa.puridiom.disbline.tasks.DisbLineCancelSetup</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="disbLines">
+				<task-object-name>com.tsa.puridiom.disbline.tasks.DisbLineRetrieveByReqLine</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

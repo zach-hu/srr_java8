@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="updateDisbursement" connection-type="transaction-required">
+	<activities>
+		<!--Update a pending disbursement-->
+		<activity synchronous="true" continue-on-failure="false" name="updateDisbursement">
+			<!--get qties from client -->
+			<!-- needs:
+				*		DisbLine_icDisbLine
+				*		old_DisbLine_qty (original qty requested)
+				* 	DisbLine_quantity (new qty requested)
+				*		DisbLine_itemLocation
+				*		DisbLine_itemNumber
+				*	***Note
+				*		Client should make sure newQty <= oldQty
+			-->
+			<task synchronous="true" continue-on-failure="false" name="Setup">
+				<rule-filename></rule-filename>
+				<task-object-name>com.tsa.puridiom.disbline.tasks.DisbLineUpdateSetup</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="disbLine">
+				<rule-filename></rule-filename>
+				<task-object-name>com.tsa.puridiom.disbline.tasks.DisbLineRetrieveById</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="disbLine">
+				<rule-filename></rule-filename>
+				<task-object-name>com.tsa.puridiom.disbline.tasks.DisbLineSetValues</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="disbLineUpdate">
+				<rule-filename></rule-filename>
+				<task-object-name>com.tsa.puridiom.disbline.tasks.DisbLineUpdate</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<!-- if we are doing extended inventory, bin has to be updated as well. -->
+		<activity synchronous="true" continue-on-failure="false" name="updateQty">
+			<rule-filename>is-extended-inventory-module-active</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="invBinLocation">
+				<task-object-name>com.tsa.puridiom.invbinlocation.tasks.InvBinLocationRetrieveById</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="invBinLocation">
+				<rule-filename check-for-false="true">is-invbinlocation-empty.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.invbinlocation.tasks.UpdateQtyInvBinLocation</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="invBinLocation">
+				<rule-filename check-for-false="true">is-invbinlocation-empty.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.invbinlocation.tasks.InvBinLocationUpdate</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<!--Update inv_location-->
+		<activity synchronous="true" continue-on-failure="false" name="updateQty">
+			<task synchronous="true" continue-on-failure="false" name="invLocation">
+				<task-object-name>com.tsa.puridiom.invlocation.tasks.InvLocationRetrieveById</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="invLocation">
+				<rule-filename check-for-false="true">is-invlocation-empty.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.invlocation.tasks.UpdateQtyInvLocation</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="invLocation">
+				<rule-filename check-for-false="true">is-invlocation-empty.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.invlocation.tasks.InvLocationUpdate</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<!-- Requisition Line should be updated as well 12/30/04. -->
+		<activity synchronous="true" continue-on-failure="false" name="updateQty">
+			<rule-filename check-for-false="true">is-dsb-type-o.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="requisitionLine">
+				<task-object-name>com.tsa.puridiom.requisitionline.tasks.RequisitionLineRetrieveById</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="requisitionLine">
+				<task-object-name>com.tsa.puridiom.requisitionline.tasks.RequisitionLineUpdateDisbursedQty</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="requisitionLine">
+				<task-object-name>com.tsa.puridiom.requisitionline.tasks.RequisitionLineUpdate</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+	</activities>
+</process>

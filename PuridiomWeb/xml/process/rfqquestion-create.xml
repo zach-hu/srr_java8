@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="rfqQuestionCreate" connection-type="Connection-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="rfqQuestionCreate">
+			<task synchronous="true" continue-on-failure="false" name="rfqQuestionSetup">			
+				<task-object-name>com.tsa.puridiom.rfqquestion.tasks.RfqQuestionSetup</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="RfqQuestion_sequence">			
+				<task-object-name>com.tsa.puridiom.rfqquestion.tasks.RfqQuestionGetNextSequence</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="rfqQuestion">
+				<task-object-name>com.tsa.puridiom.rfqquestion.tasks.RfqQuestionSetValues</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="rfqQuestionAdd">
+ 				<rule-filename>is-create-save.xml</rule-filename>
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>rfqquestion-add.xml</process-filename>
+			</task>
+		</activity>
+	</activities>
+</process>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="vendorCommRelAdd" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="vendorCommRelAdd">
+			<task synchronous="true" continue-on-failure="false" name="vendorCommRel">
+				<task-object-name>com.tsa.puridiom.vendorcommrel.tasks.VendorCommRelSetValues</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="vendorCommRel">
+				<task-object-name>com.tsa.puridiom.vendorcommrel.tasks.VendorCommRelAdd</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

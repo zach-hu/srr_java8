@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="xlsDataUpload" connection-type="Connection-Required">
+	<activities>
+	    <activity synchronous="true" continue-on-failure="false" name="xlsDataSetup">
+		   <task synchronous="true" continue-on-failure="false" name="xlsDataSetup">
+		    <task-object-name>com.tsa.puridiom.xlsdata.tasks.XlsDataSetup</task-object-name>
+		  </task>
+	    </activity>
+	    <activity synchronous="true" continue-on-failure="false" name="xlsDataUpload">
+	      <rule-filename check-for-false="true">is-xls-columns-empty.xml</rule-filename>
+		  <task synchronous="true" continue-on-failure="false" name="XlsData_content">
+		    <task-object-name>com.tsa.puridiom.xlsdata.tasks.XlsDataReadFile</task-object-name>
+		  </task>
+		  <task synchronous="true" continue-on-failure="false" name="xlsData">
+		    <task-object-name>com.tsa.puridiom.xlsdata.tasks.XlsDataSetValues</task-object-name>
+		  </task>
+		  <task synchronous="true" continue-on-failure="false" name="xlsDataSetReference">
+		    <task-object-name>com.tsa.puridiom.xlsdata.tasks.XlsDataSetReference</task-object-name>
+		  </task>
+		  <task synchronous="true" continue-on-failure="false" name="xlsDataUpload">
+		    <task-object-name>com.tsa.puridiom.xlsdata.tasks.XlsDataUpload</task-object-name>
+		  </task>
+		</activity>
+	</activities>
+</process>

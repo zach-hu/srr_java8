@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="appRuleUserApprovalAmountUpdate" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="appRuleApprovalAmountUpdateByUser">
+			<task synchronous="true" continue-on-failure="false" name="appRuleApprovalAmountUpdateByUser">
+				<task-object-name>com.tsa.puridiom.apprule.tasks.AppRuleApprovalAmountUpdateByUser</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+	</activities>
+</process>

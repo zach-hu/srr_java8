@@ -1,0 +1,201 @@
+<browse_consolidateditem>
+	<columns>
+		<ConsolidatedItem_viewImage>
+			<label>Image</label>
+			<link><![CDATA[javascript: viewImage('CON'); void(0);]]></link>
+			<size>10</size>
+			<selectsql>N</selectsql>
+			<type>ImageLink</type>
+		</ConsolidatedItem_viewImage>
+		<ConsolidatedItem_id_catalogId>
+			<label><![CDATA[brw-catalogId]]></label>
+			<size>15</size>
+			<hidden-input>Y</hidden-input>
+			<key>Y</key>
+		</ConsolidatedItem_id_catalogId>
+		<ConsolidatedItem_id_inventoryLocation>
+			<label><![CDATA[brw-inventoryLocation]]></label>
+			<size>16</size>
+			<hidden-input>Y</hidden-input>
+			<key>Y</key>
+		</ConsolidatedItem_id_inventoryLocation>
+		<ConsolidatedItem_id_itemNumber>
+			<label><![CDATA[brw-itemNumber]]></label>
+			<size>16</size>
+			<hidden-input>Y</hidden-input>
+			<key>Y</key>
+		</ConsolidatedItem_id_itemNumber>
+		<ConsolidatedItem_commodity>
+			<label><![CDATA[brw-commodity]]></label>
+			<type>COMMODITY</type>
+			<size>22</size>
+		</ConsolidatedItem_commodity>
+		<ConsolidatedItem_currencyCode>
+			<hidden>Y</hidden>
+		</ConsolidatedItem_currencyCode>
+		<ConsolidatedItem_cost>
+			<label><![CDATA[brw-cost]]></label>
+			<type>CurrencyDecimal</type>
+			<arguments>
+				<col type="BrowseColumn">ConsolidatedItem_currencyCode</col>
+			</arguments>
+			<size>8</size>
+			<hidden-input>Y</hidden-input>
+		</ConsolidatedItem_cost>
+		<ConsolidatedItem_umCode>
+			<hidden>Y</hidden>
+			<hidden-input>Y</hidden-input>
+		</ConsolidatedItem_umCode>
+		<ConsolidatedItem_umDisplay>
+			<label><![CDATA[]]></label>
+			<size>5</size>
+			<concatenate>
+				<col type="String">(</col>
+				<col type="BrowseColumn">ConsolidatedItem_umCode</col>
+				<col type="String">)</col>
+			</concatenate>
+			<selectsql>N</selectsql>
+		</ConsolidatedItem_umDisplay>
+		<compute_breakCount>
+			<type>BigDecimal</type>
+			<initial>(select count (*) from catalog_price_brks where catalog_price_brks.catalog_id = ConsolidatedItem_catalog_id and catalog_price_brks.item_number = ConsolidatedItem_item_number)</initial>
+			<hidden>Y</hidden>
+			<hidden-input>Y</hidden-input>
+			<selectsql>N</selectsql>
+		</compute_breakCount>
+		<Input_quantity>
+			<label><![CDATA[brw-quantity]]></label>
+			<size>8</size>
+			<selectsql>N</selectsql>
+			<store-request-value>Y</store-request-value>
+		</Input_quantity>
+		<ConsolidatedItem_description>
+			<label><![CDATA[brw-itemDescription]]></label>
+			<detail>Y</detail>
+			<size>100</size>
+		</ConsolidatedItem_description>
+		<ConsolidatedItem_mfgName>
+			<label><![CDATA[brw-manufacturer]]></label>
+			<detail>Y</detail>
+			<size>50</size>
+		</ConsolidatedItem_mfgName>
+		<ConsolidatedItem_modelNumber>
+			<label><![CDATA[brw-modelNumber]]></label>
+			<detail>Y</detail>
+			<size>50</size>
+		</ConsolidatedItem_modelNumber>
+		<ConsolidatedItem_imageFile>
+			<hidden-input>Y</hidden-input>
+			<hidden>Y</hidden>
+		</ConsolidatedItem_imageFile>
+		<ConsolidatedItem_priceBrk>
+			<label><![CDATA[<![CDATA[brw-priceBreak]]></label>
+			<hidden>Y</hidden>
+			<hidden-input>Y</hidden-input>
+		</ConsolidatedItem_priceBrk>
+		<Link_viewPriceBreaks>
+			<label><![CDATA[<![CDATA[brw-viewPriceBreaks]]></label>
+			<link><![CDATA[javascript: viewPriceBreaks('#ConsolidatedItem_catalogId^','#ConsolidatedItem_itemNumber^'); void(0);]]></link>
+			<detail>Y</detail>
+			<size>33</size>
+			<type>ConditionalLink</type>
+			<selectsql>N</selectsql>
+		</Link_viewPriceBreaks>
+		<ConsolidatedItem_kit>
+			<label><![CDATA[brw-kitItem]]></label>
+			<hidden>Y</hidden>
+			<hidden-input>Y</hidden-input>
+		</ConsolidatedItem_kit>
+		<ConsolidatedItem_viewCatalogKitItems>
+			<label><![CDATA[brw-viewKitItems]]></label>
+			<link><![CDATA[javascript: viewKitItems('CON'); void(0);]]></link>
+			<detail>Y</detail>
+			<size>33</size>
+			<type>ConditionalLink</type>
+			<selectsql>N</selectsql>
+		</ConsolidatedItem_viewCatalogKitItems>
+		<CatalogItem_catalogId>
+			<hidden>Y</hidden>
+			<hidden-input>Y</hidden-input>
+			<concatenate>
+				<col type="BrowseColumn">ConsolidatedItem_id_catalogItem</col>
+			</concatenate>
+			<selectsql>N</selectsql>
+		</CatalogItem_catalogId>
+		<CatalogItem_itemNumber>
+			<hidden>Y</hidden>
+			<hidden-input>Y</hidden-input>
+			<concatenate>
+				<col type="BrowseColumn">ConsolidatedItem_id_itemNumber</col>
+			</concatenate>
+			<selectsql>N</selectsql>
+		</CatalogItem_itemNumber>
+		<InvLocation_itemLocation>
+			<hidden>Y</hidden>
+			<hidden-input>Y</hidden-input>
+			<concatenate>
+				<col type="BrowseColumn">ConsolidatedItem_id_itemLocation</col>
+			</concatenate>
+			<selectsql>N</selectsql>
+		</InvLocation_itemLocation>
+		<InvItem_itemNumber>
+			<hidden>Y</hidden>
+			<hidden-input>Y</hidden-input>
+			<concatenate>
+				<col type="BrowseColumn">ConsolidatedItem_id_itemNumber</col>
+			</concatenate>
+			<selectsql>N</selectsql>
+		</InvItem_itemNumber>
+		<InvItem_issueCost>
+			<hidden>Y</hidden>
+			<hidden-input>Y</hidden-input>
+			<concatenate>
+				<col type="BrowseColumn">ConsolidatedItem_cost</col>
+			</concatenate>
+			<selectsql>N</selectsql>
+		</InvItem_issueCost>
+		<InvItem_unitOfIssue>
+			<hidden>Y</hidden>
+			<hidden-input>Y</hidden-input>
+			<concatenate>
+				<col type="BrowseColumn">ConsolidatedItem_umCode</col>
+			</concatenate>
+			<selectsql>N</selectsql>
+		</InvItem_unitOfIssue>
+	</columns>
+	<group-filters>
+		<ConsolidatedItem_id_catalogId>
+			<label><![CDATA[brw-catalog]]></label>
+			<sqlselect>select Catalog.catalogId, count(ConsolidatedItem.id.catalogId)</sqlselect>
+			<sqlfrom>Catalog as Catalog, ConsolidatedItem as ConsolidatedItem</sqlfrom>
+			<sqlwhere><![CDATA[Catalog.catalogId = ConsolidatedItem.id.catalogId]]></sqlwhere>
+			<sqlgroupby>Catalog.catalogId</sqlgroupby>
+		</ConsolidatedItem_id_catalogId>
+		<ConsolidatedItem_commodity>
+			<label><![CDATA[commodity]]></label>
+			<type>Commodity</type>
+			<sqlselect>select Commodity.commodity, count(ConsolidatedItem.commodity)</sqlselect>
+			<sqlfrom>Commodity as Commodity, Catalog as Catalog, ConsolidatedItem as ConsolidatedItem</sqlfrom>
+			<sqlwhere><![CDATA[Commodity.commodity = ConsolidatedItem.commodity]]></sqlwhere>
+			<sqlgroupby>Commodity.commodity</sqlgroupby>
+		</ConsolidatedItem_commodity>
+		<ConsolidatedItem_cost>
+			<label><![CDATA[brw-cost]]></label>
+			<type>CostRange</type>
+			<sqlselect>select CostRange.description, count(ConsolidatedItem.cost), CostRange.minimumCost</sqlselect>
+			<sqlfrom>CostRange as CostRange, Catalog as Catalog, ConsolidatedItem as ConsolidatedItem</sqlfrom>
+			<sqlwhere><![CDATA[CostRange.minimumCost <= ConsolidatedItem.cost and CostRange.maximumCost >= ConsolidatedItem.cost and CostRange.itemType = ConsolidatedItem.source]]></sqlwhere>
+			<sqlgroupby>CostRange.minimumCost, CostRange.description</sqlgroupby>
+		</ConsolidatedItem_cost>
+		<ConsolidatedItem_description>
+			<label><![CDATA[brw-keyword(s)]]></label>
+			<type>Keywords</type>
+		</ConsolidatedItem_description>
+	</group-filters>
+	<sqlfrom>ConsolidatedItem as ConsolidatedItem</sqlfrom>
+	<sqlorderby>ConsolidatedItem.id.itemNumber ASC</sqlorderby>
+	<sqlwhere><![CDATA[]]></sqlwhere>
+	<title>Catalog / Inventory Items</title>
+	<pagesize>10</pagesize>
+	<maxrows>5000</maxrows>
+</browse_consolidateditem>

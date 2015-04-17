@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="ScheduleAdd" connection-type="Transaction-Required"> 
+	<activities>  
+		<activity synchronous="true" continue-on-failure="false" name="ScheduleAdd">
+			<task synchronous="true" continue-on-failure="false" name="Schedule_lineNumber">			
+				<task-object-name>com.tsa.puridiom.schedule.tasks.ScheduleGetNewLineNumber</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="schedule">			
+				<task-object-name>com.tsa.puridiom.schedule.tasks.ScheduleSetValues</task-object-name>
+			</task>
+			  <task synchronous="true" continue-on-failure="false" name="schedule">    			
+				<task-object-name>com.tsa.puridiom.schedule.tasks.ScheduleAdd</task-object-name>     
+			  </task>
+		  </activity>  
+	 </activities> 
+</process>

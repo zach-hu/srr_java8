@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="departmentRetrieveById" connection-type="Connection-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="retrieveDepartment">
+			<task synchronous="true" continue-on-failure="false" name="department">			
+				<task-object-name>com.tsa.puridiom.department.tasks.DepartmentRetrieveById</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="departmentBuyerRetrieveSetup">			
+				<task-object-name>com.tsa.puridiom.departmentbuyer.tasks.DepartmentBuyerRetrieveSetup</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="departmentBuyerList">			
+				<task-object-name>com.tsa.puridiom.departmentbuyer.tasks.DepartmentBuyerRetrieveByDept</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+	</activities>
+</process>

@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions targetNamespace="http://www.coda.com/efinance/schemas/elementmaster/elementfinder-11.2/webservice" xmlns:elmws="http://www.coda.com/efinance/schemas/elementmaster/elementfinder-11.2/webservice" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns="http://schemas.xmlsoap.org/wsdl/">
+  <types>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    xmlns:com="http://www.coda.com/efinance/schemas/common"
+    xmlns:udf="http://www.coda.com/common/schemas/udfmaster"
+    xmlns:efm="http://www.coda.com/efinance/schemas/elementfiltermaster"
+    xmlns:elm="http://www.coda.com/efinance/schemas/elementmaster"
+    targetNamespace="http://www.coda.com/efinance/schemas/elementmaster/elementfinder-11.2/webservice"
+    attributeFormDefault="unqualified" elementFormDefault="qualified">
+    <xsd:import namespace="http://www.coda.com/efinance/schemas/common" schemaLocation="http://codaweb.int.thompsontractor.com/D43PRD/wsdl/finance/common/common.xsd"/>
+    <xsd:import
+        namespace="http://www.coda.com/efinance/schemas/elementmaster" schemaLocation="http://codaweb.int.thompsontractor.com/D43PRD/wsdl/finance/elementmaster/elementmaster.xsd"/>
+    <xsd:import
+        namespace="http://www.coda.com/efinance/schemas/elementfiltermaster" schemaLocation="http://codaweb.int.thompsontractor.com/D43PRD/wsdl/finance/elementfiltermaster/elementfiltermaster.xsd"/>
+    <xsd:import namespace="http://www.coda.com/common/schemas/udfmaster" schemaLocation="http://codaweb.int.thompsontractor.com/D43PRD/wsdl/common/udfmaster/udfmaster.xsd"/>
+    <xsd:element name="FindRequest">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="FinderFilter" type="elm:ElementFinderFilter">
+                    <xsd:annotation>
+                        <xsd:documentation>A filter that selects the
+                            element masters to be listed.</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="Options">
+        <xsd:complexType>
+            <xsd:attribute name="bulkload" type="xsd:boolean"/>
+            <xsd:attribute name="logtitle" type="com:typeLogTitle"/>
+            <xsd:attribute name="attachments" type="com:typeAttachments" default="none"/>
+            <xsd:attribute name="locale" type="com:typeLocale"/>
+            <xsd:attribute name="user" type="com:typeGeneralCode"/>
+            <xsd:attribute name="company" type="com:typeGeneralCode"/>
+            <xsd:attribute name="session" type="xsd:string"/>
+            <xsd:attribute name="transactionid" type="xsd:string"/>
+            <xsd:attribute name="txtimeout" type="xsd:int"/>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="FindResponse">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="FinderFilter" type="elm:ElementFinderFilter">
+                    <xsd:annotation>
+                        <xsd:documentation>The filter that was used to
+                            select the element masters to be listed.</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:element>
+                <xsd:element name="Keys" minOccurs="0" type="elm:elmKeyDataNamed">
+                    <xsd:annotation>
+                        <xsd:documentation>Contains the key information
+                            for the listed element masters.</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="FilterResponse">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="Key" type="efm:ElementFilterKey">
+                    <xsd:annotation>
+                        <xsd:documentation>This element contains key
+                            information identifying the element filter
+                            master sent in the request corresponding to
+                            this response.</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:element>
+                <xsd:element name="MaxKeys" minOccurs="0" type="xsd:int">
+                    <xsd:annotation>
+                        <xsd:documentation>The maximum number of element
+                            masters to be returned.</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:element>
+                <xsd:element name="ReturnNames" minOccurs="0" type="xsd:boolean">
+                    <xsd:annotation>
+                        <xsd:documentation>If TRUE, specifies that names
+                            have been returned.</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:element>
+                <xsd:element name="Keys" minOccurs="0" type="elm:elmKeyDataNamed">
+                    <xsd:annotation>
+                        <xsd:documentation>Contains the key information
+                            for the listed element masters.</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="FilterRequest">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="Key" type="efm:ElementFilterKey">
+                    <xsd:annotation>
+                        <xsd:documentation>This element contains key
+                            information for specifying the element
+                            filter master to use.</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:element>
+                <xsd:element name="MaxKeys" minOccurs="0" type="xsd:int">
+                    <xsd:annotation>
+                        <xsd:documentation>The maximum number of element
+                            masters to be returned.</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:element>
+                <xsd:element name="ReturnNames" minOccurs="0" type="xsd:boolean">
+                    <xsd:annotation>
+                        <xsd:documentation>If TRUE, specifies that names
+                            should be returned.</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="OptionsResponse">
+        <xsd:complexType>
+            <xsd:attribute name="transactioncoordinator" type="xsd:string"/>
+        </xsd:complexType>
+    </xsd:element>
+</xsd:schema>
+  </types>
+  <message name="Options">
+    <part name="Options" element="elmws:Options"/>
+  </message>
+  <message name="FilterResponse">
+    <part name="FilterResponse" element="elmws:FilterResponse"/>
+  </message>
+  <message name="OptionsResponse">
+    <part name="OptionsResponse" element="elmws:OptionsResponse"/>
+  </message>
+  <message name="FindResponse">
+    <part name="FindResponse" element="elmws:FindResponse"/>
+  </message>
+  <message name="FindRequest">
+    <part name="FindRequest" element="elmws:FindRequest"/>
+  </message>
+  <message name="FilterRequest">
+    <part name="FilterRequest" element="elmws:FilterRequest"/>
+  </message>
+  <portType name="ElementFinderServicePortTypes">
+    <operation name="Filter">
+      <input message="elmws:FilterRequest"/>
+      <output message="elmws:FilterResponse"/>
+    </operation>
+    <operation name="Find">
+      <input message="elmws:FindRequest"/>
+      <output message="elmws:FindResponse"/>
+    </operation>
+  </portType>
+  <binding name="ElementFinderServiceSOAPBinding" type="elmws:ElementFinderServicePortTypes">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <operation name="Filter">
+<documentation>Searches the database for element masters by specifying an element filter master.</documentation>
+      <soap:operation soapAction="uri-coda-webservice/11.200.0306/finance/ElementFinder/Filter" style="document"/>
+      <input>
+        <soap:header message="elmws:Options" part="Options" use="literal">
+        </soap:header>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:header message="elmws:OptionsResponse" part="OptionsResponse" use="literal">
+        </soap:header>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+    <operation name="Find">
+<documentation>Searches the database for the specified element masters.</documentation>
+      <soap:operation soapAction="uri-coda-webservice/11.200.0306/finance/ElementFinder/Find" style="document"/>
+      <input>
+        <soap:header message="elmws:Options" part="Options" use="literal">
+        </soap:header>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:header message="elmws:OptionsResponse" part="OptionsResponse" use="literal">
+        </soap:header>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+  </binding>
+  <service name="ElementFinderService">
+    <port name="ElementFinderServicePort" binding="elmws:ElementFinderServiceSOAPBinding">
+      <soap:address location="http://codaweb.int.thompsontractor.com/D43PRD/services/finance/elementmaster/elementfinder-11.2"/>
+    </port>
+  </service>
+</definitions>

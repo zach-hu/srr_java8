@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="invoiceheader-update-status" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="invoiceRetrieve">
+			<task synchronous="true" continue-on-failure="false" name="invoiceHeader">
+			<!--<rule-filename>is-invoiceheader-empty</rule-filename>-->
+				<task-object-name>com.tsa.puridiom.invoiceheader.tasks.InvoiceHeaderRetrieveById</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="invoiceHeaderRetrieveSetup">
+				<task-object-name>com.tsa.puridiom.invoiceheader.tasks.InvoiceHeaderRetrieveSetup</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="invoiceLineList">
+				<task-object-name>com.tsa.puridiom.invoiceline.tasks.InvoiceLineRetrieveByHeader</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="invoiceHeaderUpdate">
+			<!--<rule-filename check-for-false="true">is-invoiceheader-empty</rule-filename>-->
+			<task synchronous="true" continue-on-failure="false" name="invoiceHeader">
+				<task-object-name>com.tsa.puridiom.invoiceheader.tasks.InvoiceHeaderSetStatusByLineList</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="invoiceHeader">
+				<task-object-name>com.tsa.puridiom.invoiceheader.tasks.InvoiceHeaderUpdate</task-object-name>
+				<post-action></post-action>
+			</task>
+			<!--<task synchronous="true" continue-on-failure="false" name="invoiceHeaderHistory">
+		    	<task-object-name>com.tsa.puridiom.invoiceheader.history.tasks.InvoiceHeaderHistory</task-object-name>
+			</task>-->
+		</activity>
+	</activities>
+</process>

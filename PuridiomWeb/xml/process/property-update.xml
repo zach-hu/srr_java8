@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="propertyUpdate" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="propertySetValues">
+			<task synchronous="true" continue-on-failure="false" name="propertyUpdateType">
+				<task-object-name>com.tsa.puridiom.property.tasks.PropertyDetermineUpdateType</task-object-name>
+			</task>
+			<task synchronous="true" undo-on-failure="true" name="propertySetValues">
+				<rule-filename>is-multiple-property-update</rule-filename>
+				<task-object-name>com.tsa.puridiom.property.tasks.PropertySetMultipleFromRequest</task-object-name>
+				<post-action>exitActivity</post-action>
+			</task>
+			<task synchronous="true" undo-on-failure="true" name="propertySetValues">
+				<task-object-name>com.tsa.puridiom.property.tasks.PropertySetFromRequest</task-object-name>
+				<post-action>exitActivity</post-action>
+			</task>			
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="propertyUpdate">
+			<task synchronous="true" continue-on-failure="false" name="propertyAdd">
+				<task-object-name>com.tsa.puridiom.property.tasks.PropertyAddList</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="propertyUpdate">
+				<task-object-name>com.tsa.puridiom.property.tasks.PropertyUpdateList</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

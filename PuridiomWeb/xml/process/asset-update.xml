@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="assetUpdate" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="assetUpdate">
+			<task synchronous="true" continue-on-failure="false" name="asset">
+				<task-object-name>com.tsa.puridiom.asset.serv.tasks.AssetSetValuesChanged</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="asset">
+				<task-object-name>com.tsa.puridiom.asset.tasks.AssetSetValues</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="asset">
+				<task-object-name>com.tsa.puridiom.asset.tasks.AssetUpdate</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="assetNoteAdd">
+				<rule-filename>is-asset-status-changed.xml</rule-filename>
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>assetnote-add-chg-asset-status.xml</process-filename>
+			</task>
+		</activity>
+	</activities>
+</process>

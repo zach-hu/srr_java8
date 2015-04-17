@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process connection-type="Transaction-Required" name="poForward">
+	<activities>
+		<activity continue-on-failure="false" name="lineStatus" synchronous="true">
+			<rule-filename>is-poline-not-pending-approval.xml;is-poline-not -cancelled.xml</rule-filename>
+			<task continue-on-failure="false" name="poLineForwardReceiptStatus" synchronous="true">
+				<rule-filename>is-line-not-receipt-required.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.poline.tasks.PoLineForwardReceive</task-object-name>
+				<post-action>exitProcess</post-action>
+			</task>
+			<task continue-on-failure="false" name="poLineForwardAwardStatus" synchronous="true">
+				<task-object-name>com.tsa.puridiom.poline.tasks.PoLineForwardAward</task-object-name>
+			</task>
+		</activity>
+
+		<activity continue-on-failure="false" name="lineStatus" synchronous="true">
+			<rule-filename>is-poline-not-pending-approval.xml</rule-filename>
+			<task continue-on-failure="false" name="poLineForwardReceiptStatus" synchronous="true">
+				<rule-filename>is-line-not-receipt-required.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.poline.tasks.PoLineForwardReceive</task-object-name>
+			</task>
+			<task continue-on-failure="false" name="poLineForwardAwardStatus" synchronous="true">
+				<task-object-name>com.tsa.puridiom.poline.tasks.PoLineForwardAward</task-object-name>
+			</task>
+			<task continue-on-failure="false" name="" synchronous="true">
+				<rule-filename>is-poline-status-changed.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.poline.tasks.PoLineUpdateRevisions</task-object-name>
+			</task>
+		</activity>
+
+		<!--this portion deals with receipts -->
+		<!-- activity continue-on-failure="false" name="noreceipts" synchronous="true">
+			<rule-filename>is-poline-not -cancelled.xml</rule-filename>
+
+		</activity -->
+		<!--activity continue-on-failure="false" name="cancelLine" synchronous="true">
+			<rule-filename>is-poline-cancelled.xml</rule-filename>
+
+		</activity -->
+	</activities>
+
+</process>

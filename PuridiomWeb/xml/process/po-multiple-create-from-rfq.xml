@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="poCreatefromrfq" connection-type="New-Transaction">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="RetrievePoVendorList">
+			<task synchronous="true" continue-on-failure="false" name="vendorList">
+				<task-object-name>com.tsa.puridiom.rfqline.tasks.RfqLineRetrieveVendorListByHeader</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="createPoMultiple">
+			<task synchronous="true" continue-on-failure="false" name="poList">
+				<task-object-name>com.tsa.puridiom.po.tasks.PoMultipleCreateFromRfq</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

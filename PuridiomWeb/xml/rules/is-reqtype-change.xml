@@ -1,0 +1,26 @@
+<rule>
+	<clause type="StringCompare">
+		<left-side>
+			<source>incomingRequest</source>
+			<name>RequisitionHeader_requisitionType</name>
+		</left-side>
+		<operator>EQUALS</operator>
+		<right-side>
+			<source>constant</source>
+			<value>C</value>
+		</right-side>
+	</clause>
+	<logical-operator>OR</logical-operator>
+	<clause type="StringCompare">
+		<left-side>
+			<source>incomingRequestObjectMethod</source>
+			<object>requisitionHeader</object>
+			<name>getRequisitionType</name>
+		</left-side>
+		<operator>EQUALS</operator>
+		<right-side>
+			<source>constant</source>
+			<value>C</value>
+		</right-side>
+	</clause>
+</rule>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- set connection-type="None" because connection will be obtained in OrganizationUpdate w/ host.cfg.xml -->
+<process name="organizationUpdate" connection-type="None" ldap-connection-type="None">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="organizationUpdate">
+			<task synchronous="true" continue-on-failure="false" name="organization">
+				<task-object-name>com.tsa.puridiom.organization.tasks.OrganizationManagerGetOrganization</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="organization">
+				<task-object-name>com.tsa.puridiom.organization.tasks.OrganizationSetValues</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="organization">
+				<task-object-name>com.tsa.puridiom.organization.tasks.OrganizationUpdate</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="organizationSetInCache">
+				<task-object-name>com.tsa.puridiom.organization.tasks.OrganizationManagerSetInCache</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

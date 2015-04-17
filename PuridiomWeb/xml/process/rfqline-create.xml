@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="rfqLineCreate" connection-type="Connection-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="rfqLineCreate">
+			<task synchronous="true" continue-on-failure="false" name="rfqHeader">
+				<task-object-name>com.tsa.puridiom.rfqheader.tasks.RfqHeaderRetrieveById</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="rfqLineSetup">
+				<rule-filename check-for-false="true">is-duplicate-item.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.rfqline.tasks.RfqLineSetup</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="rfqLineSetup">
+				<task-object-name>com.tsa.puridiom.rfqline.tasks.RfqLineSetupForLookup</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="rfqLineSetup">
+				<task-object-name>com.tsa.puridiom.rfq.tasks.RfqHeaderLinesMapUdfs</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="rfqLineSetupUmFactor">
+				<task-object-name>com.tsa.puridiom.rfqline.tasks.RfqLineSetupUmFactor</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="RfqLine_rfqLine">
+				<task-object-name>com.tsa.puridiom.rfqline.tasks.RfqLineGetNewRfqLineNumber</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="rfqLineSetDefaultsFromHeader">
+				<task-object-name>com.tsa.puridiom.rfqline.tasks.RfqLineSetDefaultsFromHeader</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="rfqLine">
+				<task-object-name>com.tsa.puridiom.rfqline.tasks.RfqLineSetValues</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="rfqLineAdd">
+ 				<rule-filename>is-create-save.xml</rule-filename>
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>rfqline-add.xml</process-filename>
+			</task>
+		</activity>
+	</activities>
+</process>

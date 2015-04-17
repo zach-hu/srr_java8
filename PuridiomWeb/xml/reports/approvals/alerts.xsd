@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="alert">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="name" />
+        <xs:element ref="type" />
+        <xs:element ref="where" />
+        <xs:element ref="description" />
+        <xs:element ref="retrieve" />
+        <xs:element ref="subject" />
+        <xs:element ref="sendto" />
+        <xs:element ref="message" />
+        <xs:element ref="last-run" minOccurs="0" />
+      </xs:sequence>
+      <xs:attribute name="enabled" type="xs:boolean" use="required" />
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="alerts">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="alert" maxOccurs="unbounded" />
+      </xs:sequence>
+      <xs:attribute name="enabled" use="required" type="xs:boolean">
+                <xs:annotation>
+                	<xs:documentation>
+                		Enables or disables alert
+                	</xs:documentation>
+                </xs:annotation>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="arg">
+    <xs:complexType>
+            <xs:annotation>
+            	<xs:documentation>
+            		Arguments from the Select statement
+            	</xs:documentation>
+            </xs:annotation>
+            <xs:sequence>
+        <xs:element ref="value" />
+        <xs:element ref="offset" />
+        <xs:element ref="type" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="argumentName">
+    <xs:complexType mixed="true" />
+  </xs:element>
+
+  <xs:element name="description">
+    <xs:complexType mixed="true" />
+  </xs:element>
+
+  <xs:element name="last-run">
+    <xs:complexType mixed="true" />
+  </xs:element>
+
+  <xs:element name="line">
+    <xs:complexType mixed="true">
+      <xs:attribute name="commentId" type="xs:NMTOKEN" use="optional" />
+      <xs:attribute name="repeat" use="required">
+        <xs:simpleType>
+          <xs:restriction base="xs:NMTOKEN">
+            <xs:enumeration value="N" />
+            <xs:enumeration value="Y" />
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="sizeObject" type="xs:NMTOKEN" use="optional" />
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="message">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="line" maxOccurs="unbounded" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="name" type="xs:string">
+  </xs:element>
+
+  <xs:element name="offset">
+    <xs:complexType mixed="true" />
+  </xs:element>
+
+  <xs:element name="process">
+    <xs:complexType mixed="true" />
+  </xs:element>
+
+  <xs:element name="retrieve">
+        <xs:annotation>
+        	<xs:documentation>
+        		Process to be executed by the alert to obtain the data
+        		necessary for the email or action to be executed.
+        	</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="process" >
+        	<xs:annotation>
+        		<xs:documentation>
+        			Process to be executed.
+        		</xs:documentation>
+        	</xs:annotation></xs:element>
+        <xs:element ref="argumentName" >
+        	<xs:annotation>
+        		<xs:documentation>
+        			if alert is not one of the default types(REtrieve
+        			for REquisition/Rfq/PO) and it will execute a
+        			process that receives only ine argument with an
+        			specific name. IcIvcHeader
+        		</xs:documentation>
+        	</xs:annotation></xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="sendto">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="user" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="subject">
+    <xs:complexType mixed="true" />
+  </xs:element>
+
+  <xs:element name="type">
+
+  	<xs:simpleType>
+  		<xs:restriction base="xs:string">
+  			<xs:enumeration value="INV"></xs:enumeration>
+  			<xs:enumeration value="REQ"></xs:enumeration>
+  			<xs:enumeration value="PO"></xs:enumeration>
+  			<xs:enumeration value="RFQ"></xs:enumeration>
+  		</xs:restriction>
+  	</xs:simpleType>
+  </xs:element>
+
+  <xs:element name="user">
+    <xs:complexType mixed="true">
+      <xs:attribute name="type" type="xs:NMTOKEN" use="required" />
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="value">
+    <xs:complexType mixed="true" />
+  </xs:element>
+
+  <xs:element name="where">
+    <xs:complexType mixed="true">
+            <xs:annotation>
+            	<xs:documentation>
+            		SQL Select statement to be executed by the alert.
+            		Select statement should return an ICHeader or a
+            		collection of elements which will be used by the
+            		associated process from the retrieve element.
+            	</xs:documentation>
+            </xs:annotation>
+            <xs:choice>
+        <xs:element ref="arg" />
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+
+
+
+
+</xs:schema>

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="receiptLineCreate" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="receiptLineCreate">
+			<task synchronous="true" continue-on-failure="false" name="receiptLineCreateSetup">
+				<rule-filename></rule-filename>
+				<task-object-name>com.tsa.puridiom.receiptline.tasks.ReceiptLineCreateSetup</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="receiptHeader">
+				<rule-filename>is-receiptheader-empty</rule-filename>
+				<task-object-name>com.tsa.puridiom.receiptheader.tasks.ReceiptHeaderRetrieveById</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="receiptLineCreate">
+			<task synchronous="true" continue-on-failure="false" name="reqLine">
+				<rule-filename>is-receiptmethod-receivebytransfer.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.requisitionline.tasks.RequisitionLineRetrieveById</task-object-name>
+				<post-action>exitActivity</post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="poLine">
+				<rule-filename>is-poline-empty</rule-filename>
+				<task-object-name>com.tsa.puridiom.poline.tasks.PoLineRetrieveById</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="receiptLineCreate">
+			<task synchronous="true" continue-on-failure="false" name="ReceiptLine_receiptLine">
+			<rule-filename check-for-false="true">is-receiptmethod-adjustment</rule-filename>
+				<task-object-name>com.tsa.puridiom.receiptline.tasks.ReceiptLineGetNewLineNumber</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="receiptLine">
+				<rule-filename></rule-filename>
+				<task-object-name>com.tsa.puridiom.receiptline.tasks.ReceiptLineSetValues</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="receiptLine">
+				<rule-filename></rule-filename>
+				<task-object-name>com.tsa.puridiom.receiptline.tasks.ReceiptLineSetValuesFromReceiptHeader</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="receiptLine">
+				<rule-filename check-for-false="true">is-poline-empty</rule-filename>
+				<task-object-name>com.tsa.puridiom.receiptline.tasks.ReceiptLineSetValuesFromPoLine</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="receiptLine">
+				<rule-filename></rule-filename>
+				<task-object-name>com.tsa.puridiom.receiptline.tasks.ReceiptLineAdd</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="poLineUpdate">
+			<rule-filename check-for-false="true">is-receiptline-qtyaccepted-zero.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="poLineUpdateBalance">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>poline-update-balance-from-receiptline.xml</process-filename>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="inventoryUpdate">
+			<rule-filename>is-inventory-module-active.xml;is-poheader-shiptoinv.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="finalizeTempBins">
+				<rule-filename check-for-false="true">is-receiptline-qtyaccepted-zero.xml</rule-filename>
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>invbinlocation-finalize-temp-bins-by-recline.xml</process-filename>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="poLineUpdate">
+			<task synchronous="true" continue-on-failure="false" name="assetListPoLineAdd">
+				<rule-filename>is-receiptline-asset.xml;is-receiptmethod-adjustment.xml</rule-filename>
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>assetreceiptline-add.xml</process-filename>
+			</task>
+		</activity>
+
+
+	</activities>
+</process>

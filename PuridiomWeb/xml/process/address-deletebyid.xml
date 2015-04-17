@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="AddressDeletebyid" connection-type="New-Transaction"> 
+	<activities>  
+		<activity synchronous="true" continue-on-failure="false" name="deletebyidAddressActivity">
+			<task synchronous="true" continue-on-failure="false" name="deletebyidAddress">    			
+				<task-object-name>com.tsa.puridiom.address.tasks.AddressDeleteById</task-object-name>    
+				<post-action />    
+			   </task>   
+		  </activity>  
+	 </activities> 
+</process>

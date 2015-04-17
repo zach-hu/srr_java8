@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="organizationpackage-retrieve-by" connection-type="Connection-Required" connection-name="host" ldap-connection-type="None"> 
+	<activities>  
+		<activity synchronous="true" continue-on-failure="false" name="retrieveActivity">   
+			<task synchronous="true" continue-on-failure="false" name="organizationPackageList">    			
+				<task-object-name>com.tsa.puridiom.organizationpackage.tasks.OrganizationPackageRetrieveActive</task-object-name>    
+			</task>   
+			<task synchronous="true" continue-on-failure="false" name="organizationPackageTotal">
+				<task-object-name>com.tsa.puridiom.organizationpackage.tasks.OrganizationPackageRetrieveActiveTotal</task-object-name>    
+			</task> 
+			<task synchronous="true" continue-on-failure="false" name="currentGroupPackage">
+				<task-object-name>com.tsa.puridiom.organizationpackage.tasks.OrganizationPackageRetrieveCurrentGroup</task-object-name>    
+			</task>
+		</activity>  
+	</activities> 
+</process>

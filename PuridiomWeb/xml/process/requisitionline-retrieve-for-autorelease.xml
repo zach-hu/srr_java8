@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="requisitionLineRetrieveById" connection-type="New-Connection">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="requisitionLineRetrieveById">
+			<task synchronous="true" continue-on-failure="false" name="requisitionLineList">
+				<task-object-name>com.tsa.puridiom.requisitionline.autorelease.tasks.RequisitionLineRetrieveForAutoRelease</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="requisitionLineRetrieveById">
+			<task synchronous="true" continue-on-failure="false" name="requisitionLineDataRetrieve">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>requisitionline-autorelease-group-by-order.xml</process-filename>
+			</task>
+			 <task synchronous="true" continue-on-failure="false" name="release">
+		        <task-object-name>com.tsa.puridiom.requisitionline.autorelease.tasks.RequisitionLineAutoRelease</task-object-name>
+	      	</task>
+	      	<task synchronous="true" continue-on-failure="false" name="lineListByNumber">
+		        <task-object-name>com.tsa.puridiom.requisitionline.autorelease.tasks.RequisitionLineAutoReleaseEmailSort</task-object-name>
+	      	</task>
+	      	<task synchronous="true" continue-on-failure="false" name="release">
+				<rule-filename check-for-false="true">is-organization-hoy.xml</rule-filename>
+		        <task-object-name>com.tsa.puridiom.requisitionline.autorelease.tasks.RequisitionLineAutoReleaseEmail</task-object-name>
+	      	</task>
+		</activity>
+	</activities>
+</process>

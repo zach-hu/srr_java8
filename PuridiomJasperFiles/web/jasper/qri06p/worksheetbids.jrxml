@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created using an evaluation version of JasperAssistant (http://www.jasperassistant.com) -->
+<!DOCTYPE jasperReport PUBLIC "-//JasperReports//DTD Report Design//EN" "http://jasperreports.sourceforge.net/dtds/jasperreport.dtd">
+
+<jasperReport name="bidlines" pageWidth="761" pageHeight="39" orientation="Landscape" columnWidth="761" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+	<property name="com.jasperassistant.designer.GridHeight" value="12"/>
+	<property name="com.jasperassistant.designer.GridWidth" value="12"/>
+	<property name="com.jasperassistant.designer.SnapToGrid" value="false"/>
+	<property name="com.jasperassistant.designer.Grid" value="false"/>
+	<import value="com.tsagate.foundation.utility.*"/>
+	<import value="com.tsa.puridiom.common.utility.HiltonUtility"/>
+	<reportFont name="Arial_Normal" isDefault="true" fontName="Arial" size="8" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Bold" isDefault="false" fontName="Arial Black" size="8" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica-Bold" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Bold_Big" isDefault="false" fontName="Arial Black" size="9" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica-Bold" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<parameter name="oid" class="java.lang.String"/>
+	<parameter name="currencyCode" class="java.lang.String"/>
+	<field name="WorkSheet_description" class="java.lang.String"/>
+	<field name="WorkSheet_line" class="java.math.BigDecimal"/>
+	<field name="WorkSheet_quantity" class="java.math.BigDecimal"/>
+	<field name="WorkSheet_unitPriceVend1" class="java.math.BigDecimal"/>
+	<field name="WorkSheet_unitPriceVend2" class="java.math.BigDecimal"/>
+	<field name="WorkSheet_unitPriceVend3" class="java.math.BigDecimal"/>
+	<field name="WorkSheet_unitPriceVend4" class="java.math.BigDecimal"/>
+	<field name="WorkSheet_unitPriceVend5" class="java.math.BigDecimal"/>
+	<field name="WorkSheet_itemNumber" class="java.lang.String"/>
+	<field name="WorkSheet_umCode" class="java.lang.String"/>
+	<field name="WorkSheet_umFactor" class="java.math.BigDecimal"/>
+	<field name="Worksheet_bidCodeDescription1" class="java.lang.String"/>
+	<field name="Worksheet_bidCodeDescription2" class="java.lang.String"/>
+	<field name="Worksheet_bidCodeDescription3" class="java.lang.String"/>
+	<field name="Worksheet_bidCodeDescription4" class="java.lang.String"/>
+	<field name="Worksheet_bidCodeDescription5" class="java.lang.String"/>
+	<variable name="subtotal1" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$V{extPrice1}]]></variableExpression>
+	</variable>
+	<variable name="part1" class="java.math.BigDecimal">
+		<variableExpression><![CDATA[$F{WorkSheet_quantity}.multiply($F{WorkSheet_umFactor})]]></variableExpression>
+	</variable>
+	<variable name="extPrice1" class="java.math.BigDecimal">
+		<variableExpression><![CDATA[$V{part1}.multiply($F{WorkSheet_unitPriceVend1})]]></variableExpression>
+	</variable>
+	<variable name="extPrice2" class="java.math.BigDecimal">
+		<variableExpression><![CDATA[$V{part1}.multiply($F{WorkSheet_unitPriceVend2})]]></variableExpression>
+	</variable>
+	<variable name="extPrice3" class="java.math.BigDecimal">
+		<variableExpression><![CDATA[$V{part1}.multiply($F{WorkSheet_unitPriceVend3})]]></variableExpression>
+	</variable>
+	<variable name="extPrice4" class="java.math.BigDecimal">
+		<variableExpression><![CDATA[$V{part1}.multiply($F{WorkSheet_unitPriceVend4})]]></variableExpression>
+	</variable>
+	<variable name="subtotal2" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$V{extPrice2}]]></variableExpression>
+	</variable>
+	<variable name="subtotal3" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$V{extPrice3}]]></variableExpression>
+	</variable>
+	<variable name="subtotal4" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$V{extPrice4}]]></variableExpression>
+	</variable>
+	<detail>
+		<band height="28">
+			<textField isBlankWhenNull="true" hyperlinkType="None">
+				<reportElement positionType="Float" x="0" y="0" width="37" height="14"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{WorkSheet_line}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true" hyperlinkType="None">
+				<reportElement positionType="Float" x="37" y="0" width="34" height="14"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[HiltonUtility.getFormattedQtyCurrency($F{WorkSheet_quantity}, $P{currencyCode}, $P{oid})]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true" hyperlinkType="None">
+				<reportElement positionType="Float" x="118" y="0" width="215" height="14" isPrintWhenDetailOverflows="true"/>
+				<box border="None" topPadding="0" leftPadding="2" bottomPadding="0" rightPadding="0"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[Utility.isEmpty($F{WorkSheet_itemNumber}) ?$F{WorkSheet_description}:$F{WorkSheet_itemNumber}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true" hyperlinkType="None">
+				<reportElement positionType="Float" x="118" y="14" width="215" height="14" isRemoveLineWhenBlank="true"/>
+				<box border="None" topPadding="0" leftPadding="2" bottomPadding="0" rightPadding="0"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[Utility.isEmpty($F{WorkSheet_itemNumber}) ?"":$F{WorkSheet_description}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true" hyperlinkType="None">
+				<reportElement positionType="Float" x="333" y="0" width="53" height="14"/>
+				<box border="None" topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="2"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[(!HiltonUtility.isEmpty($F{Worksheet_bidCodeDescription1})) ? $F{Worksheet_bidCodeDescription1} : HiltonUtility.getFormattedCurrency($F{WorkSheet_unitPriceVend1}, $P{currencyCode}, $P{oid})]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true" hyperlinkType="None">
+				<reportElement positionType="Float" x="439" y="0" width="53" height="14"/>
+				<box border="None" topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="2"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[(!HiltonUtility.isEmpty($F{Worksheet_bidCodeDescription2})) ? $F{Worksheet_bidCodeDescription2} : HiltonUtility.getFormattedCurrency($F{WorkSheet_unitPriceVend2}, $P{currencyCode}, $P{oid})]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true" hyperlinkType="None">
+				<reportElement positionType="Float" x="651" y="0" width="53" height="14"/>
+				<box border="None" topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="2"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[(!HiltonUtility.isEmpty($F{Worksheet_bidCodeDescription4})) ? $F{Worksheet_bidCodeDescription4} : HiltonUtility.getFormattedCurrency($F{WorkSheet_unitPriceVend4}, $P{currencyCode}, $P{oid})]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true" hyperlinkType="None">
+				<reportElement positionType="Float" x="545" y="0" width="53" height="14"/>
+				<box border="None" topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="2"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[(!HiltonUtility.isEmpty($F{Worksheet_bidCodeDescription3})) ? $F{Worksheet_bidCodeDescription3} : HiltonUtility.getFormattedCurrency($F{WorkSheet_unitPriceVend3}, $P{currencyCode}, $P{oid})]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true" hyperlinkType="None">
+				<reportElement positionType="Float" x="71" y="0" width="47" height="14"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{WorkSheet_umCode}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true" hyperlinkType="None">
+				<reportElement positionType="Float" x="386" y="0" width="53" height="14"/>
+				<box border="None" topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="2"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[HiltonUtility.getFormattedCurrency($V{extPrice1}, $P{currencyCode}, $P{oid})]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true" hyperlinkType="None">
+				<reportElement positionType="Float" x="492" y="0" width="53" height="14"/>
+				<box border="None" topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="2"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[HiltonUtility.getFormattedCurrency($V{extPrice2}, $P{currencyCode}, $P{oid})]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true" hyperlinkType="None">
+				<reportElement positionType="Float" x="598" y="0" width="53" height="14"/>
+				<box border="None" topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="2"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[HiltonUtility.getFormattedCurrency($V{extPrice3}, $P{currencyCode}, $P{oid})]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true" hyperlinkType="None">
+				<reportElement positionType="Float" x="704" y="0" width="53" height="14"/>
+				<box border="None" topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="2"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[HiltonUtility.getFormattedCurrency($V{extPrice4}, $P{currencyCode}, $P{oid})]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

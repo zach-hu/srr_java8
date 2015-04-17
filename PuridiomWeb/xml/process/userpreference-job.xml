@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="userPreferenceUpdateJob" connection-type="New-Transaction">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="userPreferenceUpdate">
+			<task synchronous="true" continue-on-failure="false" name="userPreferenceAddUserProfile">
+				<task-object-name>com.tsa.puridiom.userpreference.tasks.UserPreferenceAddUserProfile</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="userPreferenceUpdate">
+			<task synchronous="true" continue-on-failure="false" name="buyerPoOverdue">
+				<task-object-name>com.tsa.puridiom.userprofile.tasks.UserProfileUpdateBuyerPoOverdue</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="buyerPoIncomplete">
+				<task-object-name>com.tsa.puridiom.userprofile.tasks.UserProfileUpdateBuyerPoIncomplete</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="approverPoPendingApproval">
+				<task-object-name>com.tsa.puridiom.userprofile.tasks.UserProfileUpdateApproverPoPendingApproval</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="buyerReqAssigned">
+				<task-object-name>com.tsa.puridiom.userprofile.tasks.UserProfileUpdateBuyerReqAssigned</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="approverReqPendingApproval">
+				<task-object-name>com.tsa.puridiom.userprofile.tasks.UserProfileUpdateApproverReqPendingApproval</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="buyerReqPriced">
+				<task-object-name>com.tsa.puridiom.userprofile.tasks.UserProfileUpdateBuyerReqPriced</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="recInventory">
+				<task-object-name>com.tsa.puridiom.userprofile.tasks.UserProfileUpdateRecInventory</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="recInspection">
+				<task-object-name>com.tsa.puridiom.userprofile.tasks.UserProfileUpdateRecInspection</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="recMark">
+				<task-object-name>com.tsa.puridiom.userprofile.tasks.UserProfileUpdateRecMark</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="recDelivery">
+				<task-object-name>com.tsa.puridiom.userprofile.tasks.UserProfileUpdateRecDelivery</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+	</activities>
+</process>

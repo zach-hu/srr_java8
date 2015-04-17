@@ -1,0 +1,533 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE jasperReport PUBLIC "-//JasperReports//DTD Report Design//EN" "http://jasperreports.sourceforge.net/dtds/jasperreport.dtd">
+<!-- Created using an evaluation version of JasperAssistant (http://www.jasperassistant.com) -->
+<jasperReport name="RVsumvend" language="java" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="585" leftMargin="5" rightMargin="5" topMargin="5" bottomMargin="5" whenResourceMissingType="Null" columnCount="1" isTitleNewPage="false" columnSpacing="0" isFloatColumnFooter="false" printOrder="Vertical" orientation="Portrait" isSummaryNewPage="false">
+	
+	<property name="com.jasperassistant.designer.GridWidth" value="12"></property>
+	
+	<property name="com.jasperassistant.designer.GridHeight" value="12"></property>
+	
+	<property name="com.jasperassistant.designer.DataSource" value="one"></property>
+	
+	<property name="com.jasperassistant.designer.SnapToGrid" value="false"></property>
+	
+	<property name="com.jasperassistant.designer.Grid" value="false"></property>
+	
+	<import value="com.tsa.puridiom.property.PropertiesManager"></import>
+	
+	<import value="java.util.*"></import>
+	
+	<import value="com.tsa.puridiom.common.documents.*"></import>
+	
+	<import value="com.tsa.puridiom.entity.*"></import>
+	
+	<import value="net.sf.jasperreports.engine.JRDataSource"></import>
+	
+	<import value="com.tsagate.foundation.utility.Utility"></import>
+	
+	<import value="com.tsagate.properties.*"></import>
+	
+	<import value="com.tsa.puridiom.jasperreports.*"></import>
+	
+	<import value="java.net.*"></import>
+	
+	<reportFont name="Arial_Normal" isDefault="true" fontName="Arial" size="9" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"></reportFont>
+	
+	<reportFont name="Arial_Bold" isDefault="false" fontName="Arial Black" size="9" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica-Bold" pdfEncoding="Cp1252" isPdfEmbedded="false"></reportFont>
+	
+	<reportFont name="Arial_Bold_Big" isDefault="false" fontName="Arial Black" size="12" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica-Bold" pdfEncoding="Cp1252" isPdfEmbedded="false"></reportFont>
+	
+	<reportFont name="Arial_Big" isDefault="false" fontName="Arial" size="12" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"></reportFont>
+	
+	<parameter name="oid" class="java.lang.String" isForPrompting="true">
+		
+		<defaultValueExpression><![CDATA["HILTON"]]></defaultValueExpression>
+		
+	
+	</parameter>
+	
+	<parameter name="reportTitle" class="java.lang.String" isForPrompting="true">
+		
+		<defaultValueExpression><![CDATA["Template"]]></defaultValueExpression>
+		
+	
+	</parameter>
+	
+	<parameter name="reportCriteria" class="java.lang.String" isForPrompting="true">
+	</parameter>
+	
+	<parameter name="userId" class="java.lang.String" isForPrompting="true">
+		
+		<defaultValueExpression><![CDATA["Puridiom"]]></defaultValueExpression>
+		
+	
+	</parameter>
+	
+	<parameter name="footerText" class="java.lang.String" isForPrompting="true">
+		
+		<defaultValueExpression><![CDATA["Puridiom.com"]]></defaultValueExpression>
+		
+	
+	</parameter>
+	
+	<parameter name="reportType" class="java.lang.String" isForPrompting="true">
+		
+		<defaultValueExpression><![CDATA["Y"]]></defaultValueExpression>
+		
+	
+	</parameter>
+	
+	<field name="VoucherHeader_voucherType" class="java.lang.String">
+	</field>
+	
+	<field name="VoucherHeader_controlNumber" class="java.lang.String">
+	</field>
+	
+	<field name="VoucherHeader_invoiceNumber" class="java.lang.String">
+	</field>
+	
+	<field name="VoucherHeader_voucherNumber" class="java.lang.String">
+	</field>
+	
+	<field name="VoucherHeader_poNumber" class="java.lang.String">
+	</field>
+	
+	<field name="VoucherHeader_poRelease" class="java.lang.String">
+	</field>
+	
+	<field name="VoucherHeader_invoiceDate" class="java.lang.String">
+	</field>
+	
+	<field name="VoucherHeader_dateEntered" class="java.lang.String">
+	</field>
+	
+	<field name="VoucherHeader_vendorId" class="java.lang.String">
+	</field>
+	
+	<field name="VoucherHeader_invoiceUdf01" class="java.lang.String">
+	</field>
+	
+	<field name="VoucherHeader_invoiceUdf02" class="java.lang.String">
+	</field>
+	
+	<field name="VoucherHeader_invoiceUdf03" class="java.lang.String">
+	</field>
+	
+	<field name="VoucherHeader_invoiceUdf04" class="java.lang.String">
+	</field>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<variable name="today" class="java.util.Date" calculation="Nothing" incrementType="None" resetType="Report">
+		
+		<variableExpression><![CDATA[new Date()]]></variableExpression>
+		
+	
+	</variable>
+	
+	<title>
+		
+		<band height="76" isSplitAllowed="true">
+			
+			<subreport isUsingCache="false">
+				
+				<reportElement positionType="Float" x="0" y="0" width="580" height="62" isPrintInFirstWholeBand="false" isRemoveLineWhenBlank="false" isPrintWhenDetailOverflows="false" isPrintRepeatedValues="true" stretchType="NoStretch"></reportElement>
+				
+				<subreportParameter name="reportTitle"><subreportParameterExpression><![CDATA[$P{reportTitle}]]></subreportParameterExpression>
+				</subreportParameter>
+				
+				<subreportParameter name="reportCriteria">
+				</subreportParameter>
+				
+				<subreportParameter name="oid">
+					
+					<subreportParameterExpression><![CDATA[$P{oid}]]></subreportParameterExpression>
+					
+				
+				</subreportParameter>
+				
+				<subreportParameter name="footerText">
+				</subreportParameter>
+				
+				<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[JasperReportsHelper.loadSubReport("header.jasper", $P{oid},"", $P{reportType})]]></subreportExpression>
+				
+			
+			</subreport>
+			
+			<staticText>
+				
+				<reportElement positionType="Float" x="0" y="62" width="40" height="14" isPrintInFirstWholeBand="false" isRemoveLineWhenBlank="false" isPrintWhenDetailOverflows="false" isPrintRepeatedValues="true" stretchType="NoStretch"></reportElement>
+				
+				<box topBorder="None" leftBorder="None" bottomBorder="1Point" rightBorder="None"></box>
+				
+				<textElement textAlignment="Center" verticalAlignment="Middle"></textElement>
+				
+				<text><![CDATA[Voucher Type]]></text>
+				
+			
+			</staticText>
+			
+			<staticText>
+				
+				<reportElement positionType="Float" x="40" y="62" width="40" height="14" isPrintInFirstWholeBand="false" isRemoveLineWhenBlank="false" isPrintWhenDetailOverflows="false" isPrintRepeatedValues="true" stretchType="NoStretch"></reportElement>
+				
+				<box topBorder="None" leftBorder="None" bottomBorder="1Point" rightBorder="None"></box>
+				
+				<textElement textAlignment="Center" verticalAlignment="Middle"></textElement>
+				
+				<text><![CDATA[Control Number]]></text>
+				
+			
+			</staticText>
+			
+			<staticText>
+				
+				<reportElement positionType="Float" x="80" y="62" width="40" height="14" isPrintInFirstWholeBand="false" isRemoveLineWhenBlank="false" isPrintWhenDetailOverflows="false" isPrintRepeatedValues="true" stretchType="NoStretch"></reportElement>
+				
+				<box topBorder="None" leftBorder="None" bottomBorder="1Point" rightBorder="None"></box>
+				
+				<textElement textAlignment="Center" verticalAlignment="Middle"></textElement>
+				
+				<text><![CDATA[Invoice Number]]></text>
+				
+			
+			</staticText>
+			
+			<staticText>
+				
+				<reportElement positionType="Float" x="120" y="62" width="40" height="14" isPrintInFirstWholeBand="false" isRemoveLineWhenBlank="false" isPrintWhenDetailOverflows="false" isPrintRepeatedValues="true" stretchType="NoStretch"></reportElement>
+				
+				<box topBorder="None" leftBorder="None" bottomBorder="1Point" rightBorder="None"></box>
+				
+				<textElement textAlignment="Center" verticalAlignment="Middle"></textElement>
+				
+				<text><![CDATA[Voucher Number]]></text>
+				
+			
+			</staticText>
+			
+			<staticText>
+				
+				<reportElement positionType="Float" x="160" y="62" width="40" height="14" isPrintInFirstWholeBand="false" isRemoveLineWhenBlank="false" isPrintWhenDetailOverflows="false" isPrintRepeatedValues="true" stretchType="NoStretch"></reportElement>
+				
+				<box topBorder="None" leftBorder="None" bottomBorder="1Point" rightBorder="None"></box>
+				
+				<textElement textAlignment="Center" verticalAlignment="Middle"></textElement>
+				
+				<text><![CDATA[Po Number]]></text>
+				
+			
+			</staticText>
+			
+			<staticText>
+				
+				<reportElement positionType="Float" x="200" y="62" width="40" height="14" isPrintInFirstWholeBand="false" isRemoveLineWhenBlank="false" isPrintWhenDetailOverflows="false" isPrintRepeatedValues="true" stretchType="NoStretch"></reportElement>
+				
+				<box topBorder="None" leftBorder="None" bottomBorder="1Point" rightBorder="None"></box>
+				
+				<textElement textAlignment="Center" verticalAlignment="Middle"></textElement>
+				
+				<text><![CDATA[Po Release]]></text>
+				
+			
+			</staticText>
+			
+			<staticText>
+				
+				<reportElement positionType="Float" x="240" y="62" width="40" height="14" isPrintInFirstWholeBand="false" isRemoveLineWhenBlank="false" isPrintWhenDetailOverflows="false" isPrintRepeatedValues="true" stretchType="NoStretch"></reportElement>
+				
+				<box topBorder="None" leftBorder="None" bottomBorder="1Point" rightBorder="None"></box>
+				
+				<textElement textAlignment="Center" verticalAlignment="Middle"></textElement>
+				
+				<text><![CDATA[Invoice Date]]></text>
+				
+			
+			</staticText>
+			
+			<staticText>
+				
+				<reportElement positionType="Float" x="280" y="62" width="40" height="14" isPrintInFirstWholeBand="false" isRemoveLineWhenBlank="false" isPrintWhenDetailOverflows="false" isPrintRepeatedValues="true" stretchType="NoStretch"></reportElement>
+				
+				<box topBorder="None" leftBorder="None" bottomBorder="1Point" rightBorder="None"></box>
+				
+				<textElement textAlignment="Center" verticalAlignment="Middle"></textElement>
+				
+				<text><![CDATA[Date Entered]]></text>
+				
+			
+			</staticText>
+			
+			<staticText>
+				
+				<reportElement positionType="Float" x="320" y="62" width="40" height="14" isPrintInFirstWholeBand="false" isRemoveLineWhenBlank="false" isPrintWhenDetailOverflows="false" isPrintRepeatedValues="true" stretchType="NoStretch"></reportElement>
+				
+				<box topBorder="None" leftBorder="None" bottomBorder="1Point" rightBorder="None"></box>
+				
+				<textElement textAlignment="Center" verticalAlignment="Middle"></textElement>
+				
+				<text><![CDATA[Vendor Id]]></text>
+				
+			
+			</staticText>
+			
+			<staticText>
+				
+				<reportElement positionType="Float" x="360" y="62" width="40" height="14" isPrintInFirstWholeBand="false" isRemoveLineWhenBlank="false" isPrintWhenDetailOverflows="false" isPrintRepeatedValues="true" stretchType="NoStretch"></reportElement>
+				
+				<box topBorder="None" leftBorder="None" bottomBorder="1Point" rightBorder="None"></box>
+				
+				<textElement textAlignment="Center" verticalAlignment="Middle"></textElement>
+				
+				<text><![CDATA[Invoice Udf 01]]></text>
+				
+			
+			</staticText>
+			
+			<staticText>
+				
+				<reportElement positionType="Float" x="400" y="62" width="40" height="14" isPrintInFirstWholeBand="false" isRemoveLineWhenBlank="false" isPrintWhenDetailOverflows="false" isPrintRepeatedValues="true" stretchType="NoStretch"></reportElement>
+				
+				<box topBorder="None" leftBorder="None" bottomBorder="1Point" rightBorder="None"></box>
+				
+				<textElement textAlignment="Center" verticalAlignment="Middle"></textElement>
+				
+				<text><![CDATA[Invoice Udf 02]]></text>
+				
+			
+			</staticText>
+			
+			<staticText>
+				
+				<reportElement positionType="Float" x="440" y="62" width="40" height="14" isPrintInFirstWholeBand="false" isRemoveLineWhenBlank="false" isPrintWhenDetailOverflows="false" isPrintRepeatedValues="true" stretchType="NoStretch"></reportElement>
+				
+				<box topBorder="None" leftBorder="None" bottomBorder="1Point" rightBorder="None"></box>
+				
+				<textElement textAlignment="Center" verticalAlignment="Middle"></textElement>
+				
+				<text><![CDATA[Invoice Udf 03]]></text>
+				
+			
+			</staticText>
+			
+			<staticText>
+				
+				<reportElement positionType="Float" x="480" y="62" width="40" height="14" isPrintInFirstWholeBand="false" isRemoveLineWhenBlank="false" isPrintWhenDetailOverflows="false" isPrintRepeatedValues="true" stretchType="NoStretch"></reportElement>
+				
+				<box topBorder="None" leftBorder="None" bottomBorder="1Point" rightBorder="None"></box>
+				
+				<textElement textAlignment="Center" verticalAlignment="Middle"></textElement>
+				
+				<text><![CDATA[Invoice Udf 04]]></text>
+				
+			
+			</staticText>
+			
+			
+		
+		</band>
+		
+	
+	</title>
+	
+	<detail>
+		
+		<band height="14" isSplitAllowed="true">
+			
+			<textField hyperlinkTarget="Self" bookmarkLevel="0" hyperlinkType="None" isStretchWithOverflow="false" evaluationTime="Now">
+				
+				<reportElement positionType="Float" x="0" y="0" width="40" height="14" isPrintInFirstWholeBand="false" isRemoveLineWhenBlank="false" isPrintWhenDetailOverflows="false" isPrintRepeatedValues="true" stretchType="NoStretch"></reportElement>
+				
+				<textElement textAlignment="Center" verticalAlignment="Middle"></textElement>
+				
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{VoucherHeader_voucherType}]]></textFieldExpression>
+				
+			
+			</textField>
+			
+			<textField hyperlinkTarget="Self" bookmarkLevel="0" hyperlinkType="None" isStretchWithOverflow="false" evaluationTime="Now">
+				
+				<reportElement positionType="Float" x="40" y="0" width="40" height="14" isPrintInFirstWholeBand="false" isRemoveLineWhenBlank="false" isPrintWhenDetailOverflows="false" isPrintRepeatedValues="true" stretchType="NoStretch"></reportElement>
+				
+				<textElement textAlignment="Center" verticalAlignment="Middle"></textElement>
+				
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{VoucherHeader_controlNumber}]]></textFieldExpression>
+				
+			
+			</textField>
+			
+			<textField hyperlinkTarget="Self" bookmarkLevel="0" hyperlinkType="None" isStretchWithOverflow="false" evaluationTime="Now">
+				
+				<reportElement positionType="Float" x="80" y="0" width="40" height="14" isPrintInFirstWholeBand="false" isRemoveLineWhenBlank="false" isPrintWhenDetailOverflows="false" isPrintRepeatedValues="true" stretchType="NoStretch"></reportElement>
+				
+				<textElement textAlignment="Center" verticalAlignment="Middle"></textElement>
+				
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{VoucherHeader_invoiceNumber}]]></textFieldExpression>
+				
+			
+			</textField>
+			
+			<textField hyperlinkTarget="Self" bookmarkLevel="0" hyperlinkType="None" isStretchWithOverflow="false" evaluationTime="Now">
+				
+				<reportElement positionType="Float" x="120" y="0" width="40" height="14" isPrintInFirstWholeBand="false" isRemoveLineWhenBlank="false" isPrintWhenDetailOverflows="false" isPrintRepeatedValues="true" stretchType="NoStretch"></reportElement>
+				
+				<textElement textAlignment="Center" verticalAlignment="Middle"></textElement>
+				
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{VoucherHeader_voucherNumber}]]></textFieldExpression>
+				
+			
+			</textField>
+			
+			<textField hyperlinkTarget="Self" bookmarkLevel="0" hyperlinkType="None" isStretchWithOverflow="false" evaluationTime="Now">
+				
+				<reportElement positionType="Float" x="160" y="0" width="40" height="14" isPrintInFirstWholeBand="false" isRemoveLineWhenBlank="false" isPrintWhenDetailOverflows="false" isPrintRepeatedValues="true" stretchType="NoStretch"></reportElement>
+				
+				<textElement textAlignment="Center" verticalAlignment="Middle"></textElement>
+				
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{VoucherHeader_poNumber}]]></textFieldExpression>
+				
+			
+			</textField>
+			
+			<textField hyperlinkTarget="Self" bookmarkLevel="0" hyperlinkType="None" isStretchWithOverflow="false" evaluationTime="Now">
+				
+				<reportElement positionType="Float" x="200" y="0" width="40" height="14" isPrintInFirstWholeBand="false" isRemoveLineWhenBlank="false" isPrintWhenDetailOverflows="false" isPrintRepeatedValues="true" stretchType="NoStretch"></reportElement>
+				
+				<textElement textAlignment="Center" verticalAlignment="Middle"></textElement>
+				
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{VoucherHeader_poRelease}]]></textFieldExpression>
+				
+			
+			</textField>
+			
+			<textField hyperlinkTarget="Self" bookmarkLevel="0" hyperlinkType="None" isStretchWithOverflow="false" evaluationTime="Now">
+				
+				<reportElement positionType="Float" x="240" y="0" width="40" height="14" isPrintInFirstWholeBand="false" isRemoveLineWhenBlank="false" isPrintWhenDetailOverflows="false" isPrintRepeatedValues="true" stretchType="NoStretch"></reportElement>
+				
+				<textElement textAlignment="Center" verticalAlignment="Middle"></textElement>
+				
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{VoucherHeader_invoiceDate}]]></textFieldExpression>
+				
+			
+			</textField>
+			
+			<textField hyperlinkTarget="Self" bookmarkLevel="0" hyperlinkType="None" isStretchWithOverflow="false" evaluationTime="Now">
+				
+				<reportElement positionType="Float" x="280" y="0" width="40" height="14" isPrintInFirstWholeBand="false" isRemoveLineWhenBlank="false" isPrintWhenDetailOverflows="false" isPrintRepeatedValues="true" stretchType="NoStretch"></reportElement>
+				
+				<textElement textAlignment="Center" verticalAlignment="Middle"></textElement>
+				
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{VoucherHeader_dateEntered}]]></textFieldExpression>
+				
+			
+			</textField>
+			
+			<textField hyperlinkTarget="Self" bookmarkLevel="0" hyperlinkType="None" isStretchWithOverflow="false" evaluationTime="Now">
+				
+				<reportElement positionType="Float" x="320" y="0" width="40" height="14" isPrintInFirstWholeBand="false" isRemoveLineWhenBlank="false" isPrintWhenDetailOverflows="false" isPrintRepeatedValues="true" stretchType="NoStretch"></reportElement>
+				
+				<textElement textAlignment="Center" verticalAlignment="Middle"></textElement>
+				
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{VoucherHeader_vendorId}]]></textFieldExpression>
+				
+			
+			</textField>
+			
+			<textField hyperlinkTarget="Self" bookmarkLevel="0" hyperlinkType="None" isStretchWithOverflow="false" evaluationTime="Now">
+				
+				<reportElement positionType="Float" x="360" y="0" width="40" height="14" isPrintInFirstWholeBand="false" isRemoveLineWhenBlank="false" isPrintWhenDetailOverflows="false" isPrintRepeatedValues="true" stretchType="NoStretch"></reportElement>
+				
+				<textElement textAlignment="Center" verticalAlignment="Middle"></textElement>
+				
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{VoucherHeader_invoiceUdf01}]]></textFieldExpression>
+				
+			
+			</textField>
+			
+			<textField hyperlinkTarget="Self" bookmarkLevel="0" hyperlinkType="None" isStretchWithOverflow="false" evaluationTime="Now">
+				
+				<reportElement positionType="Float" x="400" y="0" width="40" height="14" isPrintInFirstWholeBand="false" isRemoveLineWhenBlank="false" isPrintWhenDetailOverflows="false" isPrintRepeatedValues="true" stretchType="NoStretch"></reportElement>
+				
+				<textElement textAlignment="Center" verticalAlignment="Middle"></textElement>
+				
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{VoucherHeader_invoiceUdf02}]]></textFieldExpression>
+				
+			
+			</textField>
+			
+			<textField hyperlinkTarget="Self" bookmarkLevel="0" hyperlinkType="None" isStretchWithOverflow="false" evaluationTime="Now">
+				
+				<reportElement positionType="Float" x="440" y="0" width="40" height="14" isPrintInFirstWholeBand="false" isRemoveLineWhenBlank="false" isPrintWhenDetailOverflows="false" isPrintRepeatedValues="true" stretchType="NoStretch"></reportElement>
+				
+				<textElement textAlignment="Center" verticalAlignment="Middle"></textElement>
+				
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{VoucherHeader_invoiceUdf03}]]></textFieldExpression>
+				
+			
+			</textField>
+			
+			<textField hyperlinkTarget="Self" bookmarkLevel="0" hyperlinkType="None" isStretchWithOverflow="false" evaluationTime="Now">
+				
+				<reportElement positionType="Float" x="480" y="0" width="40" height="14" isPrintInFirstWholeBand="false" isRemoveLineWhenBlank="false" isPrintWhenDetailOverflows="false" isPrintRepeatedValues="true" stretchType="NoStretch"></reportElement>
+				
+				<textElement textAlignment="Center" verticalAlignment="Middle"></textElement>
+				
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{VoucherHeader_invoiceUdf04}]]></textFieldExpression>
+				
+			
+			</textField>
+			
+			
+		
+		</band>
+		
+	
+	</detail>
+	
+	<pageFooter>
+		
+		<band height="20" isSplitAllowed="true">
+			
+			<subreport isUsingCache="false">
+				
+				<reportElement positionType="Float" x="0" y="0" width="580" height="20" isPrintInFirstWholeBand="false" isRemoveLineWhenBlank="false" isPrintWhenDetailOverflows="false" isPrintRepeatedValues="true" stretchType="NoStretch"></reportElement>
+				
+				<subreportParameter name="reportTitle"><subreportParameterExpression><![CDATA[$P{reportTitle}]]></subreportParameterExpression>
+				</subreportParameter>
+				
+				<subreportParameter name="reportCriteria">
+				</subreportParameter>
+				
+				<subreportParameter name="oid">
+					
+					<subreportParameterExpression><![CDATA[$P{oid}]]></subreportParameterExpression>
+					
+				
+				</subreportParameter>
+				
+				<subreportParameter name="footerText">
+				</subreportParameter>
+				
+				<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[JasperReportsHelper.loadSubReport("header.jasper", $P{oid}, "", $P{reportType})]]></subreportExpression>
+				
+			
+			</subreport>
+			
+		
+		</band>
+		
+	
+	</pageFooter>
+	
+
+</jasperReport>
+

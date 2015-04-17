@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="CreateReportUser" connection-type="Connection-Required">
+  <activities>
+    <activity synchronous="true" continue-on-failure="false" name="executeReport">
+      <task synchronous="true" continue-on-failure="false" name="reportUserSetup">
+        <task-object-name>com.tsa.puridiom.reportuser.tasks.ReportUserCreateSetup</task-object-name>
+      </task>
+      <task synchronous="true" continue-on-failure="false" name="reportUserSetupFromReportQueue">
+        <task-object-name>com.tsa.puridiom.reportuser.tasks.ReportUserSetupFromReportQueue</task-object-name>
+      </task>
+      <task synchronous="true" continue-on-failure="false" name="reportUser">
+        <task-object-name>com.tsa.puridiom.reportuser.tasks.ReportUserSetValues</task-object-name>
+      </task>
+      <task synchronous="true" continue-on-failure="false" name="reportUser">
+        <task-object-name>com.tsa.puridiom.reportuser.tasks.ReportUserAdd</task-object-name>
+      </task>
+    </activity>
+  </activities>
+</process>

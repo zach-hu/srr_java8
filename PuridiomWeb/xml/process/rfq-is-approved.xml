@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="rfqApprove" connection-type="Transaction-Required">
+  <rule-filename>is-rfq-approved-or-bids-pending.xml</rule-filename>
+  <activities>
+	<!--  <activity synchronous="true" continue-on-failure="false" name="buyerAssignment">
+      <task synchronous="true" continue-on-failure="false" name="buyerAssignment">
+        <task-object-name>com.tsa.puridiom.requisition.tasks.SendQueueAddReqApproved</task-object-name>
+        <process-filename>requisition-approve-final.xml</process-filename>
+      </task>
+    </activity>-->
+    <!--<activity synchronous="true" continue-on-failure="false" name="buyerAssignment">
+      <task synchronous="true" continue-on-failure="false" name="buyerAssignment">
+		  <rule-filename check-for-false="true">is-check-rfq.xml</rule-filename>
+        <task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+        <process-filename>buyer-assignment.xml</process-filename>
+      </task>
+    </activity>-->
+  <activity synchronous="true" continue-on-failure="false" name="history">
+    <task synchronous="true" continue-on-failure="false" name="rfqHeaderHistory">
+      <task-object-name>com.tsa.puridiom.rfqheader.history.tasks.RfqHeaderHistory</task-object-name>
+    </task>
+    <task synchronous="true" continue-on-failure="false" name="requisitionLineListHistory">
+      <task-object-name>com.tsa.puridiom.rfqline.history.tasks.RfqLineListHistory</task-object-name>
+    </task>
+  </activity>
+  <!--<activity synchronous="true" continue-on-failure="false" name="autorelease">
+    <task synchronous="true" continue-on-failure="false" name="emailRequisitioner">
+      <task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+      <process-filename>rfq-email-requisitioner.xml</process-filename>
+    </task>
+  </activity>-->
+  <!--<activity name="headerAssignment" continue-on-failure="false" synchronous="true">
+    <task continue-on-failure="false" name="requisitionHeader" synchronous="true">
+		<rule-filename check-for-false="true">is-check-request.xml</rule-filename>
+      <task-object-name>com.tsa.puridiom.requisition.buyerassignment.tasks.RequisitionHeaderAssignment</task-object-name>
+    </task>
+  </activity>-->
+  </activities>
+</process>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<d_receipt>
+<columns>
+		<ReceiptHeader_receiptDate>
+			<label>Receipt Date</label>
+			<type>DATE</type>
+		</ReceiptHeader_receiptDate>
+		<InvoiceLine_icPoHeader>
+			<label>Ic Po Header</label>
+			<type>STRING</type>
+		</InvoiceLine_icPoHeader>
+		<InvoiceLine_icPoLine>
+			<label>Ic Po Line</label>
+			<type>STRING</type>
+		</InvoiceLine_icPoLine>
+		<InvoiceLine_lineNumber>
+			<label>Line Number</label>
+			<type>STRING</type>
+		</InvoiceLine_lineNumber>
+		<InvoiceLine_icLineKey>
+			<label>Ic Line Key</label>
+			<type>STRING</type>
+		</InvoiceLine_icLineKey>
+</columns>
+<sqlfrom>ReceiptHeader as ReceiptHeader , InvoiceLine as InvoiceLine</sqlfrom>
+<sqlwhere><![CDATA[( ReceiptHeader.icPoLine = InvoiceLine.icPoLine )]]></sqlwhere>
+<title>REC3</title>
+</d_receipt>
+

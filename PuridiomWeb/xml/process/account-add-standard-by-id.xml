@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="accountUpdate" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="accountAddFromStandard">
+			
+			<task synchronous="true" continue-on-failure="false" name="requisitionHeaderAllocateAmount">			
+				<rule-filename>is-rqh-accounts.xml</rule-filename>			
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>requisitionheader-allocate-amount.xml</process-filename>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="requisitionLineAllocateAmount">			
+				<rule-filename>is-rql-accounts.xml</rule-filename>			
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>requisitionline-allocate-amount.xml</process-filename>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="stdAccount">
+				<task-object-name>com.tsa.puridiom.account.tasks.StdAccountRetrieveById</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="account">
+				<task-object-name>com.tsa.puridiom.account.tasks.AccountSetValuesFromStdAccount</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="Account_sequence">
+				<task-object-name>com.tsa.puridiom.account.tasks.AccountGetNextSequence</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="account">
+				<task-object-name>com.tsa.puridiom.account.tasks.AccountSetValues</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="accountAdd">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>account-add.xml</process-filename>
+			</task>
+		</activity>
+	</activities>
+</process>

@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="requisitionHeaderDataRetrieve" connection-type="Connection-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="requisitionHeaderDataRetrieve">
+			<task synchronous="true" continue-on-failure="false" name="requisitionHeaderRetrieveSetup">
+				<task-object-name>com.tsa.puridiom.requisitionheader.tasks.RequisitionHeaderRetrieveSetup</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="requisitionLineList">
+				<task-object-name>com.tsa.puridiom.requisitionline.tasks.RequisitionLineRetrieveByHeader</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="scheduleList">
+				<rule-filename></rule-filename>
+				<task-object-name>com.tsa.puridiom.schedule.tasks.ScheduleRetrieveByHeader</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="docAttachmentList">
+				<rule-filename></rule-filename>
+				<task-object-name>com.tsa.puridiom.docattachment.tasks.DocAttachmentRetrieveByHeader</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="accountList">
+				<rule-filename></rule-filename>
+				<task-object-name>com.tsa.puridiom.account.tasks.AccountRetrieveByLine</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="accountList">
+				<rule-filename></rule-filename>
+				<task-object-name>com.tsa.puridiom.account.tasks.AccountPopulateAllocationDescriptionByList</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="requisitionCommentsRetrieve">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>doccomment-retrieve-by-line.xml</process-filename>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="rfqInfoList">
+				<task-object-name>com.tsa.puridiom.requisitionheader.tasks.RequisitionHeaderRetrieveRfqInfo</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="poInfoList">
+				<task-object-name>com.tsa.puridiom.requisitionheader.tasks.RequisitionHeaderRetrievePoInfo</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="poHeader">
+				<task-object-name>com.tsa.puridiom.poheader.tasks.PoHeaderRetrieveRevById</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="requisitionHeaderOriginal">
+				<rule-filename>is-change-request.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.requisitionheader.tasks.RequisitionOriginalRetrieveById</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="shipToAddressSetup">
+				<task-object-name>com.tsa.puridiom.requisitionheader.tasks.RequisitionHeaderRetrieveShipToAddressSetup</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="shipToAddress">
+				<rule-filename>is-address-code-not-empty</rule-filename>
+				<task-object-name>com.tsa.puridiom.address.tasks.AddressRetrieveShipTo</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="billToAddressSetup">
+				<task-object-name>com.tsa.puridiom.requisitionheader.tasks.RequisitionHeaderRetrieveBillToAddressSetup</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="billToAddress">
+				<rule-filename>is-address-code-not-empty</rule-filename>
+				<task-object-name>com.tsa.puridiom.address.tasks.AddressRetrieveBillTo</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="requisitionHeaderVendorAddressRetrieve">
+			<rule-filename check-for-false="true">is-requisitionheader-vendor-id-empty</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="vendorAddressSetup">
+				<task-object-name>com.tsa.puridiom.requisitionheader.tasks.RequisitionHeaderRetrieveVendorAddressSetup</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="vendorAddress">
+				<rule-filename>is-address-type-not-empty;is-address-code-not-empty</rule-filename>
+				<task-object-name>com.tsa.puridiom.address.tasks.AddressRetrieveById</task-object-name>
+				<post-action>exitActivity</post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="vendorAddress">
+				<rule-filename>is-vendor-address-empty</rule-filename>
+				<task-object-name>com.tsa.puridiom.address.tasks.AddressRetrievePrimary</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="requisitionHeaderDataSet">
+			<task synchronous="true" continue-on-failure="false" name="requisitionHeaderDataSet">
+				<task-object-name>com.tsa.puridiom.requisitionheader.tasks.RequisitionHeaderDataSet</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="setUserRejectAccess">
+		  <task synchronous="true" continue-on-failure="false" name="userRejectAccess">
+			<task-object-name>com.tsa.puridiom.requisition.tasks.RequisitionSetUserRejectAccess</task-object-name>
+			<post-action></post-action>
+		  </task>
+		</activity>
+	</activities>
+</process>

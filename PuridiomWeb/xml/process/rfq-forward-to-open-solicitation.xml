@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="rfqForwardToOpenSolicitation" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="rfqForwardToOpenSolicitation">
+			<task synchronous="true" continue-on-failure="false" name="rfqSetApprovalInformation">
+				<rule-filename>is-extended-rfqs-active.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.rfqheader.tasks.RfqHeaderSetDueDateFromEventDates</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="rfqHeaderSetToOpenSolicitation">
+				<task-object-name>com.tsa.puridiom.rfqheader.tasks.RfqHeaderSetToOpenSolicitation</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="rfqSetApprovalInformation">
+				<task-object-name>com.tsa.puridiom.rfqheader.tasks.RfqHeaderSetApprovalInformation</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>
+

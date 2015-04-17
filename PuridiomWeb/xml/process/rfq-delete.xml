@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="rfqDelete" connection-type="transaction-required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="rfqDelete">
+			<task synchronous="true" continue-on-failure="false" name="rfqHeader">
+				<task-object-name>com.tsa.puridiom.rfqheader.tasks.RfqHeaderRetrieveById</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="rfqDeleteSetup">
+				<task-object-name>com.tsa.puridiom.rfq.tasks.RfqDeleteSetup</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="scheduleDeleteByHeader">			
+				<task-object-name>com.tsa.puridiom.schedule.tasks.ScheduleDeleteByHeader</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="billToDeleteByHeader">
+				<task-object-name>com.tsa.puridiom.billto.tasks.BillToDeleteByHeader</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="shipToDeleteByHeader">			
+				<task-object-name>com.tsa.puridiom.shipto.tasks.ShipToDeleteByHeader</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="docCommentDeleteByHeader">			
+				<task-object-name>com.tsa.puridiom.doccomment.tasks.DocCommentDeleteByHeader</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="docAttachmentDeleteByHeader">
+				<rule-filename>is-documents-module-active.xml</rule-filename>
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>docattachment-delete-by-header.xml</process-filename>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="rfqBidDeleteByHeader">
+				<task-object-name>com.tsa.puridiom.rfqbid.tasks.RfqBidDeleteByHeader</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="rfqVendorDeleteByHeader">
+				<task-object-name>com.tsa.puridiom.rfqvendor.tasks.RfqVendorDeleteByHeader</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="rfqQuestionDeleteByHeader">
+				<task-object-name>com.tsa.puridiom.rfqquestion.tasks.RfqQuestionDeleteByHeader</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="rfqLineDeleteByHeader">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>rfqline-delete-by-header.xml</process-filename>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="rfqHeaderDeleteById">			
+				<task-object-name>com.tsa.puridiom.rfqheader.tasks.RfqHeaderDeleteById</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="recentRfqActivity">
+			<task synchronous="true" continue-on-failure="true" name="recentRfqDelete">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>recentrfq-delete-by-ic.xml</process-filename>
+			</task>
+		</activity>
+	</activities>
+</process>

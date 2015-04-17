@@ -1,0 +1,64 @@
+<browse_invoiceheader>
+	<columns>
+		<InvoiceHeader_icIvcHeader>
+			<visible>0</visible>
+		</InvoiceHeader_icIvcHeader>
+		<ApprovalLog_id_icHeader>
+	        <hidden>Y</hidden>
+		</ApprovalLog_id_icHeader>
+		<InvoiceHeader_invoiceNumber>
+			<label>brw-invoiceN</label>
+			<size>12</size>
+		</InvoiceHeader_invoiceNumber>
+		<InvoiceHeader_status>
+			<label>brw-status</label>
+			<type>STATUS</type>
+			<size>16</size>
+		</InvoiceHeader_status>
+		<InvoiceHeader_invoiceDate>
+			<label>brw-date</label>
+			<type>DATE</type>
+			<sort>D</sort>
+			<size>12</size>
+		</InvoiceHeader_invoiceDate>
+		<ApprovalLog_dateAssigned>
+			<label>brw-dateassigned</label>
+			<type>DATE</type>
+			<size>12</size>
+		</ApprovalLog_dateAssigned>
+		<ApprovalLog_id_userId>
+			<label>brw-currentApprover</label>
+			<size>15</size>
+			<type>USER-ID</type>
+		</ApprovalLog_id_userId>
+		<InvoiceHeader_shipToCode>
+			<label>shipToCode</label>
+			<size>10</size>
+		</InvoiceHeader_shipToCode>
+		<InvoiceHeader_invoiceTotal>
+			<label>brw-total</label>
+			<size>10</size>
+			<type>DollarDecimal</type>
+		</InvoiceHeader_invoiceTotal>
+		<InvoiceHeader_enteredBy>
+			<label>brw-enteredby</label>
+			<size>15</size>
+			<type>USER-ID</type>
+		</InvoiceHeader_enteredBy>
+		<InvoiceHeader_vendorName>
+			<label>brw-vendorName</label>
+			<detail>Y</detail>
+			<size>100</size>
+		</InvoiceHeader_vendorName>
+		<InvoiceHeader_invoiceDesc>
+			<detail>Y</detail>
+			<label>description</label>
+			<size>100</size>
+		</InvoiceHeader_invoiceDesc>
+	</columns>
+<sqlfrom>InvoiceHeader as InvoiceHeader, ApprovalLog as ApprovalLog</sqlfrom>
+<sqlwhere><![CDATA[InvoiceHeader.status > '6000' AND InvoiceHeader.status < '6010' AND InvoiceHeader.icIvcHeader = ApprovalLog.id.icHeader AND ApprovalLog.approved = 'A']]></sqlwhere>
+<sqlorderby>InvoiceHeader.invoiceDate DESC, InvoiceHeader.invoiceNumber DESC</sqlorderby>
+<pagesize>15</pagesize>
+<title>Invoice Browse</title>
+</browse_invoiceheader>

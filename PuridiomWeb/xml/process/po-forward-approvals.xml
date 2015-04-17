@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="Po Approvals" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="checkWarrantAmount">
+			<task synchronous="true" continue-on-failure="false" name="poHeader">
+				<rule-filename check-for-false="true">is-auto-release.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.poheader.tasks.PoHeaderRetrieveById</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="poForwardSetup">
+				<task-object-name>com.tsa.puridiom.po.tasks.PoForwardSetup</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="poLineList">
+				<task-object-name>com.tsa.puridiom.poline.tasks.PoLineRetrieveByHeader</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="poApprovals">
+			<task synchronous="true" continue-on-failure="false" name="requisitionForwardToNextApprover">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>po-forward-to-next.xml</process-filename>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="poFoward">
+			<task synchronous="true" continue-on-failure="false" name="poApproveAndFoward">
+				<task-object-name>com.tsa.puridiom.po.tasks.PoApproveAndForward</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="lastActive">
+			<rule-filename>set-last-activity-vendor.xml</rule-filename>
+			<task continue-on-failure="false" name="vendorId" synchronous="true">
+				<task-object-name>com.tsa.puridiom.poheader.tasks.PoHeaderRetrieveVendorAddressSetup</task-object-name>
+			</task>
+			<task continue-on-failure="false" name="vendor" synchronous="true">
+				<task-object-name>com.tsa.puridiom.vendor.tasks.VendorRetrieveById</task-object-name>
+			</task>
+			<task continue-on-failure="false" name="vendor" synchronous="true">
+				<task-object-name>com.tsa.puridiom.vendor.tasks.SetLastActivityVendorFromPo</task-object-name>
+			</task>
+			<task continue-on-failure="false" name="vendorId" synchronous="true">
+				<task-object-name>com.tsa.puridiom.vendor.tasks.VendorUpdate</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

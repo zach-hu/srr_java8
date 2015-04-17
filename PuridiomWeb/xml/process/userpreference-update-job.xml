@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="userPreferenceUpdateJob" connection-type="New-Transaction">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="userPreferenceUpdateJob">
+			<task synchronous="true" continue-on-failure="false" name="userPreferenceUpdatePoOverdue">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>userpreference-update-pooverdue.xml</process-filename>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="userPreferenceUpdatePoIncomplete">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>userpreference-update-poincomplete.xml</process-filename>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="userPreferenceUpdatePoPendingApproval">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>userpreference-update-popendingapproval.xml</process-filename>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="userPreferenceUpdateReqAssigned">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>userpreference-update-reqassigned.xml</process-filename>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="userPreferenceUpdateReqPendingApproval">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>userpreference-update-reqpendingapproval.xml</process-filename>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="userPreferenceUpdateReqPriced">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>userpreference-update-reqpriced.xml</process-filename>
+			</task>
+
+			<task synchronous="true" continue-on-failure="false" name="userPreferenceUpdateRecInventory">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>userpreference-update-recinventory.xml</process-filename>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="userPreferenceUpdateRecInspection">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>userpreference-update-recinspection.xml</process-filename>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="userPreferenceUpdateRecMark">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>userpreference-update-recmark.xml</process-filename>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="userPreferenceUpdateRecDelivery">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>userpreference-update-recdelivery.xml</process-filename>
+			</task>
+		</activity>
+	</activities>
+</process>

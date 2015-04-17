@@ -1,0 +1,96 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping>
+
+<!--
+    Created by Middlegen Hibernate plugin
+
+    http://boss.bekk.no/boss/middlegen/
+    http://hibernate.sourceforge.net/
+-->
+
+<class
+    name="com.tsa.puridiom.entity.AuditRecord"
+    table="AUDIT_RECORD"
+>
+    <id
+        name="ic"
+        type="java.math.BigDecimal"
+        column="IC"
+    >
+        <generator class="assigned" />
+    </id>
+    <property
+        name="transaction"
+        type="java.math.BigDecimal"
+        column="`TRANSACTION`"
+        length="22"
+    />
+    <property
+        name="entityClass"
+        type="java.lang.String"
+        column="ENTITY_CLASS"
+        length="255"
+        not-null="true"
+    />
+    <property
+        name="userId"
+        type="java.lang.String"
+        column="USER_ID"
+        length="60"
+    />
+    <property
+        name="mailId"
+        type="java.lang.String"
+        column="MAIL_ID"
+        length="255"
+    />
+    <property
+        name="ipAddress"
+        type="java.lang.String"
+        column="IP_ADDRESS"
+        length="255"
+    />
+    <property
+        name="created"
+        type="java.util.Date"
+        column="CREATED"
+        length="7"
+    />
+    <property
+        name="entity1"
+        type="java.lang.String"
+        column="ENTITY1"
+        length="2000"
+    />
+    <property
+        name="entity2"
+        type="java.lang.String"
+        column="ENTITY2"
+        length="2000"
+    />
+    <property
+        name="entity3"
+        type="java.lang.String"
+        column="ENTITY3"
+        length="2000"
+    />
+    <property
+        name="entity4"
+        type="java.lang.String"
+        column="ENTITY4"
+        length="2000"
+    />
+    <property
+        name="entity5"
+        type="java.lang.String"
+        column="ENTITY5"
+        length="2000"
+    />
+    <!-- associations -->
+
+</class>
+</hibernate-mapping>

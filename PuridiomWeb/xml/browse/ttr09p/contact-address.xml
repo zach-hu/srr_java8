@@ -1,0 +1,132 @@
+<browse_contact_address>
+	<columns>
+		<Contact_id_contactCode>
+			<label>brw-contactcode</label>
+			<sort>A</sort>
+			<link><![CDATA[javascript: returnMe('#Contact_id_contactCode^'); void(0);]]></link>
+			<hidden-input>Y</hidden-input>
+			<size>10</size>
+		</Contact_id_contactCode>
+		<Contact_addressCode>
+			<label>brw-addressCode</label>
+			<visible>0</visible>
+			<hidden-input>Y</hidden-input>
+		</Contact_addressCode>
+		<Contact_id_contactType>
+			<label>brw-contacttype</label>
+			<hidden>Y</hidden>
+		</Contact_id_contactType>
+		<Contact_id_vendorId>
+			<label>brw-vendorId</label>
+			<hidden-input>Y</hidden-input>
+			<hidden>Y</hidden>
+		</Contact_id_vendorId>
+		<Contact_firstName>
+			<label>firstName</label>
+			<hidden-input>Y</hidden-input>
+			<size>10</size>
+		</Contact_firstName>
+		<Contact_middleInit>
+			<label>middleInitial</label>
+			<hidden-input>Y</hidden-input>
+			<hidden>Y</hidden>
+		</Contact_middleInit>
+		<Contact_lastName>
+			<label>lastName</label>
+			<hidden-input>Y</hidden-input>
+			<size>10</size>
+		</Contact_lastName>
+		<Address_id_addressCode>
+			<label>brw-addressCode</label>
+			<hidden>Y</hidden>
+			<hidden-input>Y</hidden-input>
+		</Address_id_addressCode>
+		<Address_addressLine1>
+			<label>brw-addressLine1</label>
+			<hidden-input>Y</hidden-input>
+			<trim>30</trim>
+			<size>30</size>
+		</Address_addressLine1>
+		<Address_addressLine2>
+			<label>brw-addressLine2</label>
+			<hidden-input>Y</hidden-input>
+			<trim>30</trim>
+			<size>30</size>
+			<detail>Y</detail>
+		</Address_addressLine2>
+		<Address_addressLine3>
+			<label>brw-addressLine3</label>
+			<hidden-input>Y</hidden-input>
+			<hidden>Y</hidden>
+		</Address_addressLine3>
+		<Address_addressLine4>
+			<label>brw-addressLine4</label>
+			<hidden-input>Y</hidden-input>
+			<hidden>Y</hidden>
+		</Address_addressLine4>
+		<Address_city>
+			<label>city</label>
+			<hidden-input>Y</hidden-input>
+			<size>20</size>
+		</Address_city>
+		<Address_state>
+			<label>state</label>
+			<hidden-input>Y</hidden-input>
+			<size>5</size>
+		</Address_state>
+		<Address_country>
+			<label>country</label>
+			<hidden-input>Y</hidden-input>
+			<hidden>Y</hidden>
+		</Address_country>
+		<Address_postalCode>
+			<label>zip</label>
+			<hidden-input>Y</hidden-input>
+			<size>15</size>
+		</Address_postalCode>
+		<Contact_displayName>
+			<concatenate>
+				<col>Contact_firstName</col>
+				<col> </col>
+				<col>Contact_middleInit</col>
+				<col> </col>
+				<col>Contact_lastName</col>
+			</concatenate>
+			<hidden>Y</hidden>
+			<hidden-input>Y</hidden-input>
+			<selectsql>N</selectsql>
+		</Contact_displayName>
+		<Contact_phoneNumber>
+			<hidden-input>Y</hidden-input>
+			<hidden>Y</hidden>
+		</Contact_phoneNumber>
+		<Contact_mobileNumber>
+			<hidden-input>Y</hidden-input>
+			<hidden>Y</hidden>
+		</Contact_mobileNumber>
+		<Contact_faxNumber>
+			<hidden-input>Y</hidden-input>
+			<hidden>Y</hidden>
+		</Contact_faxNumber>
+		<Contact_emailAddr>
+			<hidden-input>Y</hidden-input>
+			<hidden>Y</hidden>
+		</Contact_emailAddr>
+		<Contact_info1>
+			<hidden-input>Y</hidden-input>
+			<hidden>Y</hidden>
+		</Contact_info1>
+		<Contact_info2>
+			<hidden-input>Y</hidden-input>
+			<hidden>Y</hidden>
+		</Contact_info2>
+	</columns>
+<sqlfrom>Contact as Contact, Address as Address</sqlfrom>
+<sqlwhere><![CDATA[ (Contact.addressCode =  Address.id.addressCode
+	AND Contact.id.vendorId = Address.id.addressType
+	AND Contact.status <> '03') ]]>
+</sqlwhere>
+<sqlorderby>Contact.id.contactCode ASC</sqlorderby>
+<pagesize>15</pagesize>
+<title>Vendor Contact / Address Browse</title>
+</browse_contact_address>

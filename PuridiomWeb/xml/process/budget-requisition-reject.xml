@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="requisitionReject" connection-type="New-Connection">
+  <activities>
+    <activity synchronous="true" continue-on-failure="false" name="requisitionBudgetUpdate">
+      <rule-filename>is-budget-request;is-account-budget-module-active</rule-filename>
+      <task synchronous="true" continue-on-failure="false" name="requisitionRejectBudgetSetup">
+        <task-object-name>com.tsa.puridiom.requisition.tasks.RequisitionRejectBudgetSetup</task-object-name>
+        <post-action></post-action>
+      </task>
+      <task synchronous="true" continue-on-failure="false" name="budgetCheck">
+        <task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+        <process-filename>requisition-budget-check.xml</process-filename>
+        <post-action></post-action>
+      </task>
+      <task synchronous="true" continue-on-failure="false" name="requisitionBudgetCenterUpdate">
+        <task-object-name>com.tsa.puridiom.budgetcenter.tasks.BudgetCenterUpdateList</task-object-name>
+        <post-action></post-action>
+      </task>
+      <task synchronous="true" continue-on-failure="false" name="requisitionBudgetAuditUpdate">
+        <task-object-name>com.tsa.puridiom.budgetaudit.tasks.BudgetAuditUpdateList</task-object-name>
+        <post-action></post-action>
+      </task>
+    </activity>
+  </activities>
+</process>

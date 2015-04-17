@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="approvalLinkService" connection-type="Connection-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="approvalLinkRetrieve">
+			<task synchronous="true" continue-on-failure="false" name="approvalLinkRetrieve">
+		        <task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+		        <process-filename>approvallink-retrieve.xml</process-filename>
+		        <post-action></post-action>
+		    </task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="approvalLinkServiceSetup">
+			<task synchronous="true" continue-on-failure="false" name="approvalLinkServiceSetup">
+				<task-object-name>com.tsa.puridiom.approvallink.tasks.ApprovalLinkServiceSetup</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="poSupplierAcknowledgment">
+			<rule-filename>is-po-supplier-acknowledgment-service.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="poSupplierAcknowledgmentSetup">
+				<task-object-name>com.tsa.puridiom.po.tasks.PoSupplierAcknowledgmentSetup</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="poSupplierAcknowledgment">
+		        <task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+		        <process-filename>po-supplier-acknowledgement.xml</process-filename>
+		        <post-action>exitProcess</post-action>
+		    </task>
+		</activity>
+	</activities>
+</process>

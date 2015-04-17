@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping>
+
+
+<class
+    name="com.tsa.puridiom.entity.AppLeadTimeView"
+    table="APP_LEAD_TIME"
+>
+  	<id
+        name="icHeader"
+        type="java.math.BigDecimal"
+        column="IC_HEADER"
+    >
+    <generator class="assigned" />
+    </id>
+    <property
+        name="dateEnd"
+        type="java.sql.Timestamp"
+        column="DATE_END"
+    />
+    <property
+        name="dateStart"
+        type="java.sql.Timestamp"
+        column="DATE_START"
+    />
+
+    <property
+        name="appLead"
+        type="java.math.BigDecimal"
+        column="APP_LEAD"
+        length="20"
+    />
+
+</class>
+</hibernate-mapping>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="receiptheader-update-po-lastrevision" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="receiptHeaderListRetrieve">
+			<!-- retrieve receiptHeaderList from poHeader before the last revision -->
+			<task synchronous="true" continue-on-failure="false" name="receiptHeaderList">
+				<task-object-name>com.tsa.puridiom.receiptheader.tasks.ReceiptHeaderRetrieveByOrder</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="receiptHeaderListRetrieve">
+			<!-- update values from poHeader last revision -->
+			<task synchronous="true" continue-on-failure="false" name="receiptHeaderList">
+				<task-object-name>com.tsa.puridiom.receiptheader.tasks.ReceiptHeaderUpdatePoLastRevision</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+	</activities>
+</process>

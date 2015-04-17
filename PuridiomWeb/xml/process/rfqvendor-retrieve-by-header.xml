@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="rfqVendorRetrieveByHeader" connection-type="Connection-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="rfqVendorRetrieveByHeader">
+			<task synchronous="true" continue-on-failure="false" name="rfqVendorList">			
+				<task-object-name>com.tsa.puridiom.rfqvendor.tasks.RfqVendorRetrieveByHeader</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="rfqVendorList">
+				<task-object-name>com.tsa.puridiom.rfqvendor.tasks.RfqVendorRetrieveBidList</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="rfqVendorList">
+				<task-object-name>com.tsa.puridiom.rfqvendor.tasks.RfqVendorCalculateTotals</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="rfqVendorListFilter">
+				<task-object-name>com.tsa.puridiom.rfqvendor.tasks.RfqVendorListFilter</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="newsRetrieveAll" connection-type="Connection-Required" >
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="newsRetrieveAll">
+			<task synchronous="true" continue-on-failure="false" name="newsList">
+				<task-object-name>com.tsa.puridiom.news.tasks.NewsRetrieveAll</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+	</activities>
+</process>

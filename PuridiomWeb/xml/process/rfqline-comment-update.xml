@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="docCommentUpdateByLine" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="docCommentUpdateByLine">
+			<task synchronous="true" continue-on-failure="false" name="rfqLineRefTypeSetup">			
+				<task-object-name>com.tsa.puridiom.rfqline.tasks.RfqLineRefTypeSetup</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="docCommentList">
+				<task-object-name>com.tsa.puridiom.doccomment.tasks.DocCommentRetrieveByLine</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="docTextList">
+				<task-object-name>com.tsa.puridiom.doccomment.tasks.DocCommentTextRetrieveByLine</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="docCommentDeleteByLine">
+				<task-object-name>com.tsa.puridiom.doccomment.tasks.DocCommentDeleteByLine</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="docCommentUpdateByLine">			
+				<task-object-name>com.tsa.puridiom.doccomment.tasks.DocCommentUpdateByLine</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="docCommentRetrieveByLine">			
+				<task-object-name>com.tsa.puridiom.doccomment.tasks.DocCommentRetrieveByLine</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

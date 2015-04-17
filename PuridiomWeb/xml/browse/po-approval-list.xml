@@ -1,0 +1,73 @@
+<browse_po_approval_list>
+	<columns>
+		<PoHeader_icPoHeader>
+	        <hidden>Y</hidden>
+	        <visible>0</visible>
+		</PoHeader_icPoHeader>
+		<PoHeader_poNumber>
+			<label>brw-poNumber</label>
+			<sort>D</sort>
+			<link><![CDATA[javascript: retrievePoApproval('#PoHeader_icPoHeader^'); void(0);]]></link>
+			<size>10</size>
+		</PoHeader_poNumber>
+		<PoHeader_releaseNumber>
+			<label>brw-releaseNumber</label>
+			<size>5</size>
+		</PoHeader_releaseNumber>
+		<PoHeader_revisionNumber>
+			<label>brw-revisionNumber</label>
+			<type>NoDecimal</type>
+			<size>5</size>
+		</PoHeader_revisionNumber>
+		<PoHeader_status>
+			<label>brw-status</label>
+			<type>STATUS</type>
+			<size>20</size>
+		</PoHeader_status>
+		<PoHeader_poDate>
+			<label>brw-poDate</label>
+			<type>DATE</type>
+			<size>10</size>
+		</PoHeader_poDate>
+		<PoHeader_vendorId>
+			<label>brw-vendorId</label>
+			<detail>Y</detail>
+			<size>25</size>
+		</PoHeader_vendorId>
+		<PoHeader_vendorName>
+			<label>brw-vendorName</label>
+			<size>75</size>
+			<detail>Y</detail>
+		</PoHeader_vendorName>
+		<PoHeader_buyerCode>
+			<label>brw-buyer</label>
+            <size>18</size>
+            <type>USER-ID</type>
+		</PoHeader_buyerCode>
+		<PoHeader_total>
+			<label>brw-total</label>
+			<size>12</size>
+			<type>DollarDecimal</type>
+		</PoHeader_total>
+		<PoHeader_internalComments>
+			<label>purpose</label>
+			<detail>Y</detail>
+		</PoHeader_internalComments>
+		<ApprovalLog_id_userId>
+			<label>user-userId</label>
+			<type>USER-ID</type>
+			<visible>0</visible>
+		</ApprovalLog_id_userId>
+		<ApprovalLog_callForward>
+			<label>routing-callForward</label>
+			<type>USER-ID</type>
+			<hidden>Y</hidden>
+			<size>15</size>
+		</ApprovalLog_callForward>
+	</columns>
+<sqlfrom>PoHeader as PoHeader, ApprovalLog as ApprovalLog</sqlfrom>
+<sqlwhere><![CDATA[PoHeader.poNumber <> 'N/A' and ApprovalLog.id.icHeader = PoHeader.icPoHeader and ( (PoHeader.status = '3020' or PoHeader.status = '2920') and ApprovalLog.approved = 'A' ) ]]></sqlwhere>
+<sqlorderby>PoHeader.poNumber asc</sqlorderby>
+<pagesize>15</pagesize>
+<title>Purchase Orders Waiting My Approval</title>
+</browse_po_approval_list>

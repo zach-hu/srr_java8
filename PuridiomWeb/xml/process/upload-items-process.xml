@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="UploadItemProcess" connection-type="New-Connection">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="SendQueueProcessbyActionSetup">
+			<task synchronous="true" continue-on-failure="false" name="sendqueueList">
+				<task-object-name>com.tsa.puridiom.sendqueue.tasks.SendQueueRetrieveByActionStatus</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="RfqReqPoAddItems">
+			    <task-object-name>com.tsa.puridiom.sendqueue.tasks.SendQueueRfqReqPoAddItems</task-object-name>
+			</task>
+		 </activity>
+	 </activities>
+</process>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="browseExternalWebCatalog" connection-type="Connection-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="catalogRetrieve">
+			<task synchronous="true" continue-on-failure="false" name="catalog">
+				<task-object-name>com.tsa.puridiom.catalog.tasks.CatalogRetrieveById</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="catalogSecurityRetrieveByCatalog">
+			  <rule-filename>is-activate-catalogsecurity.xml</rule-filename>
+			  <task synchronous="true" continue-on-failure="false" name="catalogSecurityList">
+				<task-object-name>com.tsa.puridiom.catalogsecurity.tasks.CatalogSecurityRetrieveByUseridByFullAccess</task-object-name>
+				<post-action></post-action>
+			  </task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="userShipToAddressRetrieve">
+			<rule-filename>is-organization-wpc.xml;is-corporate-express-catalog.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="userProfileRetrieveShipToAddressSetup">
+				<task-object-name>com.tsa.puridiom.userprofile.tasks.UserProfileRetrieveShipToAddressSetup</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="shipToAddress">
+				<rule-filename>is-address-code-not-empty.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.address.tasks.AddressRetrieveById</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="setup">
+			<task synchronous="true" continue-on-failure="false" name="redirectUrl">
+				<task-object-name>com.tsa.puridiom.punchoutcatalog.tasks.BrowseExternalWebCatalogSetup</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="PunchoutRetrieve">
+			<task synchronous="true" continue-on-failure="false" name="PunchoutRetrieveAll">
+				<task-object-name>com.tsa.puridiom.punchout.tasks.PunchoutRetrieve</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+	</activities>
+</process>

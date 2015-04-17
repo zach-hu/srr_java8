@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="rfqQuestionRenumber" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="rfqQuestionRenumber">
+			<!-- retrieve all questions so they can be renumbered -->
+			<task synchronous="true" continue-on-failure="false" name="rfqQuestionList">
+				<task-object-name>com.tsa.puridiom.rfqquestion.tasks.RfqQuestionRetrieveByHeader</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="rfqQuestionList">
+				<task-object-name>com.tsa.puridiom.rfqquestion.tasks.RfqQuestionRenumber</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="rfqQuestionList">
+				<task-object-name>com.tsa.puridiom.rfqquestion.tasks.RfqQuestionUpdateEntityList</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

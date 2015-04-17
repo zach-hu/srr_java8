@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="requisitionitem-lookup" connection-type="Connection-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="requisitionItemLookupActivity">
+			<task synchronous="true" continue-on-failure="false" name="requisitionItemLookup">			
+				<task-object-name>com.tsa.puridiom.requisitionitem.tasks.RequisitionItemLookup</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="totalsActivity">
+			<rule-filename>is-po.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="poHeaderSetupIcHeader">
+				<task-object-name>com.tsa.puridiom.poheader.tasks.PoHeaderSetupIcHeader</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="recalculate">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>po-recalculate.xml</process-filename>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="totalsActivity">
+			<rule-filename>is-req.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="allocatedTotal">
+				<task-object-name>com.tsa.puridiom.account.tasks.ResetAllocatedTotal</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="recalculate">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>requisition-recalculate.xml</process-filename>
+			</task>
+		</activity>
+	</activities>
+</process>

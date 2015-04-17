@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rule>
+	<clause type="Empty">
+		<left-side>
+			<source>incomingRequestObjectMethod</source>
+			<object>header</object>
+			<name>getBuyerCode</name>
+		</left-side>
+	</clause>
+	<logical-operator>OR</logical-operator>
+	<clause type="lookup">
+		<sql> from UserProfile as userProfile where userProfile.userId = '@userid@' AND userProfile.buyer = 'Y' AND (userProfile.status = '02' OR (userProfile.status = '01' AND userProfile.dateExpires >= @today@))</sql>
+		<source>header</source>
+		<arguments>
+			<name>userid</name>
+			<source>header</source>
+			<colName>getBuyerCode</colName>
+		</arguments>
+	</clause>
+</rule>

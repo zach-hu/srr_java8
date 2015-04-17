@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rule>
+	<clause type="Rule">
+		<rule-filename>has-items.xml</rule-filename>
+	</clause>
+	<logical-operator>IFTHEN</logical-operator>
+	<clause type="lookup" elementSource="true">
+		<sql>from Address as address WHERE address.id.addressCode = '@itemLocation@' AND address.inventory = 'Y' AND address.status != '03'</sql>
+		<source>lineitems</source>
+		<arguments>
+			<name>itemLocation</name>
+			<source>lineitems</source>
+			<colName>getItemLocation</colName>
+		</arguments>
+	</clause>
+</rule>

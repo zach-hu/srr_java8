@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="receiptRetrieve" connection-type="Connection-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="receiptRetrieve">
+			<task synchronous="true" continue-on-failure="false" name="receiptHeader">
+				<task-object-name>com.tsa.puridiom.receiptheader.tasks.ReceiptHeaderRetrieveById</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="receiptRetrieveSetup">
+				<task-object-name>com.tsa.puridiom.receipt.tasks.ReceiptRetrieveSetup</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="receiptLineList">
+				<task-object-name>com.tsa.puridiom.receiptline.tasks.ReceiptLineRetrieveByHeader</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="receiptLineList">
+				<task-object-name>com.tsa.puridiom.receiptline.tasks.ReceiptLineRetrieveAll</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="accountList">
+				<rule-filename check-for-false="true">is-accountic-empty.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.account.tasks.AccountRetrieveByLine</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="poCommentsRetrieve">
+				<rule-filename check-for-false="true">is-doccomment-icheader-empty.xml</rule-filename>
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>doccomment-retrieve-by-line.xml</process-filename>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="docAttachmentList">
+				<rule-filename check-for-false="true">is-docattachment-icheader-empty.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.docattachment.tasks.DocAttachmentRetrieveByHeader</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="receiptHeaderVendorRetrieveById">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>receiptheader-vendor-retrieve-by-id.xml</process-filename>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="receiptHeaderShipToRetrieveById">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>receiptheader-shipto-retrieve-by-id.xml</process-filename>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="receiptHeader">
+				<task-object-name>com.tsa.puridiom.receiptheader.tasks.ReceiptHeaderDataSet</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="receiptRetrieveSetup">
+				<task-object-name>com.tsa.puridiom.receipt.tasks.ReceiptOrderRetrieveSetup</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="poRetrieve">
+			<rule-filename>is-receiptmethod-adjustment.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="poRetrieve">
+				<rule-filename check-for-false="true">is-poheader-icpoheader-empty.xml</rule-filename>
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>po-retrieve.xml</process-filename>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="poRetrieve">
+			<rule-filename check-for-false="true">is-receiptmethod-adjustment.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="poHeaderRetrieveSetup">
+				<task-object-name>com.tsa.puridiom.receiptheader.tasks.ReceiptHeaderPoHeaderRetrieveSetup</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="poHeader">
+				<rule-filename check-for-false="true">is-poheader-icpoheader-empty.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.poheader.tasks.PoHeaderRetrieveById</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="accountAllocAmountRetrieve">
+			<rule-filename check-for-false="true">is-accountic-empty.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="receiptRetrieveSetup">
+				<task-object-name>com.tsa.puridiom.receipt.tasks.ReceiptRetrieveSetup</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="accountAllocAmountRetrieve">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>account-alloc-amount-retrieve.xml</process-filename>
+			</task>
+		</activity>
+	</activities>
+</process>

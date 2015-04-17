@@ -1,0 +1,23 @@
+<browse_task>
+	<columns>
+		<InvTask_taskId>
+			<label>brw-taskId</label>
+			<sort>A</sort>
+			<link><![CDATA[javascript: returnInvTask('#InvTask_taskId^'); void(0);]]></link>
+			<size>15</size>
+		</InvTask_taskId>
+		<InvTask_description>
+			<label>description</label>
+			<size>50</size>
+		</InvTask_description>
+		<InvTask_taskType>
+			<label>brw-taskType</label>
+			<size>15</size>
+		</InvTask_taskType>
+	</columns>
+<sqlfrom>InvTask as InvTask</sqlfrom>
+<sqlwhere><![CDATA[ (InvTask.status <> '03') ]]></sqlwhere>
+<sqlorderby>InvTask.taskId ASC</sqlorderby>
+<pagesize>15</pagesize>
+<title>Task Browse</title>
+</browse_task>

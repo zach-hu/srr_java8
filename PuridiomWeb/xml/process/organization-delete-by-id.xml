@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="organizationUpdate" connection-type="Transaction-Required" connection-name="host" ldap-connection-type="None">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="organizationUpdate">
+			<task synchronous="true" continue-on-failure="false" name="organization">
+				<task-object-name>com.tsa.puridiom.organization.tasks.OrganizationManagerGetOrganization</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="organization">
+				<task-object-name>com.tsa.puridiom.organization.tasks.OrganizationDeleteById</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="organizationPackageDelete">
+				<task-object-name>com.tsa.puridiom.organizationpackage.tasks.OrganizationPackageDeleteByOrganization</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="organizationRemoveFromCache">
+				<task-object-name>com.tsa.puridiom.organization.tasks.OrganizationManagerRemoveFromCache</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

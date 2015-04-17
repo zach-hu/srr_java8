@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="ScheduleUpdate" connection-type="Transaction-Required"> 
+	<activities>  
+		<activity synchronous="true" continue-on-failure="false" name="updateScheduleActivity">
+			<task synchronous="true" continue-on-failure="false" name="schedule">
+				<task-object-name>com.tsa.puridiom.schedule.tasks.ScheduleRetrieveById</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="schedule">			
+				<task-object-name>com.tsa.puridiom.schedule.tasks.ScheduleSetValues</task-object-name>
+				<post-action></post-action>
+			</task>  
+			<task synchronous="true" continue-on-failure="false" name="updateSchedule">    			
+				<task-object-name>com.tsa.puridiom.schedule.tasks.ScheduleUpdate</task-object-name>    
+				<post-action />    
+			   </task>   
+		  </activity>  
+	 </activities> 
+</process>

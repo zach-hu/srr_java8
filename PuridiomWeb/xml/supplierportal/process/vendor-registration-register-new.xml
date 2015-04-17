@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="vendorRegistration" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="vendorRegistration">
+			<task synchronous="true" continue-on-failure="false" name="vendorId">
+				<rule-filename>is-temp-vendorid-empty</rule-filename>
+				<task-object-name>com.tsa.puridiom.supplierportal.registration.tasks.GenerateVendorIdFromName</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="registration">
+				<task-object-name>com.tsa.puridiom.supplierportal.registration.tasks.RegisterUserSetVendorId</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="vendorRegisterSetup">
+				<task-object-name>com.tsa.puridiom.supplierportal.registration.tasks.RegisterUserVendorRegisterSetup</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="vendorRegister">
+				<task-object-name>com.tsa.puridiom.vendorregister.tasks.VendorRegisterSetValues</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="vendorRegister">
+				<task-object-name>com.tsa.puridiom.vendorregister.tasks.VendorRegisterAdd</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="bidboardUser">
+				<rule-filename check-for-false="true">is-vendorregister-empty</rule-filename>
+				<task-object-name>com.tsa.puridiom.supplierportal.tasks.BidBoardUserSetValuesFromVendorRegister</task-object-name>
+				<post-action>exitActivity</post-action>
+			</task>
+		</activity>
+	</activities>
+</process>

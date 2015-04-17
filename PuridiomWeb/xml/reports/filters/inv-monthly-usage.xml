@@ -1,0 +1,67 @@
+<inv-monthly-usage>
+	<columns>
+		<DisbLine_itemNumber>
+			<label>dsb-itemNumber</label>
+			<alias>item_number</alias>
+			<size>15</size>
+			<type>String</type>
+		</DisbLine_itemNumber>
+		<DisbLine_itemLocation>
+			<alias>item_location</alias>
+			<label>location</label>
+			<type>String</type>
+			<size>20</size>
+		</DisbLine_itemLocation>
+		<DisbHeader_disbDate>
+			<alias>disb_date</alias>
+			<label>Disb. Date</label>
+			<type>Date</type>
+			<size>20</size>
+		</DisbHeader_disbDate>
+		<DisbLine_departmentCode>
+			<alias>department_code</alias>
+			<label>Cost Center</label>
+			<type>String</type>
+			<size>20</size>
+		</DisbLine_departmentCode>
+		<InvItem_owner>
+			<alias>owner</alias>
+			<label>Owner</label>
+			<type>String</type>
+			<size>20</size>
+		</InvItem_owner>
+		<InvItem_udf1Code>
+			<alias>udf1code</alias>
+			<label>IN01</label>
+			<type>String</type>
+			<size>20</size>
+		</InvItem_udf1Code>
+		<InvItem_udf2Code>
+			<alias>udf2code</alias>
+			<label>IN02</label>
+			<type>String</type>
+			<size>20</size>
+		</InvItem_udf2Code>
+		<InvItem_udf3Code>
+			<alias>udf3code</alias>
+			<label>IN03</label>
+			<type>String</type>
+			<size>20</size>
+		</InvItem_udf3Code>
+		<DisbHeader_disbDate>
+			<alias>month</alias>
+			<label>Month</label>
+			<type>Date</type>
+			<size>20</size>
+		</DisbHeader_disbDate>
+	</columns>
+<sqlfrom>DisbHeader DisbHeader, DisbLine DisbLine, InvItem InvItem</sqlfrom>
+<sqlwhere><![CDATA[( DisbHeader.icDsbHeader = DisbLine.icDsbHeader ) and  
+         ( DisbLine.itemNumber = InvItem.itemNumber ) and  
+         ( ( DisbHeader.status > '5000' ) AND  
+         ( DisbHeader.status < '9000' ) ) ]]></sqlwhere>
+<sqlorderby>DisbLine.itemNumber ASC, DisbHeader.disbDate ASC</sqlorderby>
+<pagesize>15</pagesize>
+<title>Inventory Monthly Usage Report</title>
+</inv-monthly-usage>
+

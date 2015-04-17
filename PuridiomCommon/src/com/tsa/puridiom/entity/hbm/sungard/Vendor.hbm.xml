@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+<class name="com.tsa.puridiom.entity.sungard.Vendor" table="VENDOR">
+    <composite-id name="comp_id" class="com.tsa.puridiom.entity.sungard.VendorPK">
+        <key-property name="vendorId" column="VENDOR_ID"  type="java.lang.String" length="15" />
+        <key-property name="internalVendorId" column="INTERNAL_VENDOR_ID" type="java.math.BigDecimal" length="10" />
+    </composite-id> 
+	<property name="statusInd" column="STATUS_IND" type="java.lang.String" length="1"/>
+	<property name="vendorType" column="VENDOR_TYPE" type="java.lang.String" length="1"/>
+	<property name="tin" column="TIN" type="java.lang.String" length="10"/>
+	<property name="tinType" column="TIN_TYPE" type="java.lang.String" length="1"/>
+	<property name="certifiedTin" column="CERTIFIED_TIN" type="java.lang.String" length="1"/>
+	<property name="dfltAddrSeqNum" column="DFLT_ADDR_SEQ_NUM" type="java.math.BigDecimal" length="10"/>
+	<property name="discPct" column="DISC_PCT" type="java.math.BigDecimal" length="6"/>
+	<property name="salesTaxPct" column="SALES_TAX_PCT" type="java.math.BigDecimal" length="6"/>
+	<property name="irsCodeId" column="IRS_CODE_ID" type="java.math.BigDecimal" length="10"/>
+	<property name="takeDiscount" column="TAKE_DISCOUNT" type="java.lang.String" length="1"/>
+	<property name="discountInd" column="DISCOUNT_IND" type="java.lang.String" length="1"/>
+	<property name="discountDays" column="DISCOUNT_DAYS" type="java.math.BigDecimal" length="10"/>
+	<property name="useTaxInd" column="USE_TAX_IND" type="java.lang.String" length="1"/>
+	<property name="combineInd" column="COMBINE_IND" type="java.lang.String" length="1"/>
+	<property name="holdInd" column="HOLD_IND" type="java.lang.String" length="1"/>
+	<property name="advicePrint" column="ADVICE_PRINT" type="java.lang.String" length="1"/>
+	<property name="sortCode" column="SORT_CODE" type="java.lang.String" length="4"/>
+	<property name="vendorStartDate" column="VENDOR_START_DATE" type="java.sql.Date" length="23"/>
+	<property name="vendorEndDate" column="VENDOR_END_DATE" type="java.sql.Date" length="23"/>
+	<property name="minorityInd" column="MINORITY_IND" type="java.lang.String" length="1"/>
+	<property name="withholdingInd" column="WITHHOLDING_IND" type="java.lang.String" length="1"/>
+	<property name="whThresholdAmt" column="WH_THRESHOLD_AMT" type="java.math.BigDecimal" length="15"/>
+	<property name="whPct" column="WH_PCT" type="java.math.BigDecimal" length="6"/>
+	<property name="netDueDays" column="NET_DUE_DAYS" type="java.math.BigDecimal" length="10"/>
+	<property name="minorityGroup" column="MINORITY_GROUP" type="java.lang.String" length="60"/>
+	<property name="vendorName1" column="VENDOR_NAME1" type="java.lang.String" length="60"/>
+</class>
+</hibernate-mapping>

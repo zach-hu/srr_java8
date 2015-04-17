@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="receiptLineDataRetrieve" connection-type="Connection-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="receiptLineRetrieve">
+			<rule-filename>is-receiptline-empty</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="receiptLine">			
+				<task-object-name>com.tsa.puridiom.receiptline.tasks.ReceiptLineRetrieveById</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="receiptLineDataRetrieve">
+			<task synchronous="true" continue-on-failure="false" name="receiptLineRetrieveSetup">			
+				<task-object-name>com.tsa.puridiom.receiptline.tasks.ReceiptLineRetrieveSetup</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="docCommentList">			
+				<task-object-name>com.tsa.puridiom.doccomment.tasks.DocCommentRetrieveByLine</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="docTextList">			
+				<task-object-name>com.tsa.puridiom.doccomment.tasks.DocCommentTextRetrieveByLine</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="receiptLine">			
+				<task-object-name>com.tsa.puridiom.receiptline.tasks.ReceiptLineDataSet</task-object-name>
+			</task>			
+		</activity>
+	</activities>
+</process>

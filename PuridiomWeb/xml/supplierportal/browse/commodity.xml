@@ -1,0 +1,17 @@
+<browse_commodity>
+	<columns>
+		<Commodity_commodity>
+			<label>Commodity Code</label>
+			<sort>A</sort>
+			<link><![CDATA[javascript: returnMe('#Commodity_commodity^'); void(0);]]></link>
+		</Commodity_commodity>
+		<Commodity_description>
+			<label>Description</label>
+			<hidden-input>Y</hidden-input>
+		</Commodity_description>
+	</columns>
+<sqlfrom>Commodity as Commodity</sqlfrom>
+<sqlwhere><![CDATA[ (Commodity.status <> '03') ]]></sqlwhere>
+<pagesize>15</pagesize>
+<title>Commodity Browse</title>
+</browse_commodity>

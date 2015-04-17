@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rule>
+	<clause type="BigDecimalCompare">
+		<left-side>
+			<source>incomingRequestObjectMethod</source>
+			<object>lineitem</object>
+			<name>getLineTotal</name>
+		</left-side>
+		<operator>GREATEREQUAL</operator>
+		<right-side>
+			<source>constant</source>
+			<value>10000</value>
+		</right-side>
+	</clause>
+	<logical-operator>IFTHEN</logical-operator>
+	<clause type="ElementRule" matchAll="true">
+		<left-side>
+			<source>incomingRequestList</source>
+			<object>lineitems</object>
+			<rule-filename>req-line-exist-account-list.xml</rule-filename>
+		</left-side>
+	</clause>
+</rule>

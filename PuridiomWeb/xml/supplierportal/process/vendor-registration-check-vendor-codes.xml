@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="vendorRegistration" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="vendorRetrieve">
+			<task synchronous="true" continue-on-failure="false" name="vendorId">
+				<rule-filename>is-temp-vendorid-empty</rule-filename>
+				<task-object-name>com.tsa.puridiom.supplierportal.registration.tasks.GenerateVendorIdFromName</task-object-name>
+				<post-action>exitActivity</post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="vendorId">
+				<task-object-name>com.tsa.puridiom.supplierportal.registration.tasks.GenerateNextVendorId</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="retrieveVendorByVendorId">
+			<task synchronous="true" continue-on-failure="false" name="vendorRegistrationValidateIdSetup">
+				<!-- set Vendor_vendorId & VendorRegister_vendorId based on vendorId -->
+				<task-object-name>com.tsa.puridiom.supplierportal.registration.tasks.ValidateNewVendorIdSetup</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="vendor">
+				<task-object-name>com.tsa.puridiom.vendor.tasks.VendorRetrieveById</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="determineRegistrationType">
+			<rule-filename check-for-false="true">is-vendor-empty</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="vendorId">
+				<task-object-name>com.tsa.puridiom.vendor.tasks.VendorGetVendorId</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="registrationStatus">
+				<task-object-name>com.tsa.puridiom.supplierportal.registration.tasks.RegisterUserSetIsQualified</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="registrationStatus">
+				<rule-filename>is-registeruser-vendor-vendorein-valid</rule-filename>
+				<task-object-name>com.tsa.puridiom.supplierportal.registration.tasks.RegisterUserSetIsEinValid</task-object-name>
+				<post-action>exitActivity</post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="vendorRegistrationCheckExistingCodes">
+				<rule-filename check-for-false="true">is-vendorid-max-reached</rule-filename>
+				<task-object-name>com.tsa.puridiom.supplierportal.InvokeSupplierPortalProcessTask</task-object-name>
+				<process-filename>vendor-registration-check-vendor-codes</process-filename>
+			</task>
+		</activity>
+	</activities>
+</process>

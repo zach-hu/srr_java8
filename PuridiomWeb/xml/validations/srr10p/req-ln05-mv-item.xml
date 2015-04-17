@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rule>
+	<clause type="StringCompare">
+		<left-side elementSource="true">
+			<source>incomingRequestObject</source>
+			<object>lineItem</object>
+			<name>getReqType</name>
+		</left-side>
+		<operator>NOTEQUAL</operator>
+		<right-side>
+			<source>constant</source>
+			<value>M</value>
+		</right-side>
+	</clause>
+	<logical-operator>IFTHEN</logical-operator>
+	<clause type="lookup" elementSource="true">
+		<sql>from StdTable stdTable where stdTable.id.tableType = 'LN05' AND stdTable.id.tableKey = '@udf5code@' AND (stdTable.status = '02' OR (stdTable.status = '01' AND stdTable.dateExpires >= @today@))</sql>
+		<source>lineItem</source>
+		<arguments>
+			<name>udf5code</name>
+			<source>lineItem</source>
+			<colName>getUdf5Code</colName>
+		</arguments>
+	</clause>
+</rule>

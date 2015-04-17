@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="rfqLineRenumber" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="rfqLineRenumber">
+			<!-- retrieve all lines so they can be renumbered -->
+			<task synchronous="true" continue-on-failure="false" name="rfqLineList">
+				<task-object-name>com.tsa.puridiom.rfqline.tasks.RfqLineRetrieveByHeader</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="rfqLineList">
+				<task-object-name>com.tsa.puridiom.rfqline.tasks.RfqLineRenumber</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="rfqLineList">
+				<task-object-name>com.tsa.puridiom.rfqline.tasks.RfqLineUpdateEntityList</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

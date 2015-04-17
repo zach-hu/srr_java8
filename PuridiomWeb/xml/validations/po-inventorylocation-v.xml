@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rule>
+	<clause type="Empty">
+		<left-side>
+			<source>incomingRequestObjectMethod</source>
+			<object>header</object>
+			<name>getItemLocation</name>
+		</left-side>
+	</clause>
+	<logical-operator>OR</logical-operator>
+	<clause type="lookup">
+		<sql>
+			from Address as address WHERE address.id.addressCode = '@itemLocation@' AND address.inventory = 'Y'
+		</sql>
+		<source>header</source>
+		<arguments>
+			<name>itemLocation</name>
+			<source>header</source>
+			<colName>getItemLocation</colName>
+		</arguments>
+	</clause>
+</rule>

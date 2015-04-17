@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="ContactDeletebyid" connection-type="Transaction-Required"> 
+	<activities>  
+		<activity synchronous="true" continue-on-failure="false" name="deletebyidContactActivity">
+			<task synchronous="true" continue-on-failure="false" name="addressSetup">			
+				<task-object-name>com.tsa.puridiom.address.tasks.AddressSetupFromContact</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="deleteAddress">			
+				<task-object-name>com.tsa.puridiom.address.tasks.AddressDeleteById</task-object-name>
+			</task>
+<!--			<task synchronous="true" continue-on-failure="false" name="defaultAddressDelete">			
+				<task-object-name>com.tsa.puridiom.address.tasks.AddressDeleteDefault</task-object-name>
+			</task> -->
+			<task synchronous="true" continue-on-failure="false" name="deletebyidContact">    			
+				<task-object-name>com.tsa.puridiom.contact.tasks.ContactDeleteById</task-object-name>    
+				<post-action />    
+			 </task>   
+		  </activity>  
+	 </activities> 
+</process>

@@ -1,0 +1,52 @@
+<browse_userlog>
+	<columns>
+		<UserLog_userId>
+			<label>user-userId</label>
+			<link><![CDATA[javascript: adminUserLog('#UserLog_userId^'); void(0);]]></link>
+			<size>13</size>
+			<distinct>Y</distinct>
+		</UserLog_userId>
+		<UserLog_mailId>
+			<label>emailAddress</label>
+			<size>25</size>
+			<selectsql>N</selectsql>
+			<allowfilter>Y</allowfilter>
+			<hidden>Y</hidden>
+		</UserLog_mailId>
+		<UserLog_dateLog>
+			<label>Date Log</label>
+			<type>DATE</type>
+			<size>15</size>
+			<selectsql>N</selectsql>
+			<allowfilter>Y</allowfilter>
+			<hidden>Y</hidden>
+		</UserLog_dateLog>
+		<UserLog_timeLog>
+			<label>Time Log</label>
+			<size>15</size>
+			<selectsql>N</selectsql>
+			<allowfilter>Y</allowfilter>
+			<hidden>Y</hidden>
+		</UserLog_timeLog>
+		<UserLog_ipLog>
+			<label>IP Log</label>
+			<size>15</size>
+			<selectsql>N</selectsql>
+			<allowfilter>Y</allowfilter>
+			<hidden>Y</hidden>
+		</UserLog_ipLog>
+		<UserLog_status>
+			<label>brw-status</label>
+			<type>STATUS</type>
+			<size>15</size>
+			<selectsql>N</selectsql>
+			<allowfilter>Y</allowfilter>
+			<hidden>Y</hidden>
+		</UserLog_status>
+	</columns>
+<sqlfrom>UserLog as UserLog</sqlfrom>
+<sqlwhere></sqlwhere>
+<sqlorderby>UserLog.userId ASC</sqlorderby>
+<pagesize>15</pagesize>
+<title>User Log</title>
+</browse_userlog>

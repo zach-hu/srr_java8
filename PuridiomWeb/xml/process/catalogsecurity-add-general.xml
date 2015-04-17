@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="catalogSecurityAdd" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="catalogSecurityAdd">
+			<task synchronous="true" continue-on-failure="false" name="catalogSecurityAdd">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>catalogsecurity-add</process-filename>
+			</task>
+		</activity>					
+		<activity synchronous="true" continue-on-failure="false" name="catalogItemSecurityAddFromCatalog">
+			<task synchronous="true" continue-on-failure="false" name="catalogItemSecurityAddFromCatalog">
+				<rule-filename></rule-filename>
+				<task-object-name>com.tsa.puridiom.catalogsecurity.tasks.CatalogItemSecurityAddFromCatalog</task-object-name>
+				<post-action></post-action>
+			  </task>
+		</activity>
+	</activities>
+</process>

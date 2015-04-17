@@ -1,0 +1,334 @@
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Drag and drop plug-in : Drag and drop with CellList</title>
+<style type="text/css">
+table {	
+	font-family: Verdana;
+	font-size: 10px;
+	background-color: white;
+}
+
+gwt-Label {	
+	font-family: Verdana;
+	font-size: 8px;
+}
+
+.demo {
+	width: 1200px;
+	margin-right: auto;
+	margin-left: auto;
+	padding: 10px;
+	border: black solid 1px;
+}
+
+.main-pager {
+	border: 1px solid #CCCCCC;
+	height: 600px;
+	text-align: left;
+	width: 900px;
+	margin: 10px;
+}
+
+.pager {
+	border: 1px solid #CCCCCC;
+	height: 50px;
+	text-align: left;
+	width: 200px;
+	margin: 10px;
+}
+
+.gwt-Label{
+	margin-left: 10px;
+	margin-top: 10px;
+	font-size: 14px;
+	font-weight: bold;
+}
+
+.pagerWrapper {
+	float:left;
+}
+
+.yellow-border div.pager {
+    border: 1px solid #FFE45C;
+}
+
+.orange-border div.pager {
+	border: 1px solid #F6A828;
+    background-color:#C1DEFD;
+}
+.popup {
+  background-color: gray;
+  border-color: gray gray gray gray;
+  border-width: 1px 3px 3px 1px;
+  border-style: solid solid solid solid;
+}
+ 
+.popup-item {
+  font-weight: normal;
+  font-size: 80%;
+}
+
+</style>
+<script language="javascript" src="MSRRequest/MSRRequest.nocache.js"></script>
+<script>
+	function getSourceType() {
+		return "R";
+	}
+	
+	function getColumns() {
+		var myColumns=["Item #/Desc.", "Catalog/Proc Level", "Quantity", "U/M", "Unit Cost", "Ext. Cost"];
+		//var myColumns=["Item #/Desc.", "Catalog/Proc Level", "Quantity", "U/M", "Unit Cost", "Ext. Cost", "Requisition #", "Status", "Kit/Inventory Location", "PO #", "Status", "Receipt #", "Status", "Invoice #", "Status"];
+		return myColumns;
+	}
+	
+	function getItemNumbers() {
+		var myColumns=["100","101","102","103"];
+		return myColumns;
+	}
+	
+	function getSupplierIds() {
+		var myColumns=["V00122","V00122","V00122","V00122"];
+		return myColumns;
+	}
+	
+	function getCatalogs() {
+		var myColumns=["SRNS-STORES","SRNS-CHEMICAL","VINIMAYA",""];
+		return myColumns;
+	}
+	
+	function getProcLevels() {
+		var myColumns=["LEVEL_2","LEVEL_3","LEVEL_3","LEVEL_3"];
+		return myColumns;
+	}
+	
+	function getCommodities() {
+		var myColumns=["1248024","1248024","1248024",""];
+		return myColumns;
+	}
+	
+	function getIndClasses() {
+		var myColumns=["II","II","II", ""];
+		return myColumns;
+	}
+	
+	function getUorms() {
+		var myColumns=["1.0000","1.0000","1.0000", "1.0000"];
+		return myColumns;
+	}
+	
+	function getQuantities() {
+		var myColumns=["1.00","1.00","1.00", "1.00"];
+		return myColumns;
+	}
+	
+	function getUnitCosts() {
+		var myColumns=["12,723.03","6,010.57","6,613.60", "100.0000"];
+		return myColumns;
+	}
+	
+	function getExtCosts() {
+		var myColumns=["12,723.03","6,010.57","6,613.60", "100.0000"];
+		return myColumns;
+	}
+	
+	
+	function getIcHistories() {
+		var myColumns=["123","456","789", "26355900813586"];
+		return myColumns;
+	}
+
+	function getIcReqLines() {
+		var myColumns=["987","654","321", "26355900811985"];
+		return myColumns;
+	}
+	
+	function getDescriptions() {
+		var myColumns=["Description 1","Description 2","Description 3","Description 4"];
+		return myColumns;
+	}
+	
+	function submitForm() {
+		//doSubmit("requests/req_review.jsp","RequisitionLineSourcingSplitHandler");
+		document.forms[0].submit();
+	}
+
+	function getIcPoLines() {
+		var myColumns=["123","456","789", "0"];
+		return myColumns;
+	}
+
+	function getItemLocations() {
+		var myColumns=["MAIN","MAIN","MAIN", "KIT_5865"];
+		return myColumns;
+	}
+
+	function getItemSources() {
+		var myColumns=["CAT","CAT","XML", ""];
+		return myColumns;
+	}
+
+	function getBlanketOrders() {
+		var myColumns=["BO","BO","BO", ""];
+		return myColumns;
+	}
+
+	function getReqNumber() {
+		var myColumns=["12-2781","12-2781","12-2781", ""];
+		return myColumns;
+	}
+
+	function getReqStatus() {
+		var myColumns=["1000","1000","1000", ""];
+		return myColumns;
+	}
+
+	function getReqLocation() {
+		var myColumns=["SOUTH","SOUTH","SOUTH", ""];
+		return myColumns;
+	}
+
+	function getPoNumber() {
+		var myColumns=["PO11","PO11","PO11", ""];
+		return myColumns;
+	}
+
+	function getPoStatus() {
+		var myColumns=["3000","3000","3000", ""];
+		return myColumns;
+	}
+
+	function getRecNumber() {
+		var myColumns=["000100","000100","000100", ""];
+		return myColumns;
+	}
+
+	function getRecStatus() {
+		var myColumns=["4000","4000","4000", ""];
+		return myColumns;
+	}
+
+	function getInvNumber() {
+		var myColumns=["159","159","159", ""];
+		return myColumns;
+	}
+
+	function getInvStatus() {
+		var myColumns=["5000","5000","5000", ""];
+		return myColumns;
+	}
+
+	function getLineNumbers() {
+		var myColumns=["1","2","3", "4"];
+		return myColumns;
+	}
+
+	function getRadNuclears() {
+		var myColumns=["Y","Y","Y", "GS"];
+		return myColumns;
+	}
+
+	function getMarkTags() {
+		var myColumns=["Y","Y","Y", "N"];
+		return myColumns;
+	}
+
+	function getTraceabilities() {
+		var myColumns=["C","C","C","C"];
+		return myColumns;
+	}
+
+	function getHeaders() {
+		var myColumns=["A","B","C", ""];
+		return myColumns;
+	}
+
+	function getIcPoLines() {
+		var myColumns=["11111","22222","33333", "0"];
+		return myColumns;
+	}
+
+	function getMsrNumber() {
+		var myColumn="12-2781";
+		return myColumn;
+	}
+
+	function isPopup() {
+		var myColumn="N";
+		return myColumn;
+	}
+	
+</script>
+</head>
+
+<body>
+
+<form action="index.html" method="get">
+<table width="100%">
+	<tr>
+		<td valign="top" width="75%">
+			<div id="mainLabel" class="divcls"></div>
+			<div id="cell"></div>
+		</td>
+		<td valign="top" width="25%">
+			<table>
+				<tr>
+					<td align="right"><div id="link"></div></td>
+				</tr>
+				<tr>
+					<td>
+						<div id="label1"></div>
+						<div id="listBox1" style="padding-left: 10px"></div>
+						<div id="order1"></div>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<div id="label2"></div>
+						<div id="listBox2" style="padding-left: 10px"></div>
+						<div id="order2"></div>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<div id="label3"></div>
+						<div id="listBox3" style="padding-left: 10px"></div>
+						<div id="order3"></div>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<div id="label4"></div>
+						<div id="listBox4" style="padding-left: 10px"></div>
+						<div id="order4"></div>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<div id="label5"></div>
+						<div id="listBox5" style="padding-left: 10px"></div>
+						<div id="order5"></div>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<div id="label6"></div>
+						<div id="listBox6" style="padding-left: 10px"></div>
+						<div id="order6"></div>
+					</td>
+				</tr>
+				<tr>
+					<td align="center"><div id="button"></div></td>
+				</tr>
+			</table>
+		</td>
+	</tr>
+</table>
+<div id="hidden"></div>
+<input type="hidden" name="hello" value="sample" />
+</form>
+<br />
+<div style="clear: left"></div>
+</body>
+</html>

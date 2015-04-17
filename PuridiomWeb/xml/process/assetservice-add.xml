@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="AssetService_sequenceNo" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="assetServiceAdd">
+			<task synchronous="true" continue-on-failure="false" name="assetServiceCreateSetup">
+				<task-object-name>com.tsa.puridiom.assetservice.serv.tasks.AssetServiceCreateSetup</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="AssetService_sequenceNo">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>assetservice-next-sequence.xml</process-filename>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="assetService">
+				<task-object-name>com.tsa.puridiom.assetservice.tasks.AssetServiceSetValues</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="assetService">
+				<task-object-name>com.tsa.puridiom.assetservice.tasks.AssetServiceAdd</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+	</activities>
+</process>

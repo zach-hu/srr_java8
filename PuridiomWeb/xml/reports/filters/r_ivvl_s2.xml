@@ -1,0 +1,72 @@
+<r_ivvl_s2>
+  <columns>
+		<InvItem_commodity>
+			<label>Commodity</label>
+			<type>STRING</type>
+		</InvItem_commodity>
+		<Inventory_itemLocation>
+			<label>Item Location</label>
+			<type>STRING</type>
+		</Inventory_itemLocation>
+		<InvItem_udf1Code>
+			<label>Udf 1 Code</label>
+			<type>STRING</type>
+		</InvItem_udf1Code>
+		<InvItem_udf2Code>
+			<label>Udf 2 Code</label>
+			<type>STRING</type>
+		</InvItem_udf2Code>
+		<InvItem_udf3Code>
+			<label>Udf 3 Code</label>
+			<type>STRING</type>
+		</InvItem_udf3Code>
+		<InvItem_udf4Code>
+			<label>Udf 4 Code</label>
+			<type>STRING</type>
+		</InvItem_udf4Code>
+		<InvItem_udf5Code>
+			<label>Udf 5 Code</label>
+			<type>STRING</type>
+		</InvItem_udf5Code>
+		<InvItem_cost>
+			<label>Cost</label>
+			<type>BIGDECIMAL</type>
+		</InvItem_cost>
+		<Inventory_qtyOnHand>
+			<label>Qty On Hand</label>
+			<type>BIGDECIMAL</type>
+		</Inventory_qtyOnHand>
+		<InvItem_averageCost>
+			<label>Average Cost</label>
+			<type>BIGDECIMAL</type>
+		</InvItem_averageCost>
+		<Inventory_itemNumber>
+			<label>Item Number</label>
+			<type>STRING</type>
+		</Inventory_itemNumber>
+		<InvItem_unitOfIssue>
+			<label>Unit Of Issue</label>
+			<type>STRING</type>
+		</InvItem_unitOfIssue>
+		<InvItem_issueCost>
+			<label>Issue Cost</label>
+			<type>BIGDECIMAL</type>
+		</InvItem_issueCost>
+		<InvItem_lastCost>
+			<label>Last Cost</label>
+			<type>BIGDECIMAL</type>
+		</InvItem_lastCost>
+		<InvItem_source>
+			<label>Source</label>
+			<type>STRING</type>
+		</InvItem_source>
+		<InvItem_description>
+			<label>Description</label>
+			<type>STRING</type>
+		</InvItem_description>
+	</columns>
+  <sqlfrom> InvBinLocation as InvBinLocation , InvItem as InvItem </sqlfrom>
+  <sqlwhere><![CDATA[(InvBinLocation.itemNumber = InvItem.itemNumber) and( (InvItem.status <> '03' ))]]></sqlwhere>	
+  <title>Inventory Value Report (Summary)</title>
+</r_ivvl_s2>
+

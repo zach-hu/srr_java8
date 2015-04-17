@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="userProfileVerifyAuthentication" connection-type="None" ldap-connection-type="None">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="userProfileSetup">
+			<task synchronous="true" continue-on-failure="false" name="checkOrganization">
+				<rule-filename check-for-false="true">is-organization-valid.xml;is-organization-empty.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.usererrormsg.tasks.ErrorMsgSetOrganizationExpired</task-object-name>
+				<post-action>exitProcess</post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="checkUserStatus">
+				<rule-filename>is-organization-onhold.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.usererrormsg.tasks.ErrorMsgSetAccountOnHold</task-object-name>
+				<post-action>exitProcess</post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="userProfileRetrieveDetails">
+<!--				<rule-filename>is-organization-valid.xml</rule-filename> -->
+				<rule-filename check-for-false="true">is-userprofile-organization-empty.xml</rule-filename>
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>userprofile-detail-retrieve-by-userid.xml</process-filename>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="userProfile">
+				<rule-filename check-for-false="true">is-userprofile-empty</rule-filename>
+				<task-object-name>com.tsa.puridiom.userprofile.tasks.UserProfileSetRegistered</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="userProfileFail">
+			<rule-filename>is-userprofile-empty.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.usererrormsg.tasks.ErrorMsgSetInvalidLogin</task-object-name>
+				<post-action>exitProcess</post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="authenticationSetup">
+				<!-- set Encrypt password, set to uppercase if passwords are not case sensitive -->
+				<task-object-name>com.tsa.puridiom.authentication.tasks.AuthenticationSetup</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="ldapSetup">
+			<rule-filename>is-ldap-authentication-required.xml</rule-filename>
+			<rule-filename check-for-false="true">is-userprofile-empty.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="ldapUserset">
+				<rule-filename>is-ldapuser-authenticated.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.userprofile.tasks.UserProfileSetAuthenticated</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="lockedOut">
+			<task synchronous="true" continue-on-failure="false" name="setErrorMsg">
+				<rule-filename>is-userprofile-login-locked.xml;is-userprofile-organizationid-bsc04p.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.usererrormsg.tasks.ErrorMsgSetAccountLockedBSC</task-object-name>
+				<post-action>exitActivity</post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="lockedOutTime">
+				<task-object-name>com.tsa.puridiom.userprofile.tasks.UserProfileLockedOutTime</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="checkUnlockTime">
+				<rule-filename>is-userprofile-login-locked.xml;is-userprofile-login-locked-time.xml</rule-filename>
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>userprofile-unlock-login.xml</process-filename>
+			</task>
+			<!-- 
+			<task synchronous="true" continue-on-failure="false" name="checkUnlockTime">
+				<rule-filename>is-userprofile-login-locked-time.xml</rule-filename>
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>userprofile-resetAttempts.xml</process-filename>
+			</task>
+			-->
+			<task synchronous="true" continue-on-failure="false" name="checkLockedLogin">
+				<rule-filename>is-userprofile-login-locked</rule-filename>
+				<task-object-name>com.tsa.puridiom.usererrormsg.tasks.ErrorMsgSetAccountLocked</task-object-name>
+				<post-action>exitProcess</post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="authenticate">
+			<rule-filename>is-user-password-valid.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="checkUserAccountExpiration">
+				<rule-filename>is-userprofile-account-expired</rule-filename>
+				<task-object-name>com.tsa.puridiom.usererrormsg.tasks.ErrorMsgSetAccountExpired</task-object-name>
+				<post-action>exitActivity</post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="checkUserStatus">
+				<rule-filename>is-userprofile-account-inactive.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.usererrormsg.tasks.ErrorMsgSetAccountInactive</task-object-name>
+				<post-action>exitActivity</post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="checkUserStatus">
+				<rule-filename>is-userprofile-account-onhold.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.usererrormsg.tasks.ErrorMsgSetAccountOnHold</task-object-name>
+				<post-action>exitActivity</post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="userLogCount">
+				<task-object-name>com.tsa.puridiom.usermanager.tasks.UserManagerGetUserLogCount</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="setMaxUsersErrorMsg">
+				<rule-filename>is-max-users-reached.xml;is-not-userprofile-temp-password.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.usererrormsg.tasks.ErrorMsgSetMaxUsers</task-object-name>
+				<post-action>exitActivity</post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="checkPasswordReset">
+				<rule-filename>is-userprofile-password-reset-required.xml;is-not-userprofile-temp-password.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.usererrormsg.tasks.ErrorMsgSetPasswordResetRequired</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="organizationId">
+				<task-object-name>com.tsa.puridiom.userprofile.tasks.UserProfileGetOrganizationId</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="daysAfter">
+				<rule-filename>is-errormsg-empty.xml;</rule-filename>
+				<task-object-name>com.tsa.puridiom.userprofile.tasks.UserProfileDaysAfterPasswordSet</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="checkPasswordExpiration">
+				<rule-filename>is-errormsg-empty.xml;is-userprofile-password-expired.xml;is-not-userprofile-temp-password.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.usererrormsg.tasks.ErrorMsgSetPasswordExpired</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="warningRemainingDays">
+				<task-object-name>com.tsa.puridiom.userprofile.tasks.UserProfileWarningRemainingDaysPasswordSet</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="checkPasswordExpiration">
+				<rule-filename>is-errormsg-empty.xml;is-userprofile-password-expiring.xml;is-not-userprofile-temp-password.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.usererrormsg.tasks.WarningMsgSetPasswordExpiring</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="setErrorMsg">
+				<rule-filename>is-userprofile-securityquestion-empty.xml;is-not-userprofile-temp-password.xml;is-security-question-required.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.usererrormsg.tasks.ErrorMsgSetSecurityQuestionRequired</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="userProfileSetAuthenticated">
+				<rule-filename>is-errormsg-empty.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.userprofile.tasks.UserProfileSetAuthenticated</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="resetSessionAttempts">
+				<task-object-name>com.tsa.puridiom.usermanager.tasks.UserManagerResetSessionLoginAttempts</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="setUserInCache">
+				<task-object-name>com.tsa.puridiom.usermanager.tasks.UserManagerSetUserInCache</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="setErrorMsg">
+				<rule-filename>is-errormsg-empty.xml;is-userprofile-reviewprofile-required.xml;is-not-userprofile-temp-password.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.usererrormsg.tasks.ErrorMsgSetReviewProfileRequired</task-object-name>
+				<post-action></post-action>
+			</task>
+			<!-- 
+			<task synchronous="true" continue-on-failure="false" name="userProfileResetAttempts">
+				<rule-filename>is-userprofile-authenticated.xml</rule-filename>
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>userprofile-resetAttempts.xml</process-filename>
+			</task>
+			-->
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="postAuthentication">
+			<rule-filename>is-userprofile-authenticated.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="userLogAdd">
+				<rule-filename>is-userlog-audittrail-active.xml</rule-filename>
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>user-log-add.xml</process-filename>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="userProfileUpdateLastLoggedOn">
+				<rule-filename>is-not-userprofile-temp-password.xml</rule-filename>
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>userprofile-update-lastloggedon.xml</process-filename>
+			</task>
+			<post-action>exitProcess</post-action>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="setFailedLogin">
+			<rule-filename check-for-false="true">is-userprofile-authenticated.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="authenticate">
+				<task-object-name>com.tsa.puridiom.usererrormsg.tasks.ErrorMsgSetInvalidLogin</task-object-name>
+				<post-action></post-action>
+			</task>
+			<!-- 
+			<rule-filename check-for-false="true">is-userprofile-authenticated.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="userProfile">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>userprofile-setAttempts.xml</process-filename>
+			</task>
+			-->
+			<rule-filename check-for-false="true">is-puridiomsessionid-empty</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="loginAttempts">
+				<task-object-name>com.tsa.puridiom.userprofile.tasks.UserProfileGetSessionLoginAttempts</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="setMaxLoginAttemptsErrorMsg">
+				<rule-filename>is-max-login-attempts-reached.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.usererrormsg.tasks.ErrorMsgSetMaxLoginAttempts</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="userLogAdd">
+				<rule-filename>is-userlog-audittrail-active.xml</rule-filename>
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>user-log-add.xml</process-filename>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="maxLoginAttempts">
+			<rule-filename>is-max-login-attempts-reached;is-userprofile-registered</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="lockLogin">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>userprofile-lock-login.xml</process-filename>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="promptPasswordHelp">
+				<rule-filename check-for-false="true">is-userprofile-organization-srr.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.usererrormsg.tasks.ErrorMsgSetFinalLoginAttempt</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="passwordHelpRetrieve">
+				<rule-filename check-for-false="true">is-userprofile-organization-srr.xml</rule-filename>
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>userprofile-passwordhelp-retrieve.xml</process-filename>
+			</task>
+		</activity>
+	</activities>
+</process>

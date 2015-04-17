@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="PrintPdf" connection-type="Connection-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="dataRetrieve">
+			<task synchronous="true" continue-on-failure="false" name="receiptHeader">
+				<task-object-name>com.tsa.puridiom.receiptheader.tasks.ReceiptHeaderRetrieveById</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="receiptLine">
+				<task-object-name>com.tsa.puridiom.receiptline.tasks.ReceiptLineRetrieveById</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="poLine">
+				<task-object-name>com.tsa.puridiom.poline.tasks.PoLineRetrieveById</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="poHeader">
+				<task-object-name>com.tsa.puridiom.poheader.tasks.PoHeaderRetrieveById</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="inspectionHeader">
+				<task-object-name>com.tsa.puridiom.inspectionheader.tasks.InspectionHeaderRetrieveById</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="inspectionHeaderDataRetrieve">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>inspectionheaderdata-retrieve.xml</process-filename>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="poLineCommentsRetrieve">
+			<task synchronous="true" continue-on-failure="false" name="poLineRetrieveSetup">
+				<task-object-name>com.tsa.puridiom.poline.tasks.PoLineRetrieveSetup</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="poLineCommentsRetrieve">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>doccomment-retrieve-by-line.xml</process-filename>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="vendorAddressRetrieve">
+			<task synchronous="true" continue-on-failure="false" name="vendorAddressSetup">
+				<task-object-name>com.tsa.puridiom.receiptheader.tasks.ReceiptHeaderRetrieveVendorAddressSetup</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="vendorAddress">
+				<rule-filename>is-address-type-not-empty;is-address-code-not-empty</rule-filename>
+				<task-object-name>com.tsa.puridiom.address.tasks.AddressRetrieveById</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="vendorAddress">
+				<rule-filename>is-address-type-not-empty</rule-filename>
+				<task-object-name>com.tsa.puridiom.address.tasks.AddressRetrievePrimary</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="contact">
+				<rule-filename>is-contact-code-not-empty</rule-filename>
+				<task-object-name>com.tsa.puridiom.contact.tasks.ContactRetrieveByCode</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="printpdf">
+			<task synchronous="true" continue-on-failure="false" name="report">
+				<task-object-name>com.tsa.puridiom.formpdf.tasks.PrintRecInspWorksheetPdf</task-object-name>
+			</task>
+			<task name="messageText" synchronous="true" continue-on-failure="false">
+        		<rule-filename check-for-false="true">is-view-now.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.formpdf.tasks.RecPdfMessageText</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

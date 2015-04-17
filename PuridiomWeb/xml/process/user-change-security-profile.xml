@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="userChangeSecurityProfile" connection-type="Connection-Required" ldap-connection-type="none">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="changeSecurityProfileSetup">
+			<task synchronous="true" continue-on-failure="false" name="changeSecurityProfileSetup">
+				<task-object-name>com.tsa.puridiom.userprofile.tasks.ChangeSecurityProfileSetup</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="userProfile">
+				<task-object-name>com.tsa.puridiom.usermanager.tasks.UserManagerGetUser</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="changePassword">
+			<rule-filename>is-user-securityanswer-valid</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="userProfileUpdate">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>userprofile-update-by-id.xml</process-filename>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="userProfileSetAuthenticated">
+				<task-object-name>com.tsa.puridiom.userprofile.tasks.UserProfileSetAuthenticated</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="setUserInCache">
+				<task-object-name>com.tsa.puridiom.usermanager.tasks.UserManagerSetUserInCache</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="setErrorMsg">
+				<rule-filename>is-userprofile-reviewprofile-required.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.usererrormsg.tasks.ErrorMsgSetReviewProfileRequired</task-object-name>
+				<post-action></post-action>
+			</task>
+			<post-action>exitProcess</post-action>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="setErrorMsg">
+			<task synchronous="true" continue-on-failure="false" name="errorMsg">
+				<task-object-name>com.tsa.puridiom.usererrormsg.tasks.ErrorMsgSetInvalidSecurityAnswer</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+	</activities>
+</process>

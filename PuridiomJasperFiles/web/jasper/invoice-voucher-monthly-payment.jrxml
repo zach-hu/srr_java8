@@ -1,0 +1,460 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created using an evaluation version of JasperAssistant (http://www.jasperassistant.com) -->
+<!DOCTYPE jasperReport PUBLIC "-//JasperReports//DTD Report Design//EN" "http://jasperreports.sourceforge.net/dtds/jasperreport.dtd">
+
+<jasperReport name="invoicevouchermonthlypayment" language="java" pageWidth="791" pageHeight="612" orientation="Landscape" columnWidth="741" leftMargin="25" rightMargin="25" topMargin="25" bottomMargin="25">
+	<property name="com.jasperassistant.designer.GridWidth" value="2"/>
+	<property name="com.jasperassistant.designer.Margins" value="true"/>
+	<property name="com.jasperassistant.designer.Grid" value="false"/>
+	<property name="com.jasperassistant.designer.SnapToGuides" value="true"/>
+	<property name="com.jasperassistant.designer.Rulers" value="true"/>
+	<property name="com.jasperassistant.designer.HGuides" value="15,54,80,84,143,162,204,208,261,265,292,296,353,360,364,439,443,495,499,578,732"/>
+	<property name="com.jasperassistant.designer.GridHeight" value="2"/>
+	<property name="com.jasperassistant.designer.VGuides.InvoiceNumberHeader" value="10,22"/>
+	<property name="com.jasperassistant.designer.DataSource" value="one"/>
+	<property name="com.jasperassistant.designer.SnapToGrid" value="true"/>
+	<property name="com.jasperassistant.designer.VGuides.Page Footer" value="17"/>
+	<property name="com.jasperassistant.designer.VGuides.Detail" value="0"/>
+	<property name="com.jasperassistant.designer.VGuides.Column Header" value="115"/>
+	<import value="com.tsa.puridiom.property.PropertiesManager"/>
+	<import value="com.tsa.puridiom.common.documents.*"/>
+	<import value="java.util.*"/>
+	<import value="com.tsa.puridiom.entity.*"/>
+	<import value="net.sf.jasperreports.engine.JRDataSource"/>
+	<import value="com.tsagate.foundation.utility.Utility"/>
+	<import value="com.tsagate.properties.*"/>
+	<import value="com.tsa.puridiom.jasperreports.*"/>
+	<import value="java.net.*"/>
+	<reportFont name="Arial_Normal" isDefault="true" fontName="Arial" size="9" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Bold" isDefault="false" fontName="Arial Black" size="9" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica-Bold" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Bold_Big" isDefault="false" fontName="Arial Black" size="12" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica-Bold" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Big" isDefault="false" fontName="Arial" size="12" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<parameter name="oid" class="java.lang.String">
+		<defaultValueExpression><![CDATA["HILTON"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="reportTitle" class="java.lang.String">
+		<defaultValueExpression><![CDATA["Invoice Voucher Monthly Payment Report"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="reportCriteria" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="userId" class="java.lang.String">
+		<defaultValueExpression><![CDATA["Puridiom"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="footerText" class="java.lang.String">
+		<defaultValueExpression><![CDATA["Puridiom.com"]]></defaultValueExpression>
+	</parameter>
+	<queryString><![CDATA[SELECT  po_header.po_number PoHeader_poNumber,
+            po_header.release_number PoHeader_releaseNumber,
+            po_header.requisitioner_code PoHeader_requisitionerCode,
+            po_header.department_code PoHeader_departmentCode,
+            po_header.requisition_number PoHeader_requisitionNumber,
+            po_line.line_number PoLine_lineNumber,
+            po_line.commodity PoLine_commodity,
+            po_line.quantity PoLine_quantity,
+            po_line.unit_price PoLine_unitPrice,
+            invoice_header.invoice_number InvoiceHeader_invoiceNumber,
+            invoice_Header.invoice_date InvoiceHeader_invoiceDate,
+            invoice_Header.date_Entered InvoiceHeader_dateEntered,
+            invoice_Header.entered_by InvoiceHeader_enteredBy,
+		    invoice_header.vendor_name InvoiceHeader_vendorName,
+            receipt_line.qty_received ReceiptLine_qtyReceived,
+            receipt_line.received_by ReceiptLine_receivedBy,
+            po_line.item_number PoLine_itemNumber,
+            po_line.description PoLine_description,
+            po_line.LINE_TOTAL PoLine_lineTotal
+     FROM po_line , po_header, receipt_line , invoice_line, invoice_header
+WHERE ( invoice_line.ic_po_line = po_line.ic_po_line )
+ and ( po_header.ic_po_header = po_line.ic_po_header )
+ and ( invoice_header.ic_ivc_header = invoice_line.ic_ivc_header )
+ and          ( invoice_line.ic_po_line = receipt_line.ic_po_line )
+ and          ( invoice_line.status = '6010' )]]></queryString>
+	<field name="PoHeader_poNumber" class="java.lang.String">
+	</field>
+	<field name="PoHeader_releaseNumber" class="java.math.BigDecimal">
+	</field>
+	<field name="PoLine_quantity" class="java.math.BigDecimal">
+	</field>
+	<field name="PoLine_unitPrice" class="java.math.BigDecimal">
+	</field>
+	<field name="ReceiptLine_qtyReceived" class="java.math.BigDecimal">
+	</field>
+	<field name="ReceiptLine_receivedBy" class="java.lang.String">
+	</field>
+	<field name="PoHeader_requisitionerCode" class="java.lang.String">
+	</field>
+	<field name="PoHeader_departmentCode" class="java.lang.String">
+	</field>
+	<field name="PoHeader_requisitionNumber" class="java.lang.String">
+	</field>
+	<field name="InvoiceHeader_invoiceDate" class="java.util.Date">
+	</field>
+	<field name="InvoiceHeader_enteredBy" class="java.lang.String">
+	</field>
+	<field name="InvoiceHeader_invoiceNumber" class="java.lang.String">
+	</field>
+	<field name="InvoiceHeader_dateEntered" class="java.util.Date">
+	</field>
+	<field name="PoLine_commodity" class="java.lang.String">
+	</field>
+	<field name="PoLine_lineNumber" class="java.math.BigDecimal">
+	</field>
+	<field name="PoLine_itemNumber" class="java.lang.String">
+	</field>
+	<field name="PoLine_description" class="java.lang.String">
+		<fieldDescription><![CDATA[PoLine_description]]></fieldDescription>
+	</field>
+	<field name="PoLine_lineTotal" class="java.math.BigDecimal">
+	</field>
+	<field name="InvoiceHeader_vendorName" class="java.lang.String">
+		<fieldDescription><![CDATA[InvoiceHeader_vendorName]]></fieldDescription>
+	</field>
+	<variable name="today" class="java.util.Date">
+		<variableExpression><![CDATA[new Date()]]></variableExpression>
+	</variable>
+	<variable name="ReceivedAmount" class="java.math.BigDecimal">
+		<variableExpression><![CDATA[$F{PoLine_unitPrice}.multiply$F{ReceiptLine_qtyReceived}]]></variableExpression>
+	</variable>
+	<variable name="OriginalAmount" class="java.math.BigDecimal">
+		<variableExpression><![CDATA[$F{PoLine_quantity}.multiply$F{PoLine_unitPrice}]]></variableExpression>
+	</variable>
+	<group name="InvoiceNumber" isReprintHeaderOnEachPage="true">
+		<groupExpression><![CDATA[$F{InvoiceHeader_invoiceNumber}]]></groupExpression>
+		<groupHeader>
+		<band height="24">
+			<staticText>
+				<reportElement positionType="Float" x="32" y="13" width="17" height="10"/>
+				<box topBorder="None" leftBorder="None" bottomBorder="1Point" rightBorder="None"/>
+				<textElement>
+					<font size="8" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Line]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="54" y="13" width="66" height="10"/>
+				<box topBorder="None" leftBorder="None" bottomBorder="1Point" rightBorder="None"/>
+				<textElement>
+					<font size="8" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Item Number]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="123" y="13" width="227" height="10"/>
+				<box topBorder="None" leftBorder="None" bottomBorder="1Point" rightBorder="None"/>
+				<textElement>
+					<font size="8" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Description]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="353" y="13" width="32" height="10"/>
+				<box topBorder="None" leftBorder="None" bottomBorder="1Point" rightBorder="None"/>
+				<textElement textAlignment="Center">
+					<font size="8" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Ordered Amount]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="390" y="13" width="36" height="10"/>
+				<box topBorder="None" leftBorder="None" bottomBorder="1Point" rightBorder="None"/>
+				<textElement textAlignment="Right">
+					<font size="8" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Received]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="430" y="13" width="39" height="10"/>
+				<box topBorder="None" leftBorder="None" bottomBorder="1Point" rightBorder="None"/>
+				<textElement>
+					<font size="8" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Unit Price]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="472" y="13" width="98" height="10"/>
+				<box topBorder="None" leftBorder="None" bottomBorder="1Point" rightBorder="None"/>
+				<textElement>
+					<font size="8" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Commodity]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" mode="Opaque" x="208" y="-1" width="58" height="11" backcolor="#c0c0c0"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{PoHeader_poNumber}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" mode="Opaque" x="265" y="-1" width="32" height="11" backcolor="#c0c0c0"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{PoHeader_releaseNumber}]]></textFieldExpression>
+			</textField>
+			<textField pattern="MM/dd/yyyy" isBlankWhenNull="true">
+				<reportElement positionType="Float" mode="Opaque" x="84" y="-1" width="60" height="11" backcolor="#c0c0c0"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.util.Date"><![CDATA[$F{InvoiceHeader_invoiceDate}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" mode="Opaque" x="143" y="-1" width="66" height="11" backcolor="#c0c0c0"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{InvoiceHeader_enteredBy}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" mode="Opaque" x="15" y="-1" width="70" height="11" backcolor="#c0c0c0"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{InvoiceHeader_invoiceNumber}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement positionType="Float" x="656" y="13" width="77" height="10"/>
+				<box topBorder="None" leftBorder="None" bottomBorder="1Point" rightBorder="None"/>
+				<textElement>
+					<font size="8" isBold="false" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Received Amount]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="572" y="13" width="72" height="10"/>
+				<box topBorder="None" leftBorder="None" bottomBorder="1Point" rightBorder="None"/>
+				<textElement>
+					<font size="8" isBold="false" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Original Amount]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" mode="Opaque" x="296" y="-1" width="69" height="11" backcolor="#c0c0c0"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{PoHeader_requisitionNumber}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" mode="Opaque" x="364" y="-1" width="80" height="11" backcolor="#c0c0c0"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{PoHeader_requisitionerCode}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" mode="Opaque" x="443" y="-1" width="57" height="11" backcolor="#c0c0c0"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[($F{PoHeader_departmentCode})]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" mode="Opaque" x="499" y="-1" width="80" height="11" backcolor="#c0c0c0"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{ReceiptLine_receivedBy}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" mode="Opaque" x="578" y="-1" width="155" height="11" backcolor="#c0c0c0"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{InvoiceHeader_vendorName}]]></textFieldExpression>
+			</textField>
+		</band>
+		</groupHeader>
+	</group>
+	<title>
+		<band height="21">
+		</band>
+	</title>
+	<columnHeader>
+		<band height="117">
+			<staticText>
+				<reportElement positionType="Float" x="15" y="104" width="70" height="12"/>
+				<box topBorder="None" leftBorder="None" bottomBorder="1Point" rightBorder="None"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Invoice Number]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="499" y="104" width="77" height="12"/>
+				<box topBorder="None" leftBorder="None" bottomBorder="1Point" rightBorder="None"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Received By]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="84" y="104" width="60" height="12"/>
+				<box topBorder="None" leftBorder="None" bottomBorder="1Point" rightBorder="None"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Invoice Date]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="265" y="104" width="32" height="12"/>
+				<box topBorder="None" leftBorder="None" bottomBorder="1Point" rightBorder="None"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Rel]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="443" y="104" width="57" height="12"/>
+				<box topBorder="None" leftBorder="None" bottomBorder="1Point" rightBorder="None"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Department]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" x="15" y="36" width="717" height="22"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{reportCriteria}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement positionType="Float" x="16" y="0" width="717" height="28"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{reportTitle}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement positionType="Float" x="651" y="0" width="50" height="22"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression class="java.lang.String"><![CDATA["Page " + String.valueOf($V{PAGE_NUMBER}) + " of" + " "]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement positionType="Float" x="700" y="0" width="33" height="22"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[" " + String.valueOf($V{PAGE_NUMBER})]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement positionType="Float" x="208" y="104" width="58" height="12"/>
+				<box topBorder="None" leftBorder="None" bottomBorder="1Point" rightBorder="None"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[PO Number]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="364" y="104" width="80" height="12"/>
+				<box topBorder="None" leftBorder="None" bottomBorder="1Point" rightBorder="None"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Requestor]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="143" y="104" width="66" height="12"/>
+				<box topBorder="None" leftBorder="None" bottomBorder="1Point" rightBorder="None"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Entered By]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="576" y="104" width="157" height="12"/>
+				<box topBorder="None" leftBorder="None" bottomBorder="1Point" rightBorder="None"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Vendor Name]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="296" y="104" width="69" height="12"/>
+				<box topBorder="None" leftBorder="None" bottomBorder="1Point" rightBorder="None"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Req Number]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="13">
+			<elementGroup>
+			</elementGroup>
+			<elementGroup>
+			</elementGroup>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" x="32" y="0" width="17" height="11"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{PoLine_lineNumber}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" x="54" y="0" width="66" height="11"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{PoLine_itemNumber}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" x="124" y="0" width="226" height="11"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{PoLine_description}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.###" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="353" y="0" width="31" height="11"/>
+				<textElement textAlignment="Justified">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{PoLine_quantity}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.###" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="390" y="0" width="35" height="11"/>
+				<textElement textAlignment="Justified">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{ReceiptLine_qtyReceived}]]></textFieldExpression>
+			</textField>
+			<textField pattern="¤#,##0.00;(¤#,##0.00)" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="430" y="0" width="40" height="11"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{PoLine_unitPrice}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" x="472" y="0" width="99" height="11"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{PoLine_commodity}]]></textFieldExpression>
+			</textField>
+			<textField pattern="¤#,##0.00;(¤#,##0.00)" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="572" y="0" width="71" height="11"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{PoLine_quantity}.multiply$F{PoLine_unitPrice}]]></textFieldExpression>
+			</textField>
+			<textField pattern="¤#,##0.00;(¤#,##0.00)" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="656" y="0" width="77" height="11"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{ReceiptLine_qtyReceived}.multiply$F{PoLine_unitPrice}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="44">
+			<line>
+				<reportElement positionType="Float" x="15" y="0" width="718" height="1"/>
+				<graphicElement/>
+			</line>
+			<textField>
+				<reportElement positionType="Float" x="648" y="12" width="80" height="13"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{footerText}]]></textFieldExpression>
+			</textField>
+			<textField pattern="MMM d, yyyy h:mm a">
+				<reportElement positionType="Float" x="15" y="12" width="465" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA["Created " + Utility.getDateFormat($V{today}.toString(), "MMM d, yyyy h:mm a") + " by " + $P{userId}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="24">
+			<staticText>
+				<reportElement positionType="Float" x="450" y="0" width="128" height="13"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom">
+					<font size="9" isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Line Summary:]]></text>
+			</staticText>
+		</band>
+	</summary>
+</jasperReport>

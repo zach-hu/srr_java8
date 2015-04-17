@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+    
+<hibernate-mapping>
+
+<class 
+    name="com.tsa.puridiom.entity.AlertExclusion" 
+    table="ALERT_EXCLUSION"
+>
+    <composite-id name="comp_id" class="com.tsa.puridiom.entity.AlertExclusionPK">
+        <key-property name="alertId" column="ALERT_ID" type="java.lang.String" />
+        <key-property name="icRef" column="IC_REF" type="java.math.BigDecimal" />
+    </composite-id>    
+    <property
+        name="refType"
+        type="java.lang.String"
+        column="REF_TYPE"
+        length="3"
+    />
+    <property
+        name="owner"
+        type="java.lang.String"
+        column="OWNER"
+        length="15"
+    />
+    <property
+        name="excludedDate"
+        type="java.sql.Timestamp"
+        column="EXCLUDED_DATE"
+        length="7"
+    />
+    <property
+        name="refNumber"
+        type="java.lang.String"
+        column="REF_NUMBER"
+        length="20"
+    />
+
+    <!-- associations -->
+
+</class>
+</hibernate-mapping>

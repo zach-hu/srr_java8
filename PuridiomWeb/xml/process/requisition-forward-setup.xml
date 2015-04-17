@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="requisitionForwardSetup" connection-type="Connection-Required">
+  <activities>
+    <activity synchronous="true" continue-on-failure="false" name="requisitionForwardSetup">
+      <task synchronous="true" continue-on-failure="false" name="requisitionHeader">
+        <task-object-name>com.tsa.puridiom.requisitionheader.tasks.RequisitionHeaderRetrieveById</task-object-name>
+        <post-action></post-action>
+      </task>
+      <task synchronous="true" continue-on-failure="false" name="requisitionForwardSetup">
+        <task-object-name>com.tsa.puridiom.requisitionheader.tasks.RequisitionHeaderUpdateSetup</task-object-name>
+        <post-action></post-action>
+      </task>
+      <task synchronous="true" continue-on-failure="false" name="requisitionLineList">
+        <task-object-name>com.tsa.puridiom.requisitionline.tasks.RequisitionLineRetrieveByHeader</task-object-name>
+        <post-action></post-action>
+      </task>
+    </activity>
+    <activity synchronous="true" continue-on-failure="false" name="requisitionPricingReqCheck">
+      <task synchronous="true" continue-on-failure="false" name="requisitionForwardPricingCheck">
+        <rule-filename>is-pricing-requisition.xml</rule-filename>
+        <task-object-name>com.tsa.puridiom.requisition.tasks.RequisitionForwardPricingCheck</task-object-name>
+        <post-action>exitActivity</post-action>
+      </task>
+      <task synchronous="true" continue-on-failure="false" name="requisitionForwardNotPricing">
+        <rule-filename>is-pricing-requisition.xml</rule-filename>
+        <task-object-name>com.tsa.puridiom.requisition.tasks.RequisitionForwardNotPricing</task-object-name>
+        <post-action></post-action>
+      </task>
+    </activity>
+  </activities>
+</process>

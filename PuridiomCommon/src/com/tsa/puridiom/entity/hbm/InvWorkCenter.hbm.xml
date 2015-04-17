@@ -1,0 +1,162 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping>
+
+<!--
+    Created by Middlegen Hibernate plugin
+
+    http://boss.bekk.no/boss/middlegen/
+    http://hibernate.sourceforge.net/
+-->
+
+<class
+    name="com.tsa.puridiom.entity.InvWorkCenter"
+    table="INV_WORK_CENTER"
+>
+    <id
+        name="workCenterId"
+        type="java.lang.String"
+        column="WORK_CENTER_ID"
+    >
+        <generator class="assigned" />
+    </id>
+    <property
+        name="description"
+        type="java.lang.String"
+        column="DESCRIPTION"
+        length="50"
+    />
+    <property
+        name="departmentCode"
+        type="java.lang.String"
+        column="DEPARTMENT_CODE"
+        length="15"
+    />
+    <property
+        name="subcontract"
+        type="java.lang.String"
+        column="SUBCONTRACT"
+        length="1"
+    />
+    <property
+        name="laborRate"
+        type="java.math.BigDecimal"
+        column="LABOR_RATE"
+        length="15"
+    />
+    <property
+        name="setupRate"
+        type="java.math.BigDecimal"
+        column="SETUP_RATE"
+        length="15"
+    />
+    <property
+        name="fixOverHead"
+        type="java.math.BigDecimal"
+        column="FIX_OVER_HEAD"
+        length="15"
+    />
+    <property
+        name="varOverHead"
+        type="java.math.BigDecimal"
+        column="VAR_OVER_HEAD"
+        length="15"
+    />
+    <property
+        name="setuphours"
+        type="java.math.BigDecimal"
+        column="SETUPHOURS"
+        length="15"
+    />
+    <property
+        name="perDayHours"
+        type="java.math.BigDecimal"
+        column="PER_DAY_HOURS"
+        length="15"
+    />
+    <property
+        name="perJobHours"
+        type="java.math.BigDecimal"
+        column="PER_JOB_HOURS"
+        length="15"
+    />
+    <property
+        name="processTime"
+        type="java.math.BigDecimal"
+        column="PROCESS_TIME"
+        length="15"
+    />
+    <property
+        name="processItems"
+        type="java.math.BigDecimal"
+        column="PROCESS_ITEMS"
+        length="15"
+    />
+    <property
+        name="bufferDays"
+        type="java.math.BigDecimal"
+        column="BUFFER_DAYS"
+        length="15"
+    />
+    <property
+        name="vendorName"
+        type="java.lang.String"
+        column="VENDOR_NAME"
+        length="40"
+    />
+    <property
+        name="vendorId"
+        type="java.lang.String"
+        column="VENDOR_ID"
+        length="15"
+    />
+    <property
+        name="cost"
+        type="java.math.BigDecimal"
+        column="COST"
+        length="15"
+    />
+    <property
+        name="unitOfMeasure"
+        type="java.lang.String"
+        column="UNIT_OF_MEASURE"
+        length="15"
+    />
+    <property
+        name="leadTime"
+        type="java.math.BigDecimal"
+        column="LEAD_TIME"
+        length="15"
+    />
+    <property
+        name="dateEntered"
+        type="java.sql.Timestamp"
+        column="DATE_ENTERED"
+        length="7"
+    />
+    <property
+        name="dateExpires"
+        type="java.sql.Timestamp"
+        column="DATE_EXPIRES"
+        length="7"
+    />
+    <property
+        name="owner"
+        type="java.lang.String"
+        column="OWNER"
+        length="15"
+    />
+    <property
+        name="status"
+        type="java.lang.String"
+        column="STATUS"
+        length="4"
+    />
+
+    <!-- associations -->
+
+</class>
+</hibernate-mapping>

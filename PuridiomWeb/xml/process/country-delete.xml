@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="countryDelete" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="deleteCountry">
+			<task synchronous="true" continue-on-failure="false" name="country">			
+				<task-object-name>com.tsa.puridiom.country.tasks.CountryDeleteById</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="updateCache">
+				<task-object-name>com.tsa.puridiom.country.tasks.CountryRemoveFromCache</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

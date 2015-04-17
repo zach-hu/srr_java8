@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="historyLogRetrieveByHistoryHeader" connection-type="Connection-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="historyLogRetrieveByHistoryHeader">
+			<task synchronous="true" continue-on-failure="false" name="historyLogList">
+				<task-object-name>com.tsa.puridiom.historylog.tasks.HistoryLogRetrieveByHistoryHeader</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="historyDocIcList">
+			<rule-filename>is-history-from-po-revisions.xml;is-icheaderkey-not-empty.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="historyDocIcList">
+				<task-object-name>com.tsa.puridiom.historylog.tasks.HistoryLogListDocicFromIcHeaderKey</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="sendQueueRetrieveByHistoryHeader">
+			<task synchronous="true" continue-on-failure="false" name="sendQueueList">
+				<rule-filename>is-history-from-po-revisions.xml;is-icheaderkey-not-empty.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.sendqueue.tasks.SendQueueRetrieveByHistoryHeaderByAllRevision</task-object-name>
+				<post-action>exitActivity</post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="sendQueueList">
+				<task-object-name>com.tsa.puridiom.sendqueue.tasks.SendQueueRetrieveByHistoryHeader</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="requisitionLineRetrieveByHeader">
+			<rule-filename>is-req.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="requisitionLineList">
+				<task-object-name>com.tsa.puridiom.requisitionline.tasks.RequisitionLineRetrieveByHeader</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="ReceiptHeader_icPoHeader">
+				<task-object-name>com.tsa.puridiom.requisitionheader.tasks.RequisitionHeaderRetrieveIcPoHeader</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="rfqLineRetrieveByHeader">
+			<rule-filename>is-rfq.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="rfqLineList">
+				<task-object-name>com.tsa.puridiom.rfqline.tasks.RfqLineRetrieveByHeader</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="ReceiptHeader_icPoHeader">
+				<task-object-name>com.tsa.puridiom.rfqheader.tasks.RfqHeaderRetrieveIcPoHeader</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="recLineRetrieveByHeader">
+			<rule-filename>is-rec.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="receiptLineList">
+				<task-object-name>com.tsa.puridiom.receiptline.tasks.ReceiptLineRetrieveByHeader</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="poLineRetrieveByHeader">
+			<rule-filename>is-po.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="poLineList">
+				<task-object-name>com.tsa.puridiom.poline.tasks.PoLineRetrieveByHeader</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="disbLineRetrieveByHeader">
+			<rule-filename>is-dsb.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="disbLineList">
+				<task-object-name>com.tsa.puridiom.disbline.tasks.DisbLineRetrieveByHeader</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="invoiceLineRetrieveByHeader">
+			<rule-filename>is-invoice.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="invoiceLineList">
+				<task-object-name>com.tsa.puridiom.invoiceline.tasks.InvoiceLineRetrieveByHeader</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="receiptHeaderRetrieveByOrder">
+			<task synchronous="true" continue-on-failure="false" name="receiptHeaderList">
+				<rule-filename>is-history-from-po-revisions.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.receiptheader.tasks.ReceiptHeaderRetrieveByAllRevision</task-object-name>
+				<post-action>exitActivity</post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="receiptHeaderList">
+				<task-object-name>com.tsa.puridiom.receiptheader.tasks.ReceiptHeaderRetrieveByOrder</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="invoiceHeaderRetrieveByOrder">
+			<task synchronous="true" continue-on-failure="false" name="invoiceHeaderList">
+				<task-object-name>com.tsa.puridiom.invoiceheader.tasks.InvoiceHeaderRetrieveByOrder</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="invoiceHeaderList">
+				<task-object-name>com.tsa.puridiom.invoiceheader.tasks.InvoiceHeaderHistoryLogIp</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+	</activities>
+</process>

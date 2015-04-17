@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="invoiceRetrieve" connection-type="New-Connection">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="extractSetup">
+			<task synchronous="true" continue-on-failure="false" name="vendor">
+				<task-object-name>com.tsa.puridiom.invoicevendor.tasks.VendorRetrieveByInvoiceVendorId</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="extractTemplate">
+				<task-object-name>com.tsa.puridiom.sungard.extract.tasks.GenerateInvoiceExtractTemplate</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="extractFile">
+				<task-object-name>com.tsa.puridiom.sungard.extract.tasks.SungardInvoiceExtractCreateFile</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="extract">
+			<task synchronous="true" continue-on-failure="false" name="extractByAccount">
+				<rule-filename>is-extract-by-account.xml</rule-filename>
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>sungard-invoice-extract-by-account.xml</process-filename>
+				<post-action>exitActivity</post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="extractByLine">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>sungard-invoice-extract-by-line.xml</process-filename>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="extractHeader">
+				<task-object-name>com.tsa.puridiom.sungard.extract.tasks.SungardInvoiceExtractUpdateHeader</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="finalizeExtract">
+			<task synchronous="true" continue-on-failure="false" name="confirmationMsg">
+				<!-- if the extractFile does not exist the process status will be set to FAILED -->
+				<task-object-name>com.tsa.puridiom.sungard.extract.tasks.SungardInvoiceExtractGetConfirmationMsg</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

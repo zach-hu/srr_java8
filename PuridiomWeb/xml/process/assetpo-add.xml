@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="invItemAdd" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="checkPoLine">
+			<task synchronous="true" continue-on-failure="false" name="AssetPoLineAdd">
+        		<task-object-name>com.tsa.puridiom.asset.serv.tasks.AssetPoAdd</task-object-name>
+      		</task>
+		</activity>
+	</activities>
+</process>

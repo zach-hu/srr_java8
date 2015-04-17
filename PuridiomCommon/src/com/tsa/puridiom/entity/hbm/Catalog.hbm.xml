@@ -1,0 +1,173 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping>
+
+<!--
+    Created by Middlegen Hibernate plugin
+
+    http://boss.bekk.no/boss/middlegen/
+    http://hibernate.sourceforge.net/
+-->
+
+<class
+    name="com.tsa.puridiom.entity.Catalog"
+    table="CATALOG"
+>
+    <id
+        name="catalogId"
+        type="java.lang.String"
+        column="CATALOG_ID"
+    >
+        <generator class="assigned" />
+    </id>
+    <property
+        name="title"
+        type="java.lang.String"
+        column="TITLE"
+        length="60"
+    />
+    <property
+        name="dateEntered"
+        type="java.sql.Timestamp"
+        column="DATE_ENTERED"
+        length="7"
+    />
+    <property
+        name="dateExpires"
+        type="java.sql.Timestamp"
+        column="DATE_EXPIRES"
+        length="7"
+    />
+    <property
+        name="status"
+        type="java.lang.String"
+        column="STATUS"
+        length="4"
+    />
+    <property
+        name="owner"
+        type="java.lang.String"
+        column="OWNER"
+        length="15"
+    />
+    <property
+        name="source"
+        type="java.lang.String"
+        column="SOURCE"
+        length="20"
+    />
+    <property
+        name="vendorId"
+        type="java.lang.String"
+        column="VENDOR_ID"
+        length="15"
+    />
+    <property
+        name="icPoHeader"
+        type="java.math.BigDecimal"
+        column="IC_PO_HEADER"
+        length="22"
+    />
+    <property
+        name="poNumber"
+        type="java.lang.String"
+        column="PO_NUMBER"
+        length="20"
+    />
+    <property
+        name="revisionNumber"
+        type="java.math.BigDecimal"
+        column="REVISION_NUMBER"
+        length="4"
+    />
+    <property
+        name="allowReleases"
+        type="java.lang.String"
+        column="ALLOW_RELEASES"
+        length="1"
+    />
+    <property
+        name="webCatalog"
+        type="java.lang.String"
+        column="WEB_CATALOG"
+        length="15"
+    />
+    <property
+        name="externalCatalog"
+        type="java.lang.String"
+        column="EXTERNAL_CATALOG"
+        length="1"
+    />
+	<property
+        name="requestXml"
+        type="java.lang.String"
+        column="REQUEST_XML"
+        length="30"
+    />
+	<property
+        name="punchoutUrl"
+        type="java.lang.String"
+        column="PUNCHOUT_URL"
+        length="255"
+    />
+	<property
+        name="icAccount"
+        type="java.math.BigDecimal"
+        column="IC_ACCOUNT"
+        length="22"
+    />
+	<property
+        name="receiptRequired"
+        type="java.lang.String"
+        column="RECEIPT_REQUIRED"
+        length="15"
+    />
+	<property
+        name="ordersOnly"
+        type="java.lang.String"
+        column="ORDERS_ONLY"
+        length="1"
+    />
+    <property
+        name="consolidateReleases"
+        type="java.lang.String"
+        column="CONSOLIDATE_RELEASES"
+        length="1"
+    />
+    <property
+        name="currencyCode"
+        type="java.lang.String"
+        column="CURRENCY_CODE"
+        length="15"
+    />
+    <property
+        name="icHeaderComment"
+        type="java.math.BigDecimal"
+        column="IC_HEADER_COMMENT"
+        length="22"
+    />
+    <property
+        name="lastUpdatedDate"
+        type="java.sql.Timestamp"
+        column="LAST_UPDATED_DATE"
+        length="7"
+    />
+    <property
+        name="lastUpdatedBy"
+        type="java.lang.String"
+        column="LAST_UPDATED_BY"
+        length="15"
+    />
+    <property
+        name="icPunchout"
+        type="java.math.BigDecimal"
+        column="IC_PUNCHOUT"
+        length="22"
+    />
+    <!-- associations -->
+
+</class>
+</hibernate-mapping>

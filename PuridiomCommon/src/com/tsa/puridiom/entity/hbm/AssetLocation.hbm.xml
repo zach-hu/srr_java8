@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 2.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+<class name="com.tsa.puridiom.entity.AssetLocation" table="ASSET_LOCATION">
+<composite-id name="comp_id" class="com.tsa.puridiom.entity.AssetLocationPK">
+	<key-property name="sequenceNo" column="SEQUENCE_NO" type="java.math.BigDecimal" length="5"/>
+	<key-property name="tagNumber" column="TAG_NUMBER" type="java.lang.String" length="20"/>
+</composite-id>
+<property name="locationType" column="LOCATION_TYPE" type="java.lang.String" length="2" not-null="true"/>
+<property name="division" column="DIVISION" type="java.lang.String" length="20"/>
+<property name="department" column="DEPARTMENT" type="java.lang.String" length="20"/>
+<property name="facility" column="FACILITY" type="java.lang.String" length="20"/>
+<property name="building" column="BUILDING" type="java.lang.String" length="20"/>
+<property name="room" column="ROOM" type="java.lang.String" length="20"/>
+<property name="userId" column="USER_ID" type="java.lang.String" length="15"/>
+<property name="dateAssigned" column="DATE_ASSIGNED" type="java.sql.Timestamp" length="7"/>
+<property name="telephone" column="TELEPHONE" type="java.lang.String" length="30"/>
+<property name="dateChanged" column="DATE_CHANGED" type="java.sql.Timestamp" length="7"/>
+<property name="lastChgBy" column="LAST_CHG_BY" type="java.lang.String" length="25"/>
+</class>
+</hibernate-mapping>

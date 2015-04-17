@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="bidboardUserLogin" connection-type="Connection-Required" ldap-connection-type="None">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="retrieveVendorRegister">
+			<task synchronous="true" continue-on-failure="false" name="vendorRegister">
+				<task-object-name>com.tsa.puridiom.vendorregister.tasks.VendorRegisterRetrieveMainByVendorId</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+	</activities>
+</process>

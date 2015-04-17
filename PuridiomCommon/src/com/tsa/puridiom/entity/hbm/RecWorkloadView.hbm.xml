@@ -1,0 +1,85 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping>
+
+<!--
+    Created by Middlegen Hibernate plugin
+
+    http://boss.bekk.no/boss/middlegen/
+    http://hibernate.sourceforge.net/
+-->
+
+<class
+    name="com.tsa.puridiom.entity.RecWorkloadView"
+    table="REC_WORKLOAD_VIEW"
+>
+    <id
+        name="manNo"
+        type="java.lang.String"
+        column="MAN_NO"
+    >
+        <generator class="assigned" />
+    </id>
+    <property
+        name="itemNo"
+        type="java.math.BigDecimal"
+        column="ITEM_NO"
+    />
+    <property
+        name="status"
+        type="java.lang.String"
+        column="STATUS"
+        length="20"
+    />
+    <property
+        name="materialId"
+        type="java.lang.String"
+        column="MATERIAL_ID"
+    />
+    <property
+        name="qty"
+        type="java.math.BigDecimal"
+        column="QTY"
+    />
+    <property
+        name="type"
+        type="java.lang.String"
+        column="TYPE"
+    />
+    <property
+        name="sourceNo"
+        type="java.lang.String"
+        column="SOURCE_NO"
+    />
+    <property
+        name="bmItemno"
+        type="java.lang.String"
+        column="BM_ITEMNO"
+    />
+    <property
+        name="bm"
+        type="java.lang.String"
+        column="BM"
+    />
+    <property
+        name="typeNo"
+        type="java.lang.String"
+        column="TYPE_NO"
+    />
+    <property
+        name="kit"
+        type="java.lang.String"
+        column="KIT"
+    />
+    <property
+        name="nrlPnShipment"
+        type="java.lang.String"
+        column="NRL_PN_SHIPMENT"
+    />
+    <!-- associations -->
+
+</class>
+</hibernate-mapping>

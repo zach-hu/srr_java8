@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="po-auto-award-create-from-req" connection-type="New-Transaction">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="requisitionHeaderRetrieveById">
+			<rule-filename>is-po-create-from-req.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="poCreateFromReq">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>po-new-create-from-req.xml</process-filename>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="requisitionHeaderRetrieveById">
+			<rule-filename>is-po-create-from-req.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="poCreateFromReq">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>po_save.xml</process-filename>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="queueAddOrderRequest">
+				<task-object-name>com.tsa.puridiom.po.tasks.QueueAddOrderReleaseRequest</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="fdcsUpdate">
+			 	<rule-filename>is-fdcs-enabled.xml</rule-filename>
+		 		<task-object-name>com.tsa.puridiom.poline.tasks.PoLineUpdateFdcsByList</task-object-name>
+		 		<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="recentOrder">
+            <rule-filename>is-poheader-ponumber-set.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="recentOrderAdd">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>recentorder-add-txn-required.xml</process-filename>
+			</task>
+    	</activity>
+  </activities>
+</process>

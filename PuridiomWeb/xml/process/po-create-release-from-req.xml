@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="poCreateReleasefromreq" connection-type="Transaction-Required">
+  <activities>
+      <activity synchronous="true" continue-on-failure="false" name="Setup">
+        <rule-filename check-for-false="true">is-release-request.xml</rule-filename>
+        <task synchronous="true" continue-on-failure="false" name="autoRelease">
+          <task-object-name>com.tsa.puridiom.requisition.tasks.RequisitionAutoRelease</task-object-name>
+          <post-action></post-action>
+      </task>
+      <task synchronous="true" continue-on-failure="false" name="release">
+        <rule-filename>is-create-release-from-req.xml</rule-filename>
+        <task-object-name>com.tsa.puridiom.requisition.tasks.RequisitionHeaderAutoReleasePartial</task-object-name>
+      </task>
+    </activity>
+    <activity continue-on-failure="false" name="releaseRequest" synchronous="true">
+      <rule-filename>is-release-request.xml</rule-filename>
+      <task synchronous="true" continue-on-failure="false" name="autoRelease">
+          <task-object-name>com.tsa.puridiom.requisition.tasks.RequisitionReleseRequestAutoRelease</task-object-name>
+          <post-action></post-action>
+        </task>
+        <task synchronous="true" continue-on-failure="false" name="release">
+          <rule-filename>is-create-release-from-req.xml</rule-filename>
+          <task-object-name>com.tsa.puridiom.requisition.tasks.RequisitionReleaseAutoRelease</task-object-name>
+      </task>
+    </activity>
+  </activities>
+</process>

@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created using an evaluation version of JasperAssistant (http://www.jasperassistant.com) -->
+<!DOCTYPE jasperReport PUBLIC "-//JasperReports//DTD Report Design//EN" "http://jasperreports.sourceforge.net/dtds/jasperreport.dtd">
+
+<jasperReport name="RequisitionLinePdfQri" pageWidth="612" pageHeight="791" whenNoDataType="BlankPage" columnWidth="612" leftMargin="0" rightMargin="0" topMargin="1" bottomMargin="1">
+	<property name="com.jasperassistant.designer.Rulers" value="true"/>
+	<property name="com.jasperassistant.designer.GridWidth" value="24"/>
+	<property name="com.jasperassistant.designer.GridHeight" value="24"/>
+	<property name="com.jasperassistant.designer.DataSource" value="hilton1p"/>
+	<property name="com.jasperassistant.designer.SnapToGrid" value="false"/>
+	<property name="com.jasperassistant.designer.Margins" value="true"/>
+	<property name="com.jasperassistant.designer.Grid" value="true"/>
+	<property name="com.jasperassistant.designer.SnapToGuides" value="true"/>
+	<import value="com.tsa.puridiom.reports.datasource.*"/>
+	<import value="com.tsa.puridiom.common.utility.HiltonUtility"/>
+	<import value="com.tsa.puridiom.jasperreports.*"/>
+	<reportFont name="Arial_Normal" isDefault="true" fontName="Arial" size="8" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_bold" isDefault="false" fontName="Arial Black" size="8" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica-Bold" pdfEncoding="Cp1252" isPdfEmbedded="true"/>
+	<parameter name="oid" class="java.lang.String">
+		<defaultValueExpression><![CDATA["HILTON"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="RequisitionHeader_udf1Code" class="java.lang.String"/>
+	<parameter name="rddSeeBelow" class="java.lang.Boolean"/>
+	<parameter name="RequisitionHeader_currencyCode" class="java.lang.String"/>
+	<field name="RequisitionLine_commodityCode" class="java.lang.String"/>
+	<field name="RequisitionLine_description" class="java.lang.String"/>
+	<field name="RequisitonLine_itemNumber" class="java.lang.String"/>
+	<field name="RequisitionLine_lineNumber" class="java.math.BigDecimal"/>
+	<field name="RequisitionLine_lineTotal" class="java.math.BigDecimal"/>
+	<field name="RequisitionLine_quantity" class="java.math.BigDecimal"/>
+	<field name="RequisitionLine_status" class="java.lang.String"/>
+	<field name="RequisitionLine_umCode" class="java.lang.String"/>
+	<field name="RequisiitionLine_unitPrice" class="java.math.BigDecimal"/>
+	<field name="RequisitionLine_umFactor" class="java.math.BigDecimal"/>
+	<field name="RequisitionLine_docCommentList" class="java.util.List"/>
+	<field name="RequisitionLine_shipToList" class="java.util.List"/>
+	<field name="RequisitionLine_accountList" class="java.util.List"/>
+	<variable name="extCost" class="java.math.BigDecimal" resetType="Group" resetGroup="lines">
+		<variableExpression><![CDATA[$F{RequisiitionLine_unitPrice}.multiply($F{RequisitionLine_quantity}).multiply($F{RequisitionLine_umFactor})]]></variableExpression>
+		<initialValueExpression><![CDATA[$F{RequisiitionLine_unitPrice}.multiply($F{RequisitionLine_quantity}).multiply($F{RequisitionLine_umFactor})]]></initialValueExpression>
+	</variable>
+	<group name="commentBefore">
+		<groupExpression><![CDATA[$V{REPORT_COUNT}]]></groupExpression>
+		<groupHeader>
+			<band height="1">
+				<subreport>
+					<reportElement positionType="Float" x="3" y="0" width="554" height="1" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true"/>
+					<parametersMapExpression><![CDATA[$P{REPORT_PARAMETERS_MAP}]]></parametersMapExpression>
+					<subreportParameter name="oid">
+						<subreportParameterExpression><![CDATA[$P{oid}]]></subreportParameterExpression>
+					</subreportParameter>
+					<dataSourceExpression><![CDATA[new HibernateQueryResultDataSource($F{RequisitionLine_docCommentList})]]></dataSourceExpression>
+					<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[JasperReportsHelper.loadSubReport("comment-before-pdf.jasper", $P{oid})]]></subreportExpression>
+				</subreport>
+			</band>
+		</groupHeader>
+	</group>
+	<group name="lines">
+		<groupExpression><![CDATA[$V{REPORT_COUNT}]]></groupExpression>
+		<groupHeader>
+			<band height="29">
+				<textField isBlankWhenNull="true">
+					<reportElement positionType="Float" mode="Opaque" x="0" y="0" width="35" height="14"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{RequisitionLine_lineNumber}]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0.00" isBlankWhenNull="true">
+					<reportElement positionType="Float" mode="Opaque" x="36" y="0" width="45" height="14"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{RequisitionLine_quantity}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement positionType="Float" mode="Opaque" x="84" y="0" width="45" height="14"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{RequisitionLine_umCode}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement positionType="Float" mode="Opaque" x="131" y="0" width="305" height="14"/>
+					<textElement verticalAlignment="Middle"/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{RequisitonLine_itemNumber}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement positionType="Float" mode="Opaque" x="437" y="0" width="44" height="14"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle"/>
+					<textFieldExpression class="java.lang.String"><![CDATA[HiltonUtility.getFormattedCurrency($F{RequisiitionLine_unitPrice}, $P{RequisitionHeader_currencyCode}, $P{oid})]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement positionType="Float" mode="Opaque" x="488" y="0" width="54" height="14"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle"/>
+					<textFieldExpression class="java.lang.String"><![CDATA[HiltonUtility.getFormattedCurrency($V{extCost}, $P{RequisitionHeader_currencyCode}, $P{oid})]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement positionType="Float" mode="Opaque" x="131" y="14" width="305" height="14" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true"/>
+					<textElement verticalAlignment="Middle"/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{RequisitionLine_description}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+	</group>
+	<group name="commentsAfter">
+		<groupExpression><![CDATA[$V{REPORT_COUNT}]]></groupExpression>
+		<groupHeader>
+			<band height="1">
+				<subreport>
+					<reportElement positionType="Float" x="3" y="0" width="554" height="1" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true"/>
+					<parametersMapExpression><![CDATA[$P{REPORT_PARAMETERS_MAP}]]></parametersMapExpression>
+					<subreportParameter name="oid">
+						<subreportParameterExpression><![CDATA[$P{oid}]]></subreportParameterExpression>
+					</subreportParameter>
+					<dataSourceExpression><![CDATA[new HibernateQueryResultDataSource($F{RequisitionLine_docCommentList})]]></dataSourceExpression>
+					<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[JasperReportsHelper.loadSubReport("comment-after-pdf-new.jasper", $P{oid})]]></subreportExpression>
+				</subreport>
+			</band>
+		</groupHeader>
+	</group>
+	<group name="accounts">
+		<groupExpression><![CDATA[$V{REPORT_COUNT}]]></groupExpression>
+		<groupHeader>
+			<band height="1">
+				<subreport>
+					<reportElement positionType="Float" x="0" y="0" width="543" height="1" isRemoveLineWhenBlank="true"/>
+					<parametersMapExpression><![CDATA[$P{REPORT_PARAMETERS_MAP}]]></parametersMapExpression>
+					<subreportParameter name="udf1">
+						<subreportParameterExpression><![CDATA[$P{RequisitionHeader_udf1Code}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="oid">
+						<subreportParameterExpression><![CDATA[$P{oid}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="labelPrefix">
+						<subreportParameterExpression><![CDATA["req"]]></subreportParameterExpression>
+					</subreportParameter>
+					<dataSourceExpression><![CDATA[new HibernateQueryResultDataSource($F{RequisitionLine_accountList})]]></dataSourceExpression>
+					<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[JasperReportsHelper.loadSubReport("lineitem-account-pdf.jasper", $P{oid})]]></subreportExpression>
+				</subreport>
+			</band>
+		</groupHeader>
+	</group>
+	<group name="shipto">
+		<groupExpression><![CDATA[$V{REPORT_COUNT}]]></groupExpression>
+		<groupHeader>
+			<band height="1">
+				<subreport>
+					<reportElement positionType="Float" x="3" y="0" width="554" height="1" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true"/>
+					<parametersMapExpression><![CDATA[$P{REPORT_PARAMETERS_MAP}]]></parametersMapExpression>
+					<subreportParameter name="oid">
+						<subreportParameterExpression><![CDATA[$P{oid}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="rddSeeBelow">
+						<subreportParameterExpression><![CDATA[$P{rddSeeBelow}]]></subreportParameterExpression>
+					</subreportParameter>
+					<dataSourceExpression><![CDATA[new HibernateQueryResultDataSource($F{RequisitionLine_shipToList})]]></dataSourceExpression>
+					<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[JasperReportsHelper.loadSubReport("lineshipto-pdf.jasper", $P{oid})]]></subreportExpression>
+				</subreport>
+			</band>
+		</groupHeader>
+	</group>
+</jasperReport>

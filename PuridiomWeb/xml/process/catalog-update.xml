@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="catalogUpdate" connection-type="New-Transaction">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="catalogUpdate">
+			<task synchronous="true" continue-on-failure="false" name="catalog">			
+				<task-object-name>com.tsa.puridiom.catalog.tasks.CatalogRetrieveById</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="catalog">			
+				<task-object-name>com.tsa.puridiom.catalog.tasks.CatalogSetValues</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="catalog">			
+				<task-object-name>com.tsa.puridiom.catalog.tasks.CatalogUpdate</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="catalogItemUpdate">
+			<rule-filename>is-catalog-status-update.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="catalogItemUpdate">
+				<task-object-name>com.tsa.puridiom.catalog.tasks.CatalogItemUpdateStatusByCatalog</task-object-name>
+				<post-action></post-action>
+			</task>
+			<!--task synchronous="true" continue-on-failure="false" name="catalogItemUpdate">
+				<task-object-name>com.tsa.puridiom.catalog.tasks.CatalogItemUpdateByCatalogSetup</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="catalogItemList">
+				<task-object-name>com.tsa.puridiom.catalog.tasks.CatalogItemRetrieveByCatalog</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="catalogItemList">
+				<task-object-name>com.tsa.puridiom.catalog.tasks.CatalogItemUpdateList</task-object-name>
+				<post-action></post-action>
+			</task-->
+		</activity>
+	</activities>
+</process>

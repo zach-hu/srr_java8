@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="disbHeaderRetrieveById" connection-type="Connection-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="retrievedisbheader">
+			<task synchronous="true" continue-on-failure="false" name="disbHeader">			
+				<task-object-name>com.tsa.puridiom.disbheader.tasks.DisbHeaderRetrieveById</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="disbHeaderRetrieveSetup">			
+				<task-object-name>com.tsa.puridiom.disbheader.tasks.DisbHeaderRetrieveSetup</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="disbLines">			
+				<task-object-name>com.tsa.puridiom.disbline.tasks.DisbLineRetrieveByHeader</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+	</activities>
+</process>

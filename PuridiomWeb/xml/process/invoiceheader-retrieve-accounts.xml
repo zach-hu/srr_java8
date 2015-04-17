@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="invoiceHeaderRetrieveAccounts" connection-type="Connection-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="invoiceHeaderRetrieveAccounts">
+			<task synchronous="true" continue-on-failure="false" name="taxAccountRetrieveSetup">
+				<task-object-name>com.tsa.puridiom.invoice.tasks.InvoiceTaxAccountRetrieveSetup</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="taxAccountList">
+				<task-object-name>com.tsa.puridiom.account.tasks.AccountRetrieveByLine</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="usetaxAccountRetrieveSetup">
+				<task-object-name>com.tsa.puridiom.invoice.tasks.InvoiceUseTaxAccountRetrieveSetup</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="usetaxAccountList">
+				<task-object-name>com.tsa.puridiom.account.tasks.AccountRetrieveByLine</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="shippingAccountRetrieveSetup">
+				<task-object-name>com.tsa.puridiom.invoice.tasks.InvoiceShippingAccountRetrieveSetup</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="shippingAccountList">
+				<task-object-name>com.tsa.puridiom.account.tasks.AccountRetrieveByLine</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="otherAccountRetrieveSetup">
+				<task-object-name>com.tsa.puridiom.invoice.tasks.InvoiceOtherAccountRetrieveSetup</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="otherAccountList">
+				<task-object-name>com.tsa.puridiom.account.tasks.AccountRetrieveByLine</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+	</activities>
+</process>

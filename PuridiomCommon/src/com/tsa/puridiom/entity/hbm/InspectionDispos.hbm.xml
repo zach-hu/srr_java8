@@ -1,0 +1,82 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping>
+
+<class
+    name="com.tsa.puridiom.entity.InspectionDispos"
+    table="INSPECTION_DISPOS"
+>
+    <composite-id name="comp_id" class="com.tsa.puridiom.entity.InspectionDisposPK">
+        <key-property name="icRecHeader" column="IC_REC_HEADER" type="java.math.BigDecimal"/>
+        <key-property name="icRecLine" column="IC_REC_LINE" type="java.math.BigDecimal"/>
+        <key-property name="icInspDiscrep" column="IC_INSP_DISCREP" type="java.math.BigDecimal"/>
+        <key-property name="keySequence" column="KEY_SEQUENCE" type="java.math.BigDecimal"/>
+    </composite-id>
+    <property
+        name="icInspNo"
+        type="java.math.BigDecimal"
+        column="IC_INSP_NO"
+        length="22"
+    />
+    <property
+        name="icMsrLine"
+        type="java.math.BigDecimal"
+        column="IC_MSR_LINE"
+        length="22"
+    />
+    <property
+        name="disposition"
+        type="java.lang.String"
+        column="DISPOSITION"
+        length="255"
+    />
+    <property
+        name="respGroup"
+        type="java.lang.String"
+        column="RESP_GROUP"
+        length="25"
+    />
+    <property
+        name="dispType"
+        type="java.lang.String"
+        column="DISP_TYPE"
+        length="15"
+    />
+    <property
+        name="dispQuantity"
+        type="java.math.BigDecimal"
+        column="DISP_QUANTITY"
+        length="15"
+    />
+    <property
+        name="dispClosed"
+        type="java.sql.Timestamp"
+        column="DISP_CLOSED"
+        length="7"
+    />
+    <property
+        name="lastChange"
+        type="java.sql.Timestamp"
+        column="LAST_CHANGE"
+        length="7"
+    />
+    <property
+        name="lastChangeBy"
+        type="java.lang.String"
+        column="LAST_CHANGE_BY"
+        length="15"
+    />
+    <property
+        name="description"
+        type="java.lang.String"
+        column="DESCRIPTION"
+        length="2000"
+    />
+
+    <!-- associations -->
+
+</class>
+</hibernate-mapping>

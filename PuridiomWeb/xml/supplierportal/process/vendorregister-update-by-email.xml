@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="vendorRegisterUpdate" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="vendorRegisterRetrieve">
+			<task synchronous="true" continue-on-failure="false" name="vendorRegister">
+				<task-object-name>com.tsa.puridiom.vendorregister.tasks.VendorRegisterRetrieveByContactEmailAddr</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="vendorRegisterUpdate">
+			<task synchronous="true" continue-on-failure="false" name="vendorRegister">
+				<task-object-name>com.tsa.puridiom.vendorregister.tasks.VendorRegisterSetValues</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="vendorRegister">			
+				<task-object-name>com.tsa.puridiom.vendorregister.tasks.VendorRegisterUpdate</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="vendorRegCommRelUpdate">			
+				<rule-filename>is-vendor-commodity-update.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.supplierportal.InvokeSupplierPortalProcessTask</task-object-name>
+				<process-filename>vendorregcommrel-update.xml</process-filename>
+			</task>
+		</activity>
+	</activities>
+</process>

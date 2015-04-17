@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<r_ivil_language>
+	
+
+
+  <columns>
+		<InvItem_description>
+			<label>Description</label>
+			<type>STRING</type>
+		</InvItem_description>
+		<InvItem_commodity>
+			<label>Commodity</label>
+			<type>STRING</type>
+		</InvItem_commodity>
+		<InvItem_cost>
+			<label>Cost</label>
+			<type>BIGDECIMAL</type>
+		</InvItem_cost>
+		<InvItem_unitOfOrder>
+			<label>Unit Of Order</label>
+			<type>STRING</type>
+		</InvItem_unitOfOrder>
+		<InvItem_udf1Code>
+			<label>Udf 1 Code</label>
+			<type>STRING</type>
+		</InvItem_udf1Code>
+		<InvItem_udf2Code>
+			<label>Udf 2 Code</label>
+			<type>STRING</type>
+		</InvItem_udf2Code>
+		<InvItem_udf3Code>
+			<label>Udf 3 Code</label>
+			<type>STRING</type>
+		</InvItem_udf3Code>
+		<InvItem_udf4Code>
+			<label>Udf 4 Code</label>
+			<type>STRING</type>
+		</InvItem_udf4Code>
+		<InvItem_udf5Code>
+			<label>Udf 5 Code</label>
+			<type>STRING</type>
+		</InvItem_udf5Code>
+		<InvItem_itemNumber>
+			<label>Item Number</label>
+			<type>STRING</type>
+		</InvItem_itemNumber>
+		<AltText_language>
+			<label>Language</label>
+			<type>STRING</type>
+		</AltText_language>
+	</columns>
+	
+
+
+  <sqlfrom>inv_item ,std_text ,alt_text</sqlfrom>
+	
+
+
+  <sqlwhere>( inv_item.item_number = alt_text.item_number ) and( alt_text.ic_text = std_text.ic_text ) and( ( alt_text.source = 'inv' ) and( alt_text.id = 'G-INV999' ) )</sqlwhere>
+	
+
+
+  <pagesize>15</pagesize>
+	
+
+
+  <title>Inventory Item Listing</title>
+	
+
+
+
+</r_ivil_language>
+

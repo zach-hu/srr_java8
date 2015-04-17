@@ -1,0 +1,54 @@
+<browse_invoiceheader>
+	<columns>
+		<InvoiceHeader_icIvcHeader>
+			<visible>0</visible>
+		</InvoiceHeader_icIvcHeader>
+		<InvoiceHeader_invoiceNumber>
+			<label>Invoice #</label>
+			<link><![CDATA[javascript: viewInvoice('#InvoiceHeader_icIvcHeader^'); void(0);]]></link>
+			<size>12</size>
+		</InvoiceHeader_invoiceNumber>
+		<InvoiceHeader_status>
+			<label>Status</label>
+			<type>STATUS</type>
+			<size>17</size>
+		</InvoiceHeader_status>
+		<InvoiceHeader_invoiceDate>
+			<label>Date</label>
+			<type>DATE</type>
+			<sort>D</sort>
+			<size>12</size>
+		</InvoiceHeader_invoiceDate>
+		<InvoiceHeader_paymentDueDate>
+			<label>Due Date</label>
+			<type>DATE</type>
+			<size>12</size>
+		</InvoiceHeader_paymentDueDate>
+		<InvoiceHeader_poNumber>
+			<label>Order #</label>
+			<size>10</size>
+		</InvoiceHeader_poNumber>
+		<InvoiceHeader_poRelease>
+			<label>Release</label>
+			<size>4</size>
+		</InvoiceHeader_poRelease>
+		<InvoiceHeader_shipToCode>
+			<label>Ship To</label>
+			<size>10</size>
+		</InvoiceHeader_shipToCode>
+		<InvoiceHeader_invoiceTotal>
+			<label>Total</label>
+			<size>10</size>
+			<type>DollarDecimal</type>
+		</InvoiceHeader_invoiceTotal>
+		<InvoiceHeader_invoiceDesc>
+			<detail>Y</detail>
+			<label>Description</label>
+		</InvoiceHeader_invoiceDesc>
+	</columns>
+<sqlfrom>InvoiceHeader as InvoiceHeader</sqlfrom>
+<sqlwhere><![CDATA[InvoiceHeader.invoiceNumber <> 'N/A'  ]]></sqlwhere>
+<sqlorderby>InvoiceHeader.invoiceDate DESC, InvoiceHeader.invoiceNumber DESC</sqlorderby>
+<pagesize>15</pagesize>
+<title>Invoice Browse</title>
+</browse_invoiceheader>

@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="userProfileAdminAdd" connection-type="Transaction-Required" ldap-connection-type="None">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="setUserProfileValues">
+			<task synchronous="true" continue-on-failure="false" name="userRegistrationSetup">
+				<!-- Setup password information for validation, userId, mailId, organizationId -->
+				<task-object-name>com.tsa.puridiom.userprofile.tasks.UserProfileAdminAddSetup</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="userProfile">
+				<!-- SetValues before validation checks so client has information previously entered if validation does not pass -->
+				<task-object-name>com.tsa.puridiom.userprofile.tasks.UserProfileSetValues</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="userProfile">
+				<task-object-name>com.tsa.puridiom.userprofile.tasks.UserProfileSetTempUserRoles</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="registrationValidations">
+			<task synchronous="true" continue-on-failure="false" name="registrationError">
+				<rule-filename check-for-false="true">is-organization-valid.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.usererrormsg.tasks.ErrorMsgSetInvalidOrganizationId</task-object-name>
+				<post-action>exitProcess</post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="hostUser">
+				<task-object-name>com.tsa.puridiom.hostuser.tasks.HostUserRetrieveById</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="registrationError">
+				<rule-filename check-for-false="true">is-hostuser-empty.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.usererrormsg.tasks.ErrorMsgSetDuplicateMailId</task-object-name>
+				<post-action>exitProcess</post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="userProfileTest">
+				<task-object-name>com.tsa.puridiom.userprofile.tasks.UserProfileRetrieveByMailId</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="registrationError">
+				<rule-filename check-for-false="true">is-userprofiletest-empty</rule-filename>
+				<task-object-name>com.tsa.puridiom.usererrormsg.tasks.ErrorMsgSetDuplicateMailId</task-object-name>
+				<post-action>exitProcess</post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="duplicateUserIdValidation">
+			<!-- No need to test for duplicate user id here if userId is being generated w/ duplication testing -->
+			<rule-filename check-for-false="true">is-user-autogenerateid-active.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="userProfileTest">
+				<task-object-name>com.tsa.puridiom.userprofile.tasks.UserProfileRetrieveById</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="registrationError">
+				<rule-filename check-for-false="true">is-userprofiletest-empty.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.usererrormsg.tasks.ErrorMsgSetDuplicateUserId</task-object-name>
+				<post-action>exitProcess</post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="validateMailIdAndGeneratePassword">
+			<task synchronous="true" continue-on-failure="false" name="validateMailId">
+				<!-- Will throw an InvalidMailIdException that will end the process if mail id format or domain is not valid -->
+				<task-object-name>com.tsa.puridiom.common.tasks.EmailAddressValidation</task-object-name>
+			</task>
+			<!-- No need to validate password... password is now being generated -->
+			<!--task synchronous="true" continue-on-failure="false" name="passwordValidation">
+				<task-object-name>com.tsa.puridiom.common.tasks.PasswordValidation</task-object-name>
+			</task-->
+			<task synchronous="true" continue-on-failure="false" name="UserProfile_userPassword">
+				<!--rule-filename>is-user-login-allowed.xml</rule-filename-->
+				<task-object-name>com.tsa.puridiom.password.tasks.GeneratePassword</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="generateUserId">
+			<rule-filename>is-user-autogenerateid-active.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="UserProfile_userId">
+				<task-object-name>com.tsa.puridiom.userregistration.tasks.GenerateUserIdFromName</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="validateUserId">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>user-registration-get-valid-userid.xml</process-filename>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="addHostUser">
+			<task synchronous="true" continue-on-failure="false" name="userProfile">
+				<!-- SetValues again to set userId and userPassword -->
+				<task-object-name>com.tsa.puridiom.userprofile.tasks.UserProfileSetValues</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="userProfile">
+				<task-object-name>com.tsa.puridiom.userprofile.tasks.UserProfileAdd</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="addHostUser">
+			<task synchronous="true" continue-on-failure="false" name="addHostUser">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>hostuser-add.xml</process-filename>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="updateUserRoles">
+			<task synchronous="true" continue-on-failure="false" name="userGroupRelUpdate">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>usergrouprel-update-by-userid.xml</process-filename>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="userProfile">
+				<task-object-name>com.tsa.puridiom.userprofile.tasks.UserProfileSetUserRoles</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="userProfile">
+				<task-object-name>com.tsa.puridiom.userprofile.tasks.UserProfileSetRegistered</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="setUserInCache">
+				<task-object-name>com.tsa.puridiom.usermanager.tasks.UserManagerSetUserInCache</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="emailAccountLoginInformation">
+			<rule-filename>is-user-login-allowed.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="sendAccountActivationEmail">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>userprofile-admin-add-email.xml</process-filename>
+			</task>
+		</activity>
+	</activities>
+</process>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process connection-type="Connection-Required" name="billToRetrieveByLine">
+	<activities>
+		<activity continue-on-failure="false" name="billToRetrieveByLine" synchronous="true">
+			<task continue-on-failure="false" name="billToList" synchronous="true">
+				<task-object-name>com.tsa.puridiom.billto.tasks.BillToRetrieveByLine</task-object-name>
+			</task>
+			<task continue-on-failure="false" name="billToList" synchronous="true">
+				<rule-filename>is-billto-list-empty.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.requisitionline.autorelease.tasks.BillToCreateForAutoRelease</task-object-name>
+			</task>
+			<!-- Not needed for now. We are not displaying information just creating the object
+			<task continue-on-failure="false" name="billToDataRetrieve" synchronous="true">
+				<task-object-name>com.tsa.puridiom.billto.tasks.BillToDataRetrieve</task-object-name>
+			</task> -->
+		</activity>
+	</activities>
+</process>

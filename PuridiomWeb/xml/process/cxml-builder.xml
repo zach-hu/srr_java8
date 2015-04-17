@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="cxmlBuilder" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="createCXMLObjects">
+			<task synchronous="true" continue-on-failure="false" name="catalogSecurityRetrieveByPoHeaderByFullAccess">
+				<rule-filename>is-activate-catalogsecurity.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.catalogsecurity.tasks.CatalogSecurityRetrieveByPoHeaderByFullAccess</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="cXMLRequest">
+				<task-object-name>com.tsa.puridiom.cxml.tasks.CXMLRequestSetValues</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="cXMLResponse">
+				<task-object-name>com.tsa.puridiom.cxml.tasks.CXMLResponseSetValues</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="writeCXMLDocuments">
+			<task synchronous="true" continue-on-failure="false" name="writeCXMLDocuments">
+				<task-object-name>com.tsa.puridiom.cxml.tasks.CXMLDocumentBuilder</task-object-name>
+			</task>
+		</activity>
+		<!--activity synchronous="true" continue-on-failure="false" name="poHeaderHistory">
+        	<task synchronous="true" continue-on-failure="false" name="poHeaderHistory">
+        		<task-object-name>com.tsa.puridiom.poheader.history.tasks.PoHeaderHistory</task-object-name>
+      		</task>
+    	</activity-->
+    	<activity synchronous="true" continue-on-failure="false" name="poHeaderUpdate">
+			<task synchronous="true" continue-on-failure="false" name="poHeader">
+				<task-object-name>com.tsa.puridiom.poheader.tasks.PoHeaderUpdate</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+	</activities>
+</process>

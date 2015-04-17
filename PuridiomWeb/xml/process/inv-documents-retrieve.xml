@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="inv-documents-retrieve" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="receiptLineRetrive">
+			<task synchronous="true" continue-on-failure="false" name="receiptLine">
+				<rule-filename>is-receiptline-empty.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.receiptline.tasks.ReceiptLineRetrieveById</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="receiptLineRetrieveSetup">
+				<rule-filename check-for-false="true">is-receiptline-empty.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.receiptline.tasks.ReceiptLineRetrieveSetup</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="receiptHeaderRetrive">
+			<rule-filename>is-receiptheader-empty.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="receiptHeader">
+				<task-object-name>com.tsa.puridiom.receiptheader.tasks.ReceiptHeaderRetrieveById</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="receiptLineListRetrieve">
+			<rule-filename check-for-false="true">is-receiptheader-empty.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="receiptDocumentsRetrieveSetup">
+				<task-object-name>com.tsa.puridiom.receiptheader.tasks.ReceiptHeaderDocumentsRetrieveSetup</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="receiptLineList">
+				<rule-filename>is-receiptlinelist-empty.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.receiptline.tasks.ReceiptLineRetrieveByHeader</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="poHeaderRetrive">
+			<rule-filename>is-poheader-empty.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="poHeader">
+				<task-object-name>com.tsa.puridiom.poheader.tasks.PoHeaderRetrieveById</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="poLineListRetrieve">
+			<rule-filename>is-poline-empty.xml;is-poline-icpoline-not-empty.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="poLine">
+				<task-object-name>com.tsa.puridiom.poline.tasks.PoLineRetrieveById</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="requisitionHeaderRetrieve">
+			<task synchronous="true" continue-on-failure="false" name="requisitionHeader">
+				<rule-filename>is-requisitionheader-empty.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.requisitionheader.tasks.RequisitionHeaderRetrieveById</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="requisitionDocumentsRetrieveSetup">
+				<task-object-name>com.tsa.puridiom.requisitionheader.tasks.RequisitionHeaderDocumentsRetrieveSetup</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="requisitionLineListRetrieve">
+			<rule-filename>is-requisitionline-empty.xml;is-requisitionline-icreqline-not-empty.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="requisitionLine">
+				<task-object-name>com.tsa.puridiom.requisitionline.tasks.RequisitionLineRetrieveById</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="msrHeaderRetrieve">
+			<task synchronous="true" continue-on-failure="false" name="msrHeader">
+				<rule-filename>is-msrheader-empty.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.requisitionheader.tasks.MsrHeaderRetrieveById</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="msrLineListRetrieve">
+			<rule-filename check-for-false="true">is-msrheader-empty.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="msrDocumentsRetrieveSetup">
+				<task-object-name>com.tsa.puridiom.requisitionheader.tasks.MsrHeaderDocumentsRetrieveSetup</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="msrLineList">
+				<rule-filename>is-msrlinelist-empty.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.requisitionline.tasks.MsrLineRetrieveByHeader</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="invBinLocationListRetrive">
+			<rule-filename check-for-false="true">is-receiptlinelist-empty.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="invBinLocationList">
+				<task-object-name>com.tsa.puridiom.receiptline.tasks.ReceiptLineListRetrieveInvBinLocationList</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+	</activities>
+</process>

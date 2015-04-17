@@ -1,0 +1,39 @@
+<browse_paymentterms>
+	<columns>
+		<PaymentTerm_termsCode>
+			<label>brw-termCode</label>
+			<sort>A</sort>
+			<link><![CDATA[javascript: returnMe('#PaymentTerm_termsCode^'); void(0);]]></link>
+			<size>20</size>
+		</PaymentTerm_termsCode>
+		<PaymentTerm_termDescription>
+			<label>description</label>
+			<size>40</size>
+		</PaymentTerm_termDescription>
+		<PaymentTerm_termTypeFlag>
+			<label>brw-termTypeFlag</label>
+			<hidden-input>Y</hidden-input>
+			<size>10</size>
+		</PaymentTerm_termTypeFlag>
+		<PaymentTerm_termDays>
+			<label>brw-termDays</label>
+			<size>10</size>
+			<hidden-input>Y</hidden-input>
+		</PaymentTerm_termDays>
+		<PaymentTerm_discount>
+			<label>brw-discountAmount</label>
+			<hidden-input>Y</hidden-input>
+			<size>10</size>
+		</PaymentTerm_discount>
+		<PaymentTerm_discountDays>
+			<label>brw-discountDays</label>
+			<hidden-input>Y</hidden-input>
+			<size>10</size>
+		</PaymentTerm_discountDays>
+	</columns>
+<sqlfrom>PaymentTerm as PaymentTerm</sqlfrom>
+<sqlwhere><![CDATA[ (PaymentTerm.status = '02' OR (PaymentTerm.status = '01' AND PaymentTerm.dateExpires >= :as_today)) ]]></sqlwhere>
+<sqlorderby>PaymentTerm.termsCode ASC</sqlorderby>
+<pagesize>15</pagesize>
+<title>Payment Terms</title>
+</browse_paymentterms>

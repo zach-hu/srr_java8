@@ -1,0 +1,79 @@
+<browse_rules>
+	<columns>
+		<Rules_icRule>
+			<hidden>Y</hidden>
+			<hidden-input>Y</hidden-input>
+			<key>Y</key>
+		</Rules_icRule>
+		<Link_deleteRule>
+			<link><![CDATA[javascript: deleteRule('#Rules_icRule^', '#Rules_ruleName^'); void(0);]]></link>
+			<linkImage>delete.gif</linkImage>
+			<selectsql>N</selectsql>
+			<align>center</align>
+			<size>2</size>
+		</Link_deleteRule>
+		<Rules_ruleName>
+			<label><![CDATA[brw-rules-rulename]]></label>
+			<link><![CDATA[javascript: editRule('#Rules_icRule^'); void(0);]]></link>
+			<size>20</size>
+			<type>UPPERCASE</type>
+			<sort>A</sort>
+		</Rules_ruleName>
+		<Rules_validationMessage>
+			<label><![CDATA[brw-rules-validationmessage]]></label>
+			<size>60</size>
+			<text-input>Y</text-input>
+			<input-size>100</input-size>
+			<store-request-value>Y</store-request-value>
+		</Rules_validationMessage>
+		<Rules_enabled>
+			<label><![CDATA[brw-rules-enabled]]></label>
+			<size>5</size>
+			<checkbox>Y</checkbox>
+			<align>center</align>
+			<hidden-input>Y</hidden-input>
+			<store-request-value>Y</store-request-value>
+		</Rules_enabled>
+		<Link_validationInfo>
+			<link><![CDATA[javascript: triggerRuleDetails(); void(0);]]></link>
+			<linkImage>plus.gif</linkImage>
+			<selectsql>N</selectsql>
+			<align>center</align>
+			<size>3</size>
+		</Link_validationInfo>
+		<Rules_validationLink>
+			<label><![CDATA[brw-rules-validationlink]]></label>
+			<size>100</size>
+			<text-input>Y</text-input>
+			<input-size>100</input-size>
+			<detail>Y</detail>
+			<store-request-value>Y</store-request-value>
+		</Rules_validationLink>
+		<Rules_fieldName>
+			<label><![CDATA[brw-rules-fieldname]]></label>
+			<size>100</size>
+			<text-input>Y</text-input>
+			<input-size>100</input-size>
+			<detail>Y</detail>
+			<store-request-value>Y</store-request-value>
+		</Rules_fieldName>
+		<Rules_validationSeverity>
+			<label><![CDATA[brw-rules-validationseverity]]></label>
+			<size>150</size>
+			<select-input>Y</select-input>
+			<arguments>
+				<col type="E">Error</col>
+				<col type="W">Warning</col>
+			</arguments>
+			<input-size>20</input-size>
+			<detail>Y</detail>
+			<store-request-value>Y</store-request-value>
+		</Rules_validationSeverity>
+	</columns>
+<sqlfrom>Rules as Rules</sqlfrom>
+<sqlwhere><![CDATA[]]></sqlwhere>
+<sqlorderby>Rules.ruleName ASC</sqlorderby>
+<pagesize>5</pagesize>
+<detail-visible>N</detail-visible>
+<title>Rules Management</title>
+</browse_rules>

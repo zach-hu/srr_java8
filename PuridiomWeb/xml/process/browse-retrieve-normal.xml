@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="browseRetrieve" connection-type="Connection-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="browseRetrieve">
+			<task synchronous="true" continue-on-failure="false" name="browseObject">			
+				<task-object-name>com.tsa.puridiom.browse.tasks.GenerateBrowseObject</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="browseObject">			
+				<task-object-name>com.tsa.puridiom.browse.tasks.GenerateBrowseFilter</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="browseList">			
+				<task-object-name>com.tsa.puridiom.browse.tasks.BrowseRetrieveNormal</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="groupFilterList">			
+				<task-object-name>com.tsa.puridiom.browse.tasks.GroupFilterSelectionRetrieve</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="costRangeList">			
+				<rule-filename>is-costrange-itemtype-set</rule-filename>
+				<task-object-name>com.tsa.puridiom.costrange.tasks.CostRangeRetrieveBy</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="EmailRequisitioner" connection-type="Transaction-Required">
+  <activities>
+    <activity synchronous="true" continue-on-failure="false" name="emailRequisitioner">
+      <task synchronous="true" continue-on-failure="false" name="nonReleasedMessages">
+        <task-object-name>com.tsa.puridiom.requisition.tasks.NonReleasedItemsEmailTxt</task-object-name>
+      </task>
+      <task synchronous="true" continue-on-failure="false" name="email">
+        <task-object-name>com.tsa.puridiom.requisition.tasks.BuyerReqApprovedEmail</task-object-name>
+      </task>
+    </activity>
+  </activities>
+</process>

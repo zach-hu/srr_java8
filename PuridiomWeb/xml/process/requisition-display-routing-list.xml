@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="requisitionRoutingList" connection-type="Connection-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="retrieveRequisition">
+			<task synchronous="true" continue-on-failure="false" name="requisitionHeader">
+				<task-object-name>com.tsa.puridiom.requisitionheader.tasks.RequisitionHeaderRetrieveById</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="retrieveIt">
+			<rule-filename>is-routing-for-display.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="setup">
+				<task-object-name>com.tsa.puridiom.requisition.tasks.RequisitionRoutingDisplaySetup</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="routingList">
+				<task-object-name>com.tsa.puridiom.approvals.tasks.ApprovalLogRetrieveByHeader</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="routingListGroups">
+				<task-object-name>com.tsa.puridiom.approvals.tasks.ApprovalLogListGroupByRule</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="requisitionRoutingListSetup">
+			<rule-filename>is-requisition-forward-available.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="requisitionRoutingSetup">
+				<task-object-name>com.tsa.puridiom.requisition.tasks.RequisitionRoutingSetup</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="requisitionLineList">
+				<task-object-name>com.tsa.puridiom.requisitionline.tasks.RequisitionLineRetrieveByHeader</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="accountList">
+				<task-object-name>com.tsa.puridiom.account.tasks.AccountRetrieveByHeader</task-object-name>
+				<post-action></post-action>
+			</task>
+			<!--task synchronous="true" continue-on-failure="false" name="otherRule">
+				<rule-filename>is-organization-bsc.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.requisition.rules.BrendaBangertRule</task-object-name>
+			</task-->
+			<task synchronous="true" continue-on-failure="false" name="reuseRoutingList">
+				<task-object-name>com.tsa.puridiom.approvals.tasks.ApprovalLogReuseRetrieveByHeader</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="hoyaRule">
+				<rule-filename>is-organization-hoy.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.approvals.AccountUdf5LineTotalRule</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="addToCatalogRule">
+				<rule-filename>is-organization-hoy.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.approvals.AppRuleAddToCatalog</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="rulList">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>ext-approvals.xml</process-filename>
+				<post-action></post-action>
+			</task>
+
+			<task synchronous="true" continue-on-failure="false" name="requisitionRoutingList">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>requisition-routing-list-build.xml</process-filename>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="rioList">
+				<task-object-name>com.tsa.puridiom.approvals.tasks.ApprovalRioBuildApproverList</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="routingList">
+				<task-object-name>com.tsa.puridiom.approvals.tasks.ApprovalLogListBuild</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="setupApprovalRules">
+				<rule-filename>is-setup-approval-rules.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.approvals.tasks.SetupApprovalRules</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="setupApprovalRules">
+				<rule-filename>is-not-approval-need.xml</rule-filename>
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>requisition-setupapproval-new-list.xml</process-filename>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="setupApprovalRules">
+				<rule-filename>is-reuse-approvers.xml;is-requisition-approver-reuse-status.xml</rule-filename>
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>requisition-reuse-new-list.xml</process-filename>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="routingSetupLastApprovers">
+				<rule-filename>is-last-approvers-admin-request.xml</rule-filename>
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>setup-from-poolid-last-approver.xml</process-filename>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="routingListGroups">
+				<task-object-name>com.tsa.puridiom.approvals.tasks.ApprovalLogListGroupByRule</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="routingListUpdate">
+				<rule-filename>is-routing-for-forward.xml</rule-filename>
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>approvallog-update-temp-list.xml</process-filename>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="routingListUpdate">
+				<rule-filename>is-routing-for-display.xml;is-reuse-approvers.xml;is-requisition-approver-reuse-status.xml</rule-filename>
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>approvallog-update-temp-list.xml</process-filename>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="retrieveIt">
+			<task synchronous="true" continue-on-failure="false" name="setup">
+				<task-object-name>com.tsa.puridiom.requisition.tasks.ReqRoutingDisplaySetup</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="routingList">
+				<task-object-name>com.tsa.puridiom.approvals.tasks.ApprovalLogRetrieveByHeader</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="approvalLogListOrderedByUserId">
+				<task-object-name>com.tsa.puridiom.approvals.tasks.ApprovalLogRetrieveByHeaderOrderedByUserId</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="routingListDefaultSendTo">
+				<rule-filename>is-routing-for-forward.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.approvals.tasks.ApprovalLogListDefaultSendTo</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="updatedFieldsToAccount">
+			<rule-filename>is-updatefields-reqheader-to-lines.xml;is-organization-bly.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="updatedFieldsToAccount">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>reqline-updated-fields-to-accounts.xml</process-filename>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="healMultipleCurrentApprover">
+			<task synchronous="true" continue-on-failure="false" name="ruleRoutingList">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>heal-multiple-current-approver.xml</process-filename>
+			</task>
+		</activity>
+	</activities>
+</process>

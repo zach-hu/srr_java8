@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="inspectionHeaderUpdate" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="inspectionHeaderRetrieve">
+			<task synchronous="true" continue-on-failure="false" name="inspectionHeader">
+				<task-object-name>com.tsa.puridiom.inspectionheader.tasks.InspectionHeaderRetrieveById</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+
+		<activity synchronous="true" continue-on-failure="false" name="inspectionHeaderDetailDelete">
+			<rule check-for-false="true">is-inspectionheader-empty.xml</rule>
+			<task synchronous="true" continue-on-failure="false" name="inspectionHeaderDelete">
+				<task-object-name>com.tsa.puridiom.inspectionheader.tasks.InspectionHeaderDeleteById</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="true" name="inspectionDeleteMfr">
+				<task-object-name>com.tsa.puridiom.inspectionmfr.tasks.InspectionMfrDeleteByIcInspNo</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="inspectionDeleteLine">
+				<task-object-name>com.tsa.puridiom.inspectionline.tasks.InspectionLineDeleteByIcInspNo</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+	</activities>
+</process>

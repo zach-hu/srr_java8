@@ -1,0 +1,77 @@
+<browse-req-check-approval-list>
+	<columns>
+		<RequisitionHeader_requisitionType>
+			<label>Type</label>
+			<type>REQUISITION-TYPE</type>
+			<size>15</size>
+		</RequisitionHeader_requisitionType>
+		<RequisitionHeader_icReqHeader>
+			<label>Ic Req Header</label>
+	        <hidden>Y</hidden>
+		</RequisitionHeader_icReqHeader> 
+		<RequisitionHeader_requisitionNumber>
+			<label>Req. #</label>
+			<link><![CDATA[javascript: retrieveReqApproval('#RequisitionHeader_icReqHeader^'); void(0);]]></link>
+			<size>10</size>
+		</RequisitionHeader_requisitionNumber>
+		<RequisitionHeader_requisitionDate>
+			<label>Request Date</label>
+			<sort>D</sort>
+			<size>11</size>
+			<type>DATE</type>
+		</RequisitionHeader_requisitionDate>
+		<RequisitionHeader_status>
+			<label>brw-status</label>
+			<type>STATUS</type>
+			<size>15</size>
+		</RequisitionHeader_status>
+		<RequisitionHeader_owner>
+			<label>Owner</label>
+	        <hidden>Y</hidden>
+		</RequisitionHeader_owner>
+		<RequisitionHeader_internalComments>
+			<label>Purpose</label>
+            <trim>35</trim>
+            <size>30</size>
+            <detail>Y</detail>
+		</RequisitionHeader_internalComments>
+		<RequisitionHeader_fiscalYear>
+			<label>Fiscal Year</label>
+			<visible>0</visible>
+		</RequisitionHeader_fiscalYear>
+		<RequisitionHeader_dateEntered>
+			<label>Date Entered</label>
+			<hidden>Y</hidden>
+			<type>DATE</type>
+		</RequisitionHeader_dateEntered>
+		<RequisitionHeader_total>
+			<label>brw-total</label>
+			<type>BigDecimal</type>
+			<size>8</size>
+		</RequisitionHeader_total>
+		<RequisitionHeader_approved>
+			<label>Approved</label>
+			<hidden>Y</hidden>
+		</RequisitionHeader_approved>
+		<RequisitionHeader_requisitionerCode>
+			<label>Requisitioner</label>
+            <size>15</size>
+            <type>USER-ID</type>
+		</RequisitionHeader_requisitionerCode>
+		<ApprovalLog_id_userId>
+			<label>User ID</label>
+			<type>USER-ID</type>
+			<visible>0</visible>
+		</ApprovalLog_id_userId>
+		<ApprovalLog_callForward>
+			<label>Call Forward</label>
+			<type>USER-ID</type>
+			<size>15</size>
+		</ApprovalLog_callForward>
+	</columns>
+<sqlfrom>RequisitionHeader as RequisitionHeader, ApprovalLog as ApprovalLog</sqlfrom>
+<sqlwhere><![CDATA[RequisitionHeader.requisitionNumber <> 'N/A' and ApprovalLog.id.icHeader = RequisitionHeader.icReqHeader and RequisitionHeader.status = '1030' and ApprovalLog.approved = 'A' and RequisitionHeader.requisitionType = 'K' and ApprovalLog.callForward = 'AP' ]]></sqlwhere>
+<sqlorderby>RequisitionHeader.requisitionNumber asc</sqlorderby>
+<pagesize>15</pagesize>
+<title>Requisitions Waiting My Approval</title>
+</browse-req-check-approval-list>

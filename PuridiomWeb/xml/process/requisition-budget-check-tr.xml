@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="RequisitionBudgetCheck" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="budgetCheckSetup">
+			<task synchronous="true" continue-on-failure="false" name="budgetCheckSetup">
+				<task-object-name>com.tsa.puridiom.budget.tasks.BudgetCheckSetup</task-object-name>
+				<post-action></post-action>
+			</task>
+	      	<task synchronous="true" continue-on-failure="false" name="budgetSetupRetrieve">
+    	    	<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+        		<process-filename>budget-setup-retrieve.xml</process-filename>
+        		<post-action></post-action>
+      		</task>
+			<task synchronous="true" continue-on-failure="false" name="requisitionHeader">
+				<rule-filename>is-requisitionheader-empty.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.requisitionheader.tasks.RequisitionHeaderRetrieveById</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="requisitionLineList">
+				<rule-filename>is-requisitionlinelist-empty.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.requisitionline.tasks.RequisitionLineRetrieveByHeader</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="budgetDistribute">
+				<task-object-name>com.tsa.puridiom.budget.tasks.BudgetDistribute</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="budgetStatus">
+				<task-object-name>com.tsa.puridiom.budget.tasks.BudgetCheck</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+	</activities>
+</process>

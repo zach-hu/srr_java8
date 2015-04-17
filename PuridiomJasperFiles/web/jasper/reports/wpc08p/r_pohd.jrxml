@@ -1,0 +1,610 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created using an evaluation version of JasperAssistant (http://www.jasperassistant.com) -->
+<!DOCTYPE jasperReport PUBLIC "-//JasperReports//DTD Report Design//EN" "http://jasperreports.sourceforge.net/dtds/jasperreport.dtd">
+
+<jasperReport name="RPohd" pageWidth="891" pageHeight="612" orientation="Landscape" whenNoDataType="AllSectionsNoDetail" columnWidth="861" leftMargin="15" rightMargin="15" topMargin="15" bottomMargin="15" whenResourceMissingType="Empty">
+	<property name="com.jasperassistant.designer.GridWidth" value="12"/>
+	<property name="com.jasperassistant.designer.GridHeight" value="12"/>
+	<property name="com.jasperassistant.designer.DataSource" value="one"/>
+	<property name="com.jasperassistant.designer.SnapToGrid" value="false"/>
+	<property name="com.jasperassistant.designer.Grid" value="false"/>
+	<import value="com.tsagate.foundation.utility.Utility"/>
+	<import value="com.tsa.puridiom.currcode.CurrencyManager"/>
+	<import value="com.tsa.puridiom.common.documents.*"/>
+	<import value="java.net.*"/>
+	<import value="com.tsagate.properties.*"/>
+	<import value="com.tsa.puridiom.entity.*"/>
+	<import value="com.tsa.puridiom.common.documents.OrderType"/>
+	<import value="java.util.*"/>
+	<import value="com.tsa.puridiom.property.PropertiesManager"/>
+	<import value="com.tsa.puridiom.common.utility.HiltonUtility"/>
+	<import value="net.sf.jasperreports.engine.JRDataSource"/>
+	<import value="com.tsa.puridiom.jasperreports.*"/>
+	<import value="com.tsa.puridiom.usermanager.UserManager"/>
+	<reportFont name="Arial_Normal" isDefault="true" fontName="Arial" size="8" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Bold" isDefault="false" fontName="Arial Black" size="8" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica-Bold" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Bold_Big" isDefault="false" fontName="Arial Black" size="12" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica-Bold" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Big" isDefault="false" fontName="Arial" size="12" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<parameter name="oid" class="java.lang.String">
+		<defaultValueExpression><![CDATA["HILTON"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="reportTitle" class="java.lang.String">
+		<defaultValueExpression><![CDATA[$P{reportTitle}]]></defaultValueExpression>
+	</parameter>
+	<parameter name="reportCriteria" class="java.lang.String">
+		<defaultValueExpression><![CDATA[$P{reportCriteria}]]></defaultValueExpression>
+	</parameter>
+	<parameter name="userId" class="java.lang.String">
+		<defaultValueExpression><![CDATA["Puridiom"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="reportType" class="java.lang.String">
+		<defaultValueExpression><![CDATA["Y"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="companyName" class="java.lang.String">
+		<defaultValueExpression><![CDATA[PropertiesManager.getInstance($P{oid}).getProperty("COMPANY", "Name", "TSA")]]></defaultValueExpression>
+	</parameter>
+	<parameter name="today" class="java.lang.String">
+		<defaultValueExpression><![CDATA["Created " + Utility.getDateFormat(new Date(), "MMM d, yyyy h:mm a") +" by "+$P{userId}]]></defaultValueExpression>
+	</parameter>
+	<parameter name="footerText" class="java.lang.String">
+		<defaultValueExpression><![CDATA[$P{companyName}]]></defaultValueExpression>
+	</parameter>
+	<parameter name="currencyManager" class="com.tsa.puridiom.currcode.CurrencyManager">
+		<defaultValueExpression><![CDATA[CurrencyManager.getInstance($P{oid})]]></defaultValueExpression>
+	</parameter>
+	<parameter name="currencyBase" class="java.lang.String">
+		<defaultValueExpression><![CDATA[$P{currencyManager}.getBaseCurrencyCode()]]></defaultValueExpression>
+	</parameter>
+	<field name="PoHeader_poType" class="java.lang.String"/>
+	<field name="PoHeader_poNumber" class="java.lang.String"/>
+	<field name="PoHeader_releaseNumber" class="java.math.BigDecimal"/>
+	<field name="PoHeader_revisionNumber" class="java.math.BigDecimal"/>
+	<field name="PoHeader_departmentCode" class="java.lang.String"/>
+	<field name="PoHeader_poDate" class="java.util.Date"/>
+	<field name="PoHeader_status" class="java.lang.String"/>
+	<field name="PoHeader_buyerCode" class="java.lang.String"/>
+	<field name="PoHeader_effectiveDate" class="java.util.Date"/>
+	<field name="PoHeader_expirationDate" class="java.util.Date"/>
+	<field name="PoHeader_vendorId" class="java.lang.String"/>
+	<field name="PoHeader_requiredDate" class="java.util.Date"/>
+	<field name="PoLine_lineNumber" class="java.math.BigDecimal"/>
+	<field name="PoLine_umCode" class="java.lang.String"/>
+	<field name="PoLine_quantity" class="java.math.BigDecimal"/>
+	<field name="PoHeader_icReqHeader" class="java.math.BigDecimal"/>
+	<field name="PoHeader_requisitionerCode" class="java.lang.String"/>
+	<field name="PoLine_itemNumber" class="java.lang.String"/>
+	<field name="PoLine_description" class="java.lang.String"/>
+	<field name="PoLine_unitPrice" class="java.math.BigDecimal"/>
+	<field name="PoLine_lineTotal" class="java.math.BigDecimal"/>
+	<field name="PoLine_taxAmount" class="java.math.BigDecimal"/>
+	<field name="PoLine_umFactor" class="java.math.BigDecimal"/>
+	<field name="PoLine_status" class="java.lang.String"/>
+	<field name="PoHeader_total" class="java.math.BigDecimal"/>
+	<field name="PoHeader_subtotal" class="java.math.BigDecimal"/>
+	<field name="PoHeader_currencyCode" class="java.lang.String"/>
+	<field name="PoHeader_currencyFactor" class="java.math.BigDecimal"/>
+	<field name="PoHeader_discountAmount" class="java.math.BigDecimal"/>
+	<field name="PoHeader_shippingCharges" class="java.math.BigDecimal"/>
+	<field name="PoHeader_otherCharges" class="java.math.BigDecimal"/>
+	<field name="PoLine_discountAmount" class="java.math.BigDecimal"/>
+	<field name="PoLine_shippingCharges" class="java.math.BigDecimal"/>
+	<field name="PoLine_otherCharges" class="java.math.BigDecimal"/>
+	<field name="PoHeader_requisitionNumber" class="java.lang.String"/>
+	<field name="PoHeader_taxAmount" class="java.math.BigDecimal"/>
+	<field name="PoHeader_shippingTax" class="java.math.BigDecimal"/>
+	<field name="PoHeader_otherTax" class="java.math.BigDecimal"/>
+	<field name="PoHeader_vendorName" class="java.lang.String"/>
+	<field name="UserProfile_nameUdf2" class="java.lang.String"/>
+	<field name="PoHeader_pcardName" class="java.lang.String"/>
+	<field name="UserProfile_costCenter" class="java.lang.String"/>
+	<field name="PoLine_departmentCode" class="java.lang.String"/>
+	<field name="PoLine_itemLocation" class="java.lang.String"/>
+	<field name="Account_fld4" class="java.lang.String"/>
+	<variable name="PO_Count" class="java.lang.Integer" incrementType="Group" incrementGroup="Group_PoNumber" calculation="DistinctCount">
+		<variableExpression><![CDATA[$F{PoHeader_poNumber}]]></variableExpression>
+		<initialValueExpression><![CDATA[new Integer(0)]]></initialValueExpression>
+	</variable>
+	<variable name="sumGrandBaseTotal" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[($F{PoLine_lineTotal}).multiply($F{PoHeader_currencyFactor})]]></variableExpression>
+		<initialValueExpression><![CDATA[new BigDecimal(0)]]></initialValueExpression>
+	</variable>
+	<variable name="sumBaseTotal" class="java.math.BigDecimal" resetType="Group" resetGroup="Group_PoNumber" calculation="Sum">
+		<variableExpression><![CDATA[($F{PoLine_lineTotal}).multiply($F{PoHeader_currencyFactor})]]></variableExpression>
+		<initialValueExpression><![CDATA[new BigDecimal(0)]]></initialValueExpression>
+	</variable>
+	<variable name="baseTotalLine" class="java.math.BigDecimal" resetType="Group" resetGroup="Group_PoNumber">
+		<variableExpression><![CDATA[($F{PoLine_lineTotal}).multiply($F{PoHeader_currencyFactor})]]></variableExpression>
+		<initialValueExpression><![CDATA[new BigDecimal(0)]]></initialValueExpression>
+	</variable>
+	<group name="Group_PoNumber" isReprintHeaderOnEachPage="true">
+		<groupExpression><![CDATA[$F{Account_fld4}]]></groupExpression>
+		<groupHeader>
+			<band height="49">
+				<textField hyperlinkType="None">
+					<reportElement positionType="Float" x="89" y="0" width="67" height="14"/>
+					<box topBorder="None" topPadding="0" leftBorder="None" leftPadding="3" bottomBorder="1Point" bottomPadding="0" rightBorder="None" rightPadding="3"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font reportFont="Arial_Bold" fontName="Arial Black" isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA["Order Type"]]></textFieldExpression>
+				</textField>
+				<textField hyperlinkType="None">
+					<reportElement positionType="Float" x="156" y="0" width="70" height="14"/>
+					<box topBorder="None" topPadding="0" leftBorder="None" leftPadding="3" bottomBorder="1Point" bottomPadding="0" rightBorder="None" rightPadding="3"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font reportFont="Arial_Bold" fontName="Arial Black" isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA["Order Number"]]></textFieldExpression>
+				</textField>
+				<textField hyperlinkType="None">
+					<reportElement positionType="Float" x="226" y="0" width="65" height="14"/>
+					<box topBorder="None" topPadding="0" leftBorder="None" leftPadding="3" bottomBorder="1Point" bottomPadding="0" rightBorder="None" rightPadding="3"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font reportFont="Arial_Bold" fontName="Arial Black" isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA["Order Date"]]></textFieldExpression>
+				</textField>
+				<textField hyperlinkType="None">
+					<reportElement positionType="Float" x="291" y="0" width="79" height="14"/>
+					<box topBorder="None" topPadding="0" leftBorder="None" leftPadding="3" bottomBorder="1Point" bottomPadding="0" rightBorder="None" rightPadding="3"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font reportFont="Arial_Bold" fontName="Arial Black" isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA["Required"]]></textFieldExpression>
+				</textField>
+				<textField hyperlinkType="None">
+					<reportElement positionType="Float" x="370" y="0" width="91" height="14" forecolor="#000000"/>
+					<box topBorder="None" topPadding="0" leftBorder="None" leftPadding="3" bottomBorder="1Point" bottomPadding="0" rightBorder="None" rightPadding="3"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font reportFont="Arial_Bold" fontName="Arial Black" isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA["Effective Date"]]></textFieldExpression>
+				</textField>
+				<textField hyperlinkType="None">
+					<reportElement positionType="Float" x="461" y="0" width="68" height="14"/>
+					<box topBorder="None" topPadding="0" leftBorder="None" leftPadding="3" bottomBorder="1Point" bottomPadding="0" rightBorder="None" rightPadding="3"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font reportFont="Arial_Bold" fontName="Arial Black" isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA["Expires"]]></textFieldExpression>
+				</textField>
+				<textField hyperlinkType="None">
+					<reportElement positionType="Float" x="529" y="0" width="73" height="14"/>
+					<box topBorder="None" topPadding="0" leftBorder="None" leftPadding="3" bottomBorder="1Point" bottomPadding="0" rightBorder="None" rightPadding="3"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font reportFont="Arial_Bold" fontName="Arial Black" isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA["Buyer"]]></textFieldExpression>
+				</textField>
+				<textField hyperlinkType="None">
+					<reportElement positionType="Float" x="602" y="0" width="91" height="14"/>
+					<box topBorder="None" topPadding="0" leftBorder="None" leftPadding="3" bottomBorder="1Point" bottomPadding="0" rightBorder="None" rightPadding="3"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font reportFont="Arial_Bold" fontName="Arial Black" isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA["Supplier"]]></textFieldExpression>
+				</textField>
+				<textField hyperlinkType="None">
+					<reportElement positionType="Float" x="693" y="0" width="65" height="14"/>
+					<box topBorder="None" topPadding="0" leftBorder="None" leftPadding="3" bottomBorder="1Point" bottomPadding="0" rightBorder="None" rightPadding="3"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font reportFont="Arial_Bold" fontName="Arial Black" isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA["PO Status"]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true" hyperlinkType="None">
+					<reportElement positionType="Float" x="89" y="15" width="67" height="14"/>
+					<box border="None" topPadding="0" leftPadding="3" bottomPadding="0" rightPadding="3"/>
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font reportFont="Arial_Normal"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[OrderType.toString($F{PoHeader_poType})]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true" hyperlinkType="None">
+					<reportElement positionType="Float" x="156" y="15" width="70" height="14"/>
+					<box border="None" topPadding="0" leftPadding="3" bottomPadding="0" rightPadding="3"/>
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font reportFont="Arial_Normal"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{PoHeader_poNumber}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true" hyperlinkType="None">
+					<reportElement positionType="Float" x="226" y="15" width="65" height="14"/>
+					<box border="None" topPadding="0" leftPadding="3" bottomPadding="0" rightPadding="3"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font reportFont="Arial_Normal"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[HiltonUtility.getFormattedDate($F{PoHeader_poDate}, $P{oid})]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true" hyperlinkType="None">
+					<reportElement positionType="Float" x="291" y="15" width="79" height="14"/>
+					<box border="None" topPadding="0" leftPadding="3" bottomPadding="0" rightPadding="3"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font reportFont="Arial_Normal"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[HiltonUtility.getFormattedDate($F{PoHeader_requiredDate}, $P{oid})]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true" hyperlinkType="None">
+					<reportElement positionType="Float" x="370" y="15" width="91" height="14" forecolor="#000000"/>
+					<box border="None" topPadding="0" leftPadding="3" bottomPadding="0" rightPadding="3"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font reportFont="Arial_Normal"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[HiltonUtility.getFormattedDate($F{PoHeader_effectiveDate}, $P{oid})]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true" hyperlinkType="None">
+					<reportElement positionType="Float" x="461" y="15" width="68" height="14"/>
+					<box border="None" topPadding="0" leftPadding="3" bottomPadding="0" rightPadding="3"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font reportFont="Arial_Normal"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[HiltonUtility.getFormattedDate($F{PoHeader_expirationDate}, $P{oid})]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true" hyperlinkType="None">
+					<reportElement positionType="Float" x="529" y="15" width="73" height="14"/>
+					<box border="None" topPadding="0" leftPadding="3" bottomPadding="0" rightPadding="3"/>
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font reportFont="Arial_Normal"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[UserManager.getInstance().getUser($P{oid},$F{PoHeader_buyerCode}).getDisplayName()]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true" hyperlinkType="None">
+					<reportElement positionType="Float" x="602" y="15" width="91" height="14"/>
+					<box border="None" topPadding="0" leftPadding="3" bottomPadding="0" rightPadding="3"/>
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font reportFont="Arial_Normal"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{PoHeader_vendorName}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true" hyperlinkType="None">
+					<reportElement positionType="Float" x="693" y="15" width="65" height="14"/>
+					<box border="None" topPadding="0" leftPadding="3" bottomPadding="0" rightPadding="3"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font reportFont="Arial_Normal"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[DocumentStatus.toString($F{PoHeader_status})]]></textFieldExpression>
+				</textField>
+				<textField hyperlinkType="None">
+					<reportElement positionType="Float" x="188" y="35" width="60" height="14"/>
+					<box topBorder="None" topPadding="0" leftBorder="None" leftPadding="3" bottomBorder="1Point" bottomPadding="0" rightBorder="None" rightPadding="3"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font reportFont="Arial_Bold" fontName="Arial Black" isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA["Requisition"]]></textFieldExpression>
+				</textField>
+				<textField hyperlinkType="None">
+					<reportElement positionType="Float" x="248" y="35" width="60" height="14"/>
+					<box topBorder="None" topPadding="0" leftBorder="None" leftPadding="3" bottomBorder="1Point" bottomPadding="0" rightBorder="None" rightPadding="3"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font reportFont="Arial_Bold" fontName="Arial Black" isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA["Requisitioner"]]></textFieldExpression>
+				</textField>
+				<textField hyperlinkType="None">
+					<reportElement positionType="Float" x="308" y="35" width="30" height="14"/>
+					<box topBorder="None" topPadding="0" leftBorder="None" leftPadding="3" bottomBorder="1Point" bottomPadding="0" rightBorder="None" rightPadding="3"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font reportFont="Arial_Bold" fontName="Arial Black" isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA["Line"]]></textFieldExpression>
+				</textField>
+				<textField hyperlinkType="None">
+					<reportElement positionType="Float" x="338" y="35" width="70" height="14"/>
+					<box topBorder="None" topPadding="0" leftBorder="None" leftPadding="3" bottomBorder="1Point" bottomPadding="0" rightBorder="None" rightPadding="3"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font reportFont="Arial_Bold" fontName="Arial Black" isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA["Item Number"]]></textFieldExpression>
+				</textField>
+				<textField hyperlinkType="None">
+					<reportElement positionType="Float" x="408" y="35" width="80" height="14"/>
+					<box topBorder="None" topPadding="0" leftBorder="None" leftPadding="3" bottomBorder="1Point" bottomPadding="0" rightBorder="None" rightPadding="3"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font reportFont="Arial_Bold" fontName="Arial Black" isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA["Description"]]></textFieldExpression>
+				</textField>
+				<textField hyperlinkType="None">
+					<reportElement positionType="Float" x="488" y="35" width="55" height="14"/>
+					<box topBorder="None" topPadding="0" leftBorder="None" leftPadding="3" bottomBorder="1Point" bottomPadding="0" rightBorder="None" rightPadding="3"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font reportFont="Arial_Bold" fontName="Arial Black" isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA["Quantity"]]></textFieldExpression>
+				</textField>
+				<textField hyperlinkType="None">
+					<reportElement positionType="Float" x="543" y="35" width="30" height="14"/>
+					<box topBorder="None" topPadding="0" leftBorder="None" leftPadding="3" bottomBorder="1Point" bottomPadding="0" rightBorder="None" rightPadding="3"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font reportFont="Arial_Bold" fontName="Arial Black" isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA["U/M"]]></textFieldExpression>
+				</textField>
+				<textField hyperlinkType="None">
+					<reportElement positionType="Float" x="573" y="35" width="65" height="14"/>
+					<box topBorder="None" topPadding="0" leftBorder="None" leftPadding="3" bottomBorder="1Point" bottomPadding="0" rightBorder="None" rightPadding="3"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font reportFont="Arial_Bold" fontName="Arial Black" isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA["Unit Price"]]></textFieldExpression>
+				</textField>
+				<textField hyperlinkType="None">
+					<reportElement positionType="Float" x="638" y="35" width="70" height="14"/>
+					<box topBorder="None" topPadding="0" leftBorder="None" leftPadding="3" bottomBorder="1Point" bottomPadding="0" rightBorder="None" rightPadding="3"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font reportFont="Arial_Bold" fontName="Arial Black" isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA["Line Total"]]></textFieldExpression>
+				</textField>
+				<textField hyperlinkType="None">
+					<reportElement positionType="Float" x="708" y="35" width="80" height="14"/>
+					<box topBorder="None" topPadding="0" leftBorder="None" leftPadding="3" bottomBorder="1Point" bottomPadding="0" rightBorder="None" rightPadding="3"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font reportFont="Arial_Bold" fontName="Arial Black" isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA["Line Status"]]></textFieldExpression>
+				</textField>
+				<textField hyperlinkType="None">
+					<reportElement positionType="Float" x="788" y="35" width="70" height="14"/>
+					<box topBorder="None" topPadding="0" leftBorder="None" leftPadding="3" bottomBorder="1Point" bottomPadding="0" rightBorder="None" rightPadding="3"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font reportFont="Arial_Bold" fontName="Arial Black" isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA["Base Total"]]></textFieldExpression>
+				</textField>
+				<textField hyperlinkType="None">
+					<reportElement positionType="Float" x="121" y="35" width="67" height="14"/>
+					<box topBorder="None" topPadding="0" leftBorder="None" leftPadding="3" bottomBorder="1Point" bottomPadding="0" rightBorder="None" rightPadding="3"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font reportFont="Arial_Bold" fontName="Arial Black" isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA["cost center"]]></textFieldExpression>
+				</textField>
+				<textField hyperlinkType="None">
+					<reportElement positionType="Float" x="61" y="35" width="60" height="14"/>
+					<box topBorder="None" topPadding="0" leftBorder="None" leftPadding="3" bottomBorder="1Point" bottomPadding="0" rightBorder="None" rightPadding="3"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font reportFont="Arial_Bold" fontName="Arial Black" isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA["location"]]></textFieldExpression>
+				</textField>
+				<textField hyperlinkType="None">
+					<reportElement positionType="Float" x="1" y="35" width="60" height="14"/>
+					<box topBorder="None" topPadding="0" leftBorder="None" leftPadding="3" bottomBorder="1Point" bottomPadding="0" rightBorder="None" rightPadding="3"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font reportFont="Arial_Bold" fontName="Arial Black" isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA["Department"]]></textFieldExpression>
+				</textField>
+				<textField hyperlinkType="None">
+					<reportElement positionType="Float" x="1" y="0" width="88" height="14"/>
+					<box topBorder="None" topPadding="0" leftBorder="None" leftPadding="3" bottomBorder="1Point" bottomPadding="0" rightBorder="None" rightPadding="3"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font reportFont="Arial_Bold" fontName="Arial Black" isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA["Car"]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true" hyperlinkType="None">
+					<reportElement positionType="Float" x="1" y="15" width="88" height="14"/>
+					<box border="None" topPadding="0" leftPadding="3" bottomPadding="0" rightPadding="3"/>
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font reportFont="Arial_Normal"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{Account_fld4}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="25">
+				<textField hyperlinkType="None">
+					<reportElement positionType="Float" x="714" y="0" width="75" height="14"/>
+					<box border="None" topPadding="0" leftPadding="3" bottomPadding="0" rightPadding="3"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font reportFont="Arial_Bold" fontName="Arial Black"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA["Base Total : "]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true" hyperlinkType="None">
+					<reportElement positionType="Float" x="789" y="0" width="70" height="14"/>
+					<box topBorder="1Point" topPadding="0" leftBorder="None" leftPadding="3" bottomBorder="None" bottomPadding="0" rightBorder="None" rightPadding="3"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font reportFont="Arial_Normal"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[HiltonUtility.getFormattedCurrency($V{sumBaseTotal},$P{currencyBase}, $P{oid})]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupFooter>
+	</group>
+	<pageHeader>
+		<band height="58">
+			<subreport isUsingCache="false">
+				<reportElement positionType="Float" x="1" y="1" width="859" height="40"/>
+				<subreportParameter name="footerText"/>
+				<subreportParameter name="reportTitle">
+					<subreportParameterExpression><![CDATA[$P{reportTitle}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="oid">
+					<subreportParameterExpression><![CDATA[$P{oid}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="reportCriteria">
+					<subreportParameterExpression><![CDATA[$P{reportCriteria}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="today">
+					<subreportParameterExpression><![CDATA[$P{today}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="pageNumber">
+					<subreportParameterExpression><![CDATA[String.valueOf($V{PAGE_NUMBER})]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="companyName">
+					<subreportParameterExpression><![CDATA[$P{companyName}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="totalPages">
+					<subreportParameterExpression><![CDATA[String.valueOf($V{PAGE_COUNT})]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[JasperReportsHelper.loadSubReport("header.jasper", $P{oid},"", $P{reportType})]]></subreportExpression>
+			</subreport>
+			<textField hyperlinkType="None">
+				<reportElement positionType="Float" x="773" y="1" width="57" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA["Page " + String.valueOf($V{PAGE_NUMBER}) + " of "]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report" hyperlinkType="None">
+				<reportElement positionType="Float" x="832" y="1" width="24" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[" " + String.valueOf($V{PAGE_NUMBER})]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="14">
+			<textField isBlankWhenNull="true" hyperlinkType="None">
+				<reportElement x="488" y="0" width="55" height="14"/>
+				<box border="None" topPadding="0" leftPadding="3" bottomPadding="0" rightPadding="3"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font reportFont="Arial_Normal"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{PoLine_quantity}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true" hyperlinkType="None">
+				<reportElement x="188" y="0" width="60" height="14"/>
+				<box border="None" topPadding="0" leftPadding="3" bottomPadding="0" rightPadding="3"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font reportFont="Arial_Normal"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{PoHeader_requisitionNumber}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true" hyperlinkType="None">
+				<reportElement x="248" y="0" width="60" height="14"/>
+				<box border="None" topPadding="0" leftPadding="3" bottomPadding="0" rightPadding="3"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font reportFont="Arial_Normal"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{PoHeader_requisitionerCode}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true" hyperlinkType="None">
+				<reportElement x="308" y="0" width="30" height="14"/>
+				<box border="None" topPadding="0" leftPadding="3" bottomPadding="0" rightPadding="3"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font reportFont="Arial_Normal"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{PoLine_lineNumber}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true" hyperlinkType="None">
+				<reportElement x="338" y="0" width="70" height="14"/>
+				<box border="None" topPadding="0" leftPadding="3" bottomPadding="0" rightPadding="3"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font reportFont="Arial_Normal"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{PoLine_itemNumber}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true" hyperlinkType="None">
+				<reportElement x="408" y="0" width="80" height="14"/>
+				<box border="None" topPadding="0" leftPadding="3" bottomPadding="0" rightPadding="3"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font reportFont="Arial_Normal"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{PoLine_description}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true" hyperlinkType="None">
+				<reportElement x="543" y="0" width="30" height="14"/>
+				<box border="None" topPadding="0" leftPadding="3" bottomPadding="0" rightPadding="3"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font reportFont="Arial_Normal"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{PoLine_umCode}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true" hyperlinkType="None">
+				<reportElement x="573" y="0" width="65" height="14"/>
+				<box border="None" topPadding="0" leftPadding="3" bottomPadding="0" rightPadding="3"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font reportFont="Arial_Normal"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[HiltonUtility.getFormattedDollar($F{PoLine_unitPrice},$P{oid})]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true" hyperlinkType="None">
+				<reportElement x="638" y="0" width="70" height="14"/>
+				<box border="None" topPadding="0" leftPadding="3" bottomPadding="0" rightPadding="3"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font reportFont="Arial_Normal"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[HiltonUtility.getFormattedCurrency($F{PoLine_lineTotal},$F{PoHeader_currencyCode}, $P{oid})]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true" hyperlinkType="None">
+				<reportElement x="708" y="0" width="80" height="14"/>
+				<box border="None" topPadding="0" leftPadding="3" bottomPadding="0" rightPadding="3"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font reportFont="Arial_Normal"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[DocumentStatus.toString($F{PoLine_status})]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true" hyperlinkType="None">
+				<reportElement x="788" y="0" width="70" height="14" forecolor="#000000"/>
+				<box border="None" topPadding="0" leftPadding="3" bottomPadding="0" rightPadding="3"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font reportFont="Arial_Normal"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[HiltonUtility.getFormattedCurrency($V{baseTotalLine},$P{currencyBase}, $P{oid})]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true" hyperlinkType="None">
+				<reportElement x="121" y="0" width="67" height="14"/>
+				<box border="None" topPadding="0" leftPadding="3" bottomPadding="0" rightPadding="3"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font reportFont="Arial_Normal"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{UserProfile_costCenter}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true" hyperlinkType="None">
+				<reportElement x="61" y="0" width="60" height="14"/>
+				<box border="None" topPadding="0" leftPadding="3" bottomPadding="0" rightPadding="3"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font reportFont="Arial_Normal"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{PoLine_itemLocation}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true" hyperlinkType="None">
+				<reportElement x="1" y="0" width="60" height="14"/>
+				<box border="None" topPadding="0" leftPadding="3" bottomPadding="0" rightPadding="3"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font reportFont="Arial_Normal"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{PoLine_departmentCode}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<summary>
+		<band height="19">
+			<textField hyperlinkType="None">
+				<reportElement positionType="Float" mode="Transparent" x="299" y="0" width="100" height="14"/>
+				<box border="None" topPadding="0" leftPadding="3" bottomPadding="0" rightPadding="3"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font reportFont="Arial_Bold" fontName="Arial Black" size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Purchase Orders:"]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true" hyperlinkType="None">
+				<reportElement x="399" y="0" width="40" height="14"/>
+				<box border="None" topPadding="0" leftPadding="3" bottomPadding="0" rightPadding="3"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font reportFont="Arial_Normal"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$V{PO_Count}]]></textFieldExpression>
+			</textField>
+			<textField hyperlinkType="None">
+				<reportElement positionType="Float" mode="Transparent" x="689" y="0" width="100" height="14"/>
+				<box border="None" topPadding="0" leftPadding="3" bottomPadding="0" rightPadding="3"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font reportFont="Arial_Bold" fontName="Arial Black" size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Grand Total:"]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true" hyperlinkType="None">
+				<reportElement x="789" y="0" width="70" height="14"/>
+				<box border="None" topPadding="0" leftPadding="3" bottomPadding="0" rightPadding="3"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font reportFont="Arial_Normal"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[HiltonUtility.getFormattedCurrency($V{sumGrandBaseTotal},$P{currencyBase}, $P{oid})]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="saveRfqBidHistory" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="saveRfqBidHistory">
+			<task synchronous="true" continue-on-failure="false" name="check">
+				<task-object-name>com.tsa.puridiom.rfqbidhistory.tasks.RfqBidHistoryHeaderCheck</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="listCheck">
+				<task-object-name>com.tsa.puridiom.rfqbidhistory.tasks.RfqBidHistoryListLineCheck</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="listCheck">
+				<task-object-name>com.tsa.puridiom.rfqbidhistory.tasks.RfqBidHistoryListVendorCheck</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

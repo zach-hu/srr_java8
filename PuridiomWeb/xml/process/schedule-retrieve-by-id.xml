@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="ScheduleRetrieveById" connection-type="New-Connection"> 
+	<!--Retrieve all Schedules for a given id-->
+	<activities>  
+		<activity synchronous="true" continue-on-failure="false" name="ScheduleRetrieveById">
+			  <task synchronous="true" continue-on-failure="false" name="schedule">    			
+				<task-object-name>com.tsa.puridiom.schedule.tasks.ScheduleRetrieveById</task-object-name>    
+				<post-action />    
+			  </task>
+		  </activity>  
+	 </activities> 
+</process>

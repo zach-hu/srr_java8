@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="recalc" connection-type="Connection-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="recalc">
+			<task synchronous="true" continue-on-failure="false" name="inventorySummary">
+				<task-object-name>com.tsa.puridiom.invlocation.tasks.InvLocationRetrieveByItem</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="recalcThem">
+				<task-object-name>com.tsa.puridiom.reports.itemusage.tasks.InvUsageRecalc</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

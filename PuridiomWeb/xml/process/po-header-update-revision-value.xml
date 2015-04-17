@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process connection-type="Transaction-Required" name="updateRevisionValue">
+	<activities>
+    <activity synchronous="true" continue-on-failure="false" name="updateRevisionValue">
+          <rule-filename>is-revision.xml</rule-filename>
+          <task continue-on-failure="false" synchronous="true" name="setupRevisionPrior">
+    		<task-object-name>com.tsa.puridiom.poheader.tasks.PoHeaderGetTotalPriorRevision</task-object-name>
+     	  </task>
+     	  <!-- task continue-on-failure="false" name="poHeader" synchronous="true">
+        	<task-object-name>com.tsa.puridiom.poheader.tasks.PoHeaderUpdate</task-object-name>
+      	  </task>
+     	 <task synchronous="true" continue-on-failure="false" name="poHeader">
+        	<task-object-name>com.tsa.puridiom.poheader.tasks.PoHeaderRetrieveById</task-object-name>
+      	</task -->
+    </activity>
+  </activities>
+</process>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="VendorRetrieveById" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="vendorRetrieveById">
+			<task synchronous="true" continue-on-failure="false" name="vendor">
+				<task-object-name>com.tsa.puridiom.vendor.tasks.VendorRetrieveById</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="vendorInsuranceDefaultRetrieveById">
+				<task-object-name>com.tsa.puridiom.vendorinsurancedefault.tasks.VendorInsuranceDefaultRetrieveById</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="contractsList">
+				<task-object-name>com.tsa.puridiom.poheader.tasks.PoHeaderRetrieveContractsByVendorId</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="QueueVendorInsuranceDefaultCoveragenot">
+			<task continue-on-failure="false" name="escalateEmail" synchronous="true">
+				<task-object-name>com.tsa.puridiom.vendorinsurancedefault.tasks.QueueVendorInsuranceDefaultCoverage</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="UpdateProperty">
+			<rule-filename>is-lastelement-of-list.xml</rule-filename>
+			<task synchronous="true" undo-on-failure="true" name="propertySetValues">
+				<task-object-name>com.tsa.puridiom.property.tasks.PropertySetFromRequest</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="propertyUpdate">
+				<task-object-name>com.tsa.puridiom.property.tasks.PropertyUpdateList</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

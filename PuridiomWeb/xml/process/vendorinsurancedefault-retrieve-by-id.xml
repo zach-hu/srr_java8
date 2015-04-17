@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="vendorInsuranceDefaultRetrieveById" connection-type="Connection-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="vendorInsuranceDefaultRetrieveById">
+			<task synchronous="true" continue-on-failure="false" name="vendorInsuranceDefaultRetrieveSetup">
+				<task-object-name>com.tsa.puridiom.vendorinsurancedefault.tasks.VendorInsuranceDefaultRetrieveSetup</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="vendorInsuranceDefault">
+				<task-object-name>com.tsa.puridiom.vendorinsurancedefault.tasks.VendorInsuranceDefaultRetrieveById</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

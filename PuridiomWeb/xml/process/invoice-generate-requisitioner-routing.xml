@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="InvoiceApprovals" connection-type="New-Transaction">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="retrieveInvoice">
+			<task synchronous="true" continue-on-failure="false" name="invoiceHeader">
+                <rule-filename>is-invoiceheader-empty.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.invoiceheader.tasks.InvoiceHeaderRetrieveById</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="invoiceApprovals">
+			<rule-filename>is-auto-generate-routing-list.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="routingListDeleteByHeader">
+				<task-object-name>com.tsa.puridiom.approvals.tasks.ApprovalLogDeleteByHeader</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="addApprovers">
+				<task-object-name>com.tsa.puridiom.invoice.approvals.tasks.InvoiceAddApprovers</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+	</activities>
+</process>

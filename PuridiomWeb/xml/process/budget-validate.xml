@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="VendorValidate" connection-type="Connection-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="validationRetrieve">
+		    <task synchronous="true" continue-on-failure="false" name="budgetRetrieve">
+    			<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+    			<process-filename>budgetcenter-retrieve-by-id.xml</process-filename>
+    		</task>
+    		<task synchronous="true" continue-on-failure="false" name="FinalDataSetup">
+				<task-object-name>com.tsa.puridiom.budget.tasks.BudgetValidationRulesData</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="ProjectWildcars">
+				<task-object-name>com.tsa.puridiom.budget.tasks.BudgetProjectRules</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="validateRules">
+			<task synchronous="true" continue-on-failure="false" name="rules">
+				<task-object-name>com.tsa.puridiom.validationrules.tasks.ValidationRulesTask</task-object-name>
+				<process-filename>budget-validation-rules.xml</process-filename>
+			</task>
+		</activity>
+	</activities>
+</process>

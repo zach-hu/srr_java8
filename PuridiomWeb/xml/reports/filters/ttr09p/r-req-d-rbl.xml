@@ -1,0 +1,111 @@
+<r-req-d-rbl>
+  <columns>
+		<RequisitionHeader_requisitionNumber>
+			<label>Requisition No</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</RequisitionHeader_requisitionNumber>
+		<RequisitionHeader_udf1Code>
+			<label>Transaction Type</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</RequisitionHeader_udf1Code>
+		<RequisitionHeader_udf3Code>
+			<label>Resale type</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</RequisitionHeader_udf3Code>
+		<RequisitionLine_requiredDate>
+			<label>Req Date</label>
+			<type>DATE</type>
+			<visible>1</visible>
+		</RequisitionLine_requiredDate>
+		<RequisitionLine_itemNumber>
+			<label>Item Number</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</RequisitionLine_itemNumber>
+		<RequisitionLine_description>
+			<label>Description</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</RequisitionLine_description>
+		<RequisitionLine_unitPrice>
+			<label>Unit Price</label>
+			<type>BIGDECIMAL</type>
+			<visible>1</visible>
+		</RequisitionLine_unitPrice>
+		<RequisitionLine_quantity>
+			<label>Quantity</label>
+			<type>BIGDECIMAL</type>
+			<visible>1</visible>
+		</RequisitionLine_quantity>
+		<RequisitionLine_lineTotal>
+			<label>Line Total</label>
+			<type>BIGDECIMAL</type>
+			<visible>1</visible>
+		</RequisitionLine_lineTotal>
+		<Account_fld1>
+			<label>Account #</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</Account_fld1>
+		<Account_fld2>
+			<label>Store # (location)</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</Account_fld2>
+		<Account_fld3>
+			<label>Div/Dept</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</Account_fld3>
+		<Account_fld5>
+			<label>SOS</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</Account_fld5>
+		<RequisitionLine_commodityCode>
+			<label>Commodity</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</RequisitionLine_commodityCode>
+		<RequisitionLine_requisitionerCode>
+			<label>Requisitioner Name</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</RequisitionLine_requisitionerCode>
+		<RequisitionLine_status>
+			<label>Line Status</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</RequisitionLine_status>
+		<RequisitionHeader_internalComments>
+			<label>Purpose</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</RequisitionHeader_internalComments>
+		<RequisitionLine_udf1Code>
+			<label>Work Order #</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</RequisitionLine_udf1Code>
+		<RequisitionHeader_udf2Code>
+			<label>VOC #</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</RequisitionHeader_udf2Code>
+		<RequisitionLine_vendorName>
+			<label>Supplier Name</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</RequisitionLine_vendorName>
+	</columns>
+  <sqlfrom>RequisitionHeader as RequisitionHeader,RequisitionLine as RequisitionLine,Account as Account</sqlfrom>
+  <sqlwhere><![CDATA[  
+	(RequisitionHeader.icReqHeader = RequisitionLine.icReqHeader) and 
+		(RequisitionHeader.icReqHeader = Account.id.icHeader)  
+  ]]></sqlwhere>
+    <title>Requisitions by Location</title>
+</r-req-d-rbl>
+

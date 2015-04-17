@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="requisitionHeaderRetrieveById" connection-type="New-Connection">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="poHeaderRetrieveById">
+			<rule-filename check-for-false="true">is-applicationtype-web.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="poHeaderList">
+				<task-object-name>com.tsa.puridiom.poheader.autoawardrelease.tasks.PoHeaderByAutoRelease</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="autoaward">
+			<task synchronous="true" continue-on-failure="false" name="autoaward">
+				<task-object-name>com.tsa.puridiom.poheader.autoawardrelease.tasks.AutoCreateReleaseOrderByBO</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+	</activities>
+</process>

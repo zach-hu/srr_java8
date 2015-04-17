@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+    
+<hibernate-mapping>
+
+<!-- 
+    Created by Middlegen Hibernate plugin
+
+    http://boss.bekk.no/boss/middlegen/
+    http://hibernate.sourceforge.net/
+-->
+
+<class 
+    name="com.tsa.puridiom.entity.VendorDocument" 
+    table="VENDOR_DOCUMENT"
+>
+    <composite-id name="comp_id" class="com.tsa.puridiom.entity.VendorDocumentPK">
+        <key-property name="icRfqHeader" column="IC_RFQ_HEADER" type="java.math.BigDecimal"/>
+        <key-property name="vendorId" column="VENDOR_ID" type="java.lang.String"/>
+		<key-property name="docIc" column="DOC_IC" type="java.math.BigDecimal"/>
+    </composite-id>    
+    <property
+        name="docTitle"
+        type="java.lang.String"
+        column="DOC_TITLE"
+        not-null="true"
+        length="128"
+    />
+    <property
+        name="docFilename"
+        type="java.lang.String"
+        column="DOC_FILENAME"
+        not-null="true"
+        length="20"
+    />
+    <property
+        name="docType"
+        type="java.lang.String"
+        column="DOC_TYPE"
+        length="1"
+    />
+    <property
+        name="datePosted"
+        type="java.sql.Timestamp"
+        column="DATE_POSTED"
+        length="7"
+    />
+
+    <!-- associations -->
+
+</class>
+</hibernate-mapping>

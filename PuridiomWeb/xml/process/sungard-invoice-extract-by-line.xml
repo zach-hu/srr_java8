@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="SungardInvoiceExtractByLine" connection-type="None">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="extractByLine">
+			<task synchronous="true" continue-on-failure="false" name="extractByLineSetup">
+				<task-object-name>com.tsa.puridiom.sungard.extract.tasks.SungardInvoiceExtractByLineSetup</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="extractByLine">
+				<task-object-name>com.tsa.puridiom.sungard.extract.tasks.SungardInvoiceExtractByLine</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

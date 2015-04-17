@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="invoiceCancel" connection-type="transaction-required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="invoiceCancel">
+			<task synchronous="true" continue-on-failure="false" name="invoiceCancelSetup">
+				<task-object-name>com.tsa.puridiom.invoice.tasks.InvoiceCancelSetup</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="invoiceHeader">
+				<task-object-name>com.tsa.puridiom.invoiceheader.tasks.InvoiceHeaderRetrieveById</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="invoiceLineList">
+				<task-object-name>com.tsa.puridiom.invoiceline.tasks.InvoiceLineRetrieveByHeader</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="invoiceCancelUpdate">
+			<task synchronous="true" continue-on-failure="false" name="invoiceSetStatus">
+				<task-object-name>com.tsa.puridiom.invoice.tasks.InvoiceSetStatus</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="invoiceHeaderUpdate">
+				<task-object-name>com.tsa.puridiom.invoiceheader.tasks.InvoiceHeaderUpdate</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="invoiceLineUpdate">
+				<task-object-name>com.tsa.puridiom.invoiceline.tasks.InvoiceLineUpdateList</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="history">
+				<task synchronous="true" continue-on-failure="false" name="invoiceHeaderHistory">
+				<task-object-name>com.tsa.puridiom.invoiceheader.history.tasks.InvoiceHeaderHistory</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="invoiceLineListHistory">
+				<task-object-name>com.tsa.puridiom.invoiceline.history.tasks.InvoiceLineListHistory</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="poHeaderSetPyStatus">
+			<task synchronous="true" continue-on-failure="false" name="poHeaderRetrieveFromInvoiceSetup">
+				<task-object-name>com.tsa.puridiom.poheader.tasks.PoHeaderRetrieveFromInvoiceSetup</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="setPyStatus">
+				<rule-filename>is-invoice-created-from-po.xml</rule-filename>
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>poheader-set-pystatus.xml</process-filename>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="BudgetUpdate">
+			<rule-filename>is-account-budget-module-active;is-invoice-approved</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="budgetExpense">
+				<rule-filename check-for-false="true">is-account-budget-service-active.xml</rule-filename>
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>budget-invoice-cancel.xml</process-filename>
+				<post-action>exitActivity</post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="invoiceCancelBudgetSetup">
+		       <task-object-name>com.tsa.puridiom.invoice.tasks.InvoiceCancelBudgetServiceSetup</task-object-name>
+		       <post-action></post-action>
+      	    </task>
+			<task synchronous="true" continue-on-failure="false" name="budgetExpense">
+	        	<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+	        	<process-filename>budgetservice-update.xml</process-filename>
+	        	<post-action></post-action>
+	      	</task>
+		</activity>
+	</activities>
+</process>

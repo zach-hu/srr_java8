@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="requisitionline-update-norecalc" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="requisitionLineUpdateActivity">
+			<task synchronous="true" continue-on-failure="false" name="requisitionLine">			
+				<task-object-name>com.tsa.puridiom.requisitionline.tasks.RequisitionLineUpdate</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+	</activities>
+</process>

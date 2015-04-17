@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="receiptProcessRejectedItems" connection-type="None">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="processRejectedItems">
+			<task synchronous="true" continue-on-failure="false" name="receiptLineReturnList">			
+				<task-object-name>com.tsa.puridiom.receiptline.tasks.ReceiptLineProcessRejectedLineList</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+	</activities>
+</process>

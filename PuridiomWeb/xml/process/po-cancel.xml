@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="CancelPo" connection-type="Transaction-Required">
+  <activities>
+	  <activity synchronous="true" continue-on-failure="false" name="cancelPoSetup">
+      <task synchronous="true" continue-on-failure="false" name="cancelPoSetup">
+        <task-object-name>com.tsa.puridiom.po.tasks.PoCancelSetup</task-object-name>
+        <post-action></post-action>
+      </task>
+      <task synchronous="true" continue-on-failure="false" name="poRetrieve">
+        <task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+        <process-filename>po-retrieve.xml</process-filename>
+      </task>
+	  <task synchronous="true" continue-on-failure="false" name="accounts">
+        <task-object-name>com.tsa.puridiom.account.tasks.AccountRetrieveByLine</task-object-name>
+        <post-action></post-action>
+      </task>
+	</activity>
+    <activity synchronous="true" continue-on-failure="false" name="cancelPoChecks">
+      <task synchronous="true" continue-on-failure="false" name="CancelPoCheck">
+        <task-object-name>com.tsa.puridiom.po.tasks.PoCancelCheck</task-object-name>
+        <post-action></post-action>
+      </task>
+    </activity>
+	<activity synchronous="true" continue-on-failure="false" name="cancelPo">
+      <task synchronous="true" continue-on-failure="false" name="accountList">
+        <task-object-name>com.tsa.puridiom.account.tasks.AccountResetAmounts</task-object-name>
+        <post-action></post-action>
+      </task>
+		<task synchronous="true" continue-on-failure="false" name="poHeader">
+        <task-object-name>com.tsa.puridiom.po.tasks.PoCancelSetValues</task-object-name>
+        <post-action></post-action>
+      </task>
+      <task synchronous="true" continue-on-failure="false" name="account">
+        <task-object-name>com.tsa.puridiom.account.tasks.AccountListUpdate</task-object-name>
+        <post-action></post-action>
+      </task>
+      <task synchronous="true" continue-on-failure="false" name="updatePoHeader">
+        <task-object-name>com.tsa.puridiom.poheader.tasks.PoHeaderUpdate</task-object-name>
+        <post-action></post-action>
+      </task>
+    </activity>
+    <activity synchronous="true" continue-on-failure="false" name="totals">
+      <task synchronous="true" continue-on-failure="false" name="recalculate">
+        <task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+        <process-filename>recalculate.xml</process-filename>
+      </task>
+    </activity>
+    <activity continue-on-failure="false" name="queueAddMXPOrder" synchronous="true">
+      <task continue-on-failure="false" name="queueAddMXPOrder" synchronous="true">
+        <rule-filename>is-organization-bly.xml</rule-filename>
+        <task-object-name>com.tsa.puridiom.po.tasks.QueueAddMXPOrder</task-object-name>
+      </task>
+    </activity>
+	<activity synchronous="true" continue-on-failure="false" name="poHeaderHistory">
+        <task synchronous="true" continue-on-failure="false" name="poHeaderHistory">
+        <task-object-name>com.tsa.puridiom.poheader.history.tasks.PoHeaderHistory</task-object-name>
+      </task>
+    </activity>
+    <!--<activity synchronous="true" continue-on-failure="false" name="updatePriorRevisions">
+		<rule-filename>is-not-prior-rev.xml</rule-filename>
+      <task synchronous="true" continue-on-failure="false" name="PoRevisionList">
+        <task-object-name>com.tsa.puridiom.poheader.tasks.PoHeaderRetrievePriorRevisions</task-object-name>
+      </task>
+      <task synchronous="true" continue-on-failure="false" name="recalculate">
+        <task-object-name>com.tsa.puridiom.po.tasks.PoCancelPriorRevisions</task-object-name>
+      </task>
+    </activity>-->
+
+  </activities>
+</process>

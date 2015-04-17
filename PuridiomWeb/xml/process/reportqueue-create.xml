@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="ExecuteReport" connection-type="Connection-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="setup">
+			<task synchronous="true" continue-on-failure="false" name="datasource">
+				<task-object-name>com.tsa.puridiom.reportqueue.tasks.ReportQueueExecuteSetup</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="getDatasources">
+			<task synchronous="true" continue-on-failure="false" name="retrievedata">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>report-get-data.xml</process-filename>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="executeReport">
+			<task synchronous="true" continue-on-failure="false" name="datasource">
+				<rule-filename>is-reportname-monthlyactivitybuyer</rule-filename>
+				<task-object-name>com.tsa.puridiom.report.tasks.ReportGeMountlyActivityBuyerData</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="report">
+				<rule-filename>is-reportname-monthlyactivitybuyer</rule-filename>
+				<task-object-name>com.tsa.puridiom.formpdf.tasks.PrintReportPdf</task-object-name>
+				<post-action>exitActivity</post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="datasource">
+				<rule-filename>is-reportname-monthlydetailactivitybuyer</rule-filename>
+				<task-object-name>com.tsa.puridiom.report.tasks.ReportGeMountlyDetailActivityBuyerData</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="report">
+				<rule-filename>is-reportname-monthlydetailactivitybuyer</rule-filename>
+				<task-object-name>com.tsa.puridiom.formpdf.tasks.PrintReportPdf</task-object-name>
+				<post-action>exitActivity</post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="report">
+				<rule-filename check-for-false="true">is-reportname-monthlyactivitybuyer</rule-filename>
+				<task-object-name>com.tsa.puridiom.systemreport.tasks.SystemReportExecute</task-object-name>
+				<post-action>exitActivity</post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="report">
+				<rule-filename check-for-false="true">is-reportname-monthlydetailactivitybuyer</rule-filename>
+				<task-object-name>com.tsa.puridiom.systemreport.tasks.SystemReportExecute</task-object-name>
+				<post-action>exitActivity</post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="executeReport">
+			<task name="messageText" synchronous="true" continue-on-failure="false">
+				<rule-filename check-for-false="true">is-view-now.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.formpdf.tasks.ReportEmailMessageText</task-object-name>
+			</task>
+			<!-- <task name="reportSize" synchronous="true" continue-on-failure="false">
+				<task-object-name>com.tsa.puridiom.report.tasks.ReportRetrieveSize</task-object-name>
+			</task> -->
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="createReportUserList">
+			<task synchronous="true" continue-on-failure="false" name="userIdList">
+				<task-object-name>com.tsa.puridiom.reportuser.tasks.ReportUserRetrieveUserIdListFromSendTo</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="saveReportUserList">
+				<task-object-name>com.tsa.puridiom.reportuser.tasks.ReportUserListFromUserIdList</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

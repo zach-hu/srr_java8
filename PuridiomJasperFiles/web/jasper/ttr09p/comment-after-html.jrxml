@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created using an evaluation version of JasperAssistant (http://www.jasperassistant.com) -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="commentpdf" pageWidth="564" pageHeight="842" columnWidth="564" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+	<import value="com.tsa.puridiom.jasperreports.*"/>
+	<reportFont name="Verdana" isDefault="true" fontName="Verdana" size="9" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Verdana_big" isDefault="false" fontName="Verdana" size="11" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Verdana_bold" isDefault="false" fontName="Verdana" size="9" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<parameter name="oid" class="java.lang.String">
+		<defaultValueExpression><![CDATA["bsc04p"]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="DocComment_commentText" class="java.lang.String"/>
+	<field name="DocComment_commentBold" class="java.lang.String"/>
+	<field name="DocComment_commentPrint" class="java.lang.String"/>
+	<field name="DocComment_commentPlace" class="java.lang.String"/>
+	<field name="DocComment_commentTitle" class="java.lang.String"/>
+	<group name="textNormal">
+		<groupExpression><![CDATA[$V{REPORT_COUNT}]]></groupExpression>
+		<groupHeader>
+			<band height="15">
+				<printWhenExpression><![CDATA[new Boolean(($F{DocComment_commentPlace}.equals("A") ) && ($F{DocComment_commentBold}.equalsIgnoreCase("N") || $F{DocComment_commentBold}.equalsIgnoreCase("")))]]></printWhenExpression>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true" hyperlinkType="None">
+					<reportElement positionType="Float" stretchType="RelativeToBandHeight" mode="Opaque" x="152" y="0" width="295" height="15" isPrintInFirstWholeBand="true" isPrintWhenDetailOverflows="true" forecolor="#FF0000" backcolor="#F3F3F3"/>
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font reportFont="Verdana" isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[ReportUtils.getText($F{DocComment_commentText})]]></textFieldExpression>
+				</textField>
+				<rectangle>
+					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="88" height="15" isPrintWhenDetailOverflows="true" forecolor="#F3F3F3" backcolor="#F3F3F3"/>
+				</rectangle>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true" hyperlinkType="None">
+					<reportElement positionType="Float" stretchType="RelativeToBandHeight" mode="Opaque" x="447" y="0" width="117" height="15" isPrintInFirstWholeBand="true" isPrintWhenDetailOverflows="true" forecolor="#000000" backcolor="#F3F3F3"/>
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font reportFont="Verdana"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[""]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true" hyperlinkType="None">
+					<reportElement positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="88" y="0" width="64" height="15" isPrintInFirstWholeBand="true" isPrintWhenDetailOverflows="true" forecolor="#FF0000" backcolor="#F3F3F3"/>
+					<textElement textAlignment="Left" verticalAlignment="Top">
+						<font reportFont="Verdana" isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA["Comment:"]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+	</group>
+	<group name="textbolded">
+		<groupExpression><![CDATA[$V{REPORT_COUNT}]]></groupExpression>
+		<groupHeader>
+			<band height="15">
+				<printWhenExpression><![CDATA[new Boolean(($F{DocComment_commentPlace}.equalsIgnoreCase("A") ) && $F{DocComment_commentBold}.equalsIgnoreCase("Y"))]]></printWhenExpression>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true" hyperlinkType="None">
+					<reportElement positionType="Float" mode="Opaque" x="152" y="0" width="295" height="15" isPrintInFirstWholeBand="true" isPrintWhenDetailOverflows="true" forecolor="#FF0000" backcolor="#F3F3F3"/>
+					<textElement textAlignment="Left" verticalAlignment="Middle" markup="none">
+						<font reportFont="Verdana_bold" fontName="Verdana"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[ReportUtils.getText($F{DocComment_commentText})]]></textFieldExpression>
+				</textField>
+				<rectangle>
+					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="88" height="15" isPrintWhenDetailOverflows="true" forecolor="#F3F3F3" backcolor="#F3F3F3"/>
+				</rectangle>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true" hyperlinkType="None">
+					<reportElement positionType="Float" stretchType="RelativeToBandHeight" mode="Opaque" x="447" y="0" width="117" height="15" isPrintInFirstWholeBand="true" isPrintWhenDetailOverflows="true" forecolor="#000000" backcolor="#F3F3F3"/>
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font reportFont="Verdana"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[""]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true" hyperlinkType="None">
+					<reportElement positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="88" y="0" width="64" height="15" isPrintInFirstWholeBand="true" isPrintWhenDetailOverflows="true" forecolor="#FF0000" backcolor="#F3F3F3"/>
+					<textElement textAlignment="Left" verticalAlignment="Top" markup="none">
+						<font reportFont="Verdana_bold" fontName="Verdana"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA["Comment:"]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+	</group>
+	<group name="Group_1">
+		<groupExpression><![CDATA[$V{REPORT_COUNT}]]></groupExpression>
+		<groupHeader>
+			<band height="3">
+				<rectangle>
+					<reportElement x="0" y="0" width="535" height="3" forecolor="#F3F3F3" backcolor="#F3F3F3"/>
+				</rectangle>
+			</band>
+		</groupHeader>
+	</group>
+</jasperReport>

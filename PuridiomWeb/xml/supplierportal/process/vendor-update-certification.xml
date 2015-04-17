@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="VendorUpdateCertification" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="updateVendor">
+			<task synchronous="true" continue-on-failure="false" name="vendor">
+				<task-object-name>com.tsa.puridiom.vendor.tasks.VendorRetrieveById</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="vendor">
+				<task-object-name>com.tsa.puridiom.vendor.tasks.VendorSetValues</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="vendorUpdate">
+				<task-object-name>com.tsa.puridiom.vendor.tasks.VendorUpdate</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="updateContact">
+			<task synchronous="true" continue-on-failure="false" name="contactUpdateById">
+				<rule-filename>is-contact-pk-valid.xml</rule-filename>
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>contact-update-by-id.xml</process-filename>
+				<post-action>exitActivity</post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="contact">
+				<task-object-name>com.tsa.puridiom.contact.tasks.ContactRetrieveById</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="contactDefaultCheck">
+				<task-object-name>com.tsa.puridiom.contact.tasks.ContactDefaultCheck</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="contactUpdateById">
+				<rule-filename>is-update-contact-default.xml</rule-filename>
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>contact-update-by-id.xml</process-filename>
+				<post-action>exitActivity</post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="Contact_contactCode">
+				<task-object-name>com.tsa.puridiom.contact.tasks.ContactSelectMax</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="contactAdd">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>contact-add.xml</process-filename>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="updateAddress">
+			<task synchronous="true" continue-on-failure="false" name="address">
+				<task-object-name>com.tsa.puridiom.address.tasks.AddressRetrievePrimary</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="address">
+				<task-object-name>com.tsa.puridiom.address.tasks.AddressSetValues</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="addressUpdate">
+				<task-object-name>com.tsa.puridiom.address.tasks.AddressUpdate</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="updateAddress">
+			<rule-filename check-for-false="true">is-update-contact-default.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="addressSetupFromContact">
+				<task-object-name>com.tsa.puridiom.address.tasks.AddressSetupFromContact</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="address">
+				<task-object-name>com.tsa.puridiom.address.tasks.AddressRetrieveById</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="addressSetupForAlternateContact">
+				<task-object-name>com.tsa.puridiom.address.tasks.AddressSetupForAlternateContact</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="address">
+				<task-object-name>com.tsa.puridiom.address.tasks.AddressSetValues</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="addressAdd">
+				<task-object-name>com.tsa.puridiom.address.tasks.AddressAdd</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="updateBidboardUser">
+			<rule-filename check-for-false="true">is-contact-pk-valid.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="bidboardUser">
+				<task-object-name>com.tsa.puridiom.supplierportal.tasks.BidBoardUserSetValuesFromContact</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="bidboardUser">
+				<task-object-name>com.tsa.puridiom.supplierportal.authentication.tasks.BidBoardUserSetAuthenticated</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="setUserInCache">
+				<task-object-name>com.tsa.puridiom.supplierportal.authentication.tasks.SetBidBoardUserInCache</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

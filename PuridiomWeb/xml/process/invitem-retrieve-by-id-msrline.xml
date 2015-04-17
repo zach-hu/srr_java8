@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="invItemRetrieve" connection-type="New-Connection">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="retrieveInvItem">
+			<task synchronous="true" continue-on-failure="false" name="invItem">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>invitem-retrieve-by-id.xml</process-filename>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="requisitionHeader">
+				<task-object-name>com.tsa.puridiom.requisitionheader.tasks.RequisitionHeaderRetrieveById</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="invItemCreate">
+			<task synchronous="true" continue-on-failure="false" name="requisitionLine">
+				<task-object-name>com.tsa.puridiom.requisitionline.tasks.RequisitionLineRetrieveById</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="invItemCreateFromMsrLine">
+				<rule-filename>is-invitem-empty.xml</rule-filename>
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>invitem-create-from-msrline.xml</process-filename>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="invLocationRetrieve">
+			<task synchronous="true" continue-on-failure="false" name="invLocationRetrieve">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>invlocation-retrieve-by-id.xml</process-filename>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="requisitionLine">
+				<rule-filename>is-invlocation-empty.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.invlocation.tasks.InvLocationSetupFromMSRLine</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="invLocationCreate">
+				<rule-filename>is-invlocation-empty.xml</rule-filename>
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>invlocation-add.xml</process-filename>
+				<post-action></post-action>
+			</task>
+		</activity>
+	</activities>
+</process>

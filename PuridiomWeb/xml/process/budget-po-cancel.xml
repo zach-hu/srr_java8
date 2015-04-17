@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="BudgetPoCancel" connection-type="Transaction-Required">
+  <activities>
+    <activity synchronous="true" continue-on-failure="false" name="poBudgetUpdate">
+      <rule-filename>is-account-budget-module-active</rule-filename>
+      <task synchronous="true" continue-on-failure="false" name="poCancelBudgetSetup">
+        <task-object-name>com.tsa.puridiom.po.tasks.PoCancelBudgetSetup</task-object-name>
+        <post-action></post-action>
+      </task>
+      <task synchronous="true" continue-on-failure="false" name="budgetCheck">
+        <task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+        <process-filename>po-budget-check.xml</process-filename>
+        <post-action></post-action>
+      </task>
+      <task synchronous="true" continue-on-failure="false" name="poBudgetCenterUpdate">
+        <task-object-name>com.tsa.puridiom.budgetcenter.tasks.BudgetCenterUpdateList</task-object-name>
+        <post-action></post-action>
+      </task>
+      <task synchronous="true" continue-on-failure="false" name="poBudgetAuditUpdate">
+        <task-object-name>com.tsa.puridiom.budgetaudit.tasks.BudgetAuditUpdateList</task-object-name>
+        <post-action></post-action>
+      </task>
+    </activity>
+  </activities>
+</process>

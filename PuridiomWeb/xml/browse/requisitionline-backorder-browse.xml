@@ -1,0 +1,27 @@
+<browse_req_header>
+	<columns>
+		<RequisitionLine_icReqLine>
+			<visible>0</visible>
+		</RequisitionLine_icReqLine>
+		<RequisitionLine_icReqHeader>
+			<visible>0</visible>
+		</RequisitionLine_icReqHeader>
+		<RequisitionLine_lineNumber>
+			<label>brw-line</label>
+		</RequisitionLine_lineNumber>
+		<RequisitionLine_itemNumber>
+			<label>brw-itemNumber</label>
+			<size>15</size>
+		</RequisitionLine_itemNumber>
+		<RequisitionLine_requisitionNumber>
+			<label>brw-requisitionNumber</label>
+			<size>15</size>
+		</RequisitionLine_requisitionNumber>
+	</columns>
+<sqlfrom>RequisitionLine as RequisitionLine, InvLocation as InvLocation</sqlfrom>
+<sqlwhere><![CDATA[(RequisitionLine.status = '5005') AND (RequisitionLine.backordered > 0) AND (RequisitionLine.itemNumber = InvLocation.id.itemNumber AND RequisitionLine.itemLocation = InvLocation.id.itemLocation) AND
+((InvLocation.qtyOnHand - InvLocation.qtyAlloc) > RequisitionLine.backordered )  ]]></sqlwhere>
+<pagesize>15</pagesize>
+<title>Backordered Requisition Line Items Browse</title>
+</browse_req_header>
+

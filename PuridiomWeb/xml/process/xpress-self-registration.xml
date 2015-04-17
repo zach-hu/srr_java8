@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="xpressSelfRegistration" connection-type="None" ldap-connection-type="None">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="registrationValidations">
+			<task synchronous="true" continue-on-failure="false" name="userProfile">
+				<!-- SetValues before validation checks so client has information previously entered if validation does not pass -->
+				<task-object-name>com.tsa.puridiom.userprofile.tasks.UserProfileSetValues</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="registerOrganization">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>recaptcha-validation.xml</process-filename>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="userRegistrationSetup">
+			<rule-filename>is-recaptcha-valid.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="userRegistrationSetup">
+				<!-- Setup host user information for validation of mailId -->
+				<task-object-name>com.tsa.puridiom.userprofile.tasks.UserProfileValidateMailIdSetup</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="hostUser">
+				<task-object-name>com.tsa.puridiom.hostuser.tasks.HostUserRetrieveById</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="registrationError">
+				<rule-filename check-for-false="true">is-hostuser-empty.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.usererrormsg.tasks.ErrorMsgSetDuplicateMailId</task-object-name>
+				<post-action>exitProcess</post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="validateMailId">
+				<!-- Will throw an InvalidMailIdException that will end the process if mail id format or domain is not valid -->
+				<task-object-name>com.tsa.puridiom.common.tasks.EmailAddressValidation</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="registerOrganization">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>organization-register-new.xml</process-filename>
+			</task>
+			<!--task synchronous="true" continue-on-failure="false" name="UserProfile_userPassword">
+				<task-object-name>com.tsa.puridiom.password.tasks.GeneratePassword</task-object-name>
+			</task-->
+			<task synchronous="true" continue-on-failure="false" name="UserProfile_userId">
+				<task-object-name>com.tsa.puridiom.userregistration.tasks.GenerateUserIdFromName</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="validateUserId">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>user-registration-get-valid-userid.xml</process-filename>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="userRegistrationSetup">
+				<!-- Setup password, userId, mailId, organizationId -->
+				<task-object-name>com.tsa.puridiom.userprofile.tasks.UserProfileXpressRegistrationSetup</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="userProfile">
+				<!-- Set organizationId and userId Values -->
+				<task-object-name>com.tsa.puridiom.userprofile.tasks.UserProfileSetValues</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="addTempUser">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>userprofile-add.xml</process-filename>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="setupAuthorizeNetPaymentForm">
+				<task-object-name>com.tsa.puridiom.userpayments.tasks.ANPaymentFormSetup</task-object-name>
+			</task>
+		</activity>		
+	</activities>
+</process>

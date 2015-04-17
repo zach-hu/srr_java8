@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="BidBoardUserLockLogin" connection-type="New-Transaction" ldap-connection-type="None">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="lockLoginUpdateProfile">
+			<task synchronous="true" continue-on-failure="false" name="bidboardUser">
+				<task-object-name>com.tsa.puridiom.supplierportal.authentication.tasks.BidBoardUserLockLogin</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="lockLogin">
+				<task-object-name>com.tsa.puridiom.supplierportal.InvokeSupplierPortalProcessTask</task-object-name>
+				<process-filename>bidboarduser-update.xml</process-filename>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="bidboardUser">
+				<task-object-name>com.tsa.puridiom.supplierportal.authentication.tasks.SetBidBoardUserInCache</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+	</activities>
+</process>

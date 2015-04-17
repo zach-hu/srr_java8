@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="budgetCenterRetrieve" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="budgetCenterRetrieve">
+			<task synchronous="true" continue-on-failure="false" name="budgetCenter">
+				<task-object-name>com.tsa.puridiom.budgetcenter.tasks.BudgetCenterRetrieveFromArray</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

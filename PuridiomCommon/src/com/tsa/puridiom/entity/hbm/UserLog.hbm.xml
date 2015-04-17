@@ -1,0 +1,71 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping>
+
+<!--
+    Created by Middlegen Hibernate plugin
+
+    http://boss.bekk.no/boss/middlegen/
+    http://hibernate.sourceforge.net/
+-->
+
+<class
+	name="com.tsa.puridiom.entity.UserLog"
+	table="USER_LOG"
+>
+	<id
+		name="icUsrLog"
+		type="java.math.BigDecimal"
+		column="IC_USR_LOG"
+	>
+		<generator class="assigned" />
+	</id>
+	<property
+		name="userId"
+		type="java.lang.String"
+		column="USER_ID"
+		length="15"
+	/>
+	<property
+		name="mailId"
+		type="java.lang.String"
+		column="MAIL_ID"
+		length="65"
+	/>
+	<property
+		name="passCode"
+		type="java.lang.String"
+		column="PASS_CODE"
+		length="20"
+	/>
+	<property
+		name="dateLog"
+		type="java.sql.Timestamp"
+		column="DATE_LOG"
+		length="7"
+	/>
+	<property
+		name="timeLog"
+		type="java.lang.String"
+		column="TIME_LOG"
+		length="15"
+	/>
+	<property
+		name="ipLog"
+		type="java.lang.String"
+		column="IP_LOG"
+		length="60"
+	/>
+	<property
+		name="status"
+		type="java.lang.String"
+		column="STATUS"
+		length="4"
+	/>
+	<!-- associations -->
+
+</class>
+</hibernate-mapping>

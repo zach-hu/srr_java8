@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="altTextSaveas" connection-type="Connection-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="altTextSaveas">
+			<task synchronous="true" continue-on-failure="false" name="docTextSaveas">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>doctext-saveas.xml</process-filename>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="altTextSaveasSetup">
+				<task-object-name>com.tsa.puridiom.alttext.tasks.AltTextSaveasSetup</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="altText">			
+				<task-object-name>com.tsa.puridiom.alttext.tasks.AltTextSaveas</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

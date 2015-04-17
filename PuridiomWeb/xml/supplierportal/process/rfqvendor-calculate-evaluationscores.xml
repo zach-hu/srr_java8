@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="rfqVendorCalculateEvaluationScore" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="rfqVendorCalculateEvaluationScore">
+			<task synchronous="true" continue-on-failure="false" name="rfqVendorCalculateEvaluationScoreSetup">
+				<task-object-name>com.tsa.puridiom.rfqheader.tasks.RfqHeaderUpdateSetup</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="rfqVendorList">			
+				<task-object-name>com.tsa.puridiom.rfqvendor.tasks.RfqVendorRetrieveByHeader</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="rfqQuestionList">			
+				<task-object-name>com.tsa.puridiom.rfqquestion.tasks.RfqQuestionRetrieveByHeader</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="rfqQuestionList">
+				<task-object-name>com.tsa.puridiom.rfqquestion.tasks.RfqQuestionRetrieveVendorResponsesByList</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="rfqVendorList">			
+				<task-object-name>com.tsa.puridiom.rfqvendor.tasks.RfqVendorCalculateEvaluationScore</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="rfqVendorList">			
+				<task-object-name>com.tsa.puridiom.rfqvendor.tasks.RfqVendorUpdateEntityList</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

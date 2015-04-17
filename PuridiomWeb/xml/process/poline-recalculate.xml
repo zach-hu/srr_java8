@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="poLineRecalculate" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="poLineRecalculate">
+			<task synchronous="true" continue-on-failure="false" name="poLineUpdateSetup">			
+				<task-object-name>com.tsa.puridiom.poline.tasks.PoLineUpdateSetup</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="poLineRecalculate">			
+				<task-object-name>com.tsa.puridiom.poline.tasks.PoLineRecalculate</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="poLineCalculate">
+		    <rule-filename>is-recalculate-required.xml</rule-filename>			
+			<task synchronous="true" continue-on-failure="false" name="accountList">			
+				<task-object-name>com.tsa.puridiom.account.tasks.AccountRetrieveByLine</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="accountRecalculate">			
+				<task-object-name>com.tsa.puridiom.account.tasks.AccountRecalculate</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="accountListUpdate">			
+				<task-object-name>com.tsa.puridiom.account.tasks.AccountListUpdate</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="poLine">			
+				<task-object-name>com.tsa.puridiom.poline.tasks.PoLineSetValues</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="poLine">			
+				<task-object-name>com.tsa.puridiom.poline.tasks.PoLineUpdate</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+	</activities>
+</process>

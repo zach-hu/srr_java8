@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="requisitionHeaderUpdate" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="continuation">
+			<task synchronous="true" continue-on-failure="false" name="requisitionHeaderUpdate">			
+				<task-object-name>com.tsa.puridiom.requisitionheader.tasks.RequisitionHeaderUpdate</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="requisitionLineListUpdate">			
+				<task-object-name>com.tsa.puridiom.requisitionline.tasks.RequisitionLineUpdateList</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="accountListUpdate">			
+				<task-object-name>com.tsa.puridiom.account.tasks.AccountListUpdate</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+	</activities>
+</process>

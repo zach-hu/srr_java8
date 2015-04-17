@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created using an evaluation version of JasperAssistant (http://www.jasperassistant.com) -->
+<!DOCTYPE jasperReport PUBLIC "-//JasperReports//DTD Report Design//EN" "http://jasperreports.sourceforge.net/dtds/jasperreport.dtd">
+
+<jasperReport name="lineitem_account" pageWidth="564" pageHeight="842" columnWidth="564" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+	<import value="com.tsa.puridiom.common.utility.HiltonUtility"/>
+	<import value="com.tsagate.properties.*"/>
+	<import value="com.tsa.puridiom.jasperreports.*"/>
+	<reportFont name="Arial_Normal" isDefault="false" fontName="Arial" size="8" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Verdana" isDefault="true" fontName="Verdana" size="9" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Verdana_bold" isDefault="false" fontName="Verdana" size="9" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<parameter name="reportTitle" class="java.lang.String">
+		<defaultValueExpression><![CDATA["Account Summary"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="oid" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["test"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="labelPrefix" class="java.lang.String">
+		<defaultValueExpression><![CDATA["REQ"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="udf1" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="Account_acctString" class="java.lang.String"/>
+	<field name="Account_allocAmount" class="java.math.BigDecimal"/>
+	<field name="Account_fld1" class="java.lang.String"/>
+	<field name="Account_fld2" class="java.lang.String"/>
+	<field name="Account_fld3" class="java.lang.String"/>
+	<field name="Account_fld4" class="java.lang.String"/>
+	<field name="Account_fld5" class="java.lang.String"/>
+	<field name="Account_fld6" class="java.lang.String"/>
+	<field name="Account_fld7" class="java.lang.String"/>
+	<field name="Account_fld8" class="java.lang.String"/>
+	<field name="Account_fld9" class="java.lang.String"/>
+	<field name="Account_fld10" class="java.lang.String"/>
+	<field name="Account_fld11" class="java.lang.String"/>
+	<field name="Account_fld12" class="java.lang.String"/>
+	<field name="Account_fld13" class="java.lang.String"/>
+	<field name="Account_fld14" class="java.lang.String"/>
+	<field name="Account_fld15" class="java.lang.String"/>
+	<group name="values">
+		<groupExpression><![CDATA[$V{REPORT_COUNT}]]></groupExpression>
+		<groupHeader>
+			<band height="14">
+				<textField pattern="#,##0.00#" isBlankWhenNull="true">
+					<reportElement positionType="Float" mode="Opaque" x="475" y="0" width="72" height="14" backcolor="#F3F3F3"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle"/>
+					<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{Account_allocAmount}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement positionType="Float" mode="Opaque" x="55" y="0" width="84" height="14" backcolor="#F3F3F3"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{Account_fld1}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement positionType="Float" mode="Opaque" x="139" y="0" width="84" height="14" backcolor="#F3F3F3"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{Account_fld2}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement positionType="Float" mode="Opaque" x="307" y="0" width="84" height="14" backcolor="#F3F3F3"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{Account_fld4}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement positionType="Float" mode="Opaque" x="391" y="0" width="84" height="14" backcolor="#F3F3F3"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{Account_fld5}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement positionType="Float" mode="Opaque" x="223" y="0" width="84" height="14" backcolor="#F3F3F3"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{Account_fld3}]]></textFieldExpression>
+				</textField>
+				<rectangle>
+					<reportElement positionType="Float" x="0" y="0" width="55" height="14" backcolor="#F3F3F3"/>
+					<graphicElement/>
+				</rectangle>
+				<rectangle>
+					<reportElement positionType="Float" x="547" y="0" width="20" height="14" backcolor="#F3F3F3"/>
+					<graphicElement/>
+				</rectangle>
+			</band>
+		</groupHeader>
+	</group>
+	<group name="udf4desc">
+		<groupExpression><![CDATA[$V{REPORT_COUNT}]]></groupExpression>
+		<groupHeader>
+			<band height="14">
+				<printWhenExpression><![CDATA[new Boolean(!HiltonUtility.isEmpty($F{Account_fld4}))]]></printWhenExpression>
+				<textField>
+					<reportElement positionType="Float" mode="Opaque" x="55" y="0" width="220" height="14" backcolor="#F3F3F3">
+						<printWhenExpression><![CDATA[new Boolean( HiltonUtility.isQriCanadian($P{oid}, $P{udf1}))]]></printWhenExpression>
+					</reportElement>
+					<textElement verticalAlignment="Middle"/>
+					<textFieldExpression class="java.lang.String"><![CDATA[ReportUtils.getStdTableDescription($P{oid}, "AC04", $F{Account_fld4})]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement positionType="Float" mode="Opaque" x="55" y="0" width="220" height="14" backcolor="#F3F3F3">
+						<printWhenExpression><![CDATA[new Boolean(!HiltonUtility.isQriCanadian($P{oid}, $P{udf1}))]]></printWhenExpression>
+					</reportElement>
+					<textElement verticalAlignment="Middle"/>
+					<textFieldExpression class="java.lang.String"><![CDATA[ReportUtils.getStdTableDescription($P{oid}, "AX04", $F{Account_fld4})]]></textFieldExpression>
+				</textField>
+				<rectangle>
+					<reportElement positionType="Float" x="0" y="0" width="55" height="14" backcolor="#F3F3F3"/>
+					<graphicElement/>
+				</rectangle>
+				<rectangle>
+					<reportElement positionType="Float" x="275" y="0" width="293" height="14" backcolor="#F3F3F3"/>
+					<graphicElement/>
+				</rectangle>
+			</band>
+		</groupHeader>
+	</group>
+	<group name="udf5desc">
+		<groupHeader>
+			<band height="14">
+				<printWhenExpression><![CDATA[new Boolean(!HiltonUtility.isEmpty($F{Account_fld5}))]]></printWhenExpression>
+				<textField>
+					<reportElement positionType="Float" mode="Opaque" x="55" y="0" width="220" height="14" backcolor="#F3F3F3">
+						<printWhenExpression><![CDATA[new Boolean(!HiltonUtility.isQriCanadian($P{oid}, $P{udf1}))]]></printWhenExpression>
+					</reportElement>
+					<textElement verticalAlignment="Middle"/>
+					<textFieldExpression class="java.lang.String"><![CDATA[ReportUtils.getStdTableDescription($P{oid}, "AC05", $F{Account_fld5})]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement positionType="Float" mode="Opaque" x="55" y="0" width="220" height="14" backcolor="#F3F3F3">
+						<printWhenExpression><![CDATA[new Boolean(HiltonUtility.isQriCanadian($P{oid}, $P{udf1}))]]></printWhenExpression>
+					</reportElement>
+					<textElement verticalAlignment="Middle"/>
+					<textFieldExpression class="java.lang.String"><![CDATA[ReportUtils.getStdTableDescription($P{oid}, "AX05", $F{Account_fld5})]]></textFieldExpression>
+				</textField>
+				<rectangle>
+					<reportElement positionType="Float" x="0" y="0" width="55" height="14" backcolor="#F3F3F3"/>
+					<graphicElement/>
+				</rectangle>
+				<rectangle>
+					<reportElement positionType="Float" x="275" y="0" width="293" height="14" backcolor="#F3F3F3"/>
+					<graphicElement/>
+				</rectangle>
+			</band>
+		</groupHeader>
+	</group>
+	<group name="separtator">
+		<groupHeader>
+			<band height="6">
+				<rectangle>
+					<reportElement positionType="Float" x="0" y="0" width="564" height="6" forecolor="#F3F3F3" backcolor="#F3F3F3"/>
+					<graphicElement pen="None"/>
+				</rectangle>
+			</band>
+		</groupHeader>
+	</group>
+	<title>
+		<band height="14">
+			<textField>
+				<reportElement positionType="Float" mode="Opaque" x="391" y="0" width="84" height="14" backcolor="#F3F3F3"/>
+				<box topBorder="None" leftBorder="None" bottomBorder="1Point" rightBorder="None"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[DictionaryManager.getLabel($P{oid}, $P{labelPrefix} + "-AC05", "ACC UDF5", false)]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement positionType="Float" mode="Opaque" x="307" y="0" width="84" height="14" backcolor="#F3F3F3"/>
+				<box topBorder="None" leftBorder="None" bottomBorder="1Point" rightBorder="None"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[DictionaryManager.getLabel($P{oid}, $P{labelPrefix} + "-AC04", "ACC UDF4", false)]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement positionType="Float" mode="Opaque" x="223" y="0" width="84" height="14" backcolor="#F3F3F3"/>
+				<box topBorder="None" leftBorder="None" bottomBorder="1Point" rightBorder="None"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[DictionaryManager.getLabel($P{oid}, $P{labelPrefix} + "-AC03", "ACC UDF3", false)]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement positionType="Float" mode="Opaque" x="139" y="0" width="84" height="14" backcolor="#F3F3F3"/>
+				<box topBorder="None" leftBorder="None" bottomBorder="1Point" rightBorder="None"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[DictionaryManager.getLabel($P{oid}, $P{labelPrefix} + "-AC02", "ACC UDF2", false)]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement positionType="Float" mode="Opaque" x="55" y="0" width="84" height="14" backcolor="#F3F3F3"/>
+				<box topBorder="None" leftBorder="None" bottomBorder="1Point" rightBorder="None"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[DictionaryManager.getLabel($P{oid}, $P{labelPrefix} + "-AC01", "ACC UDF1", false)]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement positionType="Float" mode="Opaque" x="0" y="0" width="55" height="14" backcolor="#F3F3F3"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA["Account: "]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement positionType="Float" x="475" y="0" width="92" height="14" backcolor="#F3F3F3"/>
+				<graphicElement/>
+			</rectangle>
+		</band>
+	</title>
+	<summary>
+		<band height="3">
+			<rectangle>
+				<reportElement positionType="Float" x="0" y="0" width="569" height="3" forecolor="#F3F3F3" backcolor="#F3F3F3"/>
+				<graphicElement/>
+			</rectangle>
+		</band>
+	</summary>
+</jasperReport>

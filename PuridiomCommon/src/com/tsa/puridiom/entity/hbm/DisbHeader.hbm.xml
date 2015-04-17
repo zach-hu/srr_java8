@@ -1,0 +1,175 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping>
+
+<!--
+    Created by Middlegen Hibernate plugin
+
+    http://boss.bekk.no/boss/middlegen/
+    http://hibernate.sourceforge.net/
+-->
+
+<class
+    name="com.tsa.puridiom.entity.DisbHeader"
+    table="DISB_HEADER"
+>
+    <id
+        name="icDsbHeader"
+        type="java.math.BigDecimal"
+        column="IC_DSB_HEADER"
+    >
+        <generator class="assigned" />
+    </id>
+    <property
+        name="disbNumber"
+        type="java.lang.String"
+        column="DISB_NUMBER"
+        unique="true"
+        length="20"
+    />
+    <property
+        name="disbDate"
+        type="java.sql.Timestamp"
+        column="DISB_DATE"
+        length="7"
+    />
+    <property
+        name="status"
+        type="java.lang.String"
+        column="STATUS"
+        length="4"
+    />
+    <property
+        name="internalComments"
+        type="java.lang.String"
+        column="INTERNAL_COMMENTS"
+        length="150"
+    />
+    <property
+        name="fiscalYear"
+        type="java.lang.String"
+        column="FISCAL_YEAR"
+        length="4"
+    />
+    <property
+        name="owner"
+        type="java.lang.String"
+        column="OWNER"
+        length="15"
+    />
+    <property
+        name="dateEntered"
+        type="java.sql.Timestamp"
+        column="DATE_ENTERED"
+        length="7"
+    />
+    <property
+        name="itemLocation"
+        type="java.lang.String"
+        column="ITEM_LOCATION"
+        length="15"
+    />
+    <property
+        name="icAccount"
+        type="java.math.BigDecimal"
+        column="IC_ACCOUNT"
+        length="22"
+    />
+    <property
+        name="subtotal"
+        type="java.math.BigDecimal"
+        column="SUBTOTAL"
+        length="15"
+    />
+    <property
+        name="approved"
+        type="java.lang.String"
+        column="APPROVED"
+        length="1"
+    />
+    <property
+        name="appBy"
+        type="java.lang.String"
+        column="APP_BY"
+        length="15"
+    />
+    <property
+        name="appDate"
+        type="java.sql.Timestamp"
+        column="APP_DATE"
+        length="7"
+    />
+    <property
+        name="appSigned"
+        type="java.lang.String"
+        column="APP_SIGNED"
+        length="1"
+    />
+    <property
+        name="lastChgBy"
+        type="java.lang.String"
+        column="LAST_CHG_BY"
+        length="15"
+    />
+    <property
+        name="lastChgDate"
+        type="java.sql.Timestamp"
+        column="LAST_CHG_DATE"
+        length="7"
+    />
+    <property
+        name="disbType"
+        type="java.lang.String"
+        column="DISB_TYPE"
+        length="2"
+    />
+    <property
+        name="icReqHeader"
+        type="java.math.BigDecimal"
+        column="IC_REQ_HEADER"
+        length="22"
+    />
+    <property
+        name="requisitionNumber"
+        type="java.lang.String"
+        column="REQUISITION_NUMBER"
+        length="20"
+    />
+    <property
+        name="requisitionerCode"
+        type="java.lang.String"
+        column="REQUISITIONER_CODE"
+        length="15"
+    />
+    <property
+        name="printed"
+        type="java.lang.String"
+        column="PRINTED"
+        length="1"
+    />
+    <property
+        name="icHeaderHistory"
+        type="java.math.BigDecimal"
+        column="IC_HEADER_HISTORY"
+        length="22"
+    />
+    <property
+        name="shipToCode"
+        type="java.lang.String"
+        column="SHIP_TO_CODE"
+        length="15"
+    />
+    <property
+        name="timeZone"
+        type="java.lang.String"
+        column="TIME_ZONE"
+        length="30"
+    />
+    <!-- associations -->
+    <!-- bi-directional one-to-one association to DisbLine -->
+
+</class>
+</hibernate-mapping>

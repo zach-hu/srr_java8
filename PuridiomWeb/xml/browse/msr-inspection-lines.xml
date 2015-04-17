@@ -1,0 +1,83 @@
+<requistionline>
+	<columns>
+		<RequisitionLine_icLineHistory>
+			<visible>0</visible>
+		</RequisitionLine_icLineHistory>
+		<InspectionHeader_icMsrLine>
+			<visible>0</visible>
+		</InspectionHeader_icMsrLine>
+		<InspectionHeader_inspectType>
+			<label>brw-inspectType</label>
+			<size>15</size>
+			<link><![CDATA[javascript: viewInsp('#RequisitionLine_icLineHistoryr^'); void(0);]]></link>
+			<type>USER-ID</type>
+		</InspectionHeader_inspectType>
+		<InspectionHeader_inspectorId>
+			<label>brw-inspectorId</label>
+			<size>15</size>
+			<type>USER-ID</type>
+		</InspectionHeader_inspectorId>
+		<InspectionHeader_engineerId>
+			<label>brw-engineerId</label>
+			<size>15</size>
+			<type>USER-ID</type>
+		</InspectionHeader_engineerId>
+		<RequisitionLine_lineNumber>
+			<label>brw-requisitionLine</label>
+			<size>5</size>
+		</RequisitionLine_lineNumber>
+		<RequisitionLine_itemNumber>
+			<label>brw-itemNumber</label>
+			<size>15</size>
+		</RequisitionLine_itemNumber>
+		<RequisitionLine_description>
+			<label>brw-description</label>
+			<size>45</size>
+			<trim>250</trim>
+		</RequisitionLine_description>
+		<RequisitionLine_status>
+			<label>brw-status</label>
+			<type>STATUS</type>
+			<size>15</size>
+		</RequisitionLine_status>
+		<InspectionHeader_inspectionType>
+			<label>brw-requisitioner</label>
+			<size>15</size>
+			<detail>Y</detail>
+			<type>USER-ID</type>
+		</InspectionHeader_inspectionType>
+		<RequisitionLine_quantity>
+			<hidden>Y</hidden>
+			<type>QtyDecimal</type>
+		</RequisitionLine_quantity>
+		<RequisitionLine_umCode>
+			<hidden>Y</hidden>
+		</RequisitionLine_umCode>
+		<RequisitionLine_quantity>
+			<concatenate>
+				<col type="QtyDecimal">RequisitionLine_quantity</col>
+				<col type="constant"><![CDATA[&nbsp;]]></col>
+				<col type="constant">(</col>
+				<col>RequisitionLine_umCode</col>
+				<col type="constant">)</col>
+			</concatenate>
+			<label>brw-quantity</label>
+			<type>Decimal</type>
+			<size>25</size>
+			<detail>Y</detail>
+			<selectsql>N</selectsql>
+		</RequisitionLine_quantity>
+		<RequisitionLine_unitPrice>
+			<label>brw-unitPrice</label>
+			<type>DollarDecimal</type>
+			<size>25</size>
+			<detail>Y</detail>
+		</RequisitionLine_unitPrice>
+	</columns>
+<sqlfrom>RequisitionLine as RequisitionLine, InspectionHeader as InspectionHeader</sqlfrom>
+<sqlwhere><![CDATA[ RequisitionLine.icLineHistory = InspectionHeader.icMsrLine ]]></sqlwhere>
+<sqlorderby>RequisitionLine.requisitionNumber DESC</sqlorderby>
+<pagesize>15</pagesize>
+<title>Inspection Detail Browse</title>
+</requistionline>
+

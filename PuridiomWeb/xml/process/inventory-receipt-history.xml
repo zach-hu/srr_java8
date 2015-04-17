@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="InventoryReceiptHistory" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="setup">
+			<task synchronous="true" continue-on-failure="false" name="historyLog">
+				<task-object-name>com.tsa.puridiom.invhistory.tasks.InventoryReceiptGetHistory</task-object-name>
+				<post-action></post-action>
+			</task>
+		    <task synchronous="true" continue-on-failure="false" name="historyLogAdd">
+		        <rule-filename check-for-false="true">is-historylog-null.xml</rule-filename>
+                <task-object-name>com.tsa.puridiom.historylog.tasks.HistoryLogAdd</task-object-name>
+                <post-action></post-action>
+            </task>
+        </activity>
+	</activities>
+</process>

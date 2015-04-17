@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="userProfileAdd" connection-type="New-Transaction" ldap-connection-type="None">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="userRegistration">
+			<task synchronous="true" continue-on-failure="false" name="userProfile">
+				<task-object-name>com.tsa.puridiom.userprofile.tasks.UserProfileAdd</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="userGroupRelUpdate">
+				<rule-filename check-for-false="true">is-userprofile-onhold.xml</rule-filename>
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>usergrouprel-update-by-id.xml</process-filename>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="addHostUser">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>hostuser-add.xml</process-filename>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="userCacheSetup">
+			<task synchronous="true" continue-on-failure="false" name="userProfile">
+				<task-object-name>com.tsa.puridiom.userprofile.tasks.UserProfileSetRegistered</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="setUserInCache">
+				<task-object-name>com.tsa.puridiom.usermanager.tasks.UserManagerSetUserInCache</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+	</activities>
+</process>

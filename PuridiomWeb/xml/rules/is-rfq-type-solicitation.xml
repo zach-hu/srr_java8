@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rule>
+	<clause type="StringCompare">
+		<left-side>
+			<source>incomingRequest</source>
+			<name>RfqHeader_rfqType</name>
+		</left-side>
+		<operator>EQUALS</operator>
+		<right-side>
+			<source>constant</source>
+			<value>IB</value>
+		</right-side>
+	</clause>
+	<logical-operator>OR</logical-operator>
+	<clause type="StringCompare">
+		<left-side>
+			<source>incomingRequest</source>
+			<name>RfqHeader_rfqType</name>
+		</left-side>
+		<operator>EQUALS</operator>
+		<right-side>
+			<source>constant</source>
+			<value>RQ</value>
+		</right-side>
+	</clause>
+	<logical-operator>OR</logical-operator>
+	<clause type="StringCompare">
+		<left-side>
+			<source>incomingRequest</source>
+			<name>RfqHeader_rfqType</name>
+		</left-side>
+		<operator>EQUALS</operator>
+		<right-side>
+			<source>constant</source>
+			<value>RI</value>
+		</right-side>
+	</clause>
+	<logical-operator>OR</logical-operator>
+	<clause type="StringCompare">
+		<left-side>
+			<source>incomingRequest</source>
+			<name>RfqHeader_rfqType</name>
+		</left-side>
+		<operator>EQUALS</operator>
+		<right-side>
+			<source>constant</source>
+			<value>RP</value>
+		</right-side>
+	</clause>
+</rule>

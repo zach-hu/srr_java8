@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created using an evaluation version of JasperAssistant (http://www.jasperassistant.com) -->
+<!DOCTYPE jasperReport PUBLIC "-//JasperReports//DTD Report Design//EN" "http://jasperreports.sourceforge.net/dtds/jasperreport.dtd">
+
+<jasperReport name="alternate_desc_html" pageWidth="569" pageHeight="842" whenNoDataType="BlankPage" columnWidth="569" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+	<import value="com.tsa.puridiom.entity.*"/>
+	<reportFont name="Arial_Normal" isDefault="false" fontName="Arial" size="8" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Bolded" isDefault="false" fontName="Arial Black" size="8" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica-Bold" pdfEncoding="Cp1252" isPdfEmbedded="true"/>
+	<reportFont name="Verdana" isDefault="true" fontName="Verdana" size="9" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Verdana_big" isDefault="false" fontName="Verdana" size="11" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Verdana_bold" isDefault="false" fontName="Verdana" size="9" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<parameter name="oid" class="java.lang.String">
+		<defaultValueExpression><![CDATA["bsc04p"]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="DocText_stdText" class="java.lang.Object"/>
+	<group name="bold">
+		<groupHeader>
+			<band height="15">
+				<rectangle>
+					<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="0" y="0" width="27" height="15" forecolor="#F3F3F3" backcolor="#F3F3F3"/>
+					<graphicElement/>
+				</rectangle>
+				<rectangle>
+					<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="440" y="0" width="129" height="15" forecolor="#F3F3F3" backcolor="#F3F3F3"/>
+					<graphicElement/>
+				</rectangle>
+				<textField isStretchWithOverflow="true" hyperlinkType="None">
+					<reportElement positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="27" y="-1" width="126" height="16" isRemoveLineWhenBlank="true" backcolor="#F3F3F3"/>
+					<textElement verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA["Alternate Description:"]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" hyperlinkType="None">
+					<reportElement positionType="Float" mode="Opaque" x="153" y="-1" width="289" height="16" isRemoveLineWhenBlank="true" backcolor="#F3F3F3"/>
+					<textElement verticalAlignment="Middle">
+						<font isUnderline="false"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{DocText_stdText}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+	</group>
+	<summary>
+		<band height="5">
+			<rectangle>
+				<reportElement positionType="Float" x="0" y="0" width="569" height="5" forecolor="#F3F3F3" backcolor="#F3F3F3"/>
+				<graphicElement/>
+			</rectangle>
+		</band>
+	</summary>
+</jasperReport>

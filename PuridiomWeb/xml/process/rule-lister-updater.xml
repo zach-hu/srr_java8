@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="RuleListerUpdater" connection-type="New-Connection">
+  <!--Retrieve all Addresses for a given id-->
+  <activities>
+    <activity synchronous="true" continue-on-failure="false" name="ruleLister">
+        <task synchronous="true" continue-on-failure="false" name="rulesList">
+        <task-object-name>com.tsa.puridiom.common.rule.ui.RuleListerUpdater</task-object-name>
+        <post-action />
+        </task>
+      </activity>
+   </activities>
+</process>

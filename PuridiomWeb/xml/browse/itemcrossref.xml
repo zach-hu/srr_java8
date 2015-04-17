@@ -1,0 +1,25 @@
+<browse_itemcrossref>
+	<columns>
+		<ItemCrossRef_altItemNumber>
+			<label>brw-alternateItemNumber</label>
+			<size>20</size>
+			<hidden-input>Y</hidden-input>
+			<link><![CDATA[javascript: returnMe('#ItemCrossRef_altItemNumber^'); void(0);]]></link>
+			<key>Y</key>
+		</ItemCrossRef_altItemNumber>
+		<ItemCrossRef_itemNumber>
+			<label>brw-itemNumber</label>
+			<size>20</size>
+			<hidden-input>Y</hidden-input>
+		</ItemCrossRef_itemNumber>
+		<ItemCrossRef_description>
+			<label>description</label>
+			<size>60</size>
+		</ItemCrossRef_description>
+	</columns>
+	<sqlfrom>ItemCrossRef as ItemCrossRef</sqlfrom>
+	<sqlorderby>ItemCrossRef.itemNumber ASC</sqlorderby>
+	<sqlwhere><![CDATA[(ItemCrossRef.status = '02' or (ItemCrossRef.status = '01' and ItemCrossRef.dateExpires > :as_today))]]></sqlwhere>
+	<title>Alternate Part Numbers</title>
+	<pagesize>15</pagesize>
+</browse_itemcrossref>

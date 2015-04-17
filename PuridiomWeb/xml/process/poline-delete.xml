@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="poLineDelete" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="poLineDeleteSetup">
+			<rule-filename check-for-false="true">is-delete-by-header.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="poLineDeleteSetup">
+				<rule-filename></rule-filename>
+				<task-object-name>com.tsa.puridiom.poline.tasks.PoLineDeleteSetup</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="poHeader">
+		        <rule-filename>is-poheader-empty.xml</rule-filename>
+        		<task-object-name>com.tsa.puridiom.poheader.tasks.PoHeaderRetrieveById</task-object-name>
+		        <post-action></post-action>
+		    </task>
+			<task synchronous="true" continue-on-failure="false" name="poLine">
+				<task-object-name>com.tsa.puridiom.poline.tasks.PoLineRetrieveById</task-object-name>
+				<post-action></post-action>
+			</task>
+	    </activity>
+	    <activity synchronous="true" continue-on-failure="false" name="poLineDeleteCheck">
+			<task synchronous="true" continue-on-failure="false" name="CancelPoCheck">
+				<rule-filename>is-poline-delete-skip-check.xml</rule-filename>
+		        <task-object-name>com.tsa.puridiom.po.tasks.PoReqDeleteCheck</task-object-name>
+        	    <post-action></post-action>
+´   	    </task>
+        </activity>
+		<activity synchronous="true" continue-on-failure="false" name="poBudgetDelete">
+	    	<rule-filename>is-account-budget-module-active.xml;is-account-budget-service-active.xml</rule-filename>
+	      	<task synchronous="true" continue-on-failure="false" name="poLineDeleteBudgetSetup">
+	            <task-object-name>com.tsa.puridiom.poline.tasks.PoLineDeleteBudgetServiceSetup</task-object-name>
+	            <post-action></post-action>
+	        </task>
+			<task synchronous="true" continue-on-failure="false" name="poBudgetDelete">
+	        	<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+	        	<process-filename>budgetservice-update.xml</process-filename>
+	        	<post-action></post-action>
+	      	</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="poLineDelete">
+		    <rule-filename check-for-false="true">is-delete-by-header.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="billToDeleteByLine">
+				<rule-filename></rule-filename>
+				<task-object-name>com.tsa.puridiom.billto.tasks.BillToDeleteByLine</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="shipToDeleteByLine">
+				<rule-filename></rule-filename>
+				<task-object-name>com.tsa.puridiom.shipto.tasks.ShipToDeleteByLine</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="accountDeleteByLine">
+				<rule-filename></rule-filename>
+				<task-object-name>com.tsa.puridiom.account.tasks.AccountDeleteByLine</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="docCommentDelete">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>doccomment-delete-by-line.xml</process-filename>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="poLineDeleteById">
+			<task synchronous="true" continue-on-failure="false" name="poLine">
+				<task-object-name>com.tsa.puridiom.poline.tasks.PoLineDeleteById</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="updateReqStatus">
+				<task-object-name>com.tsa.puridiom.poline.tasks.PoLineUpdateReqLineStatus</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="updateReqStatus">
+				<task-object-name>com.tsa.puridiom.poline.tasks.PoLineUpdateRfqLineStatus</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="history">
+	        <task synchronous="true" continue-on-failure="false" name="poLineListHistory">
+	    	<task-object-name>com.tsa.puridiom.poline.history.tasks.PoLineSetHistory</task-object-name>
+	        </task>
+        </activity>
+		<activity synchronous="true" continue-on-failure="false" name="poUpdate">
+			<rule-filename check-for-false="true">is-action-delete-by-header.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="poLineUpdate">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>po-recalculate.xml</process-filename>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="poLineRenumber">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>poline-renumber.xml</process-filename>
+			</task>
+		</activity>
+	</activities>
+</process>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="NewsDeleteList" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="NewsDeleteList">
+			<task synchronous="true" continue-on-failure="false" name="newsDeleteList">
+				<task-object-name>com.tsa.puridiom.news.tasks.NewsDeleteList</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+	</activities>
+</process>

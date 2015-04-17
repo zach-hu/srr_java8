@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="receiptLineCreateFromPoLine" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="receiptLineCreateFromPoLine">
+			<task synchronous="true" continue-on-failure="false" name="ReceiptLine_receiptLine">
+				<task-object-name>com.tsa.puridiom.receiptline.tasks.ReceiptLineGetNewLineNumber</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="receiptLine">
+				<task-object-name>com.tsa.puridiom.receiptline.tasks.ReceiptLineSetValues</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="receiptLine">
+				<task-object-name>com.tsa.puridiom.receiptline.tasks.ReceiptLineAdd</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="checklistResponseUpdate" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="checklistResponseUpdate">
+			<task synchronous="true" continue-on-failure="false" name="checklistResponseList">			
+				<task-object-name>com.tsa.puridiom.checklistresponse.tasks.ChecklistResponseUpdateEntityList</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

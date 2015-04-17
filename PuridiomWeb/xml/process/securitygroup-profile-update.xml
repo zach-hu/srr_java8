@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="securityGroupProfileUpdate" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="securityGroupProfileUpdate">
+			<task synchronous="true" continue-on-failure="false" name="securityGroupUpdate">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>securitygroup-update.xml</process-filename>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="securityProfileDelete">
+				<task-object-name>com.tsa.puridiom.securityprofile.tasks.SecurityProfileDeleteByGroupId</task-object-name>
+			</task>			
+			<task synchronous="true" continue-on-failure="false" name="securityProfileList">
+				<task-object-name>com.tsa.puridiom.securityprofile.tasks.SecurityProfileUpdateList</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="userRole">
+				<task-object-name>com.tsa.puridiom.usermanager.tasks.UserRoleGetFromSecurityProfileList</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="userRoleSetInCache">
+				<task-object-name>com.tsa.puridiom.usermanager.tasks.UserRoleSetInCache</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

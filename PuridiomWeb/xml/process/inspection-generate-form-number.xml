@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="inspectionGenerateFormNumber" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="inspectionGenerateNumber">
+			<task synchronous="true" continue-on-failure="false" name="InspectionHeader_inspectionNumber">
+				<task-object-name>com.tsa.puridiom.common.tasks.AutoGenDocNumber</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="inspectionFormatSetup">
+				<task-object-name>com.tsa.puridiom.inspection.tasks.InspectionFormatNumberSetup</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="checkMax">
+				<task-object-name>com.tsa.puridiom.common.tasks.CheckMaxDocNumber</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="InspectionHeader_inspectionNumber">
+				<task-object-name>com.tsa.puridiom.common.tasks.FormatDocNumber</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="receiptUpdate" connection-type="New-Transaction">
+	<rule-filename>is-originalreceiptline-qtyrejected-more-than-zero.xml</rule-filename>
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="receiptLineCreateReturn">
+			<!--rule-filename>is-create-return.xml</rule-filename-->
+			<task synchronous="true" continue-on-failure="false" name="createReturnSetup">
+				<task-object-name>com.tsa.puridiom.receiptline.tasks.ReceiptLineCreateReturnSetup</task-object-name>
+			</task>
+			<!--  This task should be done when finalizing the receipts
+			<task synchronous="true" continue-on-failure="false" name="generateNumber">
+				<rule-filename>is-create-save;is-receiptheader-receiptnumber-empty</rule-filename>
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>receipt-generate-form-number.xml</process-filename>
+			</task-->
+			<task synchronous="true" continue-on-failure="false" name="receiptUpdate">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>receipt-create.xml</process-filename>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="receiptLine">
+				<task-object-name>com.tsa.puridiom.receiptline.tasks.ReceiptLineSetValues</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="receiptLine">
+				<task-object-name>com.tsa.puridiom.receiptline.tasks.ReceiptLineUpdateById</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="receiptLineCreateReturn">
+			<rule-filename>is-receiptmethod-finalizereceipt.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="sendRejectedActionTakenNotifcation">			
+				<rule-filename>is-create-return.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.receipt.tasks.QueueAddRejectedActionTaken</task-object-name>
+				<post-action>exitActivity</post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="sendBuyerRejectedActionRequiredNotifcation">			
+				<rule-filename check-for-false="true">is-create-return.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.receipt.tasks.QueueAddRejectedActionRequired</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

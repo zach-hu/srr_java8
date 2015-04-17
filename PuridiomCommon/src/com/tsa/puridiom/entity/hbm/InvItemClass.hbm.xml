@@ -1,0 +1,90 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+    
+<hibernate-mapping>
+
+<!-- 
+    Created by Middlegen Hibernate plugin
+
+    http://boss.bekk.no/boss/middlegen/
+    http://hibernate.sourceforge.net/
+-->
+
+<class 
+    name="com.tsa.puridiom.entity.InvItemClass" 
+    table="INV_ITEM_CLASS"
+>
+    <id
+        name="itemNumber"
+        type="java.lang.String"
+        column="ITEM_NUMBER"
+    >
+        <generator class="assigned" />
+    </id>
+    <property
+        name="agent"
+        type="java.math.BigDecimal"
+        column="AGENT"
+        length="15"
+    />
+    <property
+        name="dsrtMgr"
+        type="java.math.BigDecimal"
+        column="DSRT_MGR"
+        length="15"
+    />
+    <property
+        name="bcos"
+        type="java.math.BigDecimal"
+        column="BCOS"
+        length="15"
+    />
+    <property
+        name="csc"
+        type="java.math.BigDecimal"
+        column="CSC"
+        length="15"
+    />
+    <property
+        name="blos"
+        type="java.math.BigDecimal"
+        column="BLOS"
+        length="15"
+    />
+    <property
+        name="stOff"
+        type="java.math.BigDecimal"
+        column="ST_OFF"
+        length="15"
+    />
+    <property
+        name="srvCenter"
+        type="java.math.BigDecimal"
+        column="SRV_CENTER"
+        length="15"
+    />
+    <property
+        name="homeOff"
+        type="java.math.BigDecimal"
+        column="HOME_OFF"
+        length="15"
+    />
+    <property
+        name="udf1Code"
+        type="java.math.BigDecimal"
+        column="UDF_1_CODE"
+        length="15"
+    />
+    <property
+        name="udf2Code"
+        type="java.math.BigDecimal"
+        column="UDF_2_CODE"
+        length="15"
+    />
+
+    <!-- associations -->
+
+</class>
+</hibernate-mapping>

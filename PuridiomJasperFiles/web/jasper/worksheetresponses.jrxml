@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created using an evaluation version of JasperAssistant (http://www.jasperassistant.com) -->
+<!DOCTYPE jasperReport PUBLIC "-//JasperReports//DTD Report Design//EN" "http://jasperreports.sourceforge.net/dtds/jasperreport.dtd">
+
+<jasperReport name="responseLines" pageWidth="761" pageHeight="39" orientation="Landscape" columnWidth="761" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+	<property name="com.jasperassistant.designer.GridHeight" value="12"/>
+	<property name="com.jasperassistant.designer.GridWidth" value="12"/>
+	<property name="com.jasperassistant.designer.SnapToGrid" value="false"/>
+	<property name="com.jasperassistant.designer.Grid" value="false"/>
+	<import value="com.tsagate.foundation.utility.*"/>
+	<import value="com.tsa.puridiom.common.utility.HiltonUtility"/>
+	<reportFont name="Arial_Normal" isDefault="true" fontName="Arial" size="8" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Bold" isDefault="false" fontName="Arial Black" size="8" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica-Bold" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Bold_Big" isDefault="false" fontName="Arial Black" size="9" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica-Bold" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<parameter name="oid" class="java.lang.String"/>
+	<field name="WorkSheetQuestion_sequence" class="java.math.BigDecimal"/>
+	<field name="WorkSheetQuestion_questionText" class="java.lang.String"/>
+	<field name="WorkSheetQuestion_responseType" class="java.lang.String"/>
+	<field name="WorkSheetQuestion_maxPoints" class="java.math.BigDecimal"/>
+	<field name="WorkSheetQuestion_score1" class="java.math.BigDecimal"/>
+	<field name="WorkSheetQuestion_score2" class="java.math.BigDecimal"/>
+	<field name="WorkSheetQuestion_score3" class="java.math.BigDecimal"/>
+	<field name="WorkSheetQuestion_score4" class="java.math.BigDecimal"/>
+	<field name="WorkSheetQuestion_score5" class="java.math.BigDecimal"/>
+	<field name="WorkSheetQuestion_response1" class="java.lang.String"/>
+	<field name="WorkSheetQuestion_response2" class="java.lang.String"/>
+	<field name="WorkSheetQuestion_response3" class="java.lang.String"/>
+	<field name="WorkSheetQuestion_response4" class="java.lang.String"/>
+	<field name="WorkSheetQuestion_response5" class="java.lang.String"/>
+	<detail>
+		<band height="28">
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" x="0" y="0" width="37" height="14"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{WorkSheetQuestion_sequence}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="37" y="0" width="296" height="14" isPrintWhenDetailOverflows="true"/>
+				<box border="None" topPadding="0" leftPadding="2" bottomPadding="0" rightPadding="0"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{WorkSheetQuestion_questionText}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="333" y="0" width="73" height="14"/>
+				<box border="None" topPadding="0" leftPadding="2" bottomPadding="0" rightPadding="2"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{WorkSheetQuestion_response1}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="439" y="0" width="73" height="14"/>
+				<box border="None" topPadding="0" leftPadding="2" bottomPadding="0" rightPadding="2"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{WorkSheetQuestion_response2}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="651" y="0" width="73" height="14"/>
+				<box border="None" topPadding="0" leftPadding="2" bottomPadding="0" rightPadding="2"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{WorkSheetQuestion_response4}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="545" y="0" width="73" height="14"/>
+				<box border="None" topPadding="0" leftPadding="2" bottomPadding="0" rightPadding="2"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{WorkSheetQuestion_response3}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" x="406" y="0" width="33" height="14"/>
+				<box border="None" topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="2"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{WorkSheetQuestion_score1}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" x="512" y="0" width="33" height="14"/>
+				<box border="None" topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="2"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{WorkSheetQuestion_score2}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" x="618" y="0" width="33" height="14"/>
+				<box border="None" topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="2"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{WorkSheetQuestion_score3}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" x="724" y="0" width="33" height="14"/>
+				<box border="None" topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="2"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{WorkSheetQuestion_score4}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

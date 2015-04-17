@@ -1,0 +1,47 @@
+<r_supsec_user>
+  <columns>
+		<UserProfile_userId>
+			<label>User ID</label>
+			<type>STRING</type>
+		</UserProfile_userId>
+		<UserProfile_firstName>
+			<label>First Name</label>
+			<type>STRING</type>
+		</UserProfile_firstName>
+		<UserProfile_lastName>
+			<label>Last Name</label>
+			<type>STRING</type>
+		</UserProfile_lastName>
+		<Vendor_vendorId>
+			<label>Supplier Code</label>
+			<type>STRING</type>
+		</Vendor_vendorId>
+		<Vendor_vendorName>
+			<label>Supplier Name</label>
+			<type>STRING</type>
+		</Vendor_vendorName>
+		<Vendor_emailAddress>
+			<label>Email Address</label>
+			<type>STRING</type>
+		</Vendor_emailAddress>
+		<UserProfile_status>
+			<label>Status</label>
+			<type>STRING</type>
+		</UserProfile_status>
+		<VendorBuyerRel_id_userId>
+			<label>UserID</label>
+			<type>STRING</type>
+			<visible>0</visible>
+		</VendorBuyerRel_id_userId>
+		<VendorBuyerRel_id_vendorId>
+			<label>VendorID</label>
+			<type>STRING</type>
+			<visible>0</visible>
+		</VendorBuyerRel_id_vendorId>
+	</columns>
+
+  <sqlfrom>UserProfile as UserProfile, Vendor as Vendor, VendorBuyerRel as VendorBuyerRel</sqlfrom>
+  <sqlwhere><![CDATA[(UserProfile.userId = VendorBuyerRel.id.userId) and (Vendor.vendorId = VendorBuyerRel.id.vendorId)]]></sqlwhere>
+  <title>Supplier Security by User</title>
+</r_supsec_user>
+

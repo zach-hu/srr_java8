@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="EmailApprovals" connection-type="Connection-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="printpdf">
+			<task synchronous="true" continue-on-failure="false" name="datasource">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>requisition-retrieve.xml</process-filename>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="routinglistsetup">
+				<task-object-name>com.tsa.puridiom.requisition.tasks.RequisitionRoutingDisplaySetup</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="routingList">
+				<task-object-name>com.tsa.puridiom.approvals.tasks.ApprovalLogRetrieveByHeader</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="routingListOrderedByUserId">
+				<task-object-name>com.tsa.puridiom.approvals.tasks.ApprovalLogRetrieveByHeaderOrderedByUserId</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="budgetUdfSetup">
+		    <rule-filename>is-account-budget-module-active</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="budgetUdfSetup">
+				<task-object-name>com.tsa.puridiom.budget.tasks.BudgetUdfSetup</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="budgetReviewRetrieveSetup">
+				<task-object-name>com.tsa.puridiom.requisition.tasks.RequisitionForwardBudgetSetup</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="budgetReviewList">
+				<task-object-name>com.tsa.puridiom.budget.tasks.BudgetReviewRetrieve</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="createReport">
+			<task synchronous="true" continue-on-failure="false" name="report">
+				<rule-filename>is-text-email-version.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.formtext.tasks.ReqEmailApprovals</task-object-name>
+				<post-action>exitProcess</post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="report">
+				<rule-filename>is-notes-email-version.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.formnotes.tasks.ReqEmailApprovals</task-object-name>
+				<post-action>exitProcess</post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="report">
+				<task-object-name>com.tsa.puridiom.formhtml.tasks.ReqEmailApprovals</task-object-name>
+				<post-action>exitProcess</post-action>
+			</task>
+		</activity>
+	</activities>
+</process>

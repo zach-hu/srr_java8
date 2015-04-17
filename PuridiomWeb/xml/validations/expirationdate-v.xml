@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rule>
+	<clause type="Empty">
+		<left-side>
+			<source>incomingRequestObjectMethod</source>
+			<object>header</object>
+			<name>getExpirationDate</name>
+		</left-side>
+	</clause>
+	<logical-operator>OR</logical-operator>
+	<clause type="DateCompare">
+		<left-side>
+			<source>incomingRequestObjectMethod</source>
+			<object>header</object>
+			<name>getExpirationDate</name>
+		</left-side>
+		<operator>GREATER</operator>
+		<right-side>
+			<source>constant</source>
+			<value> </value>
+		</right-side>
+	</clause>
+</rule>

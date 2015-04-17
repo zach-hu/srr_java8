@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping>
+
+<class
+    name="com.tsa.puridiom.entity.ApprovalUsersView"
+    table="APPROVAL_USERS_VIEW"
+    mutable="false"
+>
+	<id
+        name="approverId"
+        type="java.lang.String"
+        column="APPROVER_ID"
+        length="15"
+    >
+        <generator class="assigned" />
+    </id>
+    <property
+        name="name"
+        type="java.lang.String"
+        column="NAME"
+        length="60"
+    />
+    <property
+        name="title"
+        type="java.lang.String"
+        column="TITLE"
+        length="40"
+    />
+    <property
+        name="approver"
+        type="java.lang.String"
+        column="APPROVER"
+        length="1"
+    />
+    <property
+        name="approvalAmount"
+        type="java.math.BigDecimal"
+        column="APPROVAL_AMOUNT"
+        length="15"
+    />
+	<property
+        name="userType"
+        type="java.lang.String"
+        column="USER_TYPE"
+        length="30"
+    />
+    <property
+        name="status"
+        type="java.lang.String"
+        column="STATUS"
+        length="4"
+    />
+</class>
+</hibernate-mapping>

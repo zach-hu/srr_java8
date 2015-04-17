@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rule>
+	<clause type="NotEmpty">
+		<left-side>
+			<source>incomingRequestObjectMethod</source>
+			<object>vendor</object>
+			<name>getVendTerms</name>
+		</left-side>
+	</clause>
+	<logical-operator>IFTHEN</logical-operator>
+	<clause type="lookup">
+		<sql> from PaymentTerm as PaymentTerm where PaymentTerm.termsCode = '@vendterms@' AND (PaymentTerm.status = '02' OR (PaymentTerm.status = '01' AND PaymentTerm.dateExpires >= @today@))</sql>
+		<source>vendor</source>
+		<arguments>
+			<name>vendterms</name>
+			<source>vendor</source>
+			<colName>getVendTerms</colName>
+		</arguments>
+	</clause>
+</rule>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="InspectionDisposUpdateLineRow" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="InspectionDisposUpdateLineRow">
+			<task synchronous="true" continue-on-failure="false" name="inspectionDisposAddSetup">
+				<task-object-name>com.tsa.puridiom.inspectiondispos.tasks.InspectionDisposAddSetup</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="inspectionDispos">
+				<task-object-name>com.tsa.puridiom.inspectiondispos.tasks.InspectionDisposSetValues</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="inspectionDispos">
+				<task-object-name>com.tsa.puridiom.inspectiondispos.tasks.InspectionDisposAdd</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="InspectionDisposHistoryActivity">
+			<task synchronous="true" continue-on-failure="false" name="inspectionDisposHistory">
+				<task-object-name>com.tsa.puridiom.inspectionhistory.tasks.DisposHistoryAddFromHistoryLogList</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="historyLogUpdate">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>historylog-add-from-list.xml</process-filename>
+			</task>
+		</activity>
+	</activities>
+</process>

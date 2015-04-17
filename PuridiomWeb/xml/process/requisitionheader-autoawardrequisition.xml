@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="requisitionHeaderRetrieveById" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="requisitionHeaderRetrieveById">
+			<task synchronous="true" continue-on-failure="false" name="poCreateFromReq">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>po-create-from-req.xml</process-filename>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="requisitionHeaderRetrieveById">
+			<task synchronous="true" continue-on-failure="false" name="poCreateFromReq">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>po_save.xml</process-filename>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="poRecalculateSetup">
+			<task synchronous="true" continue-on-failure="false" name="poHeader">
+				<task-object-name>com.tsa.puridiom.poheader.tasks.PoHeaderRetrieveById</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="poHeaderUpdateSetup">
+				<task-object-name>com.tsa.puridiom.poheader.tasks.PoHeaderUpdateSetup</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="poLineList">
+				<rule-filename>is-polinelist-empty</rule-filename>
+				<task-object-name>com.tsa.puridiom.poline.tasks.PoLineRetrieveByHeader</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="poCalculateTotalsActivity">
+			<task synchronous="true" continue-on-failure="false" name="poLineList">
+				<task-object-name>com.tsa.puridiom.poline.tasks.PoLineSetShippingTaxFromHeader</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="poLineList">
+				<task-object-name>com.tsa.puridiom.poline.tasks.PoLineSetOtherTaxFromHeader</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="poCalculateTotals">
+				<task-object-name>com.tsa.puridiom.po.tasks.PoCalculateTotals</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<!-- activity synchronous="true" continue-on-failure="false" name="setBuyerFromCommodityDepartmentBuyer">
+	      	<rule-filename>is-po-buyerassignment-active</rule-filename>
+	      	<task synchronous="true" continue-on-failure="false" name="setupBuyerAssigment">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>poheader-buyerassignment.xml</process-filename>
+			</task>
+		</activity -->
+		<activity synchronous="true" continue-on-failure="false" name="requisitionHeaderRetrieveById">
+	      	<rule-filename check-for-false="true">is-organization-hoy.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="poCreateFromReq">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>po-forward-notification.xml</process-filename>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="mail">
+	      	<task synchronous="true" continue-on-failure="false" name="mail">
+		        <task-object-name>com.tsa.puridiom.requisitionheader.autoawardrequisition.tasks.RequisitionAutoAwardEmail</task-object-name>
+	      	</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="recentOrder">
+            <rule-filename>is-poheader-ponumber-set.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="recentOrderAdd">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>recentorder-add-txn-required.xml</process-filename>
+			</task>
+    	</activity>
+	</activities>
+</process>

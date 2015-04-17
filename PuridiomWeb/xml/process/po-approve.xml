@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="poApprove" connection-type="Transaction-Required">
+  <activities>
+    <activity synchronous="true" continue-on-failure="false" name="poApproveAndForward">
+      <task synchronous="true" continue-on-failure="false" name="approvalSetup">
+        <task-object-name>com.tsa.puridiom.po.tasks.PoApprovalSetup</task-object-name>
+        <post-action></post-action>
+      </task>
+      <task synchronous="true" continue-on-failure="false" name="poHeader">
+        <task-object-name>com.tsa.puridiom.poheader.tasks.PoHeaderRetrieveById</task-object-name>
+        <post-action></post-action>
+      </task>
+      <task synchronous="true" continue-on-failure="false" name="poForwardSetup">
+        <task-object-name>com.tsa.puridiom.poheader.tasks.PoHeaderUpdateSetup</task-object-name>
+        <post-action></post-action>
+      </task>
+      <task synchronous="true" continue-on-failure="false" name="poLineList">
+        <task-object-name>com.tsa.puridiom.poline.tasks.PoLineRetrieveByHeader</task-object-name>
+        <post-action></post-action>
+      </task>
+      <task synchronous="true" continue-on-failure="false" name="approveForwardToNext">
+        <task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+        <process-filename>po-forward-to-next.xml</process-filename>
+        <post-action></post-action>
+      </task>
+      <task synchronous="true" continue-on-failure="false" name="poSetStatus">
+        <task-object-name>com.tsa.puridiom.po.tasks.PoSetStatus</task-object-name>
+        <post-action></post-action>
+      </task>
+      <task synchronous="true" continue-on-failure="false" name="poHeaderUpdate">
+        <task-object-name>com.tsa.puridiom.poheader.tasks.PoHeaderUpdate</task-object-name>
+        <post-action></post-action>
+      </task>
+      <task synchronous="true" continue-on-failure="false" name="poLineUpdate">
+        <task-object-name>com.tsa.puridiom.poline.tasks.PoLineUpdateList</task-object-name>
+        <post-action></post-action>
+      </task>
+    </activity>
+     <activity synchronous="true" continue-on-failure="false" name="autorelease">
+      <rule-filename check-for-false="true">is-po-awarded.xml</rule-filename>
+      <task synchronous="true" continue-on-failure="false" name="autorelease">
+        <task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+        <process-filename>po-award.xml</process-filename>
+        <post-action></post-action>
+      </task>
+     </activity>
+     <activity synchronous="true" continue-on-failure="false" name="autorelease">
+     	<rule-filename>is-po-last-revision.xml</rule-filename>
+     	<task synchronous="true" continue-on-failure="false" name="poLineUpdate">
+	        <task-object-name>com.tsa.puridiom.poheader.tasks.PoHeaderUpdateForLastRevision</task-object-name>
+	        <post-action></post-action>
+        </task>
+     </activity>
+    <activity synchronous="true" continue-on-failure="false" name="poReflectStatus">
+		<task synchronous="true" continue-on-failure="false" name="poReflectStatus">
+			<task-object-name>com.tsa.puridiom.po.tasks.PoReflectStatus</task-object-name>
+			<post-action></post-action>
+		</task>
+	</activity>
+  </activities>
+</process>

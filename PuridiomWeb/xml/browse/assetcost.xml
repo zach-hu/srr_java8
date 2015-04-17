@@ -1,0 +1,76 @@
+<browse_assetcost>
+	<columns>
+
+		<Asset_tagNumber>
+			<label>brw-tagNumber</label>
+			<link><![CDATA[javascript: viewassetcost('#AssetCost_id_tagNumber^', '#AssetCost_id_sequenceNo^', assetINum+assetDesc+assetTNum); void(0);]]></link>
+			<visible>1</visible>
+		</Asset_tagNumber>
+
+		<Asset_trackingNumber>
+			<visible>0</visible>
+		</Asset_trackingNumber>
+
+		<AssetCost_id_tagNumber>
+			<visible>0</visible>
+		</AssetCost_id_tagNumber>
+
+		<AssetCost_id_sequenceNo>
+			<label>routingSequence</label>
+			<visible>1</visible>
+		</AssetCost_id_sequenceNo>
+
+
+		<AssetCost_amount>
+			<label>allocationAmount</label>
+			<visible>1</visible>
+		</AssetCost_amount>
+
+		<AssetCost_extendLifeFlag>
+			<label>assetcost-extendlife</label>
+			<visible>1</visible>
+		</AssetCost_extendLifeFlag>
+
+		<AssetCost_dateEntered>
+			<label>dateentered</label>
+			<visible>0</visible>
+		</AssetCost_dateEntered>
+
+		<AssetCost_dateReceived>
+			<label>asset-datereceived</label>
+			<visible>0</visible>
+		</AssetCost_dateReceived>
+
+
+		<AssetCost_poNumber>
+			<label>assetcost-ponumber</label>
+			<visible>0</visible>
+		</AssetCost_poNumber>
+
+		<AssetCost_poVendor>
+			<label>brw-poVendor</label>
+			<visible>0</visible>
+		</AssetCost_poVendor>
+
+		<AssetCost_description>
+			<label>description</label>
+			<visible>0</visible>
+		</AssetCost_description>
+
+		<AssetCost_lastChgBy>
+			<label>lastChangedBy</label>
+			<visible>0</visible>
+		</AssetCost_lastChgBy>
+
+		<AssetCost_dateChanged>
+			<label>auditRecord-dateCreated</label>
+			<visible>0</visible>
+		</AssetCost_dateChanged>
+
+	</columns>
+<sqlfrom>Asset as Asset, AssetCost AssetCost</sqlfrom>
+<sqlwhere><![CDATA[ Asset.tagNumber = AssetCost.id.tagNumber ]]></sqlwhere>
+<sqlorderby>AssetCost.id.sequenceNo DESC</sqlorderby>
+<pagesize>15</pagesize>
+<title>Asset Cost Browse</title>
+</browse_assetcost>

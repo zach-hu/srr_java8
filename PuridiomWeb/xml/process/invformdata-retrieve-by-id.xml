@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="invFormDataRetrieveById" connection-type="Connection-Required">
+	<rule-filename></rule-filename>
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="invFormDataRetrieveById">
+			<task synchronous="true" continue-on-failure="false" name="invFormData">
+				<task-object-name>com.tsa.puridiom.invformdata.tasks.InvFormDataRetrieveById</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="invFormDataAdd">
+				<rule-filename>is-invformdata-empty.xml</rule-filename>
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>invformdata-add.xml</process-filename>
+				<post-action></post-action>
+			</task>
+			<!--task synchronous="true" continue-on-failure="false" name="invFormDataSetup">
+				<task-object-name>com.tsa.puridiom.invformdata.tasks.InvFormDataRetrieveSetup</task-object-name>
+			</task-->
+		</activity>
+	</activities>
+</process>

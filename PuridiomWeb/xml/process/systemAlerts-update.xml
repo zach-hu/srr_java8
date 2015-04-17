@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="systemAlertUpdate" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="SystemAlertsRetrieve">
+			<task synchronous="true" continue-on-failure="false" name="systemAlerts">
+				<task-object-name>com.tsa.puridiom.alert.tasks.AlertRetrieveAll</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="alertUpdate">
+			<task synchronous="true" continue-on-failure="false" name="systemAlerts">
+				<task-object-name>com.tsa.puridiom.alert.tasks.AlertConfigSetValues</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

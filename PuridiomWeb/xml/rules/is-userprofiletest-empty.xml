@@ -1,0 +1,37 @@
+<rule>
+	<clause type="StringCompare">
+		<left-side>
+			<source>incomingRequest</source>
+			<name>userProfileTest</name>
+		</left-side>
+		<operator>EQUALS</operator>
+		<right-side>
+			<source>constant</source>
+		</right-side>
+	</clause>
+	<logical-operator>OR</logical-operator>
+	<clause type="StringCompare">
+		<left-side>
+			<source>incomingRequestObjectMethod</source>
+			<object>userProfileTest</object>
+			<name>getMailId</name>
+		</left-side>
+		<operator>EQUALS</operator>
+		<right-side>
+			<source>constant</source>
+		</right-side>
+	</clause>
+	<logical-operator>OR</logical-operator>
+	<clause type="StringCompare">
+		<left-side>
+			<source>incomingRequestObjectMethod</source>
+			<object>userProfileTest</object>
+			<name>getMailId</name>
+		</left-side>
+		<operator>EQUALS</operator>
+		<right-side>
+			<source>constant</source>
+			<value></value>
+		</right-side>
+	</clause>
+</rule>

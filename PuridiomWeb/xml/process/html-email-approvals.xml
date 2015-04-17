@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="EmailApprovals" connection-type="Connection-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="printpdf">
+		<task synchronous="true" continue-on-failure="false" name="userprofile">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>userprofile-retrieve-by-mailid.xml</process-filename>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="htmlName">
+				<task-object-name>com.tsa.puridiom.formhtml.tasks.HtmlEmailApprovals</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

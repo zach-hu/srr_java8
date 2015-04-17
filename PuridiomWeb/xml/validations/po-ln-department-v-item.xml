@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rule>
+	<clause type="NotEmpty">
+		<left-side elementSource="true">
+			<source>incomingRequestObjectMethod</source>
+			<object>lineItem</object>
+			<name>getDepartmentCode</name>
+		</left-side>
+	</clause>
+	<logical-operator>IFTHEN</logical-operator>
+	<clause type="lookup">
+	    <sql>from Department department where department.departmentCode = '@departmentCod@' AND (department.status = '02' OR (department.status = '01' AND department.dateExpires >= @today@))</sql>
+		<source>lineItem</source>
+		<arguments>
+			<name>departmentCod</name>
+			<source>lineItem</source>
+			<colName>getDepartmentCode</colName>
+		</arguments>
+	</clause>
+</rule>

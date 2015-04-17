@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="po-email-approvals" connection-type="Connection-Required">
+  <activities>
+  	  <activity synchronous="true" continue-on-failure="false" name="setup">
+  		<task synchronous="true" continue-on-failure="false" name="setup">
+			<task-object-name>com.tsa.puridiom.receipt.html.tasks.AlertSetup</task-object-name>
+		  </task>
+	  </activity>
+    <activity synchronous="true" continue-on-failure="false" name="requisitionRetrieve">
+      <task synchronous="true" continue-on-failure="false" name="datasource">
+        <task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+        <process-filename>po-retrieve.xml</process-filename>
+      </task>
+    </activity>
+  <activity synchronous="true" continue-on-failure="false" name="retrieveIt">
+ 		<task synchronous="true" continue-on-failure="false" name="report">
+		<task-object-name>com.tsa.puridiom.formpdf.tasks.HtmlReceiptsAlerts</task-object-name>
+	  </task>
+  </activity>
+  </activities>
+</process>

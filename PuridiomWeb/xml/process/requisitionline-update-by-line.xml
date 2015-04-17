@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="requisitionLineUpdateMultiple" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="requisitionLineDelete">
+			<task synchronous="true" continue-on-failure="false" name="requisitionLineDelete">
+				<task-object-name>com.tsa.puridiom.requisitionline.tasks.RequisitionLineDeleteByLine</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="requisitionLineUpdate">
+			<task synchronous="true" continue-on-failure="false" name="requisitionLineUpdate">
+				<task-object-name>com.tsa.puridiom.requisitionline.tasks.RequisitionLineUpdateByLine</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="requisitionHeaderUpdate">
+			<task synchronous="true" continue-on-failure="false" name="requisitionHeaderUpdate">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>requisitionheader-update.xml</process-filename>
+			</task>
+		</activity>
+	</activities>
+</process>

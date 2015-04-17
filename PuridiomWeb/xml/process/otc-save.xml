@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="otc-save" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="RetrieveData">
+			<task synchronous="true" continue-on-failure="false" name="disbLines">
+				<task-object-name>com.tsa.puridiom.disbline.tasks.DisbLineRetrieveByHeader</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="disbHeader">
+				<task-object-name>com.tsa.puridiom.disbheader.tasks.DisbHeaderRetrieveById</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="DisbursementGenerateNumber">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>disbursement-get-form-number.xml</process-filename>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="UpdateExtendedInventory">
+			<rule-filename>is-extended-inventory-module-active.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="">
+				<rule-filename></rule-filename>
+				<task-object-name>com.tsa.puridiom.otcline.tasks.OtcLineUpdateExtInventory</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="UpdateHeader">
+			<task synchronous="true" continue-on-failure="false" name="disbHeader">
+				<task-object-name>com.tsa.puridiom.disbheader.tasks.DisbHeaderUpdateDisbursedStatus</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="disbHeader">
+				<task-object-name>com.tsa.puridiom.disbheader.tasks.DisbHeaderUpdate</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="history">
+		    <task synchronous="true" continue-on-failure="false" name="disbHeaderHistory">			
+				<task-object-name>com.tsa.puridiom.disbheader.history.tasks.DisbHeaderHistory</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="disbLineListHistory">			
+				<task-object-name>com.tsa.puridiom.disbline.history.tasks.DisbursementLineListHistory</task-object-name>
+			</task>
+		</activity>
+		<!-- <activity synchronous="true" continue-on-failure="false" name="dsbReflectStatus">
+			<task synchronous="true" continue-on-failure="false" name="dsbReflectStatus">
+				<task-object-name>com.tsa.puridiom.disbursement.tasks.DisbursementReflectStatus</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity> -->
+	</activities>
+</process>

@@ -1,0 +1,144 @@
+<r-vecm>
+  <columns>
+		<Vendor_vendorName>
+			<label>Vendor Name</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</Vendor_vendorName>
+		<Contact_id_contactCode>
+			<label>Contact Code</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</Contact_id_contactCode>
+		<Contact_firstName>
+			<label>firstName</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</Contact_firstName>
+		<Contact_middleInit>
+			<label>Middle Init</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</Contact_middleInit>
+		<Contact_lastName>
+			<label>lastName</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</Contact_lastName>
+		<Contact_phoneNumber>
+			<label>telephoneNumber</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</Contact_phoneNumber>
+		<Vendor_vendorSic>
+			<label>Vendor Sic</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</Vendor_vendorSic>
+		<Vendor_lastActive>
+			<label>Last Active</label>
+			<type>DATE</type>
+			<visible>1</visible>
+		</Vendor_lastActive>
+		<Vendor_vendorClass>
+			<label>Vendor Class</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</Vendor_vendorClass>
+		<VendorCommRel_id_commodityCode>
+			<label>Commodity Code</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</VendorCommRel_id_commodityCode>
+		<Vendor_vendorId>
+			<label>Vendor Id</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</Vendor_vendorId>
+		<Vendor_vendorDuns>
+			<label>Vendor Duns</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</Vendor_vendorDuns>
+		<Vendor_lastChange>
+			<label>Last Change</label>
+			<type>DATE</type>
+			<visible>1</visible>
+		</Vendor_lastChange>
+		<Vendor_owner>
+			<label>Owner</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</Vendor_owner>
+		<Vendor_dateEntered>
+			<label>Date Entered</label>
+			<type>DATE</type>
+			<visible>1</visible>
+		</Vendor_dateEntered>
+		<Vendor_dateExpires>
+			<label>Date Expires</label>
+			<type>DATE</type>
+			<visible>1</visible>
+		</Vendor_dateExpires>
+		<Vendor_status>
+			<label>Status</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</Vendor_status>
+		<Vendor_vendUdf1>
+			<label>Vend Udf 1</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</Vendor_vendUdf1>
+		<Vendor_vendUdf2>
+			<label>Vend Udf 2</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</Vendor_vendUdf2>
+		<Vendor_vendUdf3>
+			<label>Vend Udf 3</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</Vendor_vendUdf3>
+		<Vendor_vendUdf4>
+			<label>Vend Udf 4</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</Vendor_vendUdf4>
+		<Vendor_vendUdf5>
+			<label>Vend Udf 5</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</Vendor_vendUdf5>
+		<Vendor_vendUdf6>
+			<label>Vend Udf 6</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</Vendor_vendUdf6>
+		<Vendor_vendUdf7>
+			<label>Vend Udf 7</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</Vendor_vendUdf7>
+		<Vendor_vendUdf8>
+			<label>Vend Udf 8</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</Vendor_vendUdf8>
+		<Vendor_vendUdf9>
+			<label>Vend Udf 9</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</Vendor_vendUdf9>
+		<Vendor_vendUdf10>
+			<label>Vend Udf 10</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</Vendor_vendUdf10>
+	</columns>
+  <sqlfrom>Contact as Contact, Vendor as Vendor , VendorCommRel as VendorCommRel</sqlfrom>
+  <sqlwhere><![CDATA[( Vendor.vendorId = VendorCommRel.id.vendorId ) and ( Vendor.vendorId = Contact.id.vendorId ) ]]></sqlwhere>
+  <sqlorderby>VendorCommRel.id.commodityCode</sqlorderby>
+  <title>Supplier by Commodity Report</title>
+</r-vecm>
+

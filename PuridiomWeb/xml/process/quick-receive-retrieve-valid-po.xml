@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="quickReceiveRetrieveValidPo" connection-type="Connection-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="poHeaderRetrieveByNumber">
+			<task synchronous="true" continue-on-failure="false" name="poHeaderList">
+				<task-object-name>com.tsa.puridiom.receipt.tasks.QuickReceivePoHeaderRetrieveByNumber</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="poHeaderList">
+				<task-object-name>com.tsa.puridiom.receipt.tasks.QuickReceivePoLineRetrieve</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

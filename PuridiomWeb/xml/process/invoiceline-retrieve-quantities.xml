@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="invoiceLineRetrieveQuantities" connection-type="Connection-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="invoiceLineRetrieveQuantities">
+			<task synchronous="true" continue-on-failure="false" name="poLine">
+				<task-object-name>com.tsa.puridiom.poline.tasks.PoLineRetrieveByIcLineKey</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="poLine">
+				<rule-filename>is-poline-empty.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.poline.tasks.PoLineRetrieveById</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="setOrderedAmounts">
+				<task-object-name>com.tsa.puridiom.poline.tasks.PoLineGetExtendedCost</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="qtyInvoiced">
+				<task-object-name>com.tsa.puridiom.invoiceline.tasks.InvoiceLineRetrieveQtyInvoiced</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="invoiceUnitPrice">
+				<task-object-name>com.tsa.puridiom.invoiceline.tasks.InvoiceLineRetrieveUnitPrice</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="amountInvoiced">
+				<task-object-name>com.tsa.puridiom.invoiceline.tasks.InvoiceLineRetrieveAmountInvoiced</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="invoiceLineRetrievePoInfo">
+			<rule-filename>is-invoice-forward.xml;is-commodity-not-empty.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="commodity">
+				<task-object-name>com.tsa.puridiom.poline.tasks.PoLineGetCommodityCode</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="commodity">
+				<task-object-name>com.tsa.puridiom.commodity.tasks.CommodityRetrieveById</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="discountPercent">
+				<task-object-name>com.tsa.puridiom.poline.tasks.PoLineGetDiscount</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

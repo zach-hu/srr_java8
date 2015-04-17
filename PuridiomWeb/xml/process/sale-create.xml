@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="saleCreate" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="saleCreate">
+			<task synchronous="true" continue-on-failure="false" name="saleCreateSetup">
+				<task-object-name>com.tsa.puridiom.saleheader.tasks.SaleHeaderCreateSetup</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="saleHeaderUserMap">
+				<task-object-name>com.tsa.puridiom.saleheader.tasks.SaleHeaderUserMap</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="saleHeader">
+				<task-object-name>com.tsa.puridiom.saleheader.tasks.SaleHeaderSetValues</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="saleHeaderAdd">			
+				<task-object-name>com.tsa.puridiom.saleheader.tasks.SaleHeaderAdd</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="saleLineCreate">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>saleline-create.xml</process-filename>
+			</task>
+		</activity>
+	</activities>
+</process>

@@ -1,0 +1,103 @@
+<r-pos-s-ora>
+	<columns>
+		<PoHeader_poNumber>
+			<label>PO Number</label>
+			<type>STRING</type>
+		</PoHeader_poNumber>
+		<PoHeader_revisionNumber>
+			<aggregate>
+				<function>max</function>
+			</aggregate>
+			<label>Revision Number</label>
+			<type>BIGDECIMAL</type>
+		</PoHeader_revisionNumber>
+		<PoHeader_releaseNumber>
+			<aggregate>
+				<function>max</function>
+			</aggregate>
+			<label>Release Number</label>
+			<type>BIGDECIMAL</type>
+		</PoHeader_releaseNumber>
+		<PoLine_itemNumber>
+			<aggregate>
+				<function>max</function>
+			</aggregate>
+			<label>Item Number</label>
+			<type>STRING</type>
+		</PoLine_itemNumber>
+		<PoLine_description>
+			<aggregate>
+				<function>max</function>
+			</aggregate>
+			<label>Description</label>
+			<type>STRING</type>
+		</PoLine_description>
+		<PoLine_requisitionerCode>
+			<aggregate>
+				<function>max</function>
+			</aggregate>
+			<label>Requisitioner Code</label>
+			<type>STRING</type>
+		</PoLine_requisitionerCode>
+		<UserProfile_firstName>
+			<aggregate>
+				<function>max</function>
+			</aggregate>
+			<label>First Name</label>
+			<type>STRING</type>
+		</UserProfile_firstName>
+		<UserProfile_lastName>
+			<aggregate>
+				<function>max</function>
+			</aggregate>
+			<label>Last Name</label>
+			<type>STRING</type>
+		</UserProfile_lastName>
+		<PoHeader_dateEntered>
+			<aggregate>
+				<function>max</function>
+			</aggregate>
+			<label>Entered Date</label>
+			<type>DATE</type>
+		</PoHeader_dateEntered>
+		<PoHeader_total>
+			<aggregate>
+				<function>sum</function>
+			</aggregate>
+			<label>Total</label>
+			<type>BIGDECIMAL</type>
+		</PoHeader_total>
+		<PoHeader_currencyCode>
+			<aggregate>
+				<function>max</function>
+			</aggregate>
+			<label>Currency Code</label>
+			<type>STRING</type>
+			<visible>0</visible>
+		</PoHeader_currencyCode>
+		<ReceiptLine_receiptDate>
+			<aggregate>
+				<function>max</function>
+			</aggregate>
+			<label>Receipt Date</label>
+			<type>DATE</type>
+		</ReceiptLine_receiptDate>
+		<PoLine_lineTotal>
+			<aggregate>
+				<function>sum</function>
+			</aggregate>
+			<label>Line Total</label>
+			<type>BIGDECIMAL</type>
+		</PoLine_lineTotal>
+	</columns>
+  	<sqlfrom>PoHeader as PoHeader, PoLine as PoLine, ReceiptLine as ReceiptLine, Account as Account, UserProfile as UserProfile</sqlfrom>
+	<sqlwhere><![CDATA[( PoHeader.icPoHeader = PoLine.icPoHeader and
+						 PoHeader.icPoHeader = Account.id.icHeader and
+						 ReceiptLine.icPoLine = PoLine.icPoLine and
+	                     PoLine.requisitionerCode = UserProfile.userId  and
+	                     Account.fld1 = '137990' and PoLine.status in ('4005', '4010'))]]></sqlwhere>
+	<sqlgroupby>PoHeader.poNumber</sqlgroupby>
+	<sqlorderby>PoHeader.poNumber</sqlorderby>
+	<title>Orders Received to account 137990</title>
+</r-pos-s-ora>
+

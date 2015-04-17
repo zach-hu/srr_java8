@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created using an evaluation version of JasperAssistant (http://www.jasperassistant.com) -->
+<!DOCTYPE jasperReport PUBLIC "-//JasperReports//DTD Report Design//EN" "http://jasperreports.sourceforge.net/dtds/jasperreport.dtd">
+
+<jasperReport name="RPoAcc" pageWidth="791" pageHeight="612" orientation="Landscape" whenNoDataType="AllSectionsNoDetail" columnWidth="761" leftMargin="15" rightMargin="15" topMargin="15" bottomMargin="15" whenResourceMissingType="Empty">
+	<property name="com.jasperassistant.designer.GridWidth" value="12"/>
+	<property name="com.jasperassistant.designer.GridHeight" value="12"/>
+	<property name="com.jasperassistant.designer.DataSource" value="one"/>
+	<property name="com.jasperassistant.designer.SnapToGrid" value="false"/>
+	<property name="com.jasperassistant.designer.Grid" value="false"/>
+	<import value="com.tsa.puridiom.common.utility.HiltonUtility"/>
+	<import value="com.tsagate.foundation.utility.Utility"/>
+	<import value="com.tsagate.properties.*"/>
+	<import value="com.tsa.puridiom.usermanager.UserManager"/>
+	<import value="java.net.*"/>
+	<import value="com.tsa.puridiom.common.documents.OrderType"/>
+	<import value="com.tsa.puridiom.property.PropertiesManager"/>
+	<import value="com.tsa.puridiom.common.documents.*"/>
+	<import value="java.util.*"/>
+	<import value="com.tsa.puridiom.entity.*"/>
+	<import value="com.tsa.puridiom.vendor.VendorManager"/>
+	<import value="net.sf.jasperreports.engine.JRDataSource"/>
+	<import value="com.tsa.puridiom.currcode.CurrencyManager"/>
+	<import value="com.tsa.puridiom.jasperreports.*"/>
+	<reportFont name="Arial_Normal" isDefault="true" fontName="Arial" size="7" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Bold" isDefault="false" fontName="Arial Black" size="7" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica-Bold" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Bold_Big" isDefault="false" fontName="Arial Black" size="12" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica-Bold" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Big" isDefault="false" fontName="Arial" size="12" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<parameter name="oid" class="java.lang.String">
+		<defaultValueExpression><![CDATA["HILTON"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="reportTitle" class="java.lang.String">
+		<defaultValueExpression><![CDATA[$P{reportTitle}]]></defaultValueExpression>
+	</parameter>
+	<parameter name="reportCriteria" class="java.lang.String">
+		<defaultValueExpression><![CDATA[$P{reportCriteria}]]></defaultValueExpression>
+	</parameter>
+	<parameter name="userId" class="java.lang.String">
+		<defaultValueExpression><![CDATA["Puridiom"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="reportType" class="java.lang.String">
+		<defaultValueExpression><![CDATA["Y"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="companyName" class="java.lang.String">
+		<defaultValueExpression><![CDATA[PropertiesManager.getInstance($P{oid}).getProperty("COMPANY", "Name", "TSA")]]></defaultValueExpression>
+	</parameter>
+	<parameter name="today" class="java.lang.String">
+		<defaultValueExpression><![CDATA[Utility.getDateFormat(new Date(), "d MMM, yyyy h:mm a")]]></defaultValueExpression>
+	</parameter>
+	<parameter name="footerText" class="java.lang.String">
+		<defaultValueExpression><![CDATA[$P{companyName}]]></defaultValueExpression>
+	</parameter>
+	<parameter name="currencyManager" class="com.tsa.puridiom.currcode.CurrencyManager">
+		<defaultValueExpression><![CDATA[CurrencyManager.getInstance($P{oid})]]></defaultValueExpression>
+	</parameter>
+	<parameter name="currencyBase" class="java.lang.String">
+		<defaultValueExpression><![CDATA[$P{currencyManager}.getBaseCurrencyCode()]]></defaultValueExpression>
+	</parameter>
+	<field name="SendQueue_queueid" class="java.math.BigDecimal"/>
+	<field name="SendQueue_subject" class="java.lang.String"/>
+	<field name="SendQueue_status" class="java.lang.String"/>
+	<field name="SendQueue_dateadded" class="java.lang.String"/>
+	<field name="SendQueue_timeadded" class="java.lang.String"/>
+	<field name="SendQueue_attempts" class="java.math.BigDecimal"/>
+	<field name="SendQueue_datesent" class="java.lang.String"/>
+	<field name="SendQueue_timesent" class="java.lang.String"/>
+	<field name="SendQueue_errorText" class="java.lang.String"/>
+	<field name="PoHeader_shiptoContact" class="java.lang.String"/>
+	<field name="PoHeader_vendorName" class="java.lang.String"/>
+	<field name="SendQueue_sendto" class="java.lang.String"/>
+	<field name="SendQueue_action" class="java.lang.String"/>
+	<group name="Group_Vendor">
+		<groupExpression><![CDATA[$F{PoHeader_vendorName}]]></groupExpression>
+		<groupHeader>
+			<band height="28">
+				<textField isBlankWhenNull="true">
+					<reportElement positionType="Float" x="0" y="0" width="100" height="12"/>
+					<box border="1Point" topPadding="0" leftPadding="3" bottomPadding="0" rightPadding="3"/>
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font fontName="Arial Black" isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{PoHeader_vendorName}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement positionType="Float" x="0" y="16" width="65" height="12"/>
+					<box topBorder="None" topPadding="0" leftBorder="None" leftPadding="1" bottomBorder="1Point" bottomPadding="0" rightBorder="None" rightPadding="1"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Arial Black" isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[DictionaryManager.getLabel($P{oid},"rep-transactionId", "Transaction ID")]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement positionType="Float" x="65" y="16" width="155" height="12"/>
+					<box topBorder="None" topPadding="0" leftBorder="None" leftPadding="1" bottomBorder="1Point" bottomPadding="0" rightBorder="None" rightPadding="1"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Arial Black" isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[DictionaryManager.getLabel($P{oid},"rep-subject", "Subject")]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement positionType="Float" x="220" y="16" width="70" height="12"/>
+					<box topBorder="None" topPadding="0" leftBorder="None" leftPadding="1" bottomBorder="1Point" bottomPadding="0" rightBorder="None" rightPadding="1"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Arial Black" isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[DictionaryManager.getLabel($P{oid},"rep-shipToContact", "Sent From")]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement positionType="Float" x="400" y="16" width="50" height="12"/>
+					<box topBorder="None" topPadding="0" leftBorder="None" leftPadding="1" bottomBorder="1Point" bottomPadding="0" rightBorder="None" rightPadding="1"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Arial Black" isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[DictionaryManager.getLabel($P{oid},"rep-status", "Status")]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement positionType="Float" x="290" y="16" width="110" height="12"/>
+					<box topBorder="None" topPadding="0" leftBorder="None" leftPadding="1" bottomBorder="1Point" bottomPadding="0" rightBorder="None" rightPadding="1"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Arial Black" isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[DictionaryManager.getLabel($P{oid},"rep-sendTo", "Sent To")]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement positionType="Float" x="450" y="16" width="25" height="12"/>
+					<box topBorder="None" topPadding="0" leftBorder="None" leftPadding="1" bottomBorder="1Point" bottomPadding="0" rightBorder="None" rightPadding="1"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Arial Black" isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[DictionaryManager.getLabel($P{oid},"rep-action", "Action")]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement positionType="Float" x="475" y="16" width="25" height="12"/>
+					<box padding="0" topBorder="None" leftBorder="None" bottomBorder="1Point" rightBorder="None"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Arial Black" isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[DictionaryManager.getLabel($P{oid},"rep-attemps", "Tries")]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement positionType="Float" x="500" y="16" width="50" height="12"/>
+					<box topBorder="None" topPadding="0" leftBorder="None" leftPadding="1" bottomBorder="1Point" bottomPadding="0" rightBorder="None" rightPadding="1"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Arial Black" isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[DictionaryManager.getLabel($P{oid},"rep-dateSend", "Date Sent")]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement positionType="Float" x="550" y="16" width="50" height="12"/>
+					<box topBorder="None" topPadding="0" leftBorder="None" leftPadding="1" bottomBorder="1Point" bottomPadding="0" rightBorder="None" rightPadding="1"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Arial Black" isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[DictionaryManager.getLabel($P{oid},"rep-timeSend", "Time Sent")]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement positionType="Float" x="600" y="16" width="160" height="12"/>
+					<box topBorder="None" topPadding="0" leftBorder="None" leftPadding="1" bottomBorder="1Point" bottomPadding="0" rightBorder="None" rightPadding="1"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Arial Black" isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[DictionaryManager.getLabel($P{oid},"rep-errorText", "Comments")]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="14"/>
+		</groupFooter>
+	</group>
+	<pageHeader>
+		<band height="42">
+			<subreport isUsingCache="false">
+				<reportElement positionType="Float" x="1" y="1" width="759" height="40"/>
+				<subreportParameter name="today">
+					<subreportParameterExpression><![CDATA[$P{today}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="reportCriteria">
+					<subreportParameterExpression><![CDATA[$P{reportCriteria}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="reportTitle">
+					<subreportParameterExpression><![CDATA[$P{reportTitle}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="oid">
+					<subreportParameterExpression><![CDATA[$P{oid}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="footerText"/>
+				<subreportParameter name="pageNumber">
+					<subreportParameterExpression><![CDATA[String.valueOf($V{PAGE_NUMBER})]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="companyName">
+					<subreportParameterExpression><![CDATA[$P{companyName}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="totalPages">
+					<subreportParameterExpression><![CDATA[String.valueOf($V{PAGE_COUNT})]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[JasperReportsHelper.loadSubReport("header.jasper", $P{oid},"", $P{reportType})]]></subreportExpression>
+			</subreport>
+			<textField>
+				<reportElement positionType="Float" x="677" y="3" width="57" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA["Page " + String.valueOf($V{PAGE_NUMBER}) + " of "]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement positionType="Float" x="736" y="3" width="24" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[" " + String.valueOf($V{PAGE_NUMBER})]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="12">
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" x="65" y="0" width="155" height="12"/>
+				<box border="None" topPadding="0" leftPadding="3" bottomPadding="0" rightPadding="3"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{SendQueue_subject}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" x="220" y="0" width="70" height="12" isPrintWhenDetailOverflows="true"/>
+				<box border="None" topPadding="0" leftPadding="3" bottomPadding="0" rightPadding="3"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{PoHeader_shiptoContact}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" x="400" y="0" width="50" height="12"/>
+				<box border="None" topPadding="0" leftPadding="3" bottomPadding="0" rightPadding="3"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{SendQueue_status}.equalsIgnoreCase("00")?"In Progress":$F{SendQueue_status}.equalsIgnoreCase("10")?"Sent":$F{SendQueue_status}.equalsIgnoreCase("99")?"Failed":""]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" x="290" y="0" width="110" height="12"/>
+				<box border="None" topPadding="0" leftPadding="3" bottomPadding="0" rightPadding="3"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{SendQueue_sendto}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" x="450" y="0" width="25" height="12"/>
+				<box border="None" topPadding="0" leftPadding="3" bottomPadding="0" rightPadding="3"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{SendQueue_action}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" x="500" y="0" width="50" height="12"/>
+				<box border="None" topPadding="0" leftPadding="3" bottomPadding="0" rightPadding="3"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{SendQueue_datesent}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" x="550" y="0" width="50" height="12"/>
+				<box border="None" topPadding="0" leftPadding="3" bottomPadding="0" rightPadding="3"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{SendQueue_timesent}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" x="600" y="0" width="160" height="12"/>
+				<box border="None" topPadding="0" leftPadding="3" bottomPadding="0" rightPadding="3"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{SendQueue_errorText}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="0" width="65" height="12"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{SendQueue_queueid}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="475" y="0" width="25" height="12"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{SendQueue_attempts}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

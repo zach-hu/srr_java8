@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created using an evaluation version of JasperAssistant (http://www.jasperassistant.com) -->
+<!DOCTYPE jasperReport PUBLIC "-//JasperReports//DTD Report Design//EN" "http://jasperreports.sourceforge.net/dtds/jasperreport.dtd">
+
+<jasperReport name="ApprovalLogPdf" pageWidth="549" pageHeight="791" whenNoDataType="BlankPage" columnWidth="549" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+	<property name="com.jasperassistant.designer.GridWidth" value="12"/>
+	<property name="com.jasperassistant.designer.GridHeight" value="12"/>
+	<property name="com.jasperassistant.designer.DataSource" value="empty"/>
+	<property name="com.jasperassistant.designer.SnapToGrid" value="false"/>
+	<property name="com.jasperassistant.designer.Grid" value="false"/>
+	<import value="com.tsagate.properties.*"/>
+	<import value="com.tsa.puridiom.jasperreports.*"/>
+	<reportFont name="Arial_Normal" isDefault="true" fontName="Arial" size="8" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_black" isDefault="false" fontName="Arial Black" size="8" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica-Bold" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Verdana" isDefault="false" fontName="Verdana" size="9" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Verdana_bold" isDefault="false" fontName="Verdana" size="9" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Bold" isDefault="false" fontName="Arial Black" size="8" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica-Bold" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<parameter name="oid" class="java.lang.String">
+		<defaultValueExpression><![CDATA["hilton"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="GCS_SITE_URL" class="java.lang.String">
+		<defaultValueExpression><![CDATA["http://test.puridiom.com/hilton"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="pdf" class="java.lang.Boolean">
+		<defaultValueExpression><![CDATA[new Boolean(false)]]></defaultValueExpression>
+	</parameter>
+	<field name="ApprovalLog_userId" class="java.lang.String"/>
+	<field name="ApprovalLog_approved" class="java.lang.String"/>
+	<field name="ApprovalLog_dateApproved" class="java.util.Date"/>
+	<field name="ApprovalLog_udfValues" class="java.lang.String"/>
+	<field name="ApprovalLog_fyiApprover" class="java.lang.String"/>
+	<group name="pdftitle">
+		<groupHeader>
+			<band height="33">
+				<elementGroup>
+					<textField>
+						<reportElement positionType="Float" mode="Opaque" x="123" y="16" width="142" height="15"/>
+						<box topBorder="None" leftBorder="None" bottomBorder="1Point" rightBorder="None"/>
+						<textElement textAlignment="Center" verticalAlignment="Middle" isStyledText="true">
+							<font reportFont="Arial_Bold" fontName="Verdana"/>
+						</textElement>
+						<textFieldExpression class="java.lang.String"><![CDATA[DictionaryManager.getLabel($P{oid}, "routingApproverName", "Approver Name")]]></textFieldExpression>
+					</textField>
+					<textField>
+						<reportElement positionType="Float" mode="Opaque" x="267" y="16" width="85" height="15" isRemoveLineWhenBlank="true"/>
+						<box topBorder="None" leftBorder="None" bottomBorder="1Point" rightBorder="None"/>
+						<textElement textAlignment="Center" verticalAlignment="Middle" isStyledText="true">
+							<font reportFont="Arial_Bold" fontName="Verdana"/>
+						</textElement>
+						<textFieldExpression class="java.lang.String"><![CDATA[DictionaryManager.getLabel($P{oid}, "routingApproved", "Date Approved")]]></textFieldExpression>
+					</textField>
+					<textField>
+						<reportElement positionType="Float" mode="Opaque" x="26" y="16" width="96" height="15"/>
+						<box topBorder="None" leftBorder="None" bottomBorder="1Point" rightBorder="None"/>
+						<textElement textAlignment="Center" verticalAlignment="Middle" isStyledText="true">
+							<font reportFont="Arial_Bold" fontName="Verdana"/>
+						</textElement>
+						<textFieldExpression class="java.lang.String"><![CDATA[DictionaryManager.getLabel($P{oid}, "routingApprover", "Approver")]]></textFieldExpression>
+					</textField>
+					<staticText>
+						<reportElement positionType="Float" mode="Opaque" x="27" y="3" width="462" height="11"/>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font reportFont="Arial_Bold" size="9" isBold="true"/>
+						</textElement>
+						<text><![CDATA[Approvals]]></text>
+					</staticText>
+				</elementGroup>
+			</band>
+		</groupHeader>
+	</group>
+	<group name="pdfdfetail">
+		<groupExpression><![CDATA[$V{REPORT_COUNT}]]></groupExpression>
+		<groupHeader>
+			<band height="28">
+				<elementGroup>
+					<image hAlign="Center" isUsingCache="true" isLazy="true" onErrorType="Blank">
+						<reportElement positionType="Float" mode="Opaque" x="265" y="3" width="90" height="15" backcolor="#FFFFFF">
+							<printWhenExpression><![CDATA[new Boolean($F{ApprovalLog_fyiApprover}.equalsIgnoreCase("Y"))]]></printWhenExpression>
+						</reportElement>
+						<graphicElement/>
+						<imageExpression class="java.lang.String"><![CDATA[JasperReportsHelper.getImgUrl($P{oid}, "fyi_text_blue.gif")]]></imageExpression>
+					</image>
+					<textField isBlankWhenNull="true">
+						<reportElement positionType="Float" mode="Opaque" x="265" y="3" width="85" height="15" isRemoveLineWhenBlank="true">
+							<printWhenExpression><![CDATA[new Boolean($F{ApprovalLog_approved}.equalsIgnoreCase("N"))]]></printWhenExpression>
+						</reportElement>
+						<textElement textAlignment="Center"/>
+						<textFieldExpression class="java.lang.String"><![CDATA["--"]]></textFieldExpression>
+					</textField>
+					<textField pattern="MM/dd/yyyy" isBlankWhenNull="true">
+						<reportElement positionType="Float" mode="Opaque" x="265" y="3" width="85" height="15" isRemoveLineWhenBlank="true">
+							<printWhenExpression><![CDATA[new Boolean($F{ApprovalLog_approved}.equalsIgnoreCase("Y"))]]></printWhenExpression>
+						</reportElement>
+						<textElement textAlignment="Center" isStyledText="true"/>
+						<textFieldExpression class="java.util.Date"><![CDATA[$F{ApprovalLog_dateApproved}]]></textFieldExpression>
+					</textField>
+					<textField isBlankWhenNull="true">
+						<reportElement positionType="Float" mode="Opaque" x="265" y="3" width="85" height="15" isRemoveLineWhenBlank="true">
+							<printWhenExpression><![CDATA[new Boolean($F{ApprovalLog_approved}.equalsIgnoreCase("A"))]]></printWhenExpression>
+						</reportElement>
+						<textElement textAlignment="Center" isStyledText="true"/>
+						<textFieldExpression class="java.lang.String"><![CDATA["Current Approver"]]></textFieldExpression>
+					</textField>
+					<textField>
+						<reportElement positionType="Float" mode="Opaque" x="123" y="3" width="142" height="15" isRemoveLineWhenBlank="true"/>
+						<textElement textAlignment="Center" isStyledText="true"/>
+						<textFieldExpression class="java.lang.String"><![CDATA[ReportUtils.getUserName($F{ApprovalLog_userId}, $P{oid})]]></textFieldExpression>
+					</textField>
+					<textField isBlankWhenNull="true">
+						<reportElement positionType="Float" mode="Opaque" x="26" y="3" width="96" height="15" isRemoveLineWhenBlank="true"/>
+						<textElement textAlignment="Center" isStyledText="true">
+							<font reportFont="Verdana"/>
+						</textElement>
+						<textFieldExpression class="java.lang.String"><![CDATA[$F{ApprovalLog_userId}]]></textFieldExpression>
+					</textField>
+					<image isUsingCache="true" isLazy="true" onErrorType="Blank">
+						<reportElement positionType="Float" x="357" y="0" width="187" height="26">
+							<printWhenExpression><![CDATA[new Boolean($P{pdf}.equals(new Boolean(true)) && $F{ApprovalLog_approved}.equalsIgnoreCase("Y"))]]></printWhenExpression>
+						</reportElement>
+						<box borderColor="#C0C0C0"/>
+						<graphicElement/>
+						<imageExpression class="java.lang.String"><![CDATA[JasperReportsHelper.getSigUrl($F{ApprovalLog_userId}, $P{oid})]]></imageExpression>
+					</image>
+				</elementGroup>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="5">
+				<rectangle>
+					<reportElement positionType="Float" x="0" y="0" width="535" height="5" forecolor="#FFFFFF"/>
+					<graphicElement/>
+				</rectangle>
+			</band>
+		</groupFooter>
+	</group>
+</jasperReport>

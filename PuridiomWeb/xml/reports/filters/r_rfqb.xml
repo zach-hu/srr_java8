@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<r_rfqb>
+	
+  <columns>
+		<RfqHeader_rfqNumber>
+			<label>Rfq Number</label>
+			<type>STRING</type>
+		</RfqHeader_rfqNumber>
+		<RfqHeader_rfqDate>
+			<label>Rfq Date</label>
+			<type>DATE</type>
+		</RfqHeader_rfqDate>
+		<RfqHeader_dueDate>
+			<label>Due Date</label>
+			<type>DATE</type>
+		</RfqHeader_dueDate>
+		<RfqHeader_vendorAwarded>
+			<label>Vendor Awarded</label>
+			<type>STRING</type>
+		</RfqHeader_vendorAwarded>
+		<RfqHeader_awardDate>
+			<label>Award Date</label>
+			<type>DATE</type>
+		</RfqHeader_awardDate>
+		<RfqHeader_status>
+			<label>Status</label>
+			<type>STRING</type>
+		</RfqHeader_status>
+		<RfqHeader_buyer>
+			<label>Buyer</label>
+			<type>STRING</type>
+		</RfqHeader_buyer>
+		<RfqVendor_vendorId>
+			<label>Vendor Id</label>
+			<type>STRING</type>
+		</RfqVendor_vendorId>
+		<RfqVendor_dateResponseRecv>
+			<label>Date Response Recv</label>
+			<type>STRING</type>
+		</RfqVendor_dateResponseRecv>
+		<RfqVendor_bidResponseCode>
+			<label>Bid Response Code</label>
+			<type>STRING</type>
+		</RfqVendor_bidResponseCode>
+		<RfqHeader_rfqDescription>
+			<label>Rfq Description</label>
+			<type>STRING</type>
+		</RfqHeader_rfqDescription>
+		<Vendor_vendorName>
+			<label>Vendor Name</label>
+			<type>STRING</type>
+		</Vendor_vendorName>
+		<Vendor_vendorClass>
+			<label>Vendor Class</label>
+			<type>STRING</type>
+		</Vendor_vendorClass>
+	</columns>
+<sqlfrom>RfqHeader as RfqHeader , RfqVendor as RfqVendor , Vendor as Vendor</sqlfrom>
+<sqlwhere><![CDATA[( RfqHeader.icRfqHeader = RfqVendor.icRfqHeader ) and ( RfqVendor.vendorId = Vendor.vendorId )]]></sqlwhere>
+<title>REC3</title>
+</r_rfqb>
+

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="itemAccountAdd" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="accountSetValuesFromStdAccount">
+			<task synchronous="true" continue-on-failure="false" name="accountUpdate">
+				<task-object-name>com.tsa.puridiom.account.tasks.AccountSetValuesFromStdAccount</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="requisitionLineSetupFromAccount">
+			<rule-filename>is-organization-bly.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="xrefComboAccount">
+				<task-object-name>com.tsa.puridiom.xrefcombo.tasks.XrefComboRetrieveFromLineItem</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="accountSetValuesFromXrefCombo">
+				<task-object-name>com.tsa.puridiom.account.tasks.AccountSetValuesFromXrefCombo</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="accountDeleteNoActive">
+			<task synchronous="true" continue-on-failure="false" name="account">
+				<task-object-name>com.tsa.puridiom.account.tasks.AccountSetValues</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="accountAdd">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>account-add.xml</process-filename>
+			</task>
+		</activity>
+	</activities>
+</process>

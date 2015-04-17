@@ -1,0 +1,48 @@
+<r_vels>
+  <columns>
+		<PoHeader_poNumber>
+			<label>Po Number</label>
+			<type>STRING</type>
+		</PoHeader_poNumber>
+		<PoHeader_requiredDate>
+			<label>Required Date</label>
+			<type>DATE</type>
+		</PoHeader_requiredDate>
+		<PoHeader_poDate>
+			<label>Po Date</label>
+			<type>DATE</type>
+		</PoHeader_poDate>
+		<PoHeader_poType>
+			<label>Po Type</label>
+			<type>STRING</type>
+		</PoHeader_poType>
+		<PoHeader_status>
+			<label>Po Status</label>
+			<type>STRING</type>
+		</PoHeader_status>
+		<PoHeader_total>
+			<label>Total</label>
+			<type>STRING</type>
+		</PoHeader_total>
+		<Vendor_vendorId>
+			<label>Vendor Id</label>
+			<type>STRING</type>
+		</Vendor_vendorId>
+		<Vendor_vendorName>
+			<label>Vendor Name</label>
+			<type>STRING</type>
+		</Vendor_vendorName>
+		<Vendor_vendorClass>
+			<label>Vendor Class</label>
+			<type>STRING</type>
+		</Vendor_vendorClass>
+		<Vendor_status>
+			<label>Vendor Status</label>
+			<type>STRING</type>
+		</Vendor_status>
+	</columns>
+  <sqlfrom> PoHeader as PoHeader , Vendor as Vendor </sqlfrom>
+  <sqlwhere> <![CDATA[( PoHeader.vendorId = Vendor.vendorId ) and (to_char(PoHeader.requiredDate, 'YYYY/MM/DD') < :as_today) and (PoHeader.status >= '3030') and (PoHeader.status < '4010')]]> </sqlwhere>
+  <sqlorderby>Vendor.vendorId, PoHeader.requiredDate</sqlorderby>
+  <title>Late Shipments</title>
+</r_vels>

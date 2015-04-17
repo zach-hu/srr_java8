@@ -1,0 +1,39 @@
+Puridiom Graphs AJAX Version Setup.
+
+host.properties
+	add graph xml path:
+		graphs=.....\\xml\\graphs\\
+web.xml
+	Add PuridiomGraph servlet declaration and mapping
+		<servlet>
+		    <servlet-name>PuridiomGraphs</servlet-name>
+		    <display-name>PuridiomGraphs</display-name>
+		    <description>Graphs</description>
+		    <servlet-class>com.tsa.puridiomx.PuridiomGraphs</servlet-class>
+		  </servlet>
+		<servlet-mapping>
+		    <servlet-name>PuridiomGraphs</servlet-name>
+		    <url-pattern>/PuridiomGraphs</url-pattern>
+		  </servlet-mapping>
+cfg.xml
+	Add AppLeadTime view mapping to cfg.xml
+		<mapping resource="com/puridiom/hilton/entity/hbm/AppLeadTimeView.hbm.xml"/>
+	Run Script against DB.
+		Script:
+			SQL Server:
+				CREATE VIEW [dtnuser].[APP_LEAD_TIME]
+				    ( IC_HEADER, DATE_END, DATE_START, APP_LEAD )
+				    AS
+				    select ic_header, max ( date_approved) as DATE_END,
+				    min(date_assigned) as DATE_START,
+				    convert(float, (( max ( date_approved) ) - ( min(date_assigned) ) )) as APP_LEAD
+				    from approval_log group by ic_header
+				;
+			Oracle:
+				CREATE VIEW BSCUSER.APP_LEAD_TIME ( IC_HEADER, DATE_END, DATE_START, APP_LEAD )
+				AS
+				select ic_header, max ( date_approved) as DATE_END,
+				min(date_assigned) as DATE_START,
+				(( max ( date_approved) ) - ( min(date_assigned) )  ) as APP_LEAD
+				from approval_log group by ic_header
+				;

@@ -1,0 +1,175 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+    
+<hibernate-mapping>
+
+<!-- 
+    Created by Middlegen Hibernate plugin
+
+    http://boss.bekk.no/boss/middlegen/
+    http://hibernate.sourceforge.net/
+-->
+
+<class 
+    name="com.tsa.puridiom.entity.SaleLine" 
+    table="SALE_LINE"
+>
+    <id
+        name="icSaleLine"
+        type="java.math.BigDecimal"
+        column="IC_SALE_LINE"
+    >
+        <generator class="assigned" />
+    </id>
+    <property
+        name="icSaleHeader"
+        type="java.math.BigDecimal"
+        column="IC_SALE_HEADER"
+        unique="true"
+        length="22"
+    />
+    <property
+        name="saleNumber"
+        type="java.lang.String"
+        column="SALE_NUMBER"
+        length="20"
+    />
+    <property
+        name="source"
+        type="java.lang.String"
+        column="SOURCE"
+        length="3"
+    />
+    <property
+        name="itemNumber"
+        type="java.lang.String"
+        column="ITEM_NUMBER"
+        length="30"
+    />
+    <property
+        name="umCode"
+        type="java.lang.String"
+        column="UM_CODE"
+        length="15"
+    />
+    <property
+        name="quantity"
+        type="java.math.BigDecimal"
+        column="QUANTITY"
+        length="15"
+    />
+    <property
+        name="taxable"
+        type="java.lang.String"
+        column="TAXABLE"
+        length="1"
+    />
+    <property
+        name="status"
+        type="java.lang.String"
+        column="STATUS"
+        length="4"
+    />
+    <property
+        name="commodity"
+        type="java.lang.String"
+        column="COMMODITY"
+        length="15"
+    />
+    <property
+        name="icSource"
+        type="java.math.BigDecimal"
+        column="IC_SOURCE"
+        length="22"
+    />
+    <property
+        name="asset"
+        type="java.lang.String"
+        column="ASSET"
+        length="1"
+    />
+    <property
+        name="catalogId"
+        type="java.lang.String"
+        column="CATALOG_ID"
+        length="15"
+    />
+    <property
+        name="umFactor"
+        type="java.math.BigDecimal"
+        column="UM_FACTOR"
+        length="15"
+    />
+    <property
+        name="mfgName"
+        type="java.lang.String"
+        column="MFG_NAME"
+        length="60"
+    />
+    <property
+        name="modelNumber"
+        type="java.lang.String"
+        column="MODEL_NUMBER"
+        length="20"
+    />
+    <property
+        name="udf1Code"
+        type="java.lang.String"
+        column="UDF_1_CODE"
+        length="15"
+    />
+    <property
+        name="udf2Code"
+        type="java.lang.String"
+        column="UDF_2_CODE"
+        length="15"
+    />
+    <property
+        name="udf3Code"
+        type="java.lang.String"
+        column="UDF_3_CODE"
+        length="15"
+    />
+    <property
+        name="udf4Code"
+        type="java.lang.String"
+        column="UDF_4_CODE"
+        length="15"
+    />
+    <property
+        name="udf5Code"
+        type="java.lang.String"
+        column="UDF_5_CODE"
+        length="15"
+    />
+    <property
+        name="icLineHistory"
+        type="java.math.BigDecimal"
+        column="IC_LINE_HISTORY"
+        length="22"
+    />
+    <property
+        name="itemLocation"
+        type="java.lang.String"
+        column="ITEM_LOCATION"
+        length="15"
+    />
+    <property
+        name="description"
+        type="java.lang.String"
+        column="DESCRIPTION"
+        length="2000"
+    />
+    <property
+        name="taxCode"
+        type="java.lang.String"
+        column="TAX_CODE"
+        length="15"
+    />
+
+    <!-- associations -->
+
+</class>
+</hibernate-mapping>

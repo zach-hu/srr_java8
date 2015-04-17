@@ -1,0 +1,15 @@
+<process name="poLineCancel" connection-type="New-Connection">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="poLineCancel">
+			<task synchronous="true" continue-on-failure="false" name="poLineListTemp">
+				<task-object-name>com.tsa.puridiom.poline.tasks.PoLineRetrieveByReqLine</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="icPoHeaderList">
+				<task-object-name>com.tsa.puridiom.poheader.tasks.PoHeaderIdListRetrieveByPoLine</task-object-name>
+			</task>
+			<!-- <task synchronous="true" continue-on-failure="false" name="poHeaderCancel">
+				<task-object-name>com.tsa.puridiom.poheader.tasks.PoHeaderCancelFromReqLine</task-object-name>
+			</task> -->
+		</activity>
+	</activities>
+</process>

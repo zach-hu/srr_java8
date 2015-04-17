@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="budgetDrawerDelete" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="budgetDrawerDeleteActivity">
+			<task synchronous="true" continue-on-failure="false" name="budgetDrawerDeleteTask">
+				<task-object-name>com.tsa.puridiom.budgetdrawer.tasks.BudgetDrawerDeleteById</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+	</activities>
+</process>

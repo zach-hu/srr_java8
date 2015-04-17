@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="receiptGenerateFormNumber" connection-type="Connection-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="receiptGenerateNumber">
+			<task synchronous="true" continue-on-failure="false" name="getReceiptNumberSetup">
+				<task-object-name>com.tsa.puridiom.receipt.tasks.ReceiptGetNumberSetup</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="ReceiptHeader_receiptNumber">
+				<task-object-name>com.tsa.puridiom.receipt.tasks.ReceiptGenerateFormNumber</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="receiptFormatSetup">
+				<task-object-name>com.tsa.puridiom.receipt.tasks.ReceiptFormatNumberSetup</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="ReceiptHeader_receiptNumber">
+				<task-object-name>com.tsa.puridiom.common.tasks.FormatDocNumber</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

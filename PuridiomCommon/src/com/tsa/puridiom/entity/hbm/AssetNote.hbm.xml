@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 2.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+<class name="com.tsa.puridiom.entity.AssetNote" table="ASSET_NOTE">
+<composite-id name="comp_id" class="com.tsa.puridiom.entity.AssetNotePK">
+<key-property name="sequenceNo" column="SEQUENCE_NO" type="java.math.BigDecimal" length="5"/>
+<key-property name="tagNumber" column="TAG_NUMBER" type="java.lang.String" length="20"/>
+</composite-id>
+<property name="dateEntered" column="DATE_ENTERED" type="java.sql.Timestamp" length="7"/>
+<property name="dateChanged" column="DATE_CHANGED" type="java.sql.Timestamp" length="7"/>
+<property name="userId" column="USER_ID" type="java.lang.String" length="15"/>
+<property name="stdText" column="STD_TEXT" type="java.lang.String" length="2000"/>
+<property name="lastChgBy" column="LAST_CHG_BY" type="java.lang.String" length="25"/>
+</class>
+</hibernate-mapping>

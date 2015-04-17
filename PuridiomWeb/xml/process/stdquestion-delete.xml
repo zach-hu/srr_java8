@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="stdQuestionDelete" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="stdQuestionDelete">
+			<task synchronous="true" continue-on-failure="false" name="stdQuestion">			
+				<task-object-name>com.tsa.puridiom.stdquestion.tasks.StdQuestionDeleteById</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

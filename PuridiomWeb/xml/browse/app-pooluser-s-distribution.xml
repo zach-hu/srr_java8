@@ -1,0 +1,28 @@
+<app_pooluser_distribution>
+	<columns>
+		<c_radio>
+			<label>Select</label>
+			<type>Radio</type>
+			<size>3</size>
+			<selectsql>N</selectsql>
+			<store-request-value>Y</store-request-value>
+		</c_radio>
+		<AppPool_poolid>
+			<label>Pool Id</label>
+			<size>15</size>
+			<hidden-input>Y</hidden-input>
+			<hidden>Y</hidden>
+			<key>Y</key>
+			<alias>RadioValue</alias>
+		</AppPool_poolid>
+		<AppPool_pooldesc>
+			<label>Distribution List Name</label>
+			<size>30</size>
+			<hidden-input>Y</hidden-input>
+		</AppPool_pooldesc>
+	</columns>
+<sqlfrom>AppPool as AppPool</sqlfrom>
+<sqlwhere><![CDATA[ AppPool.poolflag2 = 'Y' ]]></sqlwhere>
+<pagesize>15</pagesize>
+<title>Distribution Lists</title>
+</app_pooluser_distribution>

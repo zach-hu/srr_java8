@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="poLineInvItemLookup" connection-type="Connection-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="poLineUpdate">
+			<task synchronous="true" continue-on-failure="false" name="currencyConversionActivity">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>item-lookup-currency-conversion.xml</process-filename>
+			</task>
+		    <task synchronous="true" continue-on-failure="false" name="poLine">
+				<rule-filename>is-poline-icpoline-not-empty.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.poline.tasks.PoLineRetrieveById</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="poLineLookupSetValues">
+				<rule-filename>is-item-found.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.poline.tasks.PoLineLookupSetValues</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="poLine">
+				<task-object-name>com.tsa.puridiom.poline.tasks.PoLineSetValues</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+	</activities>
+</process>

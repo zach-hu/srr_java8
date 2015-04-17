@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="poCreatefromreq" connection-type="New-Transaction">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="poCreate">
+			<task synchronous="true" continue-on-failure="false" name="poCreateSetup">
+				<task-object-name>com.tsa.puridiom.poheader.tasks.PoHeaderSetup</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="poCreateSetup">
+				<task-object-name>com.tsa.puridiom.po.tasks.PoCreateSetup</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="poGetHeaderInfo">
+			    <task-object-name>com.tsa.puridiom.poheader.tasks.PoGetWrkldHeaderInfo</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="poHeader">
+				<task-object-name>com.tsa.puridiom.poheader.tasks.PoHeaderSetValues</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="CreatePo">
+			<task synchronous="true" continue-on-failure="false" name="poHeader">			
+				<task-object-name>com.tsa.puridiom.poheader.tasks.PoHeaderAdd</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="addLines">
+			<task synchronous="true" continue-on-failure="false" name="addlines">			
+				<task-object-name>com.tsa.puridiom.poline.tasks.PoLineAddFromWorkload</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+	</activities>
+</process>

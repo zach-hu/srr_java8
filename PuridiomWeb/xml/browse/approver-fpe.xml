@@ -1,0 +1,64 @@
+<browse_approver>
+	<columns>
+		<UserProfile_userId>
+			<label>user-userId</label>
+			<link><![CDATA[javascript: returnMe('#UserProfile_userId^'); void(0);]]></link>
+			<size>15</size>
+		</UserProfile_userId>
+		<UserProfile_firstName>
+			<label>firstName</label>
+			<size>15</size>
+		</UserProfile_firstName>
+		<UserProfile_lastName>
+			<label>lastName</label>
+			<sort>A</sort>
+			<filter-default>Y</filter-default>
+			<size>23</size>
+		</UserProfile_lastName>
+		<UserProfile_mailId>
+			<label>emailAddress</label>
+			<hidden>Y</hidden>
+		</UserProfile_mailId>
+		<UserProfile_title>
+			<label>title</label>
+			<size>30</size>
+			<hidden-input>Y</hidden-input>
+		</UserProfile_title>
+		<UserProfile_displayName>
+			<userName>
+				<col>UserProfile_userId</col>
+			</userName>
+			<hidden>Y</hidden>
+			<hidden-input>Y</hidden-input>
+			<selectsql>N</selectsql>
+		</UserProfile_displayName>
+		<UserProfile_approvalAmount>
+			<label>brw-approvalAmt</label>
+			<hidden>N</hidden>
+			<hidden-input>Y</hidden-input>
+			<type>DollarDecimal</type>
+			<size>17</size>
+		</UserProfile_approvalAmount>
+		<UserProfile_approveByLine>
+			<label>brw-approveByLine</label>
+			<hidden>Y</hidden>
+			<hidden-input>Y</hidden-input>
+			<size>17</size>
+		</UserProfile_approveByLine>
+		<UserProfile_excludeLess>
+			<label>brw-excludeLess</label>
+			<hidden>Y</hidden>
+			<hidden-input>Y</hidden-input>
+		</UserProfile_excludeLess>
+		<UserProfile_vchApp>
+			<label>brw-invoiceApprover</label>
+			<hidden>Y</hidden>
+			<hidden-input>Y</hidden-input>
+		</UserProfile_vchApp>
+	</columns>
+<sqlfrom>UserProfile as UserProfile</sqlfrom>
+<sqlwhere><![CDATA[UserProfile.fpe = 'Y' AND UserProfile.approver = 'Y' AND UserProfile.status <> '03' AND UserProfile.userId <> 'SYSADM']]></sqlwhere>
+<sqlorderby>UserProfile.lastName ASC</sqlorderby>
+<pagesize>15</pagesize>
+<title>FPE Approver Browse</title>
+</browse_approver>

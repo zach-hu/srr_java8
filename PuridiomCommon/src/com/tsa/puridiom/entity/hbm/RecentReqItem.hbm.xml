@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+    
+<hibernate-mapping>
+
+<class 
+    name="com.tsa.puridiom.entity.RecentReqItem" 
+    table="RECENT_REQ_ITEM"
+>
+    <composite-id name="comp_id" class="com.tsa.puridiom.entity.RecentReqItemPK">
+        <key-property name="requisitionerCode" column="REQUISITIONER_CODE" type="java.lang.String"/>
+        <key-property name="itemNumber" column="ITEM_NUMBER" type="java.lang.String"/>
+        <key-property name="itemLocation" column="ITEM_LOCATION" type="java.lang.String"/>
+    </composite-id>    
+    <property
+        name="itemSource"
+        type="java.lang.String"
+        column="ITEM_SOURCE"
+        length="5"
+    />	
+    <property
+        name="description"
+        type="java.lang.String"
+        column="DESCRIPTION"
+        length="255"
+    />	
+    <property
+        name="dateEntered"
+        type="java.sql.Timestamp"
+        column="DATE_ENTERED"
+        length="7"
+    />
+    <property
+        name="requestCount"
+        type="java.math.BigDecimal"
+        column="REQUEST_COUNT"
+        length="10"
+    />
+
+    <!-- associations -->
+
+</class>
+</hibernate-mapping>

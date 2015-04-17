@@ -1,0 +1,50 @@
+<browse_asset>
+	<columns>
+		<Asset_trackingNumber>
+			<label>brw-trackingNumber</label>
+			<link><![CDATA[javascript: viewAsset1('#Asset_tagNumber^'); void(0);]]></link>
+			<visible>0</visible>
+		</Asset_trackingNumber>
+		<Asset_tagNumber>
+			<label>brw-tagNumber</label>
+			<link><![CDATA[javascript: viewAsset1('#Asset_tagNumber^'); void(0);]]></link>
+			<visible>1</visible>
+		</Asset_tagNumber>
+		<Asset_assetStatus>
+			<label>brw-assetStatus</label>
+			<visible>0</visible>
+		</Asset_assetStatus>
+		<Asset_assetClass>
+			<label>asset-assetclass</label>
+			<visible>1</visible>
+		</Asset_assetClass>
+		<Asset_itemNumber>
+			<label>asset-itemNumber</label>
+			<visible>1</visible>
+		</Asset_itemNumber>
+		<AssetLocation_room>
+			<label>assetlocation-room</label>
+			<visible>1</visible>
+		</AssetLocation_room>
+		<AssetLocation_facility>
+			<label>assetlocation-facility</label>
+			<visible>1</visible>
+		</AssetLocation_facility>
+		<AssetLocation_building>
+			<label>assetlocation-building</label>
+			<visible>1</visible>
+		</AssetLocation_building>
+		<AssetLocation_id_tagNumber>
+			<label>brw-tagNumberr</label>
+			<visible>0</visible>
+		</AssetLocation_id_tagNumber>
+		<Asset_description>
+			<label>description</label>
+			<detail>Y</detail>
+		</Asset_description>
+	</columns>
+<sqlfrom>Asset as Asset, InvItem as InvItem, AssetLocation as AssetLocation</sqlfrom>
+<sqlwhere><![CDATA[ Asset.itemNumber = InvItem.itemNumber and Asset.tagNumber = AssetLocation.id.tagNumber]]></sqlwhere>
+<pagesize>15</pagesize>
+<title>Asset By Location Browse</title>
+</browse_asset>

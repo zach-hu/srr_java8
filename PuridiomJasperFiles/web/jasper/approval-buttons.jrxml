@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created using an evaluation version of JasperAssistant (http://www.jasperassistant.com) -->
+<!DOCTYPE jasperReport PUBLIC "-//JasperReports//DTD Report Design//EN" "http://jasperreports.sourceforge.net/dtds/jasperreport.dtd">
+
+<jasperReport name="appbuttons" language="java" pageWidth="563" pageHeight="842" whenNoDataType="BlankPage" columnWidth="563" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+	<property name="com.jasperassistant.designer.GridWidth" value="12"/>
+	<property name="com.jasperassistant.designer.GridHeight" value="12"/>
+	<property name="com.jasperassistant.designer.SnapToGrid" value="false"/>
+	<property name="com.jasperassistant.designer.Grid" value="false"/>
+	<import value="com.tsa.puridiom.jasperreports.*"/>
+	<reportFont name="Verdana" isDefault="false" fontName="Verdana" size="9" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Verdana_big" isDefault="true" fontName="Verdana" size="11" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Verdana_bold" isDefault="false" fontName="Verdana" size="9" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<parameter name="oid" class="java.lang.String">
+		<defaultValueExpression><![CDATA["hilton"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="uid" class="java.lang.String">
+	</parameter>
+	<parameter name="mid" class="java.lang.String">
+	</parameter>
+	<parameter name="PoHeader_poNumber" class="java.lang.String">
+	</parameter>
+	<parameter name="PoHeader_icPoHeader" class="java.lang.String">
+	</parameter>
+	<parameter name="GCS_SITE_URL" class="java.lang.String">
+		<defaultValueExpression><![CDATA["http://test.puridiom.com/hilton"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="type" class="java.lang.String">
+		<defaultValueExpression><![CDATA["PO"]]></defaultValueExpression>
+	</parameter>
+	<title>
+		<band height="31">
+			<rectangle>
+				<reportElement positionType="Float" x="10" y="0" width="543" height="23" forecolor="#ffffff"/>
+				<graphicElement/>
+			</rectangle>
+		</band>
+	</title>
+	<detail>
+		<band height="195">
+			<textField hyperlinkType="Reference">
+				<reportElement positionType="Float" mode="Opaque" x="113" y="149" width="97" height="25" forecolor="#ffffff" backcolor="#ce0000"/>
+				<box topBorder="1Point" topBorderColor="#e4e4e4" topPadding="1" leftBorder="1Point" leftBorderColor="#e4e4e4" leftPadding="1" bottomBorder="2Point" bottomBorderColor="#c3c3c3" bottomPadding="1" rightBorder="2Point" rightBorderColor="#c3c3c3" rightPadding="3"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isUnderline="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Approve"]]></textFieldExpression>
+				<hyperlinkReferenceExpression><![CDATA[$P{GCS_SITE_URL} + "/requests/mail_approve.jsp?" + ReportUtils.getApprovalLink($P{uid}, $P{oid}, $P{mid}, "approve", $P{PoHeader_poNumber}, null, $P{PoHeader_icPoHeader}, $P{type})]]></hyperlinkReferenceExpression>
+			</textField>
+			<textField hyperlinkType="Reference">
+				<reportElement positionType="Float" mode="Opaque" x="229" y="149" width="97" height="25" forecolor="#ffffff" backcolor="#ce0000"/>
+				<box topBorder="1Point" topBorderColor="#e4e4e4" topPadding="1" leftBorder="1Point" leftBorderColor="#e4e4e4" leftPadding="1" bottomBorder="2Point" bottomBorderColor="#c3c3c3" bottomPadding="1" rightBorder="2Point" rightBorderColor="#c3c3c3" rightPadding="3"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isUnderline="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Reject"]]></textFieldExpression>
+				<hyperlinkReferenceExpression><![CDATA[$P{GCS_SITE_URL} + "/requests/mail_approve.jsp?" + ReportUtils.getApprovalLink($P{uid}, $P{oid}, $P{mid}, "reject", $P{PoHeader_poNumber}, null, $P{PoHeader_icPoHeader}, $P{type})]]></hyperlinkReferenceExpression>
+			</textField>
+			<textField hyperlinkType="Reference">
+				<reportElement positionType="Float" mode="Opaque" x="345" y="149" width="97" height="25" forecolor="#ffffff" backcolor="#ce0000"/>
+				<box topBorder="1Point" topBorderColor="#e4e4e4" topPadding="1" leftBorder="1Point" leftBorderColor="#e4e4e4" leftPadding="1" bottomBorder="2Point" bottomBorderColor="#c3c3c3" bottomPadding="1" rightBorder="2Point" rightBorderColor="#c3c3c3" rightPadding="3"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isUnderline="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Reroute"]]></textFieldExpression>
+				<hyperlinkReferenceExpression><![CDATA[$P{GCS_SITE_URL} + "/requests/mail_approve.jsp?" + ReportUtils.getApprovalLink($P{uid}, $P{oid}, $P{mid}, "reroute", $P{PoHeader_poNumber}, null, $P{PoHeader_icPoHeader}, $P{type})]]></hyperlinkReferenceExpression>
+			</textField>
+			<textField>
+				<reportElement positionType="Float" mode="Opaque" x="57" y="18" width="408" height="20" backcolor="#ffff00"/>
+				<textElement verticalAlignment="Bottom">
+					<font reportFont="Verdana_bold" size="10"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Do your current security settings not allow you to send HTML forms?"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement positionType="Float" mode="Opaque" x="86" y="50" width="379" height="12" backcolor="#ffff00"/>
+				<textElement verticalAlignment="Middle">
+					<font reportFont="Verdana"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["- Select Tools > Options > Security."]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement positionType="Float" mode="Opaque" x="86" y="62" width="379" height="24" backcolor="#ffff00"/>
+				<textElement verticalAlignment="Middle">
+					<font reportFont="Verdana"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["- Change the pulldown in Security Zones from Restricted Sites to\n" +
+"Internet"]]></textFieldExpression>
+			</textField>
+			<image isLazy="true">
+				<reportElement positionType="Float" mode="Opaque" x="38" y="18" width="19" height="20" backcolor="#ffff00"/>
+				<graphicElement/>
+				<imageExpression class="java.lang.String"><![CDATA[JasperReportsHelper.getImgUrl($P{oid}, "round_corner_lt.gif")]]></imageExpression>
+			</image>
+			<image isLazy="true">
+				<reportElement positionType="Float" mode="Opaque" x="465" y="17" width="19" height="21" backcolor="#ffff00"/>
+				<graphicElement/>
+				<imageExpression class="java.lang.String"><![CDATA[JasperReportsHelper.getImgUrl($P{oid}, "round_corner_rt.gif")]]></imageExpression>
+			</image>
+			<rectangle>
+				<reportElement positionType="Float" x="465" y="38" width="18" height="48" forecolor="#ffff00" backcolor="#ffff00"/>
+				<graphicElement/>
+			</rectangle>
+			<rectangle>
+				<reportElement positionType="Float" x="39" y="38" width="47" height="48" forecolor="#ffff00" backcolor="#ffff00"/>
+				<graphicElement/>
+			</rectangle>
+			<image isLazy="true">
+				<reportElement positionType="Float" mode="Opaque" x="39" y="86" width="19" height="20" backcolor="#ffff00"/>
+				<graphicElement/>
+				<imageExpression class="java.lang.String"><![CDATA[JasperReportsHelper.getImgUrl($P{oid}, "round_corner_lb.gif")]]></imageExpression>
+			</image>
+			<rectangle>
+				<reportElement positionType="Float" x="58" y="86" width="407" height="20" forecolor="#ffff00" backcolor="#ffff00"/>
+				<graphicElement/>
+			</rectangle>
+			<image isLazy="true">
+				<reportElement positionType="Float" mode="Opaque" x="465" y="86" width="19" height="20" backcolor="#ffff00"/>
+				<graphicElement/>
+				<imageExpression class="java.lang.String"><![CDATA[JasperReportsHelper.getImgUrl($P{oid}, "round_corner_rb.gif")]]></imageExpression>
+			</image>
+			<rectangle>
+				<reportElement positionType="Float" x="9" y="119" width="543" height="21" forecolor="#ffffff"/>
+				<graphicElement/>
+			</rectangle>
+			<textField>
+				<reportElement positionType="Float" mode="Opaque" x="86" y="38" width="379" height="12" backcolor="#ffff00"/>
+				<textElement verticalAlignment="Middle">
+					<font reportFont="Verdana"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["In Microsoft Outlook, while looking at your Inbox:"]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

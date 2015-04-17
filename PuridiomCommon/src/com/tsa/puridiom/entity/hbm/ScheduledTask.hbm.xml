@@ -1,0 +1,62 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping>
+
+<class
+    name="com.tsa.puridiom.entity.ScheduledTask"
+    table="SCHEDULED_TASK"
+>
+    <id
+        name="icSchedule"
+        type="java.math.BigDecimal"
+        column="IC_SCHEDULE"
+    >
+        <generator class="assigned" />
+    </id>
+    <property
+        name="taskName"
+        type="java.lang.String"
+        column="TASK_NAME"
+        length="60"
+    />
+    <property
+        name="taskType"
+        type="java.lang.String"
+        column="TASK_TYPE"
+        length="1"
+    />
+    <property
+        name="taskProcess"
+        type="java.lang.String"
+        column="TASK_PROCESS"
+        length="60"
+    />
+    <property
+        name="taskStartDate"
+        type="java.lang.String"
+        column="TASK_START_DATE"
+        length="18"
+    />
+    <property
+        name="taskEndDate"
+        type="java.lang.String"
+        column="TASK_END_DATE"
+        length="18"
+    />
+ 	<property
+        name="taskStatus"
+        type="java.lang.String"
+        column="TASK_STATUS"
+        length="4"
+    />
+    <property
+        name="taskNotify"
+        type="java.lang.String"
+        column="TASK_NOTIFY"
+        length="255"
+    />
+</class>
+</hibernate-mapping>

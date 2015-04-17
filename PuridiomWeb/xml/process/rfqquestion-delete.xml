@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="rfqQuestionDelete" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="rfqQuestionDelete">
+			<task synchronous="true" continue-on-failure="false" name="rfqQuestionDeleteSetup">
+				<task-object-name>com.tsa.puridiom.rfqquestion.tasks.RfqQuestionDeleteSetup</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="rfqQuestion">			
+				<task-object-name>com.tsa.puridiom.rfqquestion.tasks.RfqQuestionDeleteById</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="rfqQuestionRenumber">
+			<rule-filename>is-not-delete-all</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="rfqQuestionRenumber">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>rfqquestion-renumber.xml</process-filename>				
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="rfqHeaderUpdateMaxPoints">
+			<task synchronous="true" continue-on-failure="false" name="rfqHeaderUpdateMaxPoints">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>rfqheader-update-maxpoints.xml</process-filename>
+			</task>
+		</activity>
+	</activities>
+</process>

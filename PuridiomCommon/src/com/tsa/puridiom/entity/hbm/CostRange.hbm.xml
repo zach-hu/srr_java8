@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+    
+<hibernate-mapping>
+
+<!-- 
+    Created by Middlegen Hibernate plugin
+
+    http://boss.bekk.no/boss/middlegen/
+    http://hibernate.sourceforge.net/
+-->
+
+<class 
+    name="com.tsa.puridiom.entity.CostRange" 
+    table="COST_RANGE"
+>
+    <id
+        name="icCostRange"
+        type="java.math.BigDecimal"
+        column="IC_COST_RANGE"
+    >
+        <generator class="assigned" />
+    </id>
+    <property
+        name="itemType"
+        type="java.lang.String"
+        column="ITEM_TYPE"
+        not-null="true"
+        length="3"
+    />
+    <property
+        name="description"
+        type="java.lang.String"
+        column="DESCRIPTION"
+        length="30"
+    />
+    <property
+        name="minimumCost"
+        type="java.math.BigDecimal"
+        column="MINIMUM_COST"
+        length="15"
+    />
+    <property
+        name="maximumCost"
+        type="java.math.BigDecimal"
+        column="MAXIMUM_COST"
+        length="15"
+    />
+
+    <!-- associations -->
+
+</class>
+</hibernate-mapping>

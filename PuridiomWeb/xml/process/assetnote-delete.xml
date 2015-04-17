@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="assetDelete" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="assetDelete">
+
+			<task synchronous="true" continue-on-failure="false" name="check">
+				<task-object-name>com.tsa.puridiom.assetnote.tasks.AssetNoteIdCheck</task-object-name>
+			</task>
+
+			<task synchronous="true" continue-on-failure="false" name="assetCost">
+				<task-object-name>com.tsa.puridiom.assetnote.tasks.AssetNoteDeleteById</task-object-name>
+			</task>
+
+
+		</activity>
+	</activities>
+</process>

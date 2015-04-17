@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="CancelExtendedDisbursementLine" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="DisbursementLineExtendedCancel">
+			<task synchronous="true" continue-on-failure="false" name="invBinLocation">
+				<task-object-name>com.tsa.puridiom.invbinlocation.tasks.InvBinLocationRetrieveById</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="cancelLines">
+				<task-object-name>com.tsa.puridiom.disbline.tasks.DisbLineExtendedCancelIt</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="DisbursementLineExtendedCancel">
+			<task synchronous="true" continue-on-failure="false" name="invBinLocation">
+				<task-object-name>com.tsa.puridiom.invbinlocation.tasks.InvBinLocationUpdate</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="disbLine">
+				<task-object-name>com.tsa.puridiom.disbline.tasks.DisbLineUpdate</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

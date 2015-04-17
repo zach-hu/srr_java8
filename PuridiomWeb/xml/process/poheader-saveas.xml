@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="poSaveas" connection-type="transaction-required">
+  <activities>
+    <activity synchronous="true" continue-on-failure="false" name="poHeaderSaveasFromPo">
+      <task synchronous="true" continue-on-failure="false" name="poHeader">
+        <task-object-name>com.tsa.puridiom.poheader.tasks.PoHeaderSaveas</task-object-name>
+      </task>
+	  <task synchronous="true" continue-on-failure="false" name="poHeader">
+		<rule-filename>is-po-blanket-order.xml</rule-filename>
+		<task-object-name>com.tsa.puridiom.poheader.tasks.PoHeaderApplySelectFiscalYear</task-object-name>
+	  </task>
+	  <task synchronous="true" continue-on-failure="false" name="getCurrencyFactor">
+		<rule-filename check-for-false="true">is-create-revision.xml</rule-filename>
+		<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+	    <process-filename>get-currency-factor.xml</process-filename>
+	  </task>
+	  <task synchronous="true" continue-on-failure="false" name="poHeader">
+		<rule-filename check-for-false="true">is-create-revision.xml</rule-filename>
+	    <task-object-name>com.tsa.puridiom.po.tasks.PoSetCurrencyFactor</task-object-name>
+		<post-action></post-action>
+	  </task>
+      <task synchronous="true" continue-on-failure="false" name="poHeaderSaveasSetup">
+        <task-object-name>com.tsa.puridiom.poheader.tasks.PoHeaderSaveasSetup</task-object-name>
+      </task>
+      <task synchronous="true" continue-on-failure="false" name="poHeaderAccountSaveas">
+        <task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+        <process-filename>account-saveas.xml</process-filename>
+      </task>
+      <task synchronous="true" continue-on-failure="false" name="poHeaderCommentSaveas">
+        <task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+        <process-filename>doccomment-saveas.xml</process-filename>
+      </task>
+      <task synchronous="true" continue-on-failure="false" name="poHeaderAttachmentSaveas">
+        <rule-filename>is-documents-module-active.xml</rule-filename>
+        <task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+        <process-filename>docattachment-saveas.xml</process-filename>
+      </task>
+    </activity>
+  </activities>
+</process>

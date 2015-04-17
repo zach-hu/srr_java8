@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="validateOrganizationId" connection-type="Connection-Required" ldap-connection-type="None">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="setOrganizationIdValues">
+			<task synchronous="true" continue-on-failure="false" name="validateOrganizationIdSetup">
+				<!-- Setup password information for validation -->
+				<task-object-name>com.tsa.puridiom.userprofile.tasks.ValidateOrganizationIdSetup</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="registrationValidations">
+			<task synchronous="true" continue-on-failure="false" name="registrationError">
+				<rule-filename>is-organization-empty.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.usererrormsg.tasks.ErrorMsgSetOrganizationEmpty</task-object-name>
+				<post-action>exitProcess</post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="registrationError">
+				<rule-filename check-for-false="true">is-organization-valid.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.usererrormsg.tasks.ErrorMsgSetInvalidOrganizationId</task-object-name>
+				<post-action>exitProcess</post-action>
+			</task>
+		</activity>
+	</activities>
+</process>

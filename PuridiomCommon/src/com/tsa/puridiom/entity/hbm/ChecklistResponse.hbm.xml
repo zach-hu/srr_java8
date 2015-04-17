@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+    
+<hibernate-mapping>
+
+<!-- 
+    Created by Middlegen Hibernate plugin
+
+    http://boss.bekk.no/boss/middlegen/
+    http://hibernate.sourceforge.net/
+-->
+
+<class 
+    name="com.tsa.puridiom.entity.ChecklistResponse" 
+    table="CHECKLIST_RESPONSE"
+>
+    <composite-id name="comp_id" class="com.tsa.puridiom.entity.ChecklistResponsePK">
+        <key-property name="icHeader" column="IC_HEADER" type="java.math.BigDecimal"/>
+        <key-property name="icQuestion" column="IC_QUESTION" type="java.math.BigDecimal"/>
+    </composite-id>
+    <property
+        name="response"
+        type="java.lang.String"
+        column="RESPONSE"
+        length="2"
+    />
+    <property
+        name="textResponse"
+        type="java.lang.String"
+        column="TEXT_RESPONSE"
+        length="60"
+    />
+
+    <!-- associations -->
+    <!-- bi-directional many-to-one association to ChecklistResponse -->
+
+</class>
+</hibernate-mapping>

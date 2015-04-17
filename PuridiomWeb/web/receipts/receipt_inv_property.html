@@ -1,0 +1,2047 @@
+
+
+
+<script language='Javascript1.2' type="text/javascript">
+<!--
+	var contextPath = "/puridiom";
+//-->
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<HTML>
+<HEAD>
+	<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+	<META HTTP-EQUIV="Cache-Control" content="no-cache">
+	<META HTTP-EQUIV="Expires" CONTENT="Sat, 11 Sep 1971 12:00:00 GMT">
+	<META NAME="Description" Content="/puridiom/system/header.jsp">
+	<script type="text/javascript" src="/puridiom/scripts/yui/yahoo/yahoo.js"></script>
+	<script type="text/javascript" src="/puridiom/scripts/yui/dom/dom.js"></script>
+	<script type="text/javascript" src="/puridiom/scripts/yui/event/event.js"></script>
+	<SCRIPT LANGUAGE="JavaScript1.2" SRC="/puridiom/scripts/hilton.js"></SCRIPT>
+	<script language='Javascript1.2' src="/puridiom/scripts/filter.js"></script>
+	<TITLE>VSE Corporation Self-Service Procurement</TITLE>
+
+
+
+	<LINK REL=STYLESHEET TYPE="text/css" HREF="/puridiom/system/styles/hilton_demo.css">
+
+</HEAD>
+
+<script language='Javascript1.2' type="text/javascript">
+<!--
+	   DOM = (document.getElementById) ? true : false;
+	   NS4 = (document.layers) ? true : false;
+	NS4old = (NS4 && (parseFloat(navigator.appVersion) < 4.02));
+	    IE = (document.all) ? true : false;
+	   IE4 = IE && !DOM;
+	   Mac = (navigator.appVersion.indexOf("Mac") != -1);
+	  IE4M = IE4 && Mac;
+	IsMenu = (DOM || (NS4 && !NS4old) || (IE && !IE4M));
+
+	var fieldsToAudit;
+
+	if(window.event + "" == "undefined") event = null;
+	function f_PopUp(){return};
+	function f_PopDown(){return};
+	popUp = f_PopUp;
+	popDown = f_PopDown;
+	var browseTxt = "Browse";
+	var newTxt = "Create New";
+	var menuLocation = 72;
+	var printPdfLabel = "Print/Email";
+
+	if(IsMenu) {
+		document.write("<scr" + "ipt language='Javascript1.2' src='/puridiom/menu/menubar_arrays.js' type='text/javascript'><\/scr" + "ipt>");
+		document.write("<scr" + "ipt language='Javascript1.2' src='/puridiom/menu/hierMainMenu.js' type='text/javascript'><\/scr" + "ipt>");
+	}
+
+
+//-->
+</SCRIPT>
+<body marginwidth=0 marginheight=0 topmargin=0 leftmargin=0 width=680px onload="thisLoad();loadNavMenu();onLoadComplete();">
+<form name="purchaseform" target="_parent" action="/puridiom/HiltonServletController" method="POST">
+<div id="filterFields" style="display:none;"></div>
+<div id="hiddenFields" style="display:none;"></div>
+<div id="audit" style="display:block;">
+	<input type="hidden" name="auditTransactionId" value="null">
+	<input type="hidden" name="auditFields" id="auditFields" value="" size="80">
+	<input type="hidden" name="auditedFields" id="auditedFields" value="" size="80">
+	<input type="hidden" name="auditTables" id="auditTables" value="" size="80">
+</div>
+<input type="hidden" name="requestId" value="13408848400050">
+<input type="hidden" name="sessionId" value="5ED2CCCB129309C6DA09A0DEC0AC208C">
+<input type="hidden" name="ipAddress" value="null">
+
+
+<script language='Javascript1.2' type="text/javascript">
+<!--
+	var browser = browserCheck();
+	var assetAccess = 0;
+	var reqAccess = 0;
+	var rfqAccess = 0;
+	var poAccess = 0;
+	var questAccess = 0;
+	var rcvByPkgAccess = 0;
+	var rcvByEndUserAccess = 0;
+	var rcvFromNothingAccess = 0;
+	var rcvByItemAccess = 0;
+	var rcvFinalizeAccess = 0;
+	var rcvAdjAccess = 0;
+	var rcvReturnAccess = 0;
+	var rcvHistoryAccess = 0;
+	var invAccess = 0;
+	var invoiceAccess = 0;
+	var salesAccess = 0;
+	var repReqAccess = 0;
+	var repRfqAccess = 0;
+	var repPoAccess = 0;
+	var repInvAccess = 0;
+	var repAdminAccess = 0;
+	var repRecAccess = 0;
+	var repVchAccess = 0;
+	var repBdgAccess = 0;
+	var approver = false;
+	var buyer = false;
+	var assetsActive = false;
+	var reqsActive = true;
+	var rfqsActive = true;
+	var extRfqsActive = true;
+	var posActive = true;
+	var receivingActive = true;
+	var extInvActive = true;
+	var stdInvActive = false;
+	var vouchersActive = true;
+	var salesActive = false;
+	var dashboardAccess = 0;
+
+	if (assetsActive) {
+		assetAccess = 99;
+	}
+	if (reqsActive) {
+		reqAccess = 99;
+		approver = true;
+	}
+	if (rfqsActive) {
+		rfqAccess = 99;
+		questAccess = 0;
+		bbdocsAccess = 0;
+		bbsupAccess = 99;
+	}
+	if (posActive) {
+		poAccess = 99;
+		buyerAssignAccess = 99;
+		buyer = true;
+	}
+	if (receivingActive) {
+		rcvByPkgAccess = 99;
+		rcvByEndUserAccess = 99;
+		rcvFromNothingAccess = 99;
+		rcvByItemAccess = 99;
+		rcvFinalizeAccess = 99;
+		rcvAdjAccess = 99;
+		rcvReturnAccess = 99;
+		rcvHistoryAccess = 99;
+	}
+	if (salesActive) {
+		salesAccess = 0;
+	}
+	if (vouchersActive) {
+		invoiceAccess = 99;
+	}
+	if (extInvActive || stdInvActive) {
+		invAccess = 99;
+	}
+	adminAccess  = 99;
+	bbsupAccess =  99;
+
+	// ********* reports access *******************
+	repReqAccess = 99;
+	repRfqAccess = 99;
+	repPoAccess = 99;
+	repInvAccess = 99;
+	repAdminAccess = 99;
+	repRecAccess = 99;
+	repVchAccess = 99;
+	repBdgAccess = 0;
+	repVndAccess = 99;
+	// ********* end reports access *******************
+
+	//procurement dashboard access
+	dashboardAccess = 99;
+
+	//These options must be populated in this order!
+	Array50 = createRequisitionOptions();
+	Array51 = createSolicitationOptions();
+	Array58 = createSaleOptions();
+	Array52 = createOrderOptions();
+	var receiptOptions = new Array();
+	receiptOptions[1] = "Receive Packages";
+	receiptOptions[2] = "Finalize Receipts";
+	receiptOptions[3] = "Receive From Nothing";
+	receiptOptions[4] = "Receive Items";
+	receiptOptions[5] = "Adjust Receipt";
+	receiptOptions[6] = "Return Received Items";
+	receiptOptions[7] = "View Receipt History";
+
+	Array60 = createReceiptMenu(receiptOptions);
+	Array61 = createInvoiceOptions();
+
+	var inventoryOptions = new Array();
+	inventoryOptions[1] = "New Item";
+	inventoryOptions[2] = "Browse Items";
+	inventoryOptions[3] = "Backorder";
+	inventoryOptions[4] = "Form Approval";
+	inventoryOptions[5] = "Administrative";
+	inventoryOptions[6] = "New Return";
+	inventoryOptions[7] = "Browse Return";
+	inventoryOptions[8] = "New Disbursement";
+	inventoryOptions[9] = "Browse Disbursements";
+	Array55 = createInventoryOptions(inventoryOptions);
+
+	var reportOptions = new Array();
+	reportOptions[1] = "Administrative";
+	reportOptions[2] = "Requests";
+	reportOptions[3] = "Solicitation";
+	reportOptions[4] = "Order";
+	reportOptions[5] = "Receipt";
+	reportOptions[6] = "Invoice";
+	reportOptions[7] = "Inventory";
+	reportOptions[8] = "Budget";
+	reportOptions[9] = "Supplier";
+	//Array57 = createReportOptions(reportOptions);
+
+	Array57 = createReportQueueOptions(reportOptions);
+
+	Array62 = createAssetOptions();
+
+//-->
+</SCRIPT>
+
+<script language='Javascript1.2' src="/puridiom/scripts/dynamicTables.js"></script>
+
+<input type="HIDDEN" name="handler" value="">
+<input type="HIDDEN" name="successPage" value="">
+<input type="HIDDEN" name="failurePage" value="/system/error.jsp">
+<input type="HIDDEN" name="userId" value="SYSADM">
+<input type="HIDDEN" name="organizationId" value="VSE06P">
+<input type="HIDDEN" name="mailId" value="support@puridiom.com">
+<input type="HIDDEN" name="browseName" value="">
+<input type="HIDDEN" name="viewType" value="WIZARD">
+
+
+<div id=pageLoading style="display:block;visibility:visible;">
+<table border=0 cellspacing=0 cellpadding=0 width=680px>
+<tr><td width=100% align=center valign=top><br><b>Loading Page... Please wait.</b><br><br><br><img src="/puridiom/images/processing.gif" border=1 width=200px height=15px></td></tr>
+</table>
+</div>
+
+<div id=pageForm style="display:none;visibility:hidden;">
+
+<table border="0" cellpadding="0" cellspacing="0" width="680px">
+<tr>
+
+	<td width=250px><img src="/puridiom/images\vse06p\logo.gif"	align="bottom" alt="Purchasing Center Home" border=0 height=50px></td>
+
+	<td valign="bottom">
+
+		<table border="0" cellpadding="0" cellspacing="0" width="100%">
+		<tr><td align=right>Welcome System Admin!&nbsp;</td></tr>
+		</table>
+		<br>
+
+		<table border="0" cellpadding="0" cellspacing="0" width="100%">
+			<tr class="mrow">
+				<th height="16px">&nbsp;</th>
+
+				<th align="center" width="50px" height="16px"><a href="javascript: doSubmit('menu/main_menu.jsp', 'DoNothing'); void(0);" onClick="closeOpenWindows();" target="_parent">Menu</a></th>
+
+				<th align="center" valign="middle" width="1px" height="16px" class=separator>|</th>
+				<th align="center" width="50px" height="16px"><a href="javascript: doSubmit('admin/admin_menu.jsp', 'DoNothing'); void(0);" onClick="closeOpenWindows();" target="_parent" >Admin</a></th>
+
+				<th align="center" valign="middle" width="1px" height="16px" class=separator>|</th>
+				<th align="center" width="75px" height="16px"><a href="javascript: viewMyProfile(); void(0);" onClick="closeOpenWindows();" target="_parent">My Profile</a><div id="profileFields" style="visibility: hidden; display:none;"></div></th>
+				<th align="center" valign="middle" width="1px" height="16px" class=separator>|</th>
+
+				<th align="center" width="40px" height="16px" nowrap><a href="javascript:window.open('http://www.puridiom.com/procurement/help/helpmenu.html'); void(0);">Help</a>&nbsp;</th>
+
+				<th align="center" valign="middle" width="1px" height="16px" class=separator>|</th>
+				<th align="center" width=60px height="16px" nowrap><a href="javascript: logOff(); void(0);">Log Off</a>&nbsp;</th>
+
+			</tr>
+		</table>
+	</td>
+</tr>
+</table>
+
+<table border="0" cellpadding="0" cellspacing="0"width="680px">
+<tr><td class="mnav"><img src="/puridiom/images/none.gif" border="0" height="1px" width="100%" class="mnav"></td></tr>
+</table>
+
+
+<table border="0" cellspacing="0" cellpadding="0" width="680px" height="22px">
+	<tr class="mnav">
+
+		<td nowrap align="center" width=85px><a href="javascript: void(0);" onMouseOut="popDown('Menu50')" onMouseOver="popUp('Menu50',event)" class="mnav">Requisition</a></td>
+
+		<td nowrap align="center" width=85px><a href="javascript: void(0);" onMouseOut="popDown('Menu51')" onMouseOver="popUp('Menu51',event)" class="mnav">Solicitations</a></td>
+
+		<td nowrap align="center" width=85px><a href="javascript: void(0);" onMouseOut="popDown('Menu52')" onMouseOver="popUp('Menu52',event)" class="mnav">Orders</a></td>
+
+		<td nowrap align="center" width=85px><a href="javascript: void(0);" onMouseOut="popDown('Menu60')" onMouseOver="popUp('Menu60',event)" class="mnav">Receipts</a></td>
+
+		<td nowrap align="center" width=85px><a href="javascript: void(0);" onMouseOut="popDown('Menu61')" onMouseOver="popUp('Menu61',event)" class="mnav">Invoices</a></td>
+
+		<td nowrap align="center" width=85px><a href="javascript: void(0);" onMouseOut="popDown('Menu55')" onMouseOver="popUp('Menu55',event)" class="mnav">Inventory</a></td>
+
+		<td nowrap align="center" width=85px><a href="javascript: void(0);" onMouseOut="popDown('Menu57')" onMouseOver="popUp('Menu57',event)" class="mnav">Reports</a></td>
+		<!-- <td nowrap align="center" width=85px><a href="javascript: void(0);" onMouseOut="popDown('Menu57')" onMouseOver="popUp('Menu57',event)" class="mnav">Reports</a></td> -->
+
+		<td width=*>&nbsp;</td>
+	</tr>
+</table>
+
+
+<div id="menuBarSpacer"><img src="/puridiom/images/none.gif" border="0" height="20px"></div>
+
+<table id="navTable" border="0" height=28px>
+
+</table>
+
+<SCRIPT value=JavaScript>
+<!-- Hide script
+
+	var myPage = "/puridiom/receipts/rec_entry.jsp";
+
+	function checkHiddenMenu()
+	{
+		if ((myPage.indexOf("/user/") > 0 && myPage.indexOf("/admin/") < 0) || myPage.indexOf("/receipts/") > 0 || myPage.indexOf("/inventory/") > 0 || myPage.indexOf("/catalog/") > 0)
+		{
+			hideArea("navTable");
+			displayArea("menuBarSpacer");
+		}
+	}
+
+	function displayNavMenu ()
+	{
+		var myTable = document.getElementById("navTable");
+		deleteRow(myTable, 0);
+
+		var myRow = createRow(myTable);
+		myRow.height = "25px";
+		var myCell;
+
+		var navArray = getNavCookie("navArray");
+
+		if (navArray != undefined)
+		{
+			var tempArray = navArray.split(",");
+			for (var i = 0; i < tempArray.length; i++)
+			{
+				if (i > 0)
+				{
+					myCell = createCell(myRow);
+					myCell.innerHTML = "<font class='raquo'>&raquo;</font>";
+				}
+				myCell = createCell(myRow);
+				if (i == (tempArray.length-3))	//if this is the last in the array do not display a link
+				{
+					myCell.innerHTML = tempArray[i+2];
+				}
+				else
+				{
+					myCell.innerHTML = "<a href=\"javascript: setBrowseName(); resetNavCookie(" + i + "); doSubmit('" + tempArray[i] + "', '" + tempArray[i+1] + "');\"> " + tempArray[i+2] + " </a>";
+				}
+				i+=2;
+			}
+			hideArea("menuBarSpacer");
+		}
+	}
+
+	function setNavCookie(page, method, label, bReset)
+	{
+		var count = -1;
+		var navArray = new Array();
+		var origNavArray = getNavCookie("navArray");
+		var myPage = "/puridiom/receipts/rec_entry.jsp";
+		var itembrowse = 0;
+
+		if (bReset == null)
+		{
+			bReset = false;
+		}
+
+		if (bReset)
+		{
+			navArray[0] = "/menu/main_menu.jsp";
+			navArray[1] = "DoNothing";
+			navArray[2] = "Menu";
+			count = 2;
+		}
+		else if (origNavArray != undefined)
+		{
+			var tempArray = origNavArray.split(",");
+			for (var i = 0; i < tempArray.length; i++)
+			{
+				if (myPage.indexOf(tempArray[i]) >= 0)
+				{
+					var browseName = "";
+					/*
+						this browseName and itembrowse count are used in the catalog administration -
+						the first time one is browsing items for a particular catalog, the navigation menu not reset
+						however, if one returns to the catalog items browse, it should not keeping adding to the navigation menu,
+						it should reset
+					*/
+					if (browseName != "catalogitem-admin" || itembrowse > 0)
+					{
+						resetNavCookie(i);
+						break;
+					}
+					else
+					{
+						itembrowse++;
+					}
+				}
+				navArray[i] = tempArray[i];
+				count++;
+			}
+		}
+
+		navArray[count + 1] = page;
+		navArray[count + 2] = method;
+		navArray[count + 3] = label;
+
+		document.cookie = "navArray=" + navArray;
+
+		displayNavMenu();
+	}
+
+	function getNavCookie( cookieName )
+	{
+		var cookieJar = document.cookie.split( "; " );
+		for( var i = 0; i < cookieJar.length; i++ )
+		{
+			var myCookie = cookieJar[i].split( "=" );
+			if( myCookie[0] == escape( cookieName ) )
+			{
+				return unescape( myCookie[1] );
+			}
+		}
+		return null;
+	}
+
+	function deleteNavCookie( cookieName )
+	{
+		var cookieDate = new Date ( );
+		cookieDate.setTime ( cookieDate.getTime() - 1 );
+		document.cookie = cookieName += "=; expires=" + cookieDate.toGMTString();
+	}
+
+	function setBrowseCookie( browseName )
+	{
+		document.cookie = "browseName=" + browseName;
+		document.cookie = "browseId=" + browseId;
+	}
+
+	function setBrowseName()
+	{
+		var browseName = getNavCookie("browseName");
+		if (browseName != undefined)
+		{
+			frm.browseName.value = browseName;
+
+			if (!frm.allowBrowse)
+			{
+				var myTable = document.getElementById("navTable");
+				var myRow = createRow(myTable);
+				var myCell = createCell(myRow);
+				myCell.innerHTML = "<input type=\"hidden\" name=\"allowBrowse\" value=\"\"'>";
+			}
+			frm.allowBrowse.value = "true";
+		}
+		var browseId = getNavCookie("browseId");
+		if (browseName != undefined)
+		{
+			if (!frm.browseId)
+			{
+				var myTable = document.getElementById("navTable");
+				var myRow = createRow(myTable);
+				var myCell = createCell(myRow);
+				myCell.innerHTML = "<input type=\"hidden\" name=\"browseId\" value=\"\"'>";
+			}
+			frm.browseId.value = browseId;
+		}
+	}
+
+	/*
+		if a user clicks on one of the links, this will reset the navigation menu
+	*/
+	function resetNavCookie(index)
+	{
+		if (index == 0)
+		{
+			// if the user clicked on the very first navigation link, it should delete the menu links
+			deleteNavCookie("navArray");
+		}
+		else
+		{
+			var navArray = new Array();
+			var origNavArray = getNavCookie("navArray");
+
+			if (origNavArray != undefined)
+			{
+				var tempArray = origNavArray.split(",");
+				for (var i = 0; i < index; i++)
+				{
+					navArray[i] = tempArray[i];
+				}
+			}
+
+			document.cookie = "navArray=" + navArray;
+		}
+	}
+
+// End Hide script -->
+</SCRIPT>
+
+
+
+
+
+
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="/puridiom/scripts/calendar.js"></SCRIPT>
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="/puridiom/scripts/date_check.js"></SCRIPT>
+
+
+
+<input type=hidden name="ReceiptHeader_icRecHeader" value="13408847100048">
+<input type=hidden name="ReceiptHeader_receiptNumber" value="">
+<input type=hidden name="ReceiptHeader_receiptStatus" value="4010">
+<input type=hidden name="ReceiptHeader_fiscalYear" value="2007">
+<input type=hidden name="ReceiptHeader_icPoHeader" value="13408847000046">
+<input type=hidden name="ReceiptHeader_receiptType" value="O">
+<input type=hidden name="ReceiptHeader_shipToCode" value="">
+<input type=hidden name="ReceiptHeader_shipToInv" value="">
+<input type=hidden name="PoHeader_icPoHeader" value="13408847000046">
+<input type=hidden name="PoHeader_fiscalYear" value="2007">
+<input type=hidden name="PoHeader_poType" value="PO">
+<input type=hidden name="PoHeader_shipToInv" value="">
+<input type=hidden name="receiptMethod" value="ReceiveByOrder">
+<input type=hidden name="createAction" value="SAVE">
+<input type=hidden name="receiptAction" value="">
+<input type=hidden name="allowBrowse" value="true">
+<input type=hidden name="InvBinLocation_tempIc" value="13408848400051">
+
+<table width=680px cellpadding=0 cellspacing=0 border=0>
+<tr>
+	<td valign=top width=135px height=30px>
+		<table cellpadding=0 cellspacing=0 border=0 height=100% width=100%>
+		<tr>
+			<td height=1px class=darkShadow><img src="/puridiom/images/none.gif" width="1" height="1px" /></td>
+		</tr>
+		<tr>
+			<td nowrap class=hdr12 valign=middle>
+				<div style="margin-left:10px; margin-right:10px" class=hdr12>Receipt/Order Information</div>
+			</td>
+		</tr>
+		</table>
+	</td>
+	<td valign=bottom><img class=hdr12 src="/puridiom/images/angle.gif" height="31" /></td>
+	<td valign=bottom align=right height=30px>
+		<table border=0 cellspacing=0 cellpadding=1 width=100%>
+		<table border=0 cellspacing=0 cellpadding=1 width=100%>
+		<tr>
+			<td nowrap align=right><b>Order #:</b></td>
+			<td width=100px>N/A</td>
+		</tr>
+		<tr>
+			<td align=right><b>Receipt #:</b></td>
+			<td width=100px>N/A</td>
+		</tr>
+		</table>
+		<table cellpadding="0" cellspacing="0" border=0>
+		<tr>
+			<td width=1000px height=1px class=lightShadow><img src="/puridiom/images/none.gif" width="1" height="1" /></td>
+		</tr>
+		<tr>
+			<td height=2px class=darkShadow><img src="/puridiom/images/none.gif" width="1" height="2" /></td>
+		</tr>
+		</table>
+	</td>
+</tr>
+</table>
+
+<br>
+
+<table border=0 cellpadding=0 cellspacing=0 width=680px>
+<tr>
+	<td width=680px align=center>
+		<table border=0 cellpadding=0 cellspacing=0 width=680px>
+		<tr>
+			<td width=100% align=center valign=top>
+				<table id=receiptInfoTable border=1 cellspacing=0 cellpadding=0 width=605px class=browseHdr>
+				<tr>
+					<td class=browseHdr height=18px nowrap>&nbsp;Receipt Information</td>
+				</tr>
+				<tr>
+					<td class=browseRow align=center valign=top>
+						<table border="0" cellpadding="0" cellspacing="0" width="100%">
+						<tr>
+							<td align=center>
+								<table border="0" cellpadding="0" cellspacing="0" width="100%">
+								<tr >
+									<td align="right" nowrap><a href="javascript: browseSupplier('PoHeader_vendorId'); void(0);" title="Click here to choose the Supplier for this order or enter the Supplier in the box on the right."><font class=requiredLabelHighLight>Supplier</font></a>:&nbsp;</td>
+									<td nowrap>
+										<input type="text" name="PoHeader_vendorId" tabindex=1 size="15" maxlength="15" value="" onchange="upperCase(this); getNewInfo('vendor', this);">
+
+					<!--a href="javascript: addTempVendor(); void(0);"><img src="/puridiom/images/add.gif" alt="Click here to add this supplier to Puridiom." border="0"></a-->
+		 (Code)
+									</td>
+								</tr>
+								<tr >
+									<td align="right" nowrap><a href="javascript: browseContactAddress('PoHeader_vendContactCode', frm.PoHeader_vendorId.value); void(0);" title="Click here to choose the Address for this order or enter the Address in the box on the right.">Address</a>:&nbsp;</td>
+									<td><input type="text" name="Address_addressLine1" size="20" maxlength="40" value="" onfocus="this.blur();" disabled></td>
+								</tr>
+								<tr >
+									<td align="right" nowrap>Address 2:&nbsp;</td>
+									<td width="50%"><input type="text" name="Address_addressLine2" size="20" maxlength="40" value="" onfocus="this.blur()" disabled></td>
+								</tr>
+								<tr >
+									<td align="right" nowrap>Address 3:&nbsp;</td>
+									<td width="50%"><input type="text" name="Address_addressLine3" size="20" maxlength="40" value="" onfocus="this.blur()" disabled></td>
+								</tr>
+								<tr >
+									<td align="right" nowrap>Address 4:&nbsp;</td>
+									<td width="50%"><input type="text" name="Address_addressLine4" size="20" maxlength="40" value="" onfocus="this.blur()" disabled></td>
+								</tr>
+								<tr >
+									<td align="right" nowrap>City:&nbsp;</td>
+									<td width="50%"><input type="text" name="Address_city" size="20" maxlength="30" value="" onfocus="this.blur()" disabled></td>
+								</tr>
+								<tr >
+									<td align="right" nowrap>State:&nbsp;</td>
+									<td width="50%"><input type="text" name="Address_state" size="20" maxlength="15" value="" onfocus="this.blur()" disabled></td>
+								</tr>
+								<tr >
+									<td align="right" nowrap>Zip/Postal Code:&nbsp;</td>
+									<td width="50%"><input type="text" name="Address_postalCode" size="20" maxlength="15" value="" onfocus="this.blur()" disabled></td>
+								</tr>
+								<tr >
+									<td align="right" nowrap>Country:&nbsp;</td>
+									<td width="50%"><input type="text" name="Address_country" size="20" maxlength="25" value="" onfocus="this.blur()" disabled></td>
+								</tr>
+								<tr>
+									<td align=right nowrap>&nbsp;</td>
+									<td width=50%>
+										<input type=hidden class=error name="Address_inventory_message" size=20 maxlength=25 value="Inventory Location">
+									</td>
+								</tr>
+								<tr >
+									<td align="right" nowrap><a href="javascript: browseContactAddress('PoHeader_vendContactCode', frm.PoHeader_vendorId.value); void(0);" title="Click here to choose the Attention for this order or enter the Attention in the box on the right.">Attention</a>:&nbsp;</td>
+									<td>
+										<input type="text" name="PoHeader_vendContactCode" tabindex=10 size="20" maxlength="15" value="" onchange="getNewInfo('contact', this);">
+										<input type=hidden name="PoHeader_contactAddr" value="">
+										<input type=hidden name="PoHeader_shipViaCode" value="">
+										<input type=hidden name="PoHeader_fobCode" value="">
+										<input type=hidden name="PoHeader_termsCode" value="">
+										<input type=hidden name="PoHeader_vendorClass" value="">
+										<input type=hidden name="PoHeader_inspectionReqd" value="">
+										<input type=hidden name="PoHeader_ediOrder_option" value="">
+										<input type=hidden name="PoHeader_ediOrder" value="">
+										<input type=hidden name="VendorInsurance_vendorId" value="">
+									</td>
+								</tr>
+								<tr >
+									<td>&nbsp;</td>
+									<td><input type="text" name="PoHeader_contactName" size="20" maxlength="40" value="" readonly disabled></td>
+								</tr>
+								<tr >
+									<td align=right>Phone:&nbsp;</TD>
+									<td><input type="text" name="PoHeader_contactPhone" size="20" maxlength="30" value="" readonly disabled></td>
+								</tr>
+								<tr >
+									<td align=right>Mobile Phone:&nbsp;</TD>
+									<td><input type="text" name="PoHeader_contactMobilePhone" size="20" maxlength="30" value="" readonly disabled></td>
+								</tr>
+								<tr >
+									<td align="right" nowrap>Contact Email:&nbsp;</td>
+									<td width="50%"><input type="text" name="Address_country" size="35" maxlength="50" value="" onfocus="this.blur()" disabled></td>
+								</tr>
+								</table>
+							</td>
+							<td align=center valign=top class=browseRow>
+								<table border=0 cellspacing=0 cellpadding=1 class=browseRow width=100%>
+								<tr >
+									<td align=right nowrap width=50%><a href="javascript: browseLookup('PoHeader_shipToCode', 'ship_to'); void(0);" title="Click here to choose the Ship Id for this order or enter the Ship Id in the box on the right."><font class=requiredLabelHighLight>Ship Id</font></a>:&nbsp;</td>
+									<td width=50%><input type=text name="PoHeader_shipToCode" tabindex=1 size=15 maxlength=15 value="" onchange="upperCase(this); frm.ReceiptHeader_shipToCode.value = this.value; getNewShipToInfo(this);"></td>
+								</tr>
+								<tr >
+									<td align=right nowrap>Address:&nbsp;</td>
+									<td width=50%><input type=text name="asShipToAddress_addressLine1" size=20 maxlength=40 value="" onfocus="this.blur()" disabled></td>
+								</tr>
+								<tr >
+									<td align=right nowrap>Address 2:&nbsp;</td>
+									<td width=50%><input type=text name="asShipToAddress_addressLine2" size=20 maxlength=40 value="" onfocus="this.blur()" disabled></td>
+								</tr>
+								<tr >
+									<td align=right nowrap>Address 3:&nbsp;</td>
+									<td width=50%><input type=text name="asShipToAddress_addressLine3" size=20 maxlength=40 value="" onfocus="this.blur()" disabled></td>
+								</tr>
+								<tr >
+									<td align=right nowrap>Address 4:&nbsp;</td>
+									<td width=50%><input type=text name="asShipToAddress_addressLine4" size=20 maxlength=40 value="" onfocus="this.blur()" disabled></td>
+								</tr>
+								<tr >
+									<td align=right nowrap>City:&nbsp;</td>
+									<td width=50%><input type=text name="asShipToAddress_city" size=20 maxlength=30 value="" onfocus="this.blur()" disabled></td>
+								</tr>
+								<tr >
+									<td align=right nowrap>State:&nbsp;</td>
+									<td width=50%><input type=text name="asShipToAddress_state" size=20 maxlength=15 value="" onfocus="this.blur()" disabled></td>
+								</tr>
+								<tr >
+									<td align=right nowrap>Zip/Postal Code:&nbsp;</td>
+									<td width=50%><input type=text name="asShipToAddress_postalCode" size=20 maxlength=15 value="" onfocus="this.blur()" disabled></td>
+								</tr>
+								<tr >
+									<td align=right nowrap>Country:&nbsp;</td>
+									<td width=50%><input type=text name="asShipToAddress_country" size=20 maxlength=25 value="" onfocus="this.blur()" disabled></td>
+								</tr>
+								<tr><td colspan=2><br></td></tr>
+								<tr >
+									<td nowrap align=right><b># of Packages:</b>&nbsp;</td>
+									<td nowrap><input type=text name="ReceiptHeader_pkgsReceived" value="0" style="text-align:right" tabIndex=20 size=10 onchange="formatPkgQty()"></td>
+								</tr>
+								<tr >
+									<td nowrap align=right><b>Packing Slip:&nbsp;</b></td>
+									<td nowrap><input type=text name="ReceiptHeader_packingSlip" value="" tabIndex=21 onchange="upperCase(this);" maxLength=15></td>
+								</tr>
+								<tr >
+									<td nowrap align=right><b><a href="javascript: browseStd('ReceiptHeader_carrierCode', 'CARR'); void(0);" title="Click here to choose the Carrier Code for this receipt or enter the value in the box on the right.">Carrier Code:</a>&nbsp;</b></td>
+									<td nowrap><input type=text name="ReceiptHeader_carrierCode" value="" tabIndex=22 onchange="upperCase(this);" maxLength=15></td>
+								</tr>
+								<tr >
+									<td nowrap align=right><b>Receipt Date:</b>&nbsp;</td>
+									<td nowrap><input type=text name="ReceiptHeader_receiptDate" value="2007-12-04" tabindex=23></td>
+									<td><a href="javascript: show_calendar('ReceiptHeader_receiptDate', 'MM-dd-yyyy');"><img src="/puridiom/images/calendar.gif" alt="Click here to choose a date or enter a date in the box on the left." valign=bottom border=0></a></td>
+								</tr>
+								<tr >
+									<td nowrap align=right><b>Staging Area:&nbsp;</b></td>
+									<td nowrap><input type=text name="PoHeader_udf1Code" value="NA" tabindex=24 onchange="upperCase(this);"></td></td>
+								</tr>
+								<tr >
+									<td align="right" nowrap>
+
+										<a href="javascript: browseStd('PoHeader_udf2Code', 'PO02'); void(0);" title="Click here to choose a value for Inspection Level for this order or enter a value in the box on the right."><font class=requiredLabelHighLight>Inspection Level</font>:</a>&nbsp;
+
+									</td>
+
+									<td  >
+										<select tabindex=23 name="PoHeader_udf2Code" size=1 onchange="setUdf2Code();">
+
+										<option value="1" >Visual</value>
+
+										<option value="2" >Physical</value>
+
+										<option value="3" >Special</value>
+
+										<option value="4" SELECTED>None Required</value>
+
+										</select>
+									</td>
+
+								</tr>
+								<tr style="visibility:hidden; display:none;">
+									<td nowrap align=right><b>Order UDF 3:&nbsp;</b></td>
+									<td nowrap><input type=text name="PoHeader_udf3Code" value="NO" tabindex=26 onchange="upperCase(this);"></td>
+								</tr>
+								<tr style="visibility:hidden; display:none;">
+									<td nowrap align=right><b>Government Property in Use:&nbsp;</b></td>
+									<td nowrap><input type=text name="PoHeader_udf4Code" value="" tabindex=27 onchange="upperCase(this);"></td>
+								</tr>
+								<tr style="visibility:hidden; display:none;">
+									<td nowrap align=right><b>Procurement Type:&nbsp;</b></td>
+									<td nowrap><input type=text name="PoHeader_udf5Code" value="PO" tabindex=28 onchange="upperCase(this);"></td>
+								</tr>
+								</table>
+							</td>
+						</tr>
+						<tr>
+							<td colspan=2 align=center>
+							<br>
+								<table border=0 cellspacing=0 cellpadding=0 class=browseRow>
+								<tr >
+									<td nowrap align=right valign=top><b>Notes:</b>&nbsp;</td>
+									<td><textarea name="ReceiptHeader_receiptNotes" cols=90 rows=3  onKeyDown="textCounter(this, 225);" onKeyUp="textCounter(this,225);" tabIndex=29></textarea></td>
+								</tr>
+								</table>
+							<td>
+						</tr>
+						</table>
+					</td>
+				</tr>
+				</table>
+			</td>
+		</tr>
+		</table>
+	</td>
+</tr>
+</table>
+
+<table border=0 cellpadding=0 cellspacing=0 width=680px>
+<tr>
+	<td align=center width=680px>
+		<br>
+
+		<table border=0 cellpadding=2 cellspacing=0 width=675px>
+		<tr><td>&nbsp;<a href="javascript: viewAllItemDetails(); void(0);">View Details for All Items</a></td></tr>
+		</table>
+
+		<table id=itemTable border=1 cellspacing=0 cellpadding=0 width=670px class=browseHdr>
+		<tr>
+			<td width=100% align=center valign=top>
+				<table border=0 cellspacing=0 cellpadding=2 width=100% class=browseRowHdr>
+				<tr>
+					<td  width=6% class=browseHdr nowrap align=center>Line #</td>
+					<td  width=30% class=browseHdr nowrap>Part #</td>
+					<td  width=20% class=browseHdr nowrap align=right>Unit Cost</td>
+					<!--td  width=20% class=browseHdr nowrap align=right>Ordered</td-->
+					<td  width=11% class=browseHdr nowrap align=right>Received</td>
+					<td  width=5% class=browseHdr nowrap align=right>UOM</td>
+					<td  width=11% class=browseHdr nowrap align=right>Rejected</td>
+					<td  width=11% class=browseHdr nowrap align=right>Accepted</td>
+					<td  width=3% class=browseHdr nowrap>&nbsp;</td>
+					<td width=3% class=browseHdr nowrap>&nbsp;</td>
+				</tr>
+				</table>
+			</td>
+		</tr>
+		</table>
+	</td>
+</tr>
+<tr>
+	<td align=right>
+		<table border=0 cellpadding=1 cellspacing=0>
+		<tr>
+			<td align=right><a href="javascript: addNewItem(); void(0);"><img src="/puridiom/images/cmd_add_item.gif" border=0 alt="Add Item"></a></td>
+			<td nowrap>&nbsp;<a href="javascript: addNewItem(); void(0);" title="Click here to add a new Receipt Item">Add Item</a></td>
+			<td width=10px>&nbsp;</td>
+		</tr>
+		</table>
+	</td>
+</tr>
+</table>
+
+<div id="defaultItemDetails" style="visibility: hidden; display: none;">
+	<div id="itemDetails" style="visibility: hidden; display: none;">
+	<table border=0 cellspacing=0 cellpadding=1 width=100% class=browseRow>
+	<tr>
+		<td  height=16px class=label align=right nowrap><a href="javascript: setCurrentRow([ROW_NUMBER]); browseLookup('PoLine_requisitionerCode', 'requisitioner'); void(0);" title="Click here to choose the End User for this order or enter the End User in the box on the right." tabIndex=-1>End User:</td>
+		<td ><input type=text name="PoLine_requisitionerCode" tabindex="23" size="25" maxlength=20 value="SYSADM" onchange="upperCase(this);  getNewInfo('requisitioner', this);"></td>
+		<td  height=16px width=18% class=label align=right nowrap><a href="javascript: setCurrentRow([ROW_NUMBER]);  browseStd('PoLine_udf1Code', 'LN01'); void(0);" title="Click here to choose the value for Hazmat for this item or enter the value in the box on the right." tabIndex=-1><font class=requiredLabelHighLight>Hazmat</font></a>:</td>
+
+		<td  height=16px width=18%>
+			<input type=checkbox name="c_checkbox" tabindex="9"  value="Y" onclick="setCheckbox(PoLine_udf1Code, 0);">
+			<input type=hidden name="PoLine_udf1Code" value="">
+		</td>
+
+		<td  height=16px class=label align=right nowrap><a href="javascript: setCurrentRow([ROW_NUMBER]); browseStd('PoLine_udf4Code', 'LN04'); void(0);" title="Click here to choose the value for C of C Required for this item or enter the value in the box on the right." tabIndex=-1>C of C Required</a>:</td>
+		<td height=16px ><input type=text name="PoLine_udf4Code" tabindex="41" size=15 maxlength=15 value="" onchange="upperCase(this); "></td>
+	</tr>
+	<tr>
+		<td  align=right nowrap class=label>End User Name:</td>
+		<td  nowrap><input type=text name="as_requisitionerName" size=25 value="System Admin" onfocus="this.blur();" disabled></td>
+
+		<td  align=right nowrap><font class=requiredLabelHighLight>Inspection Level</font>:&nbsp;</td>
+		<td  >
+			<select tabindex="37" name="PoLine_udf2Code" size=1>
+
+					<option value="1" >Visual</value>
+
+					<option value="2" >Physical</value>
+
+					<option value="3" >Special</value>
+
+					<option value="4" SELECTED>None Required</value>
+
+				</select>
+		</td>
+
+		<td height=16px  class=label align=right nowrap><a href="javascript: setCurrentRow([ROW_NUMBER]); browseStd('PoLine_udf5Code', 'LN05'); void(0);" title="Click here to choose the value for Transfer Type for this item or enter the value in the box on the right." tabIndex=-1><font class=requiredLabelHighLight>Transfer Type</font></a>:</td>
+		<td height=16px ><input type=text name="PoLine_udf5Code" tabindex="43" size=15 maxlength=15 value="" onchange="upperCase(this); "></td>
+	</tr>
+	<tr>
+		<td  height=16px  class=label align=right nowrap>Capital Asset:</td>
+		<td  height=16px colspan=3>
+			<table border=0 cellspacing=0 cellpadding=1 width=100% class=browseRow>
+			<tr>
+				<td valign=middle><input type="checkbox" name="c_asset" value=Y onclick="setCurrentRow([ROW_NUMBER]); setAsset();"></td>
+				<td valign=middle height=16px  class=label align=right nowrap>Gov't Property:</td>
+				<td valign=middle><input type="checkbox" name="c_gfp" value=Y onclick="setCurrentRow([ROW_NUMBER]); setGfp();"></td>
+				<td valign=middle height=16px  class=label align=right nowrap>Foreign Gov't Property:</td>
+				<td valign=middle><input type="checkbox" name="c_fgp" value=Y onclick="setCurrentRow([ROW_NUMBER]); setFgp();"></td>
+			</tr>
+			</table>
+		</td>
+
+		<td  height=16px width=15% class=label align=right nowrap><a href="javascript: setCurrentRow([ROW_NUMBER]); browseStd('PoLine_udf3Code', 'LN03'); void(0);" title="Click here to choose the value for Govt Property Class for this item or enter the value in the box on the right." tabIndex=-1><font class=requiredLabelHighLight>Govt Property Class</font></a>:</td>
+		<td  height=16px width=16%><input type=text name="PoLine_udf3Code" tabindex="39" size=15 maxlength=15 value="" onchange="upperCase(this); "></td>
+	</tr>
+	</table>
+	<div id="itemInvProperties" style="visibility: hidden; display: none;">
+		<table border=0 cellspacing=0 cellpadding=1 width=100% class=browseRow>
+		<tr><td></td></tr>
+		</table>
+	</div>
+	</div>
+</div>
+
+<div id="defaultInvProperties" style="visibility: hidden; display: none;">
+	<hr size=0>
+	<table border=0 cellspacing=0 cellpadding=1 width=100% class=browseRow>
+	<tr>
+		<td align=right width=5px>[INV_PROPERTY_ROW_DISPLAY]:</td>
+		<td align=right nowrap>GPIN/CapAsset Tag #:</td>
+		<td><input type=text name="InvProperty_tagNumber" value="" size=35></td>
+		<td align=right nowrap>Serial #:</td>
+		<td><input type=text name="InvProperty_serialNumber" value="" size=50></td>
+		<td width=5px align=center><a href="javascript: deleteInvProperty([ROW_NUMBER],[INV_PROPERTY_ROW]); void(0);"><img src="/puridiom/images/delete.gif" border=0 alt="Delete Property Record" tabIndex=-1></a></td>
+	</tr>
+	<tr>
+		<td align=right width=5px>&nbsp;</td>
+		<td align=right nowrap><a href="javascript: void(0);">PJO/DO/TO</a>:</td>
+		<td><input type=text name="InvProperty_contract" value=""></td>
+		<td align=right nowrap>Shipping Number:</td>
+		<td colspan=2><input type=text name="InvProperty_shipNumber" value=""></td>
+	</tr>
+	<tr>
+		<td align=right width=5px>&nbsp;</td>
+		<td align=right nowrap>PO Number:</td>
+		<td><input type=text name="InvProperty_poNumber" value=""></td>
+		<td align=right nowrap>Receipt Number:</td>
+		<td colspan=2><input type=text name="InvProperty_receiptNumber" value=""></td>
+	</tr>
+	<tr>
+		<td align=right width=5px>&nbsp;</td>
+		<td align=right nowrap>Remarks:</td>
+		<td colspan=4><input type=text name="InvProperty_remarks" value="" size=50></td>
+	</tr>
+	</table>
+</div>
+
+<div id="dummyFields" style="display:none;">
+<input type=hidden name="ReceiptLine_qtyReceived" value="">
+<input type=hidden name="ReceiptLine_qtyRejected" value="">
+<input type=hidden name="ReceiptLine_qtyAccepted" value="">
+<input type=hidden name="balance" value="">
+<input type=hidden name="originalQtyReceived" value="">
+<input type=hidden name="ReceiptLine_icRecHeader" value="">
+<input type=hidden name="ReceiptLine_icRecLine" value="">
+<input type=hidden name="ReceiptLine_icPoLine" value="">
+<input type=hidden name="ReceiptLine_receiptNotes" value="">
+<input type=hidden name="ReceiptLine_inspectionCode" value="">
+<input type=hidden name="ReceiptLine_rejectionCode" value="">
+<input type=hidden name="ReceiptLine_dispositionCode" value="">
+<input type=hidden name="PoLine_quantity" value="">
+<input type=hidden name="PoLine_umCode" value="">
+<input type=hidden name="PoLine_umFactor" value="">
+<input type=hidden name="PoLine_itemNumber" value="">
+<input type=hidden name="PoLine_description" value="">
+<input type=hidden name="PoLine_unitPrice" value="">
+<input type=hidden name="PoLine_itemSource" value="">
+<input type=hidden name="PoLine_itemLocation" value="">
+<input type=hidden name="PoLine_asset" value="">
+<input type=hidden name="PoLine_receiptRequired" value="">
+<input type=hidden name="PoLine_icPoLine" value="">
+<input type=hidden name="PoLine_udf1Code" value="">
+<input type=hidden name="PoLine_udf2Code" value="">
+<input type=hidden name="PoLine_udf3Code" value="">
+<input type=hidden name="PoLine_udf4Code" value="">
+<input type=hidden name="PoLine_udf5Code" value="">
+<input type=hidden name="PoLine_requisitionerCode" value="">
+<input type=hidden name="createReturn" value="">
+<input type=hidden name="returnReceiptHeader_receiptNotes" value="">
+<input type=hidden name="returnReceiptHeader_pkgsReceived" value="">
+<input type=hidden name="returnReceiptHeader_packingSlip" value=""><!--RMA #-->
+<input type=hidden name="returnReceiptHeader_carrierCode" value="">
+<input type=hidden name="returnReceiptHeader_returnDate" value="">
+<input type=hidden name="returnReceiptHeader_icRecHeader" value="">
+<input type=hidden name="returnReceiptHeader_icPoHeader" value="">
+<input type=hidden name="returnReceiptLine_icRecHeader" value="">
+<input type=hidden name="returnReceiptLine_qtyReceived" value="">
+<input type=hidden name="returnReceiptLine_qtyRejected" value="">
+<input type=hidden name="returnReceiptLine_qtyReturned" value="">
+<input type=hidden name="returnReceiptLine_icPoLine" value="">
+<input type=hidden name="returnReceiptLine_dispositionCode" value="">
+<input type=hidden name="returnReceiptLine_receiptNotes" value="">
+<input type=hidden name="InvProperty_tagNumber" value="">
+<input type=hidden name="InvProperty_serialNumber" value="">
+<input type=hidden name="InvProperty_contract" value="">
+<input type=hidden name="InvProperty_shipNumber" value="">
+<input type=hidden name="InvProperty_poNumber" value="">
+<input type=hidden name="InvProperty_receiptNumber" value="">
+<input type=hidden name="InvProperty_remarks" value="">
+</div>
+
+<br>
+<br>
+
+<table border=0 cellpadding=0 cellspacing=0 width=680px>
+<tr>
+	<td width=50% align=center><div id="forward_link"><a href="javascript: finalizeReceipt(); void(0);"><img class=button src="/puridiom/images/button_finalize.gif" border=0 tabIndex=1000></a></div></td>
+	<td width=50% align=center><a href="javascript: doSubmit('menu/main_menu.jsp', 'DoNothing'); void(0);"><img class=button src="/puridiom/images/button_cancel.gif" border=0 tabIndex=1002></a></td>
+		</tr>
+		</table>
+	</td>
+</tr>
+</table>
+
+<br>
+
+<br>
+
+<table border="0" cellspacing="0" cellpadding="0" width="680px" vAlign="bottom" id="copyright">
+<hr size="0" color="black" width="680px" align="left">
+<tr>
+	<td class="copyright" width="33%" align="left">&nbsp;Copyright &copy; 2007&nbsp;<a href="http://www.puridiom.com" target="_blank">Puridiom.com</a></td>
+	<td class="copyright" width="34%" align="center"><a href="http://www.puridiom.com/procurement/legal/index.html" target="_blank">Legal Notices</a></td>
+	<td class="copyright" width="33%" align="right">Release 3.1.-datetime-</td>
+</tr>
+</table>
+
+</div><!--  end pageForm div  -->
+
+</form>
+</body>
+</html>
+
+<SCRIPT value=JavaScript>
+<!-- Hide script
+
+	frm = document.purchaseform;
+
+	var info_window = null;
+	var populated = false;
+	var uomArray = new Array();
+	var currentRow = 0;
+	var qtyDecimals  = 2;
+	var displayRejectionCode = true;
+	var displayDispositionCode = true;
+
+	addNewItem();
+
+	function receiveAllForItem(row) {
+		var balance = nformat(frm.balance[row].value, qtyDecimals);
+		frm.ReceiptLine_qtyReceived[row].value = balance;
+		frm.ReceiptLine_qtyRejected[row].value = nformat(0, qtyDecimals);
+
+		checkBalance(row);
+		if (frm.ReceiptLine_qtyReceived[row + 1] && frm.ReceiptLine_qtyReceived[row + 1].type != "hidden") {
+			frm.ReceiptLine_qtyReceived[row + 1].focus();
+		}
+	}
+
+	function checkBalance(row) {
+		var receiptQty = nformat(eval(nfilter(frm.ReceiptLine_qtyReceived[row])), qtyDecimals);
+		var rejectedQty = nformat(eval(nfilter(frm.ReceiptLine_qtyRejected[row])), qtyDecimals);
+		var acceptedQty = nformat(receiptQty - rejectedQty, qtyDecimals);
+		frm.ReceiptLine_qtyReceived[row].value = receiptQty;
+		frm.ReceiptLine_qtyAccepted[row].value = acceptedQty;
+	}
+
+	function viewReceiptHistory(row) {
+		var d = document.all("itemReceiptHistory");
+		if (d.length > 1) {
+			d(row).style.visibility = "visible";
+			d(row).style.display = "block";
+		} else {
+			d.style.visibility = "visible";
+			d.style.display = "block";
+		}
+		var t = document.all("receiptHistory");
+		if (t.length > 1) {
+			t(row).style.visibility = "hidden";
+			t(row).style.display = "none";
+		} else {
+			t.style.visibility = "hidden";
+			t.style.display = "none";
+		}
+	}
+
+	function hideReceiptHistory(row) {
+		var d = document.all("itemReceiptHistory");
+		if (d.length > 1) {
+			d(row).style.visibility = "hidden";
+			d(row).style.display = "none";
+		} else {
+			d.style.visibility = "hidden";
+			d.style.display = "none";
+		}
+		var t = document.all("receiptHistory");
+		if (t.length > 1) {
+			t(row).style.visibility = "visible";
+			t(row).style.display = "block";
+		} else {
+			t.style.visibility = "visible";
+			t.style.display = "block";
+		}
+	}
+
+	function viewReceiptNotes(row) {
+		var d = document.all("itemReceiptNotes");
+		if (d.length > 1) {
+			d(row).style.visibility = "visible";
+			d(row).style.display = "block";
+		} else {
+			d.style.visibility = "visible";
+			d.style.display = "block";
+		}
+		var t = document.all("receiptNotes");
+		if (t.length > 1) {
+			t(row).style.visibility = "hidden";
+			t(row).style.display = "block";
+		} else {
+			t.style.visibility = "hidden";
+			t.style.display = "block";
+		}
+	}
+
+	function hideReceiptNotes(row) {
+		var d = document.all("itemReceiptNotes");
+		if (d.length > 1) {
+			d(row).style.visibility = "hidden";
+			d(row).style.display = "none";
+		} else {
+			d.style.visibility = "hidden";
+			d.style.display = "none";
+		}
+		var t = document.all("receiptNotes");
+		if (t.length > 1) {
+			t(row).style.visibility = "visible";
+			t(row).style.display = "block";
+		} else {
+			t.style.visibility = "visible";
+			t.style.display = "block";
+		}
+	}
+
+	function receiveAll() {
+		var items = frm.elements.item("ReceiptLine_qtyReceived");
+		var itemCount = 0;
+
+		if (items.length != undefined){
+			itemCount = items.length - 1;
+		}
+		for (var i=0; i < itemCount; i++) {
+			receiveAllForItem(i);
+		}
+	}
+
+	function finalizeReceipt() {
+		if (validatePoLineInfo()) {
+			frm.receiptMethod.value ="ReceiveFromNothing";
+			frm.receiptAction.value = "FORWARD";
+			frm.failurePage.value = "/system/error_popup.jsp";
+			if (doSubmitToNewTarget('receipts/rec_validate.jsp', 'ReceiptValidate', 'lookup_window')) {
+				hideAreaWithBlock('forward_link');
+			}
+			frm.failurePage.value = "/system/error.jsp";
+		}
+	}
+
+	function validatePoLineInfo() {
+		var items = frm.elements.item("ReceiptLine_qtyReceived");
+		var itemCount = 0;
+
+		if (items.length != undefined){
+			itemCount = items.length - 1;
+		}
+		for (var i=0; i < itemCount; i++) {
+			if (isEmpty(frm.PoLine_itemNumber[i].value) && isEmpty(frm.PoLine_description[i].value)) {
+				alert("You must enter either an item number or description for all items.");
+				return false;
+			}
+			frm.PoLine_quantity[i].value = frm.ReceiptLine_qtyReceived[i].value;
+		}
+		return true;
+	}
+
+	function checkInventory(row) {
+		var itemSource = frm.PoLine_itemSource[row].value;
+		var itemLocation = frm.PoLine_itemLocation[row].value;
+		var itemNumber = frm.PoLine_itemNumber[row].value;
+		var itemCost = frm.PoLine_unitPrice[row].value;
+		var receiptOption = frm.PoLine_receiptRequired[row].value;
+		var icPoLine = frm.ReceiptLine_icPoLine[row].value;
+		var qtyReceived = frm.ReceiptLine_qtyAccepted[row].value;
+
+		if (itemSource == "INV" && receiptOption == "R") {
+			if (qtyReceived == 0) {
+				popupParameters = "InvBinLocation_itemNumber=" + itemNumber + ";InvBinLocation_itemLocation=" + itemLocation + ";InvBinLocation_tempIc=" + frm.InvBinLocation_tempIc.value;
+				doSubmitToLookup('system/close_window.jsp', 'InvBinLocationDeleteItemByTempIc', 'WIDTH=1px', 'HEIGHT=1px');
+			} else {
+				popupParameters = "InvBinLocation_itemNumber=" + itemNumber + ";InvBinLocation_itemLocation=" + itemLocation + ";InvLocation_itemNumber=" + itemNumber + ";InvLocation_itemLocation=" + itemLocation + ";qtyReceived=" + qtyReceived + ";index=" + row + ";InvBinLocation_tempIc=" + frm.InvBinLocation_tempIc.value + ";InvBinLocation_cost=" + itemCost + ";PoLine_icPoLine=" + icPoLine;
+				doSubmitToLookup('receipts/rec_inv_bin_locations.jsp', 'InvBinLocationRetrieveByItem', 'WIDTH=700px', 'HEIGHT=500px');
+			}
+		}
+	}
+
+	function formatPkgQty() {
+		frm.ReceiptHeader_pkgsReceived.value = nformat(eval(nfilter(frm.ReceiptHeader_pkgsReceived)), 0);
+	}
+
+	function viewAssetRelated(iclinekey) {
+  		var newInputField = "<input type='hidden' name='Asset_icLineKey' value='" + iclinekey + "'>";
+  			newInputField = newInputField + "<input type='hidden' name='allowBrowse' value='true'>";
+  			newInputField = newInputField + "<input type='hidden' name='action'		value='rec-item-entry'>";
+			newInputField = newInputField + "<input type='hidden' name='process'	value='AssetRetrieveByIcLineKey'>";
+			newInputField = newInputField + "<input type='hidden' name='urlret'		value='/receipts/rec_item_entry'>";
+		setHiddenFields(newInputField);
+		doSubmit("/asset/asset_rec_browse.jsp", "AssetRetrieveByIcLineKey");
+ 	}
+
+	function setCurrentRow(row) {
+		currentRow = row;
+	}
+
+	function checkInspectionRequirements() {
+		var inspectionReqd = false;
+		if (inspectionReqd) {
+			var items = frm.elements.item("ReceiptLine_qtyReceived");
+			var itemCount = 0;
+
+			if (items.length != undefined){
+				itemCount = items.length - 1;
+			}
+
+			for (var i=0; i < itemCount; i++) {
+				var receiptQty = eval(nfilter(frm.ReceiptLine_qtyReceived[i]));
+
+				if (receiptQty > 0 && isEmpty(frm.ReceiptLine_inspectionCode[i].value)) {
+					alert("An Inspection Code is required for all items received for this order.");
+					return false;
+				}
+			}
+		}
+		return true;
+	}
+
+	function setReceived(row) {
+		var qtyReceived = eval(nfilter(frm.ReceiptLine_qtyReceived[row]));
+		var qtyRejected = eval(nfilter(frm.ReceiptLine_qtyRejected[row]));
+
+		if (qtyRejected > qtyReceived) {
+			alert("You cannot reject more than the quantity you have received.");
+			qtyRejected = qtyReceived;
+
+			frm.ReceiptLine_qtyRejected[row].value = qtyReceived;
+		}
+		checkBalance(row);
+	}
+
+	function checkRejected(row) {
+		var qtyRejected = nformat(eval(nfilter(frm.ReceiptLine_qtyRejected[row])), qtyDecimals);
+
+		if (qtyRejected > 0) {
+			if (displayRejectionCode) {
+				viewRejectionCode(row);
+				frm.ReceiptLine_rejectionCode[row].select();
+			}
+			if (displayDispositionCode) {
+				viewDispositionCode(row);
+				if (!displayRejectionCode) {
+					frm.ReceiptLine_dispositionCode[row].select();
+				}
+			}
+		}
+		else {
+			frm.createReturn[row].value = "N";
+			hideRejectionCode(row);
+			hideDispositionCode(row);
+		}
+	}
+
+	function viewRejectionCode(row) {
+		var d = document.all("itemRejectionCode");
+		if (d.length > 1) {
+			d(row).style.visibility = "visible";
+			d(row).style.display = "block";
+		} else {
+			d.style.visibility = "visible";
+			d.style.display = "block";
+		}
+		var d = document.all("itemReturnOption");
+		if (d.length > 1) {
+			d(row).style.visibility = "visible";
+			d(row).style.display = "block";
+		} else {
+			d.style.visibility = "visible";
+			d.style.display = "block";
+		}
+	}
+
+	function hideRejectionCode(row) {
+		var d = document.all("itemRejectionCode");
+		if (d.length > 1) {
+			d(row).style.visibility = "hidden";
+			d(row).style.display = "none";
+		} else {
+			d.style.visibility = "hidden";
+			d.style.display = "none";
+		}
+		var d = document.all("itemReturnOption");
+		if (d.length > 1) {
+			d(row).style.visibility = "hidden";
+			d(row).style.display = "none";
+		} else {
+			d.style.visibility = "hidden";
+			d.style.display = "none";
+		}
+	}
+
+	function viewDispositionCode(row) {
+		var d = document.all("itemDispositionCode");
+		if (d.length > 1) {
+			d(row).style.visibility = "visible";
+			d(row).style.display = "block";
+		} else {
+			d.style.visibility = "visible";
+			d.style.display = "block";
+		}
+	}
+
+	function hideDispositionCode(row) {
+		var d = document.all("itemDispositionCode");
+		if (d.length > 1) {
+			d(row).style.visibility = "hidden";
+			d(row).style.display = "none";
+		} else {
+			d.style.visibility = "hidden";
+			d.style.display = "none";
+		}
+	}
+
+	function viewAllItemDetails() {
+		var items = frm.elements.item("ReceiptLine_qtyReceived");
+		var itemCount = 0;
+
+		if (items.length != undefined){
+			itemCount = items.length - 1;
+		}
+		for (var i=0; i < itemCount; i++) {
+			viewItemDetails(i);
+		}
+	}
+
+	function viewItemDetails(row) {
+		var d = document.all("openItemDetails");
+		if (d.length > 1) {
+			d(row).style.visibility = "hidden";
+			d(row).style.display = "none";
+		} else {
+			d.style.visibility = "hidden";
+			d.style.display = "none";
+		}
+		var t = document.all("closeItemDetails");
+		if (t.length > 1) {
+			t(row).style.visibility = "visible";
+			t(row).style.display = "block";
+		} else {
+			t.style.visibility = "visible";
+			t.style.display = "block";
+		}
+		var s = document.all("itemDetails");
+		if (s.length > 1) {
+			s(row).style.visibility = "visible";
+			s(row).style.display = "block";
+		} else {
+			s.style.visibility = "visible";
+			s.style.display = "block";
+		}
+	}
+
+	function hideItemDetails(row) {
+		var d = document.all("openItemDetails");
+		if (d.length > 1) {
+			d(row).style.visibility = "visible";
+			d(row).style.display = "block";
+		} else {
+			d.style.visibility = "visible";
+			d.style.display = "block";
+		}
+		var t = document.all("closeItemDetails");
+		if (t.length > 1) {
+			t(row).style.visibility = "hidden";
+			t(row).style.display = "none";
+		} else {
+			t.style.visibility = "hidden";
+			t.style.display = "none";
+		}
+		var s = document.all("itemDetails");
+		if (s.length > 1) {
+			s(row).style.visibility = "hidden";
+			s(row).style.display = "none";
+		} else {
+			s.style.visibility = "hidden";
+			s.style.display = "none";
+		}
+	}
+
+	function returnRejected(row) {
+		var originalQtyReceived = eval(nfilter(frm.originalQtyReceived[row]));
+		var qtyReceived = eval(nfilter(frm.ReceiptLine_qtyReceived[row]));
+		var totalQtyRecieved = eval(originalQtyReceived + qtyReceived);
+
+		popupParameters = "ReceiptHeader_icPoHeader=" + frm.ReceiptHeader_icPoHeader.value;
+		popupParameters = popupParameters + ";icPoLine=" + frm.ReceiptLine_icPoLine[row].value;
+		popupParameters = popupParameters + ";qtyRejected=" + frm.ReceiptLine_qtyRejected[row].value;
+		popupParameters = popupParameters + ";qtyReceived=" + totalQtyRecieved;
+		popupParameters = popupParameters + ";dispositionCode=" + frm.ReceiptLine_dispositionCode[row].value;
+		popupParameters = popupParameters + ";currentRow=" + row;
+		popupParameters = popupParameters + ";uid=SYSADM";
+		popupParameters = popupParameters + ";oid=VSE06P";
+
+		doSubmitToLookup('receipts/rec_return_popup.jsp', 'ReceiptCreateRetrieve', 'width=692px', 'height=325px');
+	}
+
+    function browseSupplier(formField)
+	{
+		popupParameters = popupParameters + "formField=" + formField +";browseName=vendor;allowBrowse=" + frm.allowBrowse.value;
+
+
+
+		doSubmitToLookup('/browse/supplier_filter_options.jsp', 'VendorRetrieveBrowseOptions', 'WIDTH=700px', 'HEIGHT=500px');
+	}
+
+	function getItemInfo(row) {
+		// No need to call the server if the item number is empty
+		if (!isEmpty(frm.PoLine_itemNumber[row].value)) {
+//			doSubmit('/orders/po_item.jsp', 'PoLineItemLookup;PoLineRetrieve');
+		}
+	}
+
+	function formatUnitPrice (row) {
+		var price_dec = 2;
+		var p = nformat(eval(nfilter(frm.PoLine_unitPrice[row])),price_dec);
+		var q = nformat(eval(nfilter(frm.ReceiptLine_qtyReceived[row])), qtyDecimals);
+		var f = eval(nfilter(frm.PoLine_umFactor[row]));
+
+		if (f == 0) { f = 1; }
+
+		frm.PoLine_umFactor[row].value = f;
+		frm.PoLine_unitPrice[row].value = p;
+		frm.PoLine_quantity[row].value = q;
+
+		if (p == (nformat(eval(0.00),price_dec)) && q == nformat(eval(0.00),qtyDecimals)) {
+			frm.PoLine_unitPrice[row].value = '';
+			frm.PoLine_quantity[row].value = '';
+		}
+	}
+
+	function updateUMFactor(row) {
+		var open = true;
+		var browser = browserTest();
+		var factor = "";
+		var code = "";
+
+		frm.PoLine_umCode[row].value = trim(frm.PoLine_umCode[row]);
+
+		if (info_window != null) {
+			if (browser == "Netscape") {
+				if (info_window.closed == false) {
+					info_window.setUomCode("PoLine_");
+					open = false;
+				}
+			}
+			else {
+				info_window.setUomCode("PoLine_");
+				open = false;
+			}
+		}
+
+		if (open == true) {
+			if (uomArray.length > 0 || populated) {
+				code = frm.PoLine_umCode[row].value;
+				for (var i = 0; i < uomArray.length; i++) {
+					if (code == (uomArray[i][0]).toString()) {
+						factor = uomArray[i][1];
+						break;
+					}
+				}
+
+				setUmFactor(factor, row);
+			}
+			else {
+				popupParameters = "as_prefix=PoLine_;as_row=" + row;
+				doSubmitToLookup('/base/get_uom_info.jsp', 'UnitOfMeasureRetrieveAll', 'WIDTH=1', 'HEIGHT=1');
+				self.focus();
+			}
+		}
+	}
+
+	function setUmFactor(factor, row) {
+		frm.PoLine_umFactor[row].value = factor;
+	}
+
+	function populateUOM(uoma)
+	{
+		var e = 0;
+
+		for (var i = 0; i < uoma.length; i++) {
+			uomArray[e] = new Array(uoma[i][0], uoma[i][1]);
+			e++;
+		}
+
+		populated = true;
+	}
+
+	function deleteItem(row) {
+		var myTable = document.getElementById("itemTable");
+		var currentRows = myTable.rows.length;
+
+		if (currentRows == 1) {
+			return;
+		}
+		else if (currentRows == 2) {
+			frm.PoLine_quantity[0].value = "";
+			frm.PoLine_umCode[0].value = "";
+			frm.PoLine_umFactor[0].value = "1";
+			frm.PoLine_itemNumber[0].value = "";
+			frm.PoLine_description[0].value = "";
+			frm.PoLine_unitPrice[0].value = "";
+			frm.PoLine_itemSource[0].value = "";
+			frm.PoLine_itemLocation[0].value = "";
+			frm.PoLine_asset[0].value = "";
+			frm.PoLine_udf1Code[0].value = "";
+			frm.PoLine_udf2Code[0].value = "";
+			frm.PoLine_udf3Code[0].value = "";
+			frm.PoLine_udf4Code[0].value = "";
+			frm.PoLine_udf5Code[0].value = "";
+			frm.PoLine_receiptRequired[0].value = "";
+			frm.PoLine_requisitionerCode[0].value = "";
+		}
+		else if (currentRows > 2) {
+			for (var i = row; i < (currentRows - 1); i++) {
+				var quantity = frm.PoLine_quantity[i + 1].value;
+				var umCode = frm.PoLine_umCode[i + 1].value;
+				var umFactor = frm.PoLine_umFactor[i + 1].value;
+				var itemNumber = frm.PoLine_itemNumber[i + 1].value;
+				var description = frm.PoLine_description[i + 1].value;
+				var unitPrice =frm.PoLine_unitPrice[i + 1].value;
+				var itemSource = frm.PoLine_itemSource[i + 1].value;
+				var itemLocation = frm.PoLine_itemLocation[i + 1].value;
+				var asset = frm.PoLine_asset[i + 1].value;
+				var udf1Code = frm.PoLine_udf1Code[i + 1].value;
+				var udf2Code = frm.PoLine_udf2Code[i + 1].value;
+				var udf3Code = frm.PoLine_udf3Code[i + 1].value;
+				var udf4Code = frm.PoLine_udf4Code[i + 1].value;
+				var udf5Code = frm.PoLine_udf5Code[i + 1].value;
+				var receiptRequired =frm.PoLine_receiptRequired[i + 1].value;
+				var requisitionerCode = frm.PoLine_requisitionerCode[i + 1].value;
+
+				frm.PoLine_quantity[i].value = quantity;
+				frm.PoLine_umCode[i].value = umCode;
+				frm.PoLine_umFactor[i].value = umFactor;
+				frm.PoLine_itemNumber[i].value = itemNumber;
+				frm.PoLine_description[i].value = description;
+				frm.PoLine_unitPrice[i].value = unitPrice;
+				frm.PoLine_itemSource[i].value = itemSource;
+				frm.PoLine_itemLocation[i].value = itemLocation;
+				frm.PoLine_asset[i].value = asset;
+				frm.PoLine_udf1Code[i].value = udf1Code;
+				frm.PoLine_udf2Code[i].value = udf2Code;
+				frm.PoLine_udf3Code[i].value = udf3Code;
+				frm.PoLine_udf4Code[i].value = udf4Code;
+				frm.PoLine_udf5Code[i].value = udf5Code;
+				frm.PoLine_receiptRequired[i].value = receiptRequired;
+				frm.PoLine_requisitionerCode[i].value = requisitionerCode;
+			}
+		}
+
+		if (currentRows > 2) {
+			myTable.deleteRow(currentRows - 1);
+		}
+	}
+
+	function getItemDetailsHTML(row) {
+		var defaultObj = document.getElementById("defaultItemDetails");
+		var defaultHTML = defaultObj.innerHTML;
+		defaultHTML = replaceChars(defaultHTML, "[ROW_NUMBER]", row);
+		return defaultHTML;
+	}
+
+	function addNewItem() {
+		var myTable = document.getElementById("itemTable");
+		var currentRows = myTable.rows.length;
+		var row = currentRows - 1;
+		var myRow;
+		var myCell;
+
+		myRow = createRow(myTable);
+
+		myCell = createCell(myRow);
+		myCell.width = "100%";
+		myCell.align = "center";
+		myCell.vAlign = "top";
+		myCell.innerHTML = "<table border=0 cellspacing=0 cellpadding=1 width=100% class=browseRow id=\"item_" + row + "\"></table>";
+
+		var myItemTable = document.getElementById("item_" + row);
+
+		myRow = createRow(myItemTable);
+
+		myCell = createCell(myRow);
+		myCell.width = "6%";
+		myCell.className = "browseRow";
+		myCell.align = "right";
+		myCell.nowrap = true;
+		myCell.innerHTML = nformat((row + 1), 1) + "&nbsp;";
+
+
+		myCell = createCell(myRow);
+		myCell.width = "30%";
+		myCell.className = "browseRow";
+		myCell.nowrap = true;
+		myCell.innerHTML = "<input type=text name=\"PoLine_itemNumber\" size=25 maxlength=30 value=\"\" onchange=\"upperCase(this); getItemInfo(" + row + ");  void(0);\">";
+
+		myCell = createCell(myRow);
+		myCell.width = "20%";
+		myCell.className = "browseRow";
+		myCell.align = "right";
+		myCell.nowrap = true;
+		myCell.innerHTML = "<input type=text name=\"PoLine_unitPrice\" size=20 maxlength=25 value=\"\" style=\"text-align:right\" onchange=\"formatUnitPrice(" + row + ");\">";
+
+
+		myCell = createCell(myRow);
+		myCell.width = "12%";
+		myCell.className = "browseRow";
+		myCell.align = "right";
+		myCell.nowrap = true;
+		myCell.innerHTML = "<input type=text name=\"ReceiptLine_qtyReceived\" size=10 maxlength=25 value=\"\" style=\"text-align:right\" onchange=\"checkBalance(" + row + "); checkInventory(" + row + ");\">" +
+						"<input type=hidden name=\"balance\" value=\"\">" +
+						"<input type=hidden name=\"originalQtyReceived\" value=\"\">" +
+						"<input type=hidden name=\"ReceiptLine_icRecHeader\" value=\"13408847100048\">" +
+						"<input type=hidden name=\"ReceiptLine_icRecLine\" value=\"\">" +
+						"<input type=hidden name=\"ReceiptLine_icPoLine\" value=\"\">" +
+						"<input type=hidden name=\"PoLine_itemSource\" value=\"\">" +
+						"<input type=hidden name=\"PoLine_itemLocation\" value=\"\">" +
+						"<input type=hidden name=\"PoLine_quantity\" value=\"\">" +
+						"<input type=hidden name=\"PoLine_receiptRequired\" value=\"\">" +
+						"<input type=hidden name=\"PoLine_asset\" value=\"\">" +
+						"<input type=hidden name=\"createReturn\" value=\"\">" +
+						"<input type=hidden name=\"returnReceiptHeader_receiptNotes\" value=\"\">" +
+						"<input type=hidden name=\"returnReceiptHeader_pkgsReceived\" value=\"\">" +
+						"<input type=hidden name=\"returnReceiptHeader_packingSlip\" value=\"\"><!--RMA #-->" +
+						"<input type=hidden name=\"returnReceiptHeader_carrierCode\" value=\"\">" +
+						"<input type=hidden name=\"returnReceiptHeader_returnDate\" value=\"\">" +
+						"<input type=hidden name=\"returnReceiptHeader_icRecHeader\" value=\"\">" +
+						"<input type=hidden name=\"returnReceiptHeader_icPoHeader\" value=\"13408847000046\">" +
+						"<input type=hidden name=\"returnReceiptLine_icRecHeader\" value=\"\">" +
+						"<input type=hidden name=\"returnReceiptLine_qtyReceived\" value=\"\">" +
+						"<input type=hidden name=\"returnReceiptLine_qtyRejected\" value=\"\">" +
+						"<input type=hidden name=\"returnReceiptLine_qtyReturned\" value=\"\">" +
+						"<input type=hidden name=\"returnReceiptLine_icPoLine\" value=\"\">" +
+						"<input type=hidden name=\"returnReceiptLine_dispositionCode\" value=\"\">" +
+						"<input type=hidden name=\"returnReceiptLine_receiptNotes\" value=\"\">" ;
+
+
+		myCell = createCell(myRow);
+		myCell.width = "5%";
+		myCell.className = "browseRow";
+		myCell.align = "right";
+		myCell.nowrap = true;
+		myCell.innerHTML = "<input type=text name=\"PoLine_umCode\" size=3 maxlength=15 value=\"EA\" onchange=\"upperCase(this); updateUMFactor(" + row + ");\">" +
+				 "<input type=hidden name=\"PoLine_umFactor\" value=\"1\">";
+
+
+		myCell = createCell(myRow);
+		myCell.width = "12%";
+		myCell.className = "browseRow";
+		myCell.align = "right";
+		myCell.nowrap = true;
+		myCell.innerHTML = "<input type=text name=\"ReceiptLine_qtyRejected\" size=10 value=\"\" style=\"text-align:right\" onchange=\"setReceived(" + row + "); checkRejected(" + row + ");\">";
+
+
+		myCell = createCell(myRow);
+		myCell.width = "12%";
+		myCell.className = "browseRow";
+		myCell.align = "right";
+		myCell.nowrap = true;
+		myCell.innerHTML = "<input type=text name=\"ReceiptLine_qtyAccepted\" size=10 value=\"\" style=\"text-align:right\" readonly>";
+
+
+		myCell = createCell(myRow);
+		myCell.width = "3%";
+		myCell.className = "browseRow";
+		myCell.align = "right";
+		myCell.nowrap = true;
+		myCell.innerHTML = "<div id=\"receiptNotes\"><a href=\"javascript: viewReceiptNotes(" + row + "); void(0);\"><img src=\"/puridiom/images/cmd_edit.gif\" border=0 alt=\"Enter Item Receipt Notes\" tabIndex=-1></a></div>";
+
+		myCell = createCell(myRow);
+		myCell.width = "3%";
+		myCell.className = "browseRow";
+		myCell.align = "right";
+		myCell.nowrap = true;
+		myCell.innerHTML = "<div id=\"deleteItemLink\"><a href=\"javascript: deleteItem(" + row + "); void(0);\"><img src=\"/puridiom/images/delete.gif\" border=0 alt=\"Delete Item Receipt\" tabIndex=-1></a></div>";
+
+		/***** NEW ROW FOR ITEM TABLE *****/
+		myRow = createRow(myItemTable);
+
+		myCell = createCell(myRow);
+		myCell.className = "browseRow";
+		myCell.innerHTML = "&nbsp;";
+
+		myCell = createCell(myRow);
+		myCell.className = "browseRow";
+		myCell.colSpan = 2;
+		myCell.vAlign = "top";
+		myCell.innerHTML = "<textarea wrap=\"virtual\" name=\"PoLine_description\" rows=5 cols=60 onKeyDown=\"textCounter(this, 2000);\" onKeyUp=\"textCounter(this,2000);\" onchange=\"textCounter(this,2000);\"></textarea>";
+
+		myCell = createCell(myRow);
+		myCell.className = "browseRow";
+		myCell.colSpan = 4;
+		myCell.vAlign = "top";
+		myCell.align = "right";
+		myCell.innerHTML = "<table border=0 cellspacing=0 cellpadding=1 class=browseRow id=\"inspectionCodes_"  + row +  "\"></table>";
+
+		var myCodesTable = document.getElementById("inspectionCodes_" + row);
+
+		/***** ROW FOR INSPECTION CODE *****/
+		var myCodesRow = createRow(myCodesTable);
+
+
+		myCell = createCell(myCodesRow);
+		myCell.className = "label";
+		myCell.height = "16px";
+		myCell.align = "right";
+		myCell.innerHTML = "<a href=\"javascript: setCurrentRow(" + row + "); browseStd('ReceiptLine_inspectionCode', 'INSP', true); void(0);\" tabIndex=-1>Inspection Code:</a>";
+
+		myCell = createCell(myCodesRow);
+		myCell.height = "16px";
+		myCell.innerHTML = "<input type=text name=\"ReceiptLine_inspectionCode\" size=20 onchange=\"upperCase(this);\">";
+
+		/***** ROW FOR REJECTION CODE *****/
+		myCodesRow = createRow(myCodesTable);
+		myCodesRow.id = "itemRejectionCode";
+		myCodesRow.style.visibility = "hidden";
+		myCodesRow.style.display = "none";
+
+		myCell = createCell(myCodesRow);
+		myCell.className = "label";
+		myCell.height = "16px";
+		myCell.align = "right";
+		myCell.innerHTML = "<a href=\"javascript: setCurrentRow(" + row + "); browseStd('ReceiptLine_rejectionCode', 'REJ', true); void(0);\" tabIndex=-1>Rejection Code:</a>";
+
+		myCell = createCell(myCodesRow);
+		myCell.height = "16px";
+		myCell.innerHTML = "<input type=text name=\"ReceiptLine_rejectionCode\" size=20 onchange=\"upperCase(this);\">";
+
+		/***** ROW FOR DISPOSITION CODE *****/
+		myCodesRow = createRow(myCodesTable);
+		myCodesRow.id = "itemDispositionCode";
+		myCodesRow.style.visibility = "hidden";
+		myCodesRow.style.display = "none";
+
+		myCell = createCell(myCodesRow);
+		myCell.className = "label";
+		myCell.height = "16px";
+		myCell.align = "right";
+		myCell.innerHTML = "<a href=\"javascript: setCurrentRow(" + row + "); browseStd('ReceiptLine_dispositionCode', 'DISP', true); void(0);\" tabIndex=-1>Disposition Code:</a>";
+
+		myCell = createCell(myCodesRow);
+		myCell.height = "16px";
+		myCell.innerHTML = "<input type=text name=\"ReceiptLine_dispositionCode\" size=20 onchange=\"upperCase(this);\">";
+
+		/***** ROW FOR RETURN OPTION *****/
+		myCodesRow = createRow(myCodesTable);
+		myCodesRow.id = "itemReturnOption";
+		myCodesRow.style.visibility = "hidden";
+		myCodesRow.style.display = "none";
+
+		myCell = createCell(myCodesRow);
+		myCell.colSpan = 2;
+		myCell.height = "16px";
+		myCell.align = "right";
+		myCell.innerHTML = "<a href=\"javascript: returnRejected(" + row + "); void(0);\" tabIndex=-1>Return Rejected Items</a>";
+
+		/***** END CODES TABLE ROW CREATION *****/
+
+		myCell = createCell(myRow);
+		myCell.className = "browseRow";
+		myCell.nowrap = true;
+		myCell.innerHTML = "&nbsp;";
+
+		/***** NEW ROW FOR ITEM TABLE *****/
+		myRow = createRow(myItemTable);
+
+		myCell = createCell(myRow);
+		myCell.className = "browseRow";
+		myCell.innerHTML = "&nbsp;";
+
+		myCell = createCell(myRow);
+		myCell.className = "browseRow";
+		myCell.colSpan = 2;
+		myCell.vAlign = "top";
+		myCell.innerHTML = "<div id=\"openItemDetails\"><table border=0 cellspacing=0 cellpadding=1 id=\"openItemDetailsTable_" + row + "\"></table></div>" +
+				"<div id=\"closeItemDetails\" style=\"visibility:hidden;display:none;\"><table border=0 cellspacing=0 cellpadding=1 id=\"closeItemDetailsTable_" + row + "\"></table></div>";
+
+		/***** CREATE OPEN/CLOSE ITEM DETAIL LINKS TABLE *****/
+		var myItemDetailsTable = document.getElementById("openItemDetailsTable_" + row);
+		var myItemDetailsRow = createRow(myItemDetailsTable);
+
+		myCell = createCell(myItemDetailsRow);
+		myCell.vAlign = "middle";
+		myCell.align = "right";
+		myCell.innerHTML = "<a href=\"javascript: viewItemDetails(" + row + "); void(0);\" tabIndex=\"-1\"><img src=\"/puridiom/images/plus.gif\" border=0></a>";
+
+		myCell = createCell(myItemDetailsRow);
+		myCell.vAlign = "middle";
+		myCell.innerHTML = "<a href=\"javascript: viewItemDetails(" + row + "); void(0);\" tabIndex=\"-1\">View Item Details</a>";
+
+		myItemDetailsTable = document.getElementById("closeItemDetailsTable_" + row);
+		myItemDetailsRow = createRow(myItemDetailsTable);
+
+		myCell = createCell(myItemDetailsRow);
+		myCell.vAlign = "middle";
+		myCell.align = "right";
+		myCell.innerHTML = "<a href=\"javascript: hideItemDetails(" + row + "); void(0);\" tabIndex=\"-1\"><img src=\"/puridiom/images/minus.gif\" border=0></a>";
+
+		myCell = createCell(myItemDetailsRow);
+		myCell.vAlign = "middle";
+		myCell.innerHTML = "<a href=\"javascript: hideItemDetails(" + row + "); void(0);\" tabIndex=\"-1\">Hide Item Details</a>";
+		/***** END CREATE OPE/CLOSE ITEM DETAIL LINKS TABLE *****/
+
+		myCell = createCell(myRow);
+		myCell.className = "browseRow";
+		myCell.colSpan = 4;
+		myCell.vAlign = "top";
+		myCell.align = "right";
+		myCell.innerHTML = "<div id=\"itemReceiptNotes\" style=\"visibility: hidden; display: none;\"><table border=0 cellspacing=0 cellpadding=1 class=browseRow id=\"itemReceiptNotesTable_" + row + "\"></table></div>";
+
+		/***** CREATE ITEM RECEIPT NOTES TABLE *****/
+		var myItemReceiptNotesTable = document.getElementById("itemReceiptNotesTable_" + row);
+		var myItemReceiptNotesRow = createRow(myItemReceiptNotesTable);
+
+		myCell = createCell(myItemReceiptNotesRow);
+		myCell.vAlign = "middle";
+		myCell.align = "right";
+		myCell.width = "5%";
+		myCell.innerHTML = "<a href=\"javascript: hideReceiptNotes(" + row + "); void(0);\" tabIndex=\"-1\"><img src=\"/puridiom/images/bar_close.gif\" border=0 alt='Hide Item Receipt Notes'></a>";
+
+		myCell = createCell(myItemReceiptNotesRow);
+		myCell.vAlign = "middle";
+		myCell.width = "95%";
+		myCell.innerHTML = "Notes:";
+
+		myItemReceiptNotesRow = createRow(myItemReceiptNotesTable);
+
+		myCell = createCell(myItemReceiptNotesRow);
+		myCell.colSpan = 2;
+		myCell.innerHTML = "<textarea name=\"ReceiptLine_receiptNotes\" cols=45 rows=4 onKeyDown=\"textCounter(this, 225);\" onKeyUp=\"textCounter(this,225);\"></textarea>";
+		/***** END CREATE ITEM RECEIPT NOTES TABLE *****/
+
+		myCell = createCell(myRow);
+		myCell.className="browseRow";
+		myCell.nowrap = true;
+		myCell.innerHTML = "&nbsp;";
+
+		/***** NEW ROW FOR ITEM TABLE *****/
+		myRow = createRow(myItemTable);
+
+		myCell = createCell(myRow);
+		myCell.className = "browseRow";
+		myCell.nowrap = true;
+		myCell.innerHTML = "&nbsp;";
+
+		myCell = createCell(myRow);
+		myCell.colSpan = 6;
+		myCell.className = "browseRow";
+		myCell.innerHTML = getItemDetailsHTML(row);
+
+		myCell = createCell(myRow);
+		myCell.className = "browseRow";
+		myCell.nowrap = true;
+		myCell.innerHTML = "&nbsp;";
+		/***** END NEW ROW FOR ITEM TABLE *****/
+
+		/***** NEW ROW FOR ITEM TABLE TO HOLD INV PROPERTY RECORDS *****/
+		myRow = createRow(myItemTable);
+
+		myCell = createCell(myRow);
+		myCell.className = "browseRow";
+		myCell.innerHTML = "&nbsp;";
+
+		myCell = createCell(myRow);
+		myCell.className = "browseRow";
+		myCell.colSpan = 6;
+		myCell.vAlign = "top";
+		myCell.innerHTML = "<div id=\"invPropertyArea_" + row + "\" style=\"visibility: hidden; display: none;\"><table border=0 cellspacing=0 cellpadding=1 id=\"invPropertiesTable_" + row + "\"></table>" +
+			"<tr><td nowrap><a href=\"javascript: addNewInvProperty(" + row + "); void(0);\">Add New Property to Line Item " + (row + 1) + "</td>	</tr></div>";
+		/***** END NEW ROW FOR ITEM TABLE TO HOLD INV PROPERTY RECORDS *****/
+
+		/***** NEW ROW FOR ITEM TABLE *****/
+		myRow = createRow(myItemTable);
+
+		myCell = createCell(myRow);
+		myCell.colSpan = 8;
+		myCell.align = "center";
+		myCell.innerHTML = "<hr size=0 width=100%>";
+		/***** END NEW ROW FOR ITEM TABLE *****/
+	}
+	function setGfp() {
+		if (frm.c_gfp[currentRow].checked) {
+			frm.c_asset[currentRow].checked = false;
+			frm.c_fgp[currentRow].checked = false;
+
+			setupInvProperty();
+		} else {
+			hideArea("invPropertyArea_" + currentRow);
+
+		}
+	}
+
+	function setFgp() {
+		if (frm.c_fgp[currentRow].checked) {
+			frm.c_asset[currentRow].checked = false;
+			frm.c_gfp[currentRow].checked = false;
+
+			setupInvProperty();
+		} else {
+			hideArea("invPropertyArea_" + currentRow);
+
+		}
+	}
+
+	function setAsset() {
+		if (frm.c_asset[currentRow].checked) {
+			frm.c_gfp[currentRow].checked = false;
+			frm.c_fgp[currentRow].checked = false;
+
+			setupInvProperty();
+		} else {
+			hideArea("invPropertyArea_" + currentRow);
+
+		}
+	}
+
+	function setupInvProperty() {
+		displayArea("invPropertyArea_" + currentRow);
+
+		var myTable = document.getElementById("invPropertiesTable_" + currentRow);
+		var currentRows = myTable.rows.length;
+
+		if (currentRows == 0) {
+			addNewInvProperty(currentRow);
+		}
+	}
+
+	function setGfpFgp() {
+		if (frm.c_asset[currentRow].checked || frm.c_gfp[currentRow].checked || frm.c_fgp[currentRow].checked) {
+			displayArea("invPropertyArea_" + currentRow);
+
+			var myTable = document.getElementById("invPropertiesTable_" + currentRow);
+			var currentRows = myTable.rows.length;
+
+			if (currentRows == 0) {
+				addNewInvProperty(currentRow);
+			}
+		} else {
+			hideArea("invPropertyArea_" + currentRow);
+		}
+	}
+
+	function getInvPropertiesHTML(row, invPropertyRow) {
+		var defaultObj = document.getElementById("defaultInvProperties");
+		var defaultHTML = defaultObj.innerHTML;
+		defaultHTML = replaceChars(defaultHTML, "[ROW_NUMBER]", row);
+		defaultHTML = replaceChars(defaultHTML, "[INV_PROPERTY_ROW_DISPLAY]", invPropertyRow);
+		defaultHTML = replaceChars(defaultHTML, "[INV_PROPERTY_ROW]", (invPropertyRow - 1));
+		return defaultHTML;
+	}
+
+	function addNewInvProperty(row) {
+		var myTable = document.getElementById("invPropertiesTable_" + row);
+		var currentRows = myTable.rows.length;
+		var invPropertyRow = currentRows + 1;
+		var myRow;
+		var myCell;
+
+		myRow = createRow(myTable);
+
+		myCell = createCell(myRow);
+
+		myCell.innerHTML = getInvPropertiesHTML(row, invPropertyRow);
+	}
+
+	function deleteInvProperty(row, invPropertyRow) {
+		var itemInvPropertyRow = 0;
+		var prevInvPropertyRows = 0;
+		var myTable;
+		var currentRows;
+		var totalRows;
+
+		for (var i = 0; i < row; i++) {
+			myTable = document.getElementById("invPropertiesTable_" + i);
+
+			if (myTable != undefined) {
+				currentRows = myTable.rows.length;
+				prevInvPropertyRows = prevInvPropertyRows + currentRows;
+			}
+		}
+		invPropertyRow = invPropertyRow + prevInvPropertyRows;
+		myTable = document.getElementById("invPropertiesTable_" + row);
+		currentRows = myTable.rows.length;
+
+		totalRows = currentRows + prevInvPropertyRows;
+
+		if (totalRows == 0) {
+			return;
+		}
+		else if (totalRows == 1) {
+				frm.InvProperty_tagNumber[0].value = "";
+				frm.InvProperty_serialNumber[0].value = "";
+				frm.InvProperty_contract[0].value = "";
+				frm.InvProperty_shipNumber[0].value = "";
+				frm.InvProperty_poNumber[0].value = "";
+				frm.InvProperty_receiptNumber[0].value = "";
+				frm.InvProperty_remarks[0].value =  "";
+
+		}
+		else if (totalRows > 1) {
+			for (var i = invPropertyRow; i < totalRows; i++) {
+				var tagNumber = frm.InvProperty_tagNumber[i + 1].value;
+				var serialNumber = frm.InvProperty_serialNumber[i + 1].value;
+				var contract = frm.InvProperty_contract[i + 1].value;
+				var shipNumber = frm.InvProperty_shipNumber[i + 1].value;
+				var poNumber = frm.InvProperty_poNumber[i + 1].value;
+				var receiptNumber = frm.InvProperty_receiptNumber[i + 1].value;
+				var remarks = frm.InvProperty_remarks[i + 1].value;
+
+				frm.InvProperty_tagNumber[i].value = tagNumber;
+				frm.InvProperty_serialNumber[i].value = serialNumber;
+				frm.InvProperty_contract[i].value = contract;
+				frm.InvProperty_shipNumber[i].value = shipNumber;
+				frm.InvProperty_poNumber[i].value = poNumber;
+				frm.InvProperty_receiptNumber[i].value = receiptNumber;
+				frm.InvProperty_remarks[i].value = remarks;
+			}
+		}
+
+		if (currentRows > 1) {
+			myTable.deleteRow(currentRows - 1);
+		}
+	}
+
+// End Hide script -->
+</SCRIPT>

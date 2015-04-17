@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="requisition-retrieve-templates" connection-type="Connection-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="requisitionRetrieveTemplates">
+			<task synchronous="true" continue-on-failure="false" name="templateRequisitionList">
+				<task-object-name>com.tsa.puridiom.requisition.tasks.RequisitionRetrieveTemplates</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

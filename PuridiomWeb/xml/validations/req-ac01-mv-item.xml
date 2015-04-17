@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rule>
+	<clause type="lookup" elementSource="true">
+	<sql>from VSRROrganizationAccount vsrroa where vsrroa.id.tableType = 'AC01' AND vsrroa.id.tableKey = '@fld1@' and (vsrroa.status = '02' or (vsrroa.status = '01' and vsrroa.dateExpires >= @today@))</sql>
+		<source>fld1</source>
+		<arguments>
+			<name>fld1</name>
+			<source>account</source>
+			<colName>getFld1</colName>
+		</arguments>
+	</clause>
+</rule>

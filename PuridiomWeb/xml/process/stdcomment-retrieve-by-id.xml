@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="stdCommentRetrieveById" connection-type="Connection-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="stdCommentRetrieveById">
+			<task synchronous="true" continue-on-failure="false" name="stdComment">			
+				<task-object-name>com.tsa.puridiom.stdcomment.tasks.StdCommentRetrieveById</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="docTextGetIcText">
+				<task-object-name>com.tsa.puridiom.doctext.tasks.DocTextGetIcTextFromStdComment</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="docText">
+				<task-object-name>com.tsa.puridiom.doctext.tasks.DocTextRetrieveById</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+	</activities>
+</process>

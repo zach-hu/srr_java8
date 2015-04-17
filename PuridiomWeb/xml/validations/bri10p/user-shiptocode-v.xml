@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rule>
+	<clause type="NotEmpty">
+		<left-side>
+			<source>incomingRequestObjectMethod</source>
+			<object>user</object>
+			<name>getShipToCode</name>
+		</left-side>
+	</clause>
+	<logical-operator>IFTHEN</logical-operator>
+	<clause type="lookup">
+		<sql><![CDATA[from Address as Address where Address.id.addressCode = '@shiptocode@' and Address.status = '02' and Address.shipTo = 'Y' and Address.id.addressType <> 'SHIPTO']]></sql>
+		<source>user</source>
+		<arguments>
+			<name>shiptocode</name>
+			<source>user</source>
+			<colName>getShipToCode</colName>
+		</arguments>
+	</clause>
+</rule>

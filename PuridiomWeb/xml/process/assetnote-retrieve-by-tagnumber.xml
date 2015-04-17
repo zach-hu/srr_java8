@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="assetNoteRetrieveByTagNumber" connection-type="Connection-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="assetNoteRetrieveByTagNumber">
+			<task synchronous="true" continue-on-failure="false" name="checkTagNumber">
+				<task-object-name>com.tsa.puridiom.assetnote.serv.tasks.AssetNoteTagNumberCheck</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="assetNoteList">
+				<task-object-name>com.tsa.puridiom.assetnote.serv.tasks.AssetNoteRetrieveByTagNumber</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

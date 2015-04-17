@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="recentorderitem-add" connection-type="New-Transaction">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="recentOrderItemSetup">
+		    <task synchronous="true" continue-on-failure="false" name="recentOrderItemSetup">
+				<task-object-name>com.tsa.puridiom.recentorderitem.tasks.RecentOrderItemSetupFromOrder</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="recentOrderItem">
+				<task-object-name>com.tsa.puridiom.recentorderitem.tasks.RecentOrderItemRetrieveById</task-object-name>
+			</task>
+		</activity>
+		<!-- Activities need for put all revision generate by AutoAwardRevision to My Recent POs -->
+		<activity synchronous="true" continue-on-failure="false" name="recentOrderItemAdd">
+			<rule-filename>is-recentorderitem-empty.xml;is-autoaward-revision-process.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="recentOrderItem">
+				<task-object-name>com.tsa.puridiom.recentorderitem.tasks.RecentOrderItemSetValues</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="recentOrderItem">
+				<task-object-name>com.tsa.puridiom.recentorderitem.tasks.RecentOrderItemIncrementCount</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="recentOrderItem">
+				<task-object-name>com.tsa.puridiom.recentorderitem.tasks.RecentOrderItemAdd</task-object-name>
+			</task>
+			<post-action>exitProcess</post-action>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="recentOrderItemUpdate">
+			<rule-filename>is-autoaward-revision-process.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="recentOrderItem">
+				<task-object-name>com.tsa.puridiom.recentorderitem.tasks.RecentOrderItemSetValues</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="recentOrderItem">
+				<task-object-name>com.tsa.puridiom.recentorderitem.tasks.RecentOrderItemIncrementCount</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="recentOrderItem">
+				<task-object-name>com.tsa.puridiom.recentorderitem.tasks.RecentOrderItemUpdate</task-object-name>
+			</task>
+			<post-action>exitProcess</post-action>
+		</activity>
+		<!-- process original for all organizations -->
+		<activity synchronous="true" continue-on-failure="false" name="recentOrderItemAdd">
+			<rule-filename>is-recentorderitem-empty.xml;is-recentorderitem-valid.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="recentOrderItem">
+				<task-object-name>com.tsa.puridiom.recentorderitem.tasks.RecentOrderItemSetValues</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="recentOrderItem">
+				<task-object-name>com.tsa.puridiom.recentorderitem.tasks.RecentOrderItemIncrementCount</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="recentOrderItem">
+				<task-object-name>com.tsa.puridiom.recentorderitem.tasks.RecentOrderItemAdd</task-object-name>
+			</task>
+			<post-action>exitProcess</post-action>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="recentOrderItemUpdate">
+			<rule-filename>is-recentorderitem-valid.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="recentOrderItem">
+				<task-object-name>com.tsa.puridiom.recentorderitem.tasks.RecentOrderItemSetValues</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="recentOrderItem">
+				<task-object-name>com.tsa.puridiom.recentorderitem.tasks.RecentOrderItemIncrementCount</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="recentOrderItem">
+				<task-object-name>com.tsa.puridiom.recentorderitem.tasks.RecentOrderItemUpdate</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

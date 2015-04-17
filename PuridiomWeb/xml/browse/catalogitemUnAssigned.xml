@@ -1,0 +1,168 @@
+<browse_catalog_item>
+	<columns>
+		<CatalogItem_viewImage>
+			<label>Image</label>
+			<link><![CDATA[javascript: viewImage('CAT'); void(0);]]></link>
+			<size>12</size>
+			<selectsql>N</selectsql>
+			<type>ImageLink</type>
+		</CatalogItem_viewImage>
+		<CatalogItem_id_catalogId>
+			<label><![CDATA[brw-catalogId]]></label>
+			<size>13</size>
+			<hidden-input>Y</hidden-input>
+			<key>Y</key>
+			<distinct>Y</distinct>
+		</CatalogItem_id_catalogId>
+		<CatalogSecurity_accessId>
+			<label><![CDATA[brw-accessId]]></label>
+			<size>13</size>
+			<hidden>Y</hidden>
+			<hidden-input>Y</hidden-input>
+		</CatalogSecurity_accessId>
+		<CatalogItem_id_itemNumber>
+			<label><![CDATA[brw-itemNumber]]></label>
+			<size>17</size>
+			<hidden-input>Y</hidden-input>
+			<key>Y</key>
+		</CatalogItem_id_itemNumber>
+		<CatalogItem_commodity>
+			<label><![CDATA[brw-commodity]]></label>
+			<type>COMMODITY</type>
+			<size>24</size>
+		</CatalogItem_commodity>
+		<Catalog_currencyCode>
+			<hidden>Y</hidden>
+		</Catalog_currencyCode>
+		<CatalogItem_cost>
+			<label><![CDATA[brw-cost]]></label>
+			<type>CurrencyDecimal</type>
+			<arguments>
+				<col type="BrowseColumn">Catalog_currencyCode</col>
+			</arguments>
+			<size>9</size>
+		</CatalogItem_cost>
+		<CatalogItem_umCode>
+			<hidden>Y</hidden>
+		</CatalogItem_umCode>
+		<CatalogItem_umDisplay>
+			<label><![CDATA[]]></label>
+			<size>6</size>
+			<concatenate>
+				<col type="String">(</col>
+				<col type="BrowseColumn">CatalogItem_umCode</col>
+				<col type="String">)</col>
+			</concatenate>
+			<selectsql>N</selectsql>
+		</CatalogItem_umDisplay>
+		<compute_breakCount>
+			<type>BigDecimal</type>
+			<initial>(select count (*) from catalog_price_brks where catalog_price_brks.catalog_id = CatalogItem_catalog_id and catalog_price_brks.item_number = CatalogItem_item_number)</initial>
+			<hidden>Y</hidden>
+			<hidden-input>Y</hidden-input>
+			<selectsql>N</selectsql>
+		</compute_breakCount>
+		<Input_quantity>
+			<label><![CDATA[brw-quantity]]></label>
+			<size>10</size>
+			<selectsql>N</selectsql>
+			<store-request-value>Y</store-request-value>
+		</Input_quantity>
+		<CatalogItem_description>
+			<label><![CDATA[brw-itemDescription]]></label>
+			<detail>Y</detail>
+			<size>100</size>
+		</CatalogItem_description>
+		<CatalogItem_mfgName>
+			<label><![CDATA[brw-manufacturer]]></label>
+			<detail>Y</detail>
+			<size>50</size>
+		</CatalogItem_mfgName>
+		<CatalogItem_modelNumber>
+			<label><![CDATA[brw-modelNumber]]></label>
+			<detail>Y</detail>
+			<size>50</size>
+		</CatalogItem_modelNumber>
+		<CatalogItem_imageFile>
+			<hidden-input>Y</hidden-input>
+			<hidden>Y</hidden>
+		</CatalogItem_imageFile>
+		<CatalogItem_priceBrk>
+			<label><![CDATA[brw-priceBreak]]></label>
+			<hidden-input>Y</hidden-input>
+			<hidden>Y</hidden>
+		</CatalogItem_priceBrk>
+		<Link_viewPriceBreaks>
+			<label><![CDATA[brw-viewPriceBreaks]]></label>
+			<link><![CDATA[javascript: viewPriceBreaks('#CatalogItem_catalogId^','#CatalogItem_itemNumber^'); void(0);]]></link>
+			<detail>Y</detail>
+			<size>33</size>
+			<type>ConditionalLink</type>
+			<selectsql>N</selectsql>
+		</Link_viewPriceBreaks>
+		<CatalogItem_kit>
+			<label><![CDATA[brw-kitItem]]></label>
+			<hidden>Y</hidden>
+			<hidden-input>Y</hidden-input>
+		</CatalogItem_kit>
+		<CatalogItem_viewCatalogKitItems>
+			<label><![CDATA[brw-viewKitItems]]></label>
+			<link><![CDATA[javascript: viewKitItems('CAT'); void(0);]]></link>
+			<detail>Y</detail>
+			<size>33</size>
+			<type>ConditionalLink</type>
+			<selectsql>N</selectsql>
+		</CatalogItem_viewCatalogKitItems>
+		<CatalogItem_udf2Code>
+			<label><![CDATA[appruleudf2]]></label>
+			<hidden>Y</hidden>
+			<hidden-input>Y</hidden-input>
+		</CatalogItem_udf2Code>
+	</columns>
+	<group-filters>
+		<CatalogItem_id_catalogId>
+			<label><![CDATA[brw-catalog]]></label>
+			<sqlselect>select Catalog.catalogId, count(CatalogItem.id.catalogId)</sqlselect>
+			<sqlfrom>Catalog as Catalog, CatalogItem as CatalogItem, CatalogSecurity as CatalogSecurity</sqlfrom>
+			<sqlwhere><![CDATA[Catalog.catalogId = CatalogItem.id.catalogId]]></sqlwhere>
+			<sqlgroupby>Catalog.catalogId</sqlgroupby>
+		</CatalogItem_id_catalogId>
+		<CatalogSecurity_accessId>
+			<label><![CDATA[brw-access]]></label>
+			<sqlselect>select Catalog.catalogId</sqlselect>
+			<sqlfrom>Catalog as Catalog, CatalogItem as CatalogItem, CatalogSecurity as CatalogSecurity</sqlfrom>
+			<sqlwhere><![CDATA[Catalog.catalogId = CatalogSecurity.id.catalogId]]></sqlwhere>
+			<sqlgroupby>Catalog.catalogId</sqlgroupby>
+		</CatalogSecurity_accessId>
+		<CatalogItem_commodity>
+			<label><![CDATA[commodity]]></label>
+			<type>Commodity</type>
+			<sqlselect>select Commodity.commodity, count(CatalogItem.commodity)</sqlselect>
+			<sqlfrom>Commodity as Commodity, Catalog as Catalog, CatalogItem as CatalogItem, CatalogSecurity as CatalogSecurity</sqlfrom>
+			<sqlwhere><![CDATA[Commodity.commodity = CatalogItem.commodity]]></sqlwhere>
+			<sqlgroupby>Commodity.commodity</sqlgroupby>
+		</CatalogItem_commodity>
+		<CatalogItem_cost>
+			<label><![CDATA[brw-cost]]></label>
+			<type>CostRange</type>
+			<sqlselect>select CostRange.description, count(CatalogItem.cost), CostRange.minimumCost</sqlselect>
+			<sqlfrom>CostRange as CostRange, Catalog as Catalog, CatalogItem as CatalogItem, CatalogSecurity as CatalogSecurity</sqlfrom>
+			<sqlwhere><![CDATA[CostRange.minimumCost <= CatalogItem.cost and CostRange.maximumCost >= CatalogItem.cost and CostRange.itemType = 'CAT']]></sqlwhere>
+			<sqlgroupby>CostRange.minimumCost, CostRange.description</sqlgroupby>
+		</CatalogItem_cost> 
+		<CatalogItem_description>
+			<label><![CDATA[brw-keyword(s)]]></label>
+			<type>Keywords</type>
+		</CatalogItem_description>
+	</group-filters>
+	<sqlfrom>Catalog as Catalog, CatalogItem as CatalogItem, CatalogSecurity as CatalogSecurity</sqlfrom>
+	<sqlorderby>CatalogItem.id.itemNumber ASC</sqlorderby>
+	<sqlwhere><![CDATA[
+		(Catalog.catalogId = CatalogItem.id.catalogId) and 
+		(CatalogSecurity.id.catalogId = CatalogItem.id.catalogId) and 
+		(CatalogSecurity.id.itemNumber = '0' OR CatalogSecurity.id.itemNumber = CatalogItem.id.itemNumber ) and 
+		(CatalogItem.status = '02' or (CatalogItem.status = '01' and CatalogItem.dateExpires > :as_today)) 
+	]]></sqlwhere>
+	<title>Catalog Items</title>
+	<pagesize>10</pagesize>
+</browse_catalog_item>

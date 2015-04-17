@@ -1,0 +1,103 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping>
+
+<!--
+    Created by Middlegen Hibernate plugin
+
+    http://boss.bekk.no/boss/middlegen/
+    http://hibernate.sourceforge.net/
+-->
+
+<class
+    name="com.tsa.puridiom.entity.InspectionHistory"
+    table="INSPECTION_HISTORY"
+>
+    <id
+        name="icHistory"
+        type="java.math.BigDecimal"
+        column="IC_HISTORY"
+    >
+        <generator class="assigned" />
+    </id>
+    <property
+        name="icRecLine"
+        type="java.math.BigDecimal"
+        column="IC_REC_LINE"
+        length="22"
+    />
+    <property
+        name="icInspNo"
+        type="java.math.BigDecimal"
+        column="IC_INSP_NO"
+        not-null="true"
+        length="22"
+    />
+    <property
+        name="icMsrLine"
+        type="java.math.BigDecimal"
+        column="IC_MSR_LINE"
+        length="22"
+    />
+    <property
+        name="recType"
+        type="java.lang.String"
+        column="REC_TYPE"
+        length="15"
+    />
+    <property
+        name="statusDate"
+        type="java.sql.Timestamp"
+        column="STATUS_DATE"
+        length="7"
+    />
+    <property
+        name="quantity"
+        type="java.math.BigDecimal"
+        column="QUANTITY"
+        length="15"
+    />
+    <property
+        name="area"
+        type="java.lang.String"
+        column="AREA"
+        length="15"
+    />
+    <property
+        name="storage"
+        type="java.lang.String"
+        column="STORAGE"
+        length="15"
+    />
+    <property
+        name="location"
+        type="java.lang.String"
+        column="LOCATION"
+        length="15"
+    />
+    <property
+        name="status"
+        type="java.lang.String"
+        column="STATUS"
+        length="15"
+    />
+    <property
+        name="owner"
+        type="java.lang.String"
+        column="OWNER"
+        length="15"
+    />
+    <property
+        name="historyText"
+        type="java.lang.String"
+        column="HISTORY_TEXT"
+        length="255"
+    />
+
+    <!-- associations -->
+
+</class>
+</hibernate-mapping>

@@ -1,0 +1,69 @@
+<browse_invoiceheader>
+	<columns>
+		<InvoiceHeader_icIvcHeader>
+			<hidden>Y</hidden>
+			<hidden-input>Y</hidden-input>
+			<key>Y</key>
+		</InvoiceHeader_icIvcHeader>
+		<c_checkbox>
+			<label>Reset</label>
+			<type>Checkbox</type>
+			<size>5</size>
+			<selectsql>N</selectsql>
+			<store-request-value>Y</store-request-value>
+		</c_checkbox>
+		<InvoiceHeader_invoiceNumber>
+			<label>Invoice #</label>
+			<link><![CDATA[javascript: viewInvoice('#InvoiceHeader_icIvcHeader^'); void(0);]]></link>
+			<size>12</size>
+		</InvoiceHeader_invoiceNumber>
+		<InvoiceHeader_status>
+			<label>brw-status</label>
+			<type>STATUS</type>
+			<visible>1</visible>
+		</InvoiceHeader_status>
+		<InvoiceHeader_invoiceDate>
+			<label>brw-date</label>
+			<type>DATE</type>
+			<sort>D</sort>
+			<size>12</size>
+		</InvoiceHeader_invoiceDate>
+		<InvoiceHeader_paymentDueDate>
+			<label>brw-dueDate</label>
+			<type>DATE</type>
+			<size>12</size>
+		</InvoiceHeader_paymentDueDate>
+		<InvoiceHeader_poNumber>
+			<label>brw-poNumber</label>
+			<size>12</size>
+		</InvoiceHeader_poNumber>
+		<InvoiceHeader_poRelease>
+			<label>brw-releaseNumber</label>
+			<size>3</size>
+		</InvoiceHeader_poRelease>
+		<InvoiceHeader_shipToCode>
+			<label>shipToCode</label>
+			<size>10</size>
+		</InvoiceHeader_shipToCode>
+		<InvoiceHeader_invoiceTotal>
+			<label>brw-total</label>
+			<size>10</size>
+			<type>DollarDecimal</type>
+		</InvoiceHeader_invoiceTotal>
+		<InvoiceHeader_vendorName>
+			<label>brw-vendorName</label>
+			<detail>Y</detail>
+			<size>100</size>
+		</InvoiceHeader_vendorName>
+		<InvoiceHeader_invoiceDesc>
+			<detail>Y</detail>
+			<label>description</label>
+			<size>100</size>
+		</InvoiceHeader_invoiceDesc>
+	</columns>
+<sqlfrom>InvoiceHeader as InvoiceHeader</sqlfrom>
+<sqlwhere><![CDATA[InvoiceHeader.invoiceNumber <> 'N/A' AND InvoiceHeader.status > '6010' AND InvoiceHeader.status < '9010']]></sqlwhere>
+<sqlorderby>InvoiceHeader.invoiceDate DESC, InvoiceHeader.invoiceNumber DESC</sqlorderby>
+<pagesize>15</pagesize>
+<title>Invoice Browse</title>
+</browse_invoiceheader>

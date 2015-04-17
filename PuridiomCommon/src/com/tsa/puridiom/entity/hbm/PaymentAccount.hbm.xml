@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 2.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+<class name="com.tsa.puridiom.entity.PaymentAccount" table="PAYMENT_ACCOUNT">
+<id name="icPayment" column="IC_PAYMENT" type="java.math.BigDecimal">
+<generator class="assigned" />
+</id>
+<property name="invoiceNumber" column="INVOICE_NUMBER" type="java.lang.String" length="20"/>
+<property name="poNumber" column="PO_NUMBER" type="java.lang.String" length="20"/>
+<property name="releaseNumber" column="RELEASE_NUMBER" type="java.math.BigDecimal" length="15"/>
+<property name="invoiceDate" column="INVOICE_DATE" type="java.sql.Timestamp" length="7"/>
+<property name="tsrYear" column="TSR_YEAR" type="java.lang.String" length="4"/>
+<property name="tsrMonth" column="TSR_MONTH" type="java.math.BigDecimal" length="6"/>
+<property name="vendorId" column="VENDOR_ID" type="java.lang.String" length="15"/>
+<property name="cacCode" column="CAC_CODE" type="java.lang.String" length="15"/>
+<property name="accountCode" column="ACCOUNT_CODE" type="java.lang.String" length="15"/>
+<property name="costCenter" column="COST_CENTER" type="java.lang.String" length="15"/>
+<property name="utilCode" column="UTIL_CODE" type="java.lang.String" length="15"/>
+<property name="allocAmount" column="ALLOC_AMOUNT" type="java.math.BigDecimal" length="15"/>
+<property name="invoiceAmount" column="INVOICE_AMOUNT" type="java.math.BigDecimal" length="15"/>
+<property name="checkNumber" column="CHECK_NUMBER" type="java.lang.String" length="15"/>
+<property name="checkAmount" column="CHECK_AMOUNT" type="java.math.BigDecimal" length="15"/>
+<property name="checkDate" column="CHECK_DATE" type="java.sql.Timestamp" length="7"/>
+<property name="cancelDate" column="CANCEL_DATE" type="java.sql.Timestamp" length="7"/>
+<property name="voucherNumber" column="VOUCHER_NUMBER" type="java.lang.String" length="20"/>
+<property name="icPoHeader" column="IC_PO_HEADER" type="java.math.BigDecimal" length="22"/>
+<property name="tsrFlag" column="TSR_FLAG" type="java.lang.String" length="2"/>
+<property name="transDate" column="TRANS_DATE" type="java.lang.String" length="20"/>
+<property name="voucherDesc" column="VOUCHER_DESC" type="java.lang.String" length="60"/>
+<property name="dateEntered" column="DATE_ENTERED" type="java.sql.Timestamp" length="7"/>
+<property name="owner" column="OWNER" type="java.lang.String" length="15"/>
+</class>
+</hibernate-mapping>

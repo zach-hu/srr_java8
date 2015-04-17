@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="userSelfRegistration" connection-type="Transaction-Required" ldap-connection-type="None">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="userRegistration">
+			<task synchronous="true" continue-on-failure="false" name="addUser">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>organization-add.xml</process-filename>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="addUser">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>userprofile-add.xml</process-filename>
+			</task>
+		</activity>
+	</activities>
+</process>

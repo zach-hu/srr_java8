@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="CatalogItemValidate" connection-type="Connection-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="CatalogItemValidate">
+			<task synchronous="true" continue-on-failure="false" name="catalogItem">
+				<task-object-name>com.tsa.puridiom.catalog.tasks.CatalogItemRetrieveById</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="labelsList">
+				<task-object-name>com.tsa.puridiom.labels.tasks.LabelsRetrieveBy</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="rules">
+				<task-object-name>com.tsa.puridiom.validationrules.tasks.DatabaseValidationRulesTask</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

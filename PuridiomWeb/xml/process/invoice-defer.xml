@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="ApprovalLogReroute" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="approvalLogInit">
+			<task synchronous="true" continue-on-failure="false" name="approvalLogInit">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>approvallog-add-init.xml</process-filename>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="approvalLogReRoute">
+			<task synchronous="true" continue-on-failure="false" name="invoiceHeader">
+				<task-object-name>com.tsa.puridiom.invoiceheader.tasks.InvoiceHeaderRetrieveById</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="routingList">
+				<task-object-name>com.tsa.puridiom.invoice.approvals.tasks.InvoiceApprovalLogApprove</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="routingList">
+				<task-object-name>com.tsa.puridiom.invoice.approvals.tasks.InvoiceApprovalLogForward</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="routingListUpdate">
+				<task-object-name>com.tsa.puridiom.approvals.tasks.ApprovalLogListUpdate</task-object-name>
+				<post-action />
+			</task>
+		</activity>
+		<activity continue-on-failure="false" name="email" synchronous="true">
+			<task continue-on-failure="false" name="rerouteEmail" synchronous="true">
+				<task-object-name>com.tsa.puridiom.invoice.approvals.tasks.QueueAddInvoiceDeferEmail</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="retrieveInvoiceLines">
+			<task synchronous="true" continue-on-failure="false" name="invoiceLineList">
+				<rule-filename>is-invoicelinelist-empty.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.invoiceline.tasks.InvoiceLineRetrieveByHeader</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="history">
+			<task synchronous="true" continue-on-failure="false" name="invoiceHeaderHistory">
+				<task-object-name>com.tsa.puridiom.invoiceheader.history.tasks.InvoiceHeaderHistory</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="invoiceLineListHistory">
+				<task-object-name>com.tsa.puridiom.invoiceline.history.tasks.InvoiceLineListHistory</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>
+
+

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<InvoiceVoucherMonthlyPayment>
+
+    <columns>
+		<PoHeader_poNumber>
+			<label>PO Number</label>
+			<type>STRING</type>
+		</PoHeader_poNumber>
+		<PoHeader_releaseNumber>
+			<label>Release</label>
+			<type>BIGDECIMAL</type>
+		</PoHeader_releaseNumber>
+		<InvoiceHeader_invoiceNumber>
+			<label>Invoice Number</label>
+			<type>STRING</type>
+		</InvoiceHeader_invoiceNumber>
+		<InvoiceHeader_invoiceDate>
+			<label>Invoice Date</label>
+			<type>DATE</type>
+		</InvoiceHeader_invoiceDate>
+		<InvoiceHeader_enteredBy>
+			<label>Entered By</label>
+			<type>STRING</type>
+		</InvoiceHeader_enteredBy>
+		<PoHeader_requisitionNumber>
+			<label>Requisition Number</label>
+			<type>STRING</type>
+		</PoHeader_requisitionNumber>
+		<PoHeader_requisitionerCode>
+			<label>Requisitioner Code</label>
+			<type>STRING</type>
+		</PoHeader_requisitionerCode>
+		<PoHeader_departmentCode>
+			<label>Department Code</label>
+			<type>STRING</type>
+		</PoHeader_departmentCode>
+		<ReceiptLine_receivedBy>
+			<label>Received By</label>
+			<type>STRING</type>
+		</ReceiptLine_receivedBy>
+		<ReceiptLine_qtyReceived>
+			<label>Receipt Qty</label>
+			<type>BIGDECIMAL</type>
+		</ReceiptLine_qtyReceived>
+		<PoLine_quantity>
+			<label>PO Qty</label>
+			<type>BIGDECIMAL</type>
+		</PoLine_quantity>
+		<PoLine_unitPrice>
+			<label>Unit Cost</label>
+			<type>BIGDECIMAL</type>
+		</PoLine_unitPrice>
+		<PoLine_lineNumber>
+			<label>Line Number</label>
+			<type>BIGDECIMAL</type>
+		</PoLine_lineNumber>
+		<PoLine_itemNumber>
+			<label>Item Number</label>
+			<type>STRING</type>
+		</PoLine_itemNumber>
+		<PoLine_description>
+			<label>Description</label>
+			<type>STRING</type>
+		</PoLine_description>
+	</columns>
+  <sqlfrom> PoLine as PoLine, PoHeader as PoHeader, ReceiptLine as ReceiptLine, InvoiceLine as InvoiceLine, InvoiceHeader as InvoiceHeader</sqlfrom>
+  <sqlwhere><![CDATA[InvoiceLine.icPoLine = PoLine.icPoLine and PoHeader.icPoHeader = PoLine.icPoHeader and InvoiceHeader.icIvcHeader = InvoiceLine.icIvcHeader and InvoiceLine.icPoLine = ReceiptLine.icPoLine and InvoiceLine.status = '6010' and InvoiceHeader.invoiceNumber <> 'N/A' and InvoiceHeader.invoiceNumber is not NULL]]></sqlwhere>
+  <pagesize>15</pagesize>
+  <title>Invoice Voucher Monthly Payment Report</title>
+
+</InvoiceVoucherMonthlyPayment>
+

@@ -1,0 +1,88 @@
+<r-pos-s-acl>
+	<columns>
+		<PoHeader_poType>
+			<label>Type</label>
+			<type>STRING</type>
+		</PoHeader_poType>
+		<PoHeader_icPoHeader>
+			<label>Ic Po Header</label>
+	        <type>BIGDECIMAL</type>
+		</PoHeader_icPoHeader>
+		<PoHeader_poNumber>
+			<label>Order #</label>
+			<type>STRING</type>
+		</PoHeader_poNumber>
+		<PoHeader_releaseNumber>
+			<label>Release</label>
+			<type>BIGDECIMAL</type>
+		</PoHeader_releaseNumber>
+		<PoHeader_revisionNumber>
+			<label>Revision</label>
+			<type>BIGDECIMAL</type>
+		</PoHeader_revisionNumber>
+		<PoHeader_poDate>
+			<label>Order Date</label>
+			<type>DATE</type>
+		</PoHeader_poDate>
+		<PoHeader_status>
+			<label>Status</label>
+			<type>STATUS</type>
+		</PoHeader_status>
+		<PoHeader_vendorId>
+			<label>Supplier ID</label>
+			<type>STRING</type>
+		</PoHeader_vendorId>
+		<PoHeader_fiscalYear>
+			<label>Fiscal Year</label>
+			<type>STRING</type>
+		</PoHeader_fiscalYear>
+		<PoHeader_total>
+			<label>total</label>
+			<size>10</size>
+			<type>DollarDecimal</type>
+		</PoHeader_total>
+		<PoLine_lineNumber>
+			<label>Line</label>
+			<type>BIGDECIMAL</type>
+		</PoLine_lineNumber>
+		<PoLine_umCode>
+			<label>UOM</label>
+			<type>STRING</type>
+		</PoLine_umCode>
+		<PoLine_quantity>
+			<label>Quantity</label>
+			<type>BIGDECIMAL</type>
+		</PoLine_quantity>
+		<PoLine_unitPrice>
+			<label>Unit Price</label>
+			<type>BIGDECIMAL</type>
+		</PoLine_unitPrice>
+		<PoLine_status>
+			<label>Status Line</label>
+			<type>STATUS</type>
+		</PoLine_status>
+		<PoLine_description>
+			<label>Description</label>
+			<type>STRING</type>
+		</PoLine_description>
+		<PoLine_lineTotal>
+			<label>Line Total</label>
+			<type>BIGDECIMAL</type>
+		</PoLine_lineTotal>
+		<Account_fld1>
+			<label>Entity</label>
+			<type>STRING</type>
+		</Account_fld1>
+		<Account_fld2>
+			<label>Dept</label>
+			<type>STRING</type>
+		</Account_fld2>
+	</columns>
+<sqlfrom>PoHeader as PoHeader, Account as Account, PoLine as PoLine</sqlfrom>
+<sqlwhere><![CDATA[( PoHeader.icPoHeader = PoLine.icPoHeader ) and
+    ( PoLine.icPoHeader = Account.id.icHeader ) and
+    ( PoHeader.status <> '9010' ) and ( PoHeader.status <> '9020' ) and (PoHeader.poNumber <> 'N/A') and (PoHeader.lastRevision = 'C') ]]></sqlwhere>
+<sqlgroupby>PoHeader.poType,PoHeader.icPoHeader,PoHeader.poNumber,PoHeader.revisionNumber,PoHeader.releaseNumber,PoHeader.poDate,PoHeader.status,PoHeader.vendorId,PoHeader.fiscalYear,PoHeader.total,PoLine.lineNumber,PoLine.umCode,PoLine.quantity,PoLine.unitPrice,PoLine.status,PoLine.description,PoLine.lineTotal,Account.fld1,Account.fld2</sqlgroupby>
+<sqlorderby>PoHeader.poNumber ASC,PoHeader.revisionNumber ASC,PoLine.lineNumber ASC</sqlorderby>
+<title>PO Auto-Close Preview</title>
+</r-pos-s-acl>

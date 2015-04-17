@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="requisitionSourcing" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="requisitionSourcingSetup">
+			<task synchronous="true" continue-on-failure="false" name="requisitionHeader">
+				<task-object-name>com.tsa.puridiom.requisitionheader.tasks.RequisitionHeaderRetrieveById</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="requisitionSourcingSetup">
+				<task-object-name>com.tsa.puridiom.requisitionheader.tasks.RequisitionHeaderUpdateSetup</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="requisitionLineList">
+				<task-object-name>com.tsa.puridiom.requisitionline.tasks.RequisitionLineRetrieveByHeader</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="requisitionSourcingSplit">
+			<task synchronous="true" continue-on-failure="false" name="requisitionSourcingSplit">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>requisition-sourcing-split.xml</process-filename>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="requisitionHeaderSourcingStatusActivity">
+			<task synchronous="true" continue-on-failure="false" name="requisitionHeaderSourcingStatus">
+				<task-object-name>com.tsa.puridiom.requisitionheader.tasks.RequisitionHeaderSetSourcingStatus</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="requisitionHeaderUpdate">
+				<task-object-name>com.tsa.puridiom.requisitionheader.tasks.RequisitionHeaderUpdate</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="requisitionLineUpdate">
+				<task-object-name>com.tsa.puridiom.requisitionline.tasks.RequisitionLineUpdateList</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="recentReqItemActivity">
+			<task synchronous="true" continue-on-failure="false" name="recentReqItemAdd">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>recentreqitem-add-list.xml</process-filename>
+			</task>
+		</activity>
+	</activities>
+</process>

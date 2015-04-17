@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="rfqGenerateFormNumber" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="fiscalYearSetup">
+			<task synchronous="true" continue-on-failure="false" name="rfqFiscalYearActive">
+				<rule-filename>is-rfq-active-fiscal-year-required.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.rfq.tasks.RfqValidateActiveFiscalYear</task-object-name>
+				<post-action>exitActivity</post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="AutoGen_genYear">
+				<task-object-name>com.tsa.puridiom.common.tasks.GetDefaultFiscalYear</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="rfqGenerateNumber">
+			<task synchronous="true" continue-on-failure="false" name="RfqHeader_rfqNumber">
+				<task-object-name>com.tsa.puridiom.common.tasks.AutoGenDocNumber</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="rfqFormatSetup">
+				<task-object-name>com.tsa.puridiom.rfq.tasks.RfqFormatNumberSetup</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="checkMax">
+				<task-object-name>com.tsa.puridiom.common.tasks.CheckMaxDocNumber</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="RfqHeader_rfqNumber">
+				<task-object-name>com.tsa.puridiom.common.tasks.FormatDocNumber</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

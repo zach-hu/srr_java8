@@ -1,0 +1,114 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping>
+
+<!--
+    Created by Middlegen Hibernate plugin
+
+    http://boss.bekk.no/boss/middlegen/
+    http://hibernate.sourceforge.net/
+-->
+
+<class
+    name="com.tsa.puridiom.entity.InvoiceVendor"
+    table="INVOICE_VENDOR"
+>
+    <id
+        name="vendorId"
+        type="java.lang.String"
+        column="VENDOR_ID"
+    >
+        <generator class="assigned" />
+    </id>
+    <property
+        name="vendorName"
+        type="java.lang.String"
+        column="VENDOR_NAME"
+        length="40"
+    />
+    <property
+        name="fobCode"
+        type="java.lang.String"
+        column="FOB_CODE"
+        length="15"
+    />
+    <property
+        name="dateEntered"
+        type="java.sql.Timestamp"
+        column="DATE_ENTERED"
+        length="7"
+    />
+    <property
+        name="status"
+        type="java.lang.String"
+        column="STATUS"
+        length="4"
+    />
+    <property
+        name="ownerEmail"
+        type="java.lang.String"
+        column="OWNER_EMAIL"
+        length="60"
+    />
+    <property
+        name="notes"
+        type="java.lang.String"
+        column="NOTES"
+        length="255"
+    />
+	<property
+        name="apReference"
+        type="java.lang.String"
+        column="AP_REFERENCE"
+        length="20"
+    />
+	<property
+        name="vendorAccount"
+        type="java.lang.String"
+        column="VENDOR_ACCOUNT"
+        length="20"
+    />
+    <property
+        name="eftBankName"
+        type="java.lang.String"
+        column="EFT_BANK_NAME"
+        length="40"
+    />
+    <property
+        name="eftAccountNumber"
+        type="java.lang.String"
+        column="EFT_BANK_ACCOUNT"
+        length="20"
+    />
+    <property
+        name="eftRoutingNumber"
+        type="java.lang.String"
+        column="EFT_ABA_ACH"
+        length="20"
+    />
+    <property
+        name="eftWireAccount"
+        type="java.lang.String"
+        column="EFT_ABA_WIRE"
+        length="20"
+    />
+    <property
+        name="eftPersonName"
+        type="java.lang.String"
+        column="EFT_HOLDER_ACCOUNT"
+        length="20"
+    />
+    <property
+        name="eftAccountType"
+        type="java.lang.String"
+        column="EFT_TYPE_ACCOUNT"
+        length="1"
+    />
+
+    <!-- associations -->
+
+</class>
+</hibernate-mapping>

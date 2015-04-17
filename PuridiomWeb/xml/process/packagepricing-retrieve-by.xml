@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- set connection-type="None" because connection will be obtained in PackagePricingRetrieveAll w/ host.cfg.xml -->
+<process name="packagepricing-retrieve-by" connection-type="None" ldap-connection-type="None"> 
+	<activities>  
+		<activity synchronous="true" continue-on-failure="false" name="retrieveActivity">   
+			<task synchronous="true" continue-on-failure="false" name="packagePricingList">    			
+				<task-object-name>com.tsa.puridiom.packagepricing.tasks.PackagePricingRetrieveBy</task-object-name>    
+			</task>   
+		</activity>  
+	</activities> 
+</process>

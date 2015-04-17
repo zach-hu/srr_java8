@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Connection for OrganizationRegisterNew will be obtained in the task w/ host.cfg.xml -->
+<process name="organizationAdd" connection-type="New-Transaction" connection-name="host" ldap-connection-type="None">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="organizationRegisterNew">
+			<task synchronous="true" continue-on-failure="false" name="UserProfile_organizationId">
+				<task-object-name>com.tsa.puridiom.organization.tasks.OrganizationRegisterNew</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="setOrganizationInCache">
+				<task-object-name>com.tsa.puridiom.organization.tasks.OrganizationManagerSetInCache</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="setupOrganizationPackage">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>organizationpackage-register-new.xml</process-filename>
+			</task>
+		</activity>
+	</activities>
+</process>

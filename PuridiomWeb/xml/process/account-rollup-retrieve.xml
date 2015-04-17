@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="AccountRollupRetrieve" connection-type="New-Connection">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="accountRollupRetrieve">
+			<task synchronous="true" continue-on-failure="false" name="accountRollupList">
+				<task-object-name>com.tsa.puridiom.account.tasks.AccountRollupRetrieve</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+	</activities>
+</process>

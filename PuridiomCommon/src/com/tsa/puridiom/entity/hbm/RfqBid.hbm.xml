@@ -1,0 +1,154 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+    
+<hibernate-mapping>
+
+<!-- 
+    Created by Middlegen Hibernate plugin
+
+    http://boss.bekk.no/boss/middlegen/
+    http://hibernate.sourceforge.net/
+-->
+
+<class 
+    name="com.tsa.puridiom.entity.RfqBid" 
+    table="RFQ_BID"
+>
+    <composite-id name="comp_id" class="com.tsa.puridiom.entity.RfqBidPK">
+        <key-property name="icRfqHeader" column="IC_RFQ_HEADER" type="java.math.BigDecimal"/>
+        <key-property name="icRfqLine" column="IC_RFQ_LINE" type="java.math.BigDecimal"/>
+        <key-property name="vendorId" column="VENDOR_ID" type="java.lang.String"/>
+    </composite-id>    
+    <property
+        name="quantity"
+        type="java.math.BigDecimal"
+        column="QUANTITY"
+        length="15"
+    />
+    <property
+        name="umCode"
+        type="java.lang.String"
+        column="UM_CODE"
+        length="15"
+    />
+    <property
+        name="unitPrice"
+        type="java.math.BigDecimal"
+        column="UNIT_PRICE"
+        length="15"
+    />
+    <property
+        name="discountSource"
+        type="java.lang.String"
+        column="DISCOUNT_SOURCE"
+        length="1"
+    />
+    <property
+        name="discountAmount"
+        type="java.math.BigDecimal"
+        column="DISCOUNT_AMOUNT"
+        length="15"
+    />
+    <property
+        name="discountPercent"
+        type="java.math.BigDecimal"
+        column="DISCOUNT_PERCENT"
+        length="10"
+    />
+    <property
+        name="shippingCharges"
+        type="java.math.BigDecimal"
+        column="SHIPPING_CHARGES"
+        length="15"
+    />
+    <property
+        name="otherCharges"
+        type="java.math.BigDecimal"
+        column="OTHER_CHARGES"
+        length="15"
+    />
+    <property
+        name="otherDescript"
+        type="java.lang.String"
+        column="OTHER_DESCRIPT"
+        length="30"
+    />
+    <property
+        name="taxShipping"
+        type="java.lang.String"
+        column="TAX_SHIPPING"
+        length="1"
+    />
+    <property
+        name="taxOther"
+        type="java.lang.String"
+        column="TAX_OTHER"
+        length="1"
+    />
+    <property
+        name="commentFlag"
+        type="java.lang.String"
+        column="COMMENT_FLAG"
+        length="1"
+    />
+    <property
+        name="taxPercent"
+        type="java.math.BigDecimal"
+        column="TAX_PERCENT"
+        length="10"
+    />
+    <property
+        name="taxAmount"
+        type="java.math.BigDecimal"
+        column="TAX_AMOUNT"
+        length="15"
+    />
+    <property
+        name="shippingTaxAmt"
+        type="java.math.BigDecimal"
+        column="SHIPPING_TAX_AMT"
+        length="15"
+    />
+    <property
+        name="otherTaxAmount"
+        type="java.math.BigDecimal"
+        column="OTHER_TAX_AMOUNT"
+        length="15"
+    />
+    <property
+        name="bidCurrency"
+        type="java.lang.String"
+        column="BID_CURRENCY"
+        length="15"
+    />
+    <property
+        name="lastChgDate"
+        type="java.sql.Timestamp"
+        column="LAST_CHG_DATE"
+        length="7"
+    />
+    <property
+        name="bidCode"
+        type="java.lang.String"
+        column="BID_CODE"
+        length="15"
+    />
+	<property
+        name="umFactor"
+        type="java.math.BigDecimal"
+        column="UM_FACTOR"
+        length="15"
+    />
+	<property
+        name="currencyFactor"
+        type="java.math.BigDecimal"
+        column="CURRENCY_FACTOR"
+        length="15"
+    />
+    <!-- associations -->
+    <!-- bi-directional many-to-one association to RfqLine -->
+
+</class>
+</hibernate-mapping>

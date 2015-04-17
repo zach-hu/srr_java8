@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="vendorAccountUpdate" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="vendorAccountUpdate">
+			<task synchronous="true" continue-on-failure="false" name="vendorAccount">
+				<task-object-name>com.tsa.puridiom.vendoraccount.tasks.VendorAccountSetValues</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="vendorAccountAdd">
+				<task-object-name>com.tsa.puridiom.vendoraccount.tasks.VendorAccountAdd</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+	</activities>
+</process>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="SubCommodityRetrieveTree" connection-type="Connection-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="CommodityRetrieveTree">
+			<task synchronous="true" continue-on-failure="false" name="commodityList">
+				<task-object-name>com.tsa.puridiom.subcommodity.tasks.SubCommodityRetrieveTree</task-object-name>
+				<post-action>exitActivity</post-action>
+			</task>
+		</activity>  
+	 </activities> 
+</process>

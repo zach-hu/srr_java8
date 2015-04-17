@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="shipToRetrieveByLine" connection-type="Connection-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="shipToRetrieveByLine">
+			<task synchronous="true" continue-on-failure="false" name="shipToList">			
+				<task-object-name>com.tsa.puridiom.shipto.tasks.ShipToRetrieveByLine</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="shipToList">
+				<rule-filename>is-shipto-line-list-empty.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.poheader.tasks.PoHeaderRetrieveRequiredBy</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

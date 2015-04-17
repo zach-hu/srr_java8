@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rule>
+	<clause type="StringCompare">
+		<left-side>
+			<source>incomingRequest</source>
+			<name>currentGroupPackage</name>
+		</left-side>
+		<operator>STARTSWITH</operator>
+		<right-side>
+			<source>constant</source>
+			<value>FREE</value>
+		</right-side>
+	</clause>
+	<logical-operator>OR</logical-operator>
+	<clause type="StringCompare">
+		<left-side>
+			<source>incomingRequest</source>
+			<name>currentGroupPackage</name>
+		</left-side>
+		<operator>STARTSWITH</operator>
+		<right-side>
+			<source>constant</source>
+			<value>Free</value>
+		</right-side>
+	</clause>
+</rule>

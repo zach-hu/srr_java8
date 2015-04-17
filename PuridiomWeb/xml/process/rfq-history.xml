@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="rfqHistory" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="rfqRetrieve">
+			<task synchronous="true" continue-on-failure="false" name="rfqHeader">
+				<task-object-name>com.tsa.puridiom.rfqheader.tasks.RfqHeaderRetrieveById</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="rfqLineList">
+				<task-object-name>com.tsa.puridiom.rfqline.tasks.RfqLineRetrieveByHeader</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="rfqRetrieve">
+			<task synchronous="true" continue-on-failure="false" name="rfqLine">
+				<task-object-name>com.tsa.puridiom.rfqline.tasks.RfqLineRetrieveHigherStatus</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="history">
+			<task synchronous="true" continue-on-failure="false" name="rfqHeaderHistory">
+				<rule-filename>is-rfqheaderstatus-equal-than-rfqlinestatus.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.rfqheader.history.tasks.RfqHeaderHistory</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="rfqLineListHistory">
+				<rule-filename>is-rfq-not-intent.xml;is-rfq-not-purchasing.xml;is-rfq-not-approving.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.rfqline.history.tasks.RfqLineListHistory</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

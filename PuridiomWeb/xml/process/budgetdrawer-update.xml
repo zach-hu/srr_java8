@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="budgetDrawerAdd" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="budgetDrawerAdd">
+			<task synchronous="true" continue-on-failure="false" name="budgetDrawer">
+				<task-object-name>com.tsa.puridiom.budgetdrawer.tasks.BudgetDrawerSetValues</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="budgetDrawer">
+				<task-object-name>com.tsa.puridiom.budgetdrawer.tasks.BudgetDrawerUpdate</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="budgetWraperInCache">
+			<task synchronous="true" continue-on-failure="false" name="budgetWraperInCache">
+				<task-object-name>com.tsa.puridiom.budgetdrawer.tasks.BudgetWraperInCache</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

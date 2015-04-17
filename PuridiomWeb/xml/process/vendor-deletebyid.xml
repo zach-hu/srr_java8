@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="VendorDeletebyid" connection-type="New-Transaction">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="deleteCheckVendorActivity">
+			<task synchronous="true" continue-on-failure="false" name="vendorRetrieveOrderCount">
+				<task-object-name>com.tsa.puridiom.vendor.tasks.VendorRetrieveOrderCount</task-object-name>
+				<post-action />
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="vendorRetrieveOpenSoliciationCount">
+				<task-object-name>com.tsa.puridiom.vendor.tasks.VendorRetrieveOpenSolicitationCount</task-object-name>
+				<post-action />
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="deleteCheckVendorActivity">
+			<rule-filename check-for-false="true">can-delete-vendor.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="vendorDeleteError">
+				<task-object-name>com.tsa.puridiom.vendorerrormsg.tasks.ErrorMsgSetVendorDeleteError</task-object-name>
+			</task>
+			  <task synchronous="true" continue-on-failure="false" name="vendorsetup">
+				<task-object-name>com.tsa.puridiom.vendor.tasks.VendorRetrieveSetup</task-object-name>
+				<post-action />
+			  </task>
+			  <task synchronous="true" continue-on-failure="false" name="vendor">
+				<task-object-name>com.tsa.puridiom.vendor.tasks.VendorRetrieveById</task-object-name>
+				<post-action />
+			  </task>
+			  <task synchronous="true" continue-on-failure="false" name="address">
+				<task-object-name>com.tsa.puridiom.address.tasks.AddressRetrievePrimary</task-object-name>
+				<post-action />
+			  </task>
+			   <task synchronous="true" continue-on-failure="false" name="remittoaddress">
+				<task-object-name>com.tsa.puridiom.address.tasks.AddressRetrieveRemitTo</task-object-name>
+				<post-action />
+			  </task>
+			  <task synchronous="true" continue-on-failure="false" name="contact">
+				<task-object-name>com.tsa.puridiom.contact.tasks.ContactRetrievePrimary</task-object-name>
+				<post-action>exitProcess</post-action>
+			  </task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="deletebyidVendorActivity">
+			<task synchronous="true" continue-on-failure="false" name="VendorDeleteSetup">
+				<task-object-name>com.tsa.puridiom.vendor.tasks.ContactDeleteSetup</task-object-name>
+				<post-action />
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="deletebyidVendor">
+				<task-object-name>com.tsa.puridiom.vendor.tasks.VendorDeleteById</task-object-name>
+				<post-action />
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="addressDeleteByType">
+				<task-object-name>com.tsa.puridiom.address.tasks.AddressDeleteBySupplier</task-object-name>
+				<post-action />
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="contacts">
+				<task-object-name>com.tsa.puridiom.contact.tasks.ContactRetrieveBySupplier</task-object-name>
+				<post-action />
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="contacts">
+				<task-object-name>com.tsa.puridiom.contact.tasks.ContactDeleteBySupplier</task-object-name>
+				<post-action />
+			</task>
+		  </activity>
+	 </activities>
+</process>

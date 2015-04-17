@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="securityGroupProfileUpdate" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="securityGroupProfileUpdate">
+			<task synchronous="true" continue-on-failure="false" name="securityGroup">
+				<task-object-name>com.tsa.puridiom.securitygroup.tasks.SecurityGroupDeleteSetup</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="securityGroup">
+				<task-object-name>com.tsa.puridiom.securitygroup.tasks.SecurityGroupDeleteById</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="securityProfileDelete">
+				<task-object-name>com.tsa.puridiom.securityprofile.tasks.SecurityProfileDeleteByGroupId</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="userGroupRelDelete">
+				<task-object-name>com.tsa.puridiom.usergrouprel.tasks.UserGroupRelDeleteByGroupId</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="userRoleRemoveFromCache">
+				<task-object-name>com.tsa.puridiom.usermanager.tasks.UserRoleRemoveFromCache</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

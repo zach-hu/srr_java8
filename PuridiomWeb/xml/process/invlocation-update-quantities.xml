@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="UpdateQuantities" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="UpdateQuantitiesSetup">
+			<rule-filename check-for-false="true">is-receipt-update.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="bins">
+				<task-object-name>com.tsa.puridiom.invbinlocation.tasks.InvBinLocationUpdateLocationQtiesSetUp</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="UpdateQuantities">
+			<task synchronous="true" continue-on-failure="false" name="bins">
+				<task-object-name>com.tsa.puridiom.invbinlocation.tasks.InvBinLocationRetrieveByItem</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="invLocation">
+				<task-object-name>com.tsa.puridiom.invlocation.tasks.InvLocationRetrieveById</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="UpdateQuantities">
+			<rule-filename check-for-false="true">is-invlocation-empty.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="invLocation">
+				<task-object-name>com.tsa.puridiom.invbinlocation.tasks.InvBinLocationAddQuantites</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="invLocation">
+				<task-object-name>com.tsa.puridiom.invlocation.tasks.InvLocationUpdateAvgCost</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="invLocationQtyUpdate">
+				<rule-filename check-for-false="true">is-receiptmethod-empty.xml;is-receiptmethod-receivebytransfer.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.receiptline.tasks.ReceiptLineSetAcceptedInventoryQty</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="InvLocation">
+				<task-object-name>com.tsa.puridiom.invlocation.tasks.InvLocationUpdate</task-object-name>
+			</task>
+
+			<task synchronous="true" continue-on-failure="false" name="invLocationList">
+				<task-object-name>com.tsa.puridiom.invlocation.tasks.InvLocationRetrieveByItem</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="invItem">
+				<task-object-name>com.tsa.puridiom.invitem.tasks.InvItemRetrieveById</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="invItem">
+				<task-object-name>com.tsa.puridiom.invitem.tasks.InvItemUpdateAvgCost</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="UpdateItem">
+			<rule-filename check-for-false="false">is-inventory-item-not-empty.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="InvItem">
+				<task-object-name>com.tsa.puridiom.invitem.tasks.InvItemUpdate</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

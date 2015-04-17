@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="InvPropertyUpdate" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="updateInvPropertyActivity">
+			<task synchronous="true" continue-on-failure="false" name="invProperty">
+				<rule-filename></rule-filename>
+				<task-object-name>com.tsa.puridiom.invproperty.tasks.InvPropertyRetrieveById</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="invProperty">
+				<rule-filename></rule-filename>
+				<task-object-name>com.tsa.puridiom.invproperty.tasks.InvPropertySetValues</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="invProperty">
+				<task-object-name>com.tsa.puridiom.invproperty.tasks.InvPropertyUpdate</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		 </activities>
+</process>

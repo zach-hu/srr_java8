@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="Print-po-Pdf" connection-type="Transaction-Required">
+  <activities>
+  		<activity synchronous="true" continue-on-failure="false" name="poRetrieve">
+			<task synchronous="true" continue-on-failure="false" name="poHeader">
+				<task-object-name>com.tsa.puridiom.poheader.tasks.PoHeaderRetrieveById</task-object-name>
+			</task>
+			
+			<task synchronous="true" continue-on-failure="false" name="poHeaderSetPrintMode">
+				<task-object-name>com.tsa.puridiom.poheader.tasks.PoHeaderSetPrintMode</task-object-name>
+				<post-action></post-action>
+			</task>
+			
+			<task synchronous="true" continue-on-failure="false" name="poHeader">
+				<task-object-name>com.tsa.puridiom.poheader.tasks.PoHeaderSetValues</task-object-name>
+				<post-action></post-action>
+			</task>
+			
+			<task synchronous="true" continue-on-failure="false" name="poHeader">
+      			<task-object-name>com.tsa.puridiom.poheader.tasks.PoHeaderUpdate</task-object-name>
+      		<post-action></post-action>
+    </task>
+		</activity>
+  </activities>
+</process>

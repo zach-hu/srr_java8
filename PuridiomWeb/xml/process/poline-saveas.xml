@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="poLineSaveas" connection-type="transaction-required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="poLineSaveas">
+			<task synchronous="true" continue-on-failure="false" name="poLine">
+				<task-object-name>com.tsa.puridiom.poline.tasks.PoLineSaveas</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="poLineSaveasSetup">
+				<task-object-name>com.tsa.puridiom.poline.tasks.PoLineSaveasSetup</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="poLineAccountSaveas">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>account-saveas.xml</process-filename>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="poLineCommentSaveas">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>doccomment-saveas.xml</process-filename>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="poLineAttachmentSaveas">
+				<rule-filename>is-documents-module-active.xml</rule-filename>
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>docattachment-saveas-by-line.xml</process-filename>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="poLineShipToSaveas">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>shipto-saveas.xml</process-filename>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="poLineBillToSaveas">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>billto-saveas.xml</process-filename>
+			</task>
+		</activity>
+	</activities>
+</process>

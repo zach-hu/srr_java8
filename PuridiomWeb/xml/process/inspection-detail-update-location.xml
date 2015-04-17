@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="inspectionHeaderUpdateLocations" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="inspectionHeaderRetrieve">
+			<task synchronous="true" continue-on-failure="false" name="inspectionHeaderList">
+				<task-object-name>com.tsa.puridiom.inspectionheader.tasks.InspectionHeaderListRetrieveByIcMsrLine</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="inspectionHeaderListUpdateLocations">
+				<task-object-name>com.tsa.puridiom.inspectionheader.tasks.InspectionHeaderListUpdateLocations</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+	</activities>
+</process>

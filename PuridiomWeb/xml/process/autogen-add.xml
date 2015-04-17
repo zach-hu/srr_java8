@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="AutoGenAdd" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="checkDupAutoGen">
+			<task synchronous="true" continue-on-failure="false" name="existingAutoGen">
+				<task-object-name>com.tsa.puridiom.autogen.tasks.AutoGenRetrieveById</task-object-name>
+				<post-action />
+			 </task>
+			<task synchronous="true" continue-on-failure="false" name="autoGen">
+				<task-object-name>com.tsa.puridiom.autogen.tasks.AutoGenSetValues</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="autoGenValidation">
+			<rule-filename check-for-false="true">is-existing-autogen-empty.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="setErrorMsg">
+				<task-object-name>com.tsa.puridiom.autogenerrormsg.tasks.ErrorMsgSetDuplicateAutoGen</task-object-name>
+			</task>
+			<post-action>exitProcess</post-action>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="AutoGenAdd">
+			<task synchronous="true" continue-on-failure="false" name="autoGen">
+				<task-object-name>com.tsa.puridiom.autogen.tasks.AutoGenAdd</task-object-name>
+				<post-action />
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="RefreshAutoGenManager">
+				<task-object-name>com.tsa.puridiom.autogen.tasks.AutoGenRefreshCache</task-object-name>
+				<post-action></post-action>
+			</task>			
+		</activity>
+	 </activities>
+</process>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="PrintPdf" connection-type="Connection-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="printpdf">
+			<task synchronous="true" continue-on-failure="false" name="report">
+				<task-object-name>com.tsa.puridiom.formpdf.tasks.PrintPoPdf</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="pdfSendQueueSetup">
+			<task synchronous="true" continue-on-failure="false" name="poHeader">
+				<task-object-name>com.tsa.puridiom.po.tasks.QueueAddOrderPdf</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

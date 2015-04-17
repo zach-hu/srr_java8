@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="catalogitem-lookup-by-id" connection-type="Connection-Required">
+	<rule-filename>is-catalogitem-itemnumber-not-empty</rule-filename>
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="catalogItemLookupActivity">
+			<task synchronous="true" continue-on-failure="false" name="catalogItemList">
+				<task-object-name>com.tsa.puridiom.catalog.tasks.CatalogItemRetrieveBy</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="CatalogRetrieveSetup">
+				<task-object-name>com.tsa.puridiom.catalog.tasks.CatalogRetrieveSetup</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="catalog">
+				<task-object-name>com.tsa.puridiom.catalog.tasks.CatalogRetrieveById</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="catalogPriceBrk">
+				<task-object-name>com.tsa.puridiom.catalogpricebrk.tasks.CatalogPriceBrkRetrieveForItemLookup</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="itemLookup">
+				<task-object-name>com.tsa.puridiom.catalog.tasks.CatalogItemLookupSetValues</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="itemLookup">
+				<task-object-name>com.tsa.puridiom.catalog.tasks.CatalogItemAllowReleases</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+	</activities>
+</process>

@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="invoiceCheckExceptions" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="invoiceForwardSetup">
+			<task synchronous="true" continue-on-failure="false" name="invoiceForwardSetup">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>invoice-retrieve.xml</process-filename>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="invoiceForwardSetup">
+			<task synchronous="true" continue-on-failure="false" name="invoiceLineList">
+				<task-object-name>com.tsa.puridiom.invoiceline.tasks.InvoiceLineRetrieveQuantities</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="invoiceCheckExceptions">
+			<task synchronous="true" continue-on-failure="false" name="invoiceCheckInvoiceBalance">
+				<task-object-name>com.tsa.puridiom.invoice.tasks.InvoiceCheckInvoiceBalance</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="setInvoiceBalanceErrorMsg">
+				<rule-filename>is-invoice-exception.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.invoiceerrormsg.tasks.ErrorMsgSetInvoiceBalanceException</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="invoiceCheckInvoicedReceiptQty">
+				<task-object-name>com.tsa.puridiom.invoice.tasks.InvoiceCheckInvoicedReceiptQty</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="setInvoicedReceiptQtyErrorMsg">
+				<rule-filename>is-invoice-exception.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.invoiceerrormsg.tasks.ErrorMsgSetInvoicedReceiptQtyException</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="invoiceCheckInvoicedOrderQty">
+				<task-object-name>com.tsa.puridiom.invoice.tasks.InvoiceCheckInvoicedOrderQty</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="setInvoicedOrderQtyErrorMsg">
+				<rule-filename>is-invoice-exception.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.invoiceerrormsg.tasks.ErrorMsgSetInvoicedOrderQtyException</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="invoiceCheckReceiptOrderQty">
+			<rule-filename>is-receipt-quantity-exception.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="invoiceCheckReceiptOrderQty">
+				<task-object-name>com.tsa.puridiom.invoice.tasks.InvoiceCheckReceiptOrderQty</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="setReceiptOrderQtyErrorMsg">
+				<rule-filename>is-invoice-exception.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.invoiceerrormsg.tasks.ErrorMsgSetReceiptOrderQtyException</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="invoiceCheckPriceTolerance">
+			<rule-filename>is-price-tolerance-exception.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="invoiceCheckPriceTolerance">
+				<task-object-name>com.tsa.puridiom.invoice.tasks.InvoiceCheckPriceTolerance</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="setPriceToleranceErrorMsg">
+				<rule-filename>is-invoice-exception.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.invoiceerrormsg.tasks.ErrorMsgSetPriceToleranceException</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="invoiceCheckMaxDollar">
+			<rule-filename>is-max-dollar-exception.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="invoiceCheckMaxDollar">
+				<task-object-name>com.tsa.puridiom.invoice.tasks.InvoiceCheckMaxDollar</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="setMaxDollarErrorMsg">
+				<rule-filename>is-invoice-exception.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.invoiceerrormsg.tasks.ErrorMsgSetMaxDollarException</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="invoiceCheckOverPayment">
+			<rule-filename>is-over-payment-exception.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="totalAmountInvoiced">
+				<task-object-name>com.tsa.puridiom.invoiceheader.tasks.InvoiceHeaderRetrieveAmountInvoiced</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="invoiceCheckMaxDollar">
+				<task-object-name>com.tsa.puridiom.invoice.tasks.InvoiceCheckOverPayment</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="setMaxDollarErrorMsg">
+				<rule-filename>is-invoice-exception.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.invoiceerrormsg.tasks.ErrorMsgSetOverPaymentException</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="approverListVsrrProj">
+			<task synchronous="true" continue-on-failure="false" name="approverListVsrrProj">
+				<task-object-name>com.tsa.puridiom.invoice.tasks.InvoiceApproverListVsrrProj</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<!-- activity synchronous="true" continue-on-failure="false" name="invoiceCheckError">
+			<task synchronous="true" continue-on-failure="false" name="setErrorMsg">
+				<rule-filename>is-invoice-exception.xml</rule-filename>				
+				<task-object-name>com.tsa.puridiom.invoiceerrormsg.tasks.ErrorMsgSetupException</task-object-name>				
+			</task>
+		</activity-->
+		<!--<activity synchronous="true" continue-on-failure="false" name="invoiceCheckFreight">
+			<task synchronous="true" continue-on-failure="false" name="invoiceCheckFreight">
+				<task-object-name>com.tsa.puridiom.invoice.tasks.InvoiceCheckFobCode</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="setFreightErrorMsg">
+				<rule-filename>is-invoice-exception.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.invoiceerrormsg.tasks.ErrorMsgSetFreightException</task-object-name>
+				<post-action>exitProcess</post-action>
+			</task>
+		</activity>-->
+	</activities>
+</process>

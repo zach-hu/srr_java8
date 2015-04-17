@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+<class name="com.tsa.puridiom.entity.sungard.VendorContacts" table="VENDOR_CONTACTS">
+	<id name="internalVendorId" type="java.math.BigDecimal" column="INTERNAL_VENDOR_ID" length="10">
+		<generator class="assigned" />
+	</id>
+	<property name="associatedAddrId" column="ASSOCIATED_ADDR_ID" type="java.math.BigDecimal" length="10" not-null="true"/>
+	<property name="contactPhoneNum" column="CONTACT_PHONE_NUM" type="java.lang.String" length="25" not-null="true"/>
+	<property name="contactFaxNum" column="CONTACT_FAX_NUM" type="java.lang.String" length="25" not-null="true"/>
+	<property name="contactName" column="CONTACT_NAME" type="java.lang.String" length="60" not-null="true"/>
+	<property name="contactEmailAddr" column="CONTACT_EMAIL_ADDR" type="java.lang.String" length="60" not-null="true"/>
+</class>
+</hibernate-mapping>

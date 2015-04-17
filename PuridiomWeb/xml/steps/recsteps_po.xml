@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<requisition>
+    <step process="HEADER_GENERAL_INFO" visible="1">
+        <link><![CDATA[receipts/rec_general_info_po.jsp]]></link>
+        <label>general_information</label>
+        <method>RequisitionHeaderRetrieveById</method>
+    </step>
+    <step process="SHOPCART" visible="1">
+        <link><![CDATA[receipts/rec_items_po.jsp]]></link>
+        <label>shopping_cart</label>
+		<method>RequisitionLineRetrieveByHeader</method>
+    </step>
+    <step process="HEADER_VALIDATION" visible="1">
+        <link><![CDATA[receipts/rec_validation_po.jsp]]></link>
+        <label><![CDATA[validate]]></label>
+        <method>AccountDeleteZeroDollars;RequisitionValidate</method>
+    </step>
+</requisition>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="printAllPdfApprovedInvoices" connection-type="None">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="printAllPdfApprovedInvoices">
+			<task synchronous="true" continue-on-failure="false" name="invoicePdf">
+				<task-object-name>com.tsa.puridiom.formpdf.tasks.InvoicePrintAllPdfApprovedPdf</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

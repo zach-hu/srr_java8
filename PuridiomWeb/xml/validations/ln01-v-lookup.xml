@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rule>
+	<clause type="NotEmpty" matchAll="true">
+		<left-side>
+			<source>incomingRequestList</source>
+			<object>lineitems</object>
+			<name>getUdf1Code</name>
+		</left-side>
+	</clause>
+	<logical-operator>IFTHEN</logical-operator>
+	<clause type="lookup" matchAll="true">
+		<sql>from StdTable stdTable where stdTable.id.tableType = 'LN01' AND stdTable.id.tableKey = '@linefld1@' AND (stdTable.status = '02' OR (stdTable.status = '01' AND stdTable.dateExpires >= @today@))</sql>
+		<source>lineitems</source>
+		<arguments>
+			<name>linefld</name>
+			<source>lineitems</source>
+			<colName>getUdf1Code</colName>
+		</arguments>
+	</clause>
+</rule>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="invoiceRetrieve" connection-type="None">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="extractStart">
+			<task synchronous="true" continue-on-failure="false" name="invoiceExtractStart">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>sungard-checkrequest-extract-start.xml</process-filename>
+			</task>
+		</activity>
+<!-- update for lastExtract value
+		<activity synchronous="true" continue-on-failure="false" name="finalizeExtract">
+			<task synchronous="true" continue-on-failure="false" name="invoiceHeaderUpdate">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>invoiceheader-update.xml</process-filename>
+			</task>
+		</activity>
+-->
+	</activities>
+</process>

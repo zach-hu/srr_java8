@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="" connection-type="Connection-Required">
+	<rule-filename>is-update-prices-required.xml</rule-filename>
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="UpdatePriceSetup">
+			<task synchronous="true" continue-on-failure="false" name="PoLineUpdatePriceSetup">
+				<task-object-name>com.tsa.puridiom.poline.tasks.PoLineUpdatePriceSetup</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="UpdateInventoryUnitPrice">
+			<rule-filename>is-poline-source-inventory.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="PoLineUpdatePrice">
+				<task-object-name>com.tsa.puridiom.invitem.tasks.InvItemUpdateUnitPrice</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="UpdateRequisitionUnitPriceSetup">
+			<rule-filename>is-poline-source-requisition.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="reqLine">
+				<task-object-name>com.tsa.puridiom.requisitionline.tasks.RequisitionLineRetrieveById</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="ItemSourceFromRequisitionLineSetup">
+				<task-object-name>com.tsa.puridiom.poline.tasks.ItemSourceFromRequisitionLineSetup</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="UpdateRequisitionUnitPriceSetup">
+			<rule-filename>is-poline-source-requisition.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="PoLineUpdatePrice">
+				<rule-filename>is-reqline-source-inventory.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.invitem.tasks.InvItemUpdateUnitPrice</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="PoLineUpdateCatalogPrice">
+				<rule-filename check-for-false="true">is-requisitionline-catalogid-empty.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.catalogitem.tasks.CatalogItemUpdateUnitPrice</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

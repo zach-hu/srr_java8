@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="InvBinLocationDeletebyid" connection-type="Transaction-Required"> 
+	<activities>  
+		<activity synchronous="true" continue-on-failure="false" name="deletebyidInvBinLocationActivity">   
+			<task synchronous="true" continue-on-failure="false" name="invBinLocation">    			
+				<task-object-name>com.tsa.puridiom.invbinlocation.tasks.InvBinLocationDeleteById</task-object-name>    
+				<post-action />    
+			   </task>   
+		  </activity>  
+	 </activities> 
+</process>

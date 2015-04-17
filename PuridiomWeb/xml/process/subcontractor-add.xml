@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="SubContractorAdd" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="SubContractorAdd">
+			<task synchronous="true" continue-on-failure="false" name="subContractor">
+				<task-object-name>com.tsa.puridiom.po.subcontractor.tasks.SubContractorSetValues</task-object-name>
+			</task>
+			  <task synchronous="true" continue-on-failure="false" name="subContractor">
+				<task-object-name>com.tsa.puridiom.po.subcontractor.tasks.SubContractorAdd</task-object-name>
+			  </task>
+		  </activity>
+	 </activities>
+</process>

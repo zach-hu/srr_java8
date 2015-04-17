@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="InvoiceLineLoadfromOrder" connection-type="Transaction-Required">
+  <activities>
+    <activity synchronous="true" continue-on-failure="false" name="InvoiceLineSetup">
+      <!--<task synchronous="true" continue-on-failure="false" name="invoiceLineSetup">
+        <task-object-name>com.tsa.puridiom.invoiceline.tasks.InvoiceLineSetup</task-object-name>
+      </task>-->
+		<task synchronous="true" continue-on-failure="false" name="invoiceToleranceCheck">
+		<rule-filename>is-autoinvoice.xml</rule-filename>
+		  <task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+		  <process-filename>invoice-check-tolerance.xml</process-filename>
+	   </task>
+      <task synchronous="true" continue-on-failure="false" name="InvoiceLineFromOrderSetup">
+        <task-object-name>com.tsa.puridiom.invoiceline.tasks.InvoiceLineFromOrderSetup</task-object-name>
+      </task>
+      <!--<task synchronous="true" continue-on-failure="false" name="InvoiceLine_lineNumber">
+        <task-object-name>com.tsa.puridiom.invoiceline.tasks.InvoiceLineGetNewLineNumber</task-object-name>
+      </task>-->
+      <task synchronous="true" continue-on-failure="false" name="invoiceLine">
+        <task-object-name>com.tsa.puridiom.invoiceline.tasks.InvoiceLineSetValues</task-object-name>
+      </task>
+		<task synchronous="true" continue-on-failure="false" name="invoiceHeaderAccountSaveas">
+			<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+			<process-filename>account-saveas.xml</process-filename>
+		</task>
+      <task synchronous="true" continue-on-failure="false" name="invoiceLine">
+        <task-object-name>com.tsa.puridiom.invoiceline.tasks.InvoiceLineAdd</task-object-name>
+        <post-action></post-action>
+      </task>
+    </activity>
+  </activities>
+</process>

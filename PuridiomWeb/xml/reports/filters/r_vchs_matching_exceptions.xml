@@ -1,0 +1,155 @@
+<r_vchs>
+<columns>
+		<InvoiceHeader_invoiceNumber>
+			<label>Invoice Number</label>
+			<type>STRING</type>
+		</InvoiceHeader_invoiceNumber>
+		<InvoiceHeader_invoiceDate>
+			<label>Invoice Date</label>
+			<type>DATE</type>
+		</InvoiceHeader_invoiceDate>
+		<InvoiceHeader_invoiceDesc>
+			<label>Invoice Desc</label>
+			<type>STRING</type>
+		</InvoiceHeader_invoiceDesc>
+		<InvoiceHeader_invoiceTotal>
+			<label>Invoice Total</label>
+			<type>BIGDECIMAL</type>
+		</InvoiceHeader_invoiceTotal>
+		<InvoiceHeader_invoicePrintedDate>
+			<label>Printed Date</label>
+			<type>DATE</type>
+		</InvoiceHeader_invoicePrintedDate>
+		<InvoiceHeader_status>
+			<label>Status</label>
+			<type>STRING</type>
+		</InvoiceHeader_status>
+		<InvoiceHeader_dateEntered>
+			<label>Date Entered</label>
+			<type>DATE</type>
+		</InvoiceHeader_dateEntered>
+		<InvoiceHeader_paymentDueDate>
+			<label>Due Date</label>
+			<type>DATE</type>
+		</InvoiceHeader_paymentDueDate>
+		<InvoiceHeader_termsCode>
+			<label>Terms Code</label>
+			<type>STRING</type>
+		</InvoiceHeader_termsCode>
+		<InvoiceHeader_termsDiscperc>
+			<label>Terms Discperc</label>
+			<type>BIGDECIMAL</type>
+		</InvoiceHeader_termsDiscperc>
+		<InvoiceHeader_termsDiscdays>
+			<label>Terms Discdays</label>
+			<type>BIGDECIMAL</type>
+		</InvoiceHeader_termsDiscdays>
+		<InvoiceHeader_poNumber>
+			<label>Po Number</label>
+			<type>STRING</type>
+		</InvoiceHeader_poNumber>
+		<InvoiceHeader_poRelease>
+			<label>Po Release</label>
+			<type>BIGDECIMAL</type>
+		</InvoiceHeader_poRelease>
+		<InvoiceHeader_vendorId>
+			<label>Vendor Id</label>
+			<type>STRING</type>
+		</InvoiceHeader_vendorId>
+		<InvoiceHeader_vendorName>
+			<label>Vendor Name</label>
+			<type>STRING</type>
+		</InvoiceHeader_vendorName>
+		<InvoiceHeader_shipToCode>
+			<label>Ship To</label>
+			<type>STRING</type>
+		</InvoiceHeader_shipToCode>
+		<InvoiceHeader_poTotal>
+			<label>Po Total</label>
+			<type>BIGDECIMAL</type>
+		</InvoiceHeader_poTotal>
+		<InvoiceHeader_enteredBy>
+			<label>Entered By</label>
+			<type>STRING</type>
+		</InvoiceHeader_enteredBy>
+		<InvoiceHeader_apReference>
+			<label>Ap Reference</label>
+			<type>STRING</type>
+		</InvoiceHeader_apReference>
+		<InvoiceHeader_invoiceReceivedDate>
+			<label>Inv Receipt Date</label>
+			<type>DATE</type>
+		</InvoiceHeader_invoiceReceivedDate>
+		<InvoiceHeader_invoiceRejecting>
+			<label>Inv Rejecting</label>
+			<type>BIGDECIMAL</type>
+		</InvoiceHeader_invoiceRejecting>
+		<InvoiceHeader_reasonCode>
+			<label>Reason Code</label>
+			<type>STRING</type>
+		</InvoiceHeader_reasonCode>
+		<InvoiceHeader_prePaid>
+			<label>Pre Paid</label>
+			<type>STRING</type>
+		</InvoiceHeader_prePaid>
+		<InvoiceHeader_contactName>
+			<label>Contact Name</label>
+			<type>STRING</type>
+		</InvoiceHeader_contactName>
+		<InvoiceHeader_contactPhone>
+			<label>Contact Phone</label>
+			<type>STRING</type>
+		</InvoiceHeader_contactPhone>
+		<InvoiceVendor_apReference>
+			<label>Ap Reference</label>
+			<type>STRING</type>
+		</InvoiceVendor_apReference>
+		<InvoiceAddress_addressLine1>
+			<label>Address Line 1</label>
+			<type>STRING</type>
+		</InvoiceAddress_addressLine1>
+		<InvoiceAddress_addressLine2>
+			<label>Address Line 2</label>
+			<type>STRING</type>
+		</InvoiceAddress_addressLine2>
+		<InvoiceAddress_addressLine3>
+			<label>Address Line 3</label>
+			<type>STRING</type>
+		</InvoiceAddress_addressLine3>
+		<InvoiceAddress_addressLine4>
+			<label>Address Line 4</label>
+			<type>STRING</type>
+		</InvoiceAddress_addressLine4>
+		<InvoiceAddress_city>
+			<label>City</label>
+			<type>STRING</type>
+		</InvoiceAddress_city>
+		<InvoiceAddress_state>
+			<label>State</label>
+			<type>STRING</type>
+		</InvoiceAddress_state>
+		<InvoiceAddress_postalCode>
+			<label>Postal Code</label>
+			<type>STRING</type>
+		</InvoiceAddress_postalCode>
+		<InvoiceHeader_invoiceType>
+			<label>Type</label>
+			<type>STRING</type>
+		</InvoiceHeader_invoiceType>
+		<InvoiceHeader_currencyCode>
+			<label>Currency Code</label>
+			<type>STRING</type>
+		</InvoiceHeader_currencyCode>
+		<InvoiceHeader_currencyFactor>
+			<label>Currency Factor</label>
+			<type>BIGDECIMAL</type>
+		</InvoiceHeader_currencyFactor>
+</columns>
+<sqlfrom> InvoiceAddress as InvoiceAddress , InvoiceHeader as InvoiceHeader , InvoiceVendor as InvoiceVendor </sqlfrom>
+<sqlwhere><![CDATA[
+InvoiceHeader.vendorId = InvoiceVendor.vendorId and
+InvoiceVendor.vendorId = InvoiceAddress.id.vendorId and
+InvoiceHeader.vendorAddrCode = InvoiceAddress.id.addressCode
+]]></sqlwhere>
+<title>Voucher Matching Exceptions Report</title>
+</r_vchs>

@@ -1,0 +1,22 @@
+<rule>
+	<clause type="empty">
+		<left-side>
+			<source>incomingRequestObjectMethod</source>
+			<object>inspectionHeader</object>
+			<name>getInspectionNumber</name>
+		</left-side>
+	</clause>
+	<logical-operator>AND</logical-operator>
+	<clause type="StringCompare">
+		<left-side>
+			<source>incomingRequestObjectMethod</source>
+			<object>inspectionHeader</object>
+			<name>getInspectType</name>
+		</left-side>
+		<operator>EQUALS</operator>
+		<right-side>
+			<source>constant</source>
+			<value>GI</value>
+		</right-side>
+	</clause>
+</rule>

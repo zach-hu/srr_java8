@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="invoiceHeaderShipToRetrieveById" connection-type="Connection-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="invoiceHeaderRetrieveById">
+			<task synchronous="true" continue-on-failure="false" name="invoiceHeader">			
+				<task-object-name>com.tsa.puridiom.invoiceheader.tasks.InvoiceHeaderRetrieveById</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="shipToAddressSetup">
+				<task-object-name>com.tsa.puridiom.invoiceheader.tasks.InvoiceHeaderRetrieveShipToAddressSetup</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="shipToAddress">
+				<rule-filename>is-address-code-not-empty</rule-filename>
+				<task-object-name>com.tsa.puridiom.address.tasks.AddressRetrieveShipTo</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="invoiceHeaderDataSet">			
+				<task-object-name>com.tsa.puridiom.invoiceheader.tasks.InvoiceHeaderDataSet</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

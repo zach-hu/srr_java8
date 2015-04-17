@@ -1,0 +1,70 @@
+<browse_paymentaccount>
+	<columns>
+		<!--PaymentAccount_vendorId>
+			<label>Supplier</label>
+		</PaymentAccount_vendorId-->
+		<PaymentAccount_checkNumber>
+			<label>Check #</label>
+			<size>20</size>
+			<sort>A</sort>
+		</PaymentAccount_checkNumber>
+		<PaymentAccount_checkAmount>
+			<label>Check Amt.</label>
+			<type>DollarDecimal</type>
+			<size>15</size>
+		</PaymentAccount_checkAmount>
+		<compute_spacer>
+			<value><![CDATA[&nbsp;]]></value>
+			<type>constant</type>
+			<label></label>
+            <size>15</size>
+			<selectsql>N</selectsql>
+		</compute_spacer>
+		<PaymentAccount_checkDate>
+			<label>Check Date</label>
+			<type>STRING</type>
+			<size>25</size>
+		</PaymentAccount_checkDate>
+		<PaymentAccount_cancelDate>
+			<label>Cancel Date</label>
+			<type>STRING</type>
+			<size>25</size>
+		</PaymentAccount_cancelDate>
+
+		<PaymentAccount_invoiceNumber>
+			<label>Invoice #</label>
+			<size>25</size>
+			<detail>Y</detail>
+		</PaymentAccount_invoiceNumber>
+		<PaymentAccount_invoiceDate>
+			<label>Invoice Date</label>
+			<type>DATE</type>
+			<size>25</size>
+			<detail>Y</detail>
+		</PaymentAccount_invoiceDate>
+		<PaymentAccount_invoiceAmount>
+			<label>Invoice Amt.</label>
+			<type>DollarDecimal</type>
+			<size>25</size>
+			<detail>Y</detail>
+		</PaymentAccount_invoiceAmount>
+
+		<PaymentAccount_poNumber>
+			<label>PO #</label>
+			<size>17</size>
+			<detail>Y</detail>
+		</PaymentAccount_poNumber>
+		<PaymentAccount_releaseNumber>
+			<label>Rel.</label>
+			<size>8</size>
+			<detail>Y</detail>
+		</PaymentAccount_releaseNumber>
+
+	</columns>
+<sqlfrom>PaymentAccount as PaymentAccount</sqlfrom>
+<sqlwhere><![CDATA[]]></sqlwhere>
+<sqlorderby>PaymentAccount.invoiceDate ASC</sqlorderby>
+<pagesize>15</pagesize>
+<title>Payment History</title>
+<detail-visible>Y</detail-visible>
+</browse_paymentaccount>

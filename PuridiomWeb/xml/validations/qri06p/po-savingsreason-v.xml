@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rule>
+	<clause type="BigDecimalCompare">
+		<left-side>
+			<source>incomingRequestObjectMethod</source>
+			<object>header</object>
+			<name>getSavings</name>
+		</left-side>
+  		<operator>GREATER</operator>
+		<right-side>
+			<source>constant</source>
+			<value>0</value>
+		</right-side>
+	</clause>
+	<logical-operator>IFTHEN</logical-operator>
+	<clause type="NotEmpty">
+		<left-side>
+			<source>incomingRequestObjectMethod</source>
+			<object>header</object>
+			<name>getSavingsReason</name>
+		</left-side>
+	</clause>
+</rule>

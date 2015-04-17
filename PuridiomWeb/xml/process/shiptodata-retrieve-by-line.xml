@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="shipToRetrieveByLine" connection-type="Connection-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="shipToRetrieveByLine">
+			<task synchronous="true" continue-on-failure="false" name="shipToList">			
+				<task-object-name>com.tsa.puridiom.shipto.tasks.ShipToRetrieveByLine</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="shipToDataRetrieve">			
+				<task-object-name>com.tsa.puridiom.shipto.tasks.ShipToDataRetrieve</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="requiredBy">
+			<task synchronous="true" continue-on-failure="false" name="requiredBy">
+				<rule-filename>is-req.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.requisitionheader.tasks.RequisitionHeaderRetrieveRequiredBy</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="requiredBy">
+				<rule-filename>is-rfq.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.rfqheader.tasks.RfqHeaderRetrieveRequiredBy</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="requiredBy">
+				<rule-filename>is-po.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.poheader.tasks.PoHeaderRetrieveRequiredBy</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

@@ -1,0 +1,55 @@
+<browse_po_header>
+	<columns>
+		<PoHeader_poType>
+			<label>poType</label>
+			<type>ORDER-TYPE</type>
+			<size>15</size>
+		</PoHeader_poType>
+		<PoHeader_icPoHeader>
+	        <hidden>Y</hidden>
+	        <visible>0</visible>
+		</PoHeader_icPoHeader>
+		<PoHeader_poNumber>
+			<label>assetcost-ponumber</label>
+			<link><![CDATA[javascript: setAssetCostOrder('#PoHeader_poNumber^','#PoHeader_icPoHeader^'); void(0);]]></link>
+			<size>15</size>
+		</PoHeader_poNumber>
+		<PoHeader_status>
+			<label>brw-status</label>
+			<type>STATUS</type>
+			<size>10</size>
+		</PoHeader_status>
+		<PoHeader_effectiveDate>
+			<label>brw-effectiveDate</label>
+			<type>DATE</type>
+			<size>10</size>
+		</PoHeader_effectiveDate>
+		<PoHeader_expirationDate>
+			<label>brw-dateExpires</label>
+			<type>DATE</type>
+			<size>10</size>
+		</PoHeader_expirationDate>
+		<PoHeader_vendorId>
+			<label>brw-vendorId</label>
+			<hidden>Y</hidden>
+			<hidden-input>Y</hidden-input>
+		</PoHeader_vendorId>
+		<PoHeader_vendorName>
+			<label>brw-vendorName</label>
+			<size>15</size>
+		</PoHeader_vendorName>
+		<PoHeader_buyerCode>
+			<label>brw-buyer</label>
+            <size>15</size>
+            <type>USER-ID</type>
+		</PoHeader_buyerCode>
+		<PoHeader_internalComments>
+			<label>purpose</label>
+			<detail>Y</detail>
+		</PoHeader_internalComments>
+	</columns>
+<sqlfrom>PoHeader as PoHeader</sqlfrom>
+<sqlwhere><![CDATA[ ((PoHeader.poType = 'BO' or PoHeader.poType = 'SB') and PoHeader.status = '3030' and PoHeader.lastRevision = 'C') ]]></sqlwhere>
+<pagesize>15</pagesize>
+<title>Blanket Order Selection</title>
+</browse_po_header>

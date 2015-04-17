@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="departmentBuyerUpdate" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="departmentBuyerRetrieveByDept">
+			<task synchronous="true" continue-on-failure="false" name="departmentBuyer">
+				<task-object-name>com.tsa.puridiom.departmentbuyer.tasks.DepartmentBuyerRetrieveByDept</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+	</activities>
+</process>

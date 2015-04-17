@@ -1,0 +1,57 @@
+<browse_PRWV>
+	<columns>
+  	<PrmRecWorkloadView_userId>
+		<label>brw-inspector</label>
+		<link><![CDATA[javascript: viewInspectorAssignment('#PrmRecWorkloadView_userId^');  void(0);]]></link>
+		<size>20</size>
+    </PrmRecWorkloadView_userId>
+    <PrmRecWorkloadView_firstName>
+		<label>inspectorName</label>
+		<size>10</size>
+    </PrmRecWorkloadView_firstName>
+    <PrmRecWorkloadView_lastName>
+		<label></label>
+		<size>15</size>
+    </PrmRecWorkloadView_lastName>
+    <!-- PrmRecWorkloadView_firstName>
+		<concatenate>
+			<col>PrmRecWorkloadView_firstName</col>
+			<col>PrmRecWorkloadView_lastName</col>
+		</concatenate>
+		<label>Inspector Name</label>
+		<type>STRING</type>
+		<size>20</size>
+		<selectsql>Y</selectsql>
+	</PrmRecWorkloadView_firstName -->
+    <PrmRecWorkloadView_assigned>
+		<label>brw-pendWork</label>
+		<type>NroDecimal</type>
+		<link><![CDATA[javascript: summaryProcurementWorkloadRec('#PrmRecWorkloadView_userId^','A');  void(0);]]></link>
+		<size>10</size>
+    </PrmRecWorkloadView_assigned>
+    <PrmRecWorkloadView_sourcing>
+    	<label>brw-pendSourcing</label>
+    	<type>NroDecimal</type>
+		<link><![CDATA[javascript: summaryProcurementWorkloadRec('#PrmRecWorkloadView_userId^','S'); void(0);]]></link>
+		<size>15</size>
+    </PrmRecWorkloadView_sourcing>
+    <PrmRecWorkloadView_pendingAward>
+		<label>brw-pendAward</label>
+		<type>NroDecimal</type>
+		<link><![CDATA[javascript: summaryProcurementWorkloadRec('#PrmRecWorkloadView_userId^','PA'); void(0);]]></link>
+		<size>15</size>
+    </PrmRecWorkloadView_pendingAward>
+    <PrmRecWorkloadView_total>
+		<label>brw-reqTotal</label>
+		<type>PriceQuantity</type>
+		<link><![CDATA[javascript: summaryProcurementWorkloadRec('#PrmRecWorkloadView_userId^','T');  void(0);]]></link>
+		<size>15</size>
+    </PrmRecWorkloadView_total>
+  </columns>
+<sqlfrom>PrmRecWorkloadView as PrmRecWorkloadView</sqlfrom>
+<sqlwhere><![CDATA[]]></sqlwhere>
+<sqlorderby></sqlorderby>
+<pagesize>40</pagesize>
+<title>Procurement Summary Workload - Receipts</title>
+</browse_PRWV>
+

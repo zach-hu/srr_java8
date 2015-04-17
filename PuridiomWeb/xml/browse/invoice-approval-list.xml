@@ -1,0 +1,77 @@
+<browse_ivc_approval_list>
+	<columns>
+		<InvoiceHeader_icIvcHeader>
+	        <hidden>Y</hidden>
+		</InvoiceHeader_icIvcHeader>
+		<InvoiceHeader_invoiceNumber>
+			<label>brw-invoiceN</label>
+			<link><![CDATA[javascript: retrieveInvoiceApproval('#InvoiceHeader_icIvcHeader^'); void(0);]]></link>
+			<size>10</size>
+		</InvoiceHeader_invoiceNumber>
+		<InvoiceHeader_invoiceDate>
+			<label>invoiceDate</label>
+			<sort>D</sort>
+			<size>11</size>
+			<type>DATE</type>
+		</InvoiceHeader_invoiceDate>
+		<InvoiceHeader_paymentDueDate>
+			<label>brw-paymentDue</label>
+			<size>11</size>
+			<type>DATE</type>
+		</InvoiceHeader_paymentDueDate>
+		<InvoiceHeader_status>
+			<label>brw-status</label>
+			<type>STATUS</type>
+			<size>15</size>
+		</InvoiceHeader_status>
+		<InvoiceHeader_invoiceDesc>
+			<label>description</label>
+            <size>100</size>
+            <detail>Y</detail>
+		</InvoiceHeader_invoiceDesc>
+		<InvoiceHeader_dateEntered>
+			<label>brw-dateentered</label>
+			<hidden>Y</hidden>
+			<type>DATE</type>
+		</InvoiceHeader_dateEntered>
+		<InvoiceHeader_invoiceTotal>
+			<label>brw-total</label>
+			<type>BigDecimal</type>
+			<size>8</size>
+		</InvoiceHeader_invoiceTotal>
+		<!--<InvoiceHeader_approved>
+			<label>Approved</label>
+			<hidden>Y</hidden>
+		</InvoiceHeader_approved>-->
+		<InvoiceHeader_enteredBy>
+			<label>enteredby</label>
+            <size>15</size>
+            <type>USER-ID</type>
+		</InvoiceHeader_enteredBy>
+		<InvoiceHeader_vendorName>
+			<label>brw-vendorName</label>
+			<size>20</size>
+			<visible>1</visible>
+		</InvoiceHeader_vendorName>
+		<ApprovalLog_id_userId>
+			<label>user-userId</label>
+			<type>USER-ID</type>
+			<visible>0</visible>
+		</ApprovalLog_id_userId>
+		<ApprovalLog_callForward>
+			<label>routing-callForward</label>
+			<type>USER-ID</type>
+			<size>15</size>
+		</ApprovalLog_callForward>
+	</columns>
+<sqlfrom>InvoiceHeader as InvoiceHeader, ApprovalLog as ApprovalLog</sqlfrom>
+<sqlwhere>
+	<![CDATA[InvoiceHeader.invoiceNumber <> 'N/A' AND ApprovalLog.id.icHeader = InvoiceHeader.icIvcHeader
+					AND InvoiceHeader.status >= '6005' AND InvoiceHeader.status < '6010' AND ApprovalLog.approved = 'A'
+					AND (ApprovalLog.callForward = :as_userid OR ApprovalLog.backupApprover = :as_userid
+					OR (ApprovalLog.approverType = 'P' AND ApprovalLog.id.userId in (SELECT AppPooluser.id.poolid FROM AppPooluser as AppPooluser WHERE AppPooluser.id.userId = :as_userid))) ]]>
+</sqlwhere>
+<sqlorderby>InvoiceHeader.invoiceNumber ASC</sqlorderby>
+<pagesize>15</pagesize>
+<title>Invoices Waiting My Approval</title>
+</browse_ivc_approval_list>

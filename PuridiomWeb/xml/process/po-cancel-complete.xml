@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="CancelPo" connection-type="Transaction-Required">
+  <activities>
+	<activity synchronous="true" continue-on-failure="false" name="cancelPoSetup">
+      <task synchronous="true" continue-on-failure="false" name="cancelPoSetup">
+        <task-object-name>com.tsa.puridiom.po.tasks.PoCancelSetup</task-object-name>
+        <post-action></post-action>
+      </task>
+      <task synchronous="true" continue-on-failure="false" name="poRetrieve">
+        <task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+        <process-filename>po-retrieve.xml</process-filename>
+      </task>
+	</activity>
+    <activity synchronous="true" continue-on-failure="false" name="cancelPoChecks">
+      <task synchronous="true" continue-on-failure="false" name="CancelPoCheck">
+        <task-object-name>com.tsa.puridiom.po.tasks.PoCancelCheck</task-object-name>
+        <post-action></post-action>
+      </task>
+	  <task synchronous="true" continue-on-failure="false" name="CancelPoCheck">
+		<rule-filename>is-poline-cancel-skip-check.xml</rule-filename>
+        <task-object-name>com.tsa.puridiom.po.tasks.PoReqCancelCheck</task-object-name>
+        <post-action></post-action>
+      </task>
+    </activity>
+    <activity synchronous="true" continue-on-failure="false" name="poBudgetCancelClose">
+    	<rule-filename>is-account-budget-module-active.xml;is-po-awarded-status.xml</rule-filename>
+      	<task synchronous="true" continue-on-failure="false" name="poBudgetCancel">
+      		<rule-filename check-for-false="true">is-account-budget-service-active.xml</rule-filename>
+        	<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+	        <process-filename>budget-po-cancel.xml</process-filename>
+    	    <post-action>exitActivity</post-action>
+      	</task>
+      	<task synchronous="true" continue-on-failure="false" name="poCancelBudgetSetup">
+      		<rule-filename>is-po-cancel.xml</rule-filename>
+            <task-object-name>com.tsa.puridiom.po.tasks.PoCancelBudgetServiceSetup</task-object-name>
+            <post-action></post-action>
+        </task>
+      	<task synchronous="true" continue-on-failure="false" name="poCloseBudgetSetup">
+      		<rule-filename>is-po-close.xml</rule-filename>
+            <task-object-name>com.tsa.puridiom.po.tasks.PoCloseBudgetServiceSetup</task-object-name>
+            <post-action></post-action>
+        </task>
+		<task synchronous="true" continue-on-failure="false" name="poBudgetCancelClose">
+        	<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+        	<process-filename>budgetservice-update.xml</process-filename>
+        	<post-action></post-action>
+      	</task>
+	</activity>
+    <activity synchronous="true" continue-on-failure="false" name="cancelPo">
+      <task synchronous="true" continue-on-failure="false" name="CancelPoCheck">
+        <task-object-name>com.tsa.puridiom.poline.tasks.PoLineCancelAll</task-object-name>
+        <post-action></post-action>
+      </task>
+    </activity>
+	  <activity synchronous="true" continue-on-failure="false" name="history">
+      	<task synchronous="true" continue-on-failure="false" name="poLineListHistory">
+			<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+        <process-filename>poline-cancelall-check.xml</process-filename>
+	    </task>
+    </activity>
+  </activities>
+</process>

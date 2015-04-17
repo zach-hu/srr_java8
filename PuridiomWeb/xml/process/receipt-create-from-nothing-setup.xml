@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="receiptCreateFromNothingSetup" connection-type="None">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="receiptSetup">
+			<task synchronous="true" continue-on-failure="false" name="createPo">
+				  <task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+					<process-filename>po-create.xml</process-filename>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="createPoLine">
+				  <task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+					<process-filename>poline-create.xml</process-filename>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="poVendorAddressRetrieve">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>po-vendor-address-retrieve.xml</process-filename>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="poShipToAddressRetrieve">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>po-shipto-address-retrieve.xml</process-filename>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="poHeaderDataSet">
+				<task-object-name>com.tsa.puridiom.poheader.tasks.PoHeaderDataSet</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="receiptCreateSetup">
+				<task-object-name>com.tsa.puridiom.receipt.tasks.ReceiptCreateFromNothingSetup</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="receiptHeader">
+				<task-object-name>com.tsa.puridiom.receiptheader.tasks.ReceiptHeaderSetValues</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

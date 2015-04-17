@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<vendor>
+    <step process="SUPPLIER_INFO" visible="1">
+        <link><![CDATA[/admin/supplier/supplier_info.jsp]]></link>
+        <label>supplier_information</label>
+		<method>VendorRetrieveById</method>
+    </step>
+    <step process="CONTACTS_ADDRESSES" visible="1">
+        <link><![CDATA[/admin/supplier/supplier_contact_list.jsp]]></link>
+        <label><![CDATA[Contacts & Addresses]]></label>
+        <method>VendorRetrieveById;ContactAddressRetrieveBySupplier</method>
+    </step>
+    <step process="NOTES_UDFS" visible="1">
+        <link><![CDATA[/admin/supplier/supplier_notes.jsp]]></link>
+        <label><![CDATA[Notes & UDFs]]></label>
+        <method>VendorRetrieveById</method>
+    </step>
+    <step process="CERTIFICATION_TYPES" visible="1">
+        <link><![CDATA[/admin/supplier/supplier_certification_types.jsp]]></link>
+        <label>Certification Types</label>
+        <method>StdTableRetrieveBy;VendorRetrieveById</method>
+    </step>
+    <step process="INSURANCE" visible="1">
+        <link><![CDATA[/admin/supplier/supplier_insurance.jsp]]></link>
+        <label><![CDATA[Insurance]]></label>
+        <method>VendorRetrieveById;VendorInsuranceDefaultRetrieveById;ContactInsuranceRetrieveByVendorId;VendorInsuranceDefaultInsCategoryLevelValidateVendor</method>
+    </step>
+    <step process="CONTRACTS" visible="1">
+        <link><![CDATA[/admin/supplier/supplier_contracts.jsp]]></link>
+        <label><![CDATA[Contracts]]></label>
+        <method>ContractsRetrieveByVendorId</method>
+    </step>
+    <step process="COMPLIANCES" visible="1">
+        <link><![CDATA[/admin/supplier/supplier_compliances.jsp]]></link>
+        <label><![CDATA[Compliance]]></label>
+        <method>ContractsRetrieveByVendorId;ContactComplianceRetrieveByVendorId</method>
+    </step>
+    <step process="AFFILIATIONS" visible="1">
+        <link><![CDATA[/admin/supplier/supplier_affiliations.jsp]]></link>
+        <label><![CDATA[Affiliations]]></label>
+        <method>VendorAffiliateRetrieveByVendorId;VendorRetrieveById</method>
+    </step>
+    <step process="AFFILIATECONTRACTS" visible="1">
+        <link><![CDATA[/admin/supplier/supplier_contracts.jsp]]></link>
+        <label><![CDATA[Affiliate Contracts]]></label>
+        <method>ContractsRetrieveByAffiliateId</method>
+    </step>
+    <step process="COMMODITIES" visible="1">
+        <link><![CDATA[/admin/supplier/supplier_commodities.jsp]]></link>
+        <label>sup-commodity</label>
+        <method>VendorCommRelRetrieveByVendor</method>
+    </step>
+	<step process="ATTACHMENTS" visible="1">
+        <link><![CDATA[/admin/supplier/supplier_attachments.jsp]]></link>
+        <label>attachments</label>
+        <method>VendorDocumentRetrieveByVendor</method>
+    </step>
+	<step process="PURCHASE_HISTORY" visible="1">
+        <link><![CDATA[/browse/browse_filter_options.jsp]]></link>
+        <label>Purchase History</label>
+        <method>BrowseRetrieve</method>
+    </step>
+</vendor>

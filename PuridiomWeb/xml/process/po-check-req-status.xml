@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="SetMessageTextOrderNoSave" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="setMessageTextOrderNoSave">
+		    <task synchronous="true" continue-on-failure="false" name="CheckReqStausApproveFromPo">
+				<task-object-name>com.tsa.puridiom.po.notifications.tasks.CheckReqStausApproveFromPo</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="setMessageTextOrderNoSave">
+				<rule-filename>check-req-status-approved.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.po.notifications.tasks.SetMessageTextOrderNoSave</task-object-name>
+				<post-action>exitProcess</post-action>
+			</task>
+		</activity>
+	</activities>
+</process>

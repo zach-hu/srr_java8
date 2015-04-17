@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="SungardInvoiceVendorUpdate" connection-type="New-Transaction">
+	<!-- 
+			This process must be called from the task com.tsa.puridiom.sungard.tasks.SungardInvoiceVendorUpdate
+			so that the database connection is correctly set up to connect using the sungardeas.cfg.xml (SUNGARD organizationId)
+			
+			The process invoice-retrieve is also required before executing this process!!
+	-->
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="extractSetup">
+			<task synchronous="true" continue-on-failure="false" name="SungardVendor_vendorId">
+				<task-object-name>com.tsa.puridiom.invoicevendor.tasks.InvoiceVendorGetVendorId</task-object-name>
+			</task>			
+			<task synchronous="true" continue-on-failure="false" name="sungardVendor">
+				<task-object-name>com.tsa.puridiom.sungard.vendor.tasks.SungardVendorRetrieveById</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="addSungardVendor">
+			<rule-filename>is-sungard-vendor-empty.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="sungardGenerateInternalVendorId">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>sungard-generate-internalvendorid.xml</process-filename>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="sungardVendorCreateSetup">
+				<task-object-name>com.tsa.puridiom.sungard.vendor.tasks.SungardVendorCreateSetup</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="sungardVendor">
+				<task-object-name>com.tsa.puridiom.sungard.vendor.tasks.SungardVendorSetValues</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="sungardVendor">
+				<task-object-name>com.tsa.puridiom.sungard.vendor.tasks.SungardVendorAdd</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="sungardAddressCreateSetup">
+				<task-object-name>com.tsa.puridiom.sungard.address.tasks.SungardAddressCreateSetup</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="sungardAddress">
+				<task-object-name>com.tsa.puridiom.sungard.address.tasks.SungardAddressSetValues</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="sungardAddress">
+				<task-object-name>com.tsa.puridiom.sungard.address.tasks.SungardAddressAdd</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="sungardVendorContactsCreateSetup">
+				<task-object-name>com.tsa.puridiom.sungard.vendorcontacts.tasks.SungardVendorContactsCreateSetup</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="sungardVendorContacts">
+				<task-object-name>com.tsa.puridiom.sungard.vendorcontacts.tasks.SungardVendorContactsSetValues</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="sungardVendorContactsAdd">
+				<task-object-name>com.tsa.puridiom.sungard.vendorcontacts.tasks.SungardVendorContactsAdd</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

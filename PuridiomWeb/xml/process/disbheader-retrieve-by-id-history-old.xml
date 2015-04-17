@@ -1,0 +1,10 @@
+<process name="disbHeaderRetrieveById" connection-type="New-Connection">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="disbHeaderRetrieveById">
+			<task synchronous="true" continue-on-failure="false" name="oldDisbHeader">			
+				<task-object-name>com.tsa.puridiom.disbheader.tasks.DisbHeaderRetrieveByIdHistory</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+	</activities>
+</process>

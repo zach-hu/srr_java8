@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="AutoGenDelete" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="deleteAutoGen">
+			<task synchronous="true" continue-on-failure="false" name="autoGen">
+				<task-object-name>com.tsa.puridiom.autogen.tasks.AutoGenDeleteById</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="RefreshAutoGenManager">
+				<task-object-name>com.tsa.puridiom.autogen.tasks.AutoGenRefreshCache</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+	</activities>
+</process>

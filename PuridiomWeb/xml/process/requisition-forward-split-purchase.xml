@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="requisitionForwardSplitPurchase" connection-type="New-Transaction">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="requisitionForwardIntelligentPurchase">
+			<task synchronous="true" continue-on-failure="false" name="splitRequisitionList">			
+				<rule-filename>is-intelligent-purchase-request-enabled.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.requisitionline.tasks.RequisitionSplitPurchaseItems</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="requisitionProcessSplit">
+		    <rule-filename>is-change-req-type.xml</rule-filename>
+			<!-- All items are in inventory - convert to Supply Request -->
+			<task synchronous="true" continue-on-failure="false" name="requisitionForwardSplit">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>req-change-type.xml</process-filename>
+			</task>
+			<post-action>exitProcess</post-action>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="requisitionProcessSplit">
+		    <rule-filename>is-requisition-split-required.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="requisitionCreateSplit">			
+				<task-object-name>com.tsa.puridiom.requisition.tasks.RequisitionCreateSplit</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="requisitionSplitForward">
+				<task-object-name>com.tsa.puridiom.requisition.tasks.RequisitionForwardSplitList</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="requisitionSplitCleanup">			
+				<!-- Delete marked INV items from purchase request -->
+				<task-object-name>com.tsa.puridiom.requisitionline.tasks.RequisitionLineDeleteByLine</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="requisitionForwardSplit">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>requisition-recalculate.xml</process-filename>
+			</task>
+			<post-action>exitProcess</post-action>
+		</activity>
+	</activities>
+</process>

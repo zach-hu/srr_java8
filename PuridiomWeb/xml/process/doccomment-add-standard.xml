@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="docCommentAdd" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="docCommentAddStandard">
+			<task synchronous="true" continue-on-failure="false" name="docCommentList">
+				<task-object-name>com.tsa.puridiom.doccomment.tasks.DocCommentAddStandard</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

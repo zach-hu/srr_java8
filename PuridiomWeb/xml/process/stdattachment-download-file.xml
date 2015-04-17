@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="stdAttachmentDownloadFile" connection-type="None">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="stdAttachmentDownloadFile">
+			<task synchronous="true" continue-on-failure="false" name="setup">
+				<task-object-name>com.tsa.puridiom.stdattachment.tasks.StdAttachmentDownloadFileSetup</task-object-name>
+			</task>
+			 <task synchronous="true" continue-on-failure="false" name="urlFileDownload">
+				<task-object-name>com.tsa.puridiom.documentfile.tasks.DocumentFileDownload</task-object-name>
+			</task> 
+		</activity>
+	</activities>
+</process>

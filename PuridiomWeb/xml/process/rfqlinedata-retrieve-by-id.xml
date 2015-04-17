@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="rfqLineDataRetrieve" connection-type="Connection-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="rfqLineRetrieve">
+			<rule-filename>is-rfqline-empty</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="rfqLine">
+				<task-object-name>com.tsa.puridiom.rfqline.tasks.RfqLineRetrieveById</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="rfqLineDataRetrieve">
+			<task synchronous="true" continue-on-failure="false" name="rfqLineRetrieveSetup">
+				<task-object-name>com.tsa.puridiom.rfqline.tasks.RfqLineRetrieveSetup</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="billToListRetrieve">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>billtodata-retrieve-by-line.xml</process-filename>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="shipToListRetrieve">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>shiptodata-retrieve-by-line.xml</process-filename>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="rfqLineCommentsRetrieve">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>doccomment-retrieve-by-line.xml</process-filename>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="docAttachmentList">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>docattachment-retrieve-by-line.xml</process-filename>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="rfqBidList">
+				<task-object-name>com.tsa.puridiom.rfqbid.tasks.RfqBidRetrieveByLine</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="requisitionLineInfoList">
+				<task-object-name>com.tsa.puridiom.rfqline.tasks.RfqLineRetrieveRequisitionLineInfo</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="poLineInfoList">
+				<task-object-name>com.tsa.puridiom.rfqline.tasks.RfqLineRetrievePoLineInfo</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="inspectionListActivity">
+			<task synchronous="true" continue-on-failure="false" name="inspectionListSetup">
+				<task-object-name>com.tsa.puridiom.inspection.tasks.InspectionRetrieveListByLineSetup</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="inspectionList">
+				<task-object-name>com.tsa.puridiom.inspection.tasks.InspectionRetrieveListByLine</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="inspectionList">
+				<task-object-name>com.tsa.puridiom.inspectionheader.tasks.InspectionHeaderDataRetrieve</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="rfqLineDataSet">
+			<task synchronous="true" continue-on-failure="false" name="rfqLine">
+				<task-object-name>com.tsa.puridiom.rfqline.tasks.RfqLineDataSet</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="rfqLowestBid">
+				<task-object-name>com.tsa.puridiom.rfqline.tasks.RfqLineSetLowestBids</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

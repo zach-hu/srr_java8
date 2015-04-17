@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="InvBinLocationDeleteItemByTempIc" connection-type="Transaction-Required"> 
+	<activities>
+		  <activity synchronous="true" continue-on-failure="false" name="invLocationDeleteTemp">
+			<task synchronous="true" continue-on-failure="false" name="invLocationDeleteTemp">
+				<rule-filename check-for-false="true">is-invbinlocation-tempic-empty.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.invbinlocation.tasks.InvBinLocationDeleteItemByTempIc</task-object-name>
+			</task>
+		</activity>  
+	 </activities> 
+</process>

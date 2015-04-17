@@ -1,0 +1,27 @@
+<rule>
+	<clause type="StringCompare">
+		<left-side>
+			<source>incomingRequestObjectMethod</source>
+			<object>userProfile</object>
+			<name>getLockLogin</name>
+		</left-side>
+		<operator>EQUALS</operator>
+		<right-side>
+			<source>constant</source>
+			<value>Y</value>
+		</right-side>
+	</clause>
+	<logical-operator>AND</logical-operator>
+	<clause type="StringCompare">
+		<left-side>
+			<source>incomingRequestObjectMethod</source>
+			<object>userProfile</object>
+			<name>getUserId</name>
+		</left-side>
+		<operator>NOTEQUAL</operator>
+		<right-side>
+			<source>constant</source>
+			<value>SYSADM</value>
+		</right-side>
+	</clause>
+</rule>

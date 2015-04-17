@@ -1,0 +1,749 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created using an evaluation version of JasperAssistant (http://www.jasperassistant.com) -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Requistion" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="575" leftMargin="10" rightMargin="10" topMargin="10" bottomMargin="1" isTitleNewPage="true" isIgnorePagination="true">
+	<property name="com.jasperassistant.designer.Rulers" value="true"/>
+	<property name="com.jasperassistant.designer.GridHeight" value="8"/>
+	<property name="com.jasperassistant.designer.GridWidth" value="2"/>
+	<property name="com.jasperassistant.designer.SnapToGrid" value="false"/>
+	<property name="com.jasperassistant.designer.Margins" value="true"/>
+	<property name="com.jasperassistant.designer.Grid" value="true"/>
+	<property name="com.jasperassistant.designer.SnapToGuides" value="true"/>
+	<property name="com.jasperassistant.designer.HGuides" value="565"/>
+	<import value="com.tsa.puridiom.entity.*"/>
+	<import value="com.tsa.puridiom.reports.datasource.*"/>
+	<import value="com.tsa.puridiom.common.documents.*"/>
+	<import value="com.tsa.puridiom.jasperreports.*"/>
+	<import value="java.net.*"/>
+	<import value="com.tsagate.properties.*"/>
+	<reportFont name="Verdana" isDefault="true" fontName="Verdana" size="9" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_black" isDefault="false" fontName="Arial Black" size="9" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica-Bold" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Verdana_big" isDefault="false" fontName="Verdana" size="11" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Verdana_bold" isDefault="false" fontName="Verdana" size="9" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<parameter name="oid" class="java.lang.String">
+		<defaultValueExpression><![CDATA["hilton"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="linesSR" class="net.sf.jasperreports.engine.JasperReport">
+		<defaultValueExpression><![CDATA[JasperReportsHelper.loadSubReport("req-line-list.jasper", $P{oid})]]></defaultValueExpression>
+	</parameter>
+	<parameter name="linesDS" class="com.tsa.puridiom.reports.datasource.HibernateQueryResultDataSource"/>
+	<parameter name="shipToDS" class="com.tsa.puridiom.reports.datasource.EntityDataSource"/>
+	<parameter name="vendorDS" class="com.tsa.puridiom.reports.datasource.EntityDataSource"/>
+	<parameter name="accountsSR" class="net.sf.jasperreports.engine.JasperReport">
+		<defaultValueExpression><![CDATA[JasperReportsHelper.loadSubReport("account-summary.jasper", $P{oid})]]></defaultValueExpression>
+	</parameter>
+	<parameter name="accountsDS" class="com.tsa.puridiom.reports.datasource.HibernateQueryResultDataSource"/>
+	<parameter name="commentsBeforeSR" class="net.sf.jasperreports.engine.JasperReport">
+		<defaultValueExpression><![CDATA[JasperReportsHelper.loadSubReport("comment.jasper", $P{oid})]]></defaultValueExpression>
+	</parameter>
+	<parameter name="commentsBeforeDS" class="com.tsa.puridiom.reports.datasource.HibernateQueryResultDataSource"/>
+	<parameter name="commentsAfterSR" class="net.sf.jasperreports.engine.JasperReport">
+		<defaultValueExpression><![CDATA[JasperReportsHelper.loadSubReport("comment.jasper", $P{oid})]]></defaultValueExpression>
+	</parameter>
+	<parameter name="commentsAfterDS" class="com.tsa.puridiom.reports.datasource.HibernateQueryResultDataSource"/>
+	<parameter name="lines" class="java.util.List"/>
+	<parameter name="billToSR" class="net.sf.jasperreports.engine.JasperReport">
+		<defaultValueExpression><![CDATA[JasperReportsHelper.loadSubReport("shipto-po.jasper", $P{oid})]]></defaultValueExpression>
+	</parameter>
+	<parameter name="billToDS" class="com.tsa.puridiom.reports.datasource.EntityDataSource"/>
+	<parameter name="imgUrl" class="java.lang.String">
+		<defaultValueExpression><![CDATA["http://localhost:8085/hilton/images/"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="GCS_SITE_NAME" class="java.lang.String">
+		<defaultValueExpression><![CDATA["Puridiom"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="GCS_SITE_URL" class="java.lang.String">
+		<defaultValueExpression><![CDATA["http://localhost:8080/hilton"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="attachmentsSR" class="net.sf.jasperreports.engine.JasperReport">
+		<defaultValueExpression><![CDATA[JasperReportsHelper.loadSubReport("docattachment.jasper", $P{oid})]]></defaultValueExpression>
+	</parameter>
+	<parameter name="attachmentsDS" class="com.tsa.puridiom.reports.datasource.HibernateQueryResultDataSource"/>
+	<parameter name="routingListSR" class="net.sf.jasperreports.engine.JasperReport">
+		<defaultValueExpression><![CDATA[JasperReportsHelper.loadSubReport("approvallog.jasper", $P{oid})]]></defaultValueExpression>
+	</parameter>
+	<parameter name="routingListDS" class="com.tsa.puridiom.reports.datasource.HibernateQueryResultDataSource"/>
+	<parameter name="approverNotesSR" class="net.sf.jasperreports.engine.JasperReport">
+		<defaultValueExpression><![CDATA[JasperReportsHelper.loadSubReport("approver-notes.jasper", $P{oid})]]></defaultValueExpression>
+	</parameter>
+	<parameter name="approverNotesDS" class="com.tsa.puridiom.reports.datasource.HibernateQueryResultDataSource"/>
+	<parameter name="totalsSR" class="net.sf.jasperreports.engine.JasperReport">
+		<defaultValueExpression><![CDATA[JasperReportsHelper.loadSubReport("po-totals.jasper", $P{oid})]]></defaultValueExpression>
+	</parameter>
+	<parameter name="mid" class="java.lang.String"/>
+	<parameter name="uid" class="java.lang.String"/>
+	<parameter name="fyi" class="java.lang.Boolean"/>
+	<field name="RequisitionHeader_requisitionNumber" class="java.lang.String"/>
+	<field name="RequisitionHeader_requisitionDate" class="java.util.Date"/>
+	<field name="RequisitionHeader_shipToCode" class="java.lang.String"/>
+	<field name="RequisitionHeader_requiredDate" class="java.util.Date"/>
+	<field name="RequisitionHeader_requisitionerCode" class="java.lang.String"/>
+	<field name="RequisitionerHeader_departmentCode" class="java.lang.String"/>
+	<field name="RequisitionHeader_vendorId" class="java.lang.String"/>
+	<field name="RequisitionHeader_internalComments" class="java.lang.String"/>
+	<field name="RequistionHeader_routing" class="java.lang.String"/>
+	<field name="RequisitionHeader_vendorAttn" class="java.lang.String"/>
+	<field name="RequisitionHeader_shipAttn" class="java.lang.String"/>
+	<field name="RequisitionHeader_udf1Code" class="java.lang.String"/>
+	<field name="RequisitionHeader_udf2Code" class="java.lang.String"/>
+	<field name="RequisitionHeader_udf3Code" class="java.lang.String"/>
+	<field name="RequisitionHeader_total" class="java.math.BigDecimal"/>
+	<field name="RequisitionHeader_shippingCode" class="java.lang.String"/>
+	<field name="RequistionHeader_priorityCode" class="java.lang.String"/>
+	<field name="RequisitionHeader_discountAmount" class="java.math.BigDecimal"/>
+	<field name="RequisitionHeader_subtotal" class="java.math.BigDecimal"/>
+	<field name="RequisitionHeader_taxAmount" class="java.math.BigDecimal"/>
+	<field name="RequisitionHeader_shippingCharges" class="java.math.BigDecimal"/>
+	<field name="RequisitionHeader_otherCharges" class="java.math.BigDecimal"/>
+	<field name="RequisitionHeader_icReqHeader" class="java.math.BigDecimal"/>
+	<field name="RequisitionHeader_useTaxAmount" class="java.math.BigDecimal"/>
+	<field name="RequisitionHeader_shippingTaxAmt" class="java.math.BigDecimal"/>
+	<field name="RequisitionHeader_otherTaxAmount" class="java.math.BigDecimal"/>
+	<field name="RequisitionHeader_requisitionLineList" class="java.util.List"/>
+	<field name="RequisitionHeader_accountList" class="java.util.List"/>
+	<field name="RequisitionHeader_docCommentList" class="java.util.List"/>
+	<field name="RequisitionHeader_docAttachmentList" class="java.util.List"/>
+	<field name="RequisitionHeader_currencyCode" class="java.lang.String"/>
+	<field name="RequisitionHeader_requisitionType" class="java.lang.String"/>
+	<group name="commentsBefore">
+		<groupHeader>
+			<band height="2">
+				<subreport isUsingCache="false">
+					<reportElement positionType="Float" mode="Opaque" x="0" y="0" width="566" height="1" isRemoveLineWhenBlank="true" backcolor="#F3F3F3"/>
+					<dataSourceExpression><![CDATA[$P{commentsBeforeDS}]]></dataSourceExpression>
+					<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[$P{commentsBeforeSR}]]></subreportExpression>
+				</subreport>
+			</band>
+		</groupHeader>
+	</group>
+	<group name="lineItem">
+		<groupHeader>
+			<band height="2">
+				<subreport isUsingCache="false">
+					<reportElement positionType="Float" x="0" y="0" width="566" height="1" isPrintWhenDetailOverflows="true" backcolor="#F3F3F3"/>
+					<subreportParameter name="RequisitionHeader_internalComents">
+						<subreportParameterExpression><![CDATA[$F{RequisitionHeader_internalComments}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="RequisitionHeader_currencyCode">
+						<subreportParameterExpression><![CDATA[$F{RequisitionHeader_currencyCode}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="RequisitionHeader_useTaxAmount">
+						<subreportParameterExpression><![CDATA[$F{RequisitionHeader_useTaxAmount}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="RequisitionHeader_discountAmount">
+						<subreportParameterExpression><![CDATA[$F{RequisitionHeader_discountAmount}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="RequisitionHeader_otherCharges">
+						<subreportParameterExpression><![CDATA[$F{RequisitionHeader_otherCharges}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="RequisitionHeader_subtotal">
+						<subreportParameterExpression><![CDATA[$F{RequisitionHeader_subtotal}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="approverNotesDS">
+						<subreportParameterExpression><![CDATA[$P{approverNotesDS}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="RequisitionHeader_shippingTaxAmt">
+						<subreportParameterExpression><![CDATA[$F{RequisitionHeader_shippingTaxAmt}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="headerAccountsDS">
+						<subreportParameterExpression><![CDATA[$P{accountsDS}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="RequisitionHeader_shippingCharges">
+						<subreportParameterExpression><![CDATA[$F{RequisitionHeader_shippingCharges}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="oid">
+						<subreportParameterExpression><![CDATA[$P{oid}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="headerCommentsAfterDS">
+						<subreportParameterExpression><![CDATA[$P{commentsAfterDS}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="RequisitionHeader_otherTaxAmount">
+						<subreportParameterExpression><![CDATA[$F{RequisitionHeader_otherTaxAmount}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="RequisitionHeader_total">
+						<subreportParameterExpression><![CDATA[$F{RequisitionHeader_total}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="RequisitionHeader_taxAmount">
+						<subreportParameterExpression><![CDATA[$F{RequisitionHeader_taxAmount}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="lines"/>
+					<subreportParameter name="routingListDS">
+						<subreportParameterExpression><![CDATA[$P{routingListDS}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="udf1code">
+						<subreportParameterExpression><![CDATA[$F{RequisitionHeader_udf1Code}]]></subreportParameterExpression>
+					</subreportParameter>
+					<dataSourceExpression><![CDATA[$P{linesDS}]]></dataSourceExpression>
+					<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[JasperReportsHelper.loadSubReport("req-line-list.jasper", $P{oid})]]></subreportExpression>
+				</subreport>
+			</band>
+		</groupHeader>
+	</group>
+	<group name="lineItemAccountSummary">
+		<groupHeader>
+			<band height="2">
+				<subreport isUsingCache="false">
+					<reportElement positionType="Float" x="0" y="0" width="566" height="1" isPrintWhenDetailOverflows="true" backcolor="#F3F3F3">
+						<printWhenExpression><![CDATA[new Boolean(false)]]></printWhenExpression>
+					</reportElement>
+					<subreportParameter name="RequisitionHeader_internalComents">
+						<subreportParameterExpression><![CDATA[$F{RequisitionHeader_internalComments}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="currencyCode">
+						<subreportParameterExpression><![CDATA[$F{RequisitionHeader_currencyCode}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="oid">
+						<subreportParameterExpression><![CDATA[$P{oid}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="headerCommentsAfterDS">
+						<subreportParameterExpression><![CDATA[$P{commentsAfterDS}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="lines"/>
+					<subreportParameter name="routingListDS">
+						<subreportParameterExpression><![CDATA[$P{routingListDS}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="approverNotesDS">
+						<subreportParameterExpression><![CDATA[$P{approverNotesDS}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="headerAccountsDS">
+						<subreportParameterExpression><![CDATA[$P{accountsDS}]]></subreportParameterExpression>
+					</subreportParameter>
+					<dataSourceExpression><![CDATA[new HibernateQueryResultDataSource($F{RequisitionHeader_requisitionLineList})]]></dataSourceExpression>
+					<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[JasperReportsHelper.loadSubReport("req-line-list-account-html.jasper", $P{oid})]]></subreportExpression>
+				</subreport>
+			</band>
+		</groupHeader>
+	</group>
+	<group name="commentsAfter">
+		<groupHeader>
+			<band height="2">
+				<subreport isUsingCache="false">
+					<reportElement positionType="Float" mode="Opaque" x="0" y="0" width="567" height="1" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true" backcolor="#F3F3F3"/>
+					<subreportParameter name="oid">
+						<subreportParameterExpression><![CDATA[$P{oid}]]></subreportParameterExpression>
+					</subreportParameter>
+					<dataSourceExpression><![CDATA[$P{commentsAfterDS}]]></dataSourceExpression>
+					<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[JasperReportsHelper.loadSubReport("comment.jasper", $P{oid})]]></subreportExpression>
+				</subreport>
+			</band>
+		</groupHeader>
+	</group>
+	<group name="Accounts">
+		<groupHeader>
+			<band height="2">
+				<subreport isUsingCache="false">
+					<reportElement positionType="Float" mode="Opaque" x="0" y="0" width="567" height="1" isRemoveLineWhenBlank="true" backcolor="#F3F3F3"/>
+					<subreportParameter name="udf1">
+						<subreportParameterExpression><![CDATA[$F{RequisitionHeader_udf1Code}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="oid">
+						<subreportParameterExpression><![CDATA[$P{oid}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="organizationId">
+						<subreportParameterExpression><![CDATA[$P{oid}]]></subreportParameterExpression>
+					</subreportParameter>
+					<dataSourceExpression><![CDATA[$P{accountsDS}]]></dataSourceExpression>
+					<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[$P{accountsSR}]]></subreportExpression>
+				</subreport>
+			</band>
+		</groupHeader>
+	</group>
+	<group name="Attachments">
+		<groupHeader>
+			<band height="2">
+				<subreport isUsingCache="false">
+					<reportElement positionType="Float" mode="Opaque" x="0" y="0" width="567" height="1" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true" backcolor="#F3F3F3"/>
+					<subreportParameter name="oid">
+						<subreportParameterExpression><![CDATA[$P{oid}]]></subreportParameterExpression>
+					</subreportParameter>
+					<dataSourceExpression><![CDATA[$P{attachmentsDS}]]></dataSourceExpression>
+					<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[JasperReportsHelper.loadSubReport("docattachment.jasper", $P{oid})]]></subreportExpression>
+				</subreport>
+			</band>
+		</groupHeader>
+	</group>
+	<group name="routinglist">
+		<groupHeader>
+			<band height="4">
+				<subreport isUsingCache="false">
+					<reportElement positionType="Float" mode="Opaque" x="0" y="0" width="567" height="1" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true" backcolor="#F3F3F3"/>
+					<subreportParameter name="oid">
+						<subreportParameterExpression><![CDATA[$P{oid}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="pdf">
+						<subreportParameterExpression><![CDATA[new Boolean(false)]]></subreportParameterExpression>
+					</subreportParameter>
+					<dataSourceExpression><![CDATA[$P{routingListDS}]]></dataSourceExpression>
+					<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[JasperReportsHelper.loadSubReport("approvallog-email.jasper", $P{oid})]]></subreportExpression>
+				</subreport>
+				<subreport isUsingCache="false">
+					<reportElement positionType="Float" mode="Opaque" x="0" y="2" width="563" height="1" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true" backcolor="#F3F3F3"/>
+					<subreportParameter name="oid">
+						<subreportParameterExpression><![CDATA[$P{oid}]]></subreportParameterExpression>
+					</subreportParameter>
+					<dataSourceExpression><![CDATA[$P{approverNotesDS}]]></dataSourceExpression>
+					<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[JasperReportsHelper.loadSubReport("approver-notes.jasper", $P{oid})]]></subreportExpression>
+				</subreport>
+			</band>
+		</groupHeader>
+	</group>
+	<group name="buttons">
+		<groupHeader>
+			<band height="120">
+				<printWhenExpression><![CDATA[new Boolean(!$P{fyi}.booleanValue())]]></printWhenExpression>
+				<subreport isUsingCache="false">
+					<reportElement positionType="Float" x="0" y="0" width="563" height="120" isPrintWhenDetailOverflows="true" backcolor="#F3F3F3"/>
+					<subreportParameter name="uid">
+						<subreportParameterExpression><![CDATA[$P{uid}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="GCS_SITE_URL">
+						<subreportParameterExpression><![CDATA[$P{GCS_SITE_URL}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="oid">
+						<subreportParameterExpression><![CDATA[$P{oid}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="RequisitionHeader_icReqHeader">
+						<subreportParameterExpression><![CDATA[$F{RequisitionHeader_icReqHeader}.toString()]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="mid">
+						<subreportParameterExpression><![CDATA[$P{mid}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="type">
+						<subreportParameterExpression><![CDATA["REQ"]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="RequisitionHeader_requisitionNumber">
+						<subreportParameterExpression><![CDATA[$F{RequisitionHeader_requisitionNumber}]]></subreportParameterExpression>
+					</subreportParameter>
+					<dataSourceExpression><![CDATA[new JREmptyDataSource(1)]]></dataSourceExpression>
+					<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[JasperReportsHelper.loadSubReport("email-approval-buttons.jasper", $P{oid})]]></subreportExpression>
+				</subreport>
+			</band>
+		</groupHeader>
+	</group>
+	<group name="copyright">
+		<groupHeader>
+			<band height="20">
+				<subreport>
+					<reportElement positionType="Float" x="0" y="0" width="563" height="20"/>
+					<dataSourceExpression><![CDATA[new JREmptyDataSource(1)]]></dataSourceExpression>
+					<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[JasperReportsHelper.loadSubReport("copyright.jasper", $P{oid})]]></subreportExpression>
+				</subreport>
+			</band>
+		</groupHeader>
+	</group>
+	<title>
+		<band height="430">
+			<image isLazy="true" onErrorType="Blank" hyperlinkType="None">
+				<reportElement positionType="Float" x="3" y="3" width="250" height="50"/>
+				<imageExpression class="java.lang.String"><![CDATA[JasperReportsHelper.getImgUrl($P{oid}, "logo.gif")]]></imageExpression>
+			</image>
+			<textField isBlankWhenNull="true" hyperlinkType="None">
+				<reportElement positionType="Float" x="361" y="3" width="203" height="50" forecolor="#9999CC"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font reportFont="Verdana_big" size="12"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{GCS_SITE_NAME}]]></textFieldExpression>
+			</textField>
+			<textField hyperlinkType="Reference">
+				<reportElement positionType="Float" mode="Opaque" x="3" y="54" width="274" height="20" forecolor="#FFFFFF" backcolor="#9999CC"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="styled">
+					<font reportFont="Verdana_big"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Login"]]></textFieldExpression>
+				<hyperlinkReferenceExpression><![CDATA[$P{GCS_SITE_URL}]]></hyperlinkReferenceExpression>
+			</textField>
+			<textField hyperlinkType="None">
+				<reportElement positionType="Float" mode="Opaque" x="277" y="54" width="183" height="20" forecolor="#FFFFFF" backcolor="#9999CC"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[""]]></textFieldExpression>
+			</textField>
+			<image vAlign="Middle" isLazy="true" onErrorType="Blank" hyperlinkType="None">
+				<reportElement positionType="Float" mode="Opaque" x="460" y="54" width="17" height="20" forecolor="#FFFFFF" backcolor="#9999CC"/>
+				<imageExpression class="java.lang.String"><![CDATA[JasperReportsHelper.getImgUrl($P{oid}, "question.gif")]]></imageExpression>
+			</image>
+			<textField hyperlinkType="None">
+				<reportElement positionType="Float" mode="Opaque" x="477" y="54" width="90" height="20" forecolor="#FFFFFF" backcolor="#9999CC"/>
+				<textElement verticalAlignment="Middle" markup="styled">
+					<font reportFont="Verdana_big"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["  Help"]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement positionType="Float" x="3" y="79" width="564" height="6" backcolor="#CCCCCC"/>
+				<graphicElement>
+					<pen lineWidth="0.0" lineStyle="Solid"/>
+				</graphicElement>
+			</rectangle>
+			<staticText>
+				<reportElement positionType="Float" mode="Opaque" x="4" y="405" width="22" height="23" backcolor="#E4E4E4"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font reportFont="Verdana_bold"/>
+				</textElement>
+				<text><![CDATA[Line
+No.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" mode="Opaque" x="27" y="405" width="44" height="23" backcolor="#E4E4E4"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font reportFont="Verdana_bold"/>
+				</textElement>
+				<text><![CDATA[Quantity]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" mode="Opaque" x="72" y="405" width="46" height="23" backcolor="#E4E4E4"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font reportFont="Verdana_bold"/>
+				</textElement>
+				<text><![CDATA[Unit of
+Measures]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" mode="Opaque" x="161" y="405" width="266" height="23" backcolor="#E4E4E4"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font reportFont="Verdana_bold"/>
+				</textElement>
+				<text><![CDATA[Description]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" mode="Opaque" x="429" y="405" width="63" height="23" backcolor="#E4E4E4"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font reportFont="Verdana_bold"/>
+				</textElement>
+				<text><![CDATA[Unit
+Price]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" mode="Opaque" x="493" y="405" width="73" height="23" backcolor="#E4E4E4"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font reportFont="Verdana_bold"/>
+				</textElement>
+				<text><![CDATA[Extended
+Price]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement positionType="Float" x="3" y="75" width="564" height="3"/>
+			</rectangle>
+			<staticText>
+				<reportElement positionType="Float" mode="Opaque" x="293" y="88" width="136" height="20" backcolor="#E4E4E4"/>
+				<box>
+					<pen lineColor="#FFFFFF"/>
+					<topPen lineWidth="0.0" lineStyle="Solid"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Request Number]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true" hyperlinkType="None">
+				<reportElement positionType="Float" mode="Opaque" x="293" y="108" width="136" height="20" backcolor="#F3F3F3"/>
+				<box>
+					<pen lineColor="#FFFFFF"/>
+					<topPen lineWidth="0.0" lineStyle="Solid"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{RequisitionHeader_requisitionNumber}]]></textFieldExpression>
+			</textField>
+			<textField pattern="MMM d, yyyy" isBlankWhenNull="true" hyperlinkType="None">
+				<reportElement positionType="Float" mode="Opaque" x="429" y="108" width="137" height="20" backcolor="#F3F3F3"/>
+				<box>
+					<pen lineColor="#FFFFFF"/>
+					<topPen lineWidth="0.0" lineStyle="Solid"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.util.Date"><![CDATA[$F{RequisitionHeader_requisitionDate}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement positionType="Float" mode="Opaque" x="430" y="88" width="136" height="20" backcolor="#E4E4E4"/>
+				<box>
+					<pen lineColor="#FFFFFF"/>
+					<topPen lineWidth="0.0" lineStyle="Solid"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial Black"/>
+				</textElement>
+				<text><![CDATA[Req Date]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true" hyperlinkType="None">
+				<reportElement positionType="Float" mode="Opaque" x="64" y="188" width="214" height="18" backcolor="#E4E4E4"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{RequisitionHeader_shipToCode}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true" hyperlinkType="None">
+				<reportElement positionType="Float" mode="Opaque" x="366" y="188" width="200" height="18" backcolor="#E4E4E4"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{RequisitionHeader_vendorId}]]></textFieldExpression>
+			</textField>
+			<subreport isUsingCache="false">
+				<reportElement positionType="Float" mode="Opaque" x="3" y="208" width="275" height="76" backcolor="#F3F3F3"/>
+				<dataSourceExpression><![CDATA[$P{shipToDS}]]></dataSourceExpression>
+				<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[JasperReportsHelper.loadSubReport("shipto-req-email-approvals.jasper", $P{oid})]]></subreportExpression>
+			</subreport>
+			<subreport isUsingCache="false">
+				<reportElement positionType="Float" mode="Opaque" x="291" y="208" width="275" height="76" backcolor="#F3F3F3"/>
+				<dataSourceExpression><![CDATA[$P{vendorDS}]]></dataSourceExpression>
+				<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[JasperReportsHelper.loadSubReport("shipto-req-email-approvals.jasper", $P{oid})]]></subreportExpression>
+			</subreport>
+			<staticText>
+				<reportElement positionType="Float" mode="Opaque" x="4" y="297" width="96" height="24" backcolor="#E4E4E4"/>
+				<box>
+					<pen lineColor="#FFFFFF"/>
+					<topPen lineWidth="0.0" lineStyle="Solid"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font reportFont="Verdana_bold"/>
+				</textElement>
+				<text><![CDATA[Date
+Required]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true" hyperlinkType="None">
+				<reportElement positionType="Float" mode="Opaque" x="181" y="372" width="206" height="18" backcolor="#F3F3F3"/>
+				<box>
+					<pen lineColor="#FFFFFF"/>
+					<topPen lineWidth="0.0" lineStyle="Solid"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{RequistionHeader_priorityCode}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement positionType="Float" mode="Opaque" x="101" y="297" width="134" height="24" backcolor="#E4E4E4"/>
+				<box>
+					<pen lineColor="#FFFFFF"/>
+					<topPen lineWidth="0.0" lineStyle="Solid"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font reportFont="Verdana_bold"/>
+				</textElement>
+				<text><![CDATA[Requestor
+Name]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true" hyperlinkType="None">
+				<reportElement positionType="Float" mode="Opaque" x="390" y="322" width="176" height="18" backcolor="#F3F3F3"/>
+				<box>
+					<pen lineColor="#FFFFFF"/>
+					<topPen lineWidth="0.0" lineStyle="Solid"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{RequistionHeader_routing}]]></textFieldExpression>
+			</textField>
+			<textField pattern="MMM d, yyyy" isBlankWhenNull="true" hyperlinkType="None">
+				<reportElement positionType="Float" mode="Opaque" x="4" y="322" width="96" height="18" backcolor="#F3F3F3"/>
+				<box>
+					<pen lineColor="#FFFFFF"/>
+					<topPen lineWidth="0.0" lineStyle="Solid"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.util.Date"><![CDATA[$F{RequisitionHeader_requiredDate}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true" hyperlinkType="None">
+				<reportElement positionType="Float" mode="Opaque" x="101" y="322" width="134" height="18" backcolor="#F3F3F3"/>
+				<box>
+					<pen lineColor="#FFFFFF"/>
+					<topPen lineWidth="0.0" lineStyle="Solid"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[com.tsa.puridiom.usermanager.UserManager.getInstance().getUser($P{oid}, $F{RequisitionHeader_requisitionerCode}).getDisplayName()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement positionType="Float" mode="Opaque" x="387" y="352" width="179" height="20" backcolor="#E4E4E4"/>
+				<box>
+					<pen lineColor="#FFFFFF"/>
+					<topPen lineWidth="0.0" lineStyle="Solid"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font reportFont="Verdana_bold"/>
+				</textElement>
+				<text><![CDATA[Ship Via]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true" hyperlinkType="None">
+				<reportElement positionType="Float" mode="Opaque" x="387" y="372" width="179" height="18" backcolor="#F3F3F3"/>
+				<box>
+					<pen lineColor="#FFFFFF"/>
+					<topPen lineWidth="0.0" lineStyle="Solid"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{RequisitionHeader_shippingCode}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement positionType="Float" mode="Opaque" x="390" y="297" width="176" height="24" backcolor="#E4E4E4"/>
+				<box>
+					<pen lineColor="#FFFFFF"/>
+					<topPen lineWidth="0.0" lineStyle="Solid"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font reportFont="Verdana_bold"/>
+				</textElement>
+				<text><![CDATA[Delivery
+Location]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true" hyperlinkType="None">
+				<reportElement positionType="Float" mode="Opaque" x="4" y="372" width="177" height="18" backcolor="#F3F3F3"/>
+				<box>
+					<pen lineColor="#FFFFFF"/>
+					<topPen lineWidth="0.0" lineStyle="Solid"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{RequisitionerHeader_departmentCode}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true" hyperlinkType="None">
+				<reportElement positionType="Float" mode="Opaque" x="4" y="352" width="177" height="20" backcolor="#E4E4E4"/>
+				<box>
+					<pen lineColor="#FFFFFF"/>
+					<topPen lineWidth="0.0" lineStyle="Solid"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font reportFont="Verdana_bold"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[DictionaryManager.getLabel($P{oid}, "req-department", "Department")]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement positionType="Float" mode="Opaque" x="236" y="297" width="153" height="24" backcolor="#E4E4E4"/>
+				<box>
+					<pen lineColor="#FFFFFF"/>
+					<topPen lineWidth="0.0" lineStyle="Solid"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font reportFont="Verdana_bold"/>
+				</textElement>
+				<text><![CDATA[Requestor Phone/Fax]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true" hyperlinkType="None">
+				<reportElement positionType="Float" mode="Opaque" x="181" y="352" width="206" height="20" backcolor="#E4E4E4"/>
+				<box>
+					<pen lineColor="#FFFFFF"/>
+					<topPen lineWidth="0.0" lineStyle="Solid"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font reportFont="Verdana_bold"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[DictionaryManager.getLabel($P{oid}, "prioruty", "Priority")]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true" hyperlinkType="None">
+				<reportElement positionType="Float" mode="Opaque" x="236" y="322" width="153" height="18" backcolor="#F3F3F3"/>
+				<box>
+					<pen lineColor="#FFFFFF"/>
+					<topPen lineWidth="0.0" lineStyle="Solid"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[com.tsa.puridiom.usermanager.UserManager.getInstance().getUser($P{oid}, $F{RequisitionHeader_requisitionerCode}).getPhoneNumber()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement positionType="Float" mode="Opaque" x="291" y="188" width="67" height="18" backcolor="#E4E4E4"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Supplier :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" mode="Opaque" x="3" y="188" width="60" height="18" backcolor="#E4E4E4"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Ship To :]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement positionType="Float" x="3" y="295" width="266" height="1"/>
+				<graphicElement>
+					<pen lineWidth="0.0" lineStyle="Solid"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement positionType="Float" x="3" y="294" width="564" height="2"/>
+				<graphicElement>
+					<pen lineWidth="0.0" lineStyle="Solid"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement positionType="Float" x="2" y="179" width="564" height="6" forecolor="#FFFFFF"/>
+				<graphicElement>
+					<pen lineWidth="0.0" lineStyle="Solid"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement positionType="Float" x="1" y="287" width="564" height="6" forecolor="#FFFFFF"/>
+				<graphicElement>
+					<pen lineWidth="0.0" lineStyle="Solid"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement positionType="Float" x="4" y="343" width="564" height="6" forecolor="#FFFFFF"/>
+				<graphicElement>
+					<pen lineWidth="0.0" lineStyle="Solid"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement positionType="Float" x="3" y="395" width="564" height="6" forecolor="#FFFFFF"/>
+				<graphicElement>
+					<pen lineWidth="0.0" lineStyle="Solid"/>
+				</graphicElement>
+			</rectangle>
+			<textField isBlankWhenNull="true" hyperlinkType="None">
+				<reportElement positionType="Float" x="3" y="156" width="263" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="15" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[RequisitionType.toString($F{RequisitionHeader_requisitionType}, $P{oid} )]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement positionType="Float" mode="Opaque" x="119" y="405" width="41" height="23" backcolor="#E4E4E4"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Add to
+Catalog]]></text>
+			</staticText>
+		</band>
+	</title>
+</jasperReport>

@@ -1,0 +1,112 @@
+<req_summary_by_approver>
+  <columns>
+	<RequisitionHeader_requisitionNumber>
+		<label>Requisition #</label>
+		<type>STRING</type>
+	</RequisitionHeader_requisitionNumber>
+	<RequisitionHeader_requiredDate>
+		<label>requiredDate</label>
+		<type>DATE</type>
+	</RequisitionHeader_requiredDate>
+	<RequisitionHeader_requisitionType>
+		<label>Type</label>
+		<type>STRING</type>
+	</RequisitionHeader_requisitionType>
+	<RequisitionHeader_shipToCode>
+		<label>req-shipToCode</label>
+		<type>STRING</type>
+	</RequisitionHeader_shipToCode>
+	<RequisitionHeader_requisitionDate>
+		<label>requestDate</label>
+		<type>DATE</type>
+	</RequisitionHeader_requisitionDate>
+	<RequisitionHeader_shipToContact>
+		<label>req-shipToCode</label>
+		<type>STRING</type>
+	</RequisitionHeader_shipToContact>
+	<UserProfileA_firstName>
+		<label>First Name</label>
+		<type>STRING</type>
+	</UserProfileA_firstName>
+	<UserProfileA_lastName>
+		<label>Last Name</label>
+		<type>STRING</type>
+	</UserProfileA_lastName>
+	<RequisitionHeader_vendorName>
+		<label>Vendor Name</label>
+		<type>STRING</type>
+	</RequisitionHeader_vendorName>
+	<RequisitionHeader_itemLocation>
+		<label>Item Location</label>
+		<type>STRING</type>
+	</RequisitionHeader_itemLocation>
+	<RequisitionHeader_receiptRequired>
+		<label>Receipt Required</label>
+		<type>STRING</type>
+	</RequisitionHeader_receiptRequired>
+	<RequisitionHeader_departmentCode>
+		<label>req-department</label>
+		<type>STRING</type>
+	</RequisitionHeader_departmentCode>
+	<RequisitionHeader_requisitionerCode>
+		<label>req-requisitioner</label>
+		<type>STRING</type>
+	</RequisitionHeader_requisitionerCode>
+	<RequisitionHeader_assignedBuyer>
+		<label>req-assignedBuyer</label>
+		<type>STRING</type>
+	</RequisitionHeader_assignedBuyer>
+	<RequisitionHeader_appBy>
+		<label>App By</label>
+		<type>STRING</type>
+	</RequisitionHeader_appBy>
+	<RequisitionHeader_total>
+		<label>req-total</label>
+		<type>BIGDECIMAL</type>
+	</RequisitionHeader_total>
+	<RequisitionHeader_status>
+		<label>Status</label>
+		<type>STRING</type>
+	</RequisitionHeader_status>
+	<!--<TaxTotal>
+		<label>Tax Total</label>
+		<type>BIGDECIMAL</type>
+	</TaxTotal>-->
+	<RequisitionHeader_fiscalYear>
+		<label>req-fiscalYear</label>
+		<type>STRING</type>
+	</RequisitionHeader_fiscalYear>
+	<RequisitionHeader_owner>
+		<label>Owner</label>
+		<type>STRING</type>
+	</RequisitionHeader_owner>
+	<UserProfileB_firstName>
+		<label>First Name</label>
+		<type>STRING</type>
+	</UserProfileB_firstName>
+	<UserProfileB_lastName>
+		<label>Last Name</label>
+		<type>STRING</type>
+	</UserProfileB_lastName>
+	<Account_fld1>
+		<label>AC01</label>
+		<type>String</type>
+	</Account_fld1>
+	<Account_fld2>
+		<label>AC02</label>
+		<type>String</type>
+	</Account_fld2>
+	<Account_fld3>
+		<label>AC03</label>
+		<type>String</type>
+	</Account_fld3>
+	<Account_fld4>
+		<label>AC04</label>
+		<type>String</type>
+	</Account_fld4>
+</columns>
+<!--<sqlfrom>RequisitionHeader as RequisitionHeader, UserProfile as UserProfileA, ApprovelLog as ApprovalLog, UserProfile as UserProfileB, Account as Account, (RequisitionHeader.taxAmount + RequisitionHeader.otherTaxAmount + RequisitionHeader.shippingTaxAmt) as TaxTotal </sqlfrom>-->
+<sqlfrom> RequisitionHeader as RequisitionHeader, UserProfile as UserProfileA, ApprovelLog as ApprovalLog, UserProfile as UserProfileB, Account as Account </sqlfrom>
+<sqlwhere><![CDATA[ ( RequisitionHeader.requisitionerCode = UserProfileA.userId ) AND ( RequisitionHeader.icReqHeader = ApprovalLog.id.icHeader ) AND ( ApprovalLog.callForward = UserProfileB.userId ) AND ( RequisitionHeader.icReqHeader = Account.icHeader ) ]]></sqlwhere>
+<title>Requisition Summary By Approver Report</title>
+</req_summary_by_approver>

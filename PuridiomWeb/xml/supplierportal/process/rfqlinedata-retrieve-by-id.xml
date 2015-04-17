@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="rfqLineDataRetrieve" connection-type="Connection-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="rfqLineRetrieve">
+			<rule-filename>is-rfqline-empty</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="rfqLine">			
+				<task-object-name>com.tsa.puridiom.rfqline.tasks.RfqLineRetrieveById</task-object-name>
+			</task>
+		</activity>		
+		<activity synchronous="true" continue-on-failure="false" name="rfqLineDataRetrieve">
+			<task synchronous="true" continue-on-failure="false" name="rfqLineRetrieveSetup">			
+				<task-object-name>com.tsa.puridiom.rfqline.tasks.RfqLineRetrieveSetup</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="billToListRetrieve">
+				<task-object-name>com.tsa.puridiom.supplierportal.InvokeSupplierPortalProcessTask</task-object-name>
+				<process-filename>billtodata-retrieve-by-line.xml</process-filename>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="shipToListRetrieve">
+				<task-object-name>com.tsa.puridiom.supplierportal.InvokeSupplierPortalProcessTask</task-object-name>
+				<process-filename>shiptodata-retrieve-by-line.xml</process-filename>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="rfqLineCommentsRetrieve">
+				<task-object-name>com.tsa.puridiom.supplierportal.InvokeSupplierPortalProcessTask</task-object-name>
+				<process-filename>doccomment-retrieve-by-line.xml</process-filename>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="rfqBidList">
+				<task-object-name>com.tsa.puridiom.rfqbid.tasks.RfqBidRetrieveByLine</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="rfqNote">
+				<task-object-name>com.tsa.puridiom.rfqnote.tasks.RfqNoteRetrieveById</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="rfqLine">			
+				<task-object-name>com.tsa.puridiom.rfqline.tasks.RfqLineDataSet</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

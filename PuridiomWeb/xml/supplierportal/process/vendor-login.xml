@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="vendor-login" connection-type="None" ldap-connection-type="None">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="retrieveSupplierRegisterUser">
+			<rule-filename check-for-false="true">is-oid-valid.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="setErrorMsg">
+				<task-object-name>com.tsa.puridiom.supplierportal.authentication.tasks.ErrorMsgSetInvalidOrganizationId</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="setUserInCache">
+				<task-object-name>com.tsa.puridiom.supplierportal.authentication.tasks.SetBidBoardUserInCache</task-object-name>
+			</task>
+			<post-action>exitProcess</post-action>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="retrieveSupplierRegisterUser">
+			<task synchronous="true" continue-on-failure="false" name="organizationId">
+				<task-object-name>com.tsa.puridiom.supplierportal.tasks.BidBoardUserGetOrganizationId</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="authenticate">
+				<task-object-name>com.tsa.puridiom.supplierportal.InvokeSupplierPortalProcessTask</task-object-name>
+				<process-filename>vendor-authentication.xml</process-filename>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="setUserInCache">
+			<task synchronous="true" continue-on-failure="false" name="setUserInCache">
+				<task-object-name>com.tsa.puridiom.supplierportal.authentication.tasks.SetBidBoardUserInCache</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+	</activities>
+</process>

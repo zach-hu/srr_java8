@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="userLogin" connection-type="Transaction-Required" ldap-connection-type="None">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="userLogActivity">
+			<task synchronous="true" continue-on-failure="false" name="userLogSetup">
+				<task-object-name>com.tsa.puridiom.userlog.tasks.UserLogSetup</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="userLog">
+				<task-object-name>com.tsa.puridiom.userlog.tasks.UserLogSetValues</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="userLogAdd">
+				<task-object-name>com.tsa.puridiom.userlog.tasks.UserLogAdd</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

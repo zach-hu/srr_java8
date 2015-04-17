@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="poRecalculate" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="poRecalculateSetup">
+			<task synchronous="true" continue-on-failure="false" name="poHeader">			
+				<task-object-name>com.tsa.puridiom.poheader.tasks.PoHeaderRetrieveById</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="poHeaderUpdateSetup">			
+				<task-object-name>com.tsa.puridiom.poheader.tasks.PoHeaderUpdateSetup</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="poLineList">			
+				<rule-filename>is-polinelist-empty</rule-filename>
+				<task-object-name>com.tsa.puridiom.poline.tasks.PoLineRetrieveByHeader</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="poCalculateTotalsActivity">
+			<task synchronous="true" continue-on-failure="false" name="poLineList">			
+				<task-object-name>com.tsa.puridiom.poline.tasks.PoLineSetShippingTaxFromHeader</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="poLineList">			
+				<task-object-name>com.tsa.puridiom.poline.tasks.PoLineSetOtherTaxFromHeader</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="poCalculateTotals">
+				<task-object-name>com.tsa.puridiom.po.tasks.PoCalculateTotals</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="accountLineUpdate">
+				<task-object-name>com.tsa.puridiom.poline.tasks.PoLinesAccountUpateAll</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="accountReallocation">
+			<task synchronous="true" continue-on-failure="false" name="allocatedTotal">			
+				<task-object-name>com.tsa.puridiom.account.tasks.AccountAllocatedForLines</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="dummy">
+				<task-object-name>com.tsa.puridiom.account.tasks.ResetAccountIcLine</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="accountList">			
+				<task-object-name>com.tsa.puridiom.account.tasks.AccountRetrieveByLine</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="accountRecalculate">			
+				<task-object-name>com.tsa.puridiom.account.tasks.AccountRecalculate</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+	</activities>
+</process>

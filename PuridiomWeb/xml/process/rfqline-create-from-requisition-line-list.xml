@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="createLinesFromRequisitionLineList" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="createLinesFromRequisitionLineList">
+			<task synchronous="true" continue-on-failure="false" name="setup">
+				<task-object-name>com.tsa.puridiom.rfqline.tasks.RfqLineLookupSetup</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="rfqHeader">
+				<task-object-name>com.tsa.puridiom.rfqheader.tasks.RfqHeaderRetrieveById</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="createLinesFromRequisitionLineList">
+				<task-object-name>com.tsa.puridiom.rfqline.tasks.RfqLineCreateFromRequisitionLineList</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

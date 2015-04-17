@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="ExecuteReportPreview" connection-type="Transaction-Required">
+  <activities>
+  	<activity synchronous="true" continue-on-failure="false" name="getDatasources">
+      <task synchronous="true" continue-on-failure="false" name="browseObject">
+        <task-object-name>com.tsa.puridiom.browse.tasks.GenerateReportObject</task-object-name>
+      </task>
+      <task synchronous="true" continue-on-failure="false" name="browseObject">
+        <task-object-name>com.tsa.puridiom.browse.tasks.GenerateBrowseFilter</task-object-name>
+      </task>
+      <task synchronous="true" continue-on-failure="false" name="ReportQueue_whereClause">
+        <task-object-name>com.tsa.puridiom.browse.tasks.BrowseRetrieve</task-object-name>
+      </task>
+    </activity>
+    <activity synchronous="true" continue-on-failure="false" name="addReportQueue">
+		<task synchronous="true" continue-on-failure="false" name="createSetup">
+			<task-object-name>com.tsa.puridiom.reportqueue.tasks.ReportQueueCreateSetup</task-object-name>
+		</task>
+		<task synchronous="true" continue-on-failure="false" name="alterSetup">
+			<task-object-name>com.tsa.puridiom.reportqueue.tasks.ReportQueueSetPreviewValues</task-object-name>
+		</task>
+		<task synchronous="true" continue-on-failure="false" name="reportQueue">
+			<task-object-name>com.tsa.puridiom.reportqueue.tasks.ReportQueueSetValues</task-object-name>
+		</task>
+		<task synchronous="true" continue-on-failure="false" name="reportQueue">
+			<task-object-name>com.tsa.puridiom.reportqueue.tasks.ReportQueueAdd</task-object-name>
+		</task>
+    </activity>
+  </activities>
+</process>

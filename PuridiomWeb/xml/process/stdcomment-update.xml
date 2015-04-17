@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="stdCommentUpdate" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="stdCommentUpdate">
+			<task synchronous="true" continue-on-failure="false" name="stdComment">			
+				<task-object-name>com.tsa.puridiom.stdcomment.tasks.StdCommentRetrieveById</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="stdComment">
+				<task-object-name>com.tsa.puridiom.stdcomment.tasks.StdCommentSetValues</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="stdComment">
+				<task-object-name>com.tsa.puridiom.stdcomment.tasks.StdCommentUpdate</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="docTextUpdate">
+			<task synchronous="true" continue-on-failure="false" name="docTextUpdate">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>doctext-update.xml</process-filename>
+			</task>
+		</activity>
+	</activities>
+</process>

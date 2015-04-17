@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="invItemAdd" connection-type="New-Transaction">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="addInvItem">
+			<task synchronous="true" continue-on-failure="false" name="checkItemNumberAndDescription">
+        		<task-object-name>com.tsa.puridiom.asset.serv.tasks.AssetItemNumberCheck</task-object-name>
+      		</task>
+			<task synchronous="true" continue-on-failure="false" name="invItem">
+        		<task-object-name>com.tsa.puridiom.asset.serv.tasks.InvItemCreateFromAsset</task-object-name>
+      		</task>
+			<task synchronous="true" continue-on-failure="false" name="invItem">
+        		<task-object-name>com.tsa.puridiom.invitem.tasks.InvItemAdd</task-object-name>
+      		</task>
+		</activity>
+	</activities>
+</process>

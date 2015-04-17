@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="stdQuestionCreate" connection-type="Connection-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="stdQuestionCreate">
+			<task synchronous="true" continue-on-failure="false" name="stdQuestionSetup">			
+				<task-object-name>com.tsa.puridiom.stdquestion.tasks.StdQuestionSetup</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="stdQuestion">
+				<task-object-name>com.tsa.puridiom.stdquestion.tasks.StdQuestionSetValues</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="stdQuestionAdd">
+ 				<rule-filename>is-create-save.xml</rule-filename>
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>stdquestion-add.xml</process-filename>
+			</task>
+		</activity>
+	</activities>
+</process>

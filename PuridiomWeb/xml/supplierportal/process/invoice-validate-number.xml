@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="validateNumber" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="validateNumber">
+			<task synchronous="true" continue-on-failure="false" name="validateNumber">
+				<task-object-name>com.tsa.puridiom.invoice.tasks.InvoiceValidateNumber</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="setInvoiceNumber">
+			<rule-filename check-for-false="true">is-valid-number.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="true" name="setInvoiceNumber">
+				<task-object-name>com.tsa.puridiom.invoiceheader.tasks.InvoiceHeaderSetInvoiceNumber</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="setErrorMsg">
+				<task-object-name>com.tsa.puridiom.invoiceerrormsg.tasks.ErrorMsgSetDuplicateInvoiceNumber</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="invoiceHeaderUpdate">
+			<task synchronous="true" continue-on-failure="false" name="invoiceHeaderUpdate">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>invoiceheader-update.xml</process-filename>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="invoiceLinesUpdate">
+			<rule-filename>is-valid-number.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="invoiceLineList">
+				<task-object-name>com.tsa.puridiom.invoiceline.tasks.InvoiceLineRetrieveByHeader</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="invoiceLineList">
+				<task-object-name>com.tsa.puridiom.invoiceline.tasks.InvoiceLineSetInvoiceNumberFromHeader</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="invoiceLineUpdate">
+				<task-object-name>com.tsa.puridiom.invoiceline.tasks.InvoiceLineUpdateEntityList</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="retrieveInvoiceHeader">
+			<task synchronous="true" continue-on-failure="false" name="retrieveInvoiceHeader">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>invoiceheader-shipto-retrieve-by-id.xml</process-filename>
+			</task>
+		</activity>
+	</activities>
+</process>

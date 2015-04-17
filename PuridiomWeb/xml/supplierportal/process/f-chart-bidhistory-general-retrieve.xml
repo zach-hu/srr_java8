@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="bidboardUserChangePassword" connection-type="Connection-Required" ldap-connection-type="none">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="bidHistoryListSetup">
+			<task synchronous="true" continue-on-failure="false" name="bidHistoryGeneralList">
+				<task-object-name>com.tsa.puridiom.supplierportal.graphs.tasks.FChartBidHistoryGeneralRetrieve</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="bidHistoryGeneralListGraph">
+				<task-object-name>com.tsa.puridiom.supplierportal.graphs.tasks.BidHistoryGeneralGraph</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+	</activities>
+</process>

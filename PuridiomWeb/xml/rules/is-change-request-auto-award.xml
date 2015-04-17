@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rule>
+	<clause type="StringCompare">
+    	<left-side>
+      		<source>incomingRequestObjectMethod</source>
+     		<object>requisitionHeader</object>
+      		<name>getRequisitionType</name>
+    	</left-side>
+    	<operator>EQUALS</operator>
+    	<right-side>
+      		<source>constant</source>
+      		<value>C</value>
+    	</right-side>
+  	</clause>
+  	<logical-operator>AND</logical-operator>
+	<clause type="StringCompare">
+		<left-side>
+      		<source>incomingRequestObjectMethod</source>
+     		<object>requisitionHeader</object>
+      		<name>getRqSubType</name>
+    	</left-side>
+    	<operator>NOTEQUAL</operator>
+    	<right-side>
+      		<source>constant</source>
+      		<value>AA</value>
+    	</right-side>
+	</clause>
+	<logical-operator>AND</logical-operator>
+	<clause type="StringCompare">
+    	<left-side>
+      		<source>Singleton</source>
+      		<object>com.tsa.puridiom.property.PropertiesManager</object>
+	      	<name>getProperty</name>
+	      	<argument-value>AUTOCREATE</argument-value>
+	      	<argument-value>AUTOAWARDCHANGEREQUEST</argument-value>
+	      	<argument-value>N</argument-value>
+    	</left-side>
+    	<operator>EQUALS</operator>
+    	<right-side>
+      		<source>constant</source>
+      		<value>N</value>
+    	</right-side>
+  	</clause>
+</rule>

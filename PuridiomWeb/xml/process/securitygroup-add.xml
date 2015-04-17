@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="securityGroupAdd" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="securityGroupAdd">
+			<task synchronous="true" continue-on-failure="false" name="securityGroup">
+				<task-object-name>com.tsa.puridiom.securitygroup.tasks.SecurityGroupAddSetup</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="securityGroup">
+				<task-object-name>com.tsa.puridiom.securitygroup.tasks.SecurityGroupSetValues</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="securityGroup">
+				<task-object-name>com.tsa.puridiom.securitygroup.tasks.SecurityGroupAdd</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

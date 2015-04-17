@@ -1,0 +1,43 @@
+<reqsummary>
+	<columns>
+		<RequisitionHeader_requisitionNumber>
+			<label>Requisition #</label>
+			<type>STRING</type>
+		</RequisitionHeader_requisitionNumber>
+		<RequisitionHeader_requisitionDate>
+			<label>requestDate</label>
+			<type>DATE</type>
+		</RequisitionHeader_requisitionDate>
+		<RequisitionHeader_requisitionType>
+			<label>Type</label>
+			<type>STRING</type>
+		</RequisitionHeader_requisitionType>
+		<RequisitionHeader_status>
+			<label>Status</label>
+			<type>STRING</type>
+		</RequisitionHeader_status>
+		<RequisitionHeader_requiredDate>
+			<label>req-requiredDate</label>
+			<type>DATE</type>
+		</RequisitionHeader_requiredDate>
+		<RequisitionHeader_departmentCode>
+			<label>req-department</label>
+			<type>STRING</type>
+		</RequisitionHeader_departmentCode>
+		<RequisitionHeader_requisitionerCode>
+			<label>req-requisitioner</label>
+			<type>STRING</type>
+		</RequisitionHeader_requisitionerCode>
+		<RequisitionHeader_total>
+			<label>req-total</label>
+			<type>BIGDECIMAL</type>
+		</RequisitionHeader_total>
+		<RequisitionHeader_assignedBuyer>
+			<label>Assigned Buyer</label>
+			<type>STRING</type>
+		</RequisitionHeader_assignedBuyer>
+	</columns>
+	<sqlfrom>RequisitionHeader as RequisitionHeader</sqlfrom>
+	<sqlwhere><![CDATA[ RequisitionHeader.requisitionNumber <> 'N/A' ]]></sqlwhere>
+	<title>Requisition Summary Snapshot Report</title>
+</reqsummary>

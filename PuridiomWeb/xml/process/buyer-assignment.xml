@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="buyerAssignment" connection-type="Transaction-Required">
+  <activities>
+    <activity synchronous="true" continue-on-failure="false" name="setup">
+      <task synchronous="true" continue-on-failure="false" name="buyerAssignmetSetup">
+        <task-object-name>com.tsa.puridiom.requisition.buyerassignment.tasks.Setup</task-object-name>
+        <post-action></post-action>
+      </task>
+    </activity>
+    <activity synchronous="true" continue-on-failure="false" name="byline">
+      <rule-filename>is-organization-bly.xml;is-assign-by-line-active.xml</rule-filename>
+      <task synchronous="true" continue-on-failure="false" name="requisitionLineList">
+        <rule-filename>is-assign-by-suggested-active.xml</rule-filename>
+        <task-object-name>com.tsa.puridiom.requisition.buyerassignment.tasks.BySuggestedLine</task-object-name>
+        <post-action></post-action>
+      </task>
+      <task synchronous="true" continue-on-failure="false" name="requisitionLineList">
+        <rule-filename>is-assign-by-commodity-active.xml</rule-filename>
+        <task-object-name>com.tsa.puridiom.requisition.buyerassignment.tasks.ByCommodityDepartmenBuyerTable</task-object-name>
+        <post-action></post-action>
+      </task>
+      <task synchronous="true" continue-on-failure="false" name="requisitionLineList">
+        <rule-filename>is-assign-by-commodity-active.xml</rule-filename>
+        <task-object-name>com.tsa.puridiom.requisition.buyerassignment.tasks.ByDepartmenBuyerTable</task-object-name>
+        <post-action></post-action>
+      </task>
+      <task synchronous="true" continue-on-failure="false" name="requisitionLineList">
+        <rule-filename>is-assign-by-commodity-active.xml</rule-filename>
+        <task-object-name>com.tsa.puridiom.requisition.buyerassignment.tasks.ByCommodityLine</task-object-name>
+        <post-action></post-action>
+      </task>
+     <task synchronous="true" continue-on-failure="false" name="requisitionLineList">
+        <rule-filename>is-assign-by-line-active.xml</rule-filename>
+        <task-object-name>com.tsa.puridiom.requisition.buyerassignment.tasks.ByRequisitionCodeLine</task-object-name>
+        <post-action></post-action>
+      </task>
+      <post-action>exitProcess</post-action>
+    </activity>
+    <activity synchronous="true" continue-on-failure="false" name="byline">
+      <rule-filename>is-not-organization-msg.xml;is-assign-by-line-active.xml</rule-filename>
+      <task synchronous="true" continue-on-failure="false" name="requisitionLineList">
+        <rule-filename>is-assign-by-commodity-active.xml</rule-filename>
+        <task-object-name>com.tsa.puridiom.requisition.buyerassignment.tasks.ByCommodityLine</task-object-name>
+        <post-action></post-action>
+      </task>
+      <task synchronous="true" continue-on-failure="false" name="requisitionLineList">
+        <rule-filename>is-assign-by-suggested-active.xml</rule-filename>
+        <task-object-name>com.tsa.puridiom.requisition.buyerassignment.tasks.BySuggestedLine</task-object-name>
+        <post-action></post-action>
+      </task>
+      <task synchronous="true" continue-on-failure="false" name="requisitionLineList">
+        <rule-filename>is-assign-by-vendorbuyerrel-active.xml</rule-filename>
+        <task-object-name>com.tsa.puridiom.requisition.buyerassignment.tasks.ByVendorBuyerRelTable</task-object-name>
+        <post-action></post-action>
+      </task>
+    </activity>
+    <activity synchronous="true" continue-on-failure="false" name="byline">
+      <rule-filename>is-assign-by-line-for-header.xml</rule-filename>
+      <task synchronous="true" continue-on-failure="false" name="requisitionLineList">
+        <rule-filename>is-assign-by-commodity-active.xml</rule-filename>
+        <task-object-name>com.tsa.puridiom.requisition.buyerassignment.tasks.ByCommodityLine</task-object-name>
+        <post-action></post-action>
+      </task>
+      <task synchronous="true" continue-on-failure="false" name="requisitionLineList">
+        <rule-filename>is-assign-by-suggested-active.xml</rule-filename>
+        <task-object-name>com.tsa.puridiom.requisition.buyerassignment.tasks.BySuggestedLine</task-object-name>
+        <post-action></post-action>
+      </task>
+    </activity>
+    <!-- <activity synchronous="true" continue-on-failure="false" name="NotByline">
+      <rule-filename check-for-false="true">is-assign-by-line-active.xml</rule-filename>
+      <task synchronous="true" continue-on-failure="false" name="requisitionLineList">
+        <rule-filename>is-assign-by-commodity-active.xml</rule-filename>
+        <task-object-name>com.tsa.puridiom.requisition.buyerassignment.tasks.ByCommodityNotByLine</task-object-name>
+        <post-action></post-action>
+      </task>
+      <task synchronous="true" continue-on-failure="false" name="requisitionLineList">
+        <rule-filename>is-assign-by-suggested-active.xml</rule-filename>
+        <task-object-name>com.tsa.puridiom.requisition.buyerassignment.tasks.BySuggestedNotLine</task-object-name>
+        <post-action></post-action>
+      </task>
+      <task synchronous="true" continue-on-failure="false" name="requisitionLineList">
+        <task-object-name>com.tsa.puridiom.requisition.buyerassignment.tasks.AssignNotByLine</task-object-name>
+        <post-action></post-action>
+      </task>
+    </activity> -->
+  </activities>
+</process>

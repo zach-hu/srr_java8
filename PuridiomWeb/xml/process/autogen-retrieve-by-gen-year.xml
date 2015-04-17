@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="AutoGenRetrieveByGenYear" connection-type="New-Connection">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="fiscalYearSetup">
+			<task synchronous="true" continue-on-failure="false" name="AutoGenYearAst">
+				<rule-filename check-for-false="true">is-asset-active-fiscal-year-required</rule-filename>
+				<task-object-name>com.tsa.puridiom.common.tasks.GetDefaultFiscalYear</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="AutoGenYearDsb">
+				<rule-filename check-for-false="true">is-disb-active-fiscal-year-required</rule-filename>
+				<task-object-name>com.tsa.puridiom.common.tasks.GetDefaultFiscalYear</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="AutoGenYearPo">
+				<rule-filename check-for-false="true">is-po-active-fiscal-year-required</rule-filename>
+				<task-object-name>com.tsa.puridiom.common.tasks.GetDefaultFiscalYear</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="AutoGenYearReq">
+				<rule-filename check-for-false="true">is-requisition-active-fiscal-year-required</rule-filename>
+				<task-object-name>com.tsa.puridiom.common.tasks.GetDefaultFiscalYear</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="AutoGenYearRfq">
+				<rule-filename check-for-false="true">is-rfq-active-fiscal-year-required</rule-filename>
+				<task-object-name>com.tsa.puridiom.common.tasks.GetDefaultFiscalYear</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="autoGen">
+				<task-object-name>com.tsa.puridiom.autogen.tasks.AutoGenRetrieveByGenYear</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

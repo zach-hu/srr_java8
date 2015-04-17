@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="performanceDetailSaveas" connection-type="Connection-Required">
+  <activities>
+    <activity synchronous="true" continue-on-failure="false" name="performanceDetailRetrieveByHeader">
+      <task synchronous="true" continue-on-failure="false" name="performanceDetailList">
+        <task-object-name>com.tsa.puridiom.vendor.performance.tasks.SupplierPerformanceDetailRetrieveByOrder</task-object-name>
+      </task>
+      <task synchronous="true" continue-on-failure="false" name="performancedetailList">
+        <task-object-name>com.tsa.puridiom.vendor.performance.tasks.PerformanceDetailSaveasList</task-object-name>
+      </task>
+    </activity>
+  </activities>
+</process>

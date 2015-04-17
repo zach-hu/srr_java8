@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="rfqLineCreate" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="requisitionLineRetrieve">
+			<rule-filename>is-requisitionline-empty.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="requisitionLine">			
+				<task-object-name>com.tsa.puridiom.requisitionline.tasks.RequisitionLineRetrieveById</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="rfqLineCreate">
+			<task synchronous="true" continue-on-failure="false" name="rfqLineSetup">			
+				<task-object-name>com.tsa.puridiom.rfqline.tasks.RfqLineSetup</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="rfqLineSetupUmFactor">
+				<task-object-name>com.tsa.puridiom.rfqline.tasks.RfqLineSetupUmFactor</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="RfqLine_rfqLine">			
+				<task-object-name>com.tsa.puridiom.rfqline.tasks.RfqLineGetNewRfqLineNumber</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="rfqLineSetDefaultsFromHeader">			
+				<task-object-name>com.tsa.puridiom.rfqline.tasks.RfqLineSetDefaultsFromHeader</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="rfqLineSetRequisitionLineValues">			
+				<task-object-name>com.tsa.puridiom.rfqline.tasks.RfqLineSetRequisitionLineValues</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="rfqLine">			
+				<task-object-name>com.tsa.puridiom.rfqline.tasks.RfqLineSetValues</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="rfqLineSaveasFromReq">
+			<task synchronous="true" continue-on-failure="false" name="rfqLineSaveasFromReq">
+				<!-- load comments and shipping schedule -->
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>rfqline-saveas-from-req.xml</process-filename>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="rfqLineAdd">
+			<task synchronous="true" continue-on-failure="false" name="rfqLine">			
+				<task-object-name>com.tsa.puridiom.rfqline.tasks.RfqLineAdd</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

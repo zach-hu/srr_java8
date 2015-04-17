@@ -1,0 +1,157 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+ "-//Hibernate/Hibernate Mapping DTD 2.0//EN"
+ "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+
+<class
+	name="com.tsa.puridiom.entity.RfqBidHistory"
+	table="RFQ_BID_HISTORY"
+>
+<composite-id name="comp_id" class="com.tsa.puridiom.entity.RfqBidHistoryPK">
+	<key-property name="icRfqHeader" column="IC_RFQ_HEADER" type="java.math.BigDecimal"/>
+	<key-property name="icRfqLine" column="IC_RFQ_LINE" type="java.math.BigDecimal"/>
+	<key-property name="vendorId" column="VENDOR_ID" type="java.lang.String"/>
+	<key-property name="bidSequence" column="BID_SEQUENCE" type="java.math.BigDecimal"/>
+</composite-id>
+<property
+	name="quantity"
+	column="QUANTITY"
+	type="java.math.BigDecimal"
+	length="15"
+/>
+<property
+	name="umCode"
+	column="UM_CODE"
+	type="java.lang.String"
+	length="15"
+/>
+<property
+	name="unitPrice"
+	column="UNIT_PRICE"
+	type="java.math.BigDecimal"
+	length="15"
+/>
+<property
+	name="discountSource"
+	column="DISCOUNT_SOURCE"
+	type="java.lang.String"
+	length="1"
+/>
+<property
+	name="discountAmount"
+	column="DISCOUNT_AMOUNT"
+	type="java.math.BigDecimal"
+	length="15"
+/>
+<property
+	name="discountPercent"
+	column="DISCOUNT_PERCENT"
+	type="java.math.BigDecimal"
+	length="10"
+/>
+<property
+	name="shippingCharges"
+	column="SHIPPING_CHARGES"
+	type="java.math.BigDecimal"
+	length="15"
+/>
+<property
+	name="otherCharges"
+	column="OTHER_CHARGES"
+	type="java.math.BigDecimal"
+	length="15"
+/>
+<property
+	name="otherDescript"
+	column="OTHER_DESCRIPT"
+	type="java.lang.String"
+	length="30"
+/>
+<property
+	name="taxShipping"
+	column="TAX_SHIPPING"
+	type="java.lang.String"
+	length="1"
+/>
+<property
+	name="taxOther"
+	column="TAX_OTHER"
+	type="java.lang.String"
+	length="1"
+/>
+<property
+	name="commentFlag"
+	column="COMMENT_FLAG"
+	type="java.lang.String"
+	length="1"
+/>
+<property
+	name="taxPercent"
+	column="TAX_PERCENT"
+	type="java.math.BigDecimal"
+	length="10"
+/>
+<property
+	name="taxAmount"
+	column="TAX_AMOUNT"
+	type="java.math.BigDecimal"
+	length="15"
+/>
+<property
+	name="shippingTaxAmt"
+	column="SHIPPING_TAX_AMT"
+	type="java.math.BigDecimal"
+	length="15"
+/>
+<property
+	name="otherTaxAmount"
+	column="OTHER_TAX_AMOUNT"
+	type="java.math.BigDecimal"
+	length="15"
+/>
+<property
+	name="bidCurrency"
+	column="BID_CURRENCY"
+	type="java.lang.String"
+	length="15"
+/>
+<property
+	name="lastChgDate"
+	column="LAST_CHG_DATE"
+	type="java.util.Date"
+	length="7"
+/>
+<property
+	name="lastMdfDate"
+	column="LAST_MDF_DATE"
+	type="java.util.Date"
+	length="7"
+/>
+<property
+	name="bidCode"
+	column="BID_CODE"
+	type="java.lang.String"
+	length="15"
+/>
+<property
+	name="umFactor"
+	column="UM_FACTOR"
+	type="java.math.BigDecimal"
+	length="15"
+/>
+<property
+	name="userId"
+	column="USER_ID"
+	type="java.lang.String"
+	length="40"
+/>
+ <property
+	name="timeZone"
+	type="java.lang.String"
+	column="TIME_ZONE"
+	length="30"
+/>
+</class>
+</hibernate-mapping>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="AssetCost_sequenceNo" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="assetSetupClonesQty">
+			<task synchronous="true" continue-on-failure="false" name="asset">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>asset-retrieve-by-id.xml</process-filename>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="Asset_number">
+				<task-object-name>com.tsa.puridiom.asset.serv.tasks.AssetGetClonesQty</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="assetSetupClonesQty">
+			<!--<rule-filename>is-asset-number-more-than-zero.xml</rule-filename>-->
+			<task synchronous="true" continue-on-failure="false" name="assetList">
+				<task-object-name>com.tsa.puridiom.asset.serv.tasks.AssetCreateClon</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="assetList">
+				<!--<rule-filename>is-asset-number-more-than-one.xml</rule-filename>-->
+				<task-object-name>com.tsa.puridiom.asset.serv.tasks.AssetItemCreateSetup</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="assetList">
+				<task-object-name>com.tsa.puridiom.asset.serv.tasks.AssetListAddComplete</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

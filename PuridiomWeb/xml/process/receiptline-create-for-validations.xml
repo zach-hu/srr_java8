@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="receiptLineCreate" connection-type="Connection-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="receiptLineCreate">
+			<task synchronous="true" continue-on-failure="false" name="receiptLineCreateSetup">
+				<rule-filename></rule-filename>
+				<task-object-name>com.tsa.puridiom.receiptline.tasks.ReceiptLineCreateSetup</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="receiptLine">
+				<rule-filename></rule-filename>
+				<task-object-name>com.tsa.puridiom.receiptline.tasks.ReceiptLineSetValues</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="receiptLine">
+				<rule-filename></rule-filename>
+				<task-object-name>com.tsa.puridiom.receiptline.tasks.ReceiptLineSetValuesFromReceiptHeader</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+	</activities>
+</process>

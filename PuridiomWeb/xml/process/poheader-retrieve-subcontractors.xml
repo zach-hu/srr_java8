@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="poHeaderRetrieveSubContactors" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="retrieveSubContractors">
+			<task synchronous="true" continue-on-failure="false" name="subContractorRetrieveSetup">
+				<task-object-name>com.tsa.puridiom.po.subcontractor.tasks.SubContractorRetrieveSetup</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="subContractorList">
+				<task-object-name>com.tsa.puridiom.po.subcontractor.tasks.SubContractorRetrieveByOrder</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+	</activities>
+</process>

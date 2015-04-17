@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="vendorResponseUpdate" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="vendorResponseUpdate">
+			<task synchronous="true" continue-on-failure="false" name="vendorResponse">			
+				<task-object-name>com.tsa.puridiom.vendorresponse.tasks.VendorResponseRetrieveById</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="vendorResponseSetup">
+				<task-object-name>com.tsa.puridiom.vendorresponse.tasks.VendorResponseUpdateSetup</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="rfqQuestion">
+				<task-object-name>com.tsa.puridiom.rfqquestion.tasks.RfqQuestionRetrieveById</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="responseValueListRetrieve">
+				<rule-filename check-for-false="true">is-rfqquestion-empty.xml</rule-filename>
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>responsevalue-retrieve-by-question.xml</process-filename>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="vendorResponseRatings">
+				<task-object-name>com.tsa.puridiom.vendorresponse.tasks.VendorResponseSetResponseValueScore</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="vendorResponseAdd">
+				<rule-filename>is-vendorresponse-empty</rule-filename>
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>vendorresponse-add.xml</process-filename>
+				<post-action>exitActivity</post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="vendorResponse">
+				<task-object-name>com.tsa.puridiom.vendorresponse.tasks.VendorResponseSetValues</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="vendorResponse">			
+				<task-object-name>com.tsa.puridiom.vendorresponse.tasks.VendorResponseUpdateById</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

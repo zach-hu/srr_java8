@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="sendQueueAdd" connection-type="New-Transaction">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="addSendQueue" commit-after="true">
+			<task synchronous="true" continue-on-failure="false" name="queueSetup">
+				<task-object-name>com.tsa.puridiom.sendqueue.tasks.SendQueueAddSetup</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="emailsActive">
+				<rule-filename check-for-false="true">is-req-forward-approve-emails-active.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.emails.tasks.EmailsActiveSetup</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="sendQueue">
+				<task-object-name>com.tsa.puridiom.sendqueue.tasks.SendQueueSetValues</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="sendQueue">
+				<task-object-name>com.tsa.puridiom.sendqueue.tasks.SendQueueAdd</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+	</activities>
+</process>

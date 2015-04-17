@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created using an evaluation version of JasperAssistant (http://www.jasperassistant.com) -->
+<!DOCTYPE jasperReport PUBLIC "-//JasperReports//DTD Report Design//EN" "http://jasperreports.sourceforge.net/dtds/jasperreport.dtd">
+
+<jasperReport name="totals" pageWidth="595" pageHeight="105" columnWidth="595" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+	<property name="com.jasperassistant.designer.GridWidth" value="12"/>
+	<property name="com.jasperassistant.designer.GridHeight" value="12"/>
+	<property name="com.jasperassistant.designer.DataSource" value="one"/>
+	<property name="com.jasperassistant.designer.SnapToGrid" value="false"/>
+	<property name="com.jasperassistant.designer.Grid" value="false"/>
+	<import value="com.tsa.puridiom.common.utility.HiltonUtility"/>
+	<import value="com.tsagate.properties.*"/>
+	<reportFont name="Arial_Normal" isDefault="true" fontName="Arial" size="8" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Bold" isDefault="false" fontName="Arial Black" size="8" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica-Bold" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<parameter name="subtotal" class="java.math.BigDecimal"/>
+	<parameter name="discount" class="java.math.BigDecimal"/>
+	<parameter name="tax" class="java.math.BigDecimal"/>
+	<parameter name="usetax" class="java.math.BigDecimal"/>
+	<parameter name="shipping" class="java.math.BigDecimal"/>
+	<parameter name="other" class="java.math.BigDecimal"/>
+	<parameter name="total" class="java.math.BigDecimal"/>
+	<parameter name="oid" class="java.lang.String"/>
+	<parameter name="udf1Code" class="java.lang.String">
+		<defaultValueExpression><![CDATA["USA"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="othertax" class="java.math.BigDecimal"/>
+	<parameter name="shippingtax" class="java.math.BigDecimal"/>
+	<group name="subtotal">
+		<groupHeader>
+			<band height="15">
+				<textField isBlankWhenNull="true">
+					<reportElement positionType="Float" x="0" y="0" width="85" height="15"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font reportFont="Arial_Bold" isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[DictionaryManager.getLabel($P{oid}, "pdf-po-subtotal", "Subtotal")]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0.00#" isBlankWhenNull="true">
+					<reportElement positionType="Float" x="86" y="0" width="80" height="15"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle"/>
+					<textFieldExpression class="java.math.BigDecimal"><![CDATA[$P{subtotal}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+	</group>
+	<group name="discount">
+		<groupHeader>
+			<band height="15">
+				<printWhenExpression><![CDATA[new Boolean($P{discount}.compareTo(new BigDecimal(0)) > 0)]]></printWhenExpression>
+				<textField isBlankWhenNull="true">
+					<reportElement positionType="Float" x="0" y="0" width="85" height="15" isRemoveLineWhenBlank="true"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font reportFont="Arial_Bold" isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[DictionaryManager.getLabel($P{oid}, "pdf-po-discountAmount", "Discount :")]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0.00#">
+					<reportElement positionType="Float" x="86" y="0" width="80" height="15"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle"/>
+					<textFieldExpression class="java.math.BigDecimal"><![CDATA[$P{discount}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+	</group>
+	<group name="Tax">
+		<groupHeader>
+			<band height="15">
+				<printWhenExpression><![CDATA[new Boolean($P{tax}.compareTo(new BigDecimal(0)) > 0)]]></printWhenExpression>
+				<textField isBlankWhenNull="true">
+					<reportElement positionType="Float" x="0" y="0" width="85" height="15" isRemoveLineWhenBlank="true"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font reportFont="Arial_Bold" isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[DictionaryManager.getLabel($P{oid}, "pdf-po-taxAmount", "Tax Amount") + ":"]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0.00#">
+					<reportElement positionType="Float" x="86" y="0" width="80" height="15"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle"/>
+					<textFieldExpression class="java.math.BigDecimal"><![CDATA[$P{tax}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+	</group>
+	<group name="usetax">
+		<groupHeader>
+			<band height="15">
+				<printWhenExpression><![CDATA[new Boolean($P{usetax}.compareTo(new BigDecimal(0)) > 0)]]></printWhenExpression>
+				<textField pattern="#,##0.00#">
+					<reportElement positionType="Float" x="86" y="0" width="80" height="15"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle"/>
+					<textFieldExpression class="java.math.BigDecimal"><![CDATA[$P{usetax}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement positionType="Float" x="0" y="0" width="85" height="15" isRemoveLineWhenBlank="true"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font reportFont="Arial_Bold" isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[DictionaryManager.getLabel($P{oid}, "pdf-po-useTaxAmount", "Tax Amount")  + ":"]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+	</group>
+	<group name="shipping">
+		<groupHeader>
+			<band height="15">
+				<printWhenExpression><![CDATA[new Boolean($P{shipping}.compareTo(new BigDecimal(0)) > 0)]]></printWhenExpression>
+				<textField isBlankWhenNull="true">
+					<reportElement positionType="Float" x="0" y="0" width="85" height="15" isRemoveLineWhenBlank="true"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font reportFont="Arial_Bold" isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[DictionaryManager.getLabel($P{oid}, "pdf-po-shippingCharges", "Shipping")]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0.00#">
+					<reportElement positionType="Float" x="86" y="0" width="80" height="15"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle"/>
+					<textFieldExpression class="java.math.BigDecimal"><![CDATA[$P{shipping}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+	</group>
+	<group name="shippingtax">
+		<groupHeader>
+			<band height="15">
+				<printWhenExpression><![CDATA[new Boolean($P{shippingtax}.compareTo(new BigDecimal(0)) > 0)]]></printWhenExpression>
+				<textField isBlankWhenNull="true">
+					<reportElement positionType="Float" x="0" y="0" width="85" height="15" isRemoveLineWhenBlank="true"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font reportFont="Arial_Bold" isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[DictionaryManager.getLabel($P{oid}, "pdf-po-shippingTaxAmount", "Shipping Tax")]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0.00#">
+					<reportElement positionType="Float" x="86" y="0" width="80" height="15"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle"/>
+					<textFieldExpression class="java.math.BigDecimal"><![CDATA[$P{shippingtax}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+	</group>
+	<group name="other">
+		<groupHeader>
+			<band height="15">
+				<printWhenExpression><![CDATA[new Boolean($P{other}.compareTo(new BigDecimal(0)) > 0)]]></printWhenExpression>
+				<textField>
+					<reportElement positionType="Float" x="0" y="0" width="85" height="15"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font reportFont="Arial_Bold" isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[DictionaryManager.getLabel($P{oid}, "pdf-po-otherCharges", "Other")]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0.00#" isBlankWhenNull="true">
+					<reportElement positionType="Float" x="86" y="0" width="80" height="15"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle"/>
+					<textFieldExpression class="java.math.BigDecimal"><![CDATA[$P{other}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+	</group>
+	<group name="othertax">
+		<groupHeader>
+			<band height="15">
+				<printWhenExpression><![CDATA[new Boolean($P{othertax}.compareTo(new BigDecimal(0)) > 0)]]></printWhenExpression>
+				<textField>
+					<reportElement positionType="Float" x="0" y="0" width="85" height="15"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font reportFont="Arial_Bold" isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[DictionaryManager.getLabel($P{oid}, "pdf-po-otherTaxAmount", "Other Tax")]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0.00#" isBlankWhenNull="true">
+					<reportElement positionType="Float" x="86" y="0" width="80" height="15"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle"/>
+					<textFieldExpression class="java.math.BigDecimal"><![CDATA[$P{othertax}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+	</group>
+	<group name="total">
+		<groupHeader>
+			<band height="15">
+				<textField>
+					<reportElement positionType="Float" x="0" y="0" width="85" height="15"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font reportFont="Arial_Bold" isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[DictionaryManager.getLabel($P{oid}, "pdf-po-total", "Total") + ":"]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0.00#" isBlankWhenNull="true">
+					<reportElement positionType="Float" x="86" y="0" width="80" height="15"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle"/>
+					<textFieldExpression class="java.math.BigDecimal"><![CDATA[$P{total}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+	</group>
+</jasperReport>

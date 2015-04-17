@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="approvalLogUpdateList" connection-type="New-Transaction">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="approvalLogUpdate">
+			<task synchronous="true" continue-on-failure="false" name="approvalLogDeleteSetup">
+				<rule-filename>is-formtype-req.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.requisition.tasks.RequisitionApprovalSetup</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="approvalLogDeleteSetup">
+				<rule-filename>is-formtype-po.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.po.tasks.PoApprovalSetup</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="approvalLogDeleteSetup">
+				<rule-filename>is-formtype-ivc.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.invoice.approvals.tasks.InvoiceApprovalSetup</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="routingListDeleteByHeader">
+				<task-object-name>com.tsa.puridiom.approvals.tasks.ApprovalLogDeleteByHeader</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="routingList">
+				<task-object-name>com.tsa.puridiom.approvals.tasks.ApprovalLogSetValuesByLine</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="routingList">
+				<task-object-name>com.tsa.puridiom.approvals.tasks.ApprovalLogSetPoolUsers</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="routingList">
+				<task-object-name>com.tsa.puridiom.approvals.tasks.ApprovalLogListSetFinalSequence</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="routingList">
+				<task-object-name>com.tsa.puridiom.approvals.tasks.ApprovalLogListUpdate</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="approvalLogRetrieveList">
+			<task synchronous="true" continue-on-failure="false" name="requisitionHeader">
+				<rule-filename>is-formtype-req.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.requisitionheader.tasks.RequisitionHeaderRetrieveById</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="poHeader">
+				<rule-filename>is-formtype-po.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.poheader.tasks.PoHeaderRetrieveById</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="poHeader">
+				<rule-filename>is-formtype-ivc.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.invoiceheader.tasks.InvoiceHeaderRetrieveById</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="routingList">
+				<task-object-name>com.tsa.puridiom.approvals.tasks.ApprovalLogRetrieveByHeader</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="routingListGroups">
+				<task-object-name>com.tsa.puridiom.approvals.tasks.ApprovalLogListGroupByRule</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+	</activities>
+</process>

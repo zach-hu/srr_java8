@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="vendorRegistrationValidateEinFromList" connection-type="None">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="vendorGetFromList">
+			<task synchronous="true" continue-on-failure="false" name="vendor">
+				<task-object-name>com.tsa.puridiom.supplierportal.registration.tasks.GetNextVendorFromVendorList</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="validateVendorEin">
+			<rule-filename>is-registeruser-vendor-vendorein-valid</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="vendorId">
+				<task-object-name>com.tsa.puridiom.vendor.tasks.VendorGetVendorId</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="registrationStatus">
+				<task-object-name>com.tsa.puridiom.supplierportal.registration.tasks.RegisterUserSetIsQualified</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="registrationStatus">
+				<task-object-name>com.tsa.puridiom.supplierportal.registration.tasks.RegisterUserSetIsEinValid</task-object-name>
+			</task>
+			<post-action>exitProcess</post-action>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="validateNextVendorEin">
+			<rule-filename check-for-false="true">is-vendor-list-empty</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="getValidVendorId">
+				<task-object-name>com.tsa.puridiom.supplierportal.InvokeSupplierPortalProcessTask</task-object-name>
+				<process-filename>vendor-registration-validate-ein-from-list</process-filename>
+			</task>
+		</activity>
+	</activities>
+</process>

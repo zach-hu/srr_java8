@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="poCreate" connection-type="New-Transaction">
+  <activities>
+    <activity synchronous="true" continue-on-failure="false" name="poCreate">
+      <task synchronous="true" continue-on-failure="false" name="poCreateSetup">
+        <rule-filename></rule-filename>
+        <task-object-name>com.tsa.puridiom.poheader.tasks.PoHeaderSetup</task-object-name>
+        <post-action></post-action>
+      </task>
+      <task synchronous="true" continue-on-failure="false" name="poCreateSetup">
+        <rule-filename></rule-filename>
+        <task-object-name>com.tsa.puridiom.po.tasks.PoCreateSetup</task-object-name>
+        <post-action></post-action>
+      </task>
+        <task synchronous="true" continue-on-failure="false" name="userUdfs">
+        <task-object-name>com.tsa.puridiom.po.tasks.PoUserMap</task-object-name>
+        <post-action></post-action>
+      </task>
+      <task synchronous="true" continue-on-failure="false" name="setShipToTaxInfo">
+				<rule-filename>is-poheader-shiptocode-not-empty.xml</rule-filename>
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>poheader-set-tax-from-shipto.xml</process-filename>
+	</task>
+      <task synchronous="true" continue-on-failure="false" name="poHeader">
+        <rule-filename></rule-filename>
+        <task-object-name>com.tsa.puridiom.poheader.tasks.PoHeaderSetValues</task-object-name>
+        <post-action></post-action>
+      </task>
+    </activity>
+    <activity synchronous="true" continue-on-failure="false" name="TaxCode">
+      <rule-filename>is-po-default-taxcode-set.xml;is-poheader-taxrate-empty.xml</rule-filename>
+      <task synchronous="true" continue-on-failure="false" name="taxRateSetup">
+        <rule-filename></rule-filename>
+        <task-object-name>com.tsa.puridiom.poheader.tasks.TaxDefaultSetup</task-object-name>
+        <post-action></post-action>
+      </task>
+      <task synchronous="true" continue-on-failure="false" name="taxCode">
+        <rule-filename></rule-filename>
+        <task-object-name>com.tsa.puridiom.taxcode.tasks.TaxCodeRetrieveById</task-object-name>
+        <post-action></post-action>
+      </task>
+      <task synchronous="true" continue-on-failure="false" name="poHeader">
+        <rule-filename></rule-filename>
+        <task-object-name>com.tsa.puridiom.poheader.tasks.PoHeaderSetTax</task-object-name>
+        <post-action></post-action>
+      </task>
+    </activity>
+    <activity name="setcXmlFlag" synchronous="true" continue-on-failure="false">
+      <rule-filename>is-po-blanket-order.xml</rule-filename>
+      <task synchronous="true" continue-on-failure="false" name="poHeader">
+        <task-object-name>com.tsa.puridiom.po.tasks.BlanketAction</task-object-name>
+        <post-action></post-action>
+      </task>
+    </activity>
+    <activity synchronous="true" continue-on-failure="false" name="CreatePo">
+	    <task synchronous="true" continue-on-failure="false" name="setDefaultShippingTaxable">
+			<rule-filename>is-po-default-shipping.xml</rule-filename>
+			<task-object-name>com.tsa.puridiom.poheader.tasks.PoDefaultShippingTaxable</task-object-name>
+			<post-action></post-action>
+		</task>
+      <task synchronous="true" continue-on-failure="false" name="poHeader">
+        <rule-filename></rule-filename>
+        <task-object-name>com.tsa.puridiom.poheader.tasks.PoHeaderAdd</task-object-name>
+        <post-action></post-action>
+      </task>
+    </activity>
+    <activity synchronous="true" continue-on-failure="false" name="loadAcctDefaults">
+        <task synchronous="true" continue-on-failure="false" name="requisitionHeaderAllocateAmount">
+        <task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+        <process-filename>account-add-defaults.xml</process-filename>
+        <post-action></post-action>
+      </task>
+    </activity>
+  </activities>
+</process>

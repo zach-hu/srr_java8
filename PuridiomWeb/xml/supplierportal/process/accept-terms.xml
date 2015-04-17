@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="vendorRegisterUpdate" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="registerUserRetrieve">
+			<task synchronous="true" continue-on-failure="false" name="registerUser">
+				<task-object-name>com.tsa.puridiom.vendorregistration.authentication.tasks.RegisterUserGetFromCache</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="vendorAcceptTerms">
+			<rule-filename>is-registeruser-qualified.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="vendor">
+				<task-object-name>com.tsa.puridiom.vendor.tasks.VendorRetrieveById</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="vendor">			
+				<task-object-name>com.tsa.puridiom.vendor.tasks.VendorUpdateTermsAccepted</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="registerUser">
+				<task-object-name>com.tsa.puridiom.vendorregistration.tasks.RegisterUserSetValuesFromVendor</task-object-name>
+				<post-action>exitActivity</post-action>
+			</task>
+			<post-action>exitProcess</post-action>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="vendorRegisterAcceptTerms">
+			<task synchronous="true" continue-on-failure="false" name="vendorRegister">
+				<task-object-name>com.tsa.puridiom.vendorregister.tasks.VendorRegisterRetrieveByContactEmailAddr</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="vendorRegister">			
+				<task-object-name>com.tsa.puridiom.vendorregister.tasks.VendorRegisterUpdateTermsAccepted</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="registerUser">
+				<task-object-name>com.tsa.puridiom.vendorregistration.tasks.RegisterUserSetValuesFromVendorRegister</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="setUserInCache">
+				<task-object-name>com.tsa.puridiom.vendorregistration.authentication.tasks.SetRegisterUserInCache</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

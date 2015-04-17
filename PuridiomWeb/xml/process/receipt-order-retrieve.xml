@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="receipt-order-retrieve" connection-type="Connection-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="receiptOrderRetrieve">
+			<task synchronous="true" continue-on-failure="false" name="receiptRetrieveSetup">
+				<task-object-name>com.tsa.puridiom.receipt.tasks.ReceiptOrderRetrieveSetup</task-object-name>
+				<post-action></post-action>
+			</task>
+			<!-- No need to retrieve entire po information.  PoLine items are retrieved one at a time when updating receipt lines -->
+			<!--task synchronous="true" continue-on-failure="false" name="poRetrieve">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>po-retrieve.xml</process-filename>
+			</task-->
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="receiptOrderRetrieve">
+			<rule-filename check-for-false="true">is-poheader-icpoheader-empty.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="poHeader">
+				<task-object-name>com.tsa.puridiom.poheader.tasks.PoHeaderRetrieveById</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="poHeaderRetrieveSetup">
+				<task-object-name>com.tsa.puridiom.poheader.tasks.PoHeaderRetrieveSetup</task-object-name>
+				<post-action></post-action>
+			</task>
+			<!-- poLineList needed for receipt history -->
+			<task synchronous="true" continue-on-failure="false" name="poLineList">
+				<task-object-name>com.tsa.puridiom.poline.tasks.PoLineRetrieveByHeader</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="poVendorAddressRetrieve">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>po-vendor-address-retrieve.xml</process-filename>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="poShipToAddressRetrieve">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>po-shipto-address-retrieve.xml</process-filename>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="poHeaderDataSet">
+				<task-object-name>com.tsa.puridiom.poheader.tasks.PoHeaderDataSet</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+	</activities>
+</process>

@@ -1,0 +1,578 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<validation-rules>
+  <validations>
+	<save enabled="yes">
+    	<rule>
+	        <filename>has-accounts-ln.xml</filename>
+	        <alias>Has Accounts</alias>
+	        <msg>You must enter accounts for every line item!</msg>
+	        <severity>E</severity>
+	        <order>10</order>
+	        <enabled>Y</enabled>
+			<link><![CDATA[javascript: doSubmit('orders/po_items.jsp', 'PoLineRetrieveByHeader'); void(0);]]></link>
+      	</rule>
+      	<rule>
+<!-- Make sure there are accounts at the header. Using the same rule in requisitions.
+-->
+	        <filename>has-accounts.xml</filename>
+	        <alias>Has Accounts</alias>
+	        <msg>You must enter accounts on the Account Information page!</msg>
+	        <severity>E</severity>
+	        <order>10</order>
+	        <status></status>
+	        <enabled>N</enabled>
+			<link><![CDATA[javascript: doSubmit('orders/po_review.jsp', 'PoRetrieve'); void(0);]]></link>
+      	</rule>
+      	<rule>
+			<filename>has-items-check-or-is-po-blanket-order.xml</filename>
+	        <alias>Has Lines</alias>
+	        <msg>You must enter or select at least one item!</msg>
+	        <severity>E</severity>
+	        <order>20</order>
+	        <enabled>Y</enabled>
+			<link><![CDATA[javascript: doSubmit('orders/po_items.jsp', 'PoLineRetrieveByHeader'); void(0);]]></link>
+     	</rule>
+      	<rule>
+	        <filename>coda-account-validation.xml</filename>
+	        <alias>Coda Account Line</alias>
+	        <msg>Failed Coda validation for [@processedErrorText]!</msg>
+	        <severity>E</severity>
+	        <order>21</order>
+	        <enabled>Y</enabled>
+			<link><![CDATA[javascript: doSubmit('orders/po_review.jsp', 'PoRetrieve'); void(0);]]></link>
+      	</rule>
+      	<rule>
+	        <alias>DocumentValidation</alias>
+	        <msg>Document # is required for Resale Types/Parts!</msg>
+	        <severity>E</severity>
+	        <order>23</order>
+	        <enabled>Y</enabled>
+			<link><![CDATA[javascript: doSubmit('orders/po_general_info.jsp', 'PoHeaderRetrieveById'); void(0);]]></link>
+			<fieldname>PoHeader_udf5Code</fieldname>
+      	</rule>
+      	<rule>
+	        <filename>workorder-number-validation.xml</filename>
+	        <alias>WorkorderValidation</alias>
+	        <msg>Work Order # is required for Resale types/Outside Labor!</msg>
+	        <severity>E</severity>
+	        <order>24</order>
+	        <enabled>Y</enabled>
+			<link><![CDATA[javascript: doSubmit('orders/po_general_info.jsp', 'PoHeaderRetrieveById'); void(0);]]></link>
+			<fieldname>PoHeader_udf7Code</fieldname>
+      	</rule>
+      	<rule>
+			<filename>po-commodity-line-xml-not-empty.xml</filename>
+			<alias>Commodity XML</alias>
+			<msg>Every Line Item must have a valid Commodity code.</msg>
+			<severity>E</severity>
+			<order>25</order>
+			<enabled>Y</enabled>
+			<link><![CDATA[javascript: doSubmit('orders/po_items.jsp', 'PoLineRetrieveByHeader'); void(0);]]></link>
+		</rule>
+      	<rule>
+	        <filename>fdcs-workorder-validation.xml</filename>
+	        <alias>WorkOrderValidation</alias>
+	        <msg>Failed FDCS Work Order validation for [@fdcsWOErrorText]!</msg>
+	        <severity>E</severity>
+	        <order>27</order>
+	        <enabled>Y</enabled>
+			<link><![CDATA[javascript: doSubmit('orders/po_general_info.jsp', 'PoHeaderRetrieveById'); void(0);]]></link>
+      	</rule>
+      	<rule>
+	        <filename>fdcs-workorder-line-validation.xml</filename>
+	        <alias>FDCSLineValidation</alias>
+	        <msg>Failed FDCS line item validation for:[@fdcsWOLineErrorText]</msg>
+	        <severity>E</severity>
+	        <order>28</order>
+	        <enabled>N</enabled>
+			<link><![CDATA[javascript: doSubmit('orders/po_items.jsp', 'PoLineRetrieveByHeader'); void(0);]]></link>
+      	</rule>
+	<!-- every line item must have a description. Using the same rule in requisitions.
+-->
+	  	<rule>
+	        <filename>description.xml</filename>
+	        <alias>description</alias>
+	        <msg><![CDATA[ You must enter a Description for each line item! ]]></msg>
+	        <severity>E</severity>
+	        <status></status>
+	        <order>30</order>
+	        <enabled>N</enabled>
+			<fieldname>PoLine_description</fieldname>
+			<link><![CDATA[javascript: doSubmit('orders/po_items.jsp', 'PoLineRetrieveByHeader'); void(0);]]></link>
+	     </rule>
+	     <rule>
+	        <filename>po-po12-m.xml</filename>
+	        <alias>po12</alias>
+	        <msg>Employee # is Required!</msg>
+	        <severity>E</severity>
+	        <order>32</order>
+			<fieldname>PoHeader_udf12Code</fieldname>
+			<link><![CDATA[javascript: doSubmit('orders/po_general_info.jsp', 'PoHeaderRetrieveById'); void(0);]]></link>
+      	</rule>
+      	<rule>
+<!-- the quantity for each item must be greater than zero -->
+	        <filename>quantity.xml</filename>
+	        <alias>Quantity</alias>
+	        <msg><![CDATA[ The Quantity for each item must be greater than zero! ]]></msg>
+	        <severity>E</severity>
+	        <order>40</order>
+	        <status></status>
+	        <enabled>N</enabled>
+			<fieldname>PoLine_quantity</fieldname>
+			<link><![CDATA[javascript: doSubmit('orders/po_items.jsp', 'PoLineRetrieveByHeader'); void(0);]]></link>
+      	</rule>
+      	<rule>
+<!-- every item must have a valid unit of measure code. Using the same rule in requisitions.
+-->
+	        <filename>po-unit-of-measure.xml</filename>
+	        <alias>um</alias>
+	        <msg><![CDATA[ You must enter a valid UOM code for each item. ]]></msg>
+	        <severity>E</severity>
+	        <status></status>
+	        <order>50</order>
+	        <enabled>N</enabled>
+			<fieldname>PoLine_uomCode</fieldname>
+			<link><![CDATA[javascript: doSubmit('orders/po_items.jsp', 'PoLineRetrieveByHeader'); void(0);]]></link>
+	    </rule>
+	    <rule>
+<!-- each line item must have a valid commodity code or be an office max item
+-->
+	      	<filename>po-commodity-new.xml</filename>
+	        <alias>commodity</alias>
+	        <msg><![CDATA[ You must enter a valid Commodity code for each line item! ]]></msg>
+	        <severity>E</severity>
+	        <status></status>
+	        <order>60</order>
+	        <enabled>Y</enabled>
+	        <new>true</new>
+			<fieldname>PoLine_commodity</fieldname>
+			<link><![CDATA[javascript: doSubmit('orders/po_items.jsp', 'PoLineRetrieveByHeader'); void(0);]]></link>
+      	</rule>
+	    <rule>
+	      	<filename>po-commodity-equal-718300.xml</filename>
+	        <alias>commodity718300</alias>
+   	        <msg><![CDATA[ Commodity Code 718300 requires this to be a USEDPARTS Transaction. ]]></msg>
+	        <severity>E</severity>
+	        <status></status>
+	        <order>62</order>
+	        <enabled>Y</enabled>
+	        <new>true</new>
+			<fieldname>PoLine_commodity</fieldname>
+			<link><![CDATA[javascript: doSubmit('orders/po_items.jsp', 'PoLineRetrieveByHeader'); void(0);]]></link>
+      	</rule>
+	    <rule>
+	      	<filename>po-commodity-equal-718350.xml</filename>
+	        <alias>commodity718350</alias>
+   	        <msg><![CDATA[ Commodity Code 718300 requires this to be a USEDPARTS Transaction. ]]></msg>
+	        <severity>E</severity>
+	        <status></status>
+	        <order>64</order>
+	        <enabled>Y</enabled>
+	        <new>true</new>
+			<fieldname>PoLine_commodity</fieldname>
+			<link><![CDATA[javascript: doSubmit('orders/po_items.jsp', 'PoLineRetrieveByHeader'); void(0);]]></link>
+      	</rule>
+	    <rule>
+	      	<filename>po-transactiontype-usedparts-validation.xml</filename>
+	        <alias>USEDPARTSTransactions</alias>
+	        <msg><![CDATA[ USEDPARTS Transactions must contain only items with Commodity Code 718300 or 718350! ]]></msg>
+	        <severity>E</severity>
+	        <status></status>
+	        <order>66</order>
+	        <enabled>Y</enabled>
+	        <new>true</new>
+			<fieldname>PoLine_commodity</fieldname>
+			<link><![CDATA[javascript: doSubmit('orders/po_items.jsp', 'PoLineRetrieveByHeader'); void(0);]]></link>
+      	</rule>
+      	<rule>
+<!-- department code is required and it must be from the table. Using the same rule in requisitions.
+-->
+	        <filename>department.xml</filename>
+	        <alias>department</alias>
+	        <msg>You must enter or select a valid Department code!</msg>
+	        <severity>E</severity>
+	        <status></status>
+	        <order>100</order>
+	        <enabled>N</enabled>
+			<fieldname>PoHeader_departmentCode</fieldname>
+			<link><![CDATA[javascript: doSubmit('orders/po_general_info.jsp', 'PoHeaderRetrieveById'); void(0);]]></link>
+      	</rule>
+      	<rule>
+<!-- buyer code is required and it must be from the table -->
+	        <filename>buyer.xml</filename>
+	        <alias>buyer</alias>
+	        <msg><![CDATA[You must enter or select a valid Buyer code!]]></msg>
+	        <severity>E</severity>
+	        <status></status>
+	        <order>110</order>
+	        <enabled>N</enabled>
+			<process>HEADER_GENERAL_INFO</process>
+			<fieldname>PoHeader_buyerCode</fieldname>
+			<link><![CDATA[javascript: doSubmit('orders/po_general_info.jsp', 'PoHeaderRetrieveById'); void(0);]]></link>
+      	</rule>
+      	<rule>
+<!-- requisitioner code is required and it must be from the table. Using the same rule in requisitions.
+-->
+	        <filename>requisitioner.xml</filename>
+	        <alias>requisitioner</alias>
+	        <msg>You must enter or select a valid Requisitioner code!</msg>
+	        <severity>E</severity>
+	        <status></status>
+	        <order>120</order>
+	        <enabled>N</enabled>
+			<process>HEADER_GENERAL_INFO</process>
+			<fieldname>PoHeader_requisitionerCode</fieldname>
+			<link><![CDATA[javascript: doSubmit('orders/po_general_info.jsp', 'PoHeaderRetrieveById'); void(0);]]></link>
+      	</rule>
+      	<rule>
+<!-- Requisition Number is required unless Transaction Type = USEDPARTS -->
+	        <filename>po-requisitionicreqheader-validation.xml</filename>
+	        <alias>RequisitionNumber</alias>
+	        <msg>All Purchase Orders must be created from Requisitions except USEDPARTS!</msg>
+	        <severity>E</severity>
+	        <status></status>
+	        <order>120</order>
+	        <enabled>Y</enabled>
+			<link><![CDATA[javascript: doSubmit('orders/po_general_info.jsp', 'PoHeaderRetrieveById'); void(0);]]></link>
+      	</rule>
+      	<rule>
+<!-- supplier code is required and it must be from the table -->
+	        <filename>supplier.xml</filename>
+	        <alias>supplier</alias>
+	        <msg><![CDATA[You must enter or select a valid Supplier code!]]></msg>
+	        <severity>E</severity>
+	        <status></status>
+	        <order>200</order>
+	        <enabled>N</enabled>
+			<fieldname>PoHeader_vendorId</fieldname>
+			<link><![CDATA[javascript: doSubmit('orders/po_supplier.jsp', 'PoHeaderVendorRetrieveById'); void(0);]]></link>
+      	</rule>
+      	<rule>
+<!-- ship to cannot be empty, must be from table and must be marked as a ship to address
+-->
+	        <filename>ship-to.xml</filename>
+	        <alias>Ship To</alias>
+	        <msg>You must enter or select a valid Ship To code.</msg>
+	        <severity>E</severity>
+	        <status></status>
+	        <order>210</order>
+	        <enabled>N</enabled>
+			<fieldname>PoHeader_shipToCode</fieldname>
+			<link><![CDATA[javascript: doSubmit('orders/po_shipping.jsp', 'PoHeaderShipToRetrieveById'); void(0);]]></link>
+      	</rule>
+      	<rule>
+<!-- ship via code is required and it must be from table -->
+	        <filename>ship-via-po.xml</filename>
+	        <alias>shipvia</alias>
+	        <msg><![CDATA[ You must use a valid Ship Via code! ]]></msg>
+	        <severity>E</severity>
+	        <status></status>
+	        <order>220</order>
+	        <enabled>N</enabled>
+			<fieldname>PoHeader_shipViaCode</fieldname>
+			<link><![CDATA[javascript: doSubmit('orders/po_shipping.jsp', 'PoHeaderShipToRetrieveById'); void(0);]]></link>
+      	</rule>
+      	<rule>
+<!-- priority code is not required but must be from table if entered -->
+	        <filename>priority.xml</filename>
+	        <alias>Priority</alias>
+	        <msg><![CDATA[ You must use a valid Priority code! ]]></msg>
+	        <severity>E</severity>
+	        <status></status>
+	        <order>230</order>
+	        <enabled>N</enabled>
+			<fieldname>PoHeader_priorityCode</fieldname>
+			<link><![CDATA[javascript: doSubmit('orders/po_shipping.jsp', 'PoHeaderShipToRetrieveById'); void(0);]]></link>
+      	</rule>
+      	<rule>
+<!-- bill to cannot be empty, must be from table and must be a marked as a bill to address
+-->
+	        <filename>bill-to.xml</filename>
+	        <alias>Bill To</alias>
+	        <msg><![CDATA[You must enter a valid Bill To code!]]></msg>
+	        <severity>E</severity>
+	        <status></status>
+	        <order>300</order>
+	        <enabled>N</enabled>
+			<fieldname>PoHeader_billToCode</fieldname>
+			<link><![CDATA[javascript: doSubmit('orders/po_billing.jsp', 'PoHeaderBillToRetrieveById'); void(0);]]></link>
+      	</rule>
+      	<rule>
+<!-- terms code is required and it must be from the table -->
+	        <filename>payment-terms.xml</filename>
+	        <alias>Payment Terms</alias>
+	        <msg><![CDATA[ You must enter a valid Terms code. ]]></msg>
+	        <severity>E</severity>
+	        <status></status>
+	        <order>330</order>
+	        <enabled>N</enabled>
+			<fieldname>PoHeader_termsCode</fieldname>
+			<link><![CDATA[javascript: doSubmit('orders/po_billing.jsp', 'PoHeaderBillToRetrieveById'); void(0);]]></link>
+      	</rule>
+      	<rule>
+<!-- fob code is required and it must be from the table -->
+	        <filename>fob-code.xml</filename>
+	        <alias>FOB</alias>
+	        <msg><![CDATA[ You must enter a valid FOB code. ]]></msg>
+	        <severity>E</severity>
+	        <status></status>
+	        <order>340</order>
+	        <enabled>N</enabled>
+			<fieldname>PoHeader_fobCode</fieldname>
+			<link><![CDATA[javascript: doSubmit('orders/po_billing.jsp', 'PoHeaderBillToRetrieveById'); void(0);]]></link>
+      	</rule>
+      	<rule>
+<!-- must have a valid tax code at header or a tax amount > 0 for each item
+-->
+	        <filename>po-line-tax.xml</filename>
+	        <alias>Tax</alias>
+	        <msg><![CDATA[ You must enter a valid Tax code in the Totals section or a tax amount for each line item. ]]></msg>
+	        <severity>E</severity>
+	        <status></status>
+	        <order>400</order>
+	        <enabled>N</enabled>
+			<fieldname>PoHeader_taxAmount;PoHeader_taxPercent</fieldname>
+			<link><![CDATA[javascript: doSubmit('orders/po_totals.jsp', 'PoHeaderRetrieveById'); void(0);]]></link>
+      	</rule>
+		<rule>
+			<filename>account-ac01-mv.xml</filename>
+			<alias>AC01</alias>
+			<msg><![CDATA[ You must enter a valid GL Account code. ]]></msg>
+			<severity>E</severity>
+			<order>410</order>
+			<enabled>Y</enabled>
+			<fieldname>Account_fld1</fieldname>
+			<link><![CDATA[javascript: doSubmit('orders/po_review.jsp', 'PoRetrieve'); void(0);]]></link>
+		</rule>
+		<rule>
+			<filename>account-ac02-m.xml</filename>
+			<alias>AC02</alias>
+			<msg><![CDATA[ You must enter a Location. ]]></msg>
+			<severity>E</severity>
+			<order>420</order>
+			<enabled>Y</enabled>
+			<fieldname>Account_fld2</fieldname>
+			<link><![CDATA[javascript: doSubmit('orders/po_review.jsp', 'PoRetrieve'); void(0);]]></link>
+		</rule>
+		<rule>
+			<filename>account-ac03-mv.xml</filename>
+			<alias>AC03</alias>
+			<msg><![CDATA[ You must enter a valid Div / Dept code. ]]></msg>
+			<severity>E</severity>
+			<status></status>
+			<order>440</order>
+			<enabled>Y</enabled>
+			<fieldname>Account_fld3</fieldname>
+			<link><![CDATA[javascript: doSubmit('orders/po_review.jsp', 'PoRetrieve'); void(0);]]></link>
+		</rule>
+      	<rule>
+			<filename>account-ac04-mv.xml</filename>
+        	<alias>CODA</alias>
+        	<msg><![CDATA[ You must enter a valid Market Segment for this GL Account code. ]]></msg>
+        	<severity>E</severity>
+        	<status></status>
+        	<order>405</order>
+        	<enabled>Y</enabled>
+			<fieldname>Account_fld4</fieldname>
+			<link><![CDATA[javascript: doSubmit('orders/po_review.jsp', 'PoRetrieve'); void(0);]]></link>
+		</rule>
+      	<rule>
+			<filename>account-ac05-mv.xml</filename>
+        	<alias>SOS/Product</alias>
+        	<msg><![CDATA[ You must enter a valid SOS/Product Code for this GL Account code. ]]></msg>
+        	<severity>E</severity>
+        	<status></status>
+        	<order>410</order>
+        	<enabled>Y</enabled>
+			<fieldname>Account_fld5</fieldname>
+			<link><![CDATA[javascript: doSubmit('orders/po_review.jsp', 'PoRetrieve'); void(0);]]></link>
+		</rule>
+		<rule>
+			<filename>account-ac06-mv.xml</filename>
+        	<alias>MAKECODE</alias>
+        	<msg><![CDATA[ You must enter a valid Make Code for this GL Account code. ]]></msg>
+        	<severity>E</severity>
+        	<status></status>
+        	<order>415</order>
+        	<enabled>Y</enabled>
+			<fieldname>Account_fld6</fieldname>
+			<link><![CDATA[javascript: doSubmit('orders/po_review.jsp', 'PoRetrieve'); void(0);]]></link>
+		</rule>
+		<rule>
+			<filename>account-ac07-mv.xml</filename>
+        	<alias>SALES</alias>
+        	<msg><![CDATA[ You must enter a valid Sales Rep for this GL Account code. ]]></msg>
+        	<severity>E</severity>
+        	<status></status>
+        	<order>420</order>
+        	<enabled>Y</enabled>
+			<fieldname>Account_fld7</fieldname>
+			<link><![CDATA[javascript: doSubmit('orders/po_review.jsp', 'PoRetrieve'); void(0);]]></link>
+		</rule>
+		<rule>
+			<filename>account-ac08-mv.xml</filename>
+        	<alias>PROJECT</alias>
+        	<msg><![CDATA[ You must enter a valid Project for this GL Account code. ]]></msg>
+        	<severity>E</severity>
+        	<status></status>
+        	<order>425</order>
+        	<enabled>Y</enabled>
+			<fieldname>Account_fld8</fieldname>
+			<link><![CDATA[javascript: doSubmit('orders/po_review.jsp', 'PoRetrieve'); void(0);]]></link>
+		</rule>
+		<rule>
+			<filename>account-udf10-mv.xml</filename>
+			<alias>UDF10</alias>
+			<msg><![CDATA[ If Charge Code is 90,91 or 95, GL Account must be 139400 and Div/Dept must be CC. ]]></msg>
+			<severity>E</severity>
+			<status></status>
+			<order>400</order>
+			<enabled>Y</enabled>
+			<fieldname>Account_fld1</fieldname>
+			<link><![CDATA[javascript: doSubmit('orders/po_review.jsp', 'PoRetrieve'); void(0);]]></link>
+		</rule>
+		<rule>
+			<filename>xref-account-ac05-mv.xml</filename>
+        	<alias>XREFCOMBOFLD5</alias>
+        	<msg><![CDATA[ You must enter a valid GL Account code for this SOS/Product Code. ]]></msg>
+        	<severity>E</severity>
+        	<status></status>
+        	<order>430</order>
+        	<enabled>Y</enabled>
+			<fieldname>Account_fld5</fieldname>
+			<link><![CDATA[javascript: doSubmit('orders/po_review.jsp', 'PoRetrieve'); void(0);]]></link>
+		</rule>
+		<rule>
+			<filename>account-ln-ac01-mv.xml</filename>
+			<alias>LNAC01</alias>
+			<msg><![CDATA[ You must enter a valid GL Account code for all line item accounts. ]]></msg>
+			<severity>E</severity>
+			<order>440</order>
+			<enabled>Y</enabled>
+			<fieldname>Account_fld1</fieldname>
+			<link><![CDATA[javascript: doSubmit('orders/po_review.jsp', 'PoRetrieve'); void(0);]]></link>
+		</rule>
+		<rule>
+			<filename>account-ln-ac02-m.xml</filename>
+			<alias>LNAC02</alias>
+			<msg><![CDATA[ You must enter a Location for all line item accounts. ]]></msg>
+			<severity>E</severity>
+			<order>450</order>
+			<enabled>N</enabled>
+			<fieldname>Account_fld2</fieldname>
+			<link><![CDATA[javascript: doSubmit('orders/po_review.jsp', 'PoRetrieve'); void(0);]]></link>
+		</rule>
+		<rule>
+			<filename>account-ln-ac03-mv.xml</filename>
+			<alias>LNAC03</alias>
+			<msg><![CDATA[ You must enter a valid Div / Dept code for all line item accounts. ]]></msg>
+			<severity>E</severity>
+			<status></status>
+			<order>460</order>
+			<enabled>Y</enabled>
+			<fieldname>Account_fld3</fieldname>
+			<link><![CDATA[javascript: doSubmit('orders/po_review.jsp', 'PoRetrieve'); void(0);]]></link>
+		</rule>
+		<rule>
+			<filename>po-security-valid.xml</filename>
+        	<alias>POSECURITY</alias>
+        	<msg><![CDATA[ You must provide at least one Blanket Security Access on Blanket Security page. ]]></msg>
+        	<severity>E</severity>
+        	<status></status>
+        	<order>535</order>
+        	<enabled>Y</enabled>
+			<fieldname>PoSecurity_accessId</fieldname>
+			<link><![CDATA[javascript: doSubmit('orders/po_security.jsp', 'PoSecurityRetrieveBy'); void(0);]]></link>
+		</rule>
+		<rule>
+			<filename>po-shippingchargestransactiontype-v.xml</filename>
+			<alias>shippingchargestran</alias>
+			<msg>Only consumables may include Shipping Charges!</msg>
+			<severity>E</severity>
+			<order>540</order>
+			<enabled>Y</enabled>
+			<fieldname>PoHeader_shippingCharges</fieldname>
+			<link><![CDATA[javascript: doSubmit('orders/po_totals.jsp', 'PoHeaderRetrieveById'); void(0);]]></link>
+		</rule>
+		<rule>
+			<filename>po-otherchargestransactiontype-v.xml</filename>
+			<alias>otherchargestran</alias>
+			<msg>Only consumables may include Other Charges!</msg>
+			<severity>E</severity>
+			<order>545</order>
+			<enabled>Y</enabled>
+			<fieldname>PoHeader_otherCharges</fieldname>
+			<link><![CDATA[javascript: doSubmit('orders/po_totals.jsp', 'PoHeaderRetrieveById'); void(0);]]></link>
+		</rule>
+		<rule>
+			<filename>transactiontypeincluderesale.xml</filename>
+			<alias>othercharges</alias>
+			<msg>Transaction Type field includes RESALE%, You must enter a valid Resale Type!</msg>
+			<severity>E</severity>
+			<order>550</order>
+			<enabled>Y</enabled>
+			<fieldname>PoHeader_udf3Code</fieldname>
+			<link><![CDATA[javascript: doSubmit('orders/po_general_info.jsp', 'PoHeaderUpdate;PoHeaderRetrieveById'); void(0);]]></link>
+		</rule>
+		<rule>
+			<filename>transactiontypeincluderesaleresaletypeparts.xml</filename>
+			<alias>transactiontype</alias>
+			<msg>Transaction Type field includes RESALE and Resale Type field includes PARTS, You must enter a valid Document#!</msg>
+			<severity>E</severity>
+			<order>555</order>
+			<enabled>Y</enabled>
+			<fieldname>PoHeader_udf5Code</fieldname>
+			<link><![CDATA[javascript: doSubmit('orders/po_general_info.jsp', 'PoHeaderUpdate;PoHeaderRetrieveById'); void(0);]]></link>
+		</rule>
+		<rule>
+			<filename>chargecode-validation.xml</filename>
+			<alias>chargecode</alias>
+			<msg>Work Order # field is not Empty, You must enter a valid Charge Code!</msg>
+			<severity>E</severity>
+			<order>560</order>
+			<enabled>N</enabled>
+			<fieldname>PoHeader_udf10Code</fieldname>
+			<link><![CDATA[javascript: doSubmit('orders/po_general_info.jsp', 'PoHeaderUpdate;PoHeaderRetrieveById'); void(0);]]></link>
+		</rule>
+		<rule>
+			<filename>savingsreason-validation.xml</filename>
+			<alias>savingsreason</alias>
+			<msg>Savings $ field is more then zero, You must enter a valid Savings Reason!</msg>
+			<severity>E</severity>
+			<order>565</order>
+			<enabled>Y</enabled>
+			<fieldname>PoHeader_savingsReason</fieldname>
+			<link><![CDATA[javascript: doSubmit('orders/po_general_info.jsp', 'PoHeaderUpdate;PoHeaderRetrieveById'); void(0);]]></link>
+		</rule>
+		<rule>
+			<filename>po-workorder-validation-v.xml</filename>
+			<alias>work order</alias>
+			<msg>Transaction Type field is RESALE and Resale Type field includes OUTSIDE LABOR, You must enter a valid Work Order #!</msg>
+			<severity>E</severity>
+			<order>570</order>
+			<enabled>Y</enabled>
+			<fieldname>PoHeader_udf7Code</fieldname>
+			<link><![CDATA[javascript: doSubmit('orders/po_general_info.jsp', 'PoHeaderUpdate;PoHeaderRetrieveById'); void(0);]]></link>
+		</rule>
+		<rule>
+			<filename>chargecode-validation.xml</filename>
+			<alias>chargecode</alias>
+			<msg>Work Order # field is not Empty, You must enter a valid Charge Code!</msg>
+			<severity>E</severity>
+			<order>575</order>
+			<enabled>Y</enabled>
+			<fieldname>PoHeader_udf10Code</fieldname>
+			<link><![CDATA[javascript: doSubmit('orders/po_general_info.jsp', 'PoHeaderUpdate;PoHeaderRetrieveById'); void(0);]]></link>
+		</rule>
+		<rule>
+			<filename>po-vendorinsurancedefault-contracts.xml</filename>
+			<alias>validate_vendorinsurancedafault</alias>
+			<msg>The supplier's insurance levels are NOT satisfactory based on the Contract's Insurance Category Level requirements!</msg>
+			<severity>W</severity>
+			<order>60</order>
+			<enabled>Y</enabled>
+			<link><![CDATA[javascript: doSubmit('orders/po_supplier.jsp', 'PoHeaderRetrieveById'); void(0);]]></link>
+      </rule>
+    </save>
+  </validations>
+</validation-rules>

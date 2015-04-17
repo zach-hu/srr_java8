@@ -1,0 +1,54 @@
+<browse_user>
+	<columns>
+		<UserProfile_userId>
+			<label>user-userId</label>
+			<sort>A</sort>
+			<link><![CDATA[javascript: returnMe('#UserProfile_userId^'); void(0);]]></link>
+			<size>15</size>
+			<hidden-input>Y</hidden-input>
+		</UserProfile_userId>
+		<UserProfile_firstName>
+			<label>firstName</label>
+			<size>15</size>
+		</UserProfile_firstName>
+		<UserProfile_middleInit>
+			<label>brw-middleInitial</label>
+			<size>5</size>
+		</UserProfile_middleInit>
+		<UserProfile_lastName>
+			<label>lastName</label>
+			<size>15</size>
+		</UserProfile_lastName>
+		<UserProfile_mailId>
+			<label>emailAddress</label>
+			<size>40</size>
+			<hidden>Y</hidden>
+		</UserProfile_mailId>
+		<UserProfile_department>
+			<label>department</label>
+			<hidden-input>Y</hidden-input>
+			<size>20</size>
+		</UserProfile_department>
+		<UserProfile_displayName>
+			<userName>
+				<col>UserProfile_userId</col>
+			</userName>
+			<hidden>Y</hidden>
+			<hidden-input>Y</hidden-input>
+			<selectsql>N</selectsql>
+			<size>15</size>
+		</UserProfile_displayName>
+		<UserProfile_contractAmount>
+			<label>brw-contractAmt</label>
+			<hidden>N</hidden>
+			<hidden-input>Y</hidden-input>
+			<type>DollarDecimal</type>
+			<size>15</size>
+		</UserProfile_contractAmount>
+	</columns>
+<sqlfrom>UserProfile as UserProfile</sqlfrom>
+<sqlwhere><![CDATA[ UserProfile.status <> '03' AND (UserProfile.userId <> 'SYSADM') ]]></sqlwhere>
+<sqlorderby>UserProfile.lastName ASC</sqlorderby>
+<pagesize>15</pagesize>
+<title>User Browse</title>
+</browse_user>

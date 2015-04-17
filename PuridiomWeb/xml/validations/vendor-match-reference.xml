@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rule>
+	<clause type="NotEmpty">
+		<left-side>
+			<source>incomingRequestObjectMethod</source>
+			<object>vendor</object>
+			<name>getVendorAccount</name>
+		</left-side>
+	</clause>
+	<logical-operator>IFTHEN</logical-operator>
+	<clause type="StringCompare">
+		<left-side>
+			<source>incomingRequestObjectMethod</source>
+			<object>vendor</object>
+			<name>getApReference</name>
+		</left-side>
+		<operator>EQUALS</operator>
+		<right-side>
+			<source>incomingRequestObjectMethod</source>
+			<object>vendor</object>
+			<name>getVendorAccount</name>
+		</right-side>
+	</clause>
+</rule>

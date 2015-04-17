@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="cxmlBuilder" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="poRetrieve">
+			<task synchronous="true" continue-on-failure="false" name="invoiceRetrieve">
+				<rule-filename>is-organization-bly.xml;is-invoice.xml</rule-filename>
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>invoice-retrieve.xml</process-filename>
+				<post-action>exitActivity</post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="poRetrieve">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>po-retrieve.xml</process-filename>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="createMXPObjects">
+			<task synchronous="true" continue-on-failure="false" name="mxpRequestInvoiceSetValues">
+				<rule-filename>is-organization-bly.xml;is-invoice.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.mxp.tasks.MXPRequestInvoiceSetValues</task-object-name>
+				<post-action>exitActivity</post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="mxpRequestSetValues">
+				<task-object-name>com.tsa.puridiom.mxp.tasks.MXPRequestSetValues</task-object-name>
+				<post-action></post-action>
+			</task>
+			<!-- task synchronous="true" continue-on-failure="false" name="cXMLResponse">
+				<task-object-name>com.tsa.puridiom.cxml.tasks.CXMLResponseSetValues</task-object-name>
+				<post-action>exitActivity</post-action>
+			</task-->
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="writeMXPDocuments">
+			<rule-filename>valid-lines-MXPDocument.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="writeMXPDocuments">
+				<task-object-name>com.tsa.puridiom.mxp.tasks.MXPDocumentBuilder</task-object-name>
+			</task>
+		</activity>
+		<!-- activity synchronous="true" continue-on-failure="false" name="poHeaderHistory">
+        	<task synchronous="true" continue-on-failure="false" name="poHeaderHistory">
+        		<task-object-name>com.tsa.puridiom.poheader.history.tasks.PoHeaderHistory</task-object-name>
+      		</task>
+    	</activity>
+    	<activity synchronous="true" continue-on-failure="false" name="poHeaderUpdate">
+			<task synchronous="true" continue-on-failure="false" name="poHeader">
+				<task-object-name>com.tsa.puridiom.poheader.tasks.PoHeaderUpdate</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity-->
+	</activities>
+</process>

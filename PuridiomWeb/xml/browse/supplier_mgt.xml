@@ -1,0 +1,58 @@
+<browse_supplier_mgt>
+	<columns>
+		<Vendor_vendorId>
+			<label>brw-sup-supplier</label>
+			<sort>A</sort>
+			<size>15</size>
+			<distinct>Y</distinct>	
+			<link><![CDATA[javascript: viewSupplier('#Vendor_vendorId^'); void(0);]]></link>
+		</Vendor_vendorId>
+		<Vendor_vendorName>
+			<label>brw-sup-name</label>
+			<size>30</size>
+			<hidden-input>Y</hidden-input>
+		</Vendor_vendorName>
+		<VendorCommRel_id_commodityCode>
+			<label>commodity</label>
+			<selectsql>N</selectsql>
+			<allowfilter>Y</allowfilter>
+			<hidden>N</hidden>
+		</VendorCommRel_id_commodityCode>
+		<Vendor_vendorClass>
+			<label>brw-Class</label>
+			<size>10</size>
+			<hidden-input>Y</hidden-input>
+		</Vendor_vendorClass>
+		<Vendor_vendTerms>
+			<label>brw-terms</label>
+			<size>10</size>
+			<hidden-input>Y</hidden-input>
+		</Vendor_vendTerms>
+		<Vendor_status>
+			<label>brw-status</label>
+			<type>STATUS</type>
+			<size>5</size>
+		</Vendor_status>
+		<Vendor_shipVia>
+			<label>brw-shipVia</label>
+			<size>10</size>
+			<hidden-input>Y</hidden-input>
+		</Vendor_shipVia>
+		<Vendor_faxNumber>
+			<label>faxNumber</label>
+			<size>15</size>
+			<hidden-input>Y</hidden-input>
+		</Vendor_faxNumber>
+		<Vendor_taxCode>
+			<label>taxCode</label>
+			<size>10</size>
+			<hidden-input>Y</hidden-input>
+		</Vendor_taxCode>
+	</columns>
+<sqlfrom>Vendor as Vendor</sqlfrom>
+<sqlwhere><![CDATA[  ]]></sqlwhere>
+<sqlorderby>Vendor.vendorId ASC</sqlorderby>
+<pagesize>15</pagesize>
+<title>Supplier Browse</title>
+</browse_supplier_mgt>
+

@@ -1,0 +1,46 @@
+<r_vch_s_exp>
+  <columns>
+  		<InvoiceHeader_lastExtract>
+			<label>File Name</label>
+			<type>STRING</type>
+		</InvoiceHeader_lastExtract>
+		<InvoiceHeader_dateExported>
+			<label>Date Exported</label>
+			<type>DATE</type>
+		</InvoiceHeader_dateExported>
+		<InvoiceHeader_invoiceNumber>
+			<label>Invoice Number</label>
+			<type>STRING</type>
+		</InvoiceHeader_invoiceNumber>
+		<InvoiceHeader_vendorId>
+			<label>Vendor ID</label>
+			<type>STRING</type>
+		</InvoiceHeader_vendorId>
+		<InvoiceHeader_enteredBy>
+			<label>Entered By</label>
+			<type>STRING</type>
+		</InvoiceHeader_enteredBy>
+		<InvoiceHeader_vendorName>
+			<label>Vendor Name</label>
+			<type>STRING</type>
+		</InvoiceHeader_vendorName>
+		<InvoiceHeader_poNumber>
+			<label>Po Number</label>
+			<type>STRING</type>
+		</InvoiceHeader_poNumber>
+		<InvoiceHeader_dateEntered>
+			<label>Date Entered</label>
+			<type>DATE</type>
+		</InvoiceHeader_dateEntered>
+		<InvoiceHeader_invoiceTotal>
+			<label>Invoice Total</label>
+			<type>BIGDECIMAL</type>
+			<visible>0</visible>
+		</InvoiceHeader_invoiceTotal>
+   </columns>
+  <sqlfrom> InvoiceHeader as InvoiceHeader </sqlfrom>
+  <sqlwhere> <![CDATA[ ( InvoiceHeader.dateExported is not null  and InvoiceHeader.status >= '6010' ) ]]> </sqlwhere>
+  <sqlorderby>InvoiceHeader.dateExported ASC,InvoiceHeader.invoiceNumber ASC</sqlorderby>
+  <title>Daily Invoice Export</title>
+</r_vch_s_exp>
+

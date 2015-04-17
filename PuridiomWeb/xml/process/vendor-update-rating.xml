@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="VendorUpdateRating" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="updateVendorRating">
+			<task synchronous="true" continue-on-failure="false" name="Vendor_vendorRating">
+				<!-- get vendor rating and also sets Vendor_rated in incomingRequest based on cound of evaluated Pos-->
+				<task-object-name>com.tsa.puridiom.vendor.performance.tasks.GetVendorRating</task-object-name>
+				<post-action />
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="vendor">
+				<task-object-name>com.tsa.puridiom.vendor.tasks.VendorSetValues</task-object-name>
+				<post-action />
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="vendor">
+				<task-object-name>com.tsa.puridiom.vendor.tasks.VendorUpdate</task-object-name>
+				<post-action />
+			</task>
+		  </activity>
+	 </activities>
+</process>

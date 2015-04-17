@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="vendorregisterQualificationById" connection-type="Transaction-Required" ldap-connection-type="None">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="addQualifiedArContact">
+			<rule-filename>is-vendorregister-ar-contact-set.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="vendorArContactQualificationSetup">
+				<task-object-name>com.tsa.puridiom.vendorqualification.tasks.VendorAltContactQualificationSetupFromAr</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="existingContact">
+				<task-object-name>com.tsa.puridiom.contact.tasks.ContactRetrieveByEmailAddr</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="altContactAdd">
+				<rule-filename>is-existing-contact-empty.xml</rule-filename>
+    			<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+    			<process-filename>contact-add.xml</process-filename>
+    		</task>
+		</activity>
+	</activities>
+</process>

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<receipt>
+    <step process="HEADER_GENERAL_INFO" visible="1">
+        <link><![CDATA[receipts/rec_general_info.jsp]]></link>
+        <label>package_information</label>
+		<method>ReceiptLineRetrieveByHeader;ReceiptHeaderRetrieveById</method>
+    </step>
+    <step process="HEADER_ACCOUNTS" visible="0">
+        <link><![CDATA[receipts/rec_accounts.jsp]]></link>
+        <label>account_information</label>
+        <method>AccountRetrieveByLine</method>
+    </step>
+    <step process="HEADER_SUPPLIER" visible="1">
+        <link><![CDATA[receipts/rec_supplier.jsp]]></link>
+        <label>supplier_information</label>
+        <method>ReceiptLineRetrieveByHeader;ReceiptHeaderVendorRetrieveById</method>
+    </step>
+    <step process="SHOPCART" visible="0">
+        <link><![CDATA[receipts/rec_items.jsp]]></link>
+        <label>Items</label>
+		<method>ReceiptLineRetrieveByHeader</method>
+    </step>
+    <step process="STEP0" visible="1">
+        <link><![CDATA[receipts/rec_items_to_step_0.jsp]]></link>
+        <label>items</label>
+		<method>ReceiptLineRetrieveByHeader</method>
+    </step>
+    <step process="STEP1" visible="1">
+        <link><![CDATA[receipts/rec_items_to_step_1.jsp]]></link>
+        <label>inspection</label>
+		<method>ReceiptLineRetrieveByHeader</method>
+    </step>
+    <step process="STEP2" visible="1">
+        <link><![CDATA[receipts/rec_items_to_step_2.jsp]]></link>
+        <label>mark_tag</label>
+		<method>ReceiptLineRetrieveByHeader</method>
+    </step>
+    <step process="STEP3" visible="1">
+        <link><![CDATA[receipts/rec_items_to_step_3.jsp]]></link>
+        <label>delivery</label>
+		<method>ReceiptLineRetrieveByHeader</method>
+    </step>
+    <step process="HEADER_SHIPPING" visible="1">
+        <link><![CDATA[receipts/rec_shipping.jsp]]></link>
+        <label>shipping_information</label>
+        <method>ReceiptLineRetrieveByHeader;ReceiptHeaderShipToRetrieveById</method>
+    </step>
+    <step process="HEADER_NOTES" visible="1">
+        <link><![CDATA[receipts/rec_notes.jsp]]></link>
+        <label>comments</label>
+        <method>ReceiptLineRetrieveByHeader;DocCommentRetrieveByLine</method>
+    </step>
+	<step process="HEADER_ATTACHMENTS" visible="1">
+        <link><![CDATA[receipts/rec_attachment.jsp]]></link>
+        <label>attachments</label>
+        <method>ReceiptLineRetrieveByHeader;DocAttachmentRetrieveByHeader</method>
+    </step>
+    <step process="HEADER_REVIEW" visible="1">
+        <link><![CDATA[receipts/rec_review.jsp]]></link>
+        <label>review_finalize</label>
+        <method>ReceiptLineRetrieveByHeader;ReceiptRetrieve</method>
+    </step>
+    <step process="HEADER_VALIDATION" visible="1">
+        <link><![CDATA[receipts/rec_validation.jsp]]></link>
+        <label><![CDATA[validate]]></label>
+        <method>ReceiptLineRetrieveByHeader;ReceiptValidationRules</method>
+    </step>
+</receipt>

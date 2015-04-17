@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="typesListRetrieve" connection-type="None">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="typesListRetrieve">
+			<task synchronous="true" continue-on-failure="false" name="typesList">
+				<rule-filename>is-document-type.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.common.tasks.TypesListRetrieve</task-object-name>
+				<post-action>exitProcess</post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="typesList">
+				<rule-filename>is-status-type.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.common.tasks.StatusListRetrieve</task-object-name>
+				<post-action>exitProcess</post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="typesList">
+				<rule-filename>is-date-range-type.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.common.tasks.DateRangesListRetrieve</task-object-name>
+				<post-action>exitProcess</post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="typesList">
+				<rule-filename>is-general-status-type.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.common.tasks.GeneralStatusListRetrieve</task-object-name>
+				<post-action>exitProcess</post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="typesList">
+				<rule-filename>is-time-zone-type.xml</rule-filename>
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>time-zone-map-retrieve.xml</process-filename>
+				<post-action>exitProcess</post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="typesList">
+				<rule-filename>is-vsba-type.xml</rule-filename>
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>vsba-map-retrieve.xml</process-filename>
+				<post-action>exitProcess</post-action>
+			</task>
+		</activity>
+	</activities>
+</process>

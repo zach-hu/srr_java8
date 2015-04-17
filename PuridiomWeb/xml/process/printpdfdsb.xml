@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="PrintPdf" connection-type="Connection-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="printpdf">
+			<task synchronous="true" continue-on-failure="false" name="datasource">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>disbursement-retrieve.xml</process-filename>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="report">
+				<task-object-name>com.tsa.puridiom.formpdf.tasks.PrintDsbPdf</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

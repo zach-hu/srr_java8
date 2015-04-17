@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="rfqLineDelete" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="rfqLineDelete">
+			<rule-filename check-for-false="true">is-delete-by-header.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="rfqLineDeleteSetup">
+				<task-object-name>com.tsa.puridiom.rfqline.tasks.RfqLineDeleteSetup</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="rfqHeader">
+				<task-object-name>com.tsa.puridiom.rfqheader.tasks.RfqHeaderRetrieveById</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="rfqLine">
+				<task-object-name>com.tsa.puridiom.rfqline.tasks.RfqLineRetrieveById</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="billToDeleteByLine">
+				<task-object-name>com.tsa.puridiom.billto.tasks.BillToDeleteByLine</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="shipToDeleteByLine">
+				<task-object-name>com.tsa.puridiom.shipto.tasks.ShipToDeleteByLine</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="docCommentDelete">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>doccomment-delete-by-line.xml</process-filename>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="rfqBidDeleteByLine">
+				<task-object-name>com.tsa.puridiom.rfqbid.tasks.RfqBidDeleteByLine</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="rfqLineDeleteById">
+			<task synchronous="true" continue-on-failure="false" name="rfqLine">
+				<task-object-name>com.tsa.puridiom.rfqline.tasks.RfqLineDeleteById</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="updateReqStatus">
+				<task-object-name>com.tsa.puridiom.rfqline.tasks.RfqLineUpdateReqLineStatus</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="rfqLineRenumber">
+			<task synchronous="true" continue-on-failure="false" name="rfqLineRenumber">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>rfqline-renumber.xml</process-filename>
+			</task>
+		</activity>
+	</activities>
+</process>

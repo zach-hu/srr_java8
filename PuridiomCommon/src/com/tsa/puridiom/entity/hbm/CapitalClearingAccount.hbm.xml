@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping>
+
+<class
+    name="com.tsa.puridiom.entity.CapitalClearingAccount"
+    table="CAPITAL_CLEARING_ACCOUNT"
+>
+
+    <id
+        name="icHeader"
+        type="java.math.BigDecimal"
+        column="IC_HEADER"
+    >
+        <generator class="assigned" />
+    </id>
+    <property
+        name="entity"
+        type="java.lang.String"
+        column="ENTITY"
+        length="17"
+    />
+    <property
+        name="department"
+        type="java.lang.String"
+        column="DEPARTMENT"
+        length="17"
+    />
+    <property
+        name="account"
+        type="java.lang.String"
+        column="ACCOUNT"
+        length="17"
+    />
+
+</class>
+</hibernate-mapping>

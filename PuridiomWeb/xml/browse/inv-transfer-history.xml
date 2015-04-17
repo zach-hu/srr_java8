@@ -1,0 +1,60 @@
+<browse_inv_transfer_history>
+	<columns>
+		<RequisitionHeader_requisitionNumber>
+			<label>brw-requisitionNumber</label>
+			<link><![CDATA[javascript: viewReq('#RequisitionHeader_icReqHeader^','#RequisitionHeader_requisitionType^'); void(0);]]></link>
+			<size>10</size>
+		</RequisitionHeader_requisitionNumber>
+		<RequisitionHeader_requisitionDate>
+			<label>requisitionDate</label>
+			<sort>D</sort>
+			<size>10</size>
+			<type>DATE</type>
+		</RequisitionHeader_requisitionDate>
+		<RequisitionLine_lineNumber>
+			<label>lineNumber</label>
+			<size>5</size>
+		</RequisitionLine_lineNumber>
+		<RequisitionLine_quantity>
+			<label>quantity</label>
+			<type>QtyDecimal</type>
+			<size>10</size>
+		</RequisitionLine_quantity>
+		<ReceiptLine_receiptDate>
+			<label>receiptDate</label>
+			<type>DATE</type>
+			<size>10</size>
+		</ReceiptLine_receiptDate>
+		<ReceiptLine_qtyReceived>
+			<label>quantityReceived</label>
+			<type>QtyDecimal</type>
+			<size>10</size>
+		</ReceiptLine_qtyReceived>
+		<ReceiptLine_qtyReturned>
+			<label>returnQuantity</label>
+			<type>QtyDecimal</type>
+			<size>10</size>
+		</ReceiptLine_qtyReturned>
+		<ReceiptLine_qtyRejected>
+			<label>brw-rejected</label>
+			<type>QtyDecimal</type>
+			<size>10</size>
+		</ReceiptLine_qtyRejected>
+		<ReceiptLine_status>
+			<label>brw-status</label>
+			<type>STATUS</type>
+			<size>10</size>
+		</ReceiptLine_status>
+		<ReceiptLine_receivedBy>
+			<label>brw-receivedBy</label>
+			<type>USER-ID</type>
+			<size>15</size>
+		</ReceiptLine_receivedBy>
+	</columns>
+<sqlfrom>ReceiptHeader as ReceiptHeader, ReceiptLine as ReceiptLine, RequisitionHeader as RequisitionHeader, RequisitionLine as RequisitionLine</sqlfrom>
+<sqlwhere><![CDATA[ (ReceiptHeader.icRecHeader = ReceiptLine.icRecHeader) and 
+								(ReceiptHeader.refNumber = RequisitionHeader.requisitionNumber) and 
+								(RequisitionHeader.icReqHeader = RequisitionLine.icReqHeader) ]]></sqlwhere>
+<pagesize>15</pagesize>
+<title>Transfer Receipt History</title>
+</browse_inv_transfer_history>

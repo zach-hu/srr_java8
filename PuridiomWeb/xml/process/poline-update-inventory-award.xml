@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="poLineUpdateInventory" connection-type="Transaction-Required">
+	<rule-filename>is-poline-itemnumber-not-empty.xml;is-poline-receipt-required.xml</rule-filename>
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="orderUpdateInventory">
+			<!--task synchronous="true" continue-on-failure="false" name="updateQty">
+				<task-object-name>com.tsa.puridiom.poline.tasks.ReqLineRetrieveSetup</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="updateQty">
+				<task-object-name>com.tsa.puridiom.reqline.tasks.RequisitionLineRetrieveById</task-object-name>
+				<post-action></post-action>
+			</task-->
+			<task synchronous="true" continue-on-failure="false" name="InvItemRetrieveSetup">
+				<task-object-name>com.tsa.puridiom.poline.tasks.InvItemRetrieveSetup</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="invItem">
+				<task-object-name>com.tsa.puridiom.invitem.tasks.InvItemRetrieveById</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="InvLocationRetrieveSetup">
+				<task-object-name>com.tsa.puridiom.poline.tasks.InvLocationRetrieveSetup</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="invLocation">
+				<task-object-name>com.tsa.puridiom.invlocation.tasks.InvLocationRetrieveById</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="updateInventorySetup">
+				<task-object-name>com.tsa.puridiom.poline.tasks.PoLineSetAwardedInventoryQty</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="invLocation">
+				<rule-filename check-for-false="true">is-invlocation-empty.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.invlocation.tasks.InvLocationSetValues</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="invLocation">
+				<rule-filename check-for-false="true">is-invlocation-empty.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.invlocation.tasks.InvLocationUpdate</task-object-name>
+				<post-action></post-action>
+			</task>
+			<!--task synchronous="true" continue-on-failure="false" name="updateIntem">
+				<task-object-name>com.tsa.puridiom.invlocation.tasks.InvItemUpdatePoNumber</task-object-name>
+			</task-->
+		</activity>
+	</activities>
+</process>

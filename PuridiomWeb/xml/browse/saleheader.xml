@@ -1,0 +1,49 @@
+<browse_sale_header>
+	<columns>
+		<SaleHeader_icSaleHeader>
+			<label>brw-icSaleHeader</label>
+	        <hidden>Y</hidden>
+	        <visible>0</visible>
+		</SaleHeader_icSaleHeader> 
+		<SaleHeader_saleNumber>
+			<label>brw-surplus</label>
+			<link><![CDATA[javascript: viewSale('#SaleHeader_icSaleHeader^'); void(0);]]></link>
+			<size>15</size>
+		</SaleHeader_saleNumber>
+		<SaleHeader_amendment>
+			<label>brw-amendment</label>
+			<size>8</size>
+		</SaleHeader_amendment>
+		<SaleHeader_status>
+			<label>brw-status</label>
+			<type>STATUS</type>
+			<size>17</size>
+		</SaleHeader_status>
+		<SaleHeader_saleDate>
+			<label>brw-dateCreated</label>
+			<type>DATE</type>
+			<size>12</size>
+		</SaleHeader_saleDate>
+		<SaleHeader_description>
+			<label>description</label>
+			<!--trim>100</trim-->
+			<detail>Y</detail>
+			<size>120</size>
+		</SaleHeader_description>
+		<SaleHeader_contact>
+			<label>brw-contact</label>
+            <size>16</size>
+            <type>USER-ID</type>
+		</SaleHeader_contact>
+		<SaleHeader_owner>
+			<label>owner</label>
+			<hidden>Y</hidden>
+		</SaleHeader_owner>
+	</columns>
+<sqlfrom>SaleHeader as SaleHeader</sqlfrom>
+<sqlwhere><![CDATA[SaleHeader.saleNumber <> 'N/A'  ]]></sqlwhere>
+<sqlorderby>SaleHeader.saleDate DESC</sqlorderby>
+<pagesize>15</pagesize>
+<title>Surplus Browse</title>
+</browse_sale_header>
+

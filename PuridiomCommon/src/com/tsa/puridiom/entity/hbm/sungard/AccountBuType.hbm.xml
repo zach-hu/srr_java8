@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+<class name="com.tsa.puridiom.entity.sungard.AccountBuType" table="ACCOUNT_BU_TYPE">
+<id name="companyCode" type="java.lang.String" column="COMPANY_CODE">
+	<generator class="assigned" />
+</id>
+<!--property name="companyCode" column="COMPANY_CODE" type="java.lang.String" length="5"/-->
+<property name="acctNumber" column="ACCT_NUMBER" type="java.lang.String" length="15"/>
+<property name="buTypeCode" column="BU_TYPE_CODE" type="java.lang.String" length="5"/>
+<property name="reqFlag" column="REQ_FLAG" type="java.lang.String" length="1"/>
+</class>
+</hibernate-mapping>

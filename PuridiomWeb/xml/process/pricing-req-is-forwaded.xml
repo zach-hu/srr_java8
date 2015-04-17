@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="requisitionApprove" connection-type="Transaction-Required">
+  <rule-filename>is-pricing-req-forwaded.xml</rule-filename>
+  <activities>
+	<activity synchronous="true" continue-on-failure="false" name="buyerAssignment">
+	  <rule-filename>is-buyerassignment-process-active.xml</rule-filename>
+      <task synchronous="true" continue-on-failure="false" name="buyerAssignment">
+		  <rule-filename check-for-false="true">is-check-request.xml</rule-filename>
+        <task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+        <process-filename>buyer-assignment.xml</process-filename>
+      </task>
+    </activity>
+  <activity synchronous="true" continue-on-failure="false" name="history">
+    <task synchronous="true" continue-on-failure="false" name="requisitionHeaderHistory">
+      <task-object-name>com.tsa.puridiom.requisitionheader.history.tasks.RequisitionHeaderHistory</task-object-name>
+    </task>
+    <task synchronous="true" continue-on-failure="false" name="requisitionLineListHistory">
+      <task-object-name>com.tsa.puridiom.requisitionline.history.tasks.RequisitionLineListHistory</task-object-name>
+    </task>
+  </activity>
+   <activity name="headerAssignment" continue-on-failure="false" synchronous="true">
+    <rule-filename>is-buyerassignment-process-active.xml</rule-filename>
+    <task continue-on-failure="false" name="requisitionHeader" synchronous="true">
+		<rule-filename check-for-false="true">is-check-request.xml</rule-filename>
+      <task-object-name>com.tsa.puridiom.requisition.buyerassignment.tasks.RequisitionHeaderAssignment</task-object-name>
+    </task>
+  </activity>
+  </activities>
+</process>

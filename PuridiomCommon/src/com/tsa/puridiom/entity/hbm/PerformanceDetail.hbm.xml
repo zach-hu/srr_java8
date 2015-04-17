@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 2.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+<class name="com.tsa.puridiom.entity.PerformanceDetail" table="PERFORMANCE_DETAIL">
+<composite-id name="comp_id" class="com.tsa.puridiom.entity.PerformanceDetailPK">
+	<key-property name="evalNumber" column="EVAL_NUMBER" type="java.lang.String" length="2"/>
+	<key-property name="evalSection" column="EVAL_SECTION" type="java.lang.String" length="255"/>
+	<key-property name="icPoHeader" column="IC_PO_HEADER" type="java.math.BigDecimal" length="22"/>
+</composite-id>
+<property name="evaluator" column="EVALUATOR" type="java.lang.String" length="255"/>
+<property name="evalName" column="EVAL_NAME" type="java.lang.String" length="15"/>
+<property name="evalRating" column="EVAL_RATING" type="java.math.BigDecimal" length="2"/>
+<property name="evalDate" column="EVAL_DATE" type="java.util.Date" length="7"/>
+<property name="evalNotes" column="EVAL_NOTES" type="java.lang.String" length="2000"/>
+<property name="evalSequence" column="EVAL_SEQUENCE" type="java.math.BigDecimal" length="2"/>
+<property name="evalNotify" column="EVAL_NOTIFY" type="java.lang.String" length="1"/>
+<property name="evalWeight" column="EVAL_WEIGHT" type="java.math.BigDecimal" length="5"/>
+<property name="dateApproved" column="DATE_APPROVED" type="java.util.Date" length="7"/>
+<property name="status" column="STATUS" type="java.lang.String" length="5"/>
+<property name="internalNotes" column="INTERNAL_NOTES" type="java.lang.String" length="2000"/>
+<property name="dateAssigned" column="DATE_ASSIGNED" type="java.lang.String" length="255"/>
+<property name="timeAssigned" column="TIME_ASSIGNED" type="java.lang.String" length="255"/>
+
+</class>
+</hibernate-mapping>

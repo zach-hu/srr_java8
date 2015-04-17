@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping>
+
+<!--
+    Created by Middlegen Hibernate plugin
+
+    http://boss.bekk.no/boss/middlegen/
+    http://hibernate.sourceforge.net/
+-->
+
+<class
+    name="com.tsa.puridiom.entity.Report"
+    table="REPORT"
+>
+    <composite-id name="comp_id" class="com.tsa.puridiom.entity.ReportPK">
+        <key-property name="reportTitle" column="REPORT_TITLE"  type="java.lang.String"/>
+        <key-property name="reportModule" column="REPORT_MODULE"  type="java.lang.String"/>
+    </composite-id>
+    <property
+        name="reportDatawindow"
+        type="java.lang.String"
+        column="REPORT_DATAWINDOW"
+        length="60"
+    />
+    <property
+        name="reportDescription"
+        type="java.lang.String"
+        column="REPORT_DESCRIPTION"
+        length="255"
+    />
+    <property
+        name="reportPrompt"
+        type="java.lang.String"
+        column="REPORT_PROMPT"
+        length="1"
+    />
+	<property
+        name="reportXml"
+        type="java.lang.String"
+        column="REPORT_XML"
+        length="60"
+    />
+    <property
+        name="userAccessControl"
+        type="java.lang.String"
+        column="USER_ACCESS_CONTROL"
+        length="10"
+    />
+    <!-- associations -->
+
+</class>
+</hibernate-mapping>

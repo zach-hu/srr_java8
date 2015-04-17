@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="ivc-update-status" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="documentsRetrieve">
+			<task synchronous="true" continue-on-failure="false" name="documentsRetrieve">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>ivc-documents-retrieve.xml</process-filename>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="statusUpdateLine">
+			<task synchronous="true" continue-on-failure="false" name="setStatus">
+				<task-object-name>com.tsa.puridiom.invoiceline.tasks.InvoiceLineListSetStatus</task-object-name>
+				<post-action></post-action>
+			</task>
+<!--			<task synchronous="true" continue-on-failure="false" name="poLineList">-->
+<!--				<rule-filename check-for-false="true">is-receiptlinelist-empty.xml</rule-filename>-->
+<!--				<task-object-name>com.tsa.puridiom.receiptline.tasks.ReceiptLineListUpdate</task-object-name>-->
+<!--				<post-action></post-action>-->
+<!--			</task>-->
+			<task synchronous="true" continue-on-failure="false" name="poLineList">
+				<rule-filename check-for-false="true">is-polinelist-empty.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.poline.tasks.PoLineUpdateList</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="requisitionLineList">
+				<rule-filename check-for-false="true">is-requisitionlinelist-empty.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.requisitionline.tasks.RequisitionLineUpdateList</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="msrLineList">
+				<rule-filename check-for-false="true">is-msrlinelist-empty.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.requisitionline.tasks.MsrLineUpdateList</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="statusUpdateHeader">
+			<task synchronous="true" continue-on-failure="false" name="poHeaderStatusUpdate">
+				<rule-filename check-for-false="true">is-invoiceheader-empty.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.invoiceheader.tasks.InvoiceHeaderUpdateStatusByInvoiceLine</task-object-name>
+				<post-action></post-action>
+			</task>
+<!--			<task synchronous="true" continue-on-failure="false" name="poHeaderStatusUpdate">-->
+<!--				<rule-filename check-for-false="true">is-receiptheader-empty.xml</rule-filename>-->
+<!--				<task-object-name>com.tsa.puridiom.receiptheader.tasks.ReceiptHeaderUpdateStatusByReceiptLine</task-object-name>-->
+<!--				<post-action></post-action>-->
+<!--			</task>-->
+			<task synchronous="true" continue-on-failure="false" name="poHeaderStatusUpdate">
+				<rule-filename check-for-false="true">is-poheader-empty.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.poheader.tasks.PoHeaderUpdateStatusByPoLine</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="requisitionHeaderStatusUpdate">
+				<rule-filename check-for-false="true">is-requisitionheader-empty.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.requisitionheader.tasks.RequisitionHeaderUpdateStatusByRequisitionLine</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="msrHeaderStatusUpdate">
+				<rule-filename check-for-false="true">is-msrheader-empty.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.requisitionheader.tasks.MsrHeaderUpdateStatusByMsrLine</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+	</activities>
+</process>

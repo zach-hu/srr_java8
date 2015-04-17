@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="invItemAdd" connection-type="New-Transaction">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="updateRetrieve">
+			<task synchronous="true" continue-on-failure="false" name="receiptLine">
+				<task-object-name>com.tsa.puridiom.receiptline.tasks.ReceiptLineRetrieveById</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="poLineRetrieveSetup">
+				<task-object-name>com.tsa.puridiom.receiptline.tasks.ReceiptLinePoLineRetrieveSetup</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="poLine">
+				<task-object-name>com.tsa.puridiom.poline.tasks.PoLineRetrieveById</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="updateRetrieve">
+			<rule-filename>is-rec-from-transfer-request.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="requisitionLine">
+				<task-object-name>com.tsa.puridiom.requisitionline.tasks.RequisitionLineRetrieveById</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="addInvItem">
+			<task synchronous="true" continue-on-failure="false" name="invItem">
+				<task-object-name>com.tsa.puridiom.invitem.tasks.InvItemRetrieveById</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="invItemAddActivty">
+			<rule-filename>is-invitem-empty.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="invItemAdd">
+        		<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+        		<process-filename>invitem-add-from-kit-receipt.xml</process-filename>
+      		</task>
+		</activity>
+		  <activity synchronous="true" continue-on-failure="false" name="invLocationAdd">
+			<task synchronous="true" continue-on-failure="false" name="invBinLocationList">
+				<task-object-name>com.tsa.puridiom.invbinlocation.tasks.InvBinLocationAddKitList</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="invUpdateQuantitiesActivty">
+			<task synchronous="true" continue-on-failure="false" name="invUpdateQuantities">
+        		<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+        		<process-filename>invlocation-kit-update-quantities.xml</process-filename>
+      		</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="msrUpdates">
+	    	<rule-filename>is-inventoryflag-k.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="invLocationUpdateMsrSetup">
+				<task-object-name>com.tsa.puridiom.invlocation.tasks.InvLocationUpdateMsrSetup</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="msrLine">
+				<task-object-name>com.tsa.puridiom.requisitionline.tasks.RequisitionLineRetrieveByMsr</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="msrLineSetup">
+				<task-object-name>com.tsa.puridiom.requisitionline.tasks.MsrLineGetIcReqHeader</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="msrHeader">
+				<rule-filename check-for-false="true">is-msrheader-icreqheader-empty.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.requisitionheader.tasks.MsrHeaderRetrieveById</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="sendQueue">
+				<rule-filename check-for-false="true">is-msrline-empty.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.receiptline.tasks.ReceiptLineSetSendQueue</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="receiptLineSetUpdatedInventoryFlagActivty">
+			<task synchronous="true" continue-on-failure="false" name="receiptLine">
+				<task-object-name>com.tsa.puridiom.receiptline.tasks.ReceiptLineSetUpdatedInventoryFlag</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="historyUpdate">
+				<task-object-name>com.tsa.puridiom.invbinlocation.tasks.InvBinLocationListUpdateHistory</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="invReflectStatus">
+			<task synchronous="true" continue-on-failure="false" name="invReflectStatus">
+			<task-object-name>com.tsa.puridiom.inventory.tasks.InventoryReflectStatus</task-object-name>
+			<post-action></post-action>
+		</task>
+	</activity>
+	</activities>
+</process>

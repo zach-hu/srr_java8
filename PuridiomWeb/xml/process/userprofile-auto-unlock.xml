@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="userProfileAutoUnlock" connection-type="Transaction-Required" ldap-connection-type="None">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="userProfileAutoUnlock">
+			<task synchronous="true" continue-on-failure="false" name="retrieveUserProfile">
+				<rule-filename>is-userprofile-empty</rule-filename>
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>userprofile-retrieve-by-id.xml</process-filename>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="userProfile">
+				<task-object-name>com.tsa.puridiom.userprofile.tasks.UserProfileUnlockLogin</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="userProfile">
+				<task-object-name>com.tsa.puridiom.userprofile.tasks.UserProfileSetReviewProfile</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="userProfile">
+				<task-object-name>com.tsa.puridiom.userprofile.tasks.UserProfileSetDefaultPassword</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="userProfile">
+				<task-object-name>com.tsa.puridiom.userprofile.tasks.UserProfileUpdate</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="setUserInCache">
+				<task-object-name>com.tsa.puridiom.usermanager.tasks.UserManagerSetUserInCache</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="assetRetrieve" connection-type="Connection-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="assetRetrieve">
+			<task synchronous="true" continue-on-failure="false" name="check">
+				<task-object-name>com.tsa.puridiom.asset.tasks.AssetTagNumberCheck</task-object-name>
+			</task>
+
+			<task synchronous="true" continue-on-failure="false" name="check">
+				<task-object-name>com.tsa.puridiom.asset.serv.tasks.AssetDescriptionCheck</task-object-name>
+			</task>
+
+			<task synchronous="true" continue-on-failure="false" name="asset">
+				<task-object-name>com.tsa.puridiom.asset.tasks.AssetRetrieveById</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="assetLocationLastRetrieve">
+			<task synchronous="true" continue-on-failure="false" name="assetLocationLastSequence">
+				<task-object-name>com.tsa.puridiom.assetlocation.serv.tasks.AssetLocationLastSequence</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="check">
+				<task-object-name>com.tsa.puridiom.assetlocation.tasks.AssetLocationIdCheck</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="assetLocation">
+				<task-object-name>com.tsa.puridiom.assetlocation.tasks.AssetLocationRetrieveById</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="assetCostLastRetrieve">
+			<task synchronous="true" continue-on-failure="false" name="assetCostLastSequence">
+				<task-object-name>com.tsa.puridiom.assetcost.serv.tasks.AssetCostLastSequence</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="check">
+				<task-object-name>com.tsa.puridiom.assetcost.tasks.AssetCostIdCheck</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="assetCost">
+				<task-object-name>com.tsa.puridiom.assetcost.tasks.AssetCostRetrieveById</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="assetNoteLastRetrieve">
+			<task synchronous="true" continue-on-failure="false" name="assetNoteLastSequence">
+				<task-object-name>com.tsa.puridiom.assetnote.serv.tasks.AssetNoteLastSequence</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="check">
+				<task-object-name>com.tsa.puridiom.assetnote.tasks.AssetNoteIdCheck</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="assetNote">
+				<task-object-name>com.tsa.puridiom.assetnote.tasks.AssetNoteRetrieveById</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="assetServiceLastRetrieve">
+			<task synchronous="true" continue-on-failure="false" name="assetServiceLastSequence">
+				<task-object-name>com.tsa.puridiom.assetservice.serv.tasks.AssetServiceLastSequence</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="check">
+				<task-object-name>com.tsa.puridiom.assetservice.tasks.AssetServiceIdCheck</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="assetService">
+				<task-object-name>com.tsa.puridiom.assetservice.tasks.AssetServiceRetrieveById</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

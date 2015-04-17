@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="rfqVendorAddFromList" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="rfqVendorAdd">
+			<task synchronous="true" continue-on-failure="false" name="originalRfqVendorList">
+				<task-object-name>com.tsa.puridiom.rfqvendor.tasks.RfqVendorRetrieveVendorIdsByHeader</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="rfqVendorList">
+				<task-object-name>com.tsa.puridiom.rfqvendor.tasks.RfqVendorAddFromList</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

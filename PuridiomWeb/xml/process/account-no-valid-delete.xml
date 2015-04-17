@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="accountDeleteNoValid" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="accountDeleteNoActive">
+			<rule-filename>is-delete-accounts-no-active.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="accountDeleteNoActive">
+					<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+					<process-filename>account-delete-no-active.xml</process-filename>
+			</task>
+			<post-action>exitProcess</post-action>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="accountDeleteZeroDolar">
+			<rule-filename>is-delete-zero-dollar-accounts.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="accountDeleteZeroDolar">
+					<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+					<process-filename>account-deletete-zero-amount.xml</process-filename>
+			</task>
+		</activity>
+	</activities>
+</process>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="CancelPoLine" connection-type="Connection-Required">
+	<rule-filename>is-poline-from-req.xml</rule-filename>
+  <activities>
+    <activity synchronous="true" continue-on-failure="false" name="cancelLineCheckSetup">
+		<task synchronous="true" continue-on-failure="false" name="poItemsFromReq">
+		  <task-object-name>com.tsa.puridiom.poline.tasks.PoLineCancelCheckSetup</task-object-name>
+		  <post-action></post-action>
+		</task>
+    </activity>
+  </activities>
+</process>

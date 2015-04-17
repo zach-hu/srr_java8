@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="docCommentUpdate" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="docCommentAddFromStandard">
+			<task synchronous="true" continue-on-failure="false" name="stdComment">			
+				<task-object-name>com.tsa.puridiom.stdcomment.tasks.StdCommentRetrieveById</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="DocText_icText">
+				<task-object-name>com.tsa.puridiom.doctext.tasks.DocTextGetIcTextFromStdComment</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="docText">
+				<task-object-name>com.tsa.puridiom.doctext.tasks.DocTextRetrieveById</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="docComment">
+				<task-object-name>com.tsa.puridiom.doccomment.tasks.DocCommentSetValuesFromStdComment</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="docText">
+				<rule-filename>is-comment-public.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.doctext.tasks.DocTextSetValuesFromStdComment</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="DocComment_commentOrder">
+				<task-object-name>com.tsa.puridiom.doccomment.tasks.DocCommentGetNextSequence</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="docCommentAdd">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>doccomment-add.xml</process-filename>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="docTextAdd">
+ 				<rule-filename>is-comment-public.xml</rule-filename>
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>doctext-add.xml</process-filename>
+			</task>
+		</activity>
+	</activities>
+</process>

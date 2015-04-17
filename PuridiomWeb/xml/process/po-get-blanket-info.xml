@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="getBlanketInfo" connection-type="Connection-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="setup">
+			<task synchronous="true" continue-on-failure="false" name="poHeader">
+			    <rule-filename>is-poheader-empty.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.poheader.tasks.PoHeaderRetrieveById</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="blanketInfo">
+				<task-object-name>com.tsa.puridiom.po.tasks.PoCreateBlanketInfo</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="retrieveSupercedes">
+				<task-object-name>com.tsa.puridiom.poheader.tasks.PoHeaderRetrieveSupercedes</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="retrieveSupercededBy">
+				<task-object-name>com.tsa.puridiom.poheader.tasks.PoHeaderRetrieveSupercededBy</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="blanketInfo">
+			<task synchronous="true" continue-on-failure="false" name="blanketInfo">
+			    <rule-filename>is-po-blanket-order.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.po.tasks.PoSetBlanketInfo</task-object-name>
+				<post-action>exitActivity</post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="blanketInfo">
+				<task-object-name>com.tsa.puridiom.po.tasks.PoSetReleasetInfo</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+        <activity synchronous="true" continue-on-failure="false" name="setBlanketInfo">
+			<task synchronous="true" continue-on-failure="false" name="blanketInfo">
+				<task-object-name>com.tsa.puridiom.po.tasks.PoCountReleases</task-object-name>
+				<post-action></post-action>
+			</task>
+			<!-- <task synchronous="true" continue-on-failure="false" name="blanketInfo">
+				<task-object-name>com.tsa.puridiom.po.tasks.PoSetBlanketInfoTotalReleased</task-object-name>
+				<post-action></post-action>
+			</task> -->
+			<task synchronous="true" continue-on-failure="false" name="blanketInfo">
+			    <rule-filename>is-po-release-order.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.po.tasks.PoSetReleaseTotalInfo</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+	</activities>
+</process>

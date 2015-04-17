@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="vendorRegistration" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="vendorRegisterNewAlternateContact">
+			<task synchronous="true" continue-on-failure="false" name="registerUser">
+				<task-object-name>com.tsa.puridiom.supplierportal.registration.tasks.RegisterUserSetVendorId</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="vendorRegisterSetup">
+				<task-object-name>com.tsa.puridiom.supplierportal.registration.tasks.RegisterUserVendorRegisterAltSetup</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="vendorRegister">
+				<task-object-name>com.tsa.puridiom.vendorregister.tasks.VendorRegisterSetValues</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="vendorRegister">
+				<task-object-name>com.tsa.puridiom.vendorregister.tasks.VendorRegisterAdd</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

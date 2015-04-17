@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rule>
+	<clause type="AccountRule-Header-lookup" matchAll="true">
+    <sql>from VSRRXrefCombo where organizationID = '@fld1@' AND accountID = '@fld2@' AND projectID = '@fld3@' </sql>
+    <source>accounts</source>
+    <arguments>
+      <name>fld1</name>
+      <source>account</source>
+      <colName>getFld1</colName>
+    </arguments>
+  	<arguments>
+		<name>fld2</name>
+		<source>account</source>
+		<colName>getFld2</colName>
+	</arguments>
+  	<arguments>
+		<name>fld3</name>
+		<source>account</source>
+		<colName>getFld3</colName>
+	</arguments>
+  </clause>
+</rule>

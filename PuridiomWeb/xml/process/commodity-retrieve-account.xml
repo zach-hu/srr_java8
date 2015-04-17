@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="commodityRetrieveAccount" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="CommodityRetrieveById">
+			<task synchronous="true" continue-on-failure="false" name="commodity">
+				<task-object-name>com.tsa.puridiom.commodity.tasks.CommodityRetrieveById</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="requisitionLineRetrieveById">
+			<rule-filename>is-commodity-not-empty.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="accountCommoditySetup">
+				<task-object-name>com.tsa.puridiom.account.tasks.AccountCommoditySetup</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="accountCommodityList">
+				<task-object-name>com.tsa.puridiom.account.tasks.AccountRetrieveByLine</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

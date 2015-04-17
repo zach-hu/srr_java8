@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="poSetLastRevision" connection-type="New-Transaction">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="poSetLastRevision">
+			<task synchronous="true" continue-on-failure="false" name="PoSetupLastRevision">
+				<rule-filename></rule-filename>
+				<task-object-name>com.tsa.puridiom.poheader.tasks.PoSetupLastRevision</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="setIcHeader">
+				<rule-filename></rule-filename>
+				<task-object-name>com.tsa.puridiom.poheader.tasks.PoHeaderRetrieveByNumberAndReleaseAndRevision</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="maxRevision">
+				<task-object-name>com.tsa.puridiom.poheader.tasks.PoHeaderRetrieveMaxRevision</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="compareRevisions">
+				<task-object-name>com.tsa.puridiom.poheader.tasks.PoHeaderCompareRevisions</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="poLastRevisionUpdate">
+			<rule-filename>is-max-revision.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="poSetNewLastRevision">
+				<task-object-name>com.tsa.puridiom.poheader.tasks.PoSetNewLastRevisionAndUpdate</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="poHeader">
+				<task-object-name>com.tsa.puridiom.poheader.tasks.PoHeaderRetrieveById</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="poLineList">
+				<task-object-name>com.tsa.puridiom.poline.tasks.PoLineRetrieveByHeader</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="poLineSetAwardedByList">
+				<task-object-name>com.tsa.puridiom.poline.tasks.PoLineSetAwardedByList</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="poUpdateStatus">
+				<task-object-name>com.tsa.puridiom.poheader.tasks.PoHeaderSetStatusByLineList</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="poLineList">
+				<task-object-name>com.tsa.puridiom.poline.tasks.PoLineUpdateEntityList</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="poHeader">
+				<task-object-name>com.tsa.puridiom.poheader.tasks.PoHeaderUpdate</task-object-name>
+			</task>
+<!--			<task synchronous="true" continue-on-failure="false" name="poLineSetNewLastRevisionAndUpdate">-->
+<!--				<task-object-name>com.tsa.puridiom.poline.tasks.PoLineSetNewLastRevisionAndUpdate</task-object-name>-->
+<!--			</task>-->
+			<task synchronous="true" continue-on-failure="false" name="poLineSetNewLastRevision">
+				<rule-filename>is-not-first-revision.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.po.tasks.PoSetNewLastRevision</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="updateReqStatus">
+				<task-object-name>com.tsa.puridiom.poline.tasks.PoLineUpdateReqLineStatusByList</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="updateReqStatus">
+				<task-object-name>com.tsa.puridiom.poline.tasks.PoLineUpdateRfqLineStatusByList</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="poCreateHistory">
+			<task synchronous="true" continue-on-failure="false" name="historyAdd">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>history-add.xml</process-filename>
+			</task>
+		</activity>
+	</activities>
+</process>

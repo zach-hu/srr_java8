@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="PerformanceDetailSetValues" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="setValues">
+			<task synchronous="true" continue-on-failure="false" name="performanceDetailList">
+				<task-object-name>com.tsa.puridiom.vendor.performance.tasks.PerformanceDetailLoadFromRequest</task-object-name>
+				<post-action />
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="ratingsList">
+				<task-object-name>com.tsa.puridiom.vendor.performance.tasks.PerformanceDetailListUpdate</task-object-name>
+				<post-action />
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="PoHeader_vendorRating">
+				<task-object-name>com.tsa.puridiom.vendor.performance.tasks.RatingByOrder</task-object-name>
+				<post-action />
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="PoHeader_vendorRating">
+				<task-object-name>com.tsa.puridiom.vendor.performance.tasks.UpdateOrderVendorRating</task-object-name>
+				<post-action />
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="updateVendorRating">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>vendor-update-rating.xml</process-filename>
+			</task>
+		  </activity>
+	 </activities>
+</process>

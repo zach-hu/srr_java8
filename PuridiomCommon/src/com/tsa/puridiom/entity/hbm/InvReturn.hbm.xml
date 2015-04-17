@@ -1,0 +1,115 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping>
+
+<!--
+    Created by Middlegen Hibernate plugin
+
+    http://boss.bekk.no/boss/middlegen/
+    http://hibernate.sourceforge.net/
+-->
+
+<class
+    name="com.tsa.puridiom.entity.InvReturn"
+    table="INV_RETURN"
+>
+    <id
+        name="icInvReturn"
+        type="java.math.BigDecimal"
+        column="IC_INV_RETURN"
+    >
+        <generator class="assigned" />
+    </id>
+    <property
+        name="requisitionNumber"
+        type="java.lang.String"
+        column="REQUISITION_NUMBER"
+        length="20"
+    />
+    <property
+        name="disbNumber"
+        type="java.lang.String"
+        column="DISB_NUMBER"
+        length="20"
+    />
+    <property
+        name="lineNo"
+        type="java.math.BigDecimal"
+        column="LINE_NO"
+        length="8"
+    />
+    <property
+        name="itemNumber"
+        type="java.lang.String"
+        column="ITEM_NUMBER"
+        length="30"
+    />
+    <property
+        name="icReqHeader"
+        type="java.math.BigDecimal"
+        column="IC_REQ_HEADER"
+        length="22"
+    />
+    <property
+        name="icReqLine"
+        type="java.math.BigDecimal"
+        column="IC_REQ_LINE"
+        length="22"
+    />
+    <property
+        name="icDsbHeader"
+        type="java.math.BigDecimal"
+        column="IC_DSB_HEADER"
+        length="22"
+    />
+    <property
+        name="icDsbLine"
+        type="java.math.BigDecimal"
+        column="IC_DSB_LINE"
+        length="22"
+    />
+    <property
+        name="icBin"
+        type="java.math.BigDecimal"
+        column="IC_BIN"
+        length="22"
+    />
+    <property
+        name="recBy"
+        type="java.lang.String"
+        column="REC_BY"
+        length="15"
+    />
+    <property
+        name="recDate"
+        type="java.sql.Timestamp"
+        column="REC_DATE"
+        length="7"
+    />
+    <property
+        name="recAmount"
+        type="java.math.BigDecimal"
+        column="REC_AMOUNT"
+        length="15"
+    />
+    <property
+        name="owner"
+        type="java.lang.String"
+        column="OWNER"
+        length="15"
+    />
+
+    <property
+        name="duomQty"
+        type="java.math.BigDecimal"
+        column="DUOM_QTY"
+        length="15"
+    />
+
+    <!-- associations -->
+
+</class>
+</hibernate-mapping>

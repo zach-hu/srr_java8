@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="bomComponentUpdate" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="updateBomComponent">
+			<task synchronous="true" continue-on-failure="false" name="bomComponent">
+				<task-object-name>com.tsa.puridiom.bomcomponent.tasks.BomComponentRetrieveById</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="bomComponent">
+				<task-object-name>com.tsa.puridiom.bomcomponent.tasks.BomComponentSetValues</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="bomComponent">
+				<task-object-name>com.tsa.puridiom.bomcomponent.tasks.BomComponentUpdate</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+	</activities>
+</process>

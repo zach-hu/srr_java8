@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="requisitionLineUpdateReceiptOptions" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="requisitionLineUpdateReceiptOptions">
+			<task synchronous="true" continue-on-failure="false" name="requisitionLineUpdateReceiptOptions">			
+				<task-object-name>com.tsa.puridiom.requisitionline.tasks.RequisitionLineSetValues</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="requisitionLineUpdate">			
+				<task-object-name>com.tsa.puridiom.requisitionline.tasks.RequisitionLineUpdate</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+	</activities>
+</process>

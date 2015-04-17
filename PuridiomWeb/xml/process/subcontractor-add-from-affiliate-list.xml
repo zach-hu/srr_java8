@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="vendorAffiliateAddFromList" connection-type="New-Transaction">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="vendorAffiliateAdd">
+			<!--task synchronous="true" continue-on-failure="false" name="originalVendorAffiliateList">
+				<task-object-name>com.tsa.puridiom.vendoraffiliate.tasks.VendorAffiliateRetrieveByVendorId</task-object-name>
+			</task-->
+			<task synchronous="true" continue-on-failure="false" name="vendorAffiliateList">
+				<task-object-name>com.tsa.puridiom.po.subcontractor.tasks.SubContractorAddFromAffiliateList</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

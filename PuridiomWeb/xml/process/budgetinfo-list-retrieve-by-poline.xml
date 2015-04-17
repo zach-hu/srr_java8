@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="PoBudgetInfoList" connection-type="Connection-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="retrieveBudgetInfoList">
+			<task synchronous="true" continue-on-failure="false" name="retrieveBudgetAuditIcLine">
+				<task-object-name>com.tsa.puridiom.budget.tasks.BudgetAuditRetrieveIcLineFromPoLine</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="budgetAudit">
+				<task-object-name>com.tsa.puridiom.budgetaudit.tasks.BudgetAuditRetrieveBy</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="retrieveBudgetCenterBudgetId">
+				<task-object-name>com.tsa.puridiom.budget.tasks.BudgetCenterRetrieveIdFromBudgetAudit</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="budgetInfoList">
+				<task-object-name>com.tsa.puridiom.budgetcenter.tasks.BudgetCenterRetrieveByIdList</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+	</activities>
+</process>

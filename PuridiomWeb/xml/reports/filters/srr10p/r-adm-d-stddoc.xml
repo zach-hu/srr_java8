@@ -1,0 +1,44 @@
+<r-adm-d-stddoc>
+  <columns>
+		<StdComment_commentId>
+			<label>commentid</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</StdComment_commentId>
+		<StdComment_commentTitle>
+			<label>brw-title</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</StdComment_commentTitle>
+		<StdComment_commentPrint>
+			<label>print</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</StdComment_commentPrint>
+		<StdComment_commentPublic>
+			<label>public</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</StdComment_commentPublic>
+		<StdComment_commentBold>
+			<label>bold</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</StdComment_commentBold>
+		<StdComment_status>
+			<label>status</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</StdComment_status>
+		<DocText_stdText>
+			<label>brw-comment</label>
+			<type>STRING</type>
+			<visible>0</visible>
+		</DocText_stdText>
+	</columns>
+	<sqlfrom>StdComment as StdComment, DocText as DocText</sqlfrom>
+	<sqlwhere><![CDATA[ (StdComment.icText = DocText.icText) and (StdComment.status <> '03') ]]></sqlwhere>
+	<sqlorderby>StdComment.commentId ASC</sqlorderby>
+ 	<title>Standart Comments Report</title>
+</r-adm-d-stddoc>
+

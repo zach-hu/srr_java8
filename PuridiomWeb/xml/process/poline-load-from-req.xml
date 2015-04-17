@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="PoLineLoadfromReq" connection-type="Transaction-Required">
+  <activities>
+    <activity synchronous="true" continue-on-failure="false" name="PoLineSetup">
+      <task synchronous="true" continue-on-failure="false" name="poLineSetup">
+        <task-object-name>com.tsa.puridiom.poline.tasks.PoLineSetup</task-object-name>
+      </task>
+      <task synchronous="true" continue-on-failure="false" name="poLineFromReqSetup">
+        <task-object-name>com.tsa.puridiom.poline.tasks.PoLineFromReqSetup</task-object-name>
+      </task>
+      <task synchronous="true" continue-on-failure="false" name="poLineFromReqSetupUmConv">
+        <task-object-name>com.tsa.puridiom.poline.tasks.PoLineFromReqSetupUmConv</task-object-name>
+      </task>
+      <task synchronous="true" continue-on-failure="false" name="poLineSetupUmFactor">
+        <task-object-name>com.tsa.puridiom.poline.tasks.PoLineSetupUmFactor</task-object-name>
+      </task>
+      <task synchronous="true" continue-on-failure="false" name="PoLine_lineNumber">
+        <task-object-name>com.tsa.puridiom.poline.tasks.PoLineGetNewLineNumber</task-object-name>
+      </task>
+      <!--sets defaults values -->
+      <task synchronous="true" continue-on-failure="false" name="poLine">
+        <task-object-name>com.tsa.puridiom.poline.tasks.PoLineSetValues</task-object-name>
+      </task>
+      <task synchronous="true" continue-on-failure="false" name="loadcomments-accounts-from-req-po">
+        <task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+        <process-filename>poline-saveas-from.xml</process-filename>
+      </task>
+      <task synchronous="true" continue-on-failure="false" name="poLine">
+        <task-object-name>com.tsa.puridiom.poline.tasks.PoLineAdd</task-object-name>
+        <post-action></post-action>
+      </task>
+      <task synchronous="true" continue-on-failure="false" name="requisitionLineStatusUpdate">
+        <rule-filename>is-poheader-ponumber-set.xml</rule-filename>
+        <task-object-name>com.tsa.puridiom.poline.tasks.PoLineUpdateReqLineStatus</task-object-name>
+        <post-action></post-action>
+      </task>
+    </activity>
+  </activities>
+</process>

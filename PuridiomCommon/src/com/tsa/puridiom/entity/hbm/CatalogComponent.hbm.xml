@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+    
+<hibernate-mapping>
+
+<!-- 
+    Created by Middlegen Hibernate plugin
+
+    http://boss.bekk.no/boss/middlegen/
+    http://hibernate.sourceforge.net/
+-->
+
+<class 
+    name="com.tsa.puridiom.entity.CatalogComponent" 
+    table="CATALOG_COMPONENT"
+>
+    <composite-id name="comp_id" class="com.tsa.puridiom.entity.CatalogComponentPK">
+        <key-property name="catalogId" column="CATALOG_ID" type="java.lang.String"/>
+        <key-property name="itemNumber" column="ITEM_NUMBER" type="java.lang.String"/>
+        <key-property name="sequence" column="SEQUENCE_NUM" type="java.math.BigDecimal"/>
+    </composite-id>    
+    <property
+        name="optionId"
+        type="java.lang.String"
+        column="OPTION_ID"
+        length="15"
+    />
+    <property
+        name="legendCode"
+        type="java.lang.String"
+        column="LEGEND_CODE"
+        length="15"
+    />
+    <property
+        name="actionCode"
+        type="java.lang.String"
+        column="ACTION_CODE"
+        length="1"
+    />
+    <property
+        name="optionPrice"
+        type="java.math.BigDecimal"
+        column="OPTION_PRICE"
+        length="15"
+    />
+    <property
+        name="optionDecript"
+        type="java.lang.String"
+        column="OPTION_DECRIPT"
+        length="255"
+    />
+
+    <!-- associations -->
+</class>
+</hibernate-mapping>

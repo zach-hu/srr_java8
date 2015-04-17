@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+    
+<hibernate-mapping>
+
+<!-- 
+    Created by Middlegen Hibernate plugin
+
+    http://boss.bekk.no/boss/middlegen/
+    http://hibernate.sourceforge.net/
+-->
+
+<class 
+    name="com.tsa.puridiom.entity.InvCatalog" 
+    table="INV_CATALOG"
+>
+    <id
+        name="invCatid"
+        type="java.lang.String"
+        column="INV_CATID"
+    >
+        <generator class="assigned" />
+    </id>
+    <property
+        name="description"
+        type="java.lang.String"
+        column="DESCRIPTION"
+        length="255"
+    />
+    <property
+        name="dateEntered"
+        type="java.sql.Timestamp"
+        column="DATE_ENTERED"
+        length="7"
+    />
+    <property
+        name="dateExpires"
+        type="java.sql.Timestamp"
+        column="DATE_EXPIRES"
+        length="7"
+    />
+    <property
+        name="status"
+        type="java.lang.String"
+        column="STATUS"
+        length="4"
+    />
+    <property
+        name="owner"
+        type="java.lang.String"
+        column="OWNER"
+        length="15"
+    />
+
+    <!-- associations -->
+    <!-- bi-directional one-to-many association to InvCatreq -->
+</class>
+</hibernate-mapping>

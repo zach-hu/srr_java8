@@ -1,0 +1,72 @@
+<r-vch-d-pyd>
+  <columns>
+		<InvoiceHeader_invoiceNumber>
+			<label>Invoice Number</label>
+			<type>STRING</type>
+		</InvoiceHeader_invoiceNumber>
+		<InvoiceHeader_status>
+			<label>Invoice Status</label>
+			<type>STRING</type>
+		</InvoiceHeader_status>
+		<InvoiceHeader_poNumber>
+			<label>Order Number</label>
+			<type>STRING</type>
+		</InvoiceHeader_poNumber>
+		<InvoiceHeader_invoiceDate>
+			<label>Invoice Date</label>
+			<type>DATE</type>
+		</InvoiceHeader_invoiceDate>
+		<InvoiceHeader_vendorName>
+			<label>Supplier Name</label>
+			<type>STRING</type>
+		</InvoiceHeader_vendorName>
+		<InvoiceHeader_vendorId>
+			<label>Supplier Code</label>
+			<type>STRING</type>
+		</InvoiceHeader_vendorId>
+		<InvoiceHeader_departmentCode>
+			<label>Dept</label>
+			<type>STRING</type>
+		</InvoiceHeader_departmentCode>
+		<PoLine_lineNumber>
+			<label>PO Line#</label>
+			<type>BIGDECIMAL</type>
+			<visible>0</visible>
+		</PoLine_lineNumber>
+		<PoLine_quantity>
+			<label>Quantity</label>
+			<type>BIGDECIMAL</type>
+			<visible>0</visible>
+		</PoLine_quantity>
+		<InvoiceLine_quantity>
+			<label>Quantity</label>
+			<type>BIGDECIMAL</type>
+			<visible>0</visible>
+		</InvoiceLine_quantity>
+		<PoLine_unitPrice>
+			<label>PO Unit Price</label>
+			<type>BIGDECIMAL</type>
+			<visible>0</visible>
+		</PoLine_unitPrice>
+		<PoLine_itemNumber>
+			<label>Item Number</label>
+			<type>STRING</type>
+			<visible>0</visible>
+		</PoLine_itemNumber>
+		<InvoiceLine_unitPrice>
+			<label>INV Unit Price</label>
+			<type>BIGDECIMAL</type>
+			<visible>0</visible>
+		</InvoiceLine_unitPrice>
+		<InvoiceHeader_currencyCode>
+			<label>Currency Code</label>
+			<type>STRING</type>
+			<visible>0</visible>
+		</InvoiceHeader_currencyCode>
+	</columns>
+  <sqlfrom>InvoiceHeader as InvoiceHeader, PoLine as PoLine, InvoiceLine as InvoiceLine</sqlfrom>
+  <sqlwhere><![CDATA[(InvoiceHeader.icIvcHeader = InvoiceLine.icIvcHeader) and ( InvoiceLine.icPoLine = PoLine.icPoLine ) and (PoLine.unitPrice <> InvoiceLine.unitPrice) and (InvoiceHeader.invoiceNumber <> 'Enter Invoice')]]></sqlwhere>
+  <sqlorderby>InvoiceHeader.invoiceNumber ASC</sqlorderby>
+  <title>Invoice Price Exception Report</title>
+</r-vch-d-pyd>
+

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="AssetLocation_sequenceNo" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="assetLocationAdd">
+			<task synchronous="true" continue-on-failure="false" name="assetLocationCreateSetup">
+				<task-object-name>com.tsa.puridiom.assetlocation.serv.tasks.AssetLocationCreateSetup</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="assetLocationCheckNulls">
+				<task-object-name>com.tsa.puridiom.assetlocation.serv.tasks.AssetLocationCheckNulls</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="AssetLocation_sequenceNo">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>assetlocation-next-sequence.xml</process-filename>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="assetLocation">
+				<task-object-name>com.tsa.puridiom.assetlocation.tasks.AssetLocationSetValues</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="assetLocation">
+				<task-object-name>com.tsa.puridiom.assetlocation.tasks.AssetLocationAdd</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+	</activities>
+</process>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="xrefComboRetrieveBy" connection-type="Connection-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="xrefComboRetrieveBy">
+			<task synchronous="true" continue-on-failure="false" name="xrefCombo">
+				<task-object-name>com.tsa.puridiom.xrefcombo.tasks.XrefComboCheckId</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="xrefCombo">
+				<task-object-name>com.tsa.puridiom.xrefcombo.tasks.XrefComboRetrieveById</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

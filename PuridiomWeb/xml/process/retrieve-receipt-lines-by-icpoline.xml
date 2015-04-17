@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="ReceiptsInProgress" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="receiptHeaderRetrieveByPoLine">
+			<task synchronous="true" continue-on-failure="false" name="receiptsList">
+				<task-object-name>com.tsa.puridiom.receiptline.tasks.ReceiptLineRetrieveByPoLineNotRejected</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

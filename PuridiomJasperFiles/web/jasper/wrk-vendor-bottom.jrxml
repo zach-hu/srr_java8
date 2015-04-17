@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created using an evaluation version of JasperAssistant (http://www.jasperassistant.com) -->
+<!DOCTYPE jasperReport PUBLIC "-//JasperReports//DTD Report Design//EN" "http://jasperreports.sourceforge.net/dtds/jasperreport.dtd">
+
+<jasperReport name="Wrkvendorbottom" pageWidth="106" pageHeight="200" columnWidth="106" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+	<property name="com.jasperassistant.designer.GridWidth" value="12"/>
+	<property name="com.jasperassistant.designer.GridHeight" value="12"/>
+	<property name="com.jasperassistant.designer.SnapToGrid" value="false"/>
+	<property name="com.jasperassistant.designer.Grid" value="false"/>
+	<import value="com.tsa.puridiom.common.utility.HiltonUtility"/>
+	<import value="com.tsa.puridiom.jasperreports.*"/>
+	<reportFont name="Arial_Normal" isDefault="true" fontName="Arial" size="8" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<parameter name="WorkSheetHeader_shippingTaxAmt" class="java.math.BigDecimal"/>
+	<parameter name="WorkSheetHeader_taxAmt" class="java.math.BigDecimal"/>
+	<parameter name="WorkSheetHeader_otherTaxAmount" class="java.math.BigDecimal"/>
+	<parameter name="WorkSheetHeader_fob" class="java.lang.String"/>
+	<parameter name="WorkSheetHeader_paymentTerms" class="java.lang.String"/>
+	<parameter name="WorkSheetHeader_datePromised" class="java.util.Date"/>
+	<parameter name="WorkSheetHeader_bidValidTo" class="java.util.Date"/>
+	<parameter name="WorkSheetHeader_subtotal" class="java.math.BigDecimal"/>
+	<parameter name="WorkSheetHeader_total" class="java.math.BigDecimal">
+		<defaultValueExpression><![CDATA[$V{total}]]></defaultValueExpression>
+	</parameter>
+	<parameter name="oid" class="java.lang.String"/>
+	<parameter name="currencyCode" class="java.lang.String"/>
+	<variable name="total" class="java.math.BigDecimal">
+		<variableExpression><![CDATA[$P{WorkSheetHeader_subtotal}.add($P{WorkSheetHeader_shippingTaxAmt}).add($P{WorkSheetHeader_taxAmt}).add($P{WorkSheetHeader_otherTaxAmount})]]></variableExpression>
+	</variable>
+	<detail>
+		<band height="127">
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" x="2" y="56" width="103" height="14"/>
+				<box border="None" topPadding="0" leftPadding="4" bottomPadding="0" rightPadding="0"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[HiltonUtility.getFormattedCurrency($P{WorkSheetHeader_subtotal}, $P{currencyCode}, $P{oid})]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" x="2" y="0" width="103" height="14"/>
+				<box border="None" topPadding="0" leftPadding="4" bottomPadding="0" rightPadding="0"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[ReportUtils.getStdTableDescription($P{oid}, "FOB", $P{WorkSheetHeader_fob})]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" x="2" y="14" width="103" height="14"/>
+				<box border="None" topPadding="0" leftPadding="4" bottomPadding="0" rightPadding="0"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{WorkSheetHeader_paymentTerms}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" x="2" y="28" width="103" height="14"/>
+				<box border="None" topPadding="0" leftPadding="4" bottomPadding="0" rightPadding="0"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[HiltonUtility.getFormattedDate($P{WorkSheetHeader_datePromised}, $P{oid})]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" x="2" y="42" width="103" height="14"/>
+				<box border="None" topPadding="0" leftPadding="4" bottomPadding="0" rightPadding="0"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[HiltonUtility.getFormattedDate($P{WorkSheetHeader_bidValidTo}, $P{oid})]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" x="2" y="84" width="103" height="14"/>
+				<box border="None" topPadding="0" leftPadding="4" bottomPadding="0" rightPadding="0"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[HiltonUtility.getFormattedCurrency($P{WorkSheetHeader_shippingTaxAmt}, $P{currencyCode}, $P{oid})]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" x="2" y="70" width="103" height="14"/>
+				<box border="None" topPadding="0" leftPadding="4" bottomPadding="0" rightPadding="0"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[HiltonUtility.getFormattedCurrency($P{WorkSheetHeader_taxAmt}, $P{currencyCode}, $P{oid})]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" x="2" y="98" width="103" height="14"/>
+				<box border="None" topPadding="0" leftPadding="4" bottomPadding="0" rightPadding="0"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[HiltonUtility.getFormattedCurrency($P{WorkSheetHeader_otherTaxAmount}, $P{currencyCode}, $P{oid})]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" x="2" y="112" width="103" height="14"/>
+				<box border="None" topPadding="0" leftPadding="4" bottomPadding="0" rightPadding="0"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[HiltonUtility.getFormattedCurrency($P{WorkSheetHeader_subtotal}.add$P{WorkSheetHeader_taxAmt}.add$P{WorkSheetHeader_shippingTaxAmt}.add$P{WorkSheetHeader_otherTaxAmount}, $P{currencyCode}, $P{oid})]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

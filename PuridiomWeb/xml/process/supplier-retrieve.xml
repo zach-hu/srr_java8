@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="SupplierRetrieve" connection-type="New-Connection">
+	<!--Retrieve a new Supplier with primary contact and address-->
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="vendor">
+<!--			<rule-filename>is-not-vendor-duplicate</rule-filename>  -->
+			  <task synchronous="true" continue-on-failure="false" name="vendorsetup">
+				<task-object-name>com.tsa.puridiom.vendor.tasks.VendorRetrieveSetup</task-object-name>
+				<post-action />
+			  </task>
+			  <task synchronous="true" continue-on-failure="false" name="vendor">
+				<task-object-name>com.tsa.puridiom.vendor.tasks.VendorRetrieveById</task-object-name>
+				<post-action />
+			  </task>
+			  <task synchronous="true" continue-on-failure="false" name="vendorBuyerRel">
+				<task-object-name>com.tsa.puridiom.vendor.tasks.VendorBuyerRelRetrieveById</task-object-name>
+				<post-action />
+			  </task>
+			  <task synchronous="true" continue-on-failure="false" name="vendor">
+				<task-object-name>com.tsa.puridiom.vendor.tasks.VendorBuyerRelSetup</task-object-name>
+				<post-action />
+			  </task>
+			  <task synchronous="true" continue-on-failure="false" name="address">
+				<task-object-name>com.tsa.puridiom.address.tasks.AddressRetrievePrimary</task-object-name>
+				<post-action />
+			  </task>
+			   <task synchronous="true" continue-on-failure="false" name="remittoaddress">
+				<task-object-name>com.tsa.puridiom.address.tasks.AddressRetrieveRemitTo</task-object-name>
+				<post-action />
+			  </task>
+			  <task synchronous="true" continue-on-failure="false" name="contact">
+				<task-object-name>com.tsa.puridiom.contact.tasks.ContactRetrievePrimary</task-object-name>
+				<post-action />
+			  </task>
+		  </activity>
+		  <activity synchronous="true" continue-on-failure="false" name="auditTrail">
+			<task synchronous="true" continue-on-failure="false" name="entityList">
+				<task-object-name>com.tsagate.foundation.processengine.SetAuditEntitiesTask</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+	 </activities>
+</process>

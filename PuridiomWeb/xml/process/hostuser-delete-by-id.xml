@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- set connection-type="None" because connection will be obtained in HostUserDeleteById w/ host.cfg.xml -->
+<process name="hostUserDelete" connection-type="None" connection-name="host" ldap-connection-type="None">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="hostUserDelete">
+			<task synchronous="true" continue-on-failure="false" name="hostUser">
+				<task-object-name>com.tsa.puridiom.hostuser.tasks.HostUserDeleteById</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

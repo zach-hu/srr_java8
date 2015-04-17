@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="invItemAdd" connection-type="New-Transaction">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="addAssetItem">
+			<task synchronous="true" continue-on-failure="false" name="asset">
+        		<task-object-name>com.tsa.puridiom.asset.serv.tasks.AssetInventoryCreateSetup</task-object-name>
+      		</task>
+			<task synchronous="true" continue-on-failure="false" name="asset">
+        		<task-object-name>com.tsa.puridiom.asset.tasks.AssetAdd</task-object-name>
+      		</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="addAssetCost">
+			<task synchronous="true" continue-on-failure="false" name="assetCostAdd">
+        		<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+        		<process-filename>assetcostinvitem-add.xml</process-filename>
+      		</task>
+		</activity>
+	</activities>
+</process>

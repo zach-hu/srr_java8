@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="reportQueueUpdate" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="getDatasources">
+	      <task synchronous="true" continue-on-failure="false" name="browseObject">
+	        <task-object-name>com.tsa.puridiom.browse.tasks.GenerateReportObject</task-object-name>
+	      </task>
+	      <task synchronous="true" continue-on-failure="false" name="browseObject">
+	        <task-object-name>com.tsa.puridiom.browse.tasks.GenerateBrowseFilter</task-object-name>
+	      </task>
+	      <task synchronous="true" continue-on-failure="false" name="ReportQueue_whereClause">
+	        <task-object-name>com.tsa.puridiom.browse.tasks.BrowseRetrieve</task-object-name>
+	      </task>
+	    </activity>
+		<activity synchronous="true" continue-on-failure="false" name="addreportQueue">
+			<task synchronous="true" continue-on-failure="false" name="reportQueue">
+				<task-object-name>com.tsa.puridiom.reportqueue.tasks.ReportQueueSetValues</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="reportQueue">
+				<task-object-name>com.tsa.puridiom.reportqueue.tasks.ReportQueueUpdate</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="changeReportUserList">
+			<task synchronous="true" continue-on-failure="false" name="change">
+				<task-object-name>com.tsa.puridiom.reportuser.tasks.ReportUserSetPublicAccessFromUser</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="BudgetServiceUpdateBudgetCenter" connection-type="New-Transaction">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="updateBudgetCenter">
+			<task synchronous="true" continue-on-failure="false" name="budgetWrapper">
+				<task-object-name>com.puridiom.service.budget.tasks.BudgetCenterUpdate</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

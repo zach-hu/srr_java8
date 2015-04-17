@@ -1,0 +1,99 @@
+<browse_inv_item>
+	<columns>
+		<InvItem_itemNumber>
+			<label>brw-itemNumber</label>
+			<size>15</size>
+			<link><![CDATA[javascript: viewInvItem('#InvItem_itemNumber^','#InvItem_source^'); void(0);]]></link>
+			<hidden-input>Y</hidden-input>
+			<!-- type>InvItem</type -->
+		</InvItem_itemNumber>
+		<sum_qtyOnHand>
+			<label>Qty  on Hand</label>
+			<type>Sum</type>
+			<hql-arguments>
+				<selecthql><![CDATA[(select sum(InvBinLocation_qtyOnHand) from InvBinLocation as InvBinLocation where InvBinLocation_itemNumber = InvItem_itemNumber) as qtyOnHand ]]></selecthql>
+			</hql-arguments>
+			<visible>1</visible>
+			<size>15</size>
+			<allowFilter>N</allowFilter>
+		</sum_qtyOnHand>
+		<InvItem_commodity>
+			<label>commodity</label>
+			<size>15</size>
+			<visible>0</visible>
+			<hidden>Y</hidden>
+			<hidden-input>Y</hidden-input>
+		</InvItem_commodity>
+		<InvItem_description>
+			<label>description</label>
+			<size>60</size>
+		</InvItem_description>
+		<InvItem_unitOfOrder>
+			<label>Unit of Order</label>
+			<size>4</size>
+		</InvItem_unitOfOrder>
+		<InvItem_cost>
+			<label>Cost</label>
+			<type>PriceDecimal</type>
+			<size>6</size>
+		</InvItem_cost>
+		<InvItem_imageFile>
+			<hidden>Y</hidden>
+		</InvItem_imageFile>
+		<InvItem_source>
+			<hidden>Y</hidden>
+			<hidden-input>Y</hidden-input>
+		</InvItem_source>
+		<InvItem_modelNumber>
+			<label>Model Number</label>
+			<size>30</size>
+			<visible>0</visible>
+			<allowfilter>Y</allowfilter>
+		</InvItem_modelNumber>
+		<InvItem_mfgName>
+			<label>Manufacturer</label>
+			<size>15</size>
+			<visible>0</visible>
+			<allowfilter>Y</allowfilter>
+		</InvItem_mfgName>
+<!--
+		<InvItem_buyerCode>
+			<label>Buyer Code</label>
+			<size>12</size>
+		</InvItem_buyerCode>
+-->
+	</columns>
+<!--	<group-filters>
+		<CatalogItem_id_catalogId>
+			<label>Catalog</label>
+			<sqlselect>select Catalog.catalogId, count(CatalogItem.id.catalogId)</sqlselect>
+			<sqlfrom>Catalog as Catalog, CatalogItem as CatalogItem</sqlfrom>
+			<sqlwhere><![CDATA[Catalog.catalogId = CatalogItem.id.catalogId]]></sqlwhere>
+			<sqlgroupby>Catalog.catalogId</sqlgroupby>
+		</CatalogItem_id_catalogId>
+		<CatalogItem_commodity>
+			<label>Commodity</label>
+			<sqlselect>select Commodity.commodity, count(CatalogItem.commodity)</sqlselect>
+			<sqlfrom>Commodity as Commodity, CatalogItem as CatalogItem</sqlfrom>
+			<sqlwhere><![CDATA[Commodity.commodity = CatalogItem.commodity]]></sqlwhere>
+			<sqlgroupby>Commodity.commodity</sqlgroupby>
+		</CatalogItem_commodity>
+		<CatalogItem_cost>
+			<label>Cost</label>
+			<type>CostRange</type>
+			<sqlselect>select CostRange.description, count(CatalogItem.cost), CostRange.minimumCost</sqlselect>
+			<sqlfrom>CostRange as CostRange, CatalogItem as CatalogItem</sqlfrom>
+			<sqlwhere><![CDATA[CostRange.minimumCost <= CatalogItem.cost and CostRange.maximumCost >= CatalogItem.cost and CostRange.itemType = 'CAT']]></sqlwhere>
+			<sqlgroupby>CostRange.minimumCost, CostRange.description</sqlgroupby>
+		</CatalogItem_cost>
+		<CatalogItem_description>
+			<label>Keyword(s)</label>
+			<type>Keywords</type>
+		</CatalogItem_description>
+	</group-filters> -->
+	<sqlfrom>InvItem as InvItem</sqlfrom>
+	<sqlorderby>InvItem.itemNumber ASC</sqlorderby>
+	<sqlwhere><![CDATA[ ]]></sqlwhere>
+	<title>Inventory Items</title>
+	<pagesize>10</pagesize>
+</browse_inv_item>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+<class name="com.tsa.puridiom.entity.sungard.Address" table="ADDRESS">
+	<id name="internalVendorId" type="java.math.BigDecimal" column="INTERNAL_VENDOR_ID" length="10">
+		<generator class="assigned" />
+	</id>
+	<property name="associatedAddrId" column="ASSOCIATED_ADDR_ID" type="java.math.BigDecimal" length="10"/>
+	<property name="addressTypeInd" column="ADDRESS_TYPE_IND" type="java.lang.String" length="1"/>
+	<property name="defaultInd" column="DEFAULT_IND" type="java.lang.String" length="1"/>
+	<property name="state" column="STATE" type="java.lang.String" length="2"/>
+	<property name="zipcode" column="ZIPCODE" type="java.lang.String" length="10"/>
+	<property name="countryCode" column="COUNTRY_CODE" type="java.lang.String" length="2"/>
+	<property name="genericName2" column="GENERIC_NAME2" type="java.lang.String" length="60"/>
+	<property name="genericName3" column="GENERIC_NAME3" type="java.lang.String" length="60"/>
+	<property name="address1" column="ADDRESS1" type="java.lang.String" length="60"/>
+	<property name="address2" column="ADDRESS2" type="java.lang.String" length="60"/>
+	<property name="address3" column="ADDRESS3" type="java.lang.String" length="60"/>
+	<property name="city" column="CITY" type="java.lang.String" length="20"/>
+</class>
+</hibernate-mapping>

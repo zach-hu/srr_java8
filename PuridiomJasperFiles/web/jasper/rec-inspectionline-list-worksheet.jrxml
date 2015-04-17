@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created using an evaluation version of JasperAssistant (http://www.jasperassistant.com) -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="inspectionline_list_worksheet" pageWidth="546" pageHeight="842" columnWidth="546" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+	<property name="com.jasperassistant.designer.Grid" value="false"/>
+	<property name="com.jasperassistant.designer.SnapToGrid" value="false"/>
+	<property name="com.jasperassistant.designer.GridWidth" value="12"/>
+	<property name="com.jasperassistant.designer.GridHeight" value="12"/>
+	<parameter name="oid" class="java.lang.String">
+		<defaultValueExpression><![CDATA["HILTON"]]></defaultValueExpression>
+	</parameter>
+	<field name="InspectionLine_inspectCode" class="java.lang.String"/>
+	<field name="InspectionLine_critDescription" class="java.lang.String"/>
+	<detail>
+		<band height="22">
+			<textField hyperlinkType="None">
+				<reportElement x="10" y="0" width="60" height="16"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$V{REPORT_COUNT}.intValue()+""]]></textFieldExpression>
+			</textField>
+			<textField hyperlinkType="None">
+				<reportElement x="70" y="0" width="60" height="16"/>
+				<textElement textAlignment="Center" verticalAlignment="Top" markup="none">
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{InspectionLine_inspectCode}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" hyperlinkType="None">
+				<reportElement x="130" y="0" width="400" height="16"/>
+				<textElement textAlignment="Justified" verticalAlignment="Top" markup="none">
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{InspectionLine_critDescription}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

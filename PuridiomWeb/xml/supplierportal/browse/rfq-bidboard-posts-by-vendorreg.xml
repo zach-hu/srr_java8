@@ -1,0 +1,77 @@
+<rfq-bidboard-posts>
+	<columns>
+		<RfqHeader_icRfqHeader>
+			<hidden>Y</hidden>
+		</RfqHeader_icRfqHeader>
+		<RfqHeader_rfqDescription>
+			<label>Synopsis</label>
+			<size>40</size>
+		</RfqHeader_rfqDescription>
+		<RfqHeader_rfqNumber>
+			<label>Solicitation #</label>
+			<size>12</size>
+			<link><![CDATA[javascript: viewRfq('#RfqHeader_icRfqHeader^'); void(0);]]></link>
+		</RfqHeader_rfqNumber>
+		<RfqHeader_rfqAmendment>
+			<label>Amendment</label>
+			<size>10</size>
+		</RfqHeader_rfqAmendment>
+		<RfqHeader_appDate>
+			<type>DATE</type>
+			<label>Date Posted</label>
+			<size>12</size>
+		</RfqHeader_appDate>
+		<RfqHeader_dueDate>
+			<type>DATE</type>
+			<label>Date Due</label>
+			<size>12</size>
+		</RfqHeader_dueDate>
+		<RfqHeader_awardDate>
+			<type>DATE</type>
+			<hidden>Y</hidden>
+		</RfqHeader_awardDate>
+		<RfqHeader_status>
+			<hidden>Y</hidden>
+		</RfqHeader_status>
+		<RfqHeader_buyer>
+			<hidden>Y</hidden>
+		</RfqHeader_buyer>
+		<RfqHeader_webpost>
+			<hidden>Y</hidden>
+		</RfqHeader_webpost>
+		<RfqHeader_rfq_type>
+			<hidden>Y</hidden>
+		</RfqHeader_rfq_type>
+		<RfqVendor_vendorId>
+			<hidden>Y</hidden>
+			<hidden-input>Y</hidden-input>
+		</RfqVendor_vendorId>
+		<RfqHeader_bidAccess>
+			<hidden>Y</hidden>
+		</RfqHeader_bidAccess>
+		<RfqHeader_bidDueTime>
+			<hidden>Y</hidden>
+			<hidden-input>Y</hidden-input>
+		</RfqHeader_bidDueTime>
+		<RfqHeader_timeZone>
+			<hidden>Y</hidden>
+		</RfqHeader_timeZone>
+		<Input_time>
+			<label>Time Remaining</label>
+			<size>15</size>
+		</Input_time>
+		<VendorRegister_vendorId>
+			<hidden>Y</hidden>
+		</VendorRegister_vendorId>
+	</columns>
+<sqlfrom>RfqHeader as RfqHeader, RfqVendor as RfqVendor, VendorRegister as VendorRegister</sqlfrom>
+<sqlwhere>
+<![CDATA[( RfqHeader.icRfqHeader = RfqVendor.id.icRfqHeader AND 
+		VendorRegister.id.vendorId = RfqVendor.id.vendorId AND 
+		RfqHeader.webpost <> 'N' AND  
+		RfqHeader.webpost <> ' ' AND  
+		RfqHeader.status = '2005' ) ]]>
+</sqlwhere>
+<pagesize>10</pagesize>
+<title>Solicitation Search</title>
+</rfq-bidboard-posts>

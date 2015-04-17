@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rule>
+	<clause type="lookup">
+		<sql> from PaymentTerm as pt where pt.id = '@termscode@' AND (pt.status = '02' OR (pt.status = '01' AND pt.dateExpires >= @today@))</sql>
+		<source>vendorRegister</source>
+		<arguments>
+			<name>termscode</name>
+			<source>vendorRegister</source>
+			<colName>getVendorVendTerms</colName>
+		</arguments>
+	</clause>
+</rule>

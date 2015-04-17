@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="reviewfinalizeDelete" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="ReviewFinalizeIdCheck">
+			<task synchronous="true" continue-on-failure="false" name="check">
+				<task-object-name>com.tsa.puridiom.reviewfinalize.tasks.ReviewFinalizeIdCheck</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="ReviewFinalizeDelete">
+				<task-object-name>com.tsa.puridiom.reviewfinalize.tasks.ReviewFinalizeDeleteById</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+	</activities>
+</process>

@@ -1,0 +1,40 @@
+<r-sup-d-pru>
+  <columns>
+		<PoHeader_vendorId>
+			<label>Supplier Id</label>
+			<type>STRING</type>
+		</PoHeader_vendorId>
+		<Vendor_vendorName>
+			<label>Supplier Name</label>
+			<type>STRING</type>
+		</Vendor_vendorName>
+		<PoHeader_poDate>
+			<label>Order Date</label>
+			<type>DATE</type>
+		</PoHeader_poDate>
+		<PoHeader_poNumber>
+			<label>Order Number</label>
+			<type>STRING</type>
+		</PoHeader_poNumber>
+		<PoHeader_releaseNumber>
+			<label>Release</label>
+			<type>BIGDECIMAL</type>
+		</PoHeader_releaseNumber>
+		<PoHeader_currencyCode>
+			<label>Currency Code</label>
+			<type>STRING</type>
+		</PoHeader_currencyCode>
+		<PoHeader_currencyFactor>
+			<label>Currency Factor</label>
+			<type>BIGDECIMAL</type>
+		</PoHeader_currencyFactor>
+		<PoHeader_total>
+			<label>Total</label>
+			<type>BIGDECIMAL</type>
+		</PoHeader_total>
+	</columns>
+  <sqlfrom>Vendor as Vendor, PoHeader as PoHeader</sqlfrom>
+  <sqlwhere><![CDATA[ ( Vendor.vendorId = PoHeader.vendorId ) and ( PoHeader.lastRevision = 'C') and (PoHeader.status <> '99' ) and (PoHeader.status >= '3000' ) and (PoHeader.poNumber <> 'N/A') ]]></sqlwhere>
+  <sqlorderby>Vendor.vendorId, PoHeader.poNumber, PoHeader.releaseNumber </sqlorderby>
+  <title>Supplier Purchases Summary Report</title>
+</r-sup-d-pru>

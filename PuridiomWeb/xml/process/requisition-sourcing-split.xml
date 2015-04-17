@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="requisitionSourcingSplit" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="requisitionSourcingSplit">
+<!--
+			<task synchronous="true" continue-on-failure="false" name="blanketHeaderIc">
+				<task-object-name>com.tsa.puridiom.requisition.tasks.RequisitionMsrBlanketInfo</task-object-name>
+				<post-action></post-action>
+			</task>
+-->
+			<task synchronous="true" continue-on-failure="false" name="splitRequisitionList">
+				<task-object-name>com.tsa.puridiom.requisitionline.tasks.RequisitionSplitSourcingItems</task-object-name>
+				<post-action></post-action>
+			</task>
+
+			<task synchronous="true" continue-on-failure="false" name="requisitionCreateSplit">
+				<task-object-name>com.tsa.puridiom.requisition.tasks.RequisitionCreateSplit</task-object-name>
+				<post-action></post-action>
+			</task>
+<!--
+			<task synchronous="true" continue-on-failure="false" name="requisitionSplitForward">
+				<task-object-name>com.tsa.puridiom.requisition.tasks.RequisitionForwardSplitList</task-object-name>
+			</task>
+-->
+		</activity>
+	</activities>
+</process>

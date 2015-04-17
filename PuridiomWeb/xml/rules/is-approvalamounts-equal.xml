@@ -1,0 +1,27 @@
+<rule>
+	<clause type="BigDecimalCompare">
+		<left-side>
+			<source>incomingRequest</source>
+			<name>AppRule_excludeLess</name>
+		</left-side>
+		<operator>NOTEQUAL</operator>
+		<right-side>
+			<source>incomingRequestObjectMethod</source>
+			<object>userProfile</object>
+			<name>getExcludeLess</name>
+		</right-side>
+	</clause>
+	<logical-operator>OR</logical-operator>
+	<clause type="BigDecimalCompare">
+		<left-side>
+			<source>incomingRequest</source>
+			<name>AppRule_amount</name>
+		</left-side>
+		<operator>NOTEQUAL</operator>
+		<right-side>
+			<source>incomingRequestObjectMethod</source>
+			<object>userProfile</object>
+			<name>getApprovalAmount</name>
+		</right-side>
+	</clause>
+</rule>

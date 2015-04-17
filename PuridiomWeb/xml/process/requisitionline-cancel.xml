@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="CancelPoLine" connection-type="Connection-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="cancelLine">
+			<task synchronous="true" continue-on-failure="false" name="recalculate">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>requisitionline-cancel-by-id.xml</process-filename>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="RequisitionLineHistory">
+		  		<task-object-name>com.tsa.puridiom.requisitionline.history.tasks.RequisitionLineHistory</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="cancelHeader">
+				<task-object-name>com.tsa.puridiom.requisitionline.tasks.RequisitionHeaderCancelCheck</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="cancelRequisitionHeader">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>requisitionheader-update-status.xml</process-filename>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="requisitionHeaderHistory">
+		    	<rule-filename>is-requisitionheader-cancel.xml</rule-filename>
+		    	<task-object-name>com.tsa.puridiom.requisitionheader.history.tasks.RequisitionHeaderHistory</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

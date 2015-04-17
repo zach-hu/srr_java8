@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="sendemail" connection-type="None">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="setip">
+			<task synchronous="true" continue-on-failure="false" name="setup">
+				<task-object-name>com.tsa.puridiom.approval.emails.tasks.SendEmailSetup</task-object-name>
+				<post-action />
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="sendemail">
+			<task synchronous="true" continue-on-failure="false" name="emailMessage">
+				<task-object-name>com.tsa.puridiom.approval.emails.tasks.SendEmailGetMessage</task-object-name>
+				<post-action />
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="emailMessage">
+				<task-object-name>com.tsa.puridiom.approval.emails.tasks.EmailSetTo</task-object-name>
+				<post-action />
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="emailMessage">
+				<task-object-name>com.tsa.puridiom.approval.emails.tasks.EmailSetFrom</task-object-name>
+				<post-action />
+	 	    </task>
+			<task synchronous="true" continue-on-failure="false" name="emailMessage">
+				<task-object-name>com.tsa.puridiom.approval.emails.tasks.EmailSetReplyTo</task-object-name>
+				<post-action />
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="emailMessage">
+				<task-object-name>com.tsa.puridiom.approval.emails.tasks.EmailSetBcc</task-object-name>
+				<post-action />
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="emailMessage">
+				<task-object-name>com.tsa.puridiom.approval.emails.tasks.EmailSetSubject</task-object-name>
+				<post-action />
+			</task>
+		  </activity>
+		<activity synchronous="true" continue-on-failure="false" name="content">
+			<task synchronous="true" continue-on-failure="false" name="multipart">
+				<rule-filename>is-html-email.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.approval.emails.tasks.SendEmailSetHtmlContent</task-object-name>
+				<post-action />
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="multipart">
+				<!--<rule-filename>is-text-email</rule-filename>-->
+				<task-object-name>com.tsa.puridiom.approval.emails.tasks.SendEmailSetTextContent</task-object-name>
+				<post-action />
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="attachments">
+			<task synchronous="true" continue-on-failure="true" name="multipart">
+				<task-object-name>com.tsa.puridiom.approval.emails.tasks.SendEmailAddAttachments</task-object-name>
+				<post-action />
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="content">
+			<task synchronous="true" continue-on-failure="false" name="emailMessage">
+				<task-object-name>com.tsa.puridiom.approval.emails.tasks.SendEmailSetContent</task-object-name>
+				<post-action />
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="setEmailHeaders">
+			<task synchronous="true" continue-on-failure="false" name="emailMessage">
+				<rule-filename>is-html-email</rule-filename>
+				<task-object-name>com.tsa.puridiom.approval.emails.tasks.SendEmailSetHtmlHeader</task-object-name>
+				<post-action />
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="emailMessage">
+				<!--<rule-filename>is-text-email</rule-filename>-->
+				<task-object-name>com.tsa.puridiom.approval.emails.tasks.SendEmailSetTextHeader</task-object-name>
+				<post-action />
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="sendEmail">
+			<task synchronous="true" continue-on-failure="true" name="sendEmail">
+				<task-object-name>com.tsa.puridiom.approval.emails.tasks.SendEmail</task-object-name>
+				<post-action />
+			</task>
+		</activity>
+	 </activities>
+</process>

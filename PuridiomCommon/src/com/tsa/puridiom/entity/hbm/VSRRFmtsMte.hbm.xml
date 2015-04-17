@@ -1,0 +1,73 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping>
+
+<class
+    name="com.tsa.puridiom.entity.VSRRFmtsMte"
+    table="VSRR_FMTS_MTE"
+>
+
+    <id
+        name="mteNo"
+        type="java.lang.String"
+        column="MTE_NO"
+>
+        <generator class="assigned" />
+    </id>
+
+    <property
+        name="description"
+        type="java.lang.String"
+        column="DESCRIPTION"
+        length="40"
+    />
+    <property
+        name="calDueDate"
+        type="java.sql.Timestamp"
+        column="CAL_DUE_DATE"
+        length="7"
+    />
+    <property
+        name="calDate"
+        type="java.sql.Timestamp"
+        column="CAL_DATE"
+        length="7"
+    />
+    <property
+        name="activeFl"
+        type="java.lang.String"
+        column="ACTIVE_FL"
+        length="1"
+    />
+    <property
+        name="createdBy"
+        type="java.lang.String"
+        column="CREATED_BY"
+        length="30"
+    />
+    <property
+        name="createdDt"
+        type="java.sql.Timestamp"
+        column="CREATED_DT"
+        length="7"
+    />
+    <property
+        name="modifiedBy"
+        type="java.lang.String"
+        column="MODIFIED_BY"
+        length="30"
+    />
+    <property
+        name="modifiedDt"
+        type="java.sql.Timestamp"
+        column="MODIFIED_DT"
+        length="7"
+    />
+
+    <!-- associations -->
+
+</class>
+</hibernate-mapping>

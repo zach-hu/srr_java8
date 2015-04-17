@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="stdCommentAdd" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="stdCommentAdd">
+			<task synchronous="true" continue-on-failure="false" name="stdComment">
+				<task-object-name>com.tsa.puridiom.stdcomment.tasks.StdCommentSetup</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="existingRecord">
+				<task-object-name>com.tsa.puridiom.stdcomment.tasks.StdCommentRetrieveById</task-object-name>
+				<post-action />
+			 </task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="stdCommentValidation">
+			<task synchronous="true" continue-on-failure="false" name="setErrorMsg">
+				<rule-filename check-for-false="true">is-existing-record-empty.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.stdcommenterrormsg.tasks.ErrorMsgSetDuplicateRecord</task-object-name>
+				<post-action>exitProcess</post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="addstdComment">
+			<task synchronous="true" continue-on-failure="false" name="stdComment">
+				<task-object-name>com.tsa.puridiom.stdcomment.tasks.StdCommentSetValues</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="stdCommentAdd">
+				<task-object-name>com.tsa.puridiom.stdcomment.tasks.StdCommentAdd</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="docTextAdd">
+			<task synchronous="true" continue-on-failure="false" name="docTextAdd">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>doctext-add.xml</process-filename>
+			</task>
+		</activity>
+	</activities>
+</process>

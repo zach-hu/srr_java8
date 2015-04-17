@@ -1,0 +1,63 @@
+<browse_approver>
+	<columns>
+		<UserProfile_userId>
+			<label>user-userId</label>
+			<link><![CDATA[javascript: returnMe('#UserProfile_userId^'); void(0);]]></link>
+			<size>15</size>
+		</UserProfile_userId>
+		<UserProfile_firstName>
+			<label>First Name</label>
+			<size>15</size>
+		</UserProfile_firstName>
+		<UserProfile_lastName>
+			<label>Last Name</label>
+			<sort>A</sort>
+			<size>23</size>
+		</UserProfile_lastName>
+		<UserProfile_mailId>
+			<label>E-mail Address</label>
+			<hidden>Y</hidden>
+		</UserProfile_mailId>
+		<UserProfile_title>
+			<label>Title</label>
+			<size>30</size>
+			<hidden-input>Y</hidden-input>
+		</UserProfile_title>
+		<UserProfile_displayName>
+			<userName>
+				<col>UserProfile_userId</col>
+			</userName>
+			<hidden>Y</hidden>
+			<hidden-input>Y</hidden-input>
+			<selectsql>N</selectsql>
+		</UserProfile_displayName>
+		<UserProfile_approvalAmount>
+			<label>Approval Amt.</label>
+			<hidden>N</hidden>
+			<hidden-input>Y</hidden-input>
+			<type>DollarDecimal</type>
+			<size>17</size>
+		</UserProfile_approvalAmount>
+		<UserProfile_approveByLine>
+			<label>Approve By Line</label>
+			<hidden>Y</hidden>
+			<hidden-input>Y</hidden-input>
+			<size>17</size>
+		</UserProfile_approveByLine>
+		<UserProfile_excludeLess>
+			<label>Exclude Less</label>
+			<hidden>Y</hidden>
+			<hidden-input>Y</hidden-input>
+		</UserProfile_excludeLess>
+		<UserProfile_vchApp>
+			<label>Invoice Approver</label>
+			<hidden>Y</hidden>
+			<hidden-input>Y</hidden-input>
+		</UserProfile_vchApp>
+	</columns>
+<sqlfrom>UserProfile as UserProfile</sqlfrom>
+<sqlwhere><![CDATA[ UserProfile.vchApp = 'Y' AND UserProfile.status <> '03' AND UserProfile.userId <> :as_userid AND (UserProfile.userId <> 'SYSADM') AND (UserProfile.callForward <> :as_userid)]]></sqlwhere>
+<sqlorderby>UserProfile.lastName ASC</sqlorderby>
+<pagesize>15</pagesize>
+<title>Approver Browse</title>
+</browse_approver>

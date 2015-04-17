@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="poschedules" connection-type="Transaction-Required">
+  <activities>
+    <activity synchronous="true" continue-on-failure="false" name="retrieveSchedule">
+        <task synchronous="true" continue-on-failure="false" name="setup">
+        <task-object-name>com.tsa.puridiom.po.tasks.PoScheduleSetup</task-object-name>
+      </task>
+      <task synchronous="true" continue-on-failure="false" name="scheduleList">
+        <task-object-name>com.tsa.puridiom.schedule.tasks.ScheduleRetrieveByHeader</task-object-name>
+      </task>
+      <task synchronous="true" continue-on-failure="false" name="loadSchedules">
+        <task-object-name>com.tsa.puridiom.po.tasks.LoadSchedules</task-object-name>
+      </task>
+    </activity>
+  </activities>
+</process>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="ScheduleRetrieveAllLinesBy" connection-type="Connection-Required">
+	<!--Retrieve all Schedules for a given icHeader, scheduleType, and documentType -->
+	<activities>  
+		<activity synchronous="true" continue-on-failure="false" name="ScheduleRetrieveAllLinesBy">
+			  <task synchronous="true" continue-on-failure="false" name="scheduleList">
+				<task-object-name>com.tsa.puridiom.schedule.tasks.ScheduleRetrieveAllLinesBy</task-object-name>    
+				<post-action />    
+			  </task>
+		  </activity>  
+	 </activities> 
+</process>

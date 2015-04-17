@@ -1,0 +1,20 @@
+<rule>
+	<clause type="BigDecimalCompare">
+		<left-side>
+			<source>incomingRequest</source>
+			<name>RequisitionLine_icReqLine</name>
+		</left-side>
+		<operator>LESSEQUAL</operator>
+		<right-side>
+			<source>constant</source>
+			<value>0</value>
+		</right-side>
+	</clause>
+	<logical-operator>OR</logical-operator>
+	<clause type="Empty">
+		<left-side>
+			<source>incomingRequest</source>
+			<name>RequisitionLine_icReqLine</name>
+		</left-side>
+	</clause>
+</rule>

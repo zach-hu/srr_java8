@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<InvoiceVoucherDetail>
+	
+    <columns>
+		<InvoiceHeader_invoiceNumber>
+			<label>Invoice Number</label>
+			<type>STRING</type>
+		</InvoiceHeader_invoiceNumber>
+		<InvoiceHeader_invoiceDate>
+			<label>Invoice Date</label>
+			<type>DATE</type>
+		</InvoiceHeader_invoiceDate>
+		<InvoiceHeader_dateEntered>
+			<label>Date Entered</label>
+			<type>DATE</type>
+		</InvoiceHeader_dateEntered>
+		<InvoiceHeader_poNumber>
+			<label>PO Number</label>
+			<type>STRING</type>
+		</InvoiceHeader_poNumber>
+		<InvoiceHeader_vendorId>
+			<label>Vendor ID</label>
+			<type>STRING</type>
+		</InvoiceHeader_vendorId>
+		<InvoiceHeader_vendorName>
+			<label>Vendor Name</label>
+			<type>STRING</type>
+		</InvoiceHeader_vendorName>
+		<InvoiceLine_itemNumber>
+			<label>Item Number</label>
+			<type>STRING</type>
+		</InvoiceLine_itemNumber>
+		<InvoiceLine_description>
+			<label>Line Description</label>
+			<type>STRING</type>
+		</InvoiceLine_description>
+		<InvoiceHeader_invoiceSubtotal>
+			<label>Subtotal</label>
+			<type>BIGDECIMAL</type>
+		</InvoiceHeader_invoiceSubtotal>
+		<InvoiceHeader_invoiceTax>
+			<label>Tax</label>
+			<type>BIGDECIMAL</type>
+		</InvoiceHeader_invoiceTax>
+		<InvoiceHeader_invoiceShipping>
+			<label>Shipping</label>
+			<type>BIGDECIMAL</type>
+		</InvoiceHeader_invoiceShipping>
+		<InvoiceHeader_invoiceOther>
+			<label>Other</label>
+			<type>BIGDECIMAL</type>
+		</InvoiceHeader_invoiceOther>
+		<InvoiceHeader_invoiceTotal>
+			<label>Total</label>
+			<type>BIGDECIMAL</type>
+		</InvoiceHeader_invoiceTotal>
+		<InvoiceLine_lineNumber>
+			<label>Line Number</label>
+			<type>STRING</type>
+		</InvoiceLine_lineNumber>
+		<InvoiceLine_quantity>
+			<label>Quantity</label>
+			<type>BIGDECIMAL</type>
+		</InvoiceLine_quantity>
+		<InvoiceLine_umCode>
+			<label>UM Code</label>
+			<type>STRING</type>
+		</InvoiceLine_umCode>
+		<InvoiceLine_lineTotal>
+			<label>Total</label>
+			<type>BIGDECIMAL</type>
+		</InvoiceLine_lineTotal>
+		<Account_fld1>
+			<label>Account udf 1</label>
+			<type>STRING</type>
+		</Account_fld1>
+		<Account_fld2>
+			<label>Account udf 2</label>
+			<type>STRING</type>
+		</Account_fld2>
+		<Account_fld3>
+			<label>Account udf 3</label>
+			<type>STRING</type>
+		</Account_fld3>
+		<Account_fld4>
+			<label>Account udf 4</label>
+			<type>STRING</type>
+		</Account_fld4>
+		<Account_fld5>
+			<label>Account udf 5</label>
+			<type>STRING</type>
+		</Account_fld5>
+		<Account_fld6>
+			<label>Account udf 6</label>
+			<type>STRING</type>
+		</Account_fld6>
+		<Account_fld7>
+			<label>Account udf 7</label>
+			<type>STRING</type>
+		</Account_fld7>
+		<Account_fld8>
+			<label>Account udf 8</label>
+			<type>STRING</type>
+		</Account_fld8>
+		<Account_fld9>
+			<label>Account udf 9</label>
+			<type>STRING</type>
+		</Account_fld9>
+		<Account_fld10>
+			<label>Account udf 10</label>
+			<type>STRING</type>
+		</Account_fld10>
+		<Account_fld11>
+			<label>Account udf 11</label>
+			<type>STRING</type>
+		</Account_fld11>
+		<Account_fld12>
+			<label>Account udf 12</label>
+			<type>STRING</type>
+		</Account_fld12>
+		<Account_fld13>
+			<label>Account udf 13</label>
+			<type>STRING</type>
+		</Account_fld13>
+		<Account_fld14>
+			<label>Account udf 14</label>
+			<type>STRING</type>
+		</Account_fld14>
+		<Account_fld15>
+			<label>Account udf 15</label>
+			<type>STRING</type>
+		</Account_fld15>
+	</columns>
+	
+	
+	
+  <sqlfrom> InvoiceLine as InvoiceLine , InvoiceHeader as InvoiceHeader, Account as Account</sqlfrom>
+	
+	
+	
+  <sqlwhere><![CDATA[InvoiceHeader.icIvcHeader = InvoiceLine.icIvcHeader and InvoiceLine.icIvcLine = Account.comp_id.icLine and Account.comp_id.sequence = 1 and InvoiceHeader.invoiceNumber <> 'N/A' and InvoiceHeader.invoiceNumber is not NULL]]></sqlwhere>
+	
+	
+	
+  <pagesize>15</pagesize>
+	
+	
+	
+  <title>Invoice Voucher Detail Report</title>
+	
+	
+	
+
+
+
+</InvoiceVoucherDetail>
+

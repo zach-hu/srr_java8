@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rule>
+	<!--<clause type="NotEmpty">
+		<left-side>
+			<source>incomingRequestObjectMethod</source>
+			<object>header</object>
+			<name>getDepartmentCode</name>
+		</left-side>
+	</clause>
+	<logical-operator>AND</logical-operator>-->
+	<clause type="lookup">
+		<sql><![CDATA[from StdTable as StdTable where StdTable.id.tableKey = '@company@' AND (StdTable.id.tableType = 'AC01')]]></sql>
+		<source>user</source>
+		<arguments>
+			<name>company</name>
+			<source>user</source>
+			<colName>getNameUdf3</colName>
+		</arguments>
+	</clause>
+</rule>

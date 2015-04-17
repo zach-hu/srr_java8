@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rule>
+	<clause type="StringCompare">
+		<left-side elementSource="true">
+			<source>incomingRequestObject</source>
+			<object>lineItem</object>
+			<name>getReqType</name>
+		</left-side>
+		<operator>NOTEQUAL</operator>
+		<right-side>
+			<source>constant</source>
+			<value>M</value>
+		</right-side>
+	</clause>
+	<logical-operator>IFTHEN</logical-operator>
+	<clause type="NotEmpty">
+		<left-side elementSource="true">
+			<source>incomingRequestObjectMethod</source>
+			<object>lineItem</object>
+			<name>getUdf5Code</name>
+		</left-side>
+	</clause>
+</rule>

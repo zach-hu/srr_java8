@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="inspectionDisposRetrieve" connection-type="Connection-Required">
+	<activities>
+
+		<activity synchronous="true" continue-on-failure="false" name="receiptRetrieve">
+			<task synchronous="true" continue-on-failure="false" name="receiptHeader">
+				<task-object-name>com.tsa.puridiom.receiptheader.tasks.ReceiptHeaderRetrieveById</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="receiptLine">
+				<task-object-name>com.tsa.puridiom.receiptline.tasks.ReceiptLineRetrieveById</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="ReceiptLineDataRetrieve">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>receiptlinedata-retrieve.xml</process-filename>
+			</task>
+
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="inspectionDetailActivity">
+			<task synchronous="true" continue-on-failure="false" name="inspectionHeader">
+				<task-object-name>com.tsa.puridiom.inspectionheader.tasks.InspectionHeaderRetrieveById</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="inspectionLineSetup">
+				<task-object-name>com.tsa.puridiom.inspection.tasks.InspectionDetailRetrieveSetup</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="inspectionLineList">
+				<task-object-name>com.tsa.puridiom.inspectionline.tasks.InspectionLineRetrieveByIcInspNo</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+
+		<!--
+		<activity synchronous="true" continue-on-failure="false" name="inspectionDiscrepRetrieveSetupActivity">
+			<task synchronous="true" continue-on-failure="false" name="inspectionDiscrepRetrieveSetup">
+				<task-object-name>com.tsa.puridiom.inspectiondiscrep.tasks.InspectionDiscrepRetrieveSetup</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="receiptDiscrepStatusList">
+				<task-object-name>com.tsa.puridiom.stdtable.tasks.StdTableRetrieveByType</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="inspectionDiscrepList">
+				<task-object-name>com.tsa.puridiom.inspectiondiscrep.tasks.InspectionDiscrepRetrieveByReceiptLine</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>		`
+		-->
+
+		<activity synchronous="true" continue-on-failure="false" name="inspectionDisposRetrieveSetupActivity">
+			<task synchronous="true" continue-on-failure="false" name="inspectionDisposRetrieveSetup">
+				<task-object-name>com.tsa.puridiom.inspectiondispos.tasks.InspectionDisposRetrieveSetup</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="inspectionDisposList">
+				<task-object-name>com.tsa.puridiom.inspectiondispos.tasks.InspectionDisposRetrieveByIcInspDiscrep</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>		`
+	</activities>
+</process>

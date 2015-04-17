@@ -1,0 +1,57 @@
+<divs_table>
+	<columns>
+		<XrefCombo_icXref>
+			<label>brw-icHeaderr</label>
+			<visible>0</visible>
+			<hidden-input>Y</hidden-input>
+		</XrefCombo_icXref>
+		<XrefCombo_xrefType>
+			<label>poType</label>
+			<visible>1</visible>
+		</XrefCombo_xrefType>
+		<XrefCombo_code1>
+			<label>assetlocationdivision</label>
+			<visible>1</visible>
+		</XrefCombo_code1>
+		<XrefCombo_code2>
+			<label>brw-entity</label>
+			<link><![CDATA[javascript: returnMe('#XrefCombo_code2^'); void(0);]]></link>
+			<visible>1</visible>
+		</XrefCombo_code2>
+		<XrefCombo_code3>
+			<label>deparment</label>
+			<visible>1</visible>
+		</XrefCombo_code3>
+		<XrefCombo_code4>
+			<label>allocationString</label>
+			<visible>1</visible>
+		</XrefCombo_code4>
+		<XrefCombo_code5>
+			<label>brw-event</label>
+			<visible>1</visible>
+		</XrefCombo_code5>
+		<XrefCombo_code6>
+			<label>brw-performance</label>
+			<visible>1</visible>
+		</XrefCombo_code6>
+		<XrefCombo_code7>
+			<label>brw-program</label>
+			<visible>1</visible>
+		</XrefCombo_code7>
+		<StdTable_id_tableType>
+			<label>poType</label>
+			<visible>0</visible>
+		</StdTable_id_tableType>
+		<StdTable_description>
+			<label>description</label>
+			<size>45</size>
+		</StdTable_description>
+	</columns>
+<sqlfrom>XrefCombo as XrefCombo, StdTable as StdTable</sqlfrom>
+<sqlwhere><![CDATA[ XrefCombo.status='02' AND XrefCombo.xrefType='DIVS'
+					AND XrefCombo.code2=StdTable.id.tableKey AND StdTable.id.tableType='AC01'
+					AND StdTable.status='02' ]]></sqlwhere>
+<sqlorderby>XrefCombo.code2 ASC, XrefCombo.code3 ASC, XrefCombo.code4 ASC</sqlorderby>
+<pagesize>15</pagesize>
+<title>Entity/Dept/Account/Event Browse</title>
+ </divs_table>

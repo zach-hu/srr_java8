@@ -1,0 +1,32 @@
+<browse_attention>
+	<columns>
+		<Contact_contactCode>
+			<label>brw-contactcode</label>
+			<sort>A</sort>
+			<link><![CDATA[javascript: returnMe('#Contact_contactCode^'); void(0);]]></link>
+		</Contact_contactCode>
+		<Contact_contactType>
+			<label>brw-contacttype</label>
+			<visible>0</visible>
+		</Contact_contactType>
+		<Contact_vendorId>
+			<label>brw-vendorId</label>
+		</Contact_vendorId>
+		<Contact_firstName>
+			<label>firstName</label>
+			<hidden-input>Y</hidden-input>
+		</Contact_firstName>
+		<Contact_middleInit>
+			<label>middleInitial</label>
+			<hidden-input>Y</hidden-input>
+		</Contact_middleInit>
+		<Contact_lastName>
+			<label>lastName</label>
+			<hidden-input>Y</hidden-input>
+		</Contact_lastName>
+	</columns>
+<sqlfrom>Contact as Contact</sqlfrom>
+<sqlwhere><![CDATA[ (Contact.status <> '03') ]]></sqlwhere>
+<pagesize>15</pagesize>
+<title>Attention Browse</title>
+</browse_attention>

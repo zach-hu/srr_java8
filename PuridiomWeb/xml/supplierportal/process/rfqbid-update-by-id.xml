@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="rfqBidUpdate" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="rfqBidRetrieve">
+			<task synchronous="true" continue-on-failure="false" name="rfqBid">			
+				<task-object-name>com.tsa.puridiom.rfqbid.tasks.RfqBidRetrieveById</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="rfqBidUpdate">
+			<rule-filename>is-rfqbid-empty.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="rfqBid">
+				<task-object-name>com.tsa.puridiom.supplierportal.InvokeSupplierPortalProcessTask</task-object-name>
+				<process-filename>rfqbid-add-for-vendor.xml</process-filename>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="rfqBidUpdate">
+			<rule-filename check-for-false="true">is-rfqbid-empty.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="rfqBid">
+				<task-object-name>com.tsa.puridiom.rfqbid.tasks.RfqBidSetValues</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="rfqBid">			
+				<task-object-name>com.tsa.puridiom.rfqbid.tasks.RfqBidUpdateById</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

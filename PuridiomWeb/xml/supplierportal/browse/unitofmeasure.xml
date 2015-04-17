@@ -1,0 +1,21 @@
+<browse_unitofmeasure>
+	<columns>
+		<UnitOfMeasure_umCode>
+			<label>UM Code</label>
+			<sort>A</sort>
+			<link><![CDATA[javascript: returnMe('#UnitOfMeasure_umCode^'); void(0);]]></link>
+		</UnitOfMeasure_umCode>
+		<UnitOfMeasure_description>
+			<label>Description</label>
+		</UnitOfMeasure_description>
+		<UnitOfMeasure_factor>
+			<label>Factor</label>
+			<hidden-input>Y</hidden-input>
+		</UnitOfMeasure_factor>
+	</columns>
+<sqlfrom>UnitOfMeasure as UnitOfMeasure</sqlfrom>
+<sqlwhere><![CDATA[ (UnitOfMeasure.status <> '03') ]]></sqlwhere>
+<sqlorderby>UnitOfMeasure.umCode ASC</sqlorderby>
+<pagesize>15</pagesize>
+<title>Units of Measure Browse</title>
+</browse_unitofmeasure>

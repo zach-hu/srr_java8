@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="docAttachmentUpdate" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="docAttachmenttAddFromStandard">
+			<task synchronous="true" continue-on-failure="false" name="stdAttachment">			
+				<task-object-name>com.tsa.puridiom.stdattachment.tasks.StdAttachmentRetrieveById</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="docAttachmentSetup">
+				<task-object-name>com.tsa.puridiom.docattachment.tasks.DocAttachmentSetValuesFromStdAttachment</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="DocAttachment_docFilename">
+				<task-object-name>com.tsa.puridiom.documentfile.tasks.DocumentFileCopy</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="docAttachmentAdd">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>docattachment-add.xml</process-filename>
+			</task>
+		</activity>
+	</activities>
+</process>

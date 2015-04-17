@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="recalculate" connection-type="Connection-Required">
+	<rule-filename></rule-filename>
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="Totals">
+			<task synchronous="true" continue-on-failure="false" name="requisitionLineUpdate">
+				<rule-filename>is-req.xml</rule-filename>
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>requisition-recalculate.xml</process-filename>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="poRecalculate">
+				<rule-filename>is-po.xml</rule-filename>
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>po-recalculate.xml</process-filename>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="dsbRecalculate">
+				<rule-filename>is-dsb.xml</rule-filename>
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>disbursement-recalculate.xml</process-filename>
+			</task>
+		</activity>
+	</activities>
+</process>

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="InvBinLocationMove" connection-type="New-Transaction">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="MoveQty">
+			<rule-filename>is-extended-inventory-module-active</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="fromBinSetup">
+				<task-object-name>com.tsa.puridiom.invbinlocation.tasks.InvBinLocationFromMoveSetup</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="fromBin">
+				<task-object-name>com.tsa.puridiom.invbinlocation.tasks.InvBinLocationRetrieveById</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="toBinSetup">
+				<task-object-name>com.tsa.puridiom.invbinlocation.tasks.InvBinLocationToMoveSetup</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="toBin">
+				<task-object-name>com.tsa.puridiom.invbinlocation.tasks.InvBinLocationRetrieveById</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="MoveQty">
+				<task-object-name>com.tsa.puridiom.invbinlocation.tasks.InvBinLocationMove</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="InvLocation">
+				<task-object-name>com.tsa.puridiom.invbinlocation.tasks.InvBinLocationMoveProperty</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="UpdateInvBinLocation">
+			<rule-filename>is-extended-inventory-module-active</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="InvBinLocation">
+				<task-object-name>com.tsa.puridiom.invbinlocation.tasks.InvBinLocationFromUpdateSetup</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="fromBin">
+				<task-object-name>com.tsa.puridiom.invbinlocation.tasks.InvBinLocationUpdate</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="invBinLocHistory">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>invbinlochistory-add.xml</process-filename>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="InvBinLocation">
+				<task-object-name>com.tsa.puridiom.invbinlocation.tasks.InvBinLocationToUpdateSetup</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="toBin">
+				<task-object-name>com.tsa.puridiom.invbinlocation.tasks.InvBinLocationUpdate</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="invBinLocHistory">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>invbinlochistory-add.xml</process-filename>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="updateInvLocation">
+			<rule-filename>is-standard-inventory-module-active</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="fromLocationSetup">
+				<task-object-name>com.tsa.puridiom.invlocation.tasks.InvLocationFromMoveSetup</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="fromLocation">
+				<task-object-name>com.tsa.puridiom.invlocation.tasks.InvLocationRetrieveById</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="toLocationSetup">
+				<task-object-name>com.tsa.puridiom.invlocation.tasks.InvLocationToMoveSetup</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="toLocation">
+				<task-object-name>com.tsa.puridiom.invlocation.tasks.InvLocationRetrieveById</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="MoveQty">
+				<task-object-name>com.tsa.puridiom.invlocation.tasks.InvLocationMove</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="UpdateInvLocation">
+			<rule-filename>is-standard-inventory-module-active</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="InvLocation">
+				<task-object-name>com.tsa.puridiom.invlocation.tasks.InvLocationFromUpdateSetup</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="fromBin">
+				<task-object-name>com.tsa.puridiom.invlocation.tasks.InvLocationUpdate</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="InvBinLocation">
+				<task-object-name>com.tsa.puridiom.invlocation.tasks.InvLocationToUpdateSetup</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="toBin">
+				<task-object-name>com.tsa.puridiom.invlocation.tasks.InvLocationUpdate</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PoPaymentDetail>
+
+  <columns>
+		<RequisitionHeader_requisitionNumber>
+			<label>Requisition Number</label>
+			<type>STRING</type>
+		</RequisitionHeader_requisitionNumber>
+		<RequisitionHeader_departmentCode>
+			<label>Department Code</label>
+			<type>STRING</type>
+		</RequisitionHeader_departmentCode>
+		<RequisitionHeader_vendorId>
+			<label>Vendor Id</label>
+			<type>STRING</type>
+		</RequisitionHeader_vendorId>
+		<RequisitionHeader_internalComments>
+			<label>Internal Comments</label>
+			<type>STRING</type>
+		</RequisitionHeader_internalComments>
+		<RequisitionHeader_authorizationCode>
+			<label>Authorization Code</label>
+			<type>STRING</type>
+		</RequisitionHeader_authorizationCode>
+		<RequisitionHeader_requisitionDate>
+			<label>Requisition Date</label>
+			<type>DATE</type>
+		</RequisitionHeader_requisitionDate>
+		<RequisitionHeader_requisitionerCode>
+			<label>Requisitioner Code</label>
+			<type>STRING</type>
+		</RequisitionHeader_requisitionerCode>
+		<RequisitionHeader_priorityCode>
+			<label>Priority Code</label>
+			<type>STRING</type>
+		</RequisitionHeader_priorityCode>
+		<Account_fld1>
+			<label>Fld 1</label>
+			<type>STRING</type>
+		</Account_fld1>
+		<Account_fld2>
+			<label>Fld 2</label>
+			<type>STRING</type>
+		</Account_fld2>
+		<Account_fld4>
+			<label>Fld 4</label>
+			<type>STRING</type>
+		</Account_fld4>
+		<Account_fld6>
+			<label>Fld 6</label>
+			<type>STRING</type>
+		</Account_fld6>
+		<Account_fld5>
+			<label>Fld 5</label>
+			<type>STRING</type>
+		</Account_fld5>
+		<RequisitionHeader_total>
+			<label>Total</label>
+			<type>BIGDECIMAL</type>
+		</RequisitionHeader_total>
+		<RequisitionHeader_status>
+			<label>Status</label>
+			<type>STRING</type>
+		</RequisitionHeader_status>
+		<RequisitionHeader_buyer>
+			<label>Buyer</label>
+			<type>STRING</type>
+		</RequisitionHeader_buyer>
+		<RequisitionHeader_requisitionType>
+			<label>Requisition Type</label>
+			<type>STRING</type>
+		</RequisitionHeader_requisitionType>
+	</columns>
+
+  <sqlfrom>RequisitionHeader as RequisitionHeader, Account as Account</sqlfrom>
+
+  <sqlwhere><![CDATA[RequisitionHeader.icReqAccount = Account.id.icLine  and( ( Account.id.sequence = 1 ) and(RequisitionHeader.status = '20' or( RequisitionHeader.status = '10') ) )]]></sqlwhere>
+
+  <pagesize>15</pagesize>
+
+  <title>Requisition Report (Workload)</title>
+
+
+</PoPaymentDetail>
+

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="bomMethodUpdate" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="updateBomMethod">
+			<task synchronous="true" continue-on-failure="false" name="bomMethod">
+				<task-object-name>com.tsa.puridiom.bommethod.tasks.BomMethodRetrieveById</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="bomMethod">
+				<task-object-name>com.tsa.puridiom.bommethod.tasks.BomMethodSetValues</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="bomMethod">
+				<task-object-name>com.tsa.puridiom.bommethod.tasks.BomMethodUpdate</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+	</activities>
+</process>

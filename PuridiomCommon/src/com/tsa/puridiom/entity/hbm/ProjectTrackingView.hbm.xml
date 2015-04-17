@@ -1,0 +1,108 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping>
+
+<!--
+    Created by Middlegen Hibernate plugin
+
+    http://boss.bekk.no/boss/middlegen/
+    http://hibernate.sourceforge.net/
+-->
+
+<class
+    name="com.tsa.puridiom.entity.ProjectTrackingView"
+    table="PROJECT_TRACKING_VIEW"
+>
+  <id
+        name="poNumber"
+        type="java.lang.String"
+        column="PO_NUMBER"
+    >
+        <generator class="assigned" />
+    </id>
+    <property
+        name="fld4"
+        type="java.lang.String"
+        column="FLD_4"
+        length="15"
+    />
+    <property
+        name="vendorName"
+        type="java.lang.String"
+        column="VENDOR_NAME"
+        length="40"
+    />
+    <property
+        name="vendorId"
+        type="java.lang.String"
+        column="VENDOR_ID"
+        length="15"
+    />
+    <property
+        name="fld2"
+        type="java.lang.String"
+        column="FLD_2"
+        length="15"
+    />
+    <property
+        name="fld1"
+        type="java.lang.String"
+        column="FLD_1"
+        length="18"
+    />
+    <property
+        name="awarded"
+        type="java.math.BigDecimal"
+        column="AWARDED"
+        length="15"
+    />
+    <property
+        name="spentTodate"
+        type="java.math.BigDecimal"
+        column="SPENT_TODATE"
+        length="22"
+    />
+    <property
+        name="allocPercent"
+        type="java.math.BigDecimal"
+        column="ALLOC_PERCENT"
+        length="15"
+    />
+    <property
+        name="poType"
+        type="java.lang.String"
+        column="PO_TYPE"
+        length="2"
+    />
+    <property
+        name="status"
+        type="java.lang.String"
+        column="STATUS"
+        length="4"
+    />
+    <property
+        name="poDate"
+        type="java.sql.Timestamp"
+        column="PO_DATE"
+        length="7"
+    />
+    <property
+        name="appDate"
+        type="java.sql.Timestamp"
+        column="APP_DATE"
+        length="7"
+    />
+    <property
+        name="internalComments"
+        type="java.lang.String"
+        column="INTERNAL_COMMENTS"
+        length="255"
+    />
+
+    <!-- associations -->
+
+</class>
+</hibernate-mapping>

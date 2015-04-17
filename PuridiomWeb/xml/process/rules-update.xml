@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="rulesUpdate" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="rulesUpdate">
+			<task synchronous="true" continue-on-failure="false" name="rules">
+				<task-object-name>com.tsa.puridiom.rules.tasks.RulesRetrieveById</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="rules">
+				<task-object-name>com.tsa.puridiom.rules.tasks.RulesSetValues</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="rules">
+				<task-object-name>com.tsa.puridiom.rules.tasks.RulesUpdate</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

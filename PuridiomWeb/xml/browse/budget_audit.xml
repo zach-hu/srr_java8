@@ -1,0 +1,50 @@
+<browse_budget>
+	<columns>
+		<BudgetAudit_budgetId>
+			<label>budget-id</label>
+			<visible>0</visible>
+			<hidden-input>Y</hidden-input>
+		</BudgetAudit_budgetId>
+		<BudgetAudit_authority>
+			<label>routingAuthority</label>
+			<link><![CDATA[javascript: viewBudget('#BudgetAudit_budgetId^'); void(0);]]></link>
+			<visible>1</visible>
+			<hidden-input>Y</hidden-input>
+		</BudgetAudit_authority>
+		<BudgetCenter_budget1>
+			<label>user-costCenter</label>
+			<visible>1</visible>
+		</BudgetCenter_budget1>
+		<BudgetCenter_budget2>
+			<label>brw-budget-budget2</label>
+			<visible>1</visible>
+		</BudgetCenter_budget2>
+		<BudgetAudit_actionCode>
+			<label>brw-actionCode</label>
+			<visible>0</visible>
+		</BudgetAudit_actionCode>
+		<BudgetAudit_actionType>
+			<label>brw-actionType</label>
+			<visible>0</visible>
+		</BudgetAudit_actionType>
+		<BudgetAudit_tranAmt>
+			<label>budget-encumbered</label>
+			<type>BIGDECIMAL</type>
+			<visible>1</visible>
+		</BudgetAudit_tranAmt>
+		<BudgetAudit_balance>
+			<label>balance</label>
+			<type>BIGDECIMAL</type>
+			<visible>1</visible>
+		</BudgetAudit_balance>
+		<BudgetAudit_owner>
+			<label>owner</label>
+			<visible>1</visible>
+		</BudgetAudit_owner>
+	</columns>
+<sqlfrom>BudgetAudit as BudgetAudit, BudgetCenter as BudgetCenter</sqlfrom>
+<sqlwhere>BudgetAudit.budgetId = BudgetCenter.budgetId</sqlwhere>
+<sqlorderby>BudgetAudit.auditId DESC</sqlorderby>
+<pagesize>15</pagesize>
+<title>Audit Trail</title>
+</browse_budget>

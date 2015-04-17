@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="VendorContactRetrieveByEmail" connection-type="Connection-Required"> 
+	<activities>  
+		<activity synchronous="true" continue-on-failure="false" name="vendorRetrieveDetails">   
+			<task synchronous="true" continue-on-failure="false" name="contact">
+				<task-object-name>com.tsa.puridiom.contact.tasks.ContactRetrieveByEmailAddr</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="vendorRetrieveSetup">    			
+				<task-object-name>com.tsa.puridiom.vendor.tasks.VendorRetrieveSetupByContact</task-object-name>    
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="vendor">    			
+				<task-object-name>com.tsa.puridiom.vendor.tasks.VendorRetrieveById</task-object-name>    
+				<post-action />    
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="address">    			
+				<task-object-name>com.tsa.puridiom.address.tasks.AddressRetrievePrimary</task-object-name>    
+				<post-action />    
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="remitToAddress">    			
+				<task-object-name>com.tsa.puridiom.address.tasks.AddressRetrieveRemitTo</task-object-name>    
+				<post-action />    
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="contactList">
+				<task-object-name>com.tsa.puridiom.contact.tasks.ContactRetrieveBySupplier</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="vendorCommRelList">    			
+				<task-object-name>com.tsa.puridiom.vendorcommrel.tasks.VendorCommRelRetrieveBy</task-object-name>    
+				<post-action />    
+			</task>   
+		  </activity>  
+	 </activities> 
+</process>

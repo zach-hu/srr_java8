@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="otcline-update-from-lookup" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="disbineUpdateActivity">
+		    <task synchronous="true" continue-on-failure="false" name="disbLineUpdateSetup">
+				<task-object-name>com.tsa.puridiom.otcline.tasks.OtcLineLookupSetup</task-object-name>
+				<post-action></post-action>
+			</task>
+		    <task synchronous="true" continue-on-failure="false" name="disbLine">
+				<rule-filename>is-disbline-icdsbline-not-empty.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.disbline.tasks.DisbLineRetrieveById</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="disbLine">
+				<rule-filename>is-item-found.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.otcline.tasks.OtcLineLookupSetValues</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="disbLineCreate">
+				<rule-filename>is-disbline-empty.xml</rule-filename>
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>otcline-create-from-lookup.xml</process-filename>
+				<post-action>exitActivity</post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="disbLineUpdate">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>disbline-update.xml</process-filename>
+			</task>
+		</activity>
+	</activities>
+</process>

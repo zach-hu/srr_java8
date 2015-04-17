@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="invoiceLineDelete" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="invoiceLineDelete">
+			<task synchronous="true" continue-on-failure="false" name="invoiceLine">
+				<task-object-name>com.tsa.puridiom.invoiceline.tasks.InvoiceLineDeleteByLineIc</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+	</activities>
+</process>

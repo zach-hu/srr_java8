@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="docAttachmentDeleteById" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="docAttachmentDelete">
+			<task synchronous="true" continue-on-failure="false" name="docAttachment">
+				<rule-filename>is-docattachment-empty.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.docattachment.tasks.DocAttachmentRetrieveById</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="docAttachmentDeleteSetup">			
+				<task-object-name>com.tsa.puridiom.docattachment.tasks.DocAttachmentDeleteByIdSetup</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="docAttachmentDeleteById">			
+				<task-object-name>com.tsa.puridiom.docattachment.tasks.DocAttachmentDeleteById</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="deleteFile">
+				<task-object-name>com.tsa.puridiom.documentfile.tasks.DocumentFileDelete</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

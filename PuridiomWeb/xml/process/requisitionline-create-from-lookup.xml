@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="requisitionLineCreateFromLookup" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="requisitionLineCreate">
+			<task synchronous="true" continue-on-failure="false" name="requisitionHeader">			
+				<task-object-name>com.tsa.puridiom.requisitionheader.tasks.RequisitionHeaderRetrieveById</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="requisitionLineSetupForLookup">			
+				<task-object-name>com.tsa.puridiom.requisitionline.tasks.RequisitionLineSetupForLookup</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="requisitionLineSetup">
+				<task-object-name>com.tsa.puridiom.requisition.tasks.RequisitionHeaderLinesMapUdfs</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="requisitionLineSetupUmFactor">
+				<task-object-name>com.tsa.puridiom.requisitionline.tasks.RequisitionLineSetupUmFactor</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="requisitionLineSetupItemLocation">			
+				<rule-filename>is-organization-vse.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.requisitionline.tasks.RequisitionLineSetupItemLocation</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="RequisitionLine_lineNumber">			
+				<task-object-name>com.tsa.puridiom.requisitionline.tasks.RequisitionLineGetNewLineNumber</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="requisitionLine">			
+				<task-object-name>com.tsa.puridiom.requisitionline.tasks.RequisitionLineSetValues</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="requisitionLine">			
+ 				<rule-filename>is-create-save.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.requisitionline.tasks.RequisitionLineAdd</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="history">
+			<task synchronous="true" continue-on-failure="false" name="requisitionLineHistorySetup">	
+				<task-object-name>com.tsa.puridiom.requisitionline.history.tasks.RequisitionLineHistorySetup</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="requisitionLineHistory">			
+				<task-object-name>com.tsa.puridiom.requisitionline.history.tasks.RequisitionLineHistory</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

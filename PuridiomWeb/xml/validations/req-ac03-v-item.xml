@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rule>
+	<clause type="NotEmpty">
+		<left-side elementSource="true">
+			<source>incomingRequestObjectMethod</source>
+			<object>account</object>
+			<name>getFld3</name>
+		</left-side>
+	</clause>
+	<logical-operator>IFTHEN</logical-operator>
+	<clause type="lookup" elementSource="true">
+	<sql>from VSRRProject VSRRProject where VSRRProject.id.tableType = 'AC03' AND VSRRProject.id.tableKey = '@fld3@' and (VSRRProject.status = '02' or (VSRRProject.status = '01' and VSRRProject.dateExpires >= @today@))</sql>
+		<source>fld3</source>
+		<arguments>
+			<name>fld3</name>
+			<source>account</source>
+			<colName>getFld3</colName>
+		</arguments>
+	</clause>
+</rule>

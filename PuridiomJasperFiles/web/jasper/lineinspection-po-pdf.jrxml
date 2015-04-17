@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created using an evaluation version of JasperAssistant (http://www.jasperassistant.com) -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="inspection_po" pageWidth="595" pageHeight="110" columnWidth="595" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+	<property name="com.jasperassistant.designer.GridWidth" value="12"/>
+	<property name="com.jasperassistant.designer.GridHeight" value="12"/>
+	<property name="com.jasperassistant.designer.DataSource" value="oracle"/>
+	<property name="com.jasperassistant.designer.SnapToGrid" value="false"/>
+	<property name="com.jasperassistant.designer.Grid" value="false"/>
+	<import value="com.tsa.puridiom.reports.datasource.*"/>
+	<import value="com.tsa.puridiom.jasperreports.*"/>
+	<reportFont name="Arial_Normal" isDefault="false" fontName="Arial" size="8" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_bold" isDefault="false" fontName="Arial Black" size="8" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica-Bold" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<parameter name="criteriaSR" class="net.sf.jasperreports.engine.JasperReport">
+		<defaultValueExpression><![CDATA[JasperReportsHelper.loadSubReport("linecriteria-po-pdf.jasper", $P{oid})]]></defaultValueExpression>
+	</parameter>
+	<parameter name="inspectionDS" class="com.tsa.puridiom.reports.datasource.HibernateQueryResultDataSource"/>
+	<parameter name="oid" class="java.lang.String">
+		<defaultValueExpression><![CDATA["HILTON"]]></defaultValueExpression>
+	</parameter>
+	<field name="InspectionHeader_inspectType" class="java.lang.String"/>
+	<field name="InspectionHeader_standardCode" class="java.lang.String"/>
+	<field name="InspectionHeader_inspectionLineList" class="java.util.List"/>
+	<detail>
+		<band height="20">
+			<staticText>
+				<reportElement positionType="Float" x="90" y="0" width="55" height="14"/>
+				<textElement verticalAlignment="Middle">
+					<font reportFont="Arial_bold" fontName="Arial Black" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[Inspection: ]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true" hyperlinkType="None">
+				<reportElement positionType="Float" x="145" y="0" width="100" height="14"/>
+				<textElement verticalAlignment="Middle">
+					<font reportFont="Arial_Normal" fontName="Arial" isBold="false" pdfFontName="Helvetica"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{InspectionHeader_inspectType}.equals("RI") ? "Receipt Inspection (RICP)" : $F{InspectionHeader_inspectType}.equals("FI") ? "Field Inspection" : $F{InspectionHeader_inspectType}.equals("GI") ? "General Inspection" : $F{InspectionHeader_inspectType}.equals("CG") ? "CGD Inspection" : "fffffff"]]></textFieldExpression>
+			</textField>
+			<subreport>
+				<reportElement positionType="Float" x="0" y="16" width="450" height="2" isRemoveLineWhenBlank="true"/>
+				<parametersMapExpression><![CDATA[$P{REPORT_PARAMETERS_MAP}]]></parametersMapExpression>
+				<subreportParameter name="oid">
+					<subreportParameterExpression><![CDATA[$P{oid}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="labelPrefix">
+					<subreportParameterExpression><![CDATA["req"]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[ReportUtils.getDS($F{InspectionHeader_inspectionLineList})]]></dataSourceExpression>
+				<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[$P{criteriaSR}]]></subreportExpression>
+			</subreport>
+			<staticText>
+				<reportElement positionType="Float" x="255" y="0" width="75" height="14"/>
+				<textElement verticalAlignment="Middle">
+					<font reportFont="Arial_bold" fontName="Arial Black" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[Standard Code: ]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true" hyperlinkType="None">
+				<reportElement positionType="Float" x="330" y="0" width="40" height="14"/>
+				<textElement verticalAlignment="Middle" markup="none">
+					<font reportFont="Arial_Normal" fontName="Arial" isBold="false" pdfFontName="Helvetica"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{InspectionHeader_standardCode}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="requisitionHeaderUpdate" connection-type="Transaction-Required">
+	<activities>
+		<!--  special activity added for VSE; allows them to enter a new shipto or supplier address on the req-->
+		<activity synchronous="true" continue-on-failure="false" name="updateAddress">
+			<rule-filename>is-update-address.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="existingAddress">
+				<task-object-name>com.tsa.puridiom.address.tasks.AddressRetrieveById</task-object-name>
+				<post-action />
+			 </task>
+			<task synchronous="true" continue-on-failure="false" name="setErrorMsg">
+				<rule-filename>is-existing-address-empty.xml</rule-filename>
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>address-add.xml</process-filename>
+				<post-action>exitActivity</post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="setErrorMsg">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>address-update.xml</process-filename>
+				<post-action />
+			</task>
+		</activity>
+		<!--  //  -->
+		<activity synchronous="true" continue-on-failure="false" name="requisitionHeaderUpdate">
+			<task synchronous="true" continue-on-failure="false" name="requisitionHeader">
+				<task-object-name>com.tsa.puridiom.requisitionheader.tasks.RequisitionHeaderRetrieveById</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="requisitionHeaderUpdateSetup">
+				<task-object-name>com.tsa.puridiom.requisitionheader.tasks.RequisitionHeaderUpdateSetup</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="requisitionHeaderShipToTaxActivity">
+			<rule-filename>is-req-taxcode-from-shipto.xml;is-requisitionheader-shiptocode-not-empty.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="setShipToTaxInfo">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>requisitionheader-set-tax-from-shipto.xml</process-filename>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="requisitionLineAccounts">
+			<rule-filename check-for-false="true">is-project-request.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="requisitionLineList">
+				<task-object-name>com.tsa.puridiom.requisitionline.tasks.RequisitionLineRetrieveByHeader</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="RequisitionHeader_currencyFactor">
+				<rule-filename>is-requisitionheader-currency-check-required.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.requisitionheader.tasks.RequisitionHeaderGetCurrentCurrencyFactor</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="requisitionHeaderRecalculate">
+				<task-object-name>com.tsa.puridiom.requisition.tasks.RequisitionCalculateTotals</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="allocatedTotal">
+				<task-object-name>com.tsa.puridiom.account.tasks.AccountAllocatedForLines</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="accountUpdate">
+			<task synchronous="true" continue-on-failure="false" name="accountSetTotal">
+				<rule-filename>is-project-request.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.account.tasks.AccountSetAllocateTotal</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="accountList">
+				<task-object-name>com.tsa.puridiom.account.tasks.AccountRetrieveByLine</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="accountRecalculate">
+				<task-object-name>com.tsa.puridiom.account.tasks.AccountRecalculate</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="accountListUpdate">
+				<task-object-name>com.tsa.puridiom.account.tasks.AccountListUpdate</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="requisitionHeader">
+				<task-object-name>com.tsa.puridiom.requisitionheader.tasks.RequisitionHeaderSetValues</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="requisitionHeader">
+				<task-object-name>com.tsa.puridiom.requisitionheader.tasks.RequisitionHeaderUpdate</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="accountSetProjectCode">
+				<rule-filename>is-project-request.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.account.tasks.AccountSetProjectCode</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="updateItemLocation">
+			<rule-filename>is-organization-vse.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="requisitionLineList">
+				<task-object-name>com.tsa.puridiom.requisitionline.tasks.RequisitionLineRetrieveByHeader</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="updateItemLocation">
+				<task-object-name>com.tsa.puridiom.requisitionline.tasks.RequisitionLineUpdateItemLocation</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="updatedFieldsToLine">
+			<rule-filename>is-updatefields-reqheader-to-lines.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="updatedFieldsToLine">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>reqheader-updated-fields-to-lines.xml</process-filename>
+			</task>			
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="receiptOptionsUpdate">
+			<rule-filename>is-reset-values-from-header.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="receiptOptionsUpdate">
+				<rule-filename>is-requisitionlinelist-empty.xml</rule-filename>
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>requisitionline-retrieve-by-header.xml</process-filename>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="receiptOptionsUpdate">
+				<task-object-name>com.tsa.puridiom.requisitionline.tasks.RequisitionLineResetValuesFromHeader</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="accountLineUpdateByHeader">
+			<rule-filename>is-account-updated-by-reqheader.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="requisitionHeader">
+				<task-object-name>com.tsa.puridiom.requisitionheader.tasks.RequisitionHeaderRetrieveById</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="accountList">
+				<task-object-name>com.tsa.puridiom.account.tasks.AccountLineRetrieveByHeader</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="accountList">
+				<task-object-name>com.tsa.puridiom.account.tasks.AccountUpdateByRequisitionHeader</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="accountListUpdate">
+				<task-object-name>com.tsa.puridiom.account.tasks.AccountListUpdate</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<!-- <activity synchronous="true" continue-on-failure="false" name="auditTrail">
+			<rule-filename>is-audit-save-add.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="SaveAuditFields">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>audit-save-add.xml</process-filename>
+			</task>
+		</activity> -->
+		<activity synchronous="true" continue-on-failure="false" name="updateAllDepartmentCode">
+			<task synchronous="true" continue-on-failure="false" name="updateAllDepartmentCode">
+				<rule-filename>update-all-departmentcode.xml</rule-filename>
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>requisition-update-all-departmentcode.xml</process-filename>
+			</task>
+		</activity>
+	</activities>
+</process>

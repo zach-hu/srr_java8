@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="requisitionCreate" connection-type="transaction-required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="requisitionCreate">
+			<task synchronous="true" continue-on-failure="false" name="requisitionCreateSetup">
+				<rule-filename></rule-filename>
+				<task-object-name>com.tsa.puridiom.requisition.tasks.RequisitionCreateSetup</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="requisitionSuggestedBuyer">
+			<rule-filename>is-buyerassignment-suggested.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="departmentBuyer">
+				<rule-filename></rule-filename>
+				<task-object-name>com.tsa.puridiom.departmentbuyer.tasks.DepartmentBuyerRetrieveByReqDept</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="userProfileRetrieveSetup">
+				<rule-filename></rule-filename>
+				<task-object-name>com.tsa.puridiom.userprofile.tasks.UserProfileRetrieveByDeptBuyerSetup</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="userProfile">
+				<rule-filename check-for-false="true">is-userprofile-userid-empty.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.userprofile.tasks.UserProfileRetrieveById</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="setSuggestedBuyer">
+				<rule-filename check-for-false="true">is-userprofile-empty.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.requisitionheader.tasks.RequisitionHeaderSetBuyerByDept</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="requisitionMapping">
+			<task synchronous="true" continue-on-failure="false" name="requisitionUserDefaults">
+				<rule-filename>is-req-defaults-requester.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.requisition.tasks.RequisitionUserDefaults</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="requisitionUserMap">
+				<rule-filename></rule-filename>
+				<task-object-name>com.tsa.puridiom.requisition.tasks.RequisitionUserMap</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="requisitionHeaderInventorySetup">
+				<rule-filename>is-inventory-request</rule-filename>
+				<task-object-name>com.tsa.puridiom.requisitionheader.tasks.RequisitionHeaderInventorySetup</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="requisitionHeader">
+				<task-object-name>com.tsa.puridiom.requisitionheader.tasks.RequisitionHeaderSetValues</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="requisitionHeaderSupplierSetup">
+				<task-object-name>com.tsa.puridiom.requisitionheader.tasks.RequisitionHeaderSupplierSetup</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="TaxSettings">
+			<rule-filename check-for-false="true">is-requisitionheader-taxcode-empty.xml;is-check-request.xml;is-project-request.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="TaxCode_taxCode">
+				<rule-filename></rule-filename>
+				<task-object-name>com.tsa.puridiom.requisitionheader.tasks.RequisitionHeaderGetTaxCode</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="taxCode">
+				<rule-filename></rule-filename>
+				<task-object-name>com.tsa.puridiom.taxcode.tasks.TaxCodeRetrieveById</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="requisitionHeader">
+				<rule-filename></rule-filename>
+				<task-object-name>com.tsa.puridiom.requisitionheader.tasks.RequisitionHeaderSetTax</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+	</activities>
+</process>

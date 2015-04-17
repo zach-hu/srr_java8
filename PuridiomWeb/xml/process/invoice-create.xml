@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="InvoiceCreate" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="invoiceCreate">
+			<task synchronous="true" continue-on-failure="false" name="invoiceCreateSetup">
+				<rule-filename></rule-filename>
+				<task-object-name>com.tsa.puridiom.invoice.tasks.InvoiceCreateSetup</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="invoiceHeader">
+				<task-object-name>com.tsa.puridiom.invoiceheader.tasks.InvoiceHeaderSetValues</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="invoiceHeaderAdd">
+				<rule-filename></rule-filename>
+				<task-object-name>com.tsa.puridiom.invoiceheader.tasks.InvoiceHeaderAdd</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="addDefaultUseTaxAccount">
+			<task synchronous="true" continue-on-failure="false" name="addDefaultUseTaxAccount">
+				<rule-filename>is-usetax-credit-account.xml;has-invoice-use-tax.xml</rule-filename>
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>invoice-add-default-usetax-account.xml</process-filename>
+			</task>
+		</activity>
+	 </activities>
+</process>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="ValidateRules" connection-type="Connection-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="setUpRequisitionData">
+			<task synchronous="true" continue-on-failure="false" name="setup">			
+				<task-object-name>com.tsa.puridiom.validationrules.tasks.DisbRulesSetup</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="disbHeader">			
+				<task-object-name>com.tsa.puridiom.disbheader.tasks.DisbHeaderRetrieveById</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="disbHeaderDataRetrieve">			
+				<task-object-name>com.tsa.puridiom.disbheader.tasks.DisbHeaderDataRetrieve</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="lineitems">			
+				<task-object-name>com.tsa.puridiom.disbline.tasks.DisbLineDataRetrieve</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="FinalDataSetup">			
+				<task-object-name>com.tsa.puridiom.disbursement.tasks.DisbursementValidationRulesData</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="accounts">			
+				<task-object-name>com.tsa.puridiom.account.tasks.AccountRetrieveByHeader</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="otherRules">
+			<task synchronous="true" continue-on-failure="false" name="DisbursementLineExistAccount">
+				<task-object-name>com.tsa.puridiom.disbursement.rules.DisbursementLineExistAccount</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="otherRule">
+				<task-object-name>com.tsa.puridiom.account.tasks.AccValidateCCADFWellFacility</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="validateRules">
+			<task synchronous="true" continue-on-failure="false" name="labelsList">
+				<task-object-name>com.tsa.puridiom.labels.tasks.LabelsRetrieveBy</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="rules">
+				<task-object-name>com.tsa.puridiom.validationrules.tasks.DatabaseValidationRulesTask</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="rules">
+				<task-object-name>com.tsa.puridiom.validationrules.tasks.ValidationRulesTask</task-object-name>
+				<process-filename>disb-validation-rules.xml</process-filename>
+			</task>
+		</activity>
+	</activities>
+</process>

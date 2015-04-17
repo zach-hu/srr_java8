@@ -1,0 +1,16 @@
+<rule>
+	<clause type="BooleanCompare">
+		<left-side>
+			<source>Singleton</source>
+			<object>com.tsa.puridiom.usermanager.UserManager</object>
+			<name>isUserRegistered</name>
+			<argument-value source="incomingRequest">organizationId</argument-value>
+			<argument-value source="incomingRequest">userId</argument-value>
+		</left-side>
+		<operator>EQUALS</operator>
+		<right-side>
+			<source>constant</source>
+			<value>true</value>
+		</right-side>
+	</clause>
+</rule>

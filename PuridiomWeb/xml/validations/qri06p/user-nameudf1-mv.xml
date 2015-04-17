@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rule>
+	<!--<clause type="NotEmpty">
+		<left-side>
+			<source>incomingRequestObjectMethod</source>
+			<object>header</object>
+			<name>getDepartmentCode</name>
+		</left-side>
+	</clause>
+	<logical-operator>AND</logical-operator>-->
+	<clause type="lookup">
+		<sql><![CDATA[from UserProfile as UserProfile where UserProfile.id.userId = '@userid@' and (UserProfile.buyer = 'Y') AND (UserProfile.status <> '03') AND (UserProfile.userId <> 'SYSADM') ]]></sql>
+		<source>user</source>
+		<arguments>
+			<name>userid</name>
+			<source>user</source>
+			<colName>getNameUdf1</colName>
+		</arguments>
+	</clause>
+</rule>
+
+
+

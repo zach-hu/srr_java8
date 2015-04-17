@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="receiptCreateFromOrder" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="poHeaderRetrieveById">
+			<task synchronous="true" continue-on-failure="false" name="poHeader">
+				<task-object-name>com.tsa.puridiom.poheader.tasks.PoHeaderRetrieveById</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="poLineList">
+				<task-object-name>com.tsa.puridiom.poline.tasks.PoLineRetrieveByHeader</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="receiptCreate">
+			<task synchronous="true" continue-on-failure="false" name="receiptCreateFromOrderSetup">
+				<task-object-name>com.tsa.puridiom.receipt.tasks.ReceiptCreateFromOrderSetup</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="receiptHeader">
+				<task-object-name>com.tsa.puridiom.receiptheader.tasks.ReceiptHeaderSetValuesFromPoHeader</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="receiptHeader">
+				<task-object-name>com.tsa.puridiom.receiptheader.tasks.ReceiptHeaderSetValues</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="receiptHeaderAdd">
+				<task-object-name>com.tsa.puridiom.receiptheader.tasks.ReceiptHeaderAdd</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="receiptHeaderSaveasfromPo">
+			<task synchronous="true" continue-on-failure="false" name="receiptHeaderCommentSaveas">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>receiptheader-saveas-from-po.xml</process-filename>
+			</task>
+		</activity>
+		<!--
+		<activity synchronous="true" continue-on-failure="false" name="receiptCreateLines">
+			<task synchronous="true" continue-on-failure="false" name="receiptLineListCreate">
+				<task-object-name>com.tsa.puridiom.receiptline.tasks.ReceiptLineCreateFromPoLineList</task-object-name>
+			</task>
+		</activity>
+		-->
+	</activities>
+</process>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="po-update-buyer-remarks" connection-type="Connection-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="poUpdateBuyerRemarks">
+			<task synchronous="true" continue-on-failure="false" name="poLineList">
+				<task-object-name>com.tsa.puridiom.poline.tasks.PoLineRetrieveByHeader</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="icReqHeaderList">
+				<task-object-name>com.tsa.puridiom.requisitionline.tasks.RequisitionLineListRetrieveIcReqHeaderList</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="poUpdateBuyerRemarks">
+				<task-object-name>com.tsa.puridiom.po.tasks.PoUpdateBuyerRemarks</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+	</activities>
+</process>

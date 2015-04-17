@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="Print-po-Pdf" connection-type="Connection-Required">
+  <activities>
+    <activity synchronous="true" continue-on-failure="false" name="asset-unprinted">
+
+       <task synchronous="true" continue-on-failure="false" name="assetList">
+        <task-object-name>com.tsa.puridiom.asset.tasks.AssetprintedBarcode</task-object-name>
+       </task>
+       <task synchronous="true" continue-on-failure="false" name="report">
+        <task-object-name>com.tsa.puridiom.formpdf.tasks.AssetUnPrintedPdf</task-object-name>
+      </task>
+    </activity>
+  </activities>
+</process>

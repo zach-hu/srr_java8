@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Connection for OrganizationRegisterNew will be obtained in the task w/ host.cfg.xml -->
+<process name="organizationAdd" connection-type="Transaction-Required" connection-name="host" ldap-connection-type="None">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="retrievePackagePricingSelection">
+			<task synchronous="true" continue-on-failure="false" name="packagePricing">
+				<task-object-name>com.tsa.puridiom.packagepricing.tasks.PackagePricingRetrieveById</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="organizationPackageRegisterNew">
+			<task synchronous="true" continue-on-failure="false" name="organizationPackage">
+				<task-object-name>com.tsa.puridiom.organizationpackage.tasks.OrganizationPackageRegisterNew</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="paymentTermUpdate" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="updatePaymentTerm">
+			<task synchronous="true" continue-on-failure="false" name="paymentTerm">
+				<task-object-name>com.tsa.puridiom.paymentterm.tasks.PaymentTermRetrieveById</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="paymentTerm">
+				<task-object-name>com.tsa.puridiom.paymentterm.tasks.PaymentTermSetValues</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="paymentTerm">
+				<task-object-name>com.tsa.puridiom.paymentterm.tasks.PaymentTermUpdate</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+	</activities>
+</process>

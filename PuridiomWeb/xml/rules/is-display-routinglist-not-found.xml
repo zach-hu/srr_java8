@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rule>
+	<clause type="BigDecimalCompare">
+		<left-side>
+			<source>incomingRequestObjectMethod</source>
+			<object>routingList</object>
+			<name>size</name>
+		</left-side>
+		<operator>LESS</operator>
+		<right-side>
+			<source>constant</source>
+			<value>1</value>
+		</right-side>
+	</clause>
+	<logical-operator>AND</logical-operator>
+	<clause type="Rule">
+		<rule-filename>is-routing-for-display.xml</rule-filename>
+	</clause>
+</rule>
+

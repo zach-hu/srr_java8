@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rule>
+  <clause type="lookup">
+    <sql>from StdTable stdTable where stdTable.id.tableType = 'POSUBTYPE' AND stdTable.id.tableKey = '@subtype@' AND (stdTable.status = '02' OR (stdTable.status = '01' AND stdTable.dateExpires >= @today@))</sql>
+    <source>header</source>
+    <arguments>
+      <name>subtype</name>
+      <source>header</source>
+      <colName>getSubType</colName>
+    </arguments>
+  </clause>
+</rule>

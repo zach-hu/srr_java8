@@ -1,0 +1,129 @@
+<browse_rfq_vendor>
+	<columns>
+		<c_checkbox>
+			<label></label>
+			<type>Checkbox</type>
+			<size>5</size>
+			<selectsql>N</selectsql>
+			<store-request-value>Y</store-request-value>
+		</c_checkbox>
+		<Vendor_vendorId>
+			<label>brw-vendorId</label>
+			<size>15</size>
+			<hidden-input>Y</hidden-input>
+			<key>Y</key>
+			<alias>RfqVendor_vendorId</alias>
+			<distinct>Y</distinct>			
+		</Vendor_vendorId>
+		<Contact_id_vendorId>
+			<label>brw-vendorId</label>
+			<size>15</size>
+			<hidden-input>Y</hidden-input>
+			<hidden>Y</hidden>
+		</Contact_id_vendorId>
+		<Contact_id_contactType>
+			<label>brw-contacttype</label>
+			<visible>0</visible>
+		</Contact_id_contactType>
+		<Contact_addressCode>
+			<label>brw-addressCode</label>
+			<visible>0</visible>
+			<hidden-input>Y</hidden-input>
+		</Contact_addressCode>
+		<Vendor_vendorName>
+			<label>brw-vendorname</label>
+			<hidden-input>Y</hidden-input>
+			<size>30</size>
+		</Vendor_vendorName>
+		<Commodity_description>
+			<label>brw-commodityDescription</label>
+			<selectsql>N</selectsql>
+			<allowfilter>Y</allowfilter>
+			<hidden>Y</hidden>
+		</Commodity_description>
+		<Contact_id_contactCode>
+			<label>brw-contactcode</label>
+			<sort>A</sort>
+			<hidden-input>Y</hidden-input>
+			<hidden>Y</hidden>
+		</Contact_id_contactCode>
+		<Contact_firstName>
+			<label>firstName</label>
+			<hidden-input>Y</hidden-input>
+			<size>10</size>
+		</Contact_firstName>
+		<Contact_middleInit>
+			<label>brw-middleInitial</label>
+			<hidden-input>Y</hidden-input>
+			<hidden>Y</hidden>
+		</Contact_middleInit>
+		<Contact_lastName>
+			<label>lastName</label>
+			<hidden-input>Y</hidden-input>
+			<size>10</size>
+		</Contact_lastName>
+		<dummy_space>
+			<selectsql>N</selectsql>
+			<size>15</size>
+			<detail>Y</detail>
+		</dummy_space>
+		<Address_addressLine1>
+			<hidden-input>Y</hidden-input>
+			<size>85</size>
+			<detail>Y</detail>
+		</Address_addressLine1>
+		<dummy_space>
+			<selectsql>N</selectsql>
+			<size>15</size>
+			<detail>Y</detail>
+		</dummy_space>
+		<Address_addressLine2>
+			<hidden-input>Y</hidden-input>
+			<size>85</size>
+			<detail>Y</detail>
+		</Address_addressLine2>
+		<Address_addressLine3>
+			<label>addressLine3</label>
+			<hidden-input>Y</hidden-input>
+			<hidden>Y</hidden>
+		</Address_addressLine3>
+		<Address_addressLine4>
+			<label>addressLine4</label>
+			<hidden-input>Y</hidden-input>
+			<hidden>Y</hidden>
+		</Address_addressLine4>
+		<Address_city>
+			<label>city</label>
+			<hidden-input>Y</hidden-input>
+			<size>15</size>
+		</Address_city>
+		<Address_state>
+			<label>state</label>
+			<hidden-input>Y</hidden-input>
+			<size>5</size>
+		</Address_state>
+		<Address_country>
+			<label>country</label>
+			<hidden-input>Y</hidden-input>
+			<hidden>Y</hidden>
+		</Address_country>
+		<Address_postalCode>
+			<label>zip</label>
+			<hidden-input>Y</hidden-input>
+			<size>15</size>
+		</Address_postalCode>
+	</columns>
+<sqlfrom>Contact as Contact, Address as Address, Vendor as Vendor, VendorCommRel as VendorCommRel, Commodity as Commodity</sqlfrom>
+<sqlwhere><![CDATA[ (Contact.id.vendorId = Address.id.addressType
+	AND Contact.addressCode = Address.id.addressCode
+	AND Contact.id.contactType = 'DEFAULT'
+	AND Contact.status <> '03'
+	AND Vendor.vendorId = Contact.id.vendorId
+	AND Vendor.vendorId = VendorCommRel.id.vendorId
+	AND Commodity.commodity = VendorCommRel.id.commodityCode) ]]>
+</sqlwhere>
+<sqlorderby>Vendor.vendorId ASC</sqlorderby>
+<pagesize>10</pagesize>
+<title>Supplier Browse</title>
+</browse_rfq_vendor>
+

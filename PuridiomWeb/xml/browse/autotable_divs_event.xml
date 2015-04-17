@@ -1,0 +1,81 @@
+<divs_event>
+	<columns>
+		<!-- XrefCombo_icXref>
+			<label>Ic Header</label>
+			<visible>0</visible>
+			<hidden-input>Y</hidden-input>
+		</XrefCombo_icXref>
+		<XrefCombo_xrefType>
+			<label>Type</label>
+			<visible>0</visible>
+		</XrefCombo_xrefType>
+		<XrefCombo_code1>
+			<label>Division</label>
+			<visible>0</visible>
+		</XrefCombo_code1-->
+		<XrefCombo_code2>
+			<label>brw-entity</label>
+			<visible>1</visible>
+			<distinct>Y</distinct>
+		</XrefCombo_code2>
+		<!-- XrefCombo_code3>
+			<label>Department</label>
+			<visible>1</visible>
+		</XrefCombo_code3>
+		<XrefCombo_code4>
+			<label>Account</label>
+			<visible>1</visible>
+		</XrefCombo_code4>
+		<XrefCombo_code5>
+			<label>Event</label>
+			<link><![CDATA[javascript: returnMe('#XrefCombo_code5^'); void(0);]]></link>
+			<visible>1</visible>
+		</XrefCombo_code5>
+		<XrefCombo_code6>
+			<label>Performance</label>
+			<visible>1</visible>
+		</XrefCombo_code6>
+		<XrefCombo_code7>
+			<label>Program</label>
+			<visible>1</visible>
+		</XrefCombo_code7>
+		<StdTable_id_tableType>
+			<label>Type</label>
+			<visible>0</visible>
+		</StdTable_id_tableType-->
+		<StdTable_id_tableKey>
+			<label>brw-event</label>
+			<link><![CDATA[javascript: returnMe('#StdTable_id_tableKey^'); void(0);]]></link>
+			<visible>1</visible>
+		</StdTable_id_tableKey>
+		<StdTable_description>
+			<label>description</label>
+			<size>45</size>
+		</StdTable_description>
+	</columns>
+<sqlfrom>XrefCombo as XrefCombo, StdTable as StdTable</sqlfrom>
+<sqlwhere><![CDATA[ XrefCombo.status='02' AND XrefCombo.xrefType='DIVS'
+					AND StdTable.id.tableType='AC04'
+					AND StdTable.status='02'
+					AND ( XrefCombo.code2 = @Account_fld1# )
+					AND ( XrefCombo.code3 = @Account_fld2#
+					 OR	XrefCombo.code3 = '*'
+					 OR (XrefCombo.code3 like '_*' AND substr(@Account_fld2#, 1, 1) = substr(XrefCombo.code3, 1, 1) )
+ 					 OR (XrefCombo.code3 like '__*' AND substr(@Account_fld2#, 1, 2) = substr(XrefCombo.code3, 1, 2) )
+ 					 OR (XrefCombo.code3 like '___*' AND substr(@Account_fld2#, 1, 3) = substr(XrefCombo.code3, 1, 3) )
+ 					 OR (XrefCombo.code3 like '____*' AND substr(@Account_fld2#, 1, 4) = substr(XrefCombo.code3, 1, 4) )
+ 					 OR (XrefCombo.code3 like '_____*' AND substr(@Account_fld2#, 1, 5) = substr(XrefCombo.code3, 1, 5) )
+					  )
+					AND ( XrefCombo.code4 = @Account_fld3#	OR	XrefCombo.code4 = '*' )
+					AND	( XrefCombo.code5 = StdTable.id.tableKey
+					 OR (XrefCombo.code5 like '*')
+					 OR (XrefCombo.code5 like '_*' AND substr(StdTable.id.tableKey, 1, 1) = substr(XrefCombo.code5, 1, 1) )
+					 OR (XrefCombo.code5 like '__*' AND substr(StdTable.id.tableKey, 1, 2) = substr(XrefCombo.code5, 1, 2) )
+					 OR (XrefCombo.code5 like '___*' AND substr(StdTable.id.tableKey, 1, 3) = substr(XrefCombo.code5, 1, 3) )
+					 OR (XrefCombo.code5 like '____*' AND substr(StdTable.id.tableKey, 1, 4) = substr(XrefCombo.code5, 1, 4) )
+					 OR (XrefCombo.code5 like '_____*' AND substr(StdTable.id.tableKey, 1, 5) = substr(XrefCombo.code5, 1, 5) )
+					 ) ]]></sqlwhere>
+<sqlorderby>XrefCombo.code2 ASC, StdTable.id.tableKey ASC</sqlorderby>
+<pagesize>15</pagesize>
+<title>Event Browse</title>
+ </divs_event>

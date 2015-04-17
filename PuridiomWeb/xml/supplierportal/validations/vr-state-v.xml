@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rule>
+	<clause type="Empty">
+		<left-side>
+			<source>incomingRequestObjectMethod</source>
+			<object>vendorRegister</object>
+			<name>getAddressState</name>
+		</left-side>
+	</clause>
+	<logical-operator>OR</logical-operator>
+	<clause type="lookup">
+		<sql> from StdTable as StdTable where StdTable.id.tableType = 'STAT' AND StdTable.id.tableKey = '@state@' AND (StdTable.status = '02' OR (StdTable.status = '01' AND StdTable.dateExpires >= @today@)) </sql>
+		<source>vendorRegister</source>
+		<arguments>
+			<name>state</name>
+			<source>vendorRegister</source>
+			<colName>getAddressState</colName>
+		</arguments>
+	</clause>
+</rule>

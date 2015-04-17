@@ -1,0 +1,90 @@
+<browse_po_header>
+	<columns>
+		<PoHeader_icPoHeader>
+	        <hidden>Y</hidden>
+	        <visible>0</visible>
+		</PoHeader_icPoHeader>
+		<PoHeader_poNumber>
+			<label>brw-poNumber</label>
+			<sort>D</sort>
+			<link><![CDATA[javascript: viewOrder('#PoHeader_icPoHeader^', '#PoHeader_poType^'); void(0);]]></link>
+			<size>10</size>
+		</PoHeader_poNumber>
+		<PoHeader_releaseNumber>
+			<label>brw-releaseNumber</label>
+			<type>STRING</type>
+			<size>4</size>
+		</PoHeader_releaseNumber>
+		<PoHeader_poDate>
+			<label>brw-poDate</label>
+			<type>DATE</type>
+			<size>10</size>
+		</PoHeader_poDate>
+		<PoHeader_status>
+			<label>brw-status</label>
+			<type>STATUS</type>
+			<size>12</size>
+		</PoHeader_status>
+		<PoHeader_departmentCode>
+			<label>user-department</label>
+			<type>STRING</type>
+			<size>12</size>
+		</PoHeader_departmentCode>
+		<PoHeader_requisitionerCode>
+			<label>requisitioner</label>
+			<type>STRING</type>
+			<size>12</size>
+            <type>USER-ID</type>
+		</PoHeader_requisitionerCode>
+		<PoHeader_shipToCode>
+			<label>shipToCode</label>
+			<type>STRING</type>
+			<size>10</size>
+		</PoHeader_shipToCode>
+		<PoHeader_vendorRating>
+			<label>brw-supplierRating</label>
+			<link><![CDATA[javascript: createSupplierEvaluation('#PoHeader_icPoHeader^', '#PoHeader_vendorId^',  '#PoHeader_poNumber^','#PoHeader_rated^'); void(0);]]></link>
+			<size>10</size>
+			<type>BigDecimal</type>
+		</PoHeader_vendorRating>
+		<PoHeader_vendorId>
+			<label>brw-vendorId</label>
+			<hidden>Y</hidden>
+		</PoHeader_vendorId>
+		<PoHeader_buyerCode>
+			<label>brw-buyer</label>
+            <size>12</size>
+            <type>USER-ID</type>
+		</PoHeader_buyerCode>
+		<PoHeader_total>
+			<label>brw-total</label>
+			<size>8</size>
+			<type>DollarDecimal</type>
+		</PoHeader_total>
+		<PoHeader_internalComments>
+			<label>purpose</label>
+			<detail>Y</detail>
+			<size>100</size>
+		</PoHeader_internalComments>
+		<PoHeader_expirationDate>
+			<label>brw-dateExpires</label>
+			<type>DATE</type>
+			<size>10</size>
+			<visible>0</visible>
+		</PoHeader_expirationDate>
+		<PoHeader_owner>
+			<label>owner</label>
+			<detail>Y</detail>
+            <type>USER-ID</type>
+		</PoHeader_owner>
+		<PoHeader_rated>
+			<hidden>Y</hidden>
+			<hidden-input>Y</hidden-input>
+		</PoHeader_rated>
+	</columns>
+<sqlfrom>PoHeader as PoHeader</sqlfrom>
+<sqlwhere><![CDATA[PoHeader.poNumber <> 'N/A' and PoHeader.lastRevision = 'C' ]]></sqlwhere>
+<sqlorderby>PoHeader.poNumber DESC, PoHeader.releaseNumber DESC</sqlorderby>
+<pagesize>15</pagesize>
+<title>Purchase History</title>
+</browse_po_header>

@@ -1,0 +1,29 @@
+<process name="requisitionCancel" connection-type="New-Connection">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="setLineAsList">
+			<task synchronous="true" continue-on-failure="false" name="requisitionLine">
+				<task-object-name>com.tsa.puridiom.requisitionline.tasks.RequisitionLineRetrieveById</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="requisitionLineList">
+				<task-object-name>com.tsa.puridiom.requisitionline.tasks.RequisitionLineSetAsList</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="rfqListCancel">
+			<task synchronous="true" continue-on-failure="false" name="rfqListCancel">
+				<task-object-name>com.tsa.puridiom.rfqheader.tasks.RfqLineListCancel</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="rfqHeaderCancel">
+				<task-object-name>com.tsa.puridiom.rfqheader.tasks.RfqHeaderCancelFromReqLine</task-object-name>
+			</task>
+    	</activity>
+    	<activity synchronous="true" continue-on-failure="false" name="poListCancel">
+			<task synchronous="true" continue-on-failure="false" name="poListCancel">
+				<task-object-name>com.tsa.puridiom.poheader.tasks.PoLineListCancel</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="poHeaderCancel">
+				<task-object-name>com.tsa.puridiom.poheader.tasks.PoHeaderCancelFromReqLine</task-object-name>
+			</task>
+    	</activity>
+	</activities>
+</process>

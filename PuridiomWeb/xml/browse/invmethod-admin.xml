@@ -1,0 +1,19 @@
+<browse_method>
+	<columns>
+		<InvMethod_methodId>
+			<label>brw-methodId</label>
+			<sort>A</sort>
+			<link><![CDATA[javascript: returnInvMethod('#InvMethod_methodId^'); void(0);]]></link>
+			<size>15</size>
+		</InvMethod_methodId>
+		<InvMethod_description>
+			<label>description</label>
+			<size>50</size>
+		</InvMethod_description>
+	</columns>
+<sqlfrom>InvMethod as InvMethod</sqlfrom>
+<sqlwhere><![CDATA[ (InvMethod.status <> '03') ]]></sqlwhere>
+<sqlorderby>InvMethod.methodId ASC</sqlorderby>
+<pagesize>15</pagesize>
+<title>Method Browse</title>
+</browse_method>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rule>
+	<clause type="lookup">
+		<sql>from UnitOfMeasure as UnitOfMeasure where UnitOfMeasure.umCode = '@unitofissue@' AND (UnitOfMeasure.status = '02' OR (UnitOfMeasure.status = '01' AND UnitOfMeasure.dateExpires >= @today@))</sql>
+		<source>header</source>
+		<arguments>
+			<name>unitofissue</name>
+			<source>header</source>
+			<colName>getUnitOfIssue</colName>
+		</arguments>
+	</clause>
+</rule>

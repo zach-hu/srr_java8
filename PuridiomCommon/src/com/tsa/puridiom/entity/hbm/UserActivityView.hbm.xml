@@ -1,0 +1,89 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping>
+
+<!--
+    Created by Middlegen Hibernate plugin
+
+    http://boss.bekk.no/boss/middlegen/
+    http://hibernate.sourceforge.net/
+-->
+
+<class
+    name="com.tsa.puridiom.entity.UserActivityView"
+    table="USER_ACTIVITY_VIEW"
+>
+    <id
+        name="userId"
+        type="java.lang.String"
+        column="USER_ID"
+        length="15"
+    >
+        <generator class="assigned" />
+    </id>
+    <property
+        name="firstName"
+        type="java.lang.String"
+        column="FIRST_NAME"
+        length="20"
+    />
+    <property
+        name="lastName"
+        type="java.lang.String"
+        column="LAST_NAME"
+        length="20"
+    />
+    <property
+        name="lastLoggedOn"
+        type="java.util.Date"
+        column="LAST_LOGGED_ON"
+        length="7"
+    />
+    <property
+        name="loggedOn"
+        type="java.util.Date"
+        column="LOGGED_ON"
+        length="7"
+    />
+    <property
+        name="dateEntered"
+        type="java.sql.Date"
+        column="DATE_ENTERED"
+        length="7"
+    />
+    <property
+        name="status"
+        type="java.lang.String"
+        column="STATUS"
+        length="4"
+    />
+    <property
+        name="department"
+        type="java.lang.String"
+        column="DEPARTMENT"
+        length="15"
+    />
+    <property
+        name="lastChangeDate"
+        type="java.sql.Date"
+        column="LAST_REQ_DATE"
+        length="7"
+    />
+     <property
+        name="dateApproved"
+        type="java.sql.Date"
+        column="LAST_APP_DATE"
+        length="7"
+    />
+    <property
+        name="ruleAssign"
+        type="java.lang.String"
+        column="RULE_ASSIGN"
+        length="5"
+    />
+    <!-- associations -->
+</class>
+</hibernate-mapping>

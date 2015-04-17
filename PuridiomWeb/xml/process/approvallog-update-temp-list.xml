@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="approvalLogListUpdate" connection-type="New-Transaction">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="approvalLogListUpdate" commit-after="true">
+			<task synchronous="true" continue-on-failure="false" name="routingListUpdate">
+				<task-object-name>com.tsa.puridiom.approvals.tasks.ApprovalLogListUpdate</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

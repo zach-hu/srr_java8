@@ -1,0 +1,21 @@
+<browse_subcommodity>
+	<columns>
+		<SubCommodity_commodity>
+			<label>Commodity (IDS) Code</label>
+			<sort>A</sort>
+			<link><![CDATA[javascript: returnMe('#SubCommodity_commodity^'); void(0);]]></link>
+			<hidden-input>Y</hidden-input>
+			<size>20</size>
+		</SubCommodity_commodity>
+		<SubCommodity_description>
+			<label>Description</label>
+			<hidden-input>Y</hidden-input>
+			<size>80</size>
+		</SubCommodity_description>
+	</columns>
+<sqlfrom>SubCommodity as SubCommodity</sqlfrom>
+<sqlwhere><![CDATA[ (SubCommodity.status = '02' OR (SubCommodity.status = '01' AND SubCommodity.dateExpires >= :as_today)) ]]></sqlwhere>
+<sqlorderby>SubCommodity.commodity ASC</sqlorderby>
+<pagesize>15</pagesize>
+<title>Commodity (IDS) Browse</title>
+</browse_subcommodity>

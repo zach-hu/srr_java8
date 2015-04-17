@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="VendorUpdate" connection-type="Transaction-Required"> 
+	<activities>  
+		<activity synchronous="true" continue-on-failure="false" name="updateVendor">
+		<task synchronous="true" continue-on-failure="false" name="vendor">			
+				<task-object-name>com.tsa.puridiom.vendor.tasks.VendorRetrieveById</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="vendor">			
+				<task-object-name>com.tsa.puridiom.vendor.tasks.VendorSetValues</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="vendorUpdate">    			
+				<task-object-name>com.tsa.puridiom.vendor.tasks.VendorUpdate</task-object-name>    
+				<post-action></post-action>   
+			 </task>   
+		  </activity>  
+		<activity synchronous="true" continue-on-failure="false" name="vendorCommRelUpdate">
+			<rule-filename>is-vendor-commodity-update</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="deleteCommoditiesByVendor">
+				<task-object-name>com.tsa.puridiom.vendorcommrel.tasks.VendorCommRelDeleteByVendor</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="vendorCommRelList">			
+				<task-object-name>com.tsa.puridiom.vendorcommrel.tasks.VendorCommRelAddList</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="updateAddresses">
+			<task synchronous="true" continue-on-failure="false" name="vendorPrimaryAddressUpdate">
+				<task-object-name>com.tsa.puridiom.supplierportal.InvokeSupplierPortalProcessTask</task-object-name>
+				<process-filename>address-update-by-id.xml</process-filename>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="vendorRemitToAddressSetup">
+				<task-object-name>com.tsa.puridiom.address.tasks.AddressUpdateRemitToSetup</task-object-name>    
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="vendorRemitToAddressUpdate">
+				<task-object-name>com.tsa.puridiom.supplierportal.InvokeSupplierPortalProcessTask</task-object-name>
+				<process-filename>address-update-by-id.xml</process-filename>
+			</task>
+		</activity> 
+		<activity synchronous="true" continue-on-failure="false" name="updateContacts">
+			<task synchronous="true" continue-on-failure="false" name="contactList">    			
+				<task-object-name>com.tsa.puridiom.contact.tasks.ContactUpdateList</task-object-name>    
+				<post-action></post-action>
+			   </task>   
+		</activity> 
+		<activity synchronous="true" continue-on-failure="false" name="notifySupplierAdmin">
+			<task synchronous="true" continue-on-failure="false" name="vendorUpdateNotification">    			
+				<task-object-name>com.tsa.puridiom.vendor.tasks.VendorUpdateNotification</task-object-name>    
+				<post-action></post-action>
+			</task>   
+		</activity> 
+	 </activities> 
+</process>

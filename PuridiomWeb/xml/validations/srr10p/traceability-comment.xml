@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rule>
+	<clause type="Rule">
+		<rule-filename>is-msr-request.xml</rule-filename>
+	</clause>
+	<logical-operator>IFTHEN</logical-operator>
+	<clause type="StringCompare">
+		<left-side>
+			<source>incomingRequest</source>
+			<name>validTraceabilityComment</name>
+		</left-side>
+		<operator>EQUALS</operator>
+		<right-side>
+			<source>constant</source>
+			<value>true</value>
+		</right-side>
+	</clause>
+</rule>

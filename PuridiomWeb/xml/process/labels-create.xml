@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="labelsCreate" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="labelsCreate">
+		    <task synchronous="true" continue-on-failure="false" name="labelsSetup">
+				<task-object-name>com.tsa.puridiom.labels.tasks.LabelsCreateSetup</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="labels">
+				<task-object-name>com.tsa.puridiom.labels.tasks.LabelsRetrieveByUniqueKey</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="errorMsg">
+				<rule-filename check-for-false="true">is-labels-empty.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.labels.tasks.ErrorMsgSetDuplicateLabel</task-object-name>
+				<post-action>exitProcess</post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="labels">
+				<task-object-name>com.tsa.puridiom.labels.tasks.LabelsSetValues</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="labels">
+				<task-object-name>com.tsa.puridiom.labels.tasks.LabelsAdd</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+	</activities>
+</process>

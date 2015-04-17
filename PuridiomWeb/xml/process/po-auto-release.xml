@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="poCreateRelease" connection-type="New-Transaction">
+  <activities>
+    <activity synchronous="true" continue-on-failure="false" name="createReleaseInitialSetup">
+      <task synchronous="true" continue-on-failure="false" name="setup">
+      <task-object-name>com.tsa.puridiom.po.tasks.AutoReleaseOrderFromReq</task-object-name>
+      <post-action></post-action>
+      </task>
+    </activity>
+    <activity synchronous="true" continue-on-failure="false" name="createReleaseHeader">
+    <task synchronous="true" continue-on-failure="false" name="nextRelease">
+      <task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+      <process-filename>po-next-release.xml</process-filename>
+    </task>
+    <task synchronous="true" continue-on-failure="false" name="poHeader">
+        <task-object-name>com.tsa.puridiom.poheader.tasks.PoHeaderSaveas</task-object-name>
+      </task>
+    <task synchronous="true" continue-on-failure="false" name="setup">
+      <task-object-name>com.tsa.puridiom.po.tasks.PoConsolidateAutoReleaseFromReqSetup</task-object-name>
+      <post-action></post-action>
+    </task>
+  <!-- save as comments and accounts from requisition-->
+  <!-- <task synchronous="true" continue-on-failure="false" name="poHeaderCommentSaveas">
+    <task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+    <process-filename>poheader-saveas-from-req.xml</process-filename>
+  </task>
+    <task synchronous="true" continue-on-failure="false" name="schedules">
+      <task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+      <process-filename>po_schedules-saveas.xml</process-filename>
+    </task>
+    <task synchronous="true" continue-on-failure="false" name="poHeader">
+      <task-object-name>com.tsa.puridiom.po.tasks.PoAutoRelMapUdfs</task-object-name>
+      <post-action></post-action>
+    </task> -->
+	<task synchronous="true" continue-on-failure="false" name="getCurrencyFactor">
+	  <task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+	    <process-filename>get-currency-factor.xml</process-filename>
+	</task>
+    <task synchronous="true" continue-on-failure="false" name="poHeader">
+      <task-object-name>com.tsa.puridiom.po.tasks.PoSetCurrencyFactor</task-object-name>
+      <post-action></post-action>
+    </task>
+    <task synchronous="true" continue-on-failure="false" name="loadSupplier">
+      <task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+      <process-filename>po-load-supplier-for-releases.xml</process-filename>
+  </task>
+  </activity>
+  <activity synchronous="true" continue-on-failure="false" name="createReleaseLine">
+    <task synchronous="true" continue-on-failure="false" name="poLineCreateFromReq">
+      <task-object-name>com.tsa.puridiom.poline.tasks.PolineLoadFromAutoReleasedReqLine</task-object-name>
+    </task>
+    <task synchronous="true" continue-on-failure="false" name="poLineCreateFromReq">
+      <task-object-name>com.tsa.puridiom.poline.tasks.PoLineRenumber</task-object-name>
+    </task>
+    <task synchronous="true" continue-on-failure="false" name="poLineList">
+      <task-object-name>com.tsa.puridiom.poline.tasks.PoLineUpdateList</task-object-name>
+    </task>
+    </activity>
+    <activity synchronous="true" continue-on-failure="false" name="createReleaseLine">
+	    <task synchronous="true" continue-on-failure="false" name="setup">
+	      <task-object-name>com.tsa.puridiom.po.tasks.PoConsolidateAutoReleaseFromReqSetInfo</task-object-name>
+	      <post-action></post-action>
+	    </task>
+	    <task synchronous="true" continue-on-failure="false" name="poHeader">
+	      <task-object-name>com.tsa.puridiom.po.tasks.PoAutoRelMapUdfs</task-object-name>
+	    </task>
+	    <task synchronous="true" continue-on-failure="false" name="poHeader">
+	      <task-object-name>com.tsa.puridiom.poheader.tasks.PoHeaderUpdate</task-object-name>
+	      <post-action></post-action>
+	    </task>
+	</activity>
+    <activity synchronous="true" continue-on-failure="false" name="totals">
+    <task synchronous="true" continue-on-failure="false" name="totals">
+      <rule-filename>is-recalculate-required.xml</rule-filename>
+      <task-object-name>com.tsa.puridiom.po.tasks.AutoReleaseRecalculate</task-object-name>
+    </task>
+  </activity>
+    <activity synchronous="true" continue-on-failure="false" name="forwardPo">
+      <rule-filename>is-create-release-from-req.xml;is-forward-autorelease-active.xml</rule-filename>
+      <task synchronous="true" continue-on-failure="false" name="poForwardSetup">
+        <task-object-name>com.tsa.puridiom.po.tasks.PoForwardSetupFromAutoRelease</task-object-name>
+      </task>
+      <task synchronous="true" continue-on-failure="false" name="poForward">
+        <rule-filename>is-forward-allow.xml</rule-filename>
+        <task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+        <process-filename>po-forward.xml</process-filename>
+      </task>
+    </activity>
+  </activities>
+</process>

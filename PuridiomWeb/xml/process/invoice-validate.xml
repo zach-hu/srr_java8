@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="InvoiceValidate" connection-type="Connection-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="setUpInvoiceData">
+			<task synchronous="true" continue-on-failure="false" name="setup">
+				<task-object-name>com.tsa.puridiom.validationrules.tasks.InvoiceRulesSetup</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="invoiceHeaderDataRetrieve">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>invoiceheaderdata-retrieve.xml</process-filename>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="lineitems">
+				<task-object-name>com.tsa.puridiom.invoiceline.tasks.InvoiceLineDataRetrieve</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="invoiceDataSetup">
+				<task-object-name>com.tsa.puridiom.invoice.tasks.InvoiceValidationRulesData</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="deleteZeroDollarAccounts">
+			<task synchronous="true" continue-on-failure="false" name="accountListByHeader">
+				<rule-filename>is-delete-zero-dollar-accounts.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.account.tasks.AccountRetrieveByHeader</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="accounts">
+				<rule-filename>is-delete-zero-dollar-accounts.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.account.tasks.AccountDeleteZeroDollars</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="invoiceCheckInvoicedReceiptQty">
+			<task synchronous="true" continue-on-failure="false" name="invoiceLineList">
+				<task-object-name>com.tsa.puridiom.invoiceline.tasks.InvoiceLineRetrieveQuantities</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="invoiceCheckInvoicedReceiptQty">
+				<task-object-name>com.tsa.puridiom.invoice.tasks.InvoiceCheckInvoicedReceiptQty</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="invoiceCodaCheckPost">
+			<task continue-on-failure="false" name="checkPostInvoice" synchronous="true">
+		        <rule-filename>is-coda-enabled.xml</rule-filename>
+		        <task-object-name>com.tsa.puridiom.coda.tasks.CodaCheckPostInvoice</task-object-name>
+      		</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="invoiceSCI312Check">
+			<task continue-on-failure="false" name="checkInvoiceSCI312" synchronous="true">
+		        <task-object-name>com.tsa.puridiom.invoice.tasks.InvoiceValidateI312</task-object-name>
+      		</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="invoiceValidateAccount">
+			<task synchronous="true" continue-on-failure="false" name="validAccount">
+			<rule-filename>is-storedprocedure-call-for-account-validation.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.validationrules.tasks.ValidAccountSPCall</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="validateRules">
+			<task synchronous="true" continue-on-failure="false" name="labelsList">
+				<task-object-name>com.tsa.puridiom.labels.tasks.LabelsRetrieveBy</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="rules">
+				<task-object-name>com.tsa.puridiom.validationrules.tasks.DatabaseValidationRulesTask</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="rules">
+				<task-object-name>com.tsa.puridiom.validationrules.tasks.ValidationRulesTask</task-object-name>
+				<process-filename>invoice-validation-rules.xml</process-filename>
+			</task>
+		</activity>
+	</activities>
+</process>

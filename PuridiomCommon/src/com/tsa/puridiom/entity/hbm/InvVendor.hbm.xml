@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+    
+<hibernate-mapping>
+
+<!-- 
+    Created by Middlegen Hibernate plugin
+
+    http://boss.bekk.no/boss/middlegen/
+    http://hibernate.sourceforge.net/
+-->
+
+<class 
+    name="com.tsa.puridiom.entity.InvVendor" 
+    table="INV_VENDOR"
+>
+    <composite-id name="comp_id" class="com.tsa.puridiom.entity.InvVendorPK">
+        <key-property name="itemNumber" column="ITEM_NUMBER" type="java.lang.String"/>
+        <key-property name="vendorId" column="VENDOR_ID" type="java.lang.String"/>
+    </composite-id>    
+    <property
+        name="lastDate"
+        type="java.sql.Timestamp"
+        column="LAST_DATE"
+        length="7"
+    />
+    <property
+        name="lastPrice"
+        type="java.math.BigDecimal"
+        column="LAST_PRICE"
+        length="15"
+    />
+    <property
+        name="mfgNumber"
+        type="java.lang.String"
+        column="MFG_NUMBER"
+        length="20"
+    />
+    <property
+        name="leadTime"
+        type="java.math.BigDecimal"
+        column="LEAD_TIME"
+        length="15"
+    />
+    <property
+        name="primaryVendor"
+        type="java.lang.String"
+        column="PRIMARY_VENDOR"
+        length="1"
+    />
+
+    <!-- associations -->
+    <!-- bi-directional many-to-one association to InvItem -->
+</class>
+</hibernate-mapping>

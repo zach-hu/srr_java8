@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="receipt-transfer-retrieve" connection-type="Connection-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="receiptTransferRetrieve">
+			<task synchronous="true" continue-on-failure="false" name="receiptHeader">
+				<task-object-name>com.tsa.puridiom.receiptheader.tasks.ReceiptHeaderRetrieveById</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="receiptRetrieveSetup">
+				<task-object-name>com.tsa.puridiom.receipt.tasks.ReceiptRetrieveSetup</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="receiptLineList">
+				<task-object-name>com.tsa.puridiom.receiptline.tasks.ReceiptLineRetrieveByHeader</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="receiptLineList">
+				<task-object-name>com.tsa.puridiom.receiptline.tasks.ReceiptLineRetrieveAll</task-object-name>
+			</task>
+
+			<task synchronous="true" continue-on-failure="false" name="receiptRetrieveSetup">
+				<task-object-name>com.tsa.puridiom.receipt.tasks.ReceiptTransferRetrieveSetup</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="requisitionHeader">
+				<task-object-name>com.tsa.puridiom.requisitionheader.tasks.RequisitionHeaderRetrieveById</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="requisitionHeaderRetrieveSetup">
+				<task-object-name>com.tsa.puridiom.requisitionheader.tasks.RequisitionHeaderRetrieveSetup</task-object-name>
+				<post-action></post-action>
+			</task>
+			<!-- requisitionLineList needed for receipt history -->
+			<task synchronous="true" continue-on-failure="false" name="requisitionLineList">
+				<task-object-name>com.tsa.puridiom.requisitionline.tasks.RequisitionLineRetrieveByHeader</task-object-name>
+				<post-action></post-action>
+			</task>
+			<!-- <task synchronous="true" continue-on-failure="false" name="poVendorAddressRetrieve">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>po-vendor-address-retrieve.xml</process-filename>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="poShipToAddressRetrieve">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>po-shipto-address-retrieve.xml</process-filename>
+			</task> -->
+			<task synchronous="true" continue-on-failure="false" name="requisitionHeaderDataSet">
+				<task-object-name>com.tsa.puridiom.requisitionheader.tasks.RequisitionHeaderDataSet</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+	</activities>
+</process>

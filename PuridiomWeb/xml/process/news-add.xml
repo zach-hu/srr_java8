@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="NewsAdd" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="NewsAdd">
+			<task synchronous="true" continue-on-failure="false" name="newsGetIcNews">
+				<task-object-name>com.tsa.puridiom.news.tasks.NewsGetIcNews</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="newsGetSequence">
+				<task-object-name>com.tsa.puridiom.news.tasks.NewsGetSequence</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="newsSetupFromAdminInterface">
+				<task-object-name>com.tsa.puridiom.news.tasks.NewsSetupFromAdminInterface</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="news">
+				<task-object-name>com.tsa.puridiom.news.tasks.NewsSetValues</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="newsAdd">
+				<task-object-name>com.tsa.puridiom.news.tasks.NewsAdd</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+	</activities>
+</process>

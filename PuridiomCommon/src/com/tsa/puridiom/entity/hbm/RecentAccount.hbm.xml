@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping>
+
+<class
+    name="com.tsa.puridiom.entity.RecentAccount"
+    table="RECENT_ACCOUNT"
+>
+    <composite-id name="comp_id" class="com.tsa.puridiom.entity.RecentAccountPK">
+        <key-property name="userId" column="USER_ID" type="java.lang.String"/>
+        <key-property name="accountString" column="ACCOUNT_STRING" type="java.lang.String"/>
+    </composite-id>
+    <property
+        name="dateEntered"
+        type="java.sql.Timestamp"
+        column="DATE_ENTERED"
+        length="7"
+    />
+	<property
+        name="accountCount"
+        type="java.math.BigDecimal"
+        column="ACCOUNT_COUNT"
+        length="10"
+    />
+
+    <!-- associations -->
+
+</class>
+</hibernate-mapping>

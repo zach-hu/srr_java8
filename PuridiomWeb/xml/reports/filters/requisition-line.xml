@@ -1,0 +1,104 @@
+<requistionline>
+	<columns>
+		<RequisitionHeader_requisitionNumber>
+			<label>Requisition Number</label>
+			<visible>0</visible>
+			<type>STRING</type>
+		</RequisitionHeader_requisitionNumber>
+		<RequisitionLine_lineNumber>
+			<label>Line Number</label>
+			<visible>0</visible>
+			<type>BIGDECIMAL</type>
+		</RequisitionLine_lineNumber>
+		<RequisitionLine_itemNumber>
+			<label>Item Number</label>
+			<size>15</size>
+			<type>STRING</type>
+		</RequisitionLine_itemNumber>
+		<RequisitionLine_description>
+			<label>Description</label>
+			<size>15</size>
+			<type>STRING</type>
+		</RequisitionLine_description>
+		<RequisitionLine_commodityCode>
+			<label>Commodity</label>
+			<size>15</size>
+			<type>STRING</type>
+		</RequisitionLine_commodityCode>
+		<RequisitionLine_umCode>
+			<label>Unit Of Measure</label>
+			<size>15</size>
+			<type>STRING</type>
+		</RequisitionLine_umCode>
+		<RequisitionLine_quantity>
+			<label>Qty.</label>
+			<visible>0</visible>
+			<type>BIGDECIMAL</type>
+		</RequisitionLine_quantity>
+		<RequisitionLine_unitPrice>
+			<label>Unit Price</label>
+			<size>15</size>
+			<type>BIGDECIMAL</type>
+		</RequisitionLine_unitPrice>
+		<RequisitionHeader_requiredDate>
+			<label>Required Date</label>
+			<visible>0</visible>
+			<type>DATE</type>
+		</RequisitionHeader_requiredDate>
+		<RequisitionHeader_departmentCode>
+			<label>Department</label>
+			<visible>0</visible>
+			<type>STRING</type>
+		</RequisitionHeader_departmentCode>
+		<RequisitionHeader_requisitionerCode>
+			<label>Requisitioner Code</label>
+			<visible>0</visible>
+			<type>STRING</type>
+		</RequisitionHeader_requisitionerCode>
+		<RequisitionHeader_buyer>
+			<label>Buyer</label>
+			<visible>0</visible>
+			<type>STRING</type>
+		</RequisitionHeader_buyer>
+		<RequisitionLine_status>
+			<label>Status</label>
+			<type>STRING</type>
+		</RequisitionLine_status>
+		<RequisitionLine_lineTotal>
+			<label>Line Total</label>
+			<visible>0</visible>
+			<type>BIGDECIMAL</type>
+		</RequisitionLine_lineTotal>
+		<RequisitionHeader_requisitionDate>
+			<label>Requisition Date</label>
+			<visible>0</visible>
+			<type>DATE</type>
+		</RequisitionHeader_requisitionDate>
+		<RequisitionHeader_requisitionType>
+			<label>Buyer</label>
+			<visible>0</visible>
+			<type>STRING</type>
+		</RequisitionHeader_requisitionType>
+		<RequisitionHeader_requisitionType>
+			<label>Buyer</label>
+			<visible>0</visible>
+			<type>STRING</type>
+		</RequisitionHeader_requisitionType>
+		<RequisitionHeader_icReqHeader>
+			<label>ic</label>
+			<visible>0</visible>
+			<type>BIGDECIMAL</type>
+		</RequisitionHeader_icReqHeader>
+		<RequisitionHeader_owner>
+			<label>ic</label>
+			<visible>0</visible>
+			<type>STRING</type>
+		</RequisitionHeader_owner>
+	</columns>
+<sqlfrom>RequisitionLine as RequisitionLine, RequisitionHeader as RequisitionHeader</sqlfrom>
+<sqlwhere><![CDATA[ ( RequisitionHeader.icReqHeader = RequisitionLine.icReqHeader ) AND 
+				  (RequisitionHeader.requisitionNumber <> 'N/A') ]]></sqlwhere>
+<pagesize>15</pagesize>
+<title>Requisition Line Report</title>
+</requistionline>
+

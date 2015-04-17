@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="catalogSecurityRetrieveByUserId" connection-type="New-Connection">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="catalogSecurityRetrieveByUserId">
+			  <task synchronous="true" continue-on-failure="false" name="catalogSecurity">
+				<task-object-name>com.tsa.puridiom.catalogsecurity.tasks.CatalogSecurityRetrieveByUserId</task-object-name>
+				<post-action></post-action>
+			  </task>
+		  </activity>
+	 </activities>
+</process>

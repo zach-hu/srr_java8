@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="docTextUpdate" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="docTextUpdate">
+			<task synchronous="true" continue-on-failure="false" name="docText">			
+				<task-object-name>com.tsa.puridiom.doctext.tasks.DocTextRetrieveById</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="docTextSetValues">			
+				<task-object-name>com.tsa.puridiom.doctext.tasks.DocTextSetValues</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="docText">			
+				<task-object-name>com.tsa.puridiom.doctext.tasks.DocTextUpdate</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+	</activities>
+</process>

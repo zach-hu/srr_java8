@@ -1,0 +1,21 @@
+<browse_app-udf1>
+	<columns>
+		<StdTable_id_tableType>
+			<hidden>Y</hidden>
+		</StdTable_id_tableType>
+		<StdTable_id_tableKey>
+			<label>appruleudf1</label>
+			<link><![CDATA[javascript: getApproverRules('#StdTable_id_tableType^','#StdTable_id_tableKey^'); void(0);]]></link>
+			<size>15</size>
+		</StdTable_id_tableKey>
+		<StdTable_description>
+			<label>description</label>
+			<size>60</size>
+		</StdTable_description>
+	</columns>
+<sqlfrom>StdTable as StdTable</sqlfrom>
+<sqlwhere><![CDATA[ (StdTable.id.tableType = 'AC01') AND (StdTable.status <> '03') ]]></sqlwhere>
+<sqlorderby>StdTable.id.tableKey ASC</sqlorderby>
+<pagesize>15</pagesize>
+<title>Approval Rule Browse</title>
+</browse_app-udf1>

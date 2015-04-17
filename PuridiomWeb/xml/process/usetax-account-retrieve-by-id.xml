@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="useTaxAccountRetrieveById" connection-type="Connection-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="useTaxAccountRetrieveById">
+			<task synchronous="true" continue-on-failure="false" name="useTaxAccountList">
+				<task-object-name>com.tsa.puridiom.account.tasks.UseTaxAccountRetrieveById</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

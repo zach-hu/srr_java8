@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="stdQuestionRetrieveById" connection-type="Connection-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="stdQuestionRetrieveById">
+			<task synchronous="true" continue-on-failure="false" name="stdQuestion">			
+				<task-object-name>com.tsa.puridiom.stdquestion.tasks.StdQuestionRetrieveById</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="stdQuestionSetup">			
+				<task-object-name>com.tsa.puridiom.stdquestion.tasks.StdQuestionRetrieveSetup</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="responseValueList">			
+				<task-object-name>com.tsa.puridiom.responsevalue.tasks.ResponseValueRetrieveByQuestion</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="stdQuestion">			
+				<task-object-name>com.tsa.puridiom.stdquestion.tasks.StdQuestionDataSet</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

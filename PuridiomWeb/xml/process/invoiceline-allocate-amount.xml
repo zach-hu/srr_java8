@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="invoiceLineAllocateAmount" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="invoiceLineAllocateAmount">
+			<task synchronous="true" continue-on-failure="false" name="invoiceAllocAmountSetup">
+				<task-object-name>com.tsa.puridiom.invoiceline.tasks.InvoiceLineAllocateAmountSetup</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="invoiceLine">
+				<task-object-name>com.tsa.puridiom.invoiceline.tasks.InvoiceLineRetrieveById</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="amountToAllocate">
+				<task-object-name>com.tsa.puridiom.invoiceline.tasks.InvoiceLineAllocateAmount</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+	</activities>
+</process>

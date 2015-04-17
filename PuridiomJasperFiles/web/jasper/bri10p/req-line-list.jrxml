@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created using an evaluation version of JasperAssistant (http://www.jasperassistant.com) -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ReqEmailLineList" pageWidth="569" pageHeight="110" whenNoDataType="BlankPage" columnWidth="569" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+	<property name="com.jasperassistant.designer.GridHeight" value="24"/>
+	<property name="com.jasperassistant.designer.GridWidth" value="24"/>
+	<property name="com.jasperassistant.designer.Rulers" value="true"/>
+	<property name="com.jasperassistant.designer.DataSource" value="hilton1p"/>
+	<property name="com.jasperassistant.designer.SnapToGrid" value="false"/>
+	<property name="com.jasperassistant.designer.Margins" value="true"/>
+	<property name="com.jasperassistant.designer.Grid" value="true"/>
+	<property name="com.jasperassistant.designer.SnapToGuides" value="true"/>
+	<import value="com.tsa.puridiom.reports.datasource.*"/>
+	<import value="com.tsa.puridiom.jasperreports.*"/>
+	<reportFont name="Arial_Normal" isDefault="false" fontName="Arial" size="8" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Verdana" isDefault="true" fontName="Verdana" size="9" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Verdana_bold" isDefault="false" fontName="Verdana" size="9" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<parameter name="oid" class="java.lang.String"/>
+	<parameter name="reportTitle" class="java.lang.String"/>
+	<parameter name="userId" class="java.lang.String">
+		<defaultValueExpression><![CDATA["RRAMOS"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="uid" class="java.lang.String">
+		<defaultValueExpression><![CDATA["RRAMOS"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="headerAccountsDS" class="com.tsa.puridiom.reports.datasource.HibernateQueryResultDataSource"/>
+	<parameter name="lines" class="java.util.List"/>
+	<parameter name="commentsDS" class="com.tsa.puridiom.reports.datasource.HibernateQueryResultDataSource"/>
+	<parameter name="headerAccountsSR" class="net.sf.jasperreports.engine.JasperReport">
+		<defaultValueExpression><![CDATA[JasperReportsHelper.loadSubReport("account-summary.jasper", $P{oid})]]></defaultValueExpression>
+	</parameter>
+	<parameter name="headerCommentsAfterDS" class="com.tsa.puridiom.reports.datasource.HibernateQueryResultDataSource"/>
+	<parameter name="headerCommentsAfterSR" class="net.sf.jasperreports.engine.JasperReport">
+		<defaultValueExpression><![CDATA[JasperReportsHelper.loadSubReport("comment-line.jasper", $P{oid})]]></defaultValueExpression>
+	</parameter>
+	<parameter name="attachmentsDs" class="com.tsa.puridiom.reports.datasource.HibernateQueryResultDataSource"/>
+	<parameter name="routingListDS" class="com.tsa.puridiom.reports.datasource.HibernateQueryResultDataSource"/>
+	<parameter name="approverNotesDS" class="com.tsa.puridiom.reports.datasource.HibernateQueryResultDataSource"/>
+	<parameter name="RequisitionHeader_subtotal" class="java.math.BigDecimal">
+		<defaultValueExpression><![CDATA[new BigDecimal(0)]]></defaultValueExpression>
+	</parameter>
+	<parameter name="RequisitionHeader_total" class="java.math.BigDecimal">
+		<defaultValueExpression><![CDATA[new BigDecimal(0)]]></defaultValueExpression>
+	</parameter>
+	<parameter name="RequisitionHeader_discountAmount" class="java.math.BigDecimal">
+		<defaultValueExpression><![CDATA[new BigDecimal(0)]]></defaultValueExpression>
+	</parameter>
+	<parameter name="RequisitionHeader_taxAmount" class="java.math.BigDecimal">
+		<defaultValueExpression><![CDATA[new BigDecimal(0)]]></defaultValueExpression>
+	</parameter>
+	<parameter name="RequisitionHeader_shippingCharges" class="java.math.BigDecimal">
+		<defaultValueExpression><![CDATA[new BigDecimal(0)]]></defaultValueExpression>
+	</parameter>
+	<parameter name="RequisitionHeader_otherCharges" class="java.math.BigDecimal">
+		<defaultValueExpression><![CDATA[new BigDecimal(0)]]></defaultValueExpression>
+	</parameter>
+	<parameter name="totalsDS" class="com.tsa.puridiom.reports.datasource.EntityDataSource"/>
+	<parameter name="udf1code" class="java.lang.String"/>
+	<parameter name="shippingTax" class="java.math.BigDecimal"/>
+	<parameter name="otherTax" class="java.math.BigDecimal"/>
+	<parameter name="subtotal" class="java.math.BigDecimal"/>
+	<parameter name="discount" class="java.math.BigDecimal"/>
+	<parameter name="tax" class="java.math.BigDecimal"/>
+	<parameter name="usetax" class="java.math.BigDecimal"/>
+	<parameter name="shipping" class="java.math.BigDecimal"/>
+	<parameter name="other" class="java.math.BigDecimal"/>
+	<parameter name="total" class="java.math.BigDecimal"/>
+	<field name="RequisitionLine_commodityCode" class="java.lang.String"/>
+	<field name="RequisitionLine_description" class="java.lang.String"/>
+	<field name="RequisitionLine_itemNumber" class="java.lang.String"/>
+	<field name="RequisitionLine_lineNumber" class="java.math.BigDecimal"/>
+	<field name="RequisitionLine_lineTotal" class="java.math.BigDecimal"/>
+	<field name="RequisitionLine_quantity" class="java.math.BigDecimal"/>
+	<field name="RequisitionLine_status" class="java.lang.String"/>
+	<field name="RequisitionLine_umCode" class="java.lang.String"/>
+	<field name="RequisitionLine_unitPrice" class="java.math.BigDecimal"/>
+	<field name="RequisitionLine_docCommentList" class="java.lang.Object"/>
+	<field name="RequisitionLine_umFactor" class="java.math.BigDecimal"/>
+	<field name="RequisitionLine_accountList" class="java.lang.Object"/>
+	<field name="RequisitionLine_shipToList" class="java.lang.Object"/>
+	<field name="RequisitionLine_requisitionLine" class="java.lang.Object"/>
+	<variable name="today" class="java.util.Date">
+		<variableExpression><![CDATA[new java.util.Date()]]></variableExpression>
+		<initialValueExpression><![CDATA[new java.util.Date()]]></initialValueExpression>
+	</variable>
+	<variable name="reportTitle_var" class="java.lang.String">
+		<variableExpression><![CDATA["Requisition Line"]]></variableExpression>
+	</variable>
+	<variable name="extendedPrice" class="java.math.BigDecimal">
+		<variableExpression><![CDATA[$F{RequisitionLine_unitPrice}.multiply($F{RequisitionLine_quantity}).multiply($F{RequisitionLine_umFactor})]]></variableExpression>
+	</variable>
+	<detail>
+		<band height="38">
+			<elementGroup>
+				<subreport>
+					<reportElement positionType="Float" mode="Opaque" x="0" y="0" width="563" height="0" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true" backcolor="#F3F3F3"/>
+					<parametersMapExpression><![CDATA[$P{REPORT_PARAMETERS_MAP}]]></parametersMapExpression>
+					<subreportParameter name="oid">
+						<subreportParameterExpression><![CDATA[$P{oid}]]></subreportParameterExpression>
+					</subreportParameter>
+					<dataSourceExpression><![CDATA[ReportUtils.getCommentsDS($F{RequisitionLine_docCommentList}, "BEFORE")]]></dataSourceExpression>
+					<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[JasperReportsHelper.loadSubReport("comment.jasper", $P{oid})]]></subreportExpression>
+				</subreport>
+			</elementGroup>
+			<elementGroup>
+				<subreport>
+					<reportElement positionType="Float" mode="Opaque" x="0" y="18" width="567" height="20" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true" backcolor="#F3F3F3"/>
+					<parametersMapExpression><![CDATA[$P{REPORT_PARAMETERS_MAP}]]></parametersMapExpression>
+					<subreportParameter name="shipToDS">
+						<subreportParameterExpression><![CDATA[ReportUtils.getLineShipToDS($F{RequisitionLine_shipToList})]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="oid">
+						<subreportParameterExpression><![CDATA[$P{oid}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="commentsDS">
+						<subreportParameterExpression><![CDATA[ReportUtils.getCommentsDS($F{RequisitionLine_docCommentList}, "AFTER")]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="accountDS">
+						<subreportParameterExpression><![CDATA[new HibernateQueryResultDataSource((java.util.List)$F{RequisitionLine_accountList})]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="Parameter_5"/>
+					<dataSourceExpression><![CDATA[new JREmptyDataSource(1)]]></dataSourceExpression>
+					<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[JasperReportsHelper.loadSubReport("line-subreports.jasper", $P{oid})]]></subreportExpression>
+				</subreport>
+			</elementGroup>
+			<subreport>
+				<reportElement positionType="Float" x="0" y="0" width="567" height="15"/>
+				<dataSourceExpression><![CDATA[new EntityDataSource($F{RequisitionLine_requisitionLine})]]></dataSourceExpression>
+				<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[JasperReportsHelper.loadSubReport("req-line.jasper", $P{oid})]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+	<summary>
+		<band height="56">
+			<subreport>
+				<reportElement positionType="Float" mode="Opaque" x="0" y="0" width="567" height="10" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true" backcolor="#F3F3F3"/>
+				<subreportParameter name="total">
+					<subreportParameterExpression><![CDATA[$P{total}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="usetax">
+					<subreportParameterExpression><![CDATA[$P{usetax}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="shipping">
+					<subreportParameterExpression><![CDATA[$P{shipping}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="otherTax">
+					<subreportParameterExpression><![CDATA[$P{otherTax}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="other">
+					<subreportParameterExpression><![CDATA[$P{other}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="tax">
+					<subreportParameterExpression><![CDATA[$P{tax}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="shippingTax">
+					<subreportParameterExpression><![CDATA[$P{shippingTax}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="oid">
+					<subreportParameterExpression><![CDATA[$P{oid}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="udf1code">
+					<subreportParameterExpression><![CDATA[$P{udf1code}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="subtotal">
+					<subreportParameterExpression><![CDATA[$P{subtotal}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="discount">
+					<subreportParameterExpression><![CDATA[$P{discount}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[new JREmptyDataSource(1)]]></dataSourceExpression>
+				<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[JasperReportsHelper.loadSubReport("po-totals.jasper", $P{oid})]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement positionType="Float" mode="Opaque" x="0" y="10" width="567" height="10" isRemoveLineWhenBlank="true" backcolor="#F3F3F3"/>
+				<subreportParameter name="udf1"/>
+				<subreportParameter name="oid">
+					<subreportParameterExpression><![CDATA[$P{oid}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="organizationId">
+					<subreportParameterExpression><![CDATA[$P{oid}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[$P{headerAccountsDS}]]></dataSourceExpression>
+				<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[$P{headerAccountsSR}]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement positionType="Float" mode="Opaque" x="0" y="20" width="567" height="10" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true" backcolor="#F3F3F3"/>
+				<subreportParameter name="oid">
+					<subreportParameterExpression><![CDATA[$P{oid}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[$P{headerCommentsAfterDS}]]></dataSourceExpression>
+				<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[JasperReportsHelper.loadSubReport("comment.jasper", $P{oid})]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement positionType="Float" mode="Opaque" x="0" y="31" width="567" height="10" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true" backcolor="#F3F3F3"/>
+				<subreportParameter name="oid">
+					<subreportParameterExpression><![CDATA[$P{oid}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[$P{attachmentsDs}]]></dataSourceExpression>
+				<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[JasperReportsHelper.loadSubReport("docattachment.jasper", $P{oid})]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement positionType="Float" mode="Opaque" x="0" y="42" width="567" height="10" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true" backcolor="#F3F3F3"/>
+				<subreportParameter name="pdf">
+					<subreportParameterExpression><![CDATA[new Boolean(false)]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="oid">
+					<subreportParameterExpression><![CDATA[$P{oid}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[$P{routingListDS}]]></dataSourceExpression>
+				<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[JasperReportsHelper.loadSubReport("approvallog.jasper", $P{oid})]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement positionType="Float" mode="Opaque" x="0" y="53" width="563" height="0" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true" backcolor="#F3F3F3"/>
+				<subreportParameter name="oid">
+					<subreportParameterExpression><![CDATA[$P{oid}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[$P{approverNotesDS}]]></dataSourceExpression>
+				<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[JasperReportsHelper.loadSubReport("approver-notes.jasper", $P{oid})]]></subreportExpression>
+			</subreport>
+		</band>
+	</summary>
+</jasperReport>

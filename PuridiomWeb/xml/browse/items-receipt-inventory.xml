@@ -1,0 +1,86 @@
+<items-receipt-inventory>
+	<columns>
+		<ReceiptLine_icRecHeader>
+			<hidden>Y</hidden>
+			<hidden-input>Y</hidden-input>
+			<key>N</key>
+			<distinct>Y</distinct>
+		</ReceiptLine_icRecHeader>
+		<ReceiptLine_icRecLine>
+			<hidden>Y</hidden>
+			<hidden-input>Y</hidden-input>
+		</ReceiptLine_icRecLine>
+		<ReceiptLine_receiptNumber>
+			<label>brw-receiptNumber</label>
+			<size>10</size>
+			<hidden-input>Y</hidden-input>
+			<key>Y</key>
+			<link><![CDATA[javascript: viewInvBinLocation('#ReceiptLine_icRecLine^', '#RequisitionLine_itemNumber^', '#ReceiptLine_itemLocation^', '#ReceiptLine_qtyAccepted^', '#PoLine_unitPrice^', '#PoLine_commodity^', '#PoLine_umCode^', '#RequisitionHeader_icMsrHeader^', '#ReceiptLine_inventoryFlag^', '#ReceiptLine_receiptLine^', '#RequisitionHeader_msrNumber^','#ReceiptLine_icLineHistory^'); void(0);]]></link>
+		</ReceiptLine_receiptNumber>
+		<ReceiptLine_receiptLine>
+			<label>lineNumber</label>
+			<size>6</size>
+			<hidden-input>Y</hidden-input>
+			<type>QtyDecimal3</type>
+		</ReceiptLine_receiptLine>
+		<RequisitionLine_itemNumber>
+			<label>cat-itemNumber</label>
+			<hidden-input>Y</hidden-input>
+		</RequisitionLine_itemNumber>
+		<RequisitionLine_description>
+			<label>brw-description</label>
+			<hidden-input>Y</hidden-input>
+			<size>20</size>
+		</RequisitionLine_description>
+		<ReceiptLine_itemLocation>
+			<label>Location</label>
+			<size>6</size>
+			<hidden-input>Y</hidden-input>
+		</ReceiptLine_itemLocation>
+		<ReceiptLine_qtyAccepted>
+			<label>brw-QUANTITYACCEPTED</label>
+			<size>10</size>
+			<hidden-input>Y</hidden-input>
+		</ReceiptLine_qtyAccepted>
+		<ReceiptLine_receiptDate>
+			<label>brw-requiredDate</label>
+			<sort>D</sort>
+			<size>10</size>
+			<type>DATE</type>
+		</ReceiptLine_receiptDate>
+		<ReceiptLine_inventoryFlag>
+			<hidden-input>Y</hidden-input>
+			<hidden>Y</hidden>
+		</ReceiptLine_inventoryFlag>
+		<ReceiptLine_icLineHistory>
+			<hidden-input>Y</hidden-input>
+			<hidden>Y</hidden>
+		</ReceiptLine_icLineHistory>
+		<RequisitionHeader_requisitionNumber>
+			<label>brw-requisitionNumber</label>
+			<hidden-input>Y</hidden-input>
+		</RequisitionHeader_requisitionNumber>
+		<RequisitionHeader_msrNumber>
+			<label>MSR #</label>
+			<hidden-input>Y</hidden-input>
+		</RequisitionHeader_msrNumber>
+	</columns>
+<!--<sqlfrom>ReceiptLine as ReceiptLine, UserProfile as UserProfile</sqlfrom>-->
+<sqlfrom>ReceiptLine as ReceiptLine, RequisitionHeader as RequisitionHeader, RequisitionLine as RequisitionLine</sqlfrom>
+<sqlwhere><![CDATA[
+	ReceiptLine.icReqLine = RequisitionLine.icReqLine AND
+	RequisitionLine.icReqHeader = RequisitionHeader.icReqHeader AND
+	(ReceiptLine.inventoryFlag = 'I' OR ReceiptLine.inventoryFlag = 'K') AND
+	ReceiptLine.qtyAccepted <> 0
+]]>
+<!-- <sqlwhere><![CDATA[
+	ReceiptLine.icPoHeader = PoHeader.icPoHeader AND
+	PoHeader.icPoHeader = PoLine.icPoHeader AND
+	ReceiptLine.inventoryStatus = '4100' AND
+	ReceiptLine.itemLocation = UserProfile.locale
+]]> -->
+</sqlwhere>
+<sqlorderby>ReceiptLine.receiptDate DESC, RequisitionHeader.requisitionNumber DESC</sqlorderby>
+<pagesize>15</pagesize>
+<title>Item location</title>
+</items-receipt-inventory>

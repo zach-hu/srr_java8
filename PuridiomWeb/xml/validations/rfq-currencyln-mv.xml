@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rule>
+	<clause type="Rule">
+		<rule-filename>rfq-has-vendors.xml</rule-filename>
+	</clause>
+	<logical-operator>IFTHEN</logical-operator>
+	<clause type="lookup" matchAll="true">
+		<sql> from CurrCode as currCode where currCode.currencyCode = '@currencycode@' AND (currCode.status = '02' OR (currCode.status = '01' AND currCode.dateExpires >= @today@))</sql>
+		<source>rfqVendorList</source>
+		<arguments>
+			<name>currencycode</name>
+			<source>rfqVendorList</source>
+			<colName>getVendCurrency</colName>
+		</arguments>
+	</clause>
+</rule>

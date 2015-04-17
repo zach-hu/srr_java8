@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rule>
+	<clause type="StringCompare">
+		<left-side elementSource="true">
+			<source>incomingRequestObjectMethod</source>
+			<object>receiptHeader</object>
+			<name>getCarrierCode</name>
+		</left-side>
+		<operator>EQUAL</operator>
+		<right-side>
+			<source>constant</source>
+			<value>OTHER</value>
+		</right-side>
+	</clause>
+	<logical-operator>IFTHEN</logical-operator>
+	<clause type="NotEmpty">
+		<left-side elementSource="true">
+			<source>incomingRequestObjectMethod</source>
+			<object>receiptHeader</object>
+			<name>getReceiptNotes</name>
+		</left-side>
+	</clause>
+</rule>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="SendQueueProcessbyAction" connection-type="New-Connection">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="SendQueueProcessbyActionSetup">
+			<task synchronous="true" continue-on-failure="false" name="alertsList">
+				<task-object-name>com.tsa.puridiom.services.tasks.SendQueueProcessListByAction</task-object-name>
+			</task>
+	  </activity>
+	 </activities>
+</process>

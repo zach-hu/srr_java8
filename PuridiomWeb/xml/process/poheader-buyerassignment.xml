@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process connection-type="Transaction-Required" name="poSetBuyerAssignment">
+  <activities>
+    <activity continue-on-failure="false" name="" synchronous="true">
+    	<task synchronous="true" continue-on-failure="false" name="poHeader">
+    		<task-object-name>com.tsa.puridiom.po.buyerassignment.tasks.ByCommodityDepartmenBuyerTable</task-object-name>
+    	</task>
+    	<task synchronous="true" continue-on-failure="false" name="poHeader">
+    		<task-object-name>com.tsa.puridiom.poheader.tasks.PoHeaderUpdate</task-object-name>
+    	</task>
+    </activity>
+  </activities>
+</process>

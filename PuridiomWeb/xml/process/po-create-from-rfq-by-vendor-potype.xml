@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="poCreatefromrfq" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="RetrieveSourceCreate">
+			<task synchronous="true" continue-on-failure="false" name="rfqHeader">
+				<task-object-name>com.tsa.puridiom.rfqheader.tasks.RfqHeaderRetrieveById</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="rfqVendor">
+				<task-object-name>com.tsa.puridiom.rfqvendor.tasks.RfqVendorRetrieveById</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="poCreate">
+			<task synchronous="true" continue-on-failure="false" name="poCreateSetup">
+				<task-object-name>com.tsa.puridiom.poheader.tasks.PoHeaderSetup</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="poCreateSetup">
+				<task-object-name>com.tsa.puridiom.po.tasks.PoCreateSetup</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="MapReqUdfs">
+				<task-object-name>com.tsa.puridiom.po.tasks.PoRfqMapUdfs</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="poCreateFromRfqSetup">
+				<task-object-name>com.tsa.puridiom.po.tasks.PoCreateFromRfqSetup</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="poNumber">
+				<task-object-name>com.tsa.puridiom.poheader.tasks.PoHeaderSetPoNumber</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="requisitionHeader">
+				<task-object-name>com.tsa.puridiom.requisitionheader.tasks.RequisitionHeaderRetrieveById</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="poCreateFromRfqSetReqValues">
+				<task-object-name>com.tsa.puridiom.po.tasks.PoCreateFromRfqSetReqValues</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="poHeader">
+				<task-object-name>com.tsa.puridiom.poheader.tasks.PoHeaderSetValues</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity continue-on-failure="false" synchronous="true" name="loadSupplier">
+			<task synchronous="true" continue-on-failure="false" name="loadSupplier">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>po-load-supplier.xml</process-filename>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="CreatePo">
+			<task synchronous="true" continue-on-failure="false" name="poHeader">
+				<task-object-name>com.tsa.puridiom.poheader.tasks.PoHeaderAdd</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="PoHeaderSaveasfromRfq">
+			<!-- save as comments and accounts from rfq-->
+			<task synchronous="true" continue-on-failure="false" name="poHeaderCommentSaveas">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>poheader-saveas-from-rfq.xml</process-filename>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="PoLineCreateFromRfq">
+			<task synchronous="true" continue-on-failure="false" name="lines">
+				<task-object-name>com.tsa.puridiom.rfqline.tasks.RfqLineBidsByVendorFromList</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="setEntities">
+				<task-object-name>com.tsa.puridiom.poline.tasks.GetBidEntities</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="rfqLinesToCopy">
+				<task-object-name>com.tsa.puridiom.rfqline.tasks.RfqLineNotOnOrder</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="PoLineCreateFromRfq">
+			<rule-filename>is-there-rfqLines-tocopy.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="poLineCreateFromRfq">
+				<task-object-name>com.tsa.puridiom.poline.tasks.PoLineLoadRfqLinesByVendor</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="totals">
+			<task synchronous="true" continue-on-failure="false" name="poRecalculate">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>po-recalculate.xml</process-filename>
+			</task>
+		</activity>
+	</activities>
+</process>

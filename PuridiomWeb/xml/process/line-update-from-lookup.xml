@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="catalogitem-lookup-by-id" connection-type="Transaction-Required">
+	<rule-filename>is-catalogitem-itemnumber-not-empty</rule-filename>
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="lineUpdateActivity">
+			<task synchronous="true" continue-on-failure="false" name="requisitionLineUpdate">
+				<rule-filename>is-req.xml</rule-filename>
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>requisitionline-update-from-lookup.xml</process-filename>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="rfqLineUpdate">
+				<rule-filename>is-rfq.xml</rule-filename>
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>rfqline-update-from-lookup.xml</process-filename>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="poLineUpdate">
+				<rule-filename>is-po.xml</rule-filename>
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>poline-update-from-lookup.xml</process-filename>
+			</task>
+		</activity>
+	</activities>
+</process>

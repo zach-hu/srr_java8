@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created using an evaluation version of JasperAssistant (http://www.jasperassistant.com) -->
+<!DOCTYPE jasperReport PUBLIC "-//JasperReports//DTD Report Design//EN" "http://jasperreports.sourceforge.net/dtds/jasperreport.dtd">
+
+<jasperReport name="CostCenterApprovers" pageWidth="612" pageHeight="748" whenNoDataType="BlankPage" columnWidth="582" leftMargin="15" rightMargin="15" topMargin="15" bottomMargin="15">
+	<import value="com.tsa.puridiom.currcode.CurrencyManager"/>
+	<import value="com.tsagate.foundation.utility.Utility"/>
+	<import value="com.tsa.puridiom.common.documents.*"/>
+	<import value="com.tsa.puridiom.common.*"/>
+	<import value="java.net.*"/>
+	<import value="com.tsagate.properties.*"/>
+	<import value="com.tsa.puridiom.entity.*"/>
+	<import value="com.tsa.puridiom.common.documents.OrderType"/>
+	<import value="java.util.*"/>
+	<import value="com.tsa.puridiom.property.PropertiesManager"/>
+	<import value="com.tsa.puridiom.common.utility.HiltonUtility"/>
+	<import value="com.tsa.puridiom.jasperreports.*"/>
+	<import value="net.sf.jasperreports.engine.JRDataSource"/>
+	<reportFont name="Arial_Normal" isDefault="true" fontName="Arial" size="7" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Bold" isDefault="false" fontName="Arial Black" size="7" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica-Bold" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Bold_Big" isDefault="false" fontName="Arial Black" size="12" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica-Bold" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Big" isDefault="false" fontName="Arial" size="12" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<parameter name="oid" class="java.lang.String">
+		<defaultValueExpression><![CDATA["HILTON"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="reportTitle" class="java.lang.String">
+		<defaultValueExpression><![CDATA["Report"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="reportCriteria" class="java.lang.String"/>
+	<parameter name="userId" class="java.lang.String">
+		<defaultValueExpression><![CDATA["PURIDIOM"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="reportType" class="java.lang.String">
+		<defaultValueExpression><![CDATA["Y"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="companyName" class="java.lang.String">
+		<defaultValueExpression><![CDATA[PropertiesManager.getInstance($P{oid}).getProperty("COMPANY", "Name", "TSA")]]></defaultValueExpression>
+	</parameter>
+	<parameter name="currencyManager" class="com.tsa.puridiom.currcode.CurrencyManager">
+		<defaultValueExpression><![CDATA[CurrencyManager.getInstance($P{oid})]]></defaultValueExpression>
+	</parameter>
+	<field name="XrefCombo_xrefType" class="java.math.BigDecimal"/>
+	<field name="XrefCombo_code1" class="java.lang.String"/>
+	<field name="XrefCombo_code2" class="java.lang.String"/>
+	<field name="XrefCombo_code3" class="java.lang.String"/>
+	<field name="XrefCombo_code4" class="java.lang.String"/>
+	<field name="XrefCombo_code5" class="java.lang.String"/>
+	<field name="XrefCombo_code6" class="java.lang.String"/>
+	<field name="XrefCombo_code7" class="java.lang.String"/>
+	<field name="XrefCombo_code8" class="java.lang.String"/>
+	<field name="XrefCombo_code9" class="java.lang.String"/>
+	<field name="XrefCombo_code10" class="java.lang.String"/>
+	<field name="XrefCombo_code11" class="java.lang.String"/>
+	<field name="XrefCombo_code12" class="java.lang.String"/>
+	<field name="XrefCombo_code13" class="java.lang.String"/>
+	<field name="XrefCombo_code14" class="java.lang.String"/>
+	<field name="XrefCombo_code15" class="java.lang.String"/>
+	<field name="XrefCombo_xrefInd" class="java.math.BigDecimal"/>
+	<field name="XrefCombo_xrefAmt" class="java.math.BigDecimal"/>
+	<field name="XrefCombo_dateEntered" class="java.util.Date"/>
+	<field name="XrefCombo_dateExpires" class="java.util.Date"/>
+	<field name="XrefCombo_status" class="java.lang.String"/>
+	<field name="XrefCombo_owner" class="java.lang.String"/>
+	<group name="Group_Header">
+		<groupHeader>
+			<band height="53">
+				<subreport isUsingCache="false">
+					<reportElement positionType="Float" x="1" y="1" width="580" height="40"/>
+					<subreportParameter name="reportTitle">
+						<subreportParameterExpression><![CDATA[$P{reportTitle}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="oid">
+						<subreportParameterExpression><![CDATA[$P{oid}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="userId">
+						<subreportParameterExpression><![CDATA[$P{userId}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="reportCriteria">
+						<subreportParameterExpression><![CDATA[$P{reportCriteria}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="pageNumber">
+						<subreportParameterExpression><![CDATA[String.valueOf($V{PAGE_NUMBER})]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="companyName">
+						<subreportParameterExpression><![CDATA[$P{companyName}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="totalPages">
+						<subreportParameterExpression><![CDATA[String.valueOf($V{PAGE_COUNT})]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[JasperReportsHelper.loadSubReport("header-portrait.jasper", $P{oid},"", $P{reportType})]]></subreportExpression>
+				</subreport>
+				<textField hyperlinkType="None">
+					<reportElement positionType="Float" x="86" y="41" width="41" height="12"/>
+					<box border="None" padding="0"/>
+					<textElement textAlignment="Center">
+						<font reportFont="Arial_Bold" fontName="Arial" size="7" isBold="false" isUnderline="false" pdfFontName="Helvetica-Bold"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[DictionaryManager.getLabel($P{oid}, "rep-code2", "Entity")]]></textFieldExpression>
+				</textField>
+				<textField hyperlinkType="None">
+					<reportElement positionType="Float" x="449" y="41" width="32" height="12"/>
+					<box border="None" padding="0"/>
+					<textElement textAlignment="Center" lineSpacing="Single">
+						<font reportFont="Arial_Bold" fontName="Arial" size="7" isBold="false" isUnderline="false" pdfFontName="Helvetica-Bold"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[DictionaryManager.getLabel($P{oid}, "rep-status", "Status")]]></textFieldExpression>
+				</textField>
+				<textField hyperlinkType="None">
+					<reportElement positionType="Float" x="1" y="41" width="85" height="12"/>
+					<box border="None" padding="0"/>
+					<textElement textAlignment="Center">
+						<font reportFont="Arial_Bold" fontName="Arial" size="7" isBold="false" isUnderline="false" pdfFontName="Helvetica-Bold"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[DictionaryManager.getLabel($P{oid}, "rep-code1", "Division")]]></textFieldExpression>
+				</textField>
+				<textField hyperlinkType="None">
+					<reportElement positionType="Float" x="213" y="41" width="42" height="12"/>
+					<box border="None" padding="0"/>
+					<textElement textAlignment="Center">
+						<font reportFont="Arial_Bold" fontName="Arial" size="7" isBold="false" isUnderline="false" pdfFontName="Helvetica-Bold"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[DictionaryManager.getLabel($P{oid}, "rep-code5", "Event")]]></textFieldExpression>
+				</textField>
+				<textField hyperlinkType="None">
+					<reportElement positionType="Float" x="395" y="41" width="54" height="12"/>
+					<box border="None" padding="0"/>
+					<textElement textAlignment="Center" lineSpacing="Single">
+						<font reportFont="Arial_Bold" fontName="Arial" size="7" isBold="false" isUnderline="false" pdfFontName="Helvetica-Bold"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[DictionaryManager.getLabel($P{oid}, "rep-dateExpires", "Date Expires")]]></textFieldExpression>
+				</textField>
+				<textField hyperlinkType="None">
+					<reportElement positionType="Float" x="481" y="41" width="99" height="12"/>
+					<box border="None" padding="0"/>
+					<textElement textAlignment="Center" lineSpacing="Single">
+						<font reportFont="Arial_Bold" fontName="Arial" size="7" isBold="false" isUnderline="false" pdfFontName="Helvetica-Bold"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[DictionaryManager.getLabel($P{oid}, "rep-owner", "Owner")]]></textFieldExpression>
+				</textField>
+				<textField hyperlinkType="None">
+					<reportElement positionType="Float" x="172" y="41" width="41" height="12"/>
+					<box border="None" padding="0"/>
+					<textElement textAlignment="Center">
+						<font reportFont="Arial_Bold" fontName="Arial" size="7" isBold="false" isUnderline="false" pdfFontName="Helvetica-Bold"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[DictionaryManager.getLabel($P{oid}, "rep-code4", "Account")]]></textFieldExpression>
+				</textField>
+				<textField hyperlinkType="None">
+					<reportElement positionType="Float" x="255" y="41" width="51" height="12"/>
+					<box border="None" padding="0"/>
+					<textElement textAlignment="Center">
+						<font reportFont="Arial_Bold" fontName="Arial" size="7" isBold="false" isUnderline="false" pdfFontName="Helvetica-Bold"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[DictionaryManager.getLabel($P{oid}, "rep-code6", "Performance")]]></textFieldExpression>
+				</textField>
+				<textField hyperlinkType="None">
+					<reportElement positionType="Float" x="341" y="41" width="54" height="12"/>
+					<box border="None" padding="0"/>
+					<textElement textAlignment="Center" lineSpacing="Single">
+						<font reportFont="Arial_Bold" fontName="Arial" size="7" isBold="false" isUnderline="false" pdfFontName="Helvetica-Bold"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[DictionaryManager.getLabel($P{oid}, "rep-dateEntered", "Date Entered")]]></textFieldExpression>
+				</textField>
+				<textField hyperlinkType="None">
+					<reportElement positionType="Float" x="306" y="41" width="35" height="12"/>
+					<box border="None" padding="0"/>
+					<textElement textAlignment="Center">
+						<font reportFont="Arial_Bold" fontName="Arial" size="7" isBold="false" isUnderline="false" pdfFontName="Helvetica-Bold"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[DictionaryManager.getLabel($P{oid}, "rep-code7", "Program")]]></textFieldExpression>
+				</textField>
+				<textField hyperlinkType="None">
+					<reportElement positionType="Float" x="127" y="41" width="45" height="12"/>
+					<box border="None" padding="0"/>
+					<textElement textAlignment="Center">
+						<font reportFont="Arial_Bold" fontName="Arial" size="7" isBold="false" isUnderline="false" pdfFontName="Helvetica-Bold"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[DictionaryManager.getLabel($P{oid}, "rep-code3", "Department")]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+	</group>
+	<detail>
+		<band height="12">
+			<textField isBlankWhenNull="true" hyperlinkType="None">
+				<reportElement positionType="Float" x="1" y="0" width="85" height="12" forecolor="#000000"/>
+				<box border="None" padding="0"/>
+				<textElement textAlignment="Center">
+					<font reportFont="Arial_Normal" size="7"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{XrefCombo_code1}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true" hyperlinkType="None">
+				<reportElement positionType="Float" x="86" y="0" width="41" height="12" forecolor="#000000"/>
+				<box border="None" padding="0"/>
+				<textElement textAlignment="Center">
+					<font reportFont="Arial_Normal" size="7"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{XrefCombo_code2}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true" hyperlinkType="None">
+				<reportElement positionType="Float" x="127" y="0" width="45" height="12" forecolor="#000000"/>
+				<box border="None" padding="0"/>
+				<textElement textAlignment="Center">
+					<font reportFont="Arial_Normal" size="7"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{XrefCombo_code3}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true" hyperlinkType="None">
+				<reportElement positionType="Float" x="172" y="0" width="41" height="12" forecolor="#000000"/>
+				<box border="None" padding="0"/>
+				<textElement textAlignment="Center">
+					<font reportFont="Arial_Normal" size="7"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{XrefCombo_code4}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true" hyperlinkType="None">
+				<reportElement positionType="Float" x="213" y="0" width="42" height="12" forecolor="#000000"/>
+				<box border="None" padding="0"/>
+				<textElement textAlignment="Center">
+					<font reportFont="Arial_Normal" size="7"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{XrefCombo_code5}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true" hyperlinkType="None">
+				<reportElement positionType="Float" x="255" y="0" width="51" height="12" forecolor="#000000"/>
+				<box border="None" padding="0"/>
+				<textElement textAlignment="Center">
+					<font reportFont="Arial_Normal" size="7"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{XrefCombo_code6}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true" hyperlinkType="None">
+				<reportElement positionType="Float" x="306" y="0" width="35" height="12" forecolor="#000000"/>
+				<box border="None" padding="0"/>
+				<textElement textAlignment="Center">
+					<font reportFont="Arial_Normal" size="7"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{XrefCombo_code7}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true" hyperlinkType="None">
+				<reportElement positionType="Float" x="481" y="0" width="99" height="12" forecolor="#000000"/>
+				<box border="None" padding="0"/>
+				<textElement textAlignment="Center" lineSpacing="Single">
+					<font reportFont="Arial_Normal" fontName="Arial" size="7" isBold="false" pdfFontName="Helvetica"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{XrefCombo_owner}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true" hyperlinkType="None">
+				<reportElement positionType="Float" x="449" y="0" width="32" height="12" forecolor="#000000"/>
+				<box border="None" padding="0"/>
+				<textElement textAlignment="Center" lineSpacing="Single">
+					<font reportFont="Arial_Normal" fontName="Arial" size="7" isBold="false" pdfFontName="Helvetica"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{XrefCombo_status}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true" hyperlinkType="None">
+				<reportElement positionType="Float" x="394" y="0" width="55" height="12" forecolor="#000000"/>
+				<box border="None" padding="0"/>
+				<textElement textAlignment="Center" lineSpacing="Single">
+					<font reportFont="Arial_Normal" fontName="Arial" size="7" isBold="false" pdfFontName="Helvetica"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[HiltonUtility.getFormattedDate($F{XrefCombo_dateExpires}, $P{oid})]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true" hyperlinkType="None">
+				<reportElement positionType="Float" x="341" y="0" width="53" height="12" forecolor="#000000"/>
+				<box border="None" padding="0"/>
+				<textElement textAlignment="Center" lineSpacing="Single">
+					<font reportFont="Arial_Normal" fontName="Arial" size="7" isBold="false" pdfFontName="Helvetica"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[HiltonUtility.getFormattedDate($F{XrefCombo_dateEntered}, $P{oid})]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

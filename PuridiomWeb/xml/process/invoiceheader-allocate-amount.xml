@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="invoiceHeaderAllocateAmount" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="invoiceHeaderAllocateAmount">
+			<task synchronous="true" continue-on-failure="false" name="invoiceHeaderAllocAmountSetup">
+				<task-object-name>com.tsa.puridiom.invoiceheader.tasks.InvoiceHeaderAllocateAmountSetup</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="invoiceHeader">
+				<task-object-name>com.tsa.puridiom.invoiceheader.tasks.InvoiceHeaderRetrieveById</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="invoiceLineList">
+				<rule-filename>exist-ic-invoiceline.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.invoiceline.tasks.InvoiceLineRetrieveByHeader</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="allocatedTotal">
+				<task-object-name>com.tsa.puridiom.invoiceline.tasks.InvoiceAccountAllocatedForLines</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="amountToAllocate">
+				<rule-filename>is-tax-shipping-other-accounts.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.invoiceheader.tasks.InvoiceHeaderAllocateAmount</task-object-name>
+				<post-action>exitActivity</post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="retrieveAccounts">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>invoiceheader-retrieve-accounts.xml</process-filename>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="amountToAllocate">
+				<task-object-name>com.tsa.puridiom.invoiceheader.tasks.InvoiceHeaderAllocateAmount</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="invoiceAccountRetrieveSetup">
+				<task-object-name>com.tsa.puridiom.invoice.tasks.InvoiceHeaderAccountRetrieveSetup</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+	</activities>
+</process>

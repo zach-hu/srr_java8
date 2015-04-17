@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+    
+<hibernate-mapping>
+
+<!-- 
+    Created by Middlegen Hibernate plugin
+
+    http://boss.bekk.no/boss/middlegen/
+    http://hibernate.sourceforge.net/
+-->
+
+<class 
+    name="com.tsa.puridiom.entity.HostUser" 
+    table="HOST_USER"
+>
+    <id
+        name="mailId"
+        type="java.lang.String"
+        column="MAIL_ID"
+        length="65"
+    >
+        <generator class="assigned" />
+    </id>
+    <property
+        name="userId"
+        type="java.lang.String"
+        column="USER_ID"
+        length="15"
+    />
+    <property
+        name="organizationId"
+        type="java.lang.String"
+        column="ORGANIZATION_ID"
+        length="15"
+    />
+    <!-- associations -->
+
+</class>
+</hibernate-mapping>

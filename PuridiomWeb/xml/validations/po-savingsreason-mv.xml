@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rule>
+	<clause type="BigDecimalCompare">
+		<left-side>
+			<source>incomingRequestObjectMethod</source>
+			<object>header</object>
+			<name>getSavings</name>
+		</left-side>
+		<operator>GREATER</operator>
+		<right-side>
+			<source>constant</source>
+			<value>0</value>
+		</right-side>
+	</clause>
+	<logical-operator>IFTHEN</logical-operator>
+	<clause type="lookup">
+		<sql>from StdTable stdTable where stdTable.id.tableType = 'SAVE' AND stdTable.id.tableKey = '@savingsReason@' AND (stdTable.status = '02' OR (stdTable.status = '01' AND stdTable.dateExpires >= @today@))</sql>
+		<source>header</source>
+		<arguments>
+			<name>savingsReason</name>
+			<source>header</source>
+			<colName>getSavingsReason</colName>
+		</arguments>
+	</clause>
+</rule>
+

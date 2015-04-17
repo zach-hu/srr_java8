@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process connection-type="Connection-Required" name="shipToRetrieveByLine">
+	<activities>
+		<activity continue-on-failure="false" name="shipToRetrieveByLine" synchronous="true">
+			<task continue-on-failure="false" name="shipToList" synchronous="true">
+				<task-object-name>com.tsa.puridiom.requisitionline.autorelease.tasks.ShipToCreateForAutoRelease</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

@@ -1,0 +1,22 @@
+<browse_stdaccount>
+	<columns>
+		<Account_id_icHeader>
+			<hidden>Y</hidden>
+		</Account_id_icHeader>
+		<Account_accountTitle>
+			<label>brw-accountTitle</label>
+			<sort>A</sort>
+			<link><![CDATA[javascript: addStdAccount('#Account_id_icHeader^'); void(0);]]></link>
+		</Account_accountTitle>
+		<Account_id_sequence>
+			<label>routingSequence</label>
+			<hidden>Y</hidden>
+			<type>NUMBER</type>
+		</Account_id_sequence>
+	</columns>
+<sqlfrom>Account as Account</sqlfrom>
+<sqlorderby>Account.accountTitle ASC</sqlorderby>
+<sqlwhere><![CDATA[ (Account.accountType = 'STD' and Account.id.sequence = '1') ]]></sqlwhere>
+<pagesize>15</pagesize>
+<title>Standard Account Allocations</title>
+</browse_stdaccount>

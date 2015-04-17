@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rule>
+	<clause type="Rule">
+		<rule-filename>valid-req-types.xml</rule-filename>
+	</clause>
+	<logical-operator>IFTHEN</logical-operator>
+	<clause type="BigDecimalCompare">
+		<left-side>
+			<source>incomingRequestObjectMethod</source>
+			<object>header</object>
+			<name>getEstimatedCost</name>
+		</left-side>
+		<operator>GREATEREQUAL</operator>
+		<right-side>
+			<source>incomingRequestObjectMethod</source>
+			<object>header</object>
+			<name>getTotal</name>
+		</right-side>
+	</clause>
+</rule>

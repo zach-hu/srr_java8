@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="xrefComboAdd" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="xrefComboAdd">
+			<task synchronous="true" continue-on-failure="false" name="xrefComboCreateSetup">
+				<rule-filename></rule-filename>
+				<task-object-name>com.tsa.puridiom.xrefcombo.tasks.XrefComboCreateSetup</task-object-name>
+				<post-action></post-action>
+			  </task>
+			<task synchronous="true" continue-on-failure="false" name="xrefCombo">
+				<task-object-name>com.tsa.puridiom.xrefcombo.tasks.XrefComboSetValues</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="xrefCOmbo">
+				<task-object-name>com.tsa.puridiom.xrefcombo.tasks.XrefComboAdd</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+	</activities>
+</process>

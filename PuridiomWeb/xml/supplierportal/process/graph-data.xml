@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="GraphData" connection-type="Connection-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="orders">
+			<task synchronous="true" continue-on-failure="false" name="ordersbystatus">
+				<task-object-name>com.tsa.puridiom.graphs.tasks.VendorOrderCountData</task-object-name>
+			</task>
+		</activity>
+
+		<!--<activity synchronous="true" continue-on-failure="false" name="solicitations">
+			<task synchronous="true" continue-on-failure="false" name="rfqsbystatus">
+				<task-object-name>com.tsa.puridiom.graphs.tasks.VendorRfqCountData</task-object-name>
+			</task>
+		</activity>-->
+
+	</activities>
+</process>

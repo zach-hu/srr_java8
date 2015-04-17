@@ -1,0 +1,67 @@
+<browse_userprofile>
+	<columns>
+		<UserProfile_userId>
+			<label><![CDATA[user-userId]]></label>
+			<link><![CDATA[javascript: adminUserProfile('#UserProfile_userId^', '#UserProfile_organizationId^'); void(0);]]></link>
+			<size>11</size>
+		</UserProfile_userId>
+		<UserProfile_organizationId>
+			<hidden>Y</hidden>
+		</UserProfile_organizationId>
+		<UserProfile_firstName>
+			<label>firstName</label>
+			<size>11</size>
+		</UserProfile_firstName>
+		<UserProfile_middleInit>
+			<label>middleInitial</label>
+			<hidden>Y</hidden>
+		</UserProfile_middleInit>
+		<UserProfile_lastName>
+			<label>lastName</label>
+			<sort>A</sort>
+			<size>16</size>
+		</UserProfile_lastName>
+		<!--UserProfile_department>
+			<label>department</label>
+			<size>18</size>
+		</UserProfile_department-->
+		<UserProfile_mailId>
+			<label>emailAddress</label>
+			<size>22</size>
+		</UserProfile_mailId>
+		<UserProfile_title>
+			<label>title</label>
+			<hidden>Y</hidden>
+		</UserProfile_title>
+		<UserProfile_approver>
+			<label>approver</label>
+			<size>7</size>
+			<align>center</align>
+		</UserProfile_approver>
+		<UserProfile_buyer>
+			<label>brw-buyer</label>
+			<size>5</size>
+			<align>center</align>
+		</UserProfile_buyer>
+		<UserProfile_requisitioner>
+			<label>brw-requisitioner</label>
+			<size>9</size>
+			<align>center</align>
+		</UserProfile_requisitioner>
+		<UserProfile_status>
+			<label>brw-status</label>
+			<type>STATUS</type>
+			<size>10</size>
+		</UserProfile_status>
+		<UserProfile_loggedOn>
+			<label>loggedOn</label>
+			<size>11</size>
+			<type>DATE</type>
+		</UserProfile_loggedOn>
+	</columns>
+<sqlfrom>UserProfile as UserProfile</sqlfrom>
+<sqlwhere><![CDATA[ UserProfile.userId <> 'SYSADM' ]]></sqlwhere>
+<sqlorderby>UserProfile.lastName ASC</sqlorderby>
+<pagesize>15</pagesize>
+<title>Employee Browse</title>
+</browse_userprofile>

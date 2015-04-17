@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rule>
+	<clause type="StringCompare">
+		<left-side>
+			<source>incomingRequest</source>
+			<name>commodity-line-xml-not-empty</name>
+		</left-side>
+		<operator>NOTEQUAL</operator>
+		<right-side>
+			<source>constant</source>
+			<value>failed</value>
+		</right-side>
+	</clause>
+	<logical-operator>AND</logical-operator>
+  	<clause type="lookup" matchAll="true">
+		<sql>from Commodity as commodity where commodity.commodity = '@commodity@' AND (commodity.status = '02' OR (commodity.status = '01' AND commodity.dateExpires >= @today@))</sql>
+		<source>lineitems</source>
+		<arguments>
+			<name>commodity</name>
+			<source>lineitems</source>
+			<colName>getCommodity</colName>
+		</arguments>
+	</clause>
+</rule>

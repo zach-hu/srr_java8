@@ -1,0 +1,58 @@
+<browse_rfq_header>
+	<columns>
+		<RfqHeader_rfqType>
+			<label>poType</label>
+			<type>RFQ-TYPE</type>
+			<size>20</size>
+		</RfqHeader_rfqType>
+		<RfqHeader_icRfqHeader>
+	        <hidden>Y</hidden>
+	        <visible>0</visible>
+		</RfqHeader_icRfqHeader>
+		<RfqHeader_rfqNumber>
+			<label>brw-solicitationNumber</label>
+			<link><![CDATA[javascript: viewRfq('#RfqHeader_icRfqHeader^','#RfqHeader_rfqType^'); void(0);]]></link>
+			<size>15</size>
+		</RfqHeader_rfqNumber>
+		<RfqHeader_rfqAmendment>
+			<label>brw-amendment</label>
+			<size>8</size>
+		</RfqHeader_rfqAmendment>
+		<RfqHeader_status>
+			<label>brw-status</label>
+			<type>STATUS</type>
+			<size>17</size>
+		</RfqHeader_status>
+		<RfqHeader_rfqDate>
+			<label>dateCreated</label>
+			<type>DATE</type>
+			<size>12</size>
+		</RfqHeader_rfqDate>
+		<RfqHeader_dueDate>
+			<label>brw-dueDate</label>
+			<type>DATE</type>
+			<size>12</size>
+		</RfqHeader_dueDate>
+		<RfqHeader_rfqDescription>
+			<label>purpose</label>
+			<!--trim>100</trim-->
+			<detail>Y</detail>
+			<size>120</size>
+		</RfqHeader_rfqDescription>
+		<RfqHeader_buyer>
+			<label>brw-buyer</label>
+            <size>16</size>
+            <type>USER-ID</type>
+		</RfqHeader_buyer>
+		<RfqHeader_owner>
+			<label>owner</label>
+			<hidden>Y</hidden>
+		</RfqHeader_owner>
+	</columns>
+<sqlfrom>RfqHeader as RfqHeader</sqlfrom>
+<sqlwhere><![CDATA[RfqHeader.rfqNumber <> 'N/A' AND (RfqHeader.owner = :as_userid OR RfqHeader.buyer = :as_userid OR RfqHeader.requisitionerCode = :as_userid) ]]></sqlwhere>
+<sqlorderby>RfqHeader.rfqDate DESC</sqlorderby>
+<pagesize>15</pagesize>
+<title>Solicitation Browse</title>
+</browse_rfq_header>
+

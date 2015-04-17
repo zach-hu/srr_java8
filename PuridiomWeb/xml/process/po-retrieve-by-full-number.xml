@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="poRetrieveByFullNumber" connection-type="Connection-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="poRetrieveByFullNumber">
+			<task synchronous="true" continue-on-failure="false" name="poHeader">
+				<task-object-name>com.tsa.puridiom.po.tasks.PoRetrieveByFullNumber</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="poHeaderRetrieveSetup">
+				<task-object-name>com.tsa.puridiom.poheader.tasks.PoHeaderRetrieveSetup</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="poLineList">
+				<task-object-name>com.tsa.puridiom.poline.tasks.PoLineRetrieveByHeader</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

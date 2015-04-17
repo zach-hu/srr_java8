@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="SendQueueProcessbyAction" connection-type="New-Connection">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="SendQueueProcessbyActionSetup">
+			<rule-filename>is-sendqueue-alert.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="SendQueueProcess">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>sendqueue-process-by-action.xml</process-filename>
+			</task>
+	  </activity>
+	 </activities>
+</process>

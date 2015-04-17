@@ -1,0 +1,82 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+    
+<hibernate-mapping>
+
+<class 
+    name="com.tsa.puridiom.entity.DocComment" 
+    table="DOC_COMMENT"
+>
+    <composite-id name="comp_id" class="com.tsa.puridiom.entity.DocCommentPK">
+        <key-property name="icHeader" column="IC_HEADER" type="java.math.BigDecimal"/>
+        <key-property name="icLine" column="IC_LINE" type="java.math.BigDecimal"/>
+        <key-property name="commentOrder" column="COMMENT_ORDER" type="java.math.BigDecimal"/>
+    </composite-id>    
+    <property
+        name="referenceType"
+        type="java.lang.String"
+        column="REFERENCE_TYPE"
+        not-null="true"
+        length="3"
+    />
+    <property
+        name="commentId"
+        type="java.lang.String"
+        column="COMMENT_ID"
+        length="15"
+    />
+    <property
+        name="commentTitle"
+        type="java.lang.String"
+        column="COMMENT_TITLE"
+        length="60"
+    />
+    <property
+        name="icText"
+        type="java.math.BigDecimal"
+        column="IC_TEXT"
+        length="22"
+    />
+    <property
+        name="commentPrint"
+        type="java.lang.String"
+        column="COMMENT_PRINT"
+        length="1"
+    />
+    <property
+        name="commentPlace"
+        type="java.lang.String"
+        column="COMMENT_PLACE"
+        length="1"
+    />
+    <property
+        name="commentSource"
+        type="java.lang.String"
+        column="COMMENT_SOURCE"
+        length="3"
+    />
+    <property
+        name="commentBold"
+        type="java.lang.String"
+        column="COMMENT_BOLD"
+        length="1"
+    />
+    <property
+        name="commentPublic"
+        type="java.lang.String"
+        column="COMMENT_PUBLIC"
+        length="1"
+    />
+    <property
+        name="commentWebpost"
+        type="java.lang.String"
+        column="COMMENT_WEBPOST"
+        length="1"
+    />
+
+    <!-- associations -->
+
+</class>
+</hibernate-mapping>

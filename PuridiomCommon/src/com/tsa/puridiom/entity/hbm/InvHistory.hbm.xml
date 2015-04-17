@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+    
+<hibernate-mapping>
+
+<!-- 
+    Created by Middlegen Hibernate plugin
+
+    http://boss.bekk.no/boss/middlegen/
+    http://hibernate.sourceforge.net/
+-->
+
+<class 
+    name="com.tsa.puridiom.entity.InvHistory" 
+    table="INV_HISTORY"
+>
+    <composite-id name="comp_id" class="com.tsa.puridiom.entity.InvHistoryPK">
+        <key-property name="seqNumber" column="SEQ_NUMBER"  type="java.math.BigDecimal"/>
+        <key-property name="itemNumber" column="ITEM_NUMBER"  type="java.lang.String"/>
+    </composite-id>    
+    <property
+        name="docPrtDate"
+        type="java.sql.Timestamp"
+        column="DOC_PRT_DATE"
+        length="7"
+    />
+    <property
+        name="primUser"
+        type="java.lang.String"
+        column="PRIM_USER"
+        length="15"
+    />
+    <property
+        name="puAppDate"
+        type="java.sql.Timestamp"
+        column="PU_APP_DATE"
+        length="7"
+    />
+    <property
+        name="faId"
+        type="java.lang.String"
+        column="FA_ID"
+        length="15"
+    />
+    <property
+        name="faAppDate"
+        type="java.sql.Timestamp"
+        column="FA_APP_DATE"
+        length="7"
+    />
+
+    <!-- associations -->
+    <!-- bi-directional many-to-one association to InvItem -->
+
+</class>
+</hibernate-mapping>

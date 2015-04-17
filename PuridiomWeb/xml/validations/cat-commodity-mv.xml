@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rule>
+	<clause type="lookup">
+		<sql>from Commodity as Commodity where Commodity.commodity = '@commodity@' AND (Commodity.status = '02' OR (Commodity.status = '01' AND Commodity.dateExpires >= @today@))</sql>
+		<source>catalogItem</source>
+		<arguments>
+			<name>commodity</name>
+			<source>catalogItem</source>
+			<colName>getCommodity</colName>
+		</arguments>
+	</clause>
+</rule>

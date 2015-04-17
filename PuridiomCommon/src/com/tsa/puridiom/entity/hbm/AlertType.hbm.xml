@@ -1,0 +1,107 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+    
+<hibernate-mapping>
+
+<class 
+    name="com.tsa.puridiom.entity.AlertType" 
+    table="ALERT_TYPE"
+>
+    <id
+        name="alertId"
+        type="java.lang.String"
+        column="ALERT_ID"
+    >
+        <generator class="assigned" />
+    </id>
+    <property
+        name="alertText"
+        type="java.lang.String"
+        column="ALERT_TEXT"
+        length="60"
+    />
+    <property
+        name="alertDw"
+        type="java.lang.String"
+        column="ALERT_DW"
+        length="30"
+    />
+    <property
+        name="alertRefType"
+        type="java.lang.String"
+        column="ALERT_REF_TYPE"
+        length="3"
+    />
+    <property
+        name="docDw"
+        type="java.lang.String"
+        column="DOC_DW"
+        length="60"
+    />
+    <property
+        name="buyer"
+        type="java.lang.String"
+        column="BUYER"
+        length="1"
+    />
+    <property
+        name="owner"
+        type="java.lang.String"
+        column="OWNER"
+        length="1"
+    />
+    <property
+        name="requisitioner"
+        type="java.lang.String"
+        column="REQUISITIONER"
+        length="1"
+    />
+    <property
+        name="approver"
+        type="java.lang.String"
+        column="APPROVER"
+        length="1"
+    />
+    <property
+        name="manager"
+        type="java.lang.String"
+        column="MANAGER"
+        length="1"
+    />
+    <property
+        name="enabled"
+        type="java.lang.String"
+        column="ENABLED"
+        length="1"
+    />
+    <property
+        name="extraNames"
+        type="java.lang.String"
+        column="EXTRA_NAMES"
+        length="255"
+    />
+    <property
+        name="commentId"
+        type="java.lang.String"
+        column="COMMENT_ID"
+        length="15"
+    />
+    <property
+        name="offsetFlag"
+        type="java.lang.String"
+        column="OFFSET_FLAG"
+        length="1"
+    />
+    <property
+        name="offset"
+        type="java.math.BigDecimal"
+        column="OFFSET"
+        length="5"
+    />
+
+    <!-- associations -->
+
+</class>
+</hibernate-mapping>

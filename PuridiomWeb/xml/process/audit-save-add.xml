@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="auditRecordAdd" connection-type="New-Transaction">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="auditTrail">
+			<task synchronous="true" continue-on-failure="false" name="SaveAuditFields">
+				<task-object-name>com.tsagate.foundation.processengine.SaveAuditFields</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="auditRecordList">
+				<task-object-name>com.tsa.puridiom.auditrecord.tasks.AuditSaveFromRequest</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="auditRecordList">
+				<task-object-name>com.tsa.puridiom.auditrecord.tasks.AuditRecordAddList</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+	</activities>
+</process>

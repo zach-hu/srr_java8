@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="vendorregisterQualificationById" connection-type="Transaction-Required" ldap-connection-type="None">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="addQualifiedVendorContact">
+			<task synchronous="true" continue-on-failure="false" name="contactSetup">
+				<task-object-name>com.tsa.puridiom.vendorqualification.tasks.VendorContactSetup</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="contact">
+				<task-object-name>com.tsa.puridiom.contact.tasks.ContactRetrieveByEmailAddr</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="errorMsg">
+				<rule-filename check-for-false="true">is-contact-empty.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.contacterrormsg.tasks.ErrorMsgSetQualifiedContactAlreadyExists</task-object-name>
+				<post-action>exitProcess</post-action>
+			</task>
+		    <task synchronous="true" continue-on-failure="false" name="contactAdd">
+    			<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+    			<process-filename>contact-add.xml</process-filename>
+    		</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="addQualifiedVendorAddress">
+			<task synchronous="true" continue-on-failure="false" name="addressSetup">
+				<task-object-name>com.tsa.puridiom.vendorqualification.tasks.VendorContactAddressSetup</task-object-name>
+			</task>
+		    <task synchronous="true" continue-on-failure="false" name="addressAdd">
+    			<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+    			<process-filename>address-add.xml</process-filename>
+    		</task>
+			<task synchronous="true" continue-on-failure="false" name="remitToAddressSetup">
+				<task-object-name>com.tsa.puridiom.vendorqualification.tasks.VendorRemitToAddressSetup</task-object-name>
+			</task>
+		    <task synchronous="true" continue-on-failure="false" name="addressAdd">
+    			<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+    			<process-filename>address-add.xml</process-filename>
+    		</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="addQualifiedAltContactFromMain">
+			<task synchronous="true" continue-on-failure="false" name="altContactAdd">
+    			<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+    			<process-filename>vendorregister-qualify-alt-contact-from-main.xml</process-filename>
+    		</task>
+			<task synchronous="true" continue-on-failure="false" name="arContactAdd">
+    			<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+    			<process-filename>vendorregister-qualify-ar-contact-from-main.xml</process-filename>
+    		</task>
+		</activity>
+	</activities>
+</process>

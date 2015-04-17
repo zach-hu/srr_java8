@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="requisitionApprove" connection-type="Transaction-Required">
+  <activities>
+    <activity synchronous="true" continue-on-failure="false" name="retrieveIt">
+      <task synchronous="true" continue-on-failure="false" name="approvalSetup">
+        <task-object-name>com.tsa.puridiom.requisition.tasks.RequisitionApprovalSetup</task-object-name>
+        <post-action></post-action>
+      </task>
+      <task synchronous="true" continue-on-failure="false" name="routingList">
+        <task-object-name>com.tsa.puridiom.approvals.tasks.ApprovalLogRetrieveByHeader</task-object-name>
+        <post-action></post-action>
+      </task>
+      <task synchronous="true" continue-on-failure="false" name="routingList">
+        <task-object-name>com.tsa.puridiom.approvals.tasks.ApprovalLogApprove</task-object-name>
+        <post-action></post-action>
+      </task>
+      <task synchronous="true" continue-on-failure="false" name="routingList">
+        <task-object-name>com.tsa.puridiom.approvals.tasks.ApprovalLogForward</task-object-name>
+        <post-action></post-action>
+      </task>
+      <task synchronous="true" continue-on-failure="false" name="costpoint">
+      	<task-object-name>com.tsa.puridiom.approvals.tasks.SendReqToCostpoint</task-object-name>
+        <post-action></post-action>
+      </task>
+	 </activity>
+	 
+	 <activity synchronous="true" continue-on-failure="false" name="retrieveCommentList">
+	 	<task synchronous="true" continue-on-failure="false" name="requisitionCommentIdSetup">
+			<task-object-name>com.tsa.puridiom.requisition.tasks.RequisitionCommentIdSetup</task-object-name>
+			<post-action></post-action>
+		</task>
+		<task synchronous="true" continue-on-failure="false" name="docCommentList">
+			<task-object-name>com.tsa.puridiom.doccomment.tasks.DocCommentRetrieveByLine</task-object-name>
+			<post-action></post-action>
+		</task>
+		<task synchronous="true" continue-on-failure="false" name="docTextList">
+			<task-object-name>com.tsa.puridiom.doccomment.tasks.DocCommentTextRetrieveByLine</task-object-name>
+			<post-action></post-action>
+		</task>
+	 </activity>
+	 
+	 <activity synchronous="true" continue-on-failure="false" name="backupApproverActionEmails">
+	  <rule-filename>is-backup-approver-action.xml</rule-filename>
+      <task continue-on-failure="false" name="queueAddApprovedByBackupApprover" synchronous="true">
+        <task-object-name>com.tsa.puridiom.approvals.QueueAddAppByBackupRequisitionerEmail</task-object-name>
+      </task>
+      <task continue-on-failure="false" name="queueAddApprovedByBackupApprover" synchronous="true">
+        <task-object-name>com.tsa.puridiom.approvals.QueueAddAppByBackupApproverEmail</task-object-name>
+      </task>
+	 </activity>
+	 <activity synchronous="true" continue-on-failure="false" name="overrideApproverActionEmails">
+	  <rule-filename>is-override.xml</rule-filename>
+      <task continue-on-failure="false" name="queueAddApprovedByOverrider" synchronous="true">
+        <task-object-name>com.tsa.puridiom.approvals.QueueAddAppByOverriderRequisitionerEmail</task-object-name>
+      </task>
+      <task continue-on-failure="false" name="queueAddApprovedByBackupApprover" synchronous="true">
+        <task-object-name>com.tsa.puridiom.approvals.QueueAddAppByOverriderApproverEmail</task-object-name>
+      </task>
+	 </activity>
+	 <activity synchronous="true" continue-on-failure="false" name="historyApprovedEmails">
+      <task synchronous="true" continue-on-failure="false" name="historyStatus">
+        <task-object-name>com.tsa.puridiom.approvals.tasks.ApprovalLogSetHistoryStatus</task-object-name>
+        <post-action></post-action>
+      </task>
+      <!-- email -->
+      <task continue-on-failure="false" name="queueAddOrderRequest" synchronous="true">
+        <task-object-name>com.tsa.puridiom.approvals.QueueAddReqApproveEmail</task-object-name>
+      </task>
+    </activity>
+    <activity synchronous="true" continue-on-failure="false" name="requisitionForwardSetup">
+      <rule-filename>is-forward-to-next.xml</rule-filename>
+      <task synchronous="true" continue-on-failure="false" name="requisitionHeader">
+        <rule-filename check-for-false="true">is-requisitionheader-empty.xml</rule-filename>
+        <task-object-name>com.tsa.puridiom.requisitionheader.tasks.RequisitionHeaderRetrieveById</task-object-name>
+      </task>
+      <task synchronous="true" continue-on-failure="false" name="requisitionLineList">
+        <rule-filename check-for-false="true">is-requisitionlinelist-empty.xml</rule-filename>
+        <task-object-name>com.tsa.puridiom.requisitionline.tasks.RequisitionLineRetrieveByHeader</task-object-name>
+      </task>
+    </activity>
+    <!-- history pending approval. moving through the roulting list-->
+    <activity synchronous="true" continue-on-failure="false" name="history">
+      <rule-filename>is-forward-to-next.xml</rule-filename>
+      <task synchronous="true" continue-on-failure="false" name="requisitionHeaderHistory">
+          <task-object-name>com.tsa.puridiom.requisitionheader.history.tasks.RequisitionHeaderHistory</task-object-name>
+        </task>
+    	<!--<task synchronous="true" continue-on-failure="false" name="requisitionLineListHistory">
+      <task-object-name>com.tsa.puridiom.requisitionline.history.tasks.RequisitionLineListHistory</task-object-name>
+    </task>-->
+    </activity>
+  </activities>
+</process>

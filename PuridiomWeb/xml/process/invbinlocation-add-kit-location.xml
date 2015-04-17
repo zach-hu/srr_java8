@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="InvBinLocationAddKitLocation" connection-type="Transaction-Required"> 
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="invBinLocationRetrieve">
+		 	<task synchronous="true" continue-on-failure="false" name="invBinLocationRetrieve">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>invbinlocation-retrieve-by-item.xml</process-filename>
+			</task>
+		 </activity>
+		 <activity synchronous="true" continue-on-failure="false" name="requisitionHeader">
+		 	<rule-filename check-for-false="true">is-requisitionheader-icreqheader-empty.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="requisitionHeader">
+				<task-object-name>com.tsa.puridiom.requisitionheader.tasks.RequisitionHeaderRetrieveById</task-object-name>
+				<post-action></post-action>
+			</task>
+		 </activity>  
+		 <activity synchronous="true" continue-on-failure="false" name="kitLocation">
+			<rule-filename>is-kit-checked.xml;is-msr-request.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="requisitionLineList">
+				<task-object-name>com.tsa.puridiom.requisitionline.tasks.RequisitionLineRetrieveByHeader</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="requisitionLineList">
+				<task-object-name>com.tsa.puridiom.invbinlocation.tasks.InvBinLocationAddKitLocation</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+	</activities> 
+</process>

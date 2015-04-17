@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="addItemsRfqReqPo" connection-type="Transaction-Required">
+	<activities>
+	   <activity synchronous="true" continue-on-failure="false" name="readRfqReqPoItems">
+			<task synchronous="true" continue-on-failure="false" name="readRfqReqPoItems">
+				<task-object-name>com.tsa.puridiom.uploaditems.tasks.ReadRfqReqPoItems</task-object-name>
+			</task>
+		</activity>
+	    <activity synchronous="true" continue-on-failure="false" name="addItemsRfqReqPo">
+		   <task synchronous="true" continue-on-failure="false" name="setupFormType">
+		    <task-object-name>com.tsa.puridiom.uploaditems.tasks.SetupFormType</task-object-name>
+		  </task>
+		  <task synchronous="true" continue-on-failure="false" name="addItems">
+		    <task-object-name>com.tsa.puridiom.uploaditems.tasks.RfqReqPoAddItems</task-object-name>
+		  </task>
+		  <task synchronous="true" continue-on-failure="false" name="recalculateForm">
+		    <task-object-name>com.tsa.puridiom.uploaditems.tasks.RecalculateForm</task-object-name>
+		  </task>
+		   <task synchronous="true" continue-on-failure="false" name="renumberRfqReqPo">
+		    <task-object-name>com.tsa.puridiom.uploaditems.tasks.RfqReqPoLineRenumber</task-object-name>
+		  </task>
+		</activity>
+	</activities>
+</process>
+
+
+
+

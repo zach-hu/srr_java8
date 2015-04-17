@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="labelsAdd" connection-type="New-Transaction">
+  <activities>
+    <activity synchronous="true" continue-on-failure="false" name="labelsAdd">
+      <task synchronous="true" continue-on-failure="false" name="labelsAddSetup">
+        <rule-filename></rule-filename>
+        <task-object-name>com.tsa.puridiom.labels.tasks.LabelsAddSetup</task-object-name>
+        <post-action></post-action>
+      </task>
+      <task synchronous="true" continue-on-failure="false" name="labels">
+        <rule-filename></rule-filename>
+        <task-object-name>com.tsa.puridiom.labels.tasks.LabelsSetValues</task-object-name>
+        <post-action></post-action>
+      </task>
+      <task synchronous="true" continue-on-failure="false" name="labels">
+        <rule-filename></rule-filename>
+        <task-object-name>com.tsa.puridiom.labels.tasks.LabelsAdd</task-object-name>
+        <post-action></post-action>
+      </task>
+    </activity>
+  </activities>
+</process>

@@ -1,0 +1,87 @@
+<divs_perfromance>
+	<columns>
+		<!-- XrefCombo_icXref>
+			<label>Ic Header</label>
+			<visible>0</visible>
+			<hidden-input>Y</hidden-input>
+		</XrefCombo_icXref>
+		<XrefCombo_xrefType>
+			<label>Type</label>
+			<visible>0</visible>
+		</XrefCombo_xrefType>
+		<XrefCombo_code1>
+			<label>Division</label>
+			<visible>0</visible>
+		</XrefCombo_code1>
+		<XrefCombo_code2>
+			<label>Entity</label>
+			<visible>1</visible>
+		</XrefCombo_code2>
+		<XrefCombo_code3>
+			<label>Department</label>
+			<visible>1</visible>
+		</XrefCombo_code3>
+		<XrefCombo_code4>
+			<label>Account</label>
+			<visible>1</visible>
+		</XrefCombo_code4>
+		<XrefCombo_code5>
+			<label>Event</label>
+			<visible>1</visible>
+		</XrefCombo_code5>
+		<XrefCombo_code6>
+			<label>Performance</label>
+			<link><![CDATA[javascript: returnMe('#XrefCombo_code6^'); void(0);]]></link>
+			<visible>1</visible>
+		</XrefCombo_code6>
+		<XrefCombo_code7>
+			<label>Program</label>
+			<visible>1</visible>
+		</XrefCombo_code7>
+		<StdTable_id_tableType>
+			<label>Type</label>
+			<visible>0</visible>
+		</StdTable_id_tableType-->
+		<XrefCombo_code2>
+			<label>brw-entity</label>
+			<visible>1</visible>
+			<distinct>Y</distinct>
+		</XrefCombo_code2>
+		<StdTable_id_tableKey>
+			<label>brw-performance</label>
+			<link><![CDATA[javascript: returnMe('#StdTable_id_tableKey^'); void(0);]]></link>
+			<visible>1</visible>
+		</StdTable_id_tableKey>
+		<StdTable_description>
+			<label>description</label>
+			<size>45</size>
+		</StdTable_description>
+	</columns>
+<sqlfrom>XrefCombo as XrefCombo, StdTable as StdTable</sqlfrom>
+<sqlwhere><![CDATA[ XrefCombo.status='02' AND XrefCombo.xrefType='DIVS'
+					AND StdTable.id.tableType='AC05'
+					AND StdTable.status='02'
+					AND ( XrefCombo.code2 = @Account_fld1# )
+					AND ( XrefCombo.code3 = @Account_fld2#	OR	XrefCombo.code3 = '*' )
+					AND ( XrefCombo.code4 = @Account_fld3#	OR	XrefCombo.code4 = '*' )
+					AND ( XrefCombo.code5 = @Account_fld4#
+				         OR ( XrefCombo.code5 = '*' )
+				         OR ( XrefCombo.code5 = (substr(@Account_fld4#, 1, 1) || '*') )
+				         OR ( XrefCombo.code5 = (substr(@Account_fld4#, 1, 2) || '*') )
+				         OR ( XrefCombo.code5 = (substr(@Account_fld4#, 1, 3) || '*') )
+				         OR ( XrefCombo.code5 = (substr(@Account_fld4#, 1, 4) || '*') )
+				         OR ( XrefCombo.code5 = (substr(@Account_fld4#, 1, 5) || '*') )
+			        )
+					AND	( XrefCombo.code6 = StdTable.id.tableKey
+					 OR (XrefCombo.code6 like '*')
+					 OR (XrefCombo.code6 like '_*' AND substr(StdTable.id.tableKey, 1, 1) = substr(XrefCombo.code6, 1, 1) )
+					 OR (XrefCombo.code6 like '__*' AND substr(StdTable.id.tableKey, 1, 2) = substr(XrefCombo.code6, 1, 2) )
+					 OR (XrefCombo.code6 like '___*' AND substr(StdTable.id.tableKey, 1, 3) = substr(XrefCombo.code6, 1, 3) )
+					 OR (XrefCombo.code6 like '____*' AND substr(StdTable.id.tableKey, 1, 4) = substr(XrefCombo.code6, 1, 4) )
+					 OR (XrefCombo.code6 like '_____*' AND substr(StdTable.id.tableKey, 1, 5) = substr(XrefCombo.code6, 1, 5) )
+ 					 OR (XrefCombo.code6 like '______*' AND substr(StdTable.id.tableKey, 1, 6) = substr(XrefCombo.code6, 1, 6) )
+					 )]]></sqlwhere>
+<sqlorderby>XrefCombo.code2 ASC, StdTable.id.tableKey ASC</sqlorderby>
+<pagesize>15</pagesize>
+<title>Performance Browse</title>
+ </divs_perfromance>

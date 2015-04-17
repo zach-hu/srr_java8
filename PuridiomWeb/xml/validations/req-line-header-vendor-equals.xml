@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rule>
+	<clause type="StringCompare">
+		<left-side elementSource="true">
+			<source>incomingRequestObjectMethod</source>
+			<object>lineitem</object>
+			<name>getVendorId</name>
+		</left-side>
+		<operator>EQUALS</operator>
+		<right-side>
+			<source>incomingRequestObjectMethod</source>
+			<object>header</object>
+			<name>getVendorId</name>
+		</right-side>
+	</clause>
+</rule>

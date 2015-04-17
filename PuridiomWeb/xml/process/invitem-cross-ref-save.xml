@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="invItemCrossRefSave" connection-type="New-Transaction">
+	<activities>
+	    <activity synchronous="true" continue-on-failure="false" name="itemCrossRefSaveSetup">
+			<task synchronous="true" continue-on-failure="false" name="itemCrossRefDeleteByItemNumber">
+				<task-object-name>com.tsa.puridiom.invitem.tasks.InvItemCrossRefSaveSetup</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+	    <activity synchronous="true" continue-on-failure="false" name="itemCrossRefDeleteByItemNumber">
+			<task synchronous="true" continue-on-failure="false" name="itemCrossRefDeleteByItemNumber">
+				<task-object-name>com.tsa.puridiom.itemcrossref.tasks.ItemCrossRefDeleteByItemNumber</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="itemCrossRefSave">
+			<task synchronous="true" continue-on-failure="false" name="itemCrossRefAdd">
+				<task-object-name>com.tsa.puridiom.invitem.tasks.InvItemCrossRefAdd</task-object-name>
+				<post-action></post-action>
+      		</task>
+		</activity>
+	</activities>
+</process>

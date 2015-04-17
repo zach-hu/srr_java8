@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="invItemRetrieve" connection-type="Connection-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="retrieveInvItem">
+			<task synchronous="true" continue-on-failure="false" name="invItem">
+				<task-object-name>com.tsa.puridiom.invitem.tasks.InvItemRetrieveById</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="retrieveInvCrossRef">
+			<task synchronous="true" continue-on-failure="false" name="invItemRetrieveCrossRefSetup">
+				<task-object-name>com.tsa.puridiom.invitem.tasks.InvItemCrossRefRetrieveSetup</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="itemCrossRefList">
+				<task-object-name>com.tsa.puridiom.itemcrossref.tasks.ItemCrossRefRetrieveByItemNumber</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="retrieveInvBinLocationSumQtyOnHand">
+			<task synchronous="true" continue-on-failure="false" name="invItemRetrieveQtyOnHandSetup">
+				<task-object-name>com.tsa.puridiom.invitem.tasks.InvItemRetrieveQtyOnHandSetup</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="invBinLocationList">
+				<task-object-name>com.tsa.puridiom.invbinlocation.tasks.InvBinLocationRetrieveByItem</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="qtyOnHand">
+				<task-object-name>com.tsa.puridiom.invbinlocation.tasks.InvBinLocationSetupQtyOnHandInvItem</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+	</activities>
+</process>

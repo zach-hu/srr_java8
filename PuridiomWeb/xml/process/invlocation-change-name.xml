@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="changelocationname" connection-type="New-Transaction">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="changelocationnamesetup">
+			<task synchronous="true" continue-on-failure="false" name="setup">
+				<task-object-name>com.tsa.puridiom.invlocation.tasks.InvLocationChangeNameSetup</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="invLocation">
+				<task-object-name>com.tsa.puridiom.invlocation.tasks.InvLocationRetrieveByLocation</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="bins">
+				<task-object-name>com.tsa.puridiom.invbinlocation.tasks.InvBinLocationRetrieveByLocation</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="changebinlocationname">
+			<task synchronous="true" continue-on-failure="false" name="invBinLocations">
+				<task-object-name>com.tsa.puridiom.invbinlocation.tasks.InvBinLocationChangeNameSetup</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="updateBins">
+				<task-object-name>com.tsa.puridiom.invbinlocation.tasks.InvBinLocationUpdateList</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="changelocationname">
+			<task synchronous="true" continue-on-failure="false" name="changename">
+				<task-object-name>com.tsa.puridiom.invlocation.tasks.InvLocationChangeName</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="invLocationdelete">
+				<task-object-name>com.tsa.puridiom.invlocation.tasks.InvLocationDeleteList</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="invLocationadd">
+				<task-object-name>com.tsa.puridiom.invlocation.tasks.InvLocationAddList</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="changeAddressCode">
+			<task synchronous="true" continue-on-failure="false" name="retrieveAddressList">
+				<task-object-name>com.tsa.puridiom.address.tasks.AddressRetrieveAllInventory</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="addresschangename">
+				<task-object-name>com.tsa.puridiom.address.tasks.AddressChangeName</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="addressadd">
+				<task-object-name>com.tsa.puridiom.address.tasks.AddressAddList</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+	</activities>
+</process>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="ContactRetrieveBySupplier" connection-type="Connection-Required"> 
+	<!--Retrieve all Contacts for a given Supplier with their associated Address-->
+	<activities>  
+		<activity synchronous="true" continue-on-failure="false" name="ContactAddressRetrieveBySupplier">
+			  <task synchronous="true" continue-on-failure="false" name="contactAddressList">
+				<task-object-name>com.tsa.puridiom.contact.tasks.ContactAddressRetrieveBySupplier</task-object-name>    
+			  </task>
+			  <task synchronous="true" continue-on-failure="false" name="remitToAddress">
+				<task-object-name>com.tsa.puridiom.address.tasks.AddressRetrieveRemitTo</task-object-name>    
+			  </task>
+		  </activity>  
+	 </activities> 
+</process>

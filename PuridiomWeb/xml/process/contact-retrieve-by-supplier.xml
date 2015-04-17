@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="ContactRetrieveBySupplier" connection-type="New-Connection"> 
+	<!--Retrieve all Contacts for a given Supplier-->
+	<activities>  
+		<activity synchronous="true" continue-on-failure="false" name="ContactRetrieveBySupplier">
+			  <task synchronous="true" continue-on-failure="false" name="contact">    			
+				<task-object-name>com.tsa.puridiom.contact.tasks.ContactRetrieveBySupplier</task-object-name>    
+				<post-action />    
+			  </task>
+		  </activity>  
+	 </activities> 
+</process>

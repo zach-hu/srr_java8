@@ -1,0 +1,97 @@
+<browse-buyer-assignment-wkld-by-line>
+	<columns>
+		<RequisitionHeader_icReqHeader>
+			<hidden>Y</hidden>
+			<hidden-input>Y</hidden-input>
+			<key>N</key>
+		</RequisitionHeader_icReqHeader>
+		<RequisitionLine_icReqHeader>
+			<hidden>Y</hidden>
+			<hidden-input>Y</hidden-input>
+			<key>Y</key>
+		</RequisitionLine_icReqHeader>
+		<RequisitionLine_icReqLine>
+			<hidden>Y</hidden>
+			<hidden-input>Y</hidden-input>
+			<key>Y</key>
+		</RequisitionLine_icReqLine>
+		<RequisitionLine_quantity>
+			<hidden>Y</hidden>
+			<type>QtyDecimal</type>
+		</RequisitionLine_quantity>
+		<RequisitionLine_umCode>
+			<hidden>Y</hidden>
+		</RequisitionLine_umCode>
+		<c_checkbox>
+			<label>brw-reassign</label>
+			<type>Checkbox</type>
+			<size>8</size>
+			<selectsql>N</selectsql>
+			<store-request-value>Y</store-request-value>
+		</c_checkbox>
+		<RequisitionLine_requisitionNumber>
+			<label>brw-requisitionNumber</label>
+			<size>10</size>
+			<link><![CDATA[javascript: viewReqPreview('#RequisitionLine_icReqHeader^'); void(0);]]></link>
+			<hidden-input>Y</hidden-input>
+		</RequisitionLine_requisitionNumber>
+		
+		<RequisitionLine_itemNumber>
+			<label>brw-itemNumber</label>
+			<size>14</size>
+			<hidden-input>Y</hidden-input>
+		</RequisitionLine_itemNumber>
+		<RequisitionLine_quantity>
+			<concatenate>
+				<col type="QtyDecimal">RequisitionLine_quantity</col>
+				<col type="constant"><![CDATA[&nbsp;]]></col>
+				<col type="constant">(</col>
+				<col>RequisitionLine_umCode</col>
+				<col type="constant">)</col>
+			</concatenate>
+			<label>quantity</label>
+			<type>Decimal</type>
+			<size>14</size>
+			<selectsql>N</selectsql>
+		</RequisitionLine_quantity>
+		<RequisitionLine_unitPrice>
+			<label>brw-unitPrice</label>
+			<type>DollarDecimal</type>
+			<size>15</size>
+		</RequisitionLine_unitPrice>
+		<dummy_space>
+			<selectsql>N</selectsql>
+			<size>3</size>
+		</dummy_space>
+		<RequisitionLine_commodityCode>
+			<label>commodity</label>
+			<size>18</size>
+		</RequisitionLine_commodityCode>
+		<RequisitionLine_catalogId>
+			<label>brw-catalogId</label>
+			<size>20</size>
+		</RequisitionLine_catalogId>
+		<RequisitionLine_umCode>
+			<hidden>Y</hidden>
+		</RequisitionLine_umCode>
+		<RequisitionLine_description>
+			<label>description</label>
+			<detail>Y</detail>
+			<size>100</size>
+		</RequisitionLine_description>
+	</columns>
+<sqlfrom>RequisitionHeader as RequisitionHeader, RequisitionLine as RequisitionLine</sqlfrom>
+<sqlwhere><![CDATA[
+( RequisitionHeader.icReqHeader = RequisitionLine.icReqHeader ) and
+( RequisitionLine.status = '1015' or RequisitionLine.status = '1035'  or RequisitionLine.status = '2020' ) and
+( RequisitionHeader.requisitionType = 'P' or RequisitionHeader.requisitionType = 'R' or RequisitionHeader.requisitionType = 'H' or
+  RequisitionHeader.requisitionType = 'C' or RequisitionHeader.requisitionType = 'N' or
+  RequisitionHeader.requisitionType = 'E'  or RequisitionHeader.requisitionType = 'A' or
+  RequisitionHeader.requisitionType = 'O' or RequisitionHeader.requisitionType = 'V') and
+( RequisitionLine.quantity - RequisitionLine.allocated > 0 )
+]]>
+</sqlwhere>
+<sqlorderby>RequisitionHeader.requisitionDate ASC, RequisitionHeader.requisitionNumber ASC</sqlorderby>
+<pagesize>15</pagesize>
+<title>Buyer Assignment By Line</title>
+</browse-buyer-assignment-wkld-by-line>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="VendorRegisterValidate" connection-type="Connection-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="validationRetrieve">
+			<task synchronous="true" continue-on-failure="false" name="vendorRegister">
+				<task-object-name>com.tsa.puridiom.vendorregister.tasks.VendorRegisterRetrieveByContactEmailAddr</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="vendorRegister">
+				<task-object-name>com.tsa.puridiom.vendorregister.tasks.VendorRegisterSetValues</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="vendorValidationSetup">
+				<task-object-name>com.tsa.puridiom.vendorregister.tasks.VendorRegisterValidationSetup</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="validationAttach">
+			<task synchronous="true" continue-on-failure="false" name="vendorRegisterAttachTypeCSetup">
+				<task-object-name>com.tsa.puridiom.vendorregister.tasks.VendorRegisterAttachTypeCSetup</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="vendorRegisterAttachTypeCList">
+				<task-object-name>com.tsa.puridiom.vendordocument.tasks.VendorDocumentRetrieveByVendor</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="vendorRegisterAttachTypeSSetup">
+				<task-object-name>com.tsa.puridiom.vendorregister.tasks.VendorRegisterAttachTypeSSetup</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="vendorRegisterAttachTypeSList">
+				<task-object-name>com.tsa.puridiom.vendordocument.tasks.VendorDocumentRetrieveByVendor</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="validateRules">
+			<task synchronous="true" continue-on-failure="false" name="labelsList">
+				<task-object-name>com.tsa.puridiom.labels.tasks.LabelsRetrieveBy</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="rules">
+				<task-object-name>com.tsa.puridiom.validationrules.tasks.DatabaseValidationRulesTask</task-object-name>
+			</task>
+			<!--task synchronous="true" continue-on-failure="false" name="vendorValidationSetup">
+				<task-object-name>com.tsa.puridiom.vendorregister.tasks.VendorRegisterContactValidationSetup</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="labelsList">
+				<task-object-name>com.tsa.puridiom.labels.tasks.LabelsRetrieveBy</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="rules">
+				<task-object-name>com.tsa.puridiom.validationrules.tasks.DatabaseValidationRulesTask</task-object-name>
+			</task-->
+			<task synchronous="true" continue-on-failure="false" name="rules">
+				<task-object-name>com.tsa.puridiom.validationrules.tasks.ValidationRulesTask</task-object-name>
+				<process-filename>vendorregister-validation-rules.xml</process-filename>
+			</task>
+		</activity>
+	</activities>
+</process>

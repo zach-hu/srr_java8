@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="poCreatefromrfq" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="RetrievePoVendorList">
+			<task synchronous="true" continue-on-failure="false" name="poDataList">
+				<task-object-name>com.tsa.puridiom.rfqline.tasks.RfqLineRetrievePartialPoListByHeader</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="createPoMultiple">
+			<task synchronous="true" continue-on-failure="false" name="poList">
+				<task-object-name>com.tsa.puridiom.po.tasks.PoMultipleCreateFromRfqPartial</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="rfqLinesIdRetrieve">
+			<task synchronous="true" continue-on-failure="false" name="icRfqLineList">
+				<task-object-name>com.tsa.puridiom.rfqline.tasks.RfqLineRetrieveFromPoList</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="rfqLinesUpdate">
+			<task synchronous="true" continue-on-failure="false" name="rfqLineList">
+				<task-object-name>com.tsa.puridiom.rfqline.tasks.RfqLineUpdateStatus</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="rfqHeader">
+				<rule-filename>is-rfqheader-empty.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.rfqheader.tasks.RfqHeaderRetrieveById</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="reqLineList">
+				<task-object-name>com.tsa.puridiom.rfqline.tasks.RfqLineUpdateReqLineStatusByList</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="rfqLineList">
+				<task-object-name>com.tsa.puridiom.rfqline.tasks.RfqLineUpdateList</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="rfqLineList">
+				<task-object-name>com.tsa.puridiom.rfqline.tasks.RfqLineRetrieveByHeaderStatusPurchasing</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

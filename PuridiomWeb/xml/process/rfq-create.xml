@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="rfqCreate" connection-type="transaction-required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="rfqCreate">
+			<task synchronous="true" continue-on-failure="false" name="rfqCreateSetup">
+				<rule-filename></rule-filename>
+				<task-object-name>com.tsa.puridiom.rfq.tasks.RfqCreateSetup</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="rfqWebpostSetup">
+				<rule-filename>is-rfq-type-solicitation</rule-filename>
+				<task-object-name>com.tsa.puridiom.rfq.tasks.RfqWebpostSetup</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="rfqUserMap">
+				<rule-filename></rule-filename>
+				<task-object-name>com.tsa.puridiom.rfq.tasks.RfqUserMap</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="rfqHeader">
+				<rule-filename></rule-filename>
+				<task-object-name>com.tsa.puridiom.rfqheader.tasks.RfqHeaderSetValues</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="rfqHeaderAdd">			
+				<rule-filename></rule-filename>
+				<task-object-name>com.tsa.puridiom.rfqheader.tasks.RfqHeaderAdd</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+	</activities>
+</process>

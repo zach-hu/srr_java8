@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="assetDelete" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="initialCheck">
+			<task synchronous="true" continue-on-failure="false" name="check">
+				<task-object-name>com.tsa.puridiom.asset.tasks.AssetTagNumberCheck</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="assetDelete">
+			<task synchronous="true" continue-on-failure="false" name="assetCostDelete">
+        		<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+        		<process-filename>assetcost-retrieve-by-tagnumber.xml</process-filename>
+      		</task>
+			<task synchronous="true" continue-on-failure="false" name="assetCostDelete">
+        		<rule-filename>is-assetcost-delete-needed.xml</rule-filename>
+        		<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+        		<process-filename>assetcost-delete-by-tagnumber.xml</process-filename>
+      		</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="assetDelete">
+			<task synchronous="true" continue-on-failure="false" name="assetLocationDelete">
+        		<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+        		<process-filename>assetlocation-retrieve-by-tagnumber.xml</process-filename>
+      		</task>
+			<task synchronous="true" continue-on-failure="false" name="assetLocationDelete">
+        		<rule-filename>is-assetlocation-delete-needed.xml</rule-filename>
+        		<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+        		<process-filename>assetlocation-delete-by-tagnumber.xml</process-filename>
+      		</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="assetDelete">
+			<task synchronous="true" continue-on-failure="false" name="assetNoteDelete">
+        		<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+        		<process-filename>assetnote-retrieve-by-tagnumber.xml</process-filename>
+      		</task>
+			<task synchronous="true" continue-on-failure="false" name="assetNoteDelete">
+        		<rule-filename>is-assetnote-delete-needed.xml</rule-filename>
+        		<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+        		<process-filename>assetnote-delete-by-tagnumber.xml</process-filename>
+      		</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="assetDelete">
+			<task synchronous="true" continue-on-failure="false" name="assetServiceDelete">
+        		<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+        		<process-filename>assetservice-retrieve-by-tagnumber.xml</process-filename>
+      		</task>
+			<task synchronous="true" continue-on-failure="false" name="assetServiceDelete">
+
+        		<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+        		<process-filename>assetservice-delete-by-tagnumber.xml</process-filename>
+      		</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="assetDelete">
+			<task synchronous="true" continue-on-failure="false" name="assetDeleteFinal">
+        		<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+        		<process-filename>asset-delete.xml</process-filename>
+      		</task>
+		</activity>
+	</activities>
+</process>

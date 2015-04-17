@@ -1,0 +1,78 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping>
+
+
+<class
+    name="com.tsa.puridiom.entity.PurchaseCard"
+    table="PURCHASE_CARD"
+>
+    <id
+        name="pcardCode"
+        type="java.lang.String"
+        column="PCARD_CODE"
+    >
+        <generator class="assigned" />
+    </id>
+    <property
+        name="pcardNumber"
+        type="java.lang.String"
+        column="PCARD_NUMBER"
+        length="75"
+    />
+    <property
+        name="pcardSecureCode"
+        type="java.lang.String"
+        column="PCARD_SECURE_CODE"
+        length="4"
+    />
+    <property
+        name="pcardName"
+        type="java.lang.String"
+        column="PCARD_NAME"
+        length="20"
+    />
+    <property
+        name="pcardExpires"
+        type="java.lang.String"
+        column="PCARD_EXPIRES"
+        length="10"
+    />
+    <property
+        name="pcardHolder"
+        type="java.lang.String"
+        column="PCARD_HOLDER"
+        length="45"
+    />
+    <property
+        name="dateEntered"
+        type="java.sql.Timestamp"
+        column="DATE_ENTERED"
+        length="7"
+    />
+    <property
+        name="dateExpires"
+        type="java.sql.Timestamp"
+        column="DATE_EXPIRES"
+        length="7"
+    />
+    <property
+        name="status"
+        type="java.lang.String"
+        column="STATUS"
+        length="4"
+    />
+    <property
+        name="owner"
+        type="java.lang.String"
+        column="OWNER"
+        length="15"
+    />
+
+    <!-- associations -->
+
+</class>
+</hibernate-mapping>

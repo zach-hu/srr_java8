@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="recentrequisition-add" connection-type="New-Transaction">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="recentRequisitionSetup">
+		    <task synchronous="true" continue-on-failure="false" name="recentRequisitionSetup">			
+				<task-object-name>com.tsa.puridiom.recentrequisition.tasks.RecentRequisitionSetupFromRequisitionHeader</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="recentRequisition">
+				<task-object-name>com.tsa.puridiom.recentrequisition.tasks.RecentRequisitionRetrieveById</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="recentRequisitionAdd">
+			<rule-filename>is-recentrequisition-empty.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="recentRequisition">
+				<task-object-name>com.tsa.puridiom.recentrequisition.tasks.RecentRequisitionSetValues</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="recentRequisition">
+				<task-object-name>com.tsa.puridiom.recentrequisition.tasks.RecentRequisitionAdd</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>
+

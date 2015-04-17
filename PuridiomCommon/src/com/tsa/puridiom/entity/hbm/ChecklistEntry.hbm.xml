@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+    
+<hibernate-mapping>
+
+<!-- 
+    Created by Middlegen Hibernate plugin
+
+    http://boss.bekk.no/boss/middlegen/
+    http://hibernate.sourceforge.net/
+-->
+
+<class 
+    name="com.tsa.puridiom.entity.ChecklistEntry" 
+    table="CHECKLIST_ENTRY"
+>
+    <id
+        name="icQuestion"
+        type="java.math.BigDecimal"
+        column="IC_QUESTION"
+    >
+        <generator class="assigned" />
+    </id>
+    <property
+        name="referenceType"
+        type="java.lang.String"
+        column="REFERENCE_TYPE"
+        not-null="true"
+        length="3"
+    />
+    <property
+        name="sequence"
+        type="java.math.BigDecimal"
+        column="SEQUENCE"
+        not-null="true"
+        length="5"
+    />
+    <property
+        name="questionText"
+        type="java.lang.String"
+        column="QUESTION_TEXT"
+        length="250"
+    />
+    <property
+        name="responseType"
+        type="java.lang.String"
+        column="RESPONSE_TYPE"
+        length="5"
+    />
+
+    <!-- associations -->
+    <!-- bi-directional many-to-one association to ChecklistEntry -->
+
+</class>
+</hibernate-mapping>

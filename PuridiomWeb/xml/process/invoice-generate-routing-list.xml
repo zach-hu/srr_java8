@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="InvoiceApprovals" connection-type="None">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="invoiceApprovals">
+			<!-- Generate routing list based on Extended Invoice Routing Rules --> 
+			<task synchronous="true" continue-on-failure="false" name="invoiceGenerateRoutingList">
+				<rule-filename>is-extended-invoice-routing-enabled.xml</rule-filename>
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>invoice-routing-list.xml</process-filename>
+				<post-action>exitProcess</post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="invoiceRequisitionerApprovals">
+			<task synchronous="true" continue-on-failure="false" name="invoiceGenerateRoutingList">
+				<rule-filename>is-auto-generate-routing-list.xml</rule-filename>
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>invoice-generate-requisitioner-routing.xml</process-filename>
+				<post-action>exitProcess</post-action>
+			</task>
+		</activity>
+	</activities>
+</process>

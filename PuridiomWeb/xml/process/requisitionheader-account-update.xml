@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="accountUpdateByLine" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="accountUpdateByLine">
+			<task synchronous="true" continue-on-failure="false" name="requisitionHeaderRefTypeSetup">			
+				<task-object-name>com.tsa.puridiom.requisitionheader.tasks.RequisitionHeaderRefTypeSetup</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="accountDeleteByLine">			
+				<task-object-name>com.tsa.puridiom.account.tasks.AccountDeleteByLine</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="accountUpdateByLine">			
+				<task-object-name>com.tsa.puridiom.account.tasks.AccountUpdateByLine</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="accountRetrieveByLine">			
+				<task-object-name>com.tsa.puridiom.account.tasks.AccountRetrieveByLine</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+	</activities>
+</process>

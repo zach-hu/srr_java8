@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="disbline-update-icaccount" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="disbLineSetupActivity">
+			<task synchronous="true" continue-on-failure="false" name="disbLine">
+				<rule-filename>is-disbline-empty.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.disbline.tasks.DisbLineRetrieveById</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="disbLineIcAccountSetup">
+				<task-object-name>com.tsa.puridiom.disbline.tasks.DisbLineIcAccountSetup</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="disbLineUpdateActivity">
+			<task synchronous="true" continue-on-failure="false" name="disbLine">
+				<task-object-name>com.tsa.puridiom.disbline.tasks.DisbLineSetValues</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="disbLine">
+				<task-object-name>com.tsa.puridiom.disbline.tasks.DisbLineUpdate</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+	</activities>
+</process>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rule>
+	<clause type="Empty">
+		<left-side>
+			<source>incomingRequestObjectMethod</source>
+			<object>header</object>
+			<name>getCurrencyCode</name>
+		</left-side>
+	</clause>
+	<logical-operator>OR</logical-operator>
+	<clause type="lookup">
+		<sql> from CurrCode as currCode where currCode.currencyCode = '@currencycode@' AND (currCode.status = '02' OR (currCode.status = '01' AND currCode.dateExpires >= @today@))</sql>
+		<source>header</source>
+		<arguments>
+			<name>currencycode</name>
+			<source>header</source>
+			<colName>getCurrencyCode</colName>
+		</arguments>
+	</clause>
+</rule>

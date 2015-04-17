@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rule>
+	<clause type="lookup">
+    <sql><![CDATA[ from Commodity Commodity where Commodity.commodity = '@udf@' and (Commodity.status = '02' OR (Commodity.status = '01' AND Commodity.dateExpires >= @today@)) ]]></sql>
+    <source>vendor</source>
+    <arguments>
+      	<name>udf</name>
+      	<source>vendor</source>
+    	<colName>getVendUdf1</colName>
+    </arguments>
+  	</clause>  	
+</rule>
+ 

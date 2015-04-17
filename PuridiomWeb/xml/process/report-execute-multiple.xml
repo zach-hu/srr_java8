@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="ExecuteReport" connection-type="Connection-Required">
+  <activities>
+    <activity synchronous="true" continue-on-failure="false" name="getDatasources">
+      <!--<task synchronous="true" continue-on-failure="false" name="browseObject">
+        <task-object-name>com.tsa.puridiom.systemreport.tasks.GenerateReportObject</task-object-name>
+      </task>-->
+		<task synchronous="true" continue-on-failure="false" name="retrievedata">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>report-execute.xml</process-filename>
+			</task>
+    </activity>
+    <activity synchronous="true" continue-on-failure="false" name="executeReport">
+      <task synchronous="true" continue-on-failure="false" name="report">
+        <task-object-name>com.tsa.puridiom.systemreport.tasks.SystemReportExecute</task-object-name>
+      </task>
+    </activity>
+  </activities>
+</process>

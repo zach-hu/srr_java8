@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="userLogin" connection-type="None" ldap-connection-type="None">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="userLogoff">
+			<task synchronous="true" continue-on-failure="false" name="userLogoffSetup">
+				<task-object-name>com.tsa.puridiom.userprofile.tasks.UserProfileLogoffSetup</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="userProfile">
+				<task-object-name>com.tsa.puridiom.usermanager.tasks.UserManagerGetUser</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="userProfileLogoff">
+				<task-object-name>com.tsa.puridiom.userprofile.tasks.UserProfileLogoff</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="userProfileRemoved">
+				<task-object-name>com.tsa.puridiom.usermanager.tasks.UserManagerRemoveUserFromCache</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="setUserCount">
+				<task-object-name>com.tsa.puridiom.usermanager.tasks.UserManagerRemoveUserSession</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="userLogAdd">
+			<rule-filename>is-userlog-audittrail-active.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="userLogAdd">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>user-log-add.xml</process-filename>
+			</task>
+		</activity>
+	</activities>
+</process>

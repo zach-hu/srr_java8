@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rule>
+	<clause type="NotEmpty">
+		<left-side elementSource="true">
+			<source>incomingRequestObjectMethod</source>
+			<object>account</object>
+			<name>getFld4</name>
+		</left-side>
+	</clause>
+	<logical-operator>IFTHEN</logical-operator>
+	<clause type="lookup" elementSource="true">
+	<sql>from StdTable stdTable where stdTable.id.tableType = 'AC04' AND stdTable.id.tableKey = '@fld4@' and (stdTable.status = '02' or (stdTable.status = '01' and stdTable.dateExpires >= @today@))</sql>
+		<source>fld4</source>
+		<arguments>
+			<name>fld4</name>
+			<source>account</source>
+			<colName>getFld4</colName>
+		</arguments>
+	</clause>
+</rule>

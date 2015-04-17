@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created using an evaluation version of JasperAssistant (http://www.jasperassistant.com) -->
+<!DOCTYPE jasperReport PUBLIC "-//JasperReports//DTD Report Design//EN" "http://jasperreports.sourceforge.net/dtds/jasperreport.dtd">
+
+<jasperReport name="TopSuppliers" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="30" bottomMargin="30">
+	<property name="com.jasperassistant.designer.GridWidth" value="12"/>
+	<property name="com.jasperassistant.designer.GridHeight" value="12"/>
+	<property name="com.jasperassistant.designer.DataSource" value="one"/>
+	<property name="com.jasperassistant.designer.SnapToGrid" value="false"/>
+	<property name="com.jasperassistant.designer.Grid" value="false"/>
+	<import value="com.tsagate.properties.*"/>
+	<parameter name="oid" class="java.lang.String">
+		<defaultValueExpression><![CDATA["HILTON"]]></defaultValueExpression>
+	</parameter>
+	<field name="PoHeader_vendorId" class="java.lang.String"/>
+	<field name="PoHeader_total" class="java.math.BigDecimal"/>
+	<title>
+		<band height="45">
+			<rectangle>
+				<reportElement positionType="Float" x="0" y="29" width="553" height="14" forecolor="#B7B0B9" backcolor="#B7B0B9"/>
+				<graphicElement/>
+			</rectangle>
+			<textField>
+				<reportElement positionType="Float" mode="Opaque" x="30" y="29" width="80" height="14" forecolor="#400040" backcolor="#B7B0B9"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[DictionaryManager.getLabel($P{oid},"vendor", "Vendor")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement positionType="Float" mode="Opaque" x="115" y="29" width="80" height="14" forecolor="#400040" backcolor="#B7B0B9"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[DictionaryManager.getLabel($P{oid},"total", "Total")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement positionType="Float" x="3" y="2" width="552" height="20"/>
+				<textElement textAlignment="Center">
+					<font size="15" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[DictionaryManager.getLabel($P{oid},"topSuppliersByAmount", "Top Suppliers By Amount")]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<detail>
+		<band height="14">
+			<rectangle>
+				<reportElement positionType="Float" x="0" y="0" width="553" height="14" forecolor="#2DE331" backcolor="#2DE331"/>
+				<graphicElement/>
+			</rectangle>
+			<textField>
+				<reportElement positionType="Float" x="29" y="0" width="80" height="14" backcolor="#2DE331"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{PoHeader_vendorId}]]></textFieldExpression>
+			</textField>
+			<textField pattern="$#,##0.00#">
+				<reportElement positionType="Float" x="115" y="0" width="80" height="14" backcolor="#2DE331"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{PoHeader_total}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<summary>
+		<band height="373">
+			<barChart>
+				<chart isShowLegend="false" customizerClass="com.tsa.puridiom.graphs.design.customizer.BarChartCustomizer">
+					<reportElement positionType="Float" x="16" y="10" width="528" height="352" backcolor="#2DE331"/>
+					<chartTitle color="#400040">
+						<titleExpression><![CDATA[""]]></titleExpression>
+					</chartTitle>
+					<chartSubtitle color="#000000">
+						<subtitleExpression><![CDATA[""]]></subtitleExpression>
+					</chartSubtitle>
+				</chart>
+				<categoryDataset>
+					<dataset resetType="None"/>
+					<categorySeries>
+						<seriesExpression><![CDATA[$F{PoHeader_vendorId}]]></seriesExpression>
+						<categoryExpression><![CDATA[$F{PoHeader_vendorId}]]></categoryExpression>
+						<valueExpression><![CDATA[$F{PoHeader_total}]]></valueExpression>
+						<labelExpression><![CDATA[$F{PoHeader_total}.toString()]]></labelExpression>
+					</categorySeries>
+				</categoryDataset>
+				<barPlot isShowTickMarks="false">
+					<plot backcolor="#2DE331"/>
+				</barPlot>
+			</barChart>
+		</band>
+	</summary>
+</jasperReport>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="requisitionRoutingListBuild" connection-type="Connection-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="requisitionRoutingSetup">
+			<task synchronous="true" continue-on-failure="false" name="approvalSetOptions">
+				<task-object-name>com.tsa.puridiom.approvals.tasks.ApprovalSetOptions</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="approvalSetData">
+				<task-object-name>com.tsa.puridiom.approvals.tasks.ApprovalSetData</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="requiredAmounts">
+				<task-object-name>com.tsa.puridiom.approvals.tasks.ApprovalGetRequiredAmounts</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="appRuleRetrieve">
+			<task synchronous="true" continue-on-failure="false" name="appRuleList">
+				<rule-filename>is-apprule-retrieve-all-active.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.apprule.tasks.AppRuleRetrieveAll</task-object-name>
+				<post-action>exitActivity</post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="appRuleWhereClause">
+				<task-object-name>com.tsa.puridiom.apprule.tasks.AppRuleSetupApprovalCriteria</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="appRuleList">
+				<task-object-name>com.tsa.puridiom.apprule.tasks.AppRuleRetrieveWhere</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="requisitionRoutingListBuild">
+			<task synchronous="true" continue-on-failure="false" name="ruleList">
+				<task-object-name>com.tsa.puridiom.approvals.tasks.ApprovalBuildRuleList</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="requisitionRoutingListBuild">
+			<task synchronous="true" continue-on-failure="false" name="extList">
+				<task-object-name>com.tsa.puridiom.approvals.tasks.ApprovalBuildApproverList</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="retrieveApprovalHierarchy">
+				<rule-filename>is-req-approval-hierarchy-active.xml</rule-filename>
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>approval-hierarchy-retrieve.xml</process-filename>
+			</task>
+		</activity>
+	</activities>
+</process>

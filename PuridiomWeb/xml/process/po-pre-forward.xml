@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process connection-type="Connection-Required" name="poAwardOptions">
+  <activities>
+	  <activity continue-on-failure="false" name="forwardsetup" synchronous="true">
+		  <rule-filename>is-po-approvals-module-active.xml</rule-filename>
+		  <task continue-on-failure="false" name="poHeader" synchronous="true">
+			  <task-object-name>com.tsa.puridiom.poheader.tasks.PoHeaderRetrieveById</task-object-name>
+		  </task>
+		  <task synchronous="true" continue-on-failure="false" name="poHeaderRetrieveSetup">
+				<task-object-name>com.tsa.puridiom.poheader.tasks.PoHeaderRetrieveSetup</task-object-name>
+				<post-action></post-action>
+			</task>
+		  <task continue-on-failure="false" name="poLineList" synchronous="true">
+			  <task-object-name>com.tsa.puridiom.poline.tasks.PoLineRetrieveByHeader</task-object-name>
+		  </task>
+		  <task synchronous="true" continue-on-failure="false" name="poLineRetrieveAll">
+				<task-object-name>com.tsa.puridiom.poline.tasks.PoLineRetrieveAll</task-object-name>
+				<post-action></post-action>
+		  </task>
+		  <task continue-on-failure="false" synchronous="true" name="setupRevisionPrior">
+        		<rule-filename>is-revision.xml</rule-filename>
+    			<task-object-name>com.tsa.puridiom.poheader.tasks.PoHeaderGetTotalPriorRevision</task-object-name>
+     	  </task>
+		  <task synchronous="true" continue-on-failure="false" name="checkBuyerWarrantAmount">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>check-buyer-warrant-amount.xml</process-filename>
+		  </task>
+		  <task continue-on-failure="false" name="approvalLogLastFromRequisition" synchronous="true">
+		  	  <task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+			  <process-filename>approvalloglast-retrieve-from-requisition.xml</process-filename>
+		  </task>
+		  <task continue-on-failure="false" name="approvalsExceptions" synchronous="true">
+			  <task-object-name>com.tsa.puridiom.po.tasks.PoApprovalsExceptions</task-object-name>
+			  <post-action>exitProcess</post-action>
+		  </task>
+    </activity>
+	<activity continue-on-failure="false" name="forwardNormal" synchronous="true">
+		  <task synchronous="true" continue-on-failure="false" name="forward">
+			<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+			<process-filename>po-forward-notification.xml</process-filename>
+		  </task>
+    </activity>
+  </activities>
+</process>

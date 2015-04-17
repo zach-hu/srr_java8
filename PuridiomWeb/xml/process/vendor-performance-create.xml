@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="PerformanceDetailSetValues" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="setValues">
+			<task synchronous="true" continue-on-failure="false" name="performanceDetailList">
+				<task-object-name>com.tsa.puridiom.vendor.performance.tasks.PerformanceDetailDeleteByOrder</task-object-name>
+				<post-action />
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="performanceDetailList">
+				<task-object-name>com.tsa.puridiom.vendor.performance.tasks.PerformanceDetailLoadFromRequest</task-object-name>
+				<post-action />
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="ratingsList">
+				<task-object-name>com.tsa.puridiom.vendor.performance.tasks.PerformanceDetailListAdd</task-object-name>
+				<post-action />
+			</task>
+		  </activity>
+	 </activities>
+</process>

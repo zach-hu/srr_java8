@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="InvReturnOtcCreatePreview" connection-type="New-Connection">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="create">
+			<task synchronous="true" continue-on-failure="false" name="invItem">
+				<task-object-name>com.tsa.puridiom.invitem.tasks.InvItemRetrieveById</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="invReturn">
+				<task-object-name>com.tsa.puridiom.invreturn.tasks.InvReturnOtcCreatePreview</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

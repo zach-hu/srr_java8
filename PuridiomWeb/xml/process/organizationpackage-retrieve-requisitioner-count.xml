@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="organizationpackage-retrieve-requisitioner-count" connection-type="Connection-Required" connection-name="host" ldap-connection-type="None"> 
+	<activities>  
+		<activity synchronous="true" continue-on-failure="false" name="retrieveActivity">   
+			<task synchronous="true" continue-on-failure="false" name="requisitionerCount">    			
+				<task-object-name>com.tsa.puridiom.organizationpackage.tasks.OrganizationPackageRetrieveRequisitionerCount</task-object-name>    
+			</task>   
+		</activity>  
+	</activities> 
+</process>

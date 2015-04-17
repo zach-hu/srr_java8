@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="rfqNoteUpdate" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="rfqNoteRetrieve">
+			<task synchronous="true" continue-on-failure="false" name="rfqNote">			
+				<task-object-name>com.tsa.puridiom.rfqnote.tasks.RfqNoteRetrieveById</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="rfqNoteUpdate">
+			<rule-filename>is-rfqnote-empty.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="rfqNote">
+				<task-object-name>com.tsa.puridiom.rfqnote.tasks.RfqNoteSetValues</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="rfqNote">			
+				<task-object-name>com.tsa.puridiom.rfqnote.tasks.RfqNoteAdd</task-object-name>
+			</task>
+			<post-action>exitProcess</post-action>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="rfqNoteUpdate">
+			<task synchronous="true" continue-on-failure="false" name="rfqNote">
+				<task-object-name>com.tsa.puridiom.rfqnote.tasks.RfqNoteSetValues</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="rfqNote">			
+				<task-object-name>com.tsa.puridiom.rfqnote.tasks.RfqNoteUpdate</task-object-name>
+			</task>
+		</activity>		
+	</activities>
+</process>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="AddressRetrieveBillTo" connection-type="New-Connection"> 
+	<!--Retrieve all Addresses for a given Supplier-->
+	<activities>  
+		<activity synchronous="true" continue-on-failure="false" name="AddressRetrieveBillTo">
+			  <task synchronous="true" continue-on-failure="false" name="address">    			
+				<task-object-name>com.tsa.puridiom.address.tasks.AddressRetrieveBillTo</task-object-name>    
+				<post-action />    
+			  </task>
+		  </activity>  
+	 </activities> 
+</process>

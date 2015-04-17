@@ -1,0 +1,79 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping>
+
+<!--
+    Created by Middlegen Hibernate plugin
+
+    http://boss.bekk.no/boss/middlegen/
+    http://hibernate.sourceforge.net/
+-->
+
+<class
+    name="com.tsa.puridiom.entity.CapitalProjectCar"
+    table="CAPITAL_PROJECT_CAR"
+>
+    <id
+        name="icProjectCar"
+        type="java.math.BigDecimal"
+        column="IC_PROJECT_CAR"
+    >
+        <generator class="assigned" />
+    </id>
+    <property
+        name="division"
+        type="java.lang.String"
+        column="DIVISION"
+        length="15"
+    />
+    <property
+        name="project"
+        type="java.lang.String"
+        column="PROJECT"
+        length="10"
+    />
+    <property
+        name="car"
+        type="java.lang.String"
+        column="CAR"
+        length="10"
+    />
+    <property
+        name="description"
+        type="java.lang.String"
+        column="DESCRIPTION"
+        length="50"
+    />
+    <property
+        name="program"
+        type="java.lang.String"
+        column="PROGRAM"
+        length="10"
+    />
+    <property
+        name="amount"
+        type="java.lang.String"
+        column="AMOUNT"
+        length="16"
+    />
+    <property
+        name="status"
+        type="java.lang.String"
+        column="STATUS"
+        length="2"
+    />
+    <property
+        name="year"
+        type="java.lang.String"
+        column="YEAR"
+        length="4"
+    />
+
+    <!-- associations -->
+    <!-- bi-directional one-to-many association to BudgetAuditx -->
+
+</class>
+</hibernate-mapping>

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="requisitionDelete" connection-type="transaction-required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="requisitionDelete">
+			<task synchronous="true" continue-on-failure="false" name="requisitionHeader">
+				<rule-filename></rule-filename>
+				<task-object-name>com.tsa.puridiom.requisitionheader.tasks.RequisitionHeaderRetrieveById</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="requisitionDeleteSetup">
+				<rule-filename></rule-filename>
+				<task-object-name>com.tsa.puridiom.requisition.tasks.RequisitionDeleteSetup</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="scheduleDeleteByHeader">			
+				<rule-filename></rule-filename>
+				<task-object-name>com.tsa.puridiom.schedule.tasks.ScheduleDeleteByHeader</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="billToDeleteByHeader">
+				<rule-filename></rule-filename>
+				<task-object-name>com.tsa.puridiom.billto.tasks.BillToDeleteByHeader</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="shipToDeleteByHeader">			
+				<rule-filename>is-inventory-request</rule-filename>
+				<task-object-name>com.tsa.puridiom.shipto.tasks.ShipToDeleteByHeader</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="accountDeleteByHeader">			
+				<rule-filename></rule-filename>
+				<task-object-name>com.tsa.puridiom.account.tasks.AccountDeleteByHeader</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="docCommentDeleteByHeader">			
+				<rule-filename></rule-filename>
+				<task-object-name>com.tsa.puridiom.doccomment.tasks.DocCommentDeleteByHeader</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="docAttachmentDeleteByHeader">
+				<rule-filename>is-documents-module-active.xml</rule-filename>
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>docattachment-delete-by-header.xml</process-filename>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="requisitionLineDeleteByHeader">			
+				<rule-filename></rule-filename>
+				<task-object-name>com.tsa.puridiom.requisitionline.tasks.RequisitionLineDeleteByHeader</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="requisitionHeaderDeleteById">			
+				<rule-filename></rule-filename>
+				<task-object-name>com.tsa.puridiom.requisitionheader.tasks.RequisitionHeaderDeleteById</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="recentRequisitionActivity">
+			<task synchronous="true" continue-on-failure="true" name="recentRequisitionDelete">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>recentrequisition-delete-by-ic.xml</process-filename>
+			</task>
+		</activity>
+	</activities>
+</process>

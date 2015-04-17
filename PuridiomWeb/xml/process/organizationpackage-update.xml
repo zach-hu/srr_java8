@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="organizationPackageUpdate" connection-type="Transaction-Required" connection-name="host" ldap-connection-type="None">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="organizationPackageUpdate">
+			<task synchronous="true" continue-on-failure="false" name="organizationPackage">
+				<task-object-name>com.tsa.puridiom.organizationpackage.tasks.OrganizationPackageRetrieveById</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="organizationPackage">
+				<task-object-name>com.tsa.puridiom.organizationpackage.tasks.OrganizationPackageSetValues</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="organizationPackage">
+				<task-object-name>com.tsa.puridiom.organizationpackage.tasks.OrganizationPackageUpdate</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="vendorRegistration" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="vendorRegistrationSetup">
+			<task synchronous="true" continue-on-failure="false" name="vendorRegistrationSetup">
+				<task-object-name>com.tsa.puridiom.supplierportal.registration.tasks.VendorRegistrationSetup</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="registerUser">
+				<task-object-name>com.tsa.puridiom.supplierportal.registration.tasks.RegisterUserSetValues</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="recaptchaValidation">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>recaptcha-validation.xml</process-filename>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="organizationId">
+				<task-object-name>com.tsa.puridiom.supplierportal.registration.tasks.RegisterUserGetOrganizationId</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="registrationError">
+				<rule-filename check-for-false="true">is-organization-valid</rule-filename>
+				<task-object-name>com.tsa.puridiom.supplierportal.registration.tasks.ThrowInvalidOrganizationIdException</task-object-name>
+				<post-action>exitProcess</post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="validatePassword">
+				<!-- Will throw a PasswordException that will end the process if password format is not valid -->
+				<task-object-name>com.tsa.puridiom.supplierportal.tasks.SupplierPasswordValidation</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="vendorRegistrationUpdate">
+				<task-object-name>com.tsa.puridiom.supplierportal.InvokeSupplierPortalProcessTask</task-object-name>
+				<process-filename>vendor-registration-update.xml</process-filename>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="setUserInCache">
+				<task-object-name>com.tsa.puridiom.supplierportal.authentication.tasks.SetBidBoardUserInCache</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+	</activities>
+</process>

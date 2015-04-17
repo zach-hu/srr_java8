@@ -1,0 +1,99 @@
+<browse_po_line>
+	<columns>
+		<PoLine_icPoHeader>
+			<hidden>Y</hidden>
+			<hidden-input>Y</hidden-input>
+		</PoLine_icPoHeader>
+		<PoLine_icPoLine>
+			<hidden>Y</hidden>
+			<hidden-input>Y</hidden-input>
+		</PoLine_icPoLine>
+		<PoLine_poNumber>
+			<label>brw-poNumber</label>
+			<link><![CDATA[javascript: viewPo('#PoLine_icPoHeader^','#PoHeader_poType^'); void(0);]]></link>
+			<size>12</size>
+		</PoLine_poNumber>
+		<PoHeader_releaseNumber>
+			<label>brw-releaseNumber</label>
+			<type>STRING</type>
+			<size>4</size>
+		</PoHeader_releaseNumber>
+		<PoLine_itemNumber>
+			<label>brw-itemNumber</label>
+			<size>14</size>
+		</PoLine_itemNumber>
+		<PoLine_description>
+			<label>brw-description</label>
+			<size>40</size>
+			<trim>200</trim>
+		</PoLine_description>
+		<Account_fld1>
+			<label>brw-AC01</label>
+			<size>10</size>
+		</Account_fld1>
+		<Account_fld2>
+			<label>brw-AC02</label>
+			<size>20</size>
+		</Account_fld2>
+		<Account_fld3>
+			<label>brw-AC03</label>
+			<size>20</size>
+		</Account_fld3>
+		<Account_fld4>
+			<label>brw-AC04</label>
+			<size>8</size>
+		</Account_fld4>
+		<Account_fld5>
+			<label>brw-AC05</label>
+			<size>8</size>
+		</Account_fld5>
+		<PoLine_quantity>
+			<hidden>Y</hidden>
+			<type>QtyDecimal</type>
+		</PoLine_quantity>
+		<PoLine_umCode>
+			<hidden>Y</hidden>
+			<hidden-input>Y</hidden-input>
+		</PoLine_umCode>
+		<PoLine_quantity>
+			<concatenate>
+				<col type="QtyDecimal">PoLine_quantity</col>
+				<col type="constant"><![CDATA[&nbsp;]]></col>
+				<col type="constant">(</col>
+				<col>PoLine_umCode</col>
+				<col type="constant">)</col>
+			</concatenate>
+			<label>brw-quantity</label>
+			<type>Decimal</type>
+			<size>20</size>
+			<detail>Y</detail>
+			<selectsql>N</selectsql>
+		</PoLine_quantity>
+		<PoLine_unitPrice>
+			<label>brw-unitPrice</label>
+			<type>DollarDecimal</type>
+			<size>20</size>
+			<detail>Y</detail>
+		</PoLine_unitPrice>
+		<PoLine_commodity>
+			<label>brw-commodity</label>
+			<size>30</size>
+			<detail>Y</detail>
+			<type>COMMODITY</type>
+		</PoLine_commodity>
+		<PoLine_status>
+			<label>brw-status</label>
+			<type>STATUS</type>
+			<size>30</size>
+			<detail>Y</detail>
+		</PoLine_status>
+	</columns>
+	<sqlfrom>PoLine as PoLine, PoHeader as PoHeader, Account as Account</sqlfrom>
+	<sqlwhere>
+		<![CDATA[  PoLine.poNumber <> 'N/A' AND PoHeader.lastRevision = 'C' AND PoLine.icPoHeader = Account.id.icHeader
+							AND PoLine.icPoHeader = PoHeader.icPoHeader ]]>
+	</sqlwhere>
+	<sqlorderby>PoLine.poNumber DESC, PoLine.releaseNumber DESC</sqlorderby>
+	<pagesize>15</pagesize>
+	<title>Order Item Account Browse</title>
+</browse_po_line>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="RfqHistory" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="setup">
+			<task synchronous="true" continue-on-failure="false" name="setup">			
+				<task-object-name>com.tsa.puridiom.rfqheader.history.tasks.RfqHeaderRetrieveOldSetup</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="historyLog">			
+				<task-object-name>com.tsa.puridiom.rfqheader.history.tasks.RfqHeaderGetHistory</task-object-name>
+				<post-action></post-action>
+			</task>
+		    <task synchronous="true" continue-on-failure="false" name="historyLogAdd">
+		        <rule-filename check-for-false="true">is-historylog-null.xml</rule-filename>
+                <task-object-name>com.tsa.puridiom.historylog.tasks.HistoryLogAdd</task-object-name>
+                <post-action></post-action>
+            </task>
+        </activity>
+	</activities>
+</process>

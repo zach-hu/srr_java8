@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created using an evaluation version of JasperAssistant (http://www.jasperassistant.com) -->
+<!DOCTYPE jasperReport PUBLIC "-//JasperReports//DTD Report Design//EN" "http://jasperreports.sourceforge.net/dtds/jasperreport.dtd">
+
+<jasperReport name="BarbecueReport" language="java" pageWidth="595" pageHeight="842" columnWidth="515" leftMargin="40" rightMargin="40" topMargin="50" bottomMargin="50">
+	<import value="net.sourceforge.barbecue.BarcodeFactory"/>
+	<parameter name="Parameter_1" class="java.lang.String">
+	</parameter>
+	<field name="Asset_tagNumber" class="java.lang.String">
+	</field>
+	<field name="Asset_itemNumber" class="java.lang.String">
+	</field>
+	<field name="Asset_securityCode" class="java.lang.String">
+	</field>
+	<field name="Asset_commodity" class="java.lang.String">
+	</field>
+	<title>
+		<band height="742">
+			<image scaleImage="Clip" hAlign="Center">
+				<reportElement x="14" y="2" width="491" height="144"/>
+				<graphicElement/>
+				<imageExpression class="net.sf.jasperreports.engine.JRRenderable"><![CDATA[new net.sf.jasperreports.renderers.BarbecueRenderer(BarcodeFactory.createCode128B($F{Asset_tagNumber}))]]></imageExpression>
+			</image>
+			<textField>
+				<reportElement positionType="Float" x="177" y="152" width="164" height="18"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{Asset_tagNumber}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement positionType="Float" x="177" y="170" width="164" height="18"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{Asset_itemNumber}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement positionType="Float" x="177" y="188" width="164" height="18"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{Asset_commodity}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement positionType="Float" x="85" y="153" width="89" height="18"/>
+				<textElement verticalAlignment="Middle">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA["Tag Number : "]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="85" y="171" width="89" height="18"/>
+				<textElement verticalAlignment="Middle">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA["Item Number : "]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="85" y="189" width="89" height="18"/>
+				<textElement verticalAlignment="Middle">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA["Comodity : "]]></text>
+			</staticText>
+		</band>
+	</title>
+</jasperReport>

@@ -1,0 +1,34 @@
+<browse_asset>
+	<columns>
+		<Asset_trackingNumber>
+			<label>brw-trackingNumber</label>
+			<link><![CDATA[javascript: viewAsset1('#Asset_tagNumber^'); void(0);]]></link>
+			<visible>0</visible>
+		</Asset_trackingNumber>
+		<Asset_tagNumber>
+			<label>brw-tagNumber</label>
+			<link><![CDATA[javascript: viewAsset1('#Asset_tagNumber^'); void(0);]]></link>
+			<visible>1</visible>
+		</Asset_tagNumber>
+		<Asset_itemNumber>
+			<label>asset-itemNumber</label>
+			<visible>1</visible>
+		</Asset_itemNumber>
+		<Asset_monthlyPayment>
+			<label>brw-monthlyPayment</label>
+			<visible>1</visible>
+		</Asset_monthlyPayment>
+		<Asset_leaseType>
+			<label>brw-leaseType</label>
+			<visible>1</visible>
+		</Asset_leaseType>
+		<Asset_renewalDate>
+			<label>brw-renewalDate</label>
+			<visible>1</visible>
+		</Asset_renewalDate>
+	</columns>
+<sqlfrom>Asset as Asset, InvItem as InvItem</sqlfrom>
+<sqlwhere><![CDATA[ Asset.itemNumber = InvItem.itemNumber and Asset.renewalDate < :as_today]]></sqlwhere>
+<pagesize>15</pagesize>
+<title>Lease Renewal due this month</title>
+</browse_asset>

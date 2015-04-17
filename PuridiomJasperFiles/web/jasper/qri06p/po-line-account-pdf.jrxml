@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created using an evaluation version of JasperAssistant (http://www.jasperassistant.com) -->
+<!DOCTYPE jasperReport PUBLIC "-//JasperReports//DTD Report Design//EN" "http://jasperreports.sourceforge.net/dtds/jasperreport.dtd">
+
+<jasperReport name="PoLineListQri" pageWidth="563" pageHeight="70" columnWidth="563" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+	<property name="com.jasperassistant.designer.GridHeight" value="24"/>
+	<property name="com.jasperassistant.designer.GridWidth" value="24"/>
+	<property name="com.jasperassistant.designer.Rulers" value="true"/>
+	<property name="com.jasperassistant.designer.DataSource" value="hilton1p"/>
+	<property name="com.jasperassistant.designer.SnapToGrid" value="false"/>
+	<property name="com.jasperassistant.designer.Margins" value="true"/>
+	<property name="com.jasperassistant.designer.Grid" value="true"/>
+	<property name="com.jasperassistant.designer.SnapToGuides" value="true"/>
+	<import value="com.tsa.puridiom.common.utility.HiltonUtility"/>
+	<import value="com.tsa.puridiom.common.documents.DocumentStatus"/>
+	<import value="com.tsagate.properties.*"/>
+	<import value="com.tsa.puridiom.jasperreports.*"/>
+	<import value="com.tsa.puridiom.reports.datasource.*"/>
+	<reportFont name="Arial_Normal" isDefault="true" fontName="Arial" size="8" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Bold" isDefault="false" fontName="Arial Black" size="8" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica-Bold" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<parameter name="oid" class="java.lang.String">
+		<defaultValueExpression><![CDATA["QRI06P"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="requisitionerCode" class="java.lang.String"/>
+	<parameter name="requisitionNumber" class="java.lang.String"/>
+	<parameter name="udf1" class="java.lang.String"/>
+	<parameter name="rddSeeBelow" class="java.lang.Boolean"/>
+	<field name="PoLine_lineNumber" class="java.math.BigDecimal"/>
+	<field name="PoLine_accountList" class="java.util.List"/>
+	<group name="separator">
+		<groupHeader>
+			<band height="14">
+				<printWhenExpression><![CDATA[new Boolean($F{PoLine_accountList}.size() > 0)]]></printWhenExpression>
+				<rectangle>
+					<reportElement x="0" y="0" width="533" height="14" forecolor="#FFFFFF"/>
+					<graphicElement/>
+				</rectangle>
+			</band>
+		</groupHeader>
+	</group>
+	<group name="heading">
+		<groupHeader>
+			<band height="14">
+				<printWhenExpression><![CDATA[new Boolean($F{PoLine_accountList}.size() > 0)]]></printWhenExpression>
+				<staticText>
+					<reportElement positionType="Float" x="5" y="0" width="420" height="14"/>
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font reportFont="Arial_Bold"/>
+					</textElement>
+					<text><![CDATA[Line Account Coding]]></text>
+				</staticText>
+			</band>
+		</groupHeader>
+	</group>
+	<group name="accounts">
+		<groupExpression><![CDATA[$V{REPORT_COUNT}]]></groupExpression>
+		<groupHeader>
+			<band height="1">
+				<printWhenExpression><![CDATA[new Boolean($F{PoLine_accountList}.size() > 0)]]></printWhenExpression>
+				<subreport>
+					<reportElement positionType="Float" x="30" y="0" width="520" height="1" isRemoveLineWhenBlank="true"/>
+					<parametersMapExpression><![CDATA[$P{REPORT_PARAMETERS_MAP}]]></parametersMapExpression>
+					<subreportParameter name="labelPrefix">
+						<subreportParameterExpression><![CDATA["PO"]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="oid">
+						<subreportParameterExpression><![CDATA[$P{oid}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="udf1">
+						<subreportParameterExpression><![CDATA[$P{udf1}]]></subreportParameterExpression>
+					</subreportParameter>
+					<dataSourceExpression><![CDATA[new HibernateQueryResultDataSource($F{PoLine_accountList})]]></dataSourceExpression>
+					<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[JasperReportsHelper.loadSubReport("po-lineitem-account-pdf.jasper", $P{oid})]]></subreportExpression>
+				</subreport>
+				<textField isStretchWithOverflow="true">
+					<reportElement stretchType="RelativeToBandHeight" x="0" y="0" width="19" height="1"/>
+					<textElement textAlignment="Center" verticalAlignment="Top"/>
+					<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{PoLine_lineNumber}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+	</group>
+</jasperReport>

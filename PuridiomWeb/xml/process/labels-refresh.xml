@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="labelsRefresh" connection-type="New-Connection">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="labelsUpdateChangedList">
+			<!--task synchronous="true" continue-on-failure="false" name="labelsPropertiesFile">
+				<task-object-name>com.tsa.puridiom.labels.tasks.LabelsCreatePropertiesFile</task-object-name>
+				<post-action></post-action>
+			</task-->
+			<task synchronous="true" continue-on-failure="false" name="labelsList">
+				<task-object-name>com.tsa.puridiom.labels.tasks.LabelsRetrieveAll</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="labelsPropertiesFile">
+				<task-object-name>com.tsa.puridiom.labels.tasks.LabelsCreatePropertiesFile</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="refreshLabelsPropertiesFile">
+				<task-object-name>com.tsa.puridiom.labels.tasks.LabelsWriteToPropertiesFile</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="refreshLabelsDictionaryManager">
+				<task-object-name>com.tsa.puridiom.labels.tasks.LabelsRefreshDictionaryManager</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+	</activities>
+</process>

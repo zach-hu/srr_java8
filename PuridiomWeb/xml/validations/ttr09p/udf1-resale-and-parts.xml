@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rule>
+	<clause type="StringCompare">
+		<left-side>
+			<source>incomingRequestObjectMethod</source>
+			<object>header</object>
+			<name>getUdf3Code</name>
+		</left-side>
+		<operator>EQUALS</operator>
+		<right-side>
+			<source>constant</source>
+			<value>PARTS</value>
+		</right-side>
+	</clause>
+	<logical-operator>AND</logical-operator>
+	<clause type="StringCompare" matchAll="true">
+		<left-side>
+			<source>incomingRequestObjectMethod</source>
+			<object>header</object>
+			<name>getUdf1Code</name>
+		</left-side>
+		<operator>STARTSWITH</operator>
+		<right-side>
+			<source>constant</source>
+			<value>RESALE</value>
+		</right-side>
+	</clause>
+</rule>
+

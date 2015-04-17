@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="rfqBidUpdate" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="rfqBidRetrieve">
+			<task synchronous="true" continue-on-failure="false" name="rfqBid">			
+				<rule-filename>is-rfqbid-empty.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.rfqbid.tasks.RfqBidRetrieveById</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="rfqHeaderRetrieve">
+			<rule-filename>is-rfqheader-empty.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="RfqHeader_icRfqHeader">			
+				<task-object-name>com.tsa.puridiom.rfqbid.tasks.RfqBidGetIcRfqHeader</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="rfqHeader">			
+				<task-object-name>com.tsa.puridiom.rfqheader.tasks.RfqHeaderRetrieveById</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="rfqBidUpdate">			
+			<task synchronous="true" continue-on-failure="false" name="RfqBid_currencyFactor">
+				<rule-filename>is-rfqheader-currency-check-required.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.rfqbid.tasks.RfqBidGetCurrentCurrencyFactor</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="rfqBid">
+				<task-object-name>com.tsa.puridiom.rfqbid.tasks.RfqBidSetValues</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="rfqBid">			
+				<task-object-name>com.tsa.puridiom.rfqbid.tasks.RfqBidUpdateById</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

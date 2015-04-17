@@ -1,0 +1,81 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping>
+
+<!--
+    Created by Middlegen Hibernate plugin
+
+    http://boss.bekk.no/boss/middlegen/
+    http://hibernate.sourceforge.net/
+-->
+
+<class
+    name="com.tsa.puridiom.entity.CatalogSecurity"
+    table="CATALOG_SECURITY"
+>
+	<id
+        name="icHeader"
+        type="java.math.BigDecimal"
+        column="IC_HEADER"
+   >
+        <generator class="assigned" />
+    </id>
+    <property
+        name="catalogId"
+        type="java.lang.String"
+        column="CATALOG_ID"
+        length="15"
+    />
+    <property
+        name="itemNumber"
+        type="java.lang.String"
+        column="ITEM_NUMBER"
+        length="30"
+    />
+    <property
+        name="accessType"
+        type="java.lang.String"
+        column="ACCESS_TYPE"
+        length="15"
+    />
+    <property
+        name="accessId"
+        type="java.lang.String"
+        column="ACCESS_ID"
+        length="15"
+    />
+    <property
+        name="accessDescription"
+        type="java.lang.String"
+        column="ACCESS_DESCRIPTION"
+        length="40"
+    />
+    <property
+        name="owner"
+        type="java.lang.String"
+        column="OWNER"
+        length="15"
+    />
+    <property
+        name="dateEntered"
+        type="java.sql.Timestamp"
+        column="DATE_ENTERED"
+    />
+    <property
+        name="dateChanged"
+        type="java.sql.Timestamp"
+        column="DATE_CHANGED"
+    />
+    <property
+        name="lastChangedBy"
+        type="java.lang.String"
+        column="LAST_CHANGED_BY"
+        length="15"
+    />
+    <!-- associations -->
+
+</class>
+</hibernate-mapping>

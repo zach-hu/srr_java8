@@ -1,0 +1,113 @@
+<browse-inspector-assignment-wkld-by-line>
+	<columns>
+		<ReceiptHeader_icRecHeader>
+			<label><![CDATA[brw-icRecHeader]]></label>
+			<hidden>Y</hidden>
+			<hidden-input>Y</hidden-input>
+			<visible>0</visible>
+			<distinct>Y</distinct>
+		</ReceiptHeader_icRecHeader>
+		<c_checkbox>
+			<label>brw-reassign</label>
+			<type>Checkbox</type>
+			<size>8</size>
+			<selectsql>N</selectsql>
+			<align>center</align>
+			<store-request-value>Y</store-request-value>
+		</c_checkbox>
+		<ReceiptHeader_receiptNumber>
+			<label><![CDATA[brw-receiptNumber]]></label>
+			<sort>D</sort>
+			<link><![CDATA[javascript: viewRecPreview('#ReceiptHeader_icRecHeader^'); void(0);]]></link>
+			<size>8</size>
+		</ReceiptHeader_receiptNumber>
+		<ReceiptHeader_receiptStatus>
+			<label><![CDATA[Status]]></label>
+			<type>STATUS</type>
+			<size>15</size>
+		</ReceiptHeader_receiptStatus>
+		<ReceiptHeader_receiptDate>
+			<label><![CDATA[brw-transactionDate]]></label>
+			<type>DATE</type>
+			<size>12</size>
+		</ReceiptHeader_receiptDate>
+		<PoHeader_poNumber>
+			<label>brw-poNumber</label>
+			<size>12</size>
+		</PoHeader_poNumber>
+		<!-- <PoHeader_status>
+			<label><![CDATA[PO Status]]></label>
+			<type>STATUS</type>
+			<size>15</size>
+		</PoHeader_status> -->
+		<ReceiptHeader_receiptType>
+			<label>Type</label>
+			<size>5</size>
+			<align>center</align>
+		</ReceiptHeader_receiptType>
+		<d_dropdown>
+			<label>Inspector</label>
+			<idname>_0</idname>
+			<type>Dropdown</type>
+			<size>10</size>
+			<select-input>Y</select-input>
+			<selectsql>N</selectsql>
+			<hql-arguments>
+				<selecthql><![CDATA[from UserProfile as userprofile where 1=1 AND userprofile.inspector = 'Y' order by userprofile.firstName]]></selecthql>
+				<option-key>UserProfile_userId</option-key>
+				<option-value>UserProfile_displayName</option-value>
+			</hql-arguments>
+			<index>0</index>
+			<value>'#ReceiptLine_inspectorAssigned^'</value>
+			<value-option>Y</value-option>
+			<input-size>20</input-size>
+		</d_dropdown>
+		<d_dropdown>
+			<label>Engineer</label>
+			<idname>_1</idname>
+			<type>Dropdown</type>
+			<size>10</size>
+			<select-input>Y</select-input>
+			<selectsql>N</selectsql>
+			<hql-arguments>
+				<selecthql><![CDATA[from UserProfile as userprofile where 1=1 AND userprofile.engineer = 'Y' order by userprofile.firstName]]></selecthql>
+				<option-key>UserProfile_userId</option-key>
+				<option-value>UserProfile_displayName</option-value>
+			</hql-arguments>
+			<index>0</index>
+			<value>'#ReceiptLine_engineerAssigned^'</value>
+			<value-option>Y</value-option>
+			<input-size>20</input-size>
+		</d_dropdown>
+		<ReceiptLine_inspectorAssigned>
+			<hidden>Y</hidden>
+			<visible>0</visible>
+		</ReceiptLine_inspectorAssigned>
+		<ReceiptLine_engineerAssigned>
+			<hidden>Y</hidden>
+			<visible>0</visible>
+		</ReceiptLine_engineerAssigned>
+		<ReceiptLine_inspectionAssignedDate>
+			<label>Assigned Date</label>
+			<type>DATE</type>
+			<size>12</size>
+		</ReceiptLine_inspectionAssignedDate>
+		<ReceiptLine_inspectionClosedDate>
+			<label>Closed Date</label>
+			<type>DATE</type>
+			<size>12</size>
+		</ReceiptLine_inspectionClosedDate>
+	</columns>
+<sqlfrom>ReceiptHeader as ReceiptHeader, PoHeader as PoHeader, ReceiptLine as ReceiptLine</sqlfrom>
+<sqlwhere><![CDATA[ PoHeader.icPoHeader = ReceiptHeader.icPoHeader AND
+					ReceiptHeader.receiptNumber <> 'null' AND
+					ReceiptHeader.receiptNumber <> 'N/A' AND
+					ReceiptHeader.receiptNumber <> '' AND
+					ReceiptHeader.icRecHeader = ReceiptLine.icRecHeader AND
+					ReceiptLine.status = '4010' AND
+					ReceiptHeader.receiptStatus = '4010' AND
+					ReceiptLine.inspectionRequired = 'Y']]></sqlwhere>
+<sqlorderby>ReceiptHeader.receiptDate DESC, ReceiptHeader.receiptNumber DESC</sqlorderby>
+<pagesize>15</pagesize>
+<title>Inspector Assignment</title>
+</browse-inspector-assignment-wkld-by-line>

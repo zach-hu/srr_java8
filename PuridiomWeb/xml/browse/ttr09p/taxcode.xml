@@ -1,0 +1,24 @@
+<browse_taxcode>
+	<columns>
+		<TaxCode_taxCode>
+			<label>taxCode</label>
+			<sort>A</sort>
+			<link><![CDATA[javascript: returnMe('#TaxCode_taxCode^'); void(0);]]></link>
+			<size>10</size>
+		</TaxCode_taxCode>
+		<TaxCode_taxRate>
+			<label>brw-taxRate</label>
+			<hidden-input>Y</hidden-input>
+			<size>20</size>
+		</TaxCode_taxRate>
+		<TaxCode_description>
+			<label>brw-description</label>
+			<size>100</size>
+		</TaxCode_description>
+	</columns>
+<sqlfrom>TaxCode as TaxCode</sqlfrom>
+<sqlwhere><![CDATA[ (TaxCode.status <> '03') ]]></sqlwhere>
+<sqlorderby>TaxCode.taxCode ASC</sqlorderby>
+<pagesize>15</pagesize>
+<title>Tax Code Browse</title>
+</browse_taxcode>

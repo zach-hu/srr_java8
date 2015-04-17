@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="ContactAdd" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="aaa">
+			 <task synchronous="true" continue-on-failure="false" name="newDefault">
+				<task-object-name>com.tsa.puridiom.contact.tasks.ContactRetrieveById</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="currentDefault">
+				<task-object-name>com.tsa.puridiom.contact.tasks.ContactRetrievePrimary</task-object-name>
+				<post-action />
+		  	</task>
+			<task synchronous="true" continue-on-failure="false" name="set">
+				<task-object-name>com.tsa.puridiom.contact.tasks.ContactSetAsDefaultContact</task-object-name>
+				<post-action />
+		  	</task>
+		 </activity>
+	 </activities>
+</process>

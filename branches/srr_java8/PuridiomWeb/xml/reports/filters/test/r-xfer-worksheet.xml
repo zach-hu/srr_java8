@@ -1,0 +1,53 @@
+<r-xfer-worksheet>
+  <columns>
+		<InvItem_description>
+			<label>description</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</InvItem_description>
+		<InvBinLocation_itemLocation>
+			<label>location</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</InvBinLocation_itemLocation>
+		<InvItem_mohMonths>
+			<label>Moh Months</label>
+			<type>BIGDECIMAL</type>
+			<visible>1</visible>
+		</InvItem_mohMonths>
+		<InvItem_mohTot>
+			<label>Moh Tot</label>
+			<type>BIGDECIMAL</type>
+			<visible>1</visible>
+		</InvItem_mohTot>
+		<InvBinLocation_itemLocation>
+			<label>location</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</InvBinLocation_itemLocation>
+		<InvBinLocation_qtyOnHand>
+			<label>quantityOnHand</label>
+			<type>BIGDECIMAL</type>
+			<visible>1</visible>
+		</InvBinLocation_qtyOnHand>
+		<InvItem_itemNumber>
+			<label>itemNumber</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</InvItem_itemNumber>
+		<InvItem_udf1Code>
+			<label>Udf 1 Code</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</InvItem_udf1Code>
+		<InvItem_udf2Code>
+			<label>Udf 2 Code</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</InvItem_udf2Code>
+	</columns>
+  <sqlfrom>InvItem as InvItem, InvBinLocation as InvBinLocation</sqlfrom>
+  <sqlwhere><![CDATA[( InvItem.itemNumber = InvBinLocation.itemNumber ) and ( InvBinLocation.qtyOnHand <InvItem.mohTot )]]></sqlwhere>
+  <title>Transfer Worksheet Report</title>
+</r-xfer-worksheet>
+

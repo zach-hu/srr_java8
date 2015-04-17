@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="poheader-fields-to-lines" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="poHeaderUpdateLines">			
+			<task synchronous="true" continue-on-failure="false" name="poHeader">
+				<task synchronous="true" continue-on-failure="false" name="poLineList">
+				<task-object-name>com.tsa.puridiom.poline.tasks.PoLineRetrieveByHeader</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="poHeader">
+				<task-object-name>com.tsa.puridiom.poheader.tasks.PoHeaderRetrieveById</task-object-name>
+				<post-action></post-action>
+			</task>
+				<task-object-name>com.tsa.puridiom.poheader.tasks.PoHeaderSetFieldsToLines</task-object-name>
+				<post-action></post-action>
+			</task>				
+		</activity>
+	</activities>
+</process>

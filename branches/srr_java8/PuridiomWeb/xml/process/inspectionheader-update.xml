@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="inspectionHeaderUpdate" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="inspectionHeaderUpdate">
+			<task synchronous="true" continue-on-failure="false" name="inspectionHeader">
+				<rule-filename>is-inspectionheader-empty.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.inspectionheader.tasks.InspectionHeaderRetrieveById</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="inspectionHeader">
+				<task-object-name>com.tsa.puridiom.inspectionheader.tasks.InspectionHeaderSetValues</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="inspectionHeader">
+				<task-object-name>com.tsa.puridiom.inspectionheader.tasks.InspectionHeaderUpdate</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+	</activities>
+</process>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rule>
+	<clause type="lookup">
+		<sql>from StdTable stdTable where stdTable.id.tableType = 'CARR' AND stdTable.id.tableKey = '@carrierCode@' AND (stdTable.status = '02' OR (stdTable.status = '01' AND stdTable.dateExpires >= @today@))</sql>
+		<source>receiptHeader</source>
+		<arguments>
+			<name>carrierCode</name>
+			<source>receiptHeader</source>
+			<colName>getCarrierCode</colName>
+		</arguments>
+	</clause>
+</rule>

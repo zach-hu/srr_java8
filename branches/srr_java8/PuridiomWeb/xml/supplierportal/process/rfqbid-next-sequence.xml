@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="assetCostAdd" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="bidPriceAdd">
+			<task synchronous="true" continue-on-failure="false" name="bidHistoryLastSequence">
+				<task-object-name>com.tsa.puridiom.rfqbidhistory.tasks.RfqBidHistoryLastSequence</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="bidHistory_sequenceNo">
+				<task-object-name>com.tsa.puridiom.rfqbidhistory.tasks.RfqBidHistoryNewSequence</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+	</activities>
+</process>

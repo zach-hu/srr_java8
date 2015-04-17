@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="hostUserUpdateMailId" connection-type="Transaction-Required" ldap-connection-type="None">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="validateNewMailIdFromHostUser">
+			<task synchronous="true" continue-on-failure="false" name="hostUserTest">
+				<task-object-name>com.tsa.puridiom.hostuser.tasks.HostUserRetrieveByNewMailId</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="errorMsg">
+				<rule-filename check-for-false="true">is-hostusertest-empty.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.usererrormsg.tasks.ErrorMsgSetDuplicateMailId</task-object-name>
+				<post-action>exitProcess</post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="updateHostUserMailId">
+			<task synchronous="true" continue-on-failure="false" name="hostUserDelete">
+				<task-object-name>com.tsa.puridiom.hostuser.tasks.HostUserDeleteById</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="hostUserSetup">
+				<task-object-name>com.tsa.puridiom.hostuser.tasks.HostUserUpdateMailIdSetup</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="hostUser">
+				<task-object-name>com.tsa.puridiom.hostuser.tasks.HostUserSetValues</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="hostUser">
+				<task-object-name>com.tsa.puridiom.hostuser.tasks.HostUserAdd</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

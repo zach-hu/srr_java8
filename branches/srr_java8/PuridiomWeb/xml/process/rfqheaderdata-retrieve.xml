@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="rfqHeaderDataRetrieve" connection-type="Connection-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="rfqHeaderDataRetrieve">
+			<task synchronous="true" continue-on-failure="false" name="rfqHeader">
+				<task-object-name>com.tsa.puridiom.rfqheader.tasks.RfqHeaderRetrieveById</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="rfqHeaderRetrieveSetup">			
+				<task-object-name>com.tsa.puridiom.rfqheader.tasks.RfqHeaderRetrieveSetup</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="docAttachmentList">			
+				<task-object-name>com.tsa.puridiom.docattachment.tasks.DocAttachmentRetrieveByHeader</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="rfqCommentsRetrieve">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>doccomment-retrieve-by-line.xml</process-filename>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="rfqBidList">			
+				<task-object-name>com.tsa.puridiom.rfqbid.tasks.RfqBidRetrieveByHeader</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="rfqLineList">			
+				<task-object-name>com.tsa.puridiom.rfqline.tasks.RfqLineRetrieveByHeader</task-object-name>
+			</task>			
+			<task synchronous="true" continue-on-failure="false" name="rfqVendorRetrieveByHeader">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>rfqvendor-retrieve-by-header.xml</process-filename>
+			</task>
+			<!--task synchronous="true" continue-on-failure="false" name="rfqVendorList">			
+				<task-object-name>com.tsa.puridiom.rfqvendor.tasks.RfqVendorRetrieveByHeader</task-object-name>
+			</task-->
+			<task synchronous="true" continue-on-failure="false" name="rfqQuestionList">			
+				<task-object-name>com.tsa.puridiom.rfqquestion.tasks.RfqQuestionRetrieveByHeader</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="rfqQuestionList">
+				<task-object-name>com.tsa.puridiom.rfqquestion.tasks.RfqQuestionRetrieveResponseValuesByList</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="vendorResponseList">			
+				<task-object-name>com.tsa.puridiom.vendorresponse.tasks.VendorResponseRetrieveByHeader</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="scheduleList">
+				<task-object-name>com.tsa.puridiom.schedule.tasks.ScheduleRetrieveByHeader</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="billToAddressSetup">
+				<task-object-name>com.tsa.puridiom.rfqheader.tasks.RfqHeaderRetrieveBillToAddressSetup</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="billToAddress">
+				<rule-filename>is-address-code-not-empty</rule-filename>
+				<task-object-name>com.tsa.puridiom.address.tasks.AddressRetrieveBillTo</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="shipToAddressSetup">
+				<task-object-name>com.tsa.puridiom.rfqheader.tasks.RfqHeaderRetrieveShipToAddressSetup</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="shipToAddress">
+				<rule-filename>is-address-code-not-empty</rule-filename>
+				<task-object-name>com.tsa.puridiom.address.tasks.AddressRetrieveShipTo</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="vendorAddressSetup">
+				<task-object-name>com.tsa.puridiom.rfqheader.tasks.RfqHeaderRetrieveVendorAddressSetup</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="vendorAddress">
+				<rule-filename>is-address-type-not-empty;is-address-code-not-empty</rule-filename>
+				<task-object-name>com.tsa.puridiom.address.tasks.AddressRetrieveById</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="requisitionInfoList">
+				<task-object-name>com.tsa.puridiom.rfqheader.tasks.RfqHeaderRetrieveRequisitionInfo</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="poInfoList">
+				<task-object-name>com.tsa.puridiom.rfqheader.tasks.RfqHeaderRetrievePoInfo</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="rfqHeader">			
+				<task-object-name>com.tsa.puridiom.rfqheader.tasks.RfqHeaderDataSet</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

@@ -1,0 +1,58 @@
+<browse_dsb_supply_reqbrowse>
+	<columns>
+		<RequisitionHeader_requisitionType>
+			<label>poType</label>
+			<type>REQUISITION-TYPE</type>
+			<size>15</size>
+		</RequisitionHeader_requisitionType>
+		<RequisitionHeader_icReqHeader>
+	        <hidden>Y</hidden>
+		</RequisitionHeader_icReqHeader>
+		<RequisitionHeader_requisitionNumber>
+			<label>brw-requisitionNumber</label>
+			<link><![CDATA[javascript: createDisb('#RequisitionHeader_icReqHeader^','#RequisitionHeader_requisitionType^'); void(0);]]></link>
+			<size>15</size>
+		</RequisitionHeader_requisitionNumber>
+		<RequisitionHeader_requisitionDate>
+			<label>brw-requisitionDate</label>
+			<sort>D</sort>
+			<size>15</size>
+			<type>DATE</type>
+		</RequisitionHeader_requisitionDate>
+		<RequisitionHeader_fiscalYear>
+			<label>fiscalYear</label>
+			<size>10</size>
+		</RequisitionHeader_fiscalYear>
+		<RequisitionHeader_requisitionerCode>
+			<label>requisitioner</label>
+            <size>15</size>
+            <type>USER-ID</type>
+		</RequisitionHeader_requisitionerCode>
+		<RequisitionHeader_total>
+			<label>brw-total</label>
+			<type>BigDecimal</type>
+			<size>10</size>
+		</RequisitionHeader_total>
+		<RequisitionHeader_itemLocation>
+			<label>brw-itemLocation</label>
+			<size>15</size>
+		</RequisitionHeader_itemLocation>
+		<RequisitionHeader_shipToCode>
+			<label>shipToCode</label>
+			<size>10</size>
+		</RequisitionHeader_shipToCode>
+		<RequisitionHeader_owner>
+			<label>owner</label>
+			<hidden>Y</hidden>
+		</RequisitionHeader_owner>
+		<RequisitionHeader_internalComments>
+			<label>purpose</label>
+            <detail>Y</detail>
+		</RequisitionHeader_internalComments>
+	</columns>
+<sqlfrom>RequisitionHeader as RequisitionHeader</sqlfrom>
+<sqlwhere><![CDATA[RequisitionHeader.status = '1035' and (RequisitionHeader.requisitionType = 'S'  or RequisitionHeader.requisitionType = 'M')]]></sqlwhere>
+<sqlorderby>RequisitionHeader.requisitionDate DESC</sqlorderby>
+<pagesize>15</pagesize>
+<title>Inventory Requisition Selection</title>
+</browse_dsb_supply_reqbrowse>

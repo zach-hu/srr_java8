@@ -1,0 +1,27 @@
+<rule>
+	<clause type="IntegerCompare">
+		<left-side>
+			<source>incomingRequestObjectMethod</source>
+			<object>registerUser</object>
+			<name>getLoginAttempts</name>
+		</left-side>
+		<operator>GREATER</operator>
+		<right-side>
+			<source>constant</source>
+			<value>3</value>
+		</right-side>
+	</clause>
+	<logical-operator>OR</logical-operator>
+	<clause type="IntegerCompare">
+		<left-side>
+			<source>incomingRequestObjectMethod</source>
+			<object>registerUser</object>
+			<name>getLoginAttempts</name>
+		</left-side>
+		<operator>EQUALS</operator>
+		<right-side>
+			<source>constant</source>
+			<value>3</value>
+		</right-side>
+	</clause>
+</rule>

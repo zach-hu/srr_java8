@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="poLineDataRetrieve" connection-type="Connection-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="poLineDataRetrieve">
+			<task synchronous="true" continue-on-failure="false" name="poLineRetrieveSetup">
+				<task-object-name>com.tsa.puridiom.poline.tasks.PoLineRetrieveSetup</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="billToListRetrieve">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>billtodata-retrieve-by-line.xml</process-filename>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="shipToListRetrieve">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>shiptodata-retrieve-by-line.xml</process-filename>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="accountList">
+				<rule-filename></rule-filename>
+				<task-object-name>com.tsa.puridiom.account.tasks.AccountRetrieveByLine</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="accountList">
+				<rule-filename></rule-filename>
+				<task-object-name>com.tsa.puridiom.account.tasks.AccountPopulateAllocationDescriptionByList</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="retrieveBudgetInfoListFromPo">
+			    <rule-filename>is-account-budget-module-active</rule-filename>
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>budgetinfo-list-retrieve-by-poline.xml</process-filename>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="poLineCommentsRetrieve">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>doccomment-retrieve-by-line.xml</process-filename>
+			</task>
+
+			<task synchronous="true" continue-on-failure="false" name="docAttachmentList">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>docattachment-retrieve-by-line.xml</process-filename>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="imageFile">
+				<rule-filename check-for-false="true">is-catalogid-empty.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.catalog.tasks.CatalogItemRetrieveImageFile</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="receiptLineList">
+				<task-object-name>com.tsa.puridiom.receiptline.tasks.ReceiptLineRetrieveByPoLine</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="chargeCodeDataRetrieve">
+			<rule-filename check-for-false="false">is-organization-ttr.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="chargeCodeListSetup">
+				<task-object-name>com.tsa.puridiom.poline.tasks.ChargeCodeListSetup</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="chargeCodeList">
+				<task-object-name>com.tsa.puridiom.stdtable.tasks.StdTableRetrieveBy</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="poLineAltTextRetrieve">
+			<task synchronous="true" continue-on-failure="false" name="altTextListSetup">
+				<task-object-name>com.tsa.puridiom.alttext.tasks.AltTextPoLineSetup</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="altText">
+				<task-object-name>com.tsa.puridiom.alttext.tasks.AltTextRetrieveByItemId</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="inspectionListActivity">
+			<task synchronous="true" continue-on-failure="false" name="inspectionListSetup">
+				<task-object-name>com.tsa.puridiom.inspection.tasks.InspectionRetrieveListByLineSetup</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="inspectionList">
+				<task-object-name>com.tsa.puridiom.inspection.tasks.InspectionRetrieveListByLine</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="inspectionList">
+				<task-object-name>com.tsa.puridiom.inspectionheader.tasks.InspectionHeaderDataRetrieve</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="poLineDataSet">
+			<task synchronous="true" continue-on-failure="false" name="poLine">
+				<task-object-name>com.tsa.puridiom.poline.tasks.PoLineDataSet</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="catalogPriceBrkList">
+				<rule-filename check-for-false="true">is-catalogpricebrk-catalogid-empty.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.catalogpricebrk.tasks.CatalogPriceBrkRetrieveBy</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+	</activities>
+</process>

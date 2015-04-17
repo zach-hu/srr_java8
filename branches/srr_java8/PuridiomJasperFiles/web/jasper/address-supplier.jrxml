@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created using an evaluation version of JasperAssistant (http://www.jasperassistant.com) -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="address" pageWidth="265" pageHeight="15" columnWidth="265" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+	<property name="com.jasperassistant.designer.GridHeight" value="12"/>
+	<property name="com.jasperassistant.designer.GridWidth" value="12"/>
+	<property name="com.jasperassistant.designer.DataSource" value="oracle"/>
+	<property name="com.jasperassistant.designer.SnapToGrid" value="false"/>
+	<property name="com.jasperassistant.designer.Grid" value="false"/>
+	<import value="com.tsa.puridiom.common.utility.HiltonUtility"/>
+	<import value="com.tsa.puridiom.jasperreports.ReportUtils"/>
+	<reportFont name="Arial_Normal" isDefault="true" fontName="Arial" size="8" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Bold" isDefault="false" fontName="Arial Black" size="8" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica-Bold" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<parameter name="shiptocode" class="java.lang.String"/>
+	<parameter name="oid" class="java.lang.String"/>
+	<parameter name="PoHeader_vendContactCode" class="java.lang.String">
+		<defaultValueExpression><![CDATA["001"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="PoHeader_vendorId" class="java.lang.String"/>
+	<parameter name="PoHeader_contactName" class="java.lang.String"/>
+	<field name="Address_addressLine1" class="java.lang.String"/>
+	<field name="Address_addressLine2" class="java.lang.String"/>
+	<field name="Address_addressLine3" class="java.lang.String"/>
+	<field name="Address_addressLine4" class="java.lang.String"/>
+	<field name="Address_city" class="java.lang.String"/>
+	<field name="Address_country" class="java.lang.String"/>
+	<field name="Address_postalCode" class="java.lang.String"/>
+	<field name="Address_state" class="java.lang.String"/>
+	<field name="Address_cityStatePostal" class="java.lang.String"/>
+	<variable name="email" class="java.lang.String">
+		<variableExpression><![CDATA[ReportUtils.getVendContactDetails("email", $P{PoHeader_vendorId}, $P{PoHeader_vendContactCode}, $P{oid})]]></variableExpression>
+	</variable>
+	<variable name="fax" class="java.lang.String">
+		<variableExpression><![CDATA[ReportUtils.getVendContactDetails("fax", $P{PoHeader_vendorId}, $P{PoHeader_vendContactCode}, $P{oid})]]></variableExpression>
+		<initialValueExpression><![CDATA[ReportUtils.getVendContactDetails("fax", $P{PoHeader_vendorId}, $P{PoHeader_vendContactCode}, $P{oid})]]></initialValueExpression>
+	</variable>
+	<variable name="tel" class="java.lang.String">
+		<variableExpression><![CDATA[ReportUtils.getVendContactDetails("phone", $P{PoHeader_vendorId}, $P{PoHeader_vendContactCode}, $P{oid})]]></variableExpression>
+		<initialValueExpression><![CDATA[ReportUtils.getVendContactDetails("phone", $P{PoHeader_vendorId}, $P{PoHeader_vendContactCode}, $P{oid})]]></initialValueExpression>
+	</variable>
+	<group name="Group_1">
+		<groupHeader>
+			<band height="14">
+				<printWhenExpression><![CDATA[new Boolean(!HiltonUtility.isEmpty($F{Address_addressLine1}))]]></printWhenExpression>
+				<textField isBlankWhenNull="true" hyperlinkType="None">
+					<reportElement positionType="Float" x="0" y="0" width="224" height="14" isRemoveLineWhenBlank="true"/>
+					<textElement verticalAlignment="Middle">
+						<font reportFont="Arial_Normal"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{Address_addressLine1}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+	</group>
+	<group name="Group_2">
+		<groupHeader>
+			<band height="14">
+				<printWhenExpression><![CDATA[new Boolean(!HiltonUtility.isEmpty($F{Address_addressLine2}))]]></printWhenExpression>
+				<textField isBlankWhenNull="true" hyperlinkType="None">
+					<reportElement positionType="Float" x="0" y="0" width="224" height="14" isRemoveLineWhenBlank="true"/>
+					<textElement verticalAlignment="Middle">
+						<font reportFont="Arial_Normal"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{Address_addressLine2}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+	</group>
+	<group name="Group_3">
+		<groupHeader>
+			<band height="14">
+				<printWhenExpression><![CDATA[new Boolean(!HiltonUtility.isEmpty($F{Address_addressLine3}))]]></printWhenExpression>
+				<textField isBlankWhenNull="true" hyperlinkType="None">
+					<reportElement positionType="Float" x="0" y="0" width="224" height="14" isRemoveLineWhenBlank="true"/>
+					<textElement verticalAlignment="Middle">
+						<font reportFont="Arial_Normal"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{Address_addressLine3}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+	</group>
+	<group name="Group_5">
+		<groupHeader>
+			<band height="14">
+				<printWhenExpression><![CDATA[new Boolean(!HiltonUtility.isEmpty($F{Address_addressLine4}))]]></printWhenExpression>
+				<textField isBlankWhenNull="true" hyperlinkType="None">
+					<reportElement positionType="Float" x="0" y="0" width="224" height="14" isRemoveLineWhenBlank="true"/>
+					<textElement verticalAlignment="Middle" markup="none">
+						<font reportFont="Arial_Normal"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{Address_addressLine4}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+	</group>
+	<group name="Group_4" minHeightToStartNewPage="14">
+		<groupHeader>
+			<band height="14">
+				<printWhenExpression><![CDATA[new Boolean(!HiltonUtility.isEmpty($F{Address_cityStatePostal}))]]></printWhenExpression>
+				<textField isBlankWhenNull="true" hyperlinkType="None">
+					<reportElement positionType="Float" x="0" y="0" width="224" height="14" isRemoveLineWhenBlank="true"/>
+					<textElement verticalAlignment="Middle">
+						<font reportFont="Arial_Normal"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{Address_cityStatePostal}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+	</group>
+	<group name="Group_6" minHeightToStartNewPage="14">
+		<groupHeader>
+			<band height="14">
+				<printWhenExpression><![CDATA[new Boolean(!HiltonUtility.isEmpty($P{PoHeader_contactName}))]]></printWhenExpression>
+				<textField isBlankWhenNull="true" hyperlinkType="None">
+					<reportElement positionType="Float" x="38" y="0" width="223" height="14"/>
+					<textElement verticalAlignment="Middle"/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$P{PoHeader_contactName}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" hyperlinkType="None">
+					<reportElement positionType="Float" x="2" y="0" width="35" height="14"/>
+					<textElement verticalAlignment="Middle">
+						<font reportFont="Arial_Bold" isItalic="false" isStrikeThrough="false"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA["Attn:"]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+	</group>
+	<group name="Group_7" minHeightToStartNewPage="14">
+		<groupHeader>
+			<band height="14">
+				<printWhenExpression><![CDATA[new Boolean(!HiltonUtility.isEmpty($V{fax}) || !HiltonUtility.isEmpty($V{tel}))]]></printWhenExpression>
+				<textField isStretchWithOverflow="true" hyperlinkType="None">
+					<reportElement positionType="Float" x="2" y="0" width="35" height="14"/>
+					<textElement verticalAlignment="Middle">
+						<font reportFont="Arial_Bold" isItalic="false" isStrikeThrough="false"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA["Tel:"]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" hyperlinkType="None">
+					<reportElement positionType="Float" x="38" y="0" width="98" height="14" isPrintWhenDetailOverflows="true"/>
+					<textElement verticalAlignment="Middle"/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$V{tel}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true" hyperlinkType="None">
+					<reportElement positionType="Float" x="136" y="0" width="26" height="14"/>
+					<textElement verticalAlignment="Middle">
+						<font reportFont="Arial_Bold" isStrikeThrough="false"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA["Fax:"]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" hyperlinkType="None">
+					<reportElement positionType="Float" x="163" y="0" width="99" height="14"/>
+					<textElement verticalAlignment="Middle"/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$V{fax}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+	</group>
+	<group name="Group_8" minHeightToStartNewPage="15">
+		<groupHeader>
+			<band height="15">
+				<printWhenExpression><![CDATA[new Boolean(!HiltonUtility.isEmpty($V{email}))]]></printWhenExpression>
+				<textField isStretchWithOverflow="true" hyperlinkType="None">
+					<reportElement positionType="Float" x="2" y="0" width="35" height="14"/>
+					<textElement verticalAlignment="Middle">
+						<font reportFont="Arial_Bold" isItalic="false" isStrikeThrough="false"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA["Email:"]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" hyperlinkType="None">
+					<reportElement positionType="Float" x="38" y="0" width="223" height="14" isPrintWhenDetailOverflows="true"/>
+					<box>
+						<pen lineWidth="0.0" lineStyle="Solid"/>
+					</box>
+					<textElement verticalAlignment="Middle"/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$V{email}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement positionType="Float" isPrintRepeatedValues="false" x="4" y="14" width="254" height="1" isRemoveLineWhenBlank="true" forecolor="#C0C0C0"/>
+					<textElement/>
+					<text><![CDATA[Space remover. This static text never prints, but it is used to eliminate the remaining space till the bottom of the band.]]></text>
+				</staticText>
+			</band>
+		</groupHeader>
+	</group>
+</jasperReport>

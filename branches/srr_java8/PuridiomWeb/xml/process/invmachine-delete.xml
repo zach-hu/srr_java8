@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="invMachineDelete" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="deleteInvMachine">
+			<task synchronous="true" continue-on-failure="false" name="invMachine">
+				<task-object-name>com.tsa.puridiom.invmachine.tasks.InvMachineDeleteById</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+	</activities>
+</process>

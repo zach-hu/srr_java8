@@ -1,0 +1,15 @@
+<process name="rfqLineCancel" connection-type="New-Connection">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="rfqLineCancel">
+			<task synchronous="true" continue-on-failure="false" name="rfqLineListTemp">
+				<task-object-name>com.tsa.puridiom.rfqline.tasks.RfqLineRetrieveByReqLine</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="icRfqHeaderList">
+				<task-object-name>com.tsa.puridiom.rfqheader.tasks.RfqHeaderIdListRetrieveByRfqLine</task-object-name>
+			</task>
+			<!-- <task synchronous="true" continue-on-failure="false" name="rfqHeaderCancel">
+				<task-object-name>com.tsa.puridiom.rfqheader.tasks.RfqHeaderCancelFromReqLine</task-object-name>
+			</task> -->
+		</activity>
+	</activities>
+</process>

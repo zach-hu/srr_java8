@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='utf-8'?>
+	<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+	<session-factory>
+		<property name="dialect">com.tsa.puridiom.hibernate.SQLServerXDialect</property>
+<!-- Examples
+2005		<property name="connection.driver_class">com.microsoft.sqlserver.jdbc.SQLServerDriver</property>
+2000		<property name="connection.driver_class">com.microsoft.jdbc.sqlserver.SQLServerDriver</property>
+-->
+		<property name="connection.driver_class">com.microsoft.sqlserver.jdbc.SQLServerDriver</property>
+		<property name="connection.username">p4user</property>
+		<property name="connection.password">p4userp</property>
+		<property name="connection.isolation">1</property>
+
+<!-- Start of mss connection -->
+<!-- Examples
+2005		<property name="connection.url">jdbc:sqlserver://servername:1433;DatabaseName=Puridiom;SelectMethod=cursor;</property>
+2000		<property name="connection.url">jdbc:microsoft:sqlserver://servername:1433;DatabaseName=Puridiom;SelectMethod=cursor;</property>
+-->
+		<property name="connection.url">jdbc:sqlserver://216.37.169.5:1433;SelectMethod=cursor;</property>
+		<property name="show_sql">false</property>
+
+		<!-- Mapping files -->
+		<mapping resource="com/tsa/puridiom/entity/hbm/HostUser.hbm.xml"/>
+		<mapping resource="com/tsa/puridiom/entity/hbm/Organization.hbm.xml"/>
+		<mapping resource="com/tsa/puridiom/entity/hbm/PackagePricing.hbm.xml"/>
+		<mapping resource="com/tsa/puridiom/entity/hbm/OrganizationPackage.hbm.xml"/>
+	</session-factory>
+</hibernate-configuration>

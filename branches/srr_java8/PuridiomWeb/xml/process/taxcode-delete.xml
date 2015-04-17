@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="taxCodeDelete" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="deleteTaxCode">
+			<task synchronous="true" continue-on-failure="false" name="taxCode">
+				<task-object-name>com.tsa.puridiom.taxcode.tasks.TaxCodeDeleteById</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+	</activities>
+</process>

@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="requisitionApprovalRetrieve" connection-type="Connection-Required">
+  <activities>
+    <activity synchronous="true" continue-on-failure="false" name="requisitionHeaderRetrieveById">
+      <task synchronous="true" continue-on-failure="false" name="requisitionHeader">
+        <task-object-name>com.tsa.puridiom.requisitionheader.tasks.RequisitionHeaderRetrieveById</task-object-name>
+        <post-action></post-action>
+      </task>
+      <task synchronous="true" continue-on-failure="false" name="requisitionList">
+        <task-object-name>com.tsa.puridiom.requisition.tasks.RequisitionForwardList</task-object-name>
+        <post-action></post-action>
+      </task>
+      <task synchronous="true" continue-on-failure="false" name="approvedList">
+        <task-object-name>com.tsa.puridiom.approvals.tasks.ApprovalForwardReqList</task-object-name>
+        <post-action></post-action>
+      </task>
+    </activity>
+    <activity synchronous="true" continue-on-failure="false" name="requisitionHeaderRetrieveById">
+      <rule-filename>is-reqstatus-pending-approval-from-entity.xml</rule-filename>
+      <task synchronous="true" continue-on-failure="false" name="requisitionHeaderDataRetrieve">
+        <task-object-name>com.tsa.puridiom.requisitionheader.tasks.RequisitionHeaderDataRetrieve</task-object-name>
+        <post-action></post-action>
+      </task>
+      <task synchronous="true" continue-on-failure="false" name="requisitionLineDataRetrieve">
+        <task-object-name>com.tsa.puridiom.requisitionline.tasks.RequisitionLineDataRetrieve</task-object-name>
+        <post-action></post-action>
+      </task>
+      <task synchronous="true" continue-on-failure="false" name="approvalLogList">
+        <task-object-name>com.tsa.puridiom.approvals.tasks.ApprovalLogRetrieveByHeader</task-object-name>
+        <post-action></post-action>
+      </task>
+	  <task synchronous="true" continue-on-failure="false" name="approvalLogListOrderedByUserId">
+		<task-object-name>com.tsa.puridiom.approvals.tasks.ApprovalLogRetrieveByHeaderOrderedByUserId</task-object-name>
+		<post-action></post-action>
+	  </task>
+      <task synchronous="true" continue-on-failure="false" name="otherReqsWaitingMyApproval">
+        <task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+        <process-filename>my-other-reqs-to-approve.xml</process-filename>
+        <post-action></post-action>
+      </task>
+    </activity>
+    <activity synchronous="true" continue-on-failure="false" name="alreadyApprovedRequisition">
+      <rule-filename check-for-false="true">is-reqstatus-pending-approval-from-entity.xml</rule-filename>
+      <task synchronous="true" continue-on-failure="false" name="alreadyApproved">
+        <task-object-name>com.tsa.puridiom.requisitionheader.tasks.RequisitionHeaderAlreadyApproved</task-object-name>
+        <post-action></post-action>
+      </task>
+    </activity>
+    <activity synchronous="true" continue-on-failure="false" name="requisitionCheckForRecalled">
+      <rule-filename>is-reqstatus-recalled-from-entity.xml</rule-filename>
+      <task synchronous="true" continue-on-failure="false" name="requisitionWasRecalled">
+        <task-object-name>com.tsa.puridiom.requisitionheader.tasks.RequisitionHeaderWasRecalled</task-object-name>
+        <post-action></post-action>
+      </task>
+    </activity>
+    <activity synchronous="true" continue-on-failure="false" name="documentCheckForCancelled">
+      <rule-filename>is-reqstatus-cancelled-from-entity.xml</rule-filename>
+      <task synchronous="true" continue-on-failure="false" name="documentWasCancelled">
+        <task-object-name>com.tsa.puridiom.requisitionheader.tasks.DocumentWasCancelled</task-object-name>
+        <post-action></post-action>
+      </task>
+    </activity>
+    <activity synchronous="true" continue-on-failure="false" name="invalidApprover">
+      <rule-filename>is-reqstatus-pending-approval-from-entity.xml</rule-filename>
+      <task synchronous="true" continue-on-failure="false" name="invalidApprover">
+		<rule-filename check-for-false="true">is-override.xml</rule-filename>
+        <task-object-name>com.tsa.puridiom.requisition.tasks.InvalidApprover</task-object-name>
+        <post-action></post-action>
+      </task>
+    </activity>
+	<activity synchronous="true" continue-on-failure="false" name="groupApprovers">
+		<task synchronous="true" continue-on-failure="false" name="routingListGroups">
+			<task-object-name>com.tsa.puridiom.approvals.tasks.ApprovalLogListGroupByRule</task-object-name>
+			<post-action></post-action>
+		</task>
+	</activity>
+	<activity synchronous="true" continue-on-failure="false" name="budgetUdfSetup">
+		    <rule-filename>is-account-budget-module-active</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="budgetUdfSetup">
+				<task-object-name>com.tsa.puridiom.budget.tasks.BudgetUdfSetup</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="budgetReviewRetrieveSetup">
+				<task-object-name>com.tsa.puridiom.requisition.tasks.RequisitionForwardBudgetSetup</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="budgetReviewList">
+				<task-object-name>com.tsa.puridiom.budget.tasks.BudgetReviewRetrieve</task-object-name>
+				<post-action></post-action>
+			</task>
+	</activity>
+  </activities>
+</process>

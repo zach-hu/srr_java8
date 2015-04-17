@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="catalogPriceBrkUpdate" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="catalogPriceBrkUpdate">
+			<task synchronous="true" continue-on-failure="false" name="catalogPriceBrk">
+				<task-object-name>com.tsa.puridiom.catalogpricebrk.tasks.CatalogPriceBrkSetValues</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="catalogPriceBrkAdd">
+				<task-object-name>com.tsa.puridiom.catalogpricebrk.tasks.CatalogPriceBrkAdd</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+	</activities>
+</process>

@@ -1,0 +1,64 @@
+<browse_req_assigned_by_line>
+	<columns>
+		<RequisitionHeader_requisitionType>
+			<label>Type</label>
+			<type>REQUISITION-TYPE</type>
+			<size>15</size>
+		</RequisitionHeader_requisitionType>
+		<RequisitionHeader_icReqHeader>
+			<label>Ic Req Header</label>
+	        <hidden>Y</hidden>
+		</RequisitionHeader_icReqHeader>
+		<RequisitionHeader_requisitionNumber>
+			<label>Req. #</label>
+			<link><![CDATA[javascript: viewReq('#RequisitionHeader_icReqHeader^','#RequisitionHeader_requisitionType^'); void(0);]]></link>
+			<size>10</size>
+		</RequisitionHeader_requisitionNumber>
+		<RequisitionHeader_requisitionDate>
+			<label>Request Date</label>
+			<sort>D</sort>
+			<size>15</size>
+			<type>DATE</type>
+		</RequisitionHeader_requisitionDate>
+		<RequisitionHeader_status>
+			<label>brw-status</label>
+			<type>STATUS</type>
+			<size>11</size>
+		</RequisitionHeader_status>
+		<RequisitionHeader_total>
+			<label>brw-total</label>
+			<type>BigDecimal</type>
+			<size>8</size>
+		</RequisitionHeader_total>
+		<RequisitionHeader_requisitionerCode>
+			<label>Requisitioner</label>
+            <size>20</size>
+            <type>USER-ID</type>
+		</RequisitionHeader_requisitionerCode>
+		<RequisitionHeader_shipToCode>
+			<label>Ship To</label>
+			<hidden>Y</hidden>
+			<size>30</size>
+		</RequisitionHeader_shipToCode>
+		<RequisitionHeader_owner>
+			<label>Owner</label>
+			<hidden>Y</hidden>
+		</RequisitionHeader_owner>
+		<RequisitionHeader_internalComments>
+			<label>Purpose</label>
+            <detail>Y</detail>
+		</RequisitionHeader_internalComments>
+		<RequisitionHeader_fiscalYear>
+			<label>Fiscal Year</label>
+			<visible>0</visible>
+		</RequisitionHeader_fiscalYear>
+	</columns>
+<sqlfrom>RequisitionHeader as RequisitionHeader</sqlfrom>
+<sqlwhere><![CDATA[(RequisitionHeader.requisitionType = 'N') and
+	( RequisitionHeader.requisitionNumber in (
+			SELECT RequisitionLine.requisitionNumber FROM RequisitionLine as RequisitionLine
+			WHERE  ( RequisitionLine.assignedBuyer = :as_userid AND RequisitionLine.status == '1015') ) )]]></sqlwhere>
+<pagesize>15</pagesize>
+<title>Requisition Selection</title>
+</browse_req_assigned_by_line>
+

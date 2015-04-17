@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="saleGenerateFormNumber" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="fiscalYearSetup">
+			<task synchronous="true" continue-on-failure="false" name="saleFiscalYearActive">
+				<rule-filename>is-sale-active-fiscal-year-required.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.sale.tasks.SaleValidateActiveFiscalYear</task-object-name>
+				<post-action>exitActivity</post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="AutoGen_genYear">
+				<task-object-name>com.tsa.puridiom.common.tasks.GetDefaultFiscalYear</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="saleGenerateNumber">
+			<task synchronous="true" continue-on-failure="false" name="SaleHeader_saleNumber">
+				<task-object-name>com.tsa.puridiom.common.tasks.AutoGenDocNumber</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="saleFormatSetup">
+				<task-object-name>com.tsa.puridiom.sale.tasks.SaleFormatNumberSetup</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="checkMax">
+				<task-object-name>com.tsa.puridiom.common.tasks.CheckMaxDocNumber</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="SaleHeader_saleNumber">
+				<task-object-name>com.tsa.puridiom.common.tasks.FormatDocNumber</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

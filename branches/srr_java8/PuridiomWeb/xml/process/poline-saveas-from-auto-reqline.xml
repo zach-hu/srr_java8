@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="poLineSaveas" connection-type="Transaction-Required">
+  <activities>
+    <activity synchronous="true" continue-on-failure="false" name="poLineSaveas">
+      <task synchronous="true" continue-on-failure="false" name="poLineSaveasSetup">
+        <task-object-name>com.tsa.puridiom.poline.tasks.PoLineSaveasFromAutoReqLineSetup</task-object-name>
+      </task>
+      <task synchronous="true" continue-on-failure="false" name="accountList">
+		<task-object-name>com.tsa.puridiom.account.tasks.AccountSaveasList</task-object-name>
+		<post-action></post-action>
+	  </task>
+      <task synchronous="true" continue-on-failure="false" name="docCommentList">
+			<task-object-name>com.tsa.puridiom.doccomment.tasks.DocCommentSaveasList</task-object-name>
+	  </task>
+      <task synchronous="true" continue-on-failure="false" name="billToList">
+			<task-object-name>com.tsa.puridiom.billto.tasks.BillToSaveasList</task-object-name>
+	  </task>
+		<task synchronous="true" continue-on-failure="false" name="shipToSaveasList">
+			<task-object-name>com.tsa.puridiom.shipto.tasks.ShipToSaveasList</task-object-name>
+			<post-action></post-action>
+		</task>
+    </activity>
+  </activities>
+</process>

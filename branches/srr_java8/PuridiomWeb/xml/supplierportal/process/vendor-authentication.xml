@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="vendor-authentication" connection-type="New-Connection" ldap-connection-type="None">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="retrieveSupplierRegisterUser">
+			<task synchronous="true" continue-on-failure="false" name="bidboardUser">
+				<rule-filename>is-bidboard-guest-login</rule-filename>
+				<task-object-name>com.tsa.puridiom.supplierportal.authentication.tasks.BidBoardUserAuthenticateGuest</task-object-name>
+				<post-action>exitActivity</post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="setup">
+				<!-- set Contact_emailAddr & VendorRegister_emailAddr from userId, Encrypt password -->
+				<task-object-name>com.tsa.puridiom.supplierportal.authentication.tasks.AuthenticationSetup</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="contact">
+				<task-object-name>com.tsa.puridiom.contact.tasks.ContactRetrieveByEmailAddr</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="bidboardUser">
+				<rule-filename check-for-false="true">is-contact-empty</rule-filename>
+				<task-object-name>com.tsa.puridiom.supplierportal.tasks.BidBoardUserSetValuesFromContact</task-object-name>
+				<post-action>exitActivity</post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="vendorRegister">
+				<task-object-name>com.tsa.puridiom.vendorregister.tasks.VendorRegisterRetrieveByContactEmailAddr</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="bidboardUser">
+				<rule-filename check-for-false="true">is-vendorregister-empty</rule-filename>
+				<task-object-name>com.tsa.puridiom.supplierportal.tasks.BidBoardUserSetValuesFromVendorRegister</task-object-name>
+				<post-action>exitActivity</post-action>
+			</task>
+			<!-- Login Id (Email Address) must not have been found in either table.  Invalid Login -->
+			<task synchronous="true" continue-on-failure="false" name="setInvalidLoginErrorMsg">
+				<task-object-name>com.tsa.puridiom.supplierportal.authentication.tasks.ErrorMsgSetInvalidLogin</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="authenticate">
+			<task synchronous="true" continue-on-failure="false" name="resetPasswordMsg">
+				<task-object-name>com.tsa.puridiom.supplierportal.tasks.ErrorMsgSetPasswordResetRequired</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="checkLockedLogin">
+				<rule-filename>is-bidboarduser-login-locked</rule-filename>
+				<task-object-name>com.tsa.puridiom.supplierportal.authentication.tasks.ErrorMsgSetAccountLocked</task-object-name>
+				<post-action>exitProcess</post-action>
+			</task>
+			<rule-filename check-for-false="true">is-bidboarduser-empty;is-bidboard-guest-login</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="authenticate">
+				<rule-filename>is-bidboarduser-password-valid</rule-filename>
+				<task-object-name>com.tsa.puridiom.supplierportal.authentication.tasks.BidBoardUserSetAuthenticated</task-object-name>
+				<post-action>exitActivity</post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="authenticate">
+				<task-object-name>com.tsa.puridiom.supplierportal.authentication.tasks.ErrorMsgSetInvalidLogin</task-object-name>
+				<post-action>exitActivity</post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="setInactive">
+			<rule-filename>is-bidboarduser-authenticated;is-bidboarduser-inactive;</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="bidboardUser">
+				<task-object-name>com.tsa.puridiom.supplierportal.authentication.tasks.BidBoardUserResetAuthenticated</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="setInactiveErrorMsg">
+				<task-object-name>com.tsa.puridiom.supplierportal.authentication.tasks.ErrorMsgSetInactiveVendor</task-object-name>
+				<post-action></post-action>
+			</task>
+			<post-action>exitProcess</post-action>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="setInactive">
+			<rule-filename>is-bidboarduser-authenticated;is-bidboarduser-password-reset-required.xml;</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="bidboardUser">
+				<task-object-name>com.tsa.puridiom.supplierportal.authentication.tasks.BidBoardUserResetAuthenticated</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="checkPasswordReset">
+				<task-object-name>com.tsa.puridiom.supplierportal.authentication.tasks.ErrorMsgSetPasswordResetRequired</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="setFailedLogin">
+			<rule-filename check-for-false="true">is-bidboarduser-authenticated.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="bidboardUser">
+				<task-object-name>com.tsa.puridiom.supplierportal.authentication.tasks.BidBoardUserSetLoginAttempts</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="loginAttempts">
+				<task-object-name>com.tsa.puridiom.supplierportal.authentication.tasks.BidBoardUserGetMailIdLoginAttempts</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="maxLoginAttempts">
+			<rule-filename check-for-false="true">is-max-bidboard-login-attempts-reached.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="lockLogin">
+				<task-object-name>com.tsa.puridiom.supplierportal.InvokeSupplierPortalProcessTask</task-object-name>
+				<process-filename>bidboarduser-lock-login.xml</process-filename>
+			</task>
+			<!-- <task synchronous="true" continue-on-failure="false" name="promptPasswordHelp">
+				<task-object-name>com.tsa.puridiom.supplierportal.authentication.tasks.ErrorMsgSetFinalLoginAttempt</task-object-name>
+				<post-action></post-action>
+			</task> -->
+		</activity>
+	</activities>
+</process>

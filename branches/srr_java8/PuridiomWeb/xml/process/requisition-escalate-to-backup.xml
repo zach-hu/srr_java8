@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="ApprovalLogEscalateToBackup" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="requisitionHeaderRetrieveById">
+			<task synchronous="true" continue-on-failure="false" name="requisitionHeader">
+				<task-object-name>com.tsa.puridiom.requisitionheader.tasks.RequisitionHeaderRetrieveById</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="requisitionLineRetrieve">
+				<task-object-name>com.tsa.puridiom.requisitionline.tasks.RequisitionLineRetrieveByHeader</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="rerouteToBackupSetup">
+			<task synchronous="true" continue-on-failure="false" name="approvalLog">
+				<task-object-name>com.tsa.puridiom.approvals.tasks.ApprovalLogRetrieveCurrentByHeader</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="QueueAddReqEscalateApprovalEmail">
+			<task continue-on-failure="false" name="escalateEmail" synchronous="true">
+				<task-object-name>com.tsa.puridiom.approvals.QueueAddReqEscalateApprovalEmail</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="UpdateProperty">
+			<rule-filename>is-lastelement-of-list.xml</rule-filename>
+			<task synchronous="true" undo-on-failure="true" name="propertySetValues">
+				<task-object-name>com.tsa.puridiom.property.tasks.PropertySetFromRequest</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="propertyUpdate">
+				<task-object-name>com.tsa.puridiom.property.tasks.PropertyUpdateList</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>
+
+

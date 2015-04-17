@@ -1,0 +1,27 @@
+<browse_stage>
+	<columns>
+		<InvStage_stageId>
+			<label>brw-routingId</label>
+			<sort>A</sort>
+			<link><![CDATA[javascript: returnInvStage('#InvStage_stageId^'); void(0);]]></link>
+			<size>15</size>
+		</InvStage_stageId>
+		<InvStage_description>
+			<label>description</label>
+			<size>50</size>
+		</InvStage_description>
+		<InvStage_workCenterId>
+			<label>brw-workCenterId</label>
+			<size>15</size>
+		</InvStage_workCenterId>
+		<InvStage_machineId>
+			<label>brw-machineId</label>
+			<size>20</size>
+		</InvStage_machineId>
+	</columns>
+<sqlfrom>InvStage as InvStage</sqlfrom>
+<sqlwhere><![CDATA[ (InvStage.status <> '03') ]]></sqlwhere>
+<sqlorderby>InvStage.stageId ASC</sqlorderby>
+<pagesize>15</pagesize>
+<title>Routing Stage Browse</title>
+</browse_stage>

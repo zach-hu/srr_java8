@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="requisitionUnableAutoAward" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="emailNotification">
+			<task synchronous="true" continue-on-failure="false" name="requisitionHeader">
+				<task-object-name>com.tsa.puridiom.requisitionheader.tasks.RequisitionHeaderRetrieveById</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="requisitionUnableEmail">
+		    	<task-object-name>com.tsa.puridiom.requisition.notifications.tasks.QueueUnableRequisitionAwardEmail</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

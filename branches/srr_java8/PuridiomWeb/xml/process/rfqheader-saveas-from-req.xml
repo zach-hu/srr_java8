@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="rfqSaveasFromReq" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="requisitionHeaderSaveas">
+			<task synchronous="true" continue-on-failure="false" name="requisitionHeaderSaveasSetup">
+				<task-object-name>com.tsa.puridiom.rfqheader.tasks.RfqHeaderSaveasFromReqSetup</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="rfqHeaderCommentSaveas">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>doccomment-saveas.xml</process-filename>
+			</task>
+		</activity>
+	</activities>
+</process>

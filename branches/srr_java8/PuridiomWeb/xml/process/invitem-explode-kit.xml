@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="invItemExplodeKit" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="invItemExplodeKit">
+			<task synchronous="true" continue-on-failure="false" name="invItemExplodeKitSetup">
+				<task-object-name>com.tsa.puridiom.invitem.tasks.InvItemExplodeKitSetup</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="kitItemList">
+				<task-object-name>com.tsa.puridiom.kititem.tasks.KitItemRetrieveBy</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+	</activities>
+</process>

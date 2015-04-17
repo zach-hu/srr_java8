@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="bomMasterRetrieveByItem" connection-type="Connection-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="retrieveBomMasterByItem">
+			<task synchronous="true" continue-on-failure="false" name="bomMethod">
+				<task-object-name>com.tsa.puridiom.bommethod.tasks.BomMethodRetrieveById</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="bomRoutingList">
+				<task-object-name>com.tsa.puridiom.bomrouting.tasks.BomRoutingRetrieveByIcMethod</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="bomComponentList">
+				<task-object-name>com.tsa.puridiom.bomcomponent.tasks.BomComponentRetrieveByItem</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+	</activities>
+</process>

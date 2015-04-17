@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="recentaccount-add" connection-type="New-Transaction">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="recentAccountSetup">
+		    <task synchronous="true" continue-on-failure="false" name="recentAccountSetup">
+				<task-object-name>com.tsa.puridiom.recentaccount.tasks.RecentAccountSetupFromAccount</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="recentAccount">
+				<task-object-name>com.tsa.puridiom.recentaccount.tasks.RecentAccountRetrieveById</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="recentAccountAdd">
+			<rule-filename>is-recentaccount-empty.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="recentAccount">
+				<task-object-name>com.tsa.puridiom.recentaccount.tasks.RecentAccountSetValues</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="recentAccount">
+				<task-object-name>com.tsa.puridiom.recentaccount.tasks.RecentAccountIncrementCount</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="recentAccount">
+				<task-object-name>com.tsa.puridiom.recentaccount.tasks.RecentAccountAdd</task-object-name>
+			</task>
+			<post-action>exitProcess</post-action>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="recentAccountUpdate">
+			<!--<task synchronous="true" continue-on-failure="false" name="recentAccount">
+				<task-object-name>com.tsa.puridiom.recentaccount.tasks.RecentAccountSetValues</task-object-name>
+			</task>-->
+			<task synchronous="true" continue-on-failure="false" name="recentAccount">
+				<task-object-name>com.tsa.puridiom.recentaccount.tasks.RecentAccountIncrementCount</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="recentAccount">
+				<task-object-name>com.tsa.puridiom.recentaccount.tasks.RecentAccountUpdate</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>
+

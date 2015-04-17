@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="rfqNoteSaveasByLine" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="rfqNoteSaveasByLine">
+			<task synchronous="true" continue-on-failure="false" name="rfqNoteList">
+				<task-object-name>com.tsa.puridiom.rfqnote.tasks.RfqNoteRetrieveByLine</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="rfqNoteList">
+				<task-object-name>com.tsa.puridiom.rfqnote.tasks.RfqNoteSaveasListByLine</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

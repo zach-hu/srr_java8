@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="KitItemUpdateById" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="retrieveKitItem">
+			<task synchronous="true" continue-on-failure="false" name="kitItem">
+				<task-object-name>com.tsa.puridiom.kititem.tasks.KitItemRetrieveById</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="addKitItem">
+			<rule-filename>is-kititem-empty.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="kitItem">
+				<task-object-name>com.tsa.puridiom.kititem.tasks.KitItemSetValues</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="kitItem">
+				<task-object-name>com.tsa.puridiom.kititem.tasks.KitItemAdd</task-object-name>
+				<post-action></post-action>
+		   </task>
+			<post-action>exitProcess</post-action>
+		  </activity>
+		<activity synchronous="true" continue-on-failure="false" name="updateKitItem">
+			<task synchronous="true" continue-on-failure="false" name="kitItem">
+				<task-object-name>com.tsa.puridiom.kititem.tasks.KitItemSetValues</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="kitItem">
+				<task-object-name>com.tsa.puridiom.kititem.tasks.KitItemUpdate</task-object-name>
+				<post-action></post-action>
+			   </task>
+		  </activity>
+	 </activities>
+</process>

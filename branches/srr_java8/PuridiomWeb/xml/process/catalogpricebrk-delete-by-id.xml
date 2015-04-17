@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="CatalogPriceBrkDeletebyid" connection-type="Transaction-Required"> 
+	<activities>  
+		<activity synchronous="true" continue-on-failure="false" name="deletebyidCatalogPriceBrkActivity">   
+			<task synchronous="true" continue-on-failure="false" name="deletebyidCatalogPriceBrk">    			
+				<task-object-name>com.tsa.puridiom.catalogpricebrk.tasks.CatalogPriceBrkDeleteById</task-object-name>    
+				<post-action />    
+			   </task>   
+		  </activity>  
+	 </activities> 
+</process>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="rfqQuestionUpdate" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="rfqQuestionAddFromStandard">
+			<task synchronous="true" continue-on-failure="false" name="stdQuestion">			
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>stdquestion-retrieve-by-id.xml</process-filename>				
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="rfqQuestion">
+				<task-object-name>com.tsa.puridiom.rfqquestion.tasks.RfqQuestionSetValuesFromStdQuestion</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="RfqQuestion_sequence">			
+				<task-object-name>com.tsa.puridiom.rfqquestion.tasks.RfqQuestionGetNextSequence</task-object-name>
+			</task>			
+			<task synchronous="true" continue-on-failure="false" name="rfqQuestionAdd">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>rfqquestion-add.xml</process-filename>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="responseValueList">
+				<task-object-name>com.tsa.puridiom.responsevalue.tasks.ResponseValueSaveasList</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+	</activities>
+</process>

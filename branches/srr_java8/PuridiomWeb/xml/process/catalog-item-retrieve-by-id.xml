@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="CatalogItemRetrieveById" connection-type="Connection-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="CatalogItemRetrieveById">
+			<task synchronous="true" continue-on-failure="false" name="catalogItem">
+				<task-object-name>com.tsa.puridiom.catalog.tasks.CatalogItemRetrieveById</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="validUmCodeList">
+				<task-object-name>com.tsa.puridiom.unitofmeasure.tasks.UnitOfMeasureRetrieveValidUmCode</task-object-name>
+				<post-action />
+			</task>
+		</activity>
+	</activities>
+</process>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="invItemAdd" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="addInvItemPoLine">
+			<task synchronous="true" continue-on-failure="false" name="poLine">
+				<rule-filename>is-poline-itemnumber-empty.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.asset.serv.tasks.PoLineItemNumberAssign</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="invItemList">
+        		<task-object-name>com.tsa.puridiom.asset.serv.tasks.InvItemRetrieveByIdFromPoLine</task-object-name>
+      		</task>
+			<task synchronous="true" continue-on-failure="false" name="addInvItem">
+				<rule-filename>is-invitem-not-exist.xml</rule-filename>
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>invitempoline-add.xml</process-filename>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="addAssetPoLine">
+			<task synchronous="true" continue-on-failure="false" name="addAsset">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>assetpoline-add.xml</process-filename>
+			</task>
+		</activity>
+	</activities>
+</process>

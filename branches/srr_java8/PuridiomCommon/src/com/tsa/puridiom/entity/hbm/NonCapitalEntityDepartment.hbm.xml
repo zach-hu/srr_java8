@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping>
+
+<class
+    name="com.tsa.puridiom.entity.NonCapitalEntityDepartment"
+    table="NONCAPITAL_ENTITY_DEPARMENT"
+>
+
+    <id
+        name="icHeader"
+        type="java.math.BigDecimal"
+        column="IC_HEADER"
+    >
+        <generator class="assigned" />
+    </id>
+
+    <property
+        name="division"
+        type="java.lang.String"
+        column="DIVISION"
+        length="15"
+    />
+    <property
+        name="entity"
+        type="java.lang.String"
+        column="ENTITY"
+        length="17"
+    />
+    <property
+        name="department"
+        type="java.lang.String"
+        column="DEPARTMENT"
+        length="17"
+    />
+   <property
+        name="status"
+        type="java.lang.String"
+        column="STATUS"
+        length="2"
+    />
+     <property
+        name="description"
+        type="java.lang.String"
+        column="DESCRIPTION"
+        length="50"
+    />
+
+</class>
+</hibernate-mapping>

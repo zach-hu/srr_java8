@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="ScheduleRetrieveAllLinesByHeader" connection-type="Connection-Required">
+	<!--Retrieve all Schedules for a given icHeader, scheduleType, and documentType -->
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="ScheduleRetrieveMilestonesLinesBy">
+			  <task synchronous="true" continue-on-failure="false" name="milestonesList">
+				<task-object-name>com.tsa.puridiom.schedule.tasks.ScheduleRetrieveMilestonesLinesByHeader</task-object-name>
+				<post-action />
+			  </task>
+			  <task synchronous="true" continue-on-failure="false" name="deliveryList">
+				<task-object-name>com.tsa.puridiom.schedule.tasks.ScheduleRetrieveDeliveryLinesByHeader</task-object-name>
+				<post-action />
+			  </task>
+			  <task synchronous="true" continue-on-failure="false" name="paymentList">
+				<task-object-name>com.tsa.puridiom.schedule.tasks.ScheduleRetrievePaymentLinesByHeader</task-object-name>
+				<post-action />
+			  </task>
+			  <task synchronous="true" continue-on-failure="false" name="performanceList">
+				<task-object-name>com.tsa.puridiom.schedule.tasks.ScheduleRetrievePerformanceLinesByHeader</task-object-name>
+				<post-action />
+			  </task>
+		  </activity>
+	 </activities>
+
+</process>

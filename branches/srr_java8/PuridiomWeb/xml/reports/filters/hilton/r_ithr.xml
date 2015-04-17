@@ -1,0 +1,100 @@
+<r_ithr>
+  <columns>
+		<PoHeader_poNumber>
+			<label>poNumber</label>
+			<type>STRING</type>
+		</PoHeader_poNumber>
+		<PoHeader_poDate>
+			<label>poDate</label>
+			<type>DATE</type>
+		</PoHeader_poDate>
+		<PoHeader_buyerCode>
+			<label>buyer</label>
+			<type>STRING</type>
+		</PoHeader_buyerCode>
+		<UserProfile_firstName>
+			<label>firstName</label>
+			<type>STRING</type>
+		</UserProfile_firstName>
+		<UserProfile_lastName>
+			<label>lastName</label>
+			<type>STRING</type>
+		</UserProfile_lastName>
+		<PoHeader_vendorId>
+			<label>vendorId</label>
+			<type>STRING</type>
+		</PoHeader_vendorId>
+		<Vendor_vendorName>
+			<label>vendorName</label>
+			<type>STRING</type>
+		</Vendor_vendorName>
+		<PoLine_status>
+			<label>status</label>
+			<type>STATUS</type>
+		</PoLine_status>
+		<PoLine_itemNumber>
+			<label>itemNumber</label>
+			<type>STRING</type>
+		</PoLine_itemNumber>
+		<PoLine_description>
+			<label>description</label>
+			<type>STRING</type>
+		</PoLine_description>
+		<PoLine_quantity>
+			<label>quantity</label>
+			<type>BIGDECIMAL</type>
+		</PoLine_quantity>
+		<PoLine_unitPrice>
+			<label>unitPrice</label>
+			<type>BIGDECIMAL</type>
+		</PoLine_unitPrice>
+		<PoLine_umCode>
+			<label>uom</label>
+			<type>STRING</type>
+		</PoLine_umCode>
+		<PoLine_lineTotal>
+			<label>total</label>
+			<type>BIGDECIMAL</type>
+		</PoLine_lineTotal>
+		<PoLine_mfgName>
+			<label>manufacturer</label>
+			<type>STRING</type>
+		</PoLine_mfgName>
+		<PoHeader_currencyCode>
+			<label>currency</label>
+			<type>STRING</type>
+		</PoHeader_currencyCode>
+		<PoHeader_currencyFactor>
+			<label>factor</label>
+			<type>BIGDECIMAL</type>
+		</PoHeader_currencyFactor>
+		<PoHeader_fiscalYear>
+			<label>fiscalYear</label>
+			<type>STRING</type>
+		</PoHeader_fiscalYear>
+		<PoHeader_departmentCode>
+			<label>department</label>
+			<type>STRING</type>
+		</PoHeader_departmentCode>
+		<PoHeader_releaseNumber>
+			<label>releaseNumber</label>
+			<type>STRING</type>
+		</PoHeader_releaseNumber>
+		<PoHeader_revisionNumber>
+			<label>revisionNumber</label>
+			<type>STRING</type>
+		</PoHeader_revisionNumber>
+	</columns>
+  <sqlfrom> PoHeader as  PoHeader , PoLine as PoLine , UserProfile as UserProfile , Vendor as Vendor </sqlfrom>
+  <sqlwhere><![CDATA[
+  	( PoHeader.status > '3020' ) and
+  	( PoHeader.status < '9020' ) and ( PoHeader.poDate >= :as_baseReportDate ) and
+  	( PoHeader.icPoHeader = PoLine.icPoHeader ) and
+  	( PoHeader.lastRevision = 'C' ) and
+  	( PoHeader.buyerCode = UserProfile.userId ) and
+  	( PoHeader.vendorId = Vendor.vendorId )
+  	]]></sqlwhere>
+  <sqlorderby>PoLine.itemNumber</sqlorderby>
+  <title>Item History Report</title>
+</r_ithr>
+

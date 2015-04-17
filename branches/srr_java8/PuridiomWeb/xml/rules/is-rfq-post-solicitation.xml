@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rule>
+	<clause type="Rule">
+		<rule-filename>is-solicitation-active.xml</rule-filename>
+	</clause>
+	<logical-operator>AND</logical-operator>
+	<clause type="NotEmpty">
+		<left-side>
+			<source>incomingRequestObjectMethod</source>
+			<object>rfqHeader</object>
+			<name>getWebpost</name>
+		</left-side>
+	</clause>
+	<logical-operator>AND</logical-operator>
+	<clause type="StringCompare">
+		<left-side>
+			<source>incomingRequestObjectMethod</source>
+			<object>rfqHeader</object>
+			<name>getWebpost</name>
+		</left-side>
+		<operator>NOTEQUAL</operator>
+		<right-side>
+			<source>constant</source>
+			<value>N</value>
+		</right-side>
+	</clause>
+</rule>

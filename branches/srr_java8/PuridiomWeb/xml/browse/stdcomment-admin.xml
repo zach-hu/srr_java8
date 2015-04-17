@@ -1,0 +1,41 @@
+<browse_stdcomment>
+	<columns>
+		<StdComment_commentId>
+			<label>commentid</label>
+			<sort>A</sort>
+			<link><![CDATA[javascript: returnStdComment('#StdComment_commentId^'); void(0);]]></link>
+			<size>15</size>
+			<hidden-input>Y</hidden-input>
+		</StdComment_commentId>
+		<StdComment_commentTitle>
+			<label>brw-title</label>
+			<size>20</size>
+		</StdComment_commentTitle>
+		<StdComment_commentPublic>
+			<label>brw-public</label>
+			<size>5</size>
+		</StdComment_commentPublic>
+		<StdComment_commentPrint>
+			<label>print</label>
+			<size>5</size>
+		</StdComment_commentPrint>
+		<StdComment_commentBold>
+			<label>bold</label>
+			<size>5</size>
+		</StdComment_commentBold>
+		<DocText_stdText>
+			<label>brw-comment</label>
+			<size>100</size>
+			<detail>Y</detail>
+		</DocText_stdText>
+		<StdComment_status>
+			<label>brw-status</label>
+			<type>STATUS</type>
+			<size>10</size>
+		</StdComment_status>
+	</columns>
+<sqlfrom>StdComment as StdComment, DocText as DocText</sqlfrom>
+<sqlwhere><![CDATA[ (StdComment.icText = DocText.icText) ]]></sqlwhere>
+<pagesize>10</pagesize>
+<title>Standard Comments</title>
+</browse_stdcomment>

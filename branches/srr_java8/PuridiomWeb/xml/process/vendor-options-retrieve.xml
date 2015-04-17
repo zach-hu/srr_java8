@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="stdTableRetrieveVendorOptions" connection-type="Connection-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="stdTableRetrieveVendorOptions">
+			<task synchronous="true" continue-on-failure="false" name="vendorTypesRetrieveSetup">			
+				<task-object-name>com.tsa.puridiom.vendor.tasks.VendorTypesRetrieveSetup</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="vendorTypeList">			
+				<task-object-name>com.tsa.puridiom.stdtable.tasks.StdTableRetrieveBy</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="stdTableRetrieveVendorOptions">
+			<task synchronous="true" continue-on-failure="false" name="ownershipTypesRetrieveSetup">			
+				<task-object-name>com.tsa.puridiom.vendor.tasks.VendorOwnershipTypesRetrieveSetup</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="ownershipTypeList">			
+				<task-object-name>com.tsa.puridiom.stdtable.tasks.StdTableRetrieveBy</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="stdTableRetrieveVendorOptions">
+			<task synchronous="true" continue-on-failure="false" name="classificationTypesRetrieveSetup">			
+				<task-object-name>com.tsa.puridiom.vendor.tasks.VendorClassificationTypesRetrieveSetup</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="classificationTypeList">			
+				<task-object-name>com.tsa.puridiom.stdtable.tasks.StdTableRetrieveBy</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="vendorUdf1Retrieve">
+			<rule-filename>is-vn01-checkbox.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="vendorUdf1RetrieveSetup">			
+				<task-object-name>com.tsa.puridiom.vendor.tasks.VendorUdf1ValuesRetrieveSetup</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="vendorUdf1List">
+				<task-object-name>com.tsa.puridiom.stdtable.tasks.StdTableRetrieveBy</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="vendorUdf2Retrieve">
+			<rule-filename>is-vn02-checkbox.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="vendorUdf2RetrieveSetup">			
+				<task-object-name>com.tsa.puridiom.vendor.tasks.VendorUdf2ValuesRetrieveSetup</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="vendorUdf2List">
+				<task-object-name>com.tsa.puridiom.stdtable.tasks.StdTableRetrieveBy</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="vendorUdf3Retrieve">
+			<rule-filename>is-vn03-checkbox.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="vendorUdf3RetrieveSetup">			
+				<task-object-name>com.tsa.puridiom.vendor.tasks.VendorUdf3ValuesRetrieveSetup</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="vendorUdf3List">
+				<task-object-name>com.tsa.puridiom.stdtable.tasks.StdTableRetrieveBy</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="vendorUdf4Retrieve">
+			<rule-filename>is-vn04-checkbox.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="vendorUdf4RetrieveSetup">			
+				<task-object-name>com.tsa.puridiom.vendor.tasks.VendorUdf4ValuesRetrieveSetup</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="vendorUdf4List">
+				<task-object-name>com.tsa.puridiom.stdtable.tasks.StdTableRetrieveBy</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="vendorUdf5Retrieve">
+			<rule-filename>is-vn05-checkbox.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="vendorUdf5RetrieveSetup">			
+				<task-object-name>com.tsa.puridiom.vendor.tasks.VendorUdf5ValuesRetrieveSetup</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="vendorUdf5List">
+				<task-object-name>com.tsa.puridiom.stdtable.tasks.StdTableRetrieveBy</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="diverseCertifiedOrgRetrieve">
+			<task synchronous="true" continue-on-failure="false" name="diverseCertifiedOrgRetrieveSetup">			
+				<task-object-name>com.tsa.puridiom.vendor.tasks.VendorDiverseCertifiedOrgRetrieveSetup</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="diverseCertifiedOrgList">			
+				<task-object-name>com.tsa.puridiom.stdtable.tasks.StdTableRetrieveBy</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

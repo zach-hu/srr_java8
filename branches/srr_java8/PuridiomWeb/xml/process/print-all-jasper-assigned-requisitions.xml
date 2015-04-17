@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="printAllAssignedRequisitions" connection-type="None">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="printAllAssignedRequisition">
+			<task synchronous="true" continue-on-failure="false" name="requisitionJasperList">
+				<task-object-name>com.tsa.puridiom.formpdf.tasks.ReqPrintAllJasperAssignedPdf</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

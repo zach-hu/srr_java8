@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="rfq-vendor-delete" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="rfqVendorDelete">
+			<task synchronous="true" continue-on-failure="false" name="rfqVendorDeleteSetup">
+				<rule-filename></rule-filename>
+				<task-object-name>com.tsa.puridiom.rfqvendor.tasks.RfqVendorDeleteSetup</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="rfqBidDeleteByVendor">			
+				<rule-filename></rule-filename>
+				<task-object-name>com.tsa.puridiom.rfqbid.tasks.RfqBidDeleteByVendor</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="rfqVendor">			
+				<task-object-name>com.tsa.puridiom.rfqvendor.tasks.RfqVendorDeleteById</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

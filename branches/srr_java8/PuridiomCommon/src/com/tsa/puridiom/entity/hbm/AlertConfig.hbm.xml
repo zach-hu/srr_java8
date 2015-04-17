@@ -1,0 +1,113 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping>
+
+<class
+    name="com.tsa.puridiom.entity.AlertConfig"
+    table="Alert_Config"
+>
+    <id
+        name="icAlert"
+        type="java.math.BigDecimal"
+        column="IC_Alert"
+    >
+        <generator class="assigned" />
+    </id>
+    <property
+        name="reportName"
+        type="java.lang.String"
+        column="Report_Name"
+        length="80"
+    />
+    <property
+        name="description"
+        type="java.lang.String"
+        column="Description"
+        length="100"
+    />
+    <property
+        name="subject"
+        type="java.lang.String"
+        column="Subject"
+        length="150"
+    />
+    <property
+        name="processXMLFilename"
+        type="java.lang.String"
+        column="Process_XML_Filename"
+        length="100"
+    />
+    <property
+        name="argumentName"
+        type="java.lang.String"
+        column="Argument_Name"
+        length="50"
+    />
+    <property
+        name="isActive"
+        type="java.lang.String"
+        column="Is_Active"
+        length="1"
+    />
+    <property
+        name="alertType"
+        type="java.lang.String"
+        column="AlertType"
+        length="10"
+    />
+    <property
+        name="alertSql"
+        type="java.lang.String"
+        column="AlertSQL"
+        length="400"
+    />
+    <property
+        name="lastRun"
+        type="java.sql.Timestamp"
+        column="Last_Run"
+        length="7"
+    />
+    <property
+        name="enabled"
+        type="java.lang.String"
+        column="Enabled"
+        length="1"
+    />
+    <property
+        name="buyer"
+        type="java.lang.String"
+        column="Buyer"
+        length="1"
+    />
+    <property
+        name="owner"
+        type="java.lang.String"
+        column="Owner"
+        length="1"
+    />
+    <property
+        name="req"
+        type="java.lang.String"
+        column="Req"
+        length="1"
+    />
+    <property
+        name="approver"
+        type="java.lang.String"
+        column="Approver"
+        length="1"
+    />
+    <property
+        name="offsetDays"
+        type="java.math.BigDecimal"
+        column="Offset_Days"
+        length="5"
+    />
+
+    <!-- associations -->
+
+</class>
+</hibernate-mapping>

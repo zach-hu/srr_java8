@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="GetCurrencyFactor" connection-type="Connection-Required"> 
+	<activities>  
+		<activity synchronous="true" continue-on-failure="false" name="GetCurrencyCode">
+			<!--task synchronous="true" continue-on-failure="false" name="CurrCode_currencyCode">    			
+				<rule-filename>is-po-created-from-req.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.po.tasks.CurrCodeSetupFromReq</task-object-name>    
+				<post-action />    
+			</task-->
+			<task synchronous="true" continue-on-failure="false" name="CurrCode_currencyCode">    			
+				<rule-filename>is-po-created-from-rfq.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.po.tasks.CurrCodeSetupFromRfq</task-object-name>    
+				<post-action />    
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="GetCurrencyFactor">
+			<task synchronous="true" continue-on-failure="false" name="currCode">    			
+				<task-object-name>com.tsa.puridiom.currcode.tasks.CurrCodeRetrieveById</task-object-name>    
+				<post-action />    
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="CurrCode_factor">    			
+				<task-object-name>com.tsa.puridiom.currcode.tasks.GetCurrencyFactor</task-object-name>    
+				<post-action />    
+			</task>   
+		  </activity>  
+	 </activities> 
+</process>

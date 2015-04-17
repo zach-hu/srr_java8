@@ -1,0 +1,583 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created using an evaluation version of JasperAssistant (http://www.jasperassistant.com) -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="requisition_line_list" pageWidth="612" pageHeight="791" whenNoDataType="BlankPage" columnWidth="612" leftMargin="0" rightMargin="0" topMargin="1" bottomMargin="1">
+	<property name="com.jasperassistant.designer.GridHeight" value="24"/>
+	<property name="com.jasperassistant.designer.GridWidth" value="24"/>
+	<property name="com.jasperassistant.designer.Rulers" value="true"/>
+	<property name="com.jasperassistant.designer.DataSource" value="hilton1p"/>
+	<property name="com.jasperassistant.designer.SnapToGrid" value="false"/>
+	<property name="com.jasperassistant.designer.Margins" value="true"/>
+	<property name="com.jasperassistant.designer.Grid" value="true"/>
+	<property name="com.jasperassistant.designer.SnapToGuides" value="true"/>
+	<import value="com.tsa.puridiom.reports.datasource.*"/>
+	<import value="com.tsa.puridiom.jasperreports.*"/>
+	<import value="com.tsa.puridiom.common.documents.DocumentStatus"/>
+	<reportFont name="Arial_Normal" isDefault="true" fontName="Arial" size="8" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_bold" isDefault="false" fontName="Arial Black" size="8" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica-Bold" pdfEncoding="Cp1252" isPdfEmbedded="true"/>
+	<parameter name="reportTitle" class="java.lang.String"/>
+	<parameter name="userId" class="java.lang.String">
+		<defaultValueExpression><![CDATA["RRAMOS"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="accountsDS" class="com.tsa.puridiom.reports.datasource.HibernateQueryResultDataSource"/>
+	<parameter name="oid" class="java.lang.String">
+		<defaultValueExpression><![CDATA["HILTON"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="lines" class="java.util.List"/>
+	<parameter name="commentsDS" class="com.tsa.puridiom.reports.datasource.HibernateQueryResultDataSource"/>
+	<parameter name="commentsSR" class="net.sf.jasperreports.engine.JasperReport">
+		<defaultValueExpression><![CDATA[JasperReportsHelper.loadSubReport("comment-pdf.jasper", $P{oid})]]></defaultValueExpression>
+	</parameter>
+	<parameter name="RequisitionHeader_requisitionType" class="java.lang.String"/>
+	<parameter name="inspectionsSR" class="net.sf.jasperreports.engine.JasperReport">
+		<defaultValueExpression><![CDATA[JasperReportsHelper.loadSubReport("lineinspection-msr-pdf.jasper", $P{oid})]]></defaultValueExpression>
+	</parameter>
+	<parameter name="inspectionDS" class="com.tsa.puridiom.reports.datasource.HibernateQueryResultDataSource"/>
+	<field name="RequisitionLine_commodityCode" class="java.lang.String"/>
+	<field name="RequisitionLine_description" class="java.lang.String"/>
+	<field name="RequisitonLine_itemNumber" class="java.lang.String"/>
+	<field name="RequisitionLine_lineNumber" class="java.math.BigDecimal"/>
+	<field name="RequisitionLine_lineTotal" class="java.math.BigDecimal"/>
+	<field name="RequisitionLine_quantity" class="java.math.BigDecimal"/>
+	<field name="RequisitionLine_status" class="java.lang.String"/>
+	<field name="RequisitionLine_umCode" class="java.lang.String"/>
+	<field name="RequisiitionLine_unitPrice" class="java.math.BigDecimal"/>
+	<field name="RequisitionLine_umFactor" class="java.math.BigDecimal"/>
+	<field name="RequisitionLine_docCommentList" class="java.lang.Object"/>
+	<field name="RequisitionLine_docAttachmentList" class="java.util.List"/>
+	<field name="RequisitionLine_udf2Code" class="java.lang.String"/>
+	<field name="RequisitionLine_udf3Code" class="java.lang.String"/>
+	<field name="RequisitionLine_udf1Code" class="java.lang.String"/>
+	<field name="RequisitionLine_udf5Code" class="java.lang.String"/>
+	<field name="RequisitionLine_udf10Code" class="java.lang.String"/>
+	<field name="RequisitionLine_udf6Code" class="java.lang.String"/>
+	<field name="RequisitionLine_udf7Code" class="java.lang.String"/>
+	<field name="RequisitionLine_udf8Code" class="java.lang.String"/>
+	<field name="RequisitionLine_mfgName" class="java.lang.String"/>
+	<field name="RequisitionLine_modelNumber" class="java.lang.String"/>
+	<field name="RequisitionLine_udf9Code" class="java.lang.String"/>
+	<field name="RequisitionLine_shelfLifeRqd" class="java.lang.String"/>
+	<field name="RequisitionLine_catalogId" class="java.lang.String"/>
+	<field name="RequisitionLine_chemicalItemNumber" class="java.lang.String"/>
+	<field name="RequisitionLine_asset" class="java.lang.String"/>
+	<field name="RequisitionLine_reqType" class="java.lang.String"/>
+	<variable name="today" class="java.util.Date">
+		<variableExpression><![CDATA[new java.util.Date()]]></variableExpression>
+		<initialValueExpression><![CDATA[new java.util.Date()]]></initialValueExpression>
+	</variable>
+	<variable name="reportTitle_var" class="java.lang.String">
+		<variableExpression><![CDATA["Requisition Line"]]></variableExpression>
+	</variable>
+	<detail>
+		<band height="160">
+			<textField isBlankWhenNull="true" hyperlinkType="None">
+				<reportElement positionType="Float" mode="Opaque" x="0" y="7" width="35" height="14"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{RequisitionLine_lineNumber}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true" hyperlinkType="None">
+				<reportElement positionType="Float" mode="Opaque" x="36" y="7" width="45" height="14"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{RequisitionLine_quantity}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true" hyperlinkType="None">
+				<reportElement positionType="Float" mode="Opaque" x="84" y="7" width="45" height="14"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{RequisitionLine_umCode}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true" hyperlinkType="None">
+				<reportElement positionType="Float" mode="Opaque" x="131" y="7" width="305" height="14"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{RequisitonLine_itemNumber}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00#" isBlankWhenNull="true" hyperlinkType="None">
+				<reportElement positionType="Float" mode="Opaque" x="437" y="7" width="44" height="14">
+					<printWhenExpression><![CDATA[new Boolean(!($F{RequisitionLine_reqType}.equals("K")))]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{RequisiitionLine_unitPrice}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00#" isBlankWhenNull="true" hyperlinkType="None">
+				<reportElement positionType="Float" mode="Opaque" x="488" y="7" width="54" height="14"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{RequisiitionLine_unitPrice}.multiply($F{RequisitionLine_quantity}).multiply($F{RequisitionLine_umFactor})]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true" hyperlinkType="None">
+				<reportElement positionType="Float" mode="Opaque" x="131" y="23" width="305" height="21" isRemoveLineWhenBlank="true"/>
+				<textElement verticalAlignment="Top"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{RequisitionLine_description}]]></textFieldExpression>
+			</textField>
+			<subreport>
+				<reportElement positionType="Float" x="0" y="52" width="543" height="2" isRemoveLineWhenBlank="true"/>
+				<parametersMapExpression><![CDATA[$P{REPORT_PARAMETERS_MAP}]]></parametersMapExpression>
+				<subreportParameter name="oid">
+					<subreportParameterExpression><![CDATA[$P{oid}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="labelPrefix">
+					<subreportParameterExpression><![CDATA["req"]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[ReportUtils.getAccountsDS($P{lines}, $V{REPORT_COUNT}.intValue())]]></dataSourceExpression>
+				<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[JasperReportsHelper.loadSubReport("lineitem-account-pdf.jasper", $P{oid})]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement positionType="Float" x="0" y="55" width="543" height="2" isRemoveLineWhenBlank="true"/>
+				<parametersMapExpression><![CDATA[$P{REPORT_PARAMETERS_MAP}]]></parametersMapExpression>
+				<subreportParameter name="oid">
+					<subreportParameterExpression><![CDATA[$P{oid}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[ReportUtils.getCommentsDS($F{RequisitionLine_docCommentList}, "AFTER")]]></dataSourceExpression>
+				<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[$P{commentsSR}]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement positionType="Float" x="0" y="0" width="543" height="5" isRemoveLineWhenBlank="true"/>
+				<parametersMapExpression><![CDATA[$P{REPORT_PARAMETERS_MAP}]]></parametersMapExpression>
+				<subreportParameter name="oid">
+					<subreportParameterExpression><![CDATA[$P{oid}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[ReportUtils.getCommentsDS($F{RequisitionLine_docCommentList}, "BEFORE")]]></dataSourceExpression>
+				<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[$P{commentsSR}]]></subreportExpression>
+			</subreport>
+			<subreport isUsingCache="false">
+				<reportElement positionType="Float" x="0" y="58" width="543" height="2" isRemoveLineWhenBlank="true"/>
+				<parametersMapExpression><![CDATA[$P{REPORT_PARAMETERS_MAP}]]></parametersMapExpression>
+				<subreportParameter name="oid">
+					<subreportParameterExpression><![CDATA[$P{oid}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[ReportUtils.getShipToDS($P{lines}, $V{REPORT_COUNT}.intValue())]]></dataSourceExpression>
+				<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[JasperReportsHelper.loadSubReport("lineshipto-po-pdf.jasper", $P{oid})]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement positionType="Float" x="0" y="46" width="543" height="2" isRemoveLineWhenBlank="true"/>
+				<parametersMapExpression><![CDATA[$P{REPORT_PARAMETERS_MAP}]]></parametersMapExpression>
+				<subreportParameter name="inspectionDS">
+					<subreportParameterExpression><![CDATA[ReportUtils.getInspectionsDS($P{lines}, $V{REPORT_COUNT}.intValue())]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="oid">
+					<subreportParameterExpression><![CDATA[$P{oid}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="labelPrefix">
+					<subreportParameterExpression><![CDATA["req"]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[ReportUtils.getInspectionsDS($P{lines}, $V{REPORT_COUNT}.intValue())]]></dataSourceExpression>
+				<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[$P{inspectionsSR}]]></subreportExpression>
+			</subreport>
+			<subreport isUsingCache="false">
+				<reportElement positionType="Float" x="50" y="49" width="443" height="2" isRemoveLineWhenBlank="true">
+					<printWhenExpression><![CDATA[new Boolean($F{RequisitionLine_docAttachmentList} != null && $F{RequisitionLine_docAttachmentList}.size() > 0)]]></printWhenExpression>
+				</reportElement>
+				<parametersMapExpression><![CDATA[$P{REPORT_PARAMETERS_MAP}]]></parametersMapExpression>
+				<subreportParameter name="oid">
+					<subreportParameterExpression><![CDATA[$P{oid}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[new HibernateQueryResultDataSource($F{RequisitionLine_docAttachmentList})]]></dataSourceExpression>
+				<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[JasperReportsHelper.loadSubReport("docattachment-pdf.jasper", $P{oid})]]></subreportExpression>
+			</subreport>
+			<staticText>
+				<reportElement positionType="Float" mode="Opaque" x="350" y="65" width="85" height="14" forecolor="#FFFFFF" backcolor="#000000"/>
+				<box padding="0">
+					<pen lineColor="#000000"/>
+					<topPen lineWidth="0.0" lineStyle="Solid"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Functional Class]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" mode="Opaque" x="110" y="95" width="100" height="14" forecolor="#FFFFFF" backcolor="#000000"/>
+				<box padding="0">
+					<pen lineColor="#000000"/>
+					<leftPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Maint Reqd]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" mode="Opaque" x="10" y="65" width="85" height="14" forecolor="#FFFFFF" backcolor="#000000"/>
+				<box padding="0">
+					<pen lineColor="#000000"/>
+					<topPen lineWidth="0.0" lineStyle="Solid"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Inspection]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" mode="Opaque" x="410" y="95" width="110" height="14" forecolor="#FFFFFF" backcolor="#000000"/>
+				<box padding="0">
+					<pen lineColor="#000000"/>
+					<topPen lineWidth="0.0" lineStyle="Solid"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Procurement Level]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" mode="Opaque" x="435" y="65" width="85" height="14" forecolor="#FFFFFF" backcolor="#000000"/>
+				<box padding="0">
+					<pen lineColor="#000000"/>
+					<topPen lineWidth="0.0" lineStyle="Solid"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Procurement Spec.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" mode="Opaque" x="10" y="95" width="100" height="14" forecolor="#FFFFFF" backcolor="#000000"/>
+				<box padding="0">
+					<pen lineColor="#000000"/>
+					<topPen lineWidth="0.0" lineStyle="Solid"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Traceability]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true" hyperlinkType="None">
+				<reportElement positionType="Float" mode="Opaque" x="10" y="80" width="85" height="14"/>
+				<box padding="0">
+					<topPen lineWidth="0.0" lineStyle="Solid"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#FFFFFF"/>
+				</box>
+				<textElement textAlignment="Center" markup="none"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{RequisitionLine_udf8Code}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true" hyperlinkType="None">
+				<reportElement positionType="Float" mode="Opaque" x="435" y="80" width="85" height="14"/>
+				<box padding="0">
+					<topPen lineWidth="0.0" lineStyle="Solid"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" markup="none"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{RequisitionLine_udf1Code}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true" hyperlinkType="None">
+				<reportElement positionType="Float" mode="Opaque" x="10" y="110" width="100" height="14"/>
+				<box padding="0">
+					<topPen lineWidth="0.0" lineStyle="Solid"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#FFFFFF"/>
+				</box>
+				<textElement textAlignment="Center" markup="none"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{RequisitionLine_udf5Code}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true" hyperlinkType="None">
+				<reportElement positionType="Float" mode="Opaque" x="410" y="110" width="110" height="14"/>
+				<box padding="0">
+					<pen lineColor="#000000"/>
+					<topPen lineWidth="0.0" lineStyle="Solid"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Center" markup="none"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{RequisitionLine_udf2Code}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true" hyperlinkType="None">
+				<reportElement positionType="Float" mode="Opaque" x="350" y="80" width="85" height="14"/>
+				<box padding="0">
+					<pen lineWidth="0.0" lineStyle="Solid"/>
+					<bottomPen lineColor="#000000"/>
+					<rightPen lineColor="#FFFFFF"/>
+				</box>
+				<textElement textAlignment="Center" markup="none"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{RequisitionLine_udf3Code}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true" hyperlinkType="None">
+				<reportElement positionType="Float" mode="Opaque" x="110" y="110" width="100" height="14"/>
+				<box padding="0">
+					<topPen lineWidth="0.0" lineStyle="Solid"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" markup="none"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{RequisitionLine_udf10Code}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement positionType="Float" mode="Opaque" x="210" y="95" width="100" height="14" forecolor="#FFFFFF" backcolor="#000000"/>
+				<box padding="0">
+					<pen lineColor="#000000"/>
+					<leftPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Packaging Ship Level]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true" hyperlinkType="None">
+				<reportElement positionType="Float" mode="Opaque" x="210" y="110" width="100" height="14"/>
+				<box padding="0">
+					<topPen lineWidth="0.0" lineStyle="Solid"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" markup="none"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{RequisitionLine_udf6Code}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement positionType="Float" mode="Opaque" x="310" y="95" width="100" height="14" forecolor="#FFFFFF" backcolor="#000000"/>
+				<box padding="0">
+					<pen lineColor="#000000"/>
+					<leftPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Storage Level]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true" hyperlinkType="None">
+				<reportElement positionType="Float" mode="Opaque" x="310" y="110" width="100" height="14"/>
+				<box padding="0">
+					<topPen lineWidth="0.0" lineStyle="Solid"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" markup="none"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{RequisitionLine_udf7Code}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement positionType="Float" mode="Opaque" x="95" y="65" width="85" height="14" forecolor="#FFFFFF" backcolor="#000000"/>
+				<box padding="0">
+					<pen lineColor="#000000"/>
+					<topPen lineWidth="0.0" lineStyle="Solid"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Item/Part #]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true" hyperlinkType="None">
+				<reportElement positionType="Float" mode="Opaque" x="95" y="80" width="85" height="14"/>
+				<box padding="0">
+					<pen lineWidth="0.0" lineStyle="Solid"/>
+					<leftPen lineColor="#000000"/>
+					<bottomPen lineColor="#000000"/>
+					<rightPen lineColor="#FFFFFF"/>
+				</box>
+				<textElement textAlignment="Center" markup="none"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{RequisitonLine_itemNumber}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true" hyperlinkType="None">
+				<reportElement positionType="Float" isPrintRepeatedValues="false" x="29" y="7" width="519" height="25" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true" forecolor="#FF0000">
+					<printWhenExpression><![CDATA[new Boolean($F{RequisitionLine_status}.equalsIgnoreCase(DocumentStatus.CANCELLED))]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["*** Line Item Cancelled ***"]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement positionType="Float" mode="Opaque" x="180" y="65" width="85" height="14" forecolor="#FFFFFF" backcolor="#000000"/>
+				<box padding="0">
+					<pen lineColor="#000000"/>
+					<topPen lineWidth="0.0" lineStyle="Solid"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Model Number]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true" hyperlinkType="None">
+				<reportElement positionType="Float" mode="Opaque" x="180" y="80" width="85" height="14"/>
+				<box padding="0">
+					<pen lineWidth="0.0" lineStyle="Solid"/>
+					<leftPen lineColor="#000000"/>
+					<bottomPen lineColor="#000000"/>
+					<rightPen lineColor="#FFFFFF"/>
+				</box>
+				<textElement textAlignment="Center" markup="none"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{RequisitionLine_modelNumber}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement positionType="Float" mode="Opaque" x="265" y="65" width="85" height="14" forecolor="#FFFFFF" backcolor="#000000"/>
+				<box padding="0">
+					<pen lineColor="#000000"/>
+					<topPen lineWidth="0.0" lineStyle="Solid"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Manufacturer]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true" hyperlinkType="None">
+				<reportElement positionType="Float" mode="Opaque" x="265" y="80" width="85" height="14"/>
+				<box padding="0">
+					<pen lineWidth="0.0" lineStyle="Solid"/>
+					<leftPen lineColor="#000000"/>
+					<bottomPen lineColor="#000000"/>
+					<rightPen lineColor="#FFFFFF"/>
+				</box>
+				<textElement textAlignment="Center" markup="none"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{RequisitionLine_mfgName}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true" hyperlinkType="None">
+				<reportElement positionType="Float" mode="Opaque" x="410" y="140" width="110" height="14">
+					<printWhenExpression><![CDATA[new Boolean($F{RequisitionLine_reqType}.equals("M") || $F{RequisitionLine_reqType}.equals("C") || $F{RequisitionLine_reqType}.equals("E") || $F{RequisitionLine_reqType}.equals("P") || $F{RequisitionLine_reqType}.equals("S") || $F{RequisitionLine_reqType}.equals("T"))
+]]></printWhenExpression>
+				</reportElement>
+				<box padding="0">
+					<pen lineColor="#000000"/>
+					<topPen lineWidth="0.0" lineStyle="Solid"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Center" markup="none"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{RequisitionLine_chemicalItemNumber}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true" hyperlinkType="None">
+				<reportElement positionType="Float" mode="Opaque" x="10" y="140" width="100" height="14">
+					<printWhenExpression><![CDATA[new Boolean($F{RequisitionLine_reqType}.equals("M") || $F{RequisitionLine_reqType}.equals("C") || $F{RequisitionLine_reqType}.equals("E") || $F{RequisitionLine_reqType}.equals("P") || $F{RequisitionLine_reqType}.equals("S") || $F{RequisitionLine_reqType}.equals("T"))
+]]></printWhenExpression>
+				</reportElement>
+				<box padding="0">
+					<topPen lineWidth="0.0" lineStyle="Solid"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#FFFFFF"/>
+				</box>
+				<textElement textAlignment="Center" markup="none"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{RequisitionLine_udf9Code}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement positionType="Float" mode="Opaque" x="410" y="125" width="110" height="14" forecolor="#FFFFFF" backcolor="#000000">
+					<printWhenExpression><![CDATA[new Boolean($F{RequisitionLine_reqType}.equals("M") || $F{RequisitionLine_reqType}.equals("C") || $F{RequisitionLine_reqType}.equals("E") || $F{RequisitionLine_reqType}.equals("P") || $F{RequisitionLine_reqType}.equals("S") || $F{RequisitionLine_reqType}.equals("T"))
+]]></printWhenExpression>
+				</reportElement>
+				<box padding="0">
+					<pen lineColor="#000000"/>
+					<topPen lineWidth="0.0" lineStyle="Solid"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Chemical Item]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" mode="Opaque" x="10" y="125" width="100" height="14" forecolor="#FFFFFF" backcolor="#000000">
+					<printWhenExpression><![CDATA[new Boolean($F{RequisitionLine_reqType}.equals("M") || $F{RequisitionLine_reqType}.equals("C") || $F{RequisitionLine_reqType}.equals("E") || $F{RequisitionLine_reqType}.equals("P") || $F{RequisitionLine_reqType}.equals("S") || $F{RequisitionLine_reqType}.equals("T"))
+]]></printWhenExpression>
+				</reportElement>
+				<box padding="0">
+					<pen lineColor="#000000"/>
+					<topPen lineWidth="0.0" lineStyle="Solid"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[MSDS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" mode="Opaque" x="110" y="125" width="100" height="14" forecolor="#FFFFFF" backcolor="#000000">
+					<printWhenExpression><![CDATA[new Boolean($F{RequisitionLine_reqType}.equals("M") || $F{RequisitionLine_reqType}.equals("C") || $F{RequisitionLine_reqType}.equals("E") || $F{RequisitionLine_reqType}.equals("P") || $F{RequisitionLine_reqType}.equals("S") || $F{RequisitionLine_reqType}.equals("T"))
+]]></printWhenExpression>
+				</reportElement>
+				<box padding="0">
+					<pen lineColor="#000000"/>
+					<leftPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Shelf Life Required]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true" hyperlinkType="None">
+				<reportElement positionType="Float" mode="Opaque" x="110" y="140" width="100" height="14">
+					<printWhenExpression><![CDATA[new Boolean($F{RequisitionLine_reqType}.equals("M") || $F{RequisitionLine_reqType}.equals("C") || $F{RequisitionLine_reqType}.equals("E") || $F{RequisitionLine_reqType}.equals("P") || $F{RequisitionLine_reqType}.equals("S") || $F{RequisitionLine_reqType}.equals("T"))
+]]></printWhenExpression>
+				</reportElement>
+				<box padding="0">
+					<topPen lineWidth="0.0" lineStyle="Solid"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" markup="none"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{RequisitionLine_shelfLifeRqd}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true" hyperlinkType="None">
+				<reportElement positionType="Float" mode="Opaque" x="310" y="140" width="100" height="14">
+					<printWhenExpression><![CDATA[new Boolean($F{RequisitionLine_reqType}.equals("M") || $F{RequisitionLine_reqType}.equals("C") || $F{RequisitionLine_reqType}.equals("E") || $F{RequisitionLine_reqType}.equals("P") || $F{RequisitionLine_reqType}.equals("S") || $F{RequisitionLine_reqType}.equals("T"))
+]]></printWhenExpression>
+				</reportElement>
+				<box padding="0">
+					<topPen lineWidth="0.0" lineStyle="Solid"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" markup="none"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[ReportUtils.getStdTableDescription($P{oid},"ASSET", $F{RequisitionLine_asset})]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement positionType="Float" mode="Opaque" x="210" y="125" width="100" height="14" forecolor="#FFFFFF" backcolor="#000000">
+					<printWhenExpression><![CDATA[new Boolean($F{RequisitionLine_reqType}.equals("M") || $F{RequisitionLine_reqType}.equals("C") || $F{RequisitionLine_reqType}.equals("E") || $F{RequisitionLine_reqType}.equals("P") || $F{RequisitionLine_reqType}.equals("S") || $F{RequisitionLine_reqType}.equals("T"))
+]]></printWhenExpression>
+				</reportElement>
+				<box padding="0">
+					<pen lineColor="#000000"/>
+					<leftPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Catalog]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" mode="Opaque" x="310" y="125" width="100" height="14" forecolor="#FFFFFF" backcolor="#000000">
+					<printWhenExpression><![CDATA[new Boolean($F{RequisitionLine_reqType}.equals("M") || $F{RequisitionLine_reqType}.equals("C") || $F{RequisitionLine_reqType}.equals("E") || $F{RequisitionLine_reqType}.equals("P") || $F{RequisitionLine_reqType}.equals("S") || $F{RequisitionLine_reqType}.equals("T"))
+]]></printWhenExpression>
+				</reportElement>
+				<box padding="0">
+					<pen lineColor="#000000"/>
+					<leftPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Mark Tag]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true" hyperlinkType="None">
+				<reportElement positionType="Float" mode="Opaque" x="210" y="140" width="100" height="14">
+					<printWhenExpression><![CDATA[new Boolean($F{RequisitionLine_reqType}.equals("M") || $F{RequisitionLine_reqType}.equals("C") || $F{RequisitionLine_reqType}.equals("E") || $F{RequisitionLine_reqType}.equals("P") || $F{RequisitionLine_reqType}.equals("S") || $F{RequisitionLine_reqType}.equals("T"))
+]]></printWhenExpression>
+				</reportElement>
+				<box padding="0">
+					<topPen lineWidth="0.0" lineStyle="Solid"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" markup="none"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{RequisitionLine_catalogId}]]></textFieldExpression>
+			</textField>
+			<subreport isUsingCache="false">
+				<reportElement positionType="Float" x="0" y="156" width="543" height="2" isRemoveLineWhenBlank="true">
+					<printWhenExpression><![CDATA[new Boolean($F{RequisitionLine_reqType}.equals("M"))]]></printWhenExpression>
+				</reportElement>
+				<parametersMapExpression><![CDATA[$P{REPORT_PARAMETERS_MAP}]]></parametersMapExpression>
+				<subreportParameter name="oid">
+					<subreportParameterExpression><![CDATA[$P{oid}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[ReportUtils.getReqSourcedToDS($P{lines}, $V{REPORT_COUNT}.intValue())]]></dataSourceExpression>
+				<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[JasperReportsHelper.loadSubReport("req-sourced-list.jasper", $P{oid})]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+</jasperReport>

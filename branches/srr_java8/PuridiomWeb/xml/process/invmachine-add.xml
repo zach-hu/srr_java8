@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="InvMachineAdd" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="checkDupInvMachine">
+			<task synchronous="true" continue-on-failure="false" name="existingInvMachine">
+				<task-object-name>com.tsa.puridiom.invmachine.tasks.InvMachineRetrieveById</task-object-name>
+				<post-action />
+			 </task>
+			<task synchronous="true" continue-on-failure="false" name="invMachine">
+				<task-object-name>com.tsa.puridiom.invmachine.tasks.InvMachineSetValues</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+<!--
+		<activity synchronous="true" continue-on-failure="false" name="invMachineValidation">
+			<rule-filename check-for-false="true">is-existing-invmachine-empty.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="setErrorMsg">
+				<task-object-name>com.tsa.puridiom.invmachineerrormsg.tasks.ErrorMsgSetDuplicateInvMachine</task-object-name>
+			</task>
+			<post-action>exitProcess</post-action>
+		</activity>
+-->
+		<activity synchronous="true" continue-on-failure="false" name="InvMachineAdd">
+			<task synchronous="true" continue-on-failure="false" name="invMachine">
+				<task-object-name>com.tsa.puridiom.invmachine.tasks.InvMachineAdd</task-object-name>
+				<post-action />
+			</task>
+		  </activity>
+	 </activities>
+</process>

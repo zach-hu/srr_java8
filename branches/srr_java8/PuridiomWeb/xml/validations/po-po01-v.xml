@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rule>
+  <clause type="Empty">
+    <left-side>
+      <source>incomingRequestObjectMethod</source>
+      <object>header</object>
+      <name>getUdf1Code</name>
+    </left-side>
+  </clause>
+  <logical-operator>OR</logical-operator>
+  <clause type="lookup">
+    <sql>from StdTable stdTable where stdTable.id.tableType = 'PO01' AND stdTable.id.tableKey = '@udf@' AND (stdTable.status = '02' OR (stdTable.status = '01' AND stdTable.dateExpires >= @today@))</sql>
+    <source>header</source>
+    <arguments>
+      <name>udf</name>
+      <source>header</source>
+      <colName>getUdf1Code</colName>
+    </arguments>
+  </clause>
+</rule>
+

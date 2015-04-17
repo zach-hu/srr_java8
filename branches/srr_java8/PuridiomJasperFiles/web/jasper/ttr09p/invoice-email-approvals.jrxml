@@ -1,0 +1,713 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created using an evaluation version of JasperAssistant (http://www.jasperassistant.com) -->
+<!DOCTYPE jasperReport PUBLIC "-//JasperReports//DTD Report Design//EN" "http://jasperreports.sourceforge.net/dtds/jasperreport.dtd">
+
+<jasperReport name="Invoice" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="575" leftMargin="10" rightMargin="10" topMargin="10" bottomMargin="10">
+	<property name="com.jasperassistant.designer.Grid" value="true"/>
+	<property name="com.jasperassistant.designer.SnapToGrid" value="false"/>
+	<property name="com.jasperassistant.designer.GridWidth" value="2"/>
+	<property name="com.jasperassistant.designer.GridHeight" value="8"/>
+	<property name="com.jasperassistant.designer.Margins" value="true"/>
+	<property name="com.jasperassistant.designer.Rulers" value="false"/>
+	<property name="com.jasperassistant.designer.SnapToGuides" value="true"/>
+	<property name="com.jasperassistant.designer.VGuides.Title" value="200,202"/>
+	<property name="com.jasperassistant.designer.HGuides" value="9,211,565"/>
+	<import value="com.tsa.puridiom.entity.*"/>
+	<import value="com.tsa.puridiom.common.documents.*"/>
+	<import value="com.tsa.puridiom.reports.datasource.*"/>
+	<import value="com.tsa.puridiom.common.utility.HiltonUtility"/>
+	<import value="java.net.*"/>
+	<import value="net.sf.jasperreports.engine.JRDataSource"/>
+	<import value="com.tsa.puridiom.jasperreports.*"/>
+	<import value="com.tsagate.properties.*"/>
+	<reportFont name="Verdana" isDefault="true" fontName="Verdana" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Verdana_big" isDefault="false" fontName="Verdana" size="14" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Verdana_bold" isDefault="false" fontName="Verdana" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<parameter name="oid" class="java.lang.String">
+		<defaultValueExpression><![CDATA["hilton"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="vendorSR" class="net.sf.jasperreports.engine.JasperReport">
+		<defaultValueExpression><![CDATA[JasperReportsHelper.loadSubReport("html-address.jasper", $P{oid})]]></defaultValueExpression>
+	</parameter>
+	<parameter name="vendorDS" class="com.tsa.puridiom.reports.datasource.EntityDataSource"/>
+	<parameter name="lines" class="java.util.List"/>
+	<parameter name="imgUrl" class="java.lang.String">
+		<defaultValueExpression><![CDATA["http://localhost:8080/hilton/images/"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="attachmentsDS" class="com.tsa.puridiom.reports.datasource.HibernateQueryResultDataSource"/>
+	<parameter name="GCS_SITE_URL" class="java.lang.String">
+		<defaultValueExpression><![CDATA["http://localhost:8080/hilton"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="mid" class="java.lang.String"/>
+	<parameter name="uid" class="java.lang.String"/>
+	<parameter name="GCS_SITE_NAME" class="java.lang.String">
+		<defaultValueExpression><![CDATA["Puridiom"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="accountRollupSR" class="net.sf.jasperreports.engine.JasperReport">
+		<defaultValueExpression><![CDATA[JasperReportsHelper.loadSubReport("account-rollup-html.jasper", $P{oid})]]></defaultValueExpression>
+	</parameter>
+	<parameter name="accountRollupDS" class="com.tsa.puridiom.reports.datasource.HibernateQueryResultDataSource"/>
+	<parameter name="routingListSR" class="net.sf.jasperreports.engine.JasperReport">
+		<defaultValueExpression><![CDATA[JasperReportsHelper.loadSubReport("approvallog.jasper", $P{oid})]]></defaultValueExpression>
+	</parameter>
+	<parameter name="routingListDS" class="com.tsa.puridiom.reports.datasource.HibernateQueryResultDataSource"/>
+	<parameter name="approverNotesSR" class="net.sf.jasperreports.engine.JasperReport">
+		<defaultValueExpression><![CDATA[JasperReportsHelper.loadSubReport("approver-notes.jasper", $P{oid})]]></defaultValueExpression>
+	</parameter>
+	<parameter name="approverNotesDS" class="com.tsa.puridiom.reports.datasource.HibernateQueryResultDataSource"/>
+	<field name="InvoiceHeader_invoiceNumber" class="java.lang.String"/>
+	<field name="InvoiceHeader_invoiceTotal" class="java.math.BigDecimal"/>
+	<field name="InvoiceHeader_invoiceDate" class="java.util.Date"/>
+	<field name="InvoiceHeader_paymentDueDate" class="java.util.Date"/>
+	<field name="InvoiceHeader_invoiceReceivedDate" class="java.util.Date"/>
+	<field name="InvoiceHeader_invoiceSubtotal" class="java.math.BigDecimal"/>
+	<field name="InvoiceHeader_invoiceDiscount" class="java.math.BigDecimal"/>
+	<field name="InvoiceHeader_invoiceShipping" class="java.math.BigDecimal"/>
+	<field name="InvoiceHeader_invoiceOther" class="java.math.BigDecimal"/>
+	<field name="InvoiceHeader_invoiceTax" class="java.math.BigDecimal"/>
+	<field name="InvoiceHeader_status" class="java.lang.String"/>
+	<field name="InvoiceHeader_vendorId" class="java.lang.String"/>
+	<field name="InvoiceHeader_contactName" class="java.lang.String"/>
+	<field name="InvoiceHeader_contactPhone" class="java.lang.String"/>
+	<field name="InvoiceHeader_contactFax" class="java.lang.String"/>
+	<field name="InvoiceHeader_contactEmail" class="java.lang.String"/>
+	<field name="InvoiceHeader_icIvcHeader" class="java.math.BigDecimal"/>
+	<field name="InvoiceHeader_poTotal" class="java.math.BigDecimal"/>
+	<field name="InvoiceHeader_poNumber" class="java.lang.String"/>
+	<field name="InvoiceHeader_poRelease" class="java.math.BigDecimal"/>
+	<field name="InvoiceHeader_poDate" class="java.util.Date"/>
+	<field name="InvoiceHeader_specialInst" class="java.lang.String"/>
+	<field name="InvoiceHeader_apReference" class="java.lang.String"/>
+	<field name="InvoiceHeader_pcardName" class="java.lang.String"/>
+	<field name="InvoiceHeader_departmentCode" class="java.lang.String"/>
+	<field name="InvoiceHeader_orderByName" class="java.lang.String"/>
+	<field name="InvoiceHeader_orderByEmail" class="java.lang.String"/>
+	<field name="InvoiceHeader_orderByPhone" class="java.lang.String"/>
+	<field name="InvoiceHeader_docCommentList" class="java.util.List"/>
+	<field name="InvoiceHeader_accountList" class="java.util.List"/>
+	<field name="InvoiceHeader_invoiceLineList" class="java.util.List"/>
+	<field name="InvoiceHeader_vendorAccount" class="java.lang.String"/>
+	<field name="InvoiceHeader_docAttachmentList" class="java.util.List"/>
+	<field name="InvoiceHeader_currencyCode" class="java.lang.String"/>
+	<variable name="title1" class="java.lang.String">
+		<initialValueExpression><![CDATA["Puridiom Purchasing Center Home"]]></initialValueExpression>
+	</variable>
+	<variable name="siteName" class="java.lang.String">
+		<initialValueExpression><![CDATA["Puridiom"]]></initialValueExpression>
+	</variable>
+	<variable name="siteUrl" class="java.lang.String">
+		<initialValueExpression><![CDATA["http://localhost:8085/hilton/"]]></initialValueExpression>
+	</variable>
+	<group name="commentsBefore">
+		<groupHeader>
+			<band height="1">
+				<subreport isUsingCache="false">
+					<reportElement positionType="Float" mode="Opaque" x="10" y="0" width="564" height="1" isRemoveLineWhenBlank="true" backcolor="#F3F3F3"/>
+					<dataSourceExpression><![CDATA[new HibernateQueryResultDataSource($F{InvoiceHeader_docCommentList})]]></dataSourceExpression>
+					<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[JasperReportsHelper.loadSubReport("comment-before-html.jasper", $P{oid})]]></subreportExpression>
+				</subreport>
+			</band>
+		</groupHeader>
+	</group>
+	<group name="lines">
+		<groupHeader>
+			<band height="1">
+				<subreport>
+					<reportElement positionType="Float" x="10" y="0" width="566" height="1" isPrintWhenDetailOverflows="true" backcolor="#F3F3F3"/>
+					<subreportParameter name="currencyCode">
+						<subreportParameterExpression><![CDATA[$F{InvoiceHeader_currencyCode}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="oid">
+						<subreportParameterExpression><![CDATA[$P{oid}]]></subreportParameterExpression>
+					</subreportParameter>
+					<dataSourceExpression><![CDATA[new HibernateQueryResultDataSource($F{InvoiceHeader_invoiceLineList})]]></dataSourceExpression>
+					<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[JasperReportsHelper.loadSubReport("invoice-line-list-html.jasper", $P{oid})]]></subreportExpression>
+				</subreport>
+			</band>
+		</groupHeader>
+	</group>
+	<group name="commentsAfter">
+		<groupHeader>
+			<band height="1">
+				<subreport isUsingCache="false">
+					<reportElement positionType="Float" mode="Opaque" x="10" y="0" width="564" height="1" isRemoveLineWhenBlank="true" forecolor="#F3F3F3" backcolor="#F3F3F3"/>
+					<dataSourceExpression><![CDATA[new HibernateQueryResultDataSource($F{InvoiceHeader_docCommentList})]]></dataSourceExpression>
+					<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[JasperReportsHelper.loadSubReport("comment-after-html.jasper", $P{oid})]]></subreportExpression>
+				</subreport>
+			</band>
+		</groupHeader>
+	</group>
+	<group name="accounts">
+		<groupHeader>
+			<band height="1">
+				<subreport>
+					<reportElement positionType="Float" mode="Opaque" x="10" y="0" width="564" height="1" isRemoveLineWhenBlank="true" forecolor="#F3F3F3" backcolor="#F3F3F3"/>
+					<subreportParameter name="currencyCode">
+						<subreportParameterExpression><![CDATA[$F{InvoiceHeader_currencyCode}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="oid">
+						<subreportParameterExpression><![CDATA[$F{InvoiceHeader_currencyCode}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="labelPrefix">
+						<subreportParameterExpression><![CDATA["IVC"]]></subreportParameterExpression>
+					</subreportParameter>
+					<dataSourceExpression><![CDATA[$P{accountRollupDS}]]></dataSourceExpression>
+					<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[$P{accountRollupSR}]]></subreportExpression>
+				</subreport>
+			</band>
+		</groupHeader>
+	</group>
+	<group name="totals">
+		<groupHeader>
+			<band height="1">
+				<subreport isUsingCache="false">
+					<reportElement positionType="Float" x="10" y="0" width="566" height="1" isRemoveLineWhenBlank="true"/>
+					<subreportParameter name="total">
+						<subreportParameterExpression><![CDATA[$F{InvoiceHeader_invoiceTotal}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="shipping">
+						<subreportParameterExpression><![CDATA[$F{InvoiceHeader_invoiceShipping}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="other">
+						<subreportParameterExpression><![CDATA[$F{InvoiceHeader_invoiceOther}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="currencyCode">
+						<subreportParameterExpression><![CDATA[$F{InvoiceHeader_currencyCode}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="tax">
+						<subreportParameterExpression><![CDATA[$F{InvoiceHeader_invoiceTax}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="oid">
+						<subreportParameterExpression><![CDATA[$P{oid}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="subtotal">
+						<subreportParameterExpression><![CDATA[$F{InvoiceHeader_invoiceSubtotal}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="discount">
+						<subreportParameterExpression><![CDATA[$F{InvoiceHeader_invoiceDiscount}]]></subreportParameterExpression>
+					</subreportParameter>
+					<dataSourceExpression><![CDATA[new JREmptyDataSource(1)]]></dataSourceExpression>
+					<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[JasperReportsHelper.loadSubReport("invoice-totals-html.jasper", $P{oid})]]></subreportExpression>
+				</subreport>
+			</band>
+		</groupHeader>
+	</group>
+	<group name="routlinglist">
+		<groupHeader>
+			<band height="1">
+				<subreport>
+					<reportElement positionType="Float" mode="Opaque" x="10" y="0" width="567" height="1" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true" backcolor="#F3F3F3"/>
+					<subreportParameter name="oid">
+						<subreportParameterExpression><![CDATA[$P{oid}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="pdf">
+						<subreportParameterExpression><![CDATA[new Boolean(false)]]></subreportParameterExpression>
+					</subreportParameter>
+					<dataSourceExpression><![CDATA[$P{routingListDS}]]></dataSourceExpression>
+					<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[JasperReportsHelper.loadSubReport("approvallog.jasper", $P{oid})]]></subreportExpression>
+				</subreport>
+			</band>
+		</groupHeader>
+	</group>
+	<group name="notes">
+		<groupHeader>
+			<band height="1">
+				<subreport>
+					<reportElement positionType="Float" mode="Opaque" x="10" y="0" width="563" height="1" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true" forecolor="#F3F3F3" backcolor="#F3F3F3"/>
+					<subreportParameter name="oid">
+						<subreportParameterExpression><![CDATA[$P{oid}]]></subreportParameterExpression>
+					</subreportParameter>
+					<dataSourceExpression><![CDATA[$P{approverNotesDS}]]></dataSourceExpression>
+					<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[JasperReportsHelper.loadSubReport("approver-notes.jasper", $P{oid})]]></subreportExpression>
+				</subreport>
+			</band>
+		</groupHeader>
+	</group>
+	<group name="attachments">
+		<groupHeader>
+			<band height="1">
+				<subreport>
+					<reportElement positionType="Float" mode="Opaque" x="10" y="0" width="567" height="1" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true" backcolor="#F3F3F3"/>
+					<subreportParameter name="GCS_SITE_URL">
+						<subreportParameterExpression><![CDATA[$P{GCS_SITE_URL}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="oid">
+						<subreportParameterExpression><![CDATA[$P{oid}]]></subreportParameterExpression>
+					</subreportParameter>
+					<dataSourceExpression><![CDATA[new HibernateQueryResultDataSource($F{InvoiceHeader_docAttachmentList})]]></dataSourceExpression>
+					<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[JasperReportsHelper.loadSubReport("docattachment.jasper", $P{oid})]]></subreportExpression>
+				</subreport>
+			</band>
+		</groupHeader>
+	</group>
+	<group name="buttons">
+		<groupHeader>
+			<band height="71">
+				<subreport isUsingCache="false">
+					<reportElement positionType="Float" x="3" y="0" width="563" height="71" isPrintWhenDetailOverflows="true" backcolor="#F3F3F3"/>
+					<subreportParameter name="uid">
+						<subreportParameterExpression><![CDATA[$P{uid}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="GCS_SITE_URL">
+						<subreportParameterExpression><![CDATA[$P{GCS_SITE_URL}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="oid">
+						<subreportParameterExpression><![CDATA[$P{oid}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="RequisitionHeader_icReqHeader">
+						<subreportParameterExpression><![CDATA[$F{InvoiceHeader_icIvcHeader}.toString()]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="mid">
+						<subreportParameterExpression><![CDATA[$P{mid}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="type">
+						<subreportParameterExpression><![CDATA["IV"]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="RequisitionHeader_requisitionNumber">
+						<subreportParameterExpression><![CDATA[$F{InvoiceHeader_invoiceNumber}]]></subreportParameterExpression>
+					</subreportParameter>
+					<dataSourceExpression><![CDATA[new JREmptyDataSource(1)]]></dataSourceExpression>
+					<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[JasperReportsHelper.loadSubReport("email-approval-buttons.jasper", $P{oid})]]></subreportExpression>
+				</subreport>
+			</band>
+		</groupHeader>
+	</group>
+	<group name="copyright">
+		<groupHeader>
+			<band height="20">
+				<subreport>
+					<reportElement positionType="Float" x="3" y="0" width="563" height="20"/>
+					<dataSourceExpression><![CDATA[new JREmptyDataSource(1)]]></dataSourceExpression>
+					<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[JasperReportsHelper.loadSubReport("copyright.jasper", $P{oid})]]></subreportExpression>
+				</subreport>
+			</band>
+		</groupHeader>
+	</group>
+	<title>
+		<band height="345">
+			<staticText>
+				<reportElement positionType="Float" mode="Opaque" x="10" y="137" width="55" height="15" backcolor="#E4E4E4"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Verdana" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Supplier:]]></text>
+			</staticText>
+			<elementGroup/>
+			<rectangle>
+				<reportElement positionType="Float" x="3" y="324" width="568" height="2" forecolor="#FFFFFF"/>
+				<graphicElement/>
+			</rectangle>
+			<textField>
+				<reportElement positionType="Float" mode="Opaque" x="10" y="242" width="100" height="15" backcolor="#E4E4E4">
+					<printWhenExpression><![CDATA[new Boolean($V{PAGE_NUMBER}.equals(new Integer(1)))]]></printWhenExpression>
+				</reportElement>
+				<box borderColor="#FFFFFF" topBorder="None" leftBorder="1Point" bottomBorder="None" rightBorder="None"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Verdana" size="10" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[DictionaryManager.getLabel($P{oid}, "ivc-invoiceDate", "Invoice Date")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement positionType="Float" mode="Opaque" x="115" y="242" width="105" height="15" backcolor="#E4E4E4">
+					<printWhenExpression><![CDATA[new Boolean($V{PAGE_NUMBER}.equals(new Integer(1)))]]></printWhenExpression>
+				</reportElement>
+				<box borderColor="#FFFFFF" topBorder="None" leftBorder="1Point" bottomBorder="None" rightBorder="None"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Verdana" size="10" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[DictionaryManager.getLabel($P{oid}, "ivc-paymentDueDate", "Payment Due")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement positionType="Float" mode="Opaque" x="225" y="242" width="110" height="15" backcolor="#E4E4E4">
+					<printWhenExpression><![CDATA[new Boolean($V{PAGE_NUMBER}.equals(new Integer(1)))]]></printWhenExpression>
+				</reportElement>
+				<box borderColor="#FFFFFF" topBorder="None" leftBorder="1Point" bottomBorder="None" rightBorder="None"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Verdana" size="10" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[DictionaryManager.getLabel($P{oid}, "ivc-invoiceReceivedDate", "Date Received")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement positionType="Float" mode="Opaque" x="340" y="242" width="115" height="15" backcolor="#E4E4E4">
+					<printWhenExpression><![CDATA[new Boolean($V{PAGE_NUMBER}.equals(new Integer(1)))]]></printWhenExpression>
+				</reportElement>
+				<box borderColor="#FFFFFF" topBorder="None" leftBorder="1Point" bottomBorder="None" rightBorder="None"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Verdana" size="10" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[DictionaryManager.getLabel($P{oid}, "ivc-pcardName", "PCard Name")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement positionType="Float" mode="Opaque" x="458" y="242" width="115" height="15" backcolor="#E4E4E4">
+					<printWhenExpression><![CDATA[new Boolean($V{PAGE_NUMBER}.equals(new Integer(1)))]]></printWhenExpression>
+				</reportElement>
+				<box borderColor="#FFFFFF" topBorder="None" leftBorder="1Point" bottomBorder="None" rightBorder="None"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Verdana" size="10" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[DictionaryManager.getLabel($P{oid}, "ivc-department", "Department")]]></textFieldExpression>
+			</textField>
+			<textField pattern="MMM d, yyyy" isBlankWhenNull="true">
+				<reportElement positionType="Float" mode="Opaque" x="10" y="257" width="100" height="15" backcolor="#F3F3F3"/>
+				<box borderColor="#FFFFFF" topBorder="None" leftBorder="1Point" bottomBorder="None" rightBorder="None"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Verdana" size="10"/>
+				</textElement>
+				<textFieldExpression class="java.util.Date"><![CDATA[$F{InvoiceHeader_invoiceDate}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" mode="Opaque" x="115" y="257" width="105" height="15" backcolor="#F3F3F3"/>
+				<box borderColor="#FFFFFF" topBorder="None" leftBorder="1Point" bottomBorder="None" rightBorder="None"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Verdana" size="10"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[HiltonUtility.getFormattedDate($F{InvoiceHeader_paymentDueDate}, $P{oid})]]></textFieldExpression>
+			</textField>
+			<textField pattern="MMM d, yyyy" isBlankWhenNull="true">
+				<reportElement positionType="Float" mode="Opaque" x="225" y="257" width="110" height="15" backcolor="#F3F3F3"/>
+				<box borderColor="#FFFFFF" topBorder="None" leftBorder="1Point" bottomBorder="None" rightBorder="None"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Verdana" size="10"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[HiltonUtility.getFormattedDate($F{InvoiceHeader_invoiceReceivedDate}, $P{oid})]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" mode="Opaque" x="340" y="257" width="115" height="15" backcolor="#F3F3F3"/>
+				<box borderColor="#FFFFFF" topBorder="None" leftBorder="1Point" bottomBorder="None" rightBorder="None"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Verdana" size="10"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[PaymentType.toString($F{InvoiceHeader_pcardName}, $P{oid} )]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement positionType="Float" mode="Opaque" x="461" y="277" width="112" height="15" backcolor="#E4E4E4">
+					<printWhenExpression><![CDATA[new Boolean($V{PAGE_NUMBER}.equals(new Integer(1)))]]></printWhenExpression>
+				</reportElement>
+				<box borderColor="#FFFFFF" topBorder="None" leftBorder="1Point" bottomBorder="None" rightBorder="None"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Verdana" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Phone]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" mode="Opaque" x="10" y="292" width="90" height="15" backcolor="#F3F3F3"/>
+				<box borderColor="#FFFFFF" topBorder="None" leftBorder="1Point" bottomBorder="None" rightBorder="None"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Verdana" size="10" isItalic="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{InvoiceHeader_poNumber}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" mode="Opaque" x="104" y="292" width="50" height="15" backcolor="#F3F3F3"/>
+				<box borderColor="#FFFFFF" topBorder="None" leftBorder="1Point" bottomBorder="None" rightBorder="None"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Verdana" size="10" isItalic="false"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{InvoiceHeader_poRelease}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" mode="Opaque" x="158" y="292" width="130" height="15" backcolor="#F3F3F3"/>
+				<box borderColor="#FFFFFF" topBorder="None" leftBorder="1Point" bottomBorder="None" rightBorder="None"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Verdana" size="10" isItalic="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{InvoiceHeader_orderByName}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" mode="Opaque" x="461" y="292" width="112" height="15" backcolor="#F3F3F3"/>
+				<box borderColor="#FFFFFF" topBorder="None" leftBorder="1Point" bottomBorder="None" rightBorder="None"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Verdana" size="10" isItalic="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{InvoiceHeader_orderByPhone}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement positionType="Float" mode="Opaque" x="503" y="317" width="70" height="25" backcolor="#E4E4E4"/>
+				<box borderColor="#FFFFFF" topBorder="None" leftBorder="1Point" bottomBorder="None" rightBorder="None"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Verdana" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Ext Cost]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" mode="Opaque" x="430" y="317" width="70" height="25" backcolor="#E4E4E4"/>
+				<box borderColor="#FFFFFF" topBorder="None" leftBorder="1Point" bottomBorder="None" rightBorder="None"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Verdana" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Unit Price]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" mode="Opaque" x="300" y="317" width="50" height="25" backcolor="#E4E4E4"/>
+				<box borderColor="#FFFFFF" topBorder="None" leftBorder="1Point" bottomBorder="None" rightBorder="None"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Verdana" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[U / M]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" mode="Opaque" x="10" y="317" width="36" height="25" backcolor="#E4E4E4"/>
+				<box borderColor="#FFFFFF" topBorder="None" leftBorder="1Point" bottomBorder="None" rightBorder="None"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Verdana" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Line #]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" mode="Opaque" x="355" y="317" width="70" height="25" backcolor="#E4E4E4"/>
+				<box borderColor="#FFFFFF" topBorder="None" leftBorder="1Point" bottomBorder="None" rightBorder="None"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Verdana" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Quantity]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" mode="Opaque" x="50" y="317" width="245" height="25" backcolor="#E4E4E4"/>
+				<box borderColor="#FFFFFF" topBorder="None" leftBorder="1Point" bottomBorder="None" rightBorder="None"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Verdana" size="10" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Description ]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" x="10" y="85" width="275" height="35"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font reportFont="Verdana_big" fontName="Verdana" size="15" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["INVOICE VOUCHER"]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement positionType="Float" mode="Opaque" x="10" y="187" width="45" height="15" backcolor="#F3F3F3"/>
+				<textElement>
+					<font fontName="Verdana" size="10" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Phone:]]></text>
+			</staticText>
+			<textField>
+				<reportElement positionType="Float" mode="Opaque" x="55" y="187" width="100" height="15" backcolor="#F3F3F3"/>
+				<textElement>
+					<font fontName="Verdana" size="10" isItalic="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{InvoiceHeader_contactPhone}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement positionType="Float" mode="Opaque" x="100" y="157" width="185" height="15" backcolor="#F3F3F3"/>
+				<textElement>
+					<font fontName="Verdana" size="10"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{InvoiceHeader_contactName}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement positionType="Float" mode="Opaque" x="185" y="187" width="100" height="15" backcolor="#F3F3F3"/>
+				<textElement>
+					<font fontName="Verdana" size="10" isItalic="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{InvoiceHeader_contactFax}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement positionType="Float" mode="Opaque" x="155" y="187" width="30" height="15" backcolor="#F3F3F3"/>
+				<textElement>
+					<font fontName="Verdana" size="10" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Fax:]]></text>
+			</staticText>
+			<textField>
+				<reportElement positionType="Float" mode="Opaque" x="55" y="172" width="230" height="15" backcolor="#F3F3F3"/>
+				<textElement>
+					<font fontName="Verdana" size="10" isItalic="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{InvoiceHeader_contactEmail}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement positionType="Float" mode="Opaque" x="10" y="172" width="45" height="15" backcolor="#F3F3F3"/>
+				<textElement>
+					<font fontName="Verdana" size="10" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Email:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" mode="Opaque" x="10" y="157" width="90" height="15" backcolor="#F3F3F3"/>
+				<textElement>
+					<font fontName="Verdana" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Contact Name:]]></text>
+			</staticText>
+			<textField>
+				<reportElement positionType="Float" mode="Opaque" x="277" y="53" width="183" height="20" forecolor="#FFFFFF" backcolor="#9999CC"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[""]]></textFieldExpression>
+			</textField>
+			<textField hyperlinkType="Reference">
+				<reportElement positionType="Float" mode="Opaque" x="10" y="53" width="267" height="20" forecolor="#FFFFFF" backcolor="#9999CC"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" isStyledText="true"/>
+				<textFieldExpression class="java.lang.String"><![CDATA["Login"]]></textFieldExpression>
+				<hyperlinkReferenceExpression><![CDATA[$P{GCS_SITE_URL}]]></hyperlinkReferenceExpression>
+			</textField>
+			<textField>
+				<reportElement positionType="Float" mode="Opaque" x="477" y="53" width="95" height="20" forecolor="#FFFFFF" backcolor="#9999CC"/>
+				<textElement verticalAlignment="Middle" isStyledText="true"/>
+				<textFieldExpression class="java.lang.String"><![CDATA["  Help"]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement positionType="Float" x="10" y="74" width="560" height="3"/>
+				<graphicElement/>
+			</rectangle>
+			<image vAlign="Middle" isUsingCache="true" isLazy="true" onErrorType="Blank">
+				<reportElement positionType="Float" mode="Opaque" x="460" y="53" width="17" height="20" forecolor="#FFFFFF" backcolor="#9999CC"/>
+				<graphicElement/>
+				<imageExpression class="java.lang.String"><![CDATA[JasperReportsHelper.getImgUrl($P{oid}, "question.gif")]]></imageExpression>
+			</image>
+			<rectangle>
+				<reportElement positionType="Float" x="10" y="78" width="560" height="5" backcolor="#CCCCCC"/>
+				<graphicElement pen="None"/>
+			</rectangle>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" x="361" y="3" width="203" height="50" forecolor="#9999CC"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{GCS_SITE_NAME}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement mode="Opaque" x="65" y="137" width="220" height="15" backcolor="#E4E4E4"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{InvoiceHeader_vendorId}]]></textFieldExpression>
+			</textField>
+			<subreport>
+				<reportElement positionType="Float" isPrintRepeatedValues="false" x="10" y="152" width="275" height="5" isPrintWhenDetailOverflows="true"/>
+				<dataSourceExpression><![CDATA[$P{vendorDS}]]></dataSourceExpression>
+				<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[$P{vendorSR}]]></subreportExpression>
+			</subreport>
+			<textField pattern="MMM d, yyyy" isBlankWhenNull="true">
+				<reportElement positionType="Float" mode="Opaque" x="293" y="292" width="165" height="15" backcolor="#F3F3F3"/>
+				<box borderColor="#FFFFFF" topBorder="None" leftBorder="1Point" bottomBorder="None" rightBorder="None"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Verdana" size="10"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{InvoiceHeader_orderByEmail}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement positionType="Float" mode="Opaque" x="10" y="277" width="90" height="15" backcolor="#E4E4E4">
+					<printWhenExpression><![CDATA[new Boolean($V{PAGE_NUMBER}.equals(new Integer(1)))]]></printWhenExpression>
+				</reportElement>
+				<box borderColor="#FFFFFF" topBorder="None" leftBorder="1Point" bottomBorder="None" rightBorder="None"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Verdana" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Order Number]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" mode="Opaque" x="104" y="277" width="50" height="15" backcolor="#E4E4E4">
+					<printWhenExpression><![CDATA[new Boolean($V{PAGE_NUMBER}.equals(new Integer(1)))]]></printWhenExpression>
+				</reportElement>
+				<box borderColor="#FFFFFF" topBorder="None" leftBorder="1Point" bottomBorder="None" rightBorder="None"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Verdana" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Release]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" mode="Opaque" x="158" y="277" width="130" height="15" backcolor="#E4E4E4">
+					<printWhenExpression><![CDATA[new Boolean($V{PAGE_NUMBER}.equals(new Integer(1)))]]></printWhenExpression>
+				</reportElement>
+				<box borderColor="#FFFFFF" topBorder="None" leftBorder="1Point" bottomBorder="None" rightBorder="None"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Verdana" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Ordered By]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" mode="Opaque" x="293" y="277" width="165" height="15" backcolor="#E4E4E4">
+					<printWhenExpression><![CDATA[new Boolean($V{PAGE_NUMBER}.equals(new Integer(1)))]]></printWhenExpression>
+				</reportElement>
+				<box borderColor="#FFFFFF" topBorder="None" leftBorder="1Point" bottomBorder="None" rightBorder="None"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Verdana" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Email]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement positionType="Float" x="10" y="232" width="555" height="10" forecolor="#FFFFFF"/>
+				<graphicElement/>
+			</rectangle>
+			<rectangle>
+				<reportElement positionType="Float" x="10" y="307" width="555" height="10" forecolor="#FFFFFF"/>
+				<graphicElement/>
+			</rectangle>
+			<staticText>
+				<reportElement positionType="Float" mode="Opaque" x="300" y="137" width="275" height="15" forecolor="#400040" backcolor="#E4E4E4">
+					<printWhenExpression><![CDATA[new Boolean(!HiltonUtility.isEmpty($F{InvoiceHeader_specialInst}))]]></printWhenExpression>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Special Instructions:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" mode="Opaque" x="300" y="152" width="275" height="80" isRemoveLineWhenBlank="true" backcolor="#F3F3F3"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{InvoiceHeader_specialInst}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement positionType="Float" mode="Opaque" x="455" y="85" width="115" height="20" forecolor="#400040" backcolor="#E4E4E4"/>
+				<box topBorderColor="#000000" leftBorderColor="#000000" bottomBorderColor="#000000" rightBorderColor="#000000"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Invoice #]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" mode="Opaque" x="455" y="105" width="115" height="20" forecolor="#400040" backcolor="#F3F3F3"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{InvoiceHeader_invoiceNumber}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement positionType="Float" mode="Opaque" x="10" y="202" width="75" height="15" backcolor="#F3F3F3"/>
+				<textElement>
+					<font fontName="Verdana" size="10" isBold="true" isItalic="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[DictionaryManager.getLabel($P{oid}, "ivc-apReference", "AP Ref. #") + " :"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement positionType="Float" mode="Opaque" x="85" y="202" width="200" height="15" backcolor="#F3F3F3"/>
+				<textElement>
+					<font fontName="Verdana" size="10" isItalic="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{InvoiceHeader_apReference}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement positionType="Float" mode="Opaque" x="10" y="217" width="75" height="15" backcolor="#F3F3F3"/>
+				<textElement>
+					<font fontName="Verdana" size="10" isBold="true" isItalic="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[DictionaryManager.getLabel($P{oid}, "ivc-vendorAccount", "Account #") + " :"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement positionType="Float" mode="Opaque" x="85" y="217" width="200" height="15" backcolor="#F3F3F3"/>
+				<textElement>
+					<font fontName="Verdana" size="10" isItalic="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{InvoiceHeader_vendorAccount}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" mode="Opaque" x="458" y="257" width="115" height="15" backcolor="#F3F3F3"/>
+				<box borderColor="#FFFFFF" topBorder="None" leftBorder="1Point" bottomBorder="None" rightBorder="None"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Verdana" size="10"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{InvoiceHeader_departmentCode}]]></textFieldExpression>
+			</textField>
+			<image isLazy="true">
+				<reportElement positionType="Float" x="11" y="3" width="250" height="48"/>
+				<graphicElement/>
+				<imageExpression class="java.lang.String"><![CDATA[JasperReportsHelper.getImgUrl($P{oid}, "logo.gif")]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<detail>
+		<band height="30"/>
+	</detail>
+	<summary>
+		<band height="96"/>
+	</summary>
+</jasperReport>

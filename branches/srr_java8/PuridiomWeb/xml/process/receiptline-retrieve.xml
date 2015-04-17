@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="ReceiptLineRetrieve" connection-type="Connection-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="receiptLineRetrieve">
+			<task synchronous="true" continue-on-failure="false" name="receiptLine">
+				<task-object-name>com.tsa.puridiom.receiptline.tasks.ReceiptLineRetrieveById</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="ReceiptLineDataRetrieve">
+				<rule-filename check-for-false="true">is-receiptmethod-receivebytransfer.xml</rule-filename>
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>receiptlinedata-retrieve.xml</process-filename>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="ReceiptLineDataRetrieve">
+				<rule-filename>is-receiptmethod-receivebytransfer.xml</rule-filename>
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>receiptlinereqdata-retrieve.xml</process-filename>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="inspectionDetailActivity">
+			<task synchronous="true" continue-on-failure="false" name="inspectionHeaderRetrieveSetup">
+				<task-object-name>com.tsa.puridiom.inspection.tasks.InspectionHeaderRetrieveFromRclSetup</task-object-name>
+				<post-action></post-action>
+			</task>
+<!--
+			<task synchronous="true" continue-on-failure="false" name="inspectionHeader">
+				<task-object-name>com.tsa.puridiom.inspectionheader.tasks.InspectionHeaderRetrieveByIcRecLine</task-object-name>
+				<post-action></post-action>
+			</task>
+-->
+			<task synchronous="true" continue-on-failure="false" name="inspectionHeader">
+			    <!--  rule-filename>is-inspectionheader-empty.xml</rule-filename -->
+				<task-object-name>com.tsa.puridiom.inspectionheader.tasks.InspectionHeaderRetrieveByIcMsrLine</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="inspectionLineSetup">
+				<task-object-name>com.tsa.puridiom.inspection.tasks.InspectionDetailRetrieveSetup</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="inspectionLineList">
+				<task-object-name>com.tsa.puridiom.inspectionline.tasks.InspectionLineRetrieveByIcInspNo</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+
+	</activities>
+</process>
+

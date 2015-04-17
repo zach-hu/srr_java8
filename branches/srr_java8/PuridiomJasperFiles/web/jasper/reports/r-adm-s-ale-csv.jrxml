@@ -1,0 +1,281 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created using an evaluation version of JasperAssistant (http://www.jasperassistant.com) -->
+<!DOCTYPE jasperReport PUBLIC "-//JasperReports//DTD Report Design//EN" "http://jasperreports.sourceforge.net/dtds/jasperreport.dtd">
+
+<jasperReport name="CostCenterApprovers" pageWidth="748" pageHeight="612" orientation="Landscape" whenNoDataType="BlankPage" columnWidth="718" leftMargin="15" rightMargin="15" topMargin="15" bottomMargin="15">
+	<import value="com.tsa.puridiom.entity.*"/>
+	<import value="com.tsagate.foundation.utility.Utility"/>
+	<import value="com.tsa.puridiom.currcode.CurrencyManager"/>
+	<import value="com.tsa.puridiom.common.documents.*"/>
+	<import value="com.tsa.puridiom.common.documents.OrderType"/>
+	<import value="java.util.*"/>
+	<import value="com.tsa.puridiom.property.PropertiesManager"/>
+	<import value="com.tsa.puridiom.common.utility.HiltonUtility"/>
+	<import value="java.net.*"/>
+	<import value="net.sf.jasperreports.engine.JRDataSource"/>
+	<import value="com.tsa.puridiom.jasperreports.*"/>
+	<import value="com.tsagate.properties.*"/>
+	<reportFont name="Arial_Normal" isDefault="true" fontName="Arial" size="7" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Bold" isDefault="false" fontName="Arial Black" size="7" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica-Bold" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Bold_Big" isDefault="false" fontName="Arial Black" size="12" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica-Bold" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Big" isDefault="false" fontName="Arial" size="12" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<parameter name="oid" class="java.lang.String">
+		<defaultValueExpression><![CDATA["HILTON"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="reportTitle" class="java.lang.String">
+		<defaultValueExpression><![CDATA["Report"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="reportCriteria" class="java.lang.String"/>
+	<parameter name="userId" class="java.lang.String">
+		<defaultValueExpression><![CDATA["PURIDIOM"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="reportType" class="java.lang.String">
+		<defaultValueExpression><![CDATA["Y"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="companyName" class="java.lang.String">
+		<defaultValueExpression><![CDATA[PropertiesManager.getInstance($P{oid}).getProperty("COMPANY", "Name", "TSA")]]></defaultValueExpression>
+	</parameter>
+	<parameter name="currencyManager" class="com.tsa.puridiom.currcode.CurrencyManager">
+		<defaultValueExpression><![CDATA[CurrencyManager.getInstance($P{oid})]]></defaultValueExpression>
+	</parameter>
+	<field name="PoolApprView_entity" class="java.lang.String"/>
+	<field name="PoolApprView_dept" class="java.lang.String"/>
+	<field name="PoolApprView_amount" class="java.math.BigDecimal"/>
+	<field name="PoolApprView_routTo" class="java.lang.String"/>
+	<field name="PoolApprView_name" class="java.lang.String"/>
+	<field name="PoolApprView_userId" class="java.lang.String"/>
+	<field name="PoolApprView_indPool" class="java.lang.String"/>
+	<field name="PoolApprView_fyi" class="java.lang.String"/>
+	<field name="PoolApprView_reqApp" class="java.lang.String"/>
+	<field name="PoolApprView_callForward" class="java.lang.String"/>
+	<field name="PoolApprView_description" class="java.lang.String"/>
+	<field name="PoolApprView_poolType" class="java.lang.String"/>
+	<field name="PoolApprView_cap" class="java.lang.String"/>
+	<group name="Group_Header">
+		<groupHeader>
+			<band height="52">
+				<textField hyperlinkType="None">
+					<reportElement positionType="Float" isPrintRepeatedValues="false" x="0" y="40" width="33" height="12"/>
+					<box padding="0" topBorder="None" leftBorder="None" bottomBorder="None" rightBorder="None"/>
+					<textElement textAlignment="Center">
+						<font reportFont="Arial_Bold" fontName="Arial" size="7" isBold="false" isUnderline="false"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[DictionaryManager.getLabel($P{oid}, "appruleudf1", "Entity")]]></textFieldExpression>
+				</textField>
+				<textField hyperlinkType="None">
+					<reportElement positionType="Float" isPrintRepeatedValues="false" x="312" y="40" width="62" height="12"/>
+					<box padding="0" topBorder="None" leftBorder="None" bottomBorder="None" rightBorder="None"/>
+					<textElement textAlignment="Center">
+						<font reportFont="Arial_Bold" fontName="Arial" size="7" isBold="false" isUnderline="false"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[DictionaryManager.getLabel($P{oid}, "user-userId", "Approver")]]></textFieldExpression>
+				</textField>
+				<textField hyperlinkType="None">
+					<reportElement positionType="Float" isPrintRepeatedValues="false" x="33" y="40" width="46" height="12"/>
+					<box padding="0" topBorder="None" leftBorder="None" bottomBorder="None" rightBorder="None"/>
+					<textElement textAlignment="Center">
+						<font reportFont="Arial_Bold" fontName="Arial" size="7" isBold="false" isUnderline="false"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[DictionaryManager.getLabel($P{oid}, "appruleudf2", "Capital")]]></textFieldExpression>
+				</textField>
+				<textField hyperlinkType="None">
+					<reportElement positionType="Float" isPrintRepeatedValues="false" x="398" y="40" width="26" height="12"/>
+					<box padding="0" topBorder="None" leftBorder="None" bottomBorder="None" rightBorder="None"/>
+					<textElement textAlignment="Center">
+						<font reportFont="Arial_Bold" fontName="Arial" size="7" isBold="false" isUnderline="false"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[DictionaryManager.getLabel($P{oid}, "label", "FYI?")]]></textFieldExpression>
+				</textField>
+				<textField hyperlinkType="None">
+					<reportElement positionType="Float" isPrintRepeatedValues="false" x="424" y="40" width="27" height="12"/>
+					<box padding="0" topBorder="None" leftBorder="None" bottomBorder="None" rightBorder="None"/>
+					<textElement textAlignment="Center">
+						<font reportFont="Arial_Bold" fontName="Arial" size="7" isBold="false" isUnderline="false"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[DictionaryManager.getLabel($P{oid}, "label", "Reqd?")]]></textFieldExpression>
+				</textField>
+				<textField hyperlinkType="None">
+					<reportElement positionType="Float" isPrintRepeatedValues="false" x="207" y="40" width="105" height="12"/>
+					<box padding="0" topBorder="None" leftBorder="None" bottomBorder="None" rightBorder="None"/>
+					<textElement textAlignment="Center">
+						<font reportFont="Arial_Bold" fontName="Arial" size="7" isBold="false" isUnderline="false"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[DictionaryManager.getLabel($P{oid}, "user-name", "Approver Name")]]></textFieldExpression>
+				</textField>
+				<textField hyperlinkType="None">
+					<reportElement positionType="Float" isPrintRepeatedValues="false" x="451" y="40" width="68" height="12"/>
+					<box padding="0" topBorder="None" leftBorder="None" bottomBorder="None" rightBorder="None"/>
+					<textElement textAlignment="Center">
+						<font reportFont="Arial_Bold" fontName="Arial" size="7" isBold="false" isUnderline="false"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[DictionaryManager.getLabel($P{oid}, "user-callForward", "Call Forward")]]></textFieldExpression>
+				</textField>
+				<textField hyperlinkType="None">
+					<reportElement positionType="Float" isPrintRepeatedValues="false" x="79" y="40" width="64" height="12"/>
+					<box padding="0" topBorder="None" leftBorder="None" bottomBorder="None" rightBorder="None"/>
+					<textElement textAlignment="Center">
+						<font reportFont="Arial_Bold" fontName="Arial" size="7" isBold="false" isUnderline="false"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[DictionaryManager.getLabel($P{oid}, "label", "Rule Amount")]]></textFieldExpression>
+				</textField>
+				<textField hyperlinkType="None">
+					<reportElement positionType="Float" isPrintRepeatedValues="false" x="575" y="40" width="141" height="12"/>
+					<box padding="0" topBorder="None" leftBorder="None" bottomBorder="None" rightBorder="None"/>
+					<textElement textAlignment="Center">
+						<font reportFont="Arial_Bold" fontName="Arial" size="7" isBold="false" isUnderline="false"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[DictionaryManager.getLabel($P{oid}, "rep-pooldesc", "Description")]]></textFieldExpression>
+				</textField>
+				<textField hyperlinkType="None">
+					<reportElement positionType="Float" isPrintRepeatedValues="false" x="519" y="40" width="56" height="12"/>
+					<box padding="0" topBorder="None" leftBorder="None" bottomBorder="None" rightBorder="None"/>
+					<textElement textAlignment="Center">
+						<font reportFont="Arial_Bold" fontName="Arial" size="7" isBold="false" isUnderline="false"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[DictionaryManager.getLabel($P{oid}, "rep-pooltype", "Ind/Pool")]]></textFieldExpression>
+				</textField>
+				<textField hyperlinkType="None">
+					<reportElement positionType="Float" isPrintRepeatedValues="false" x="143" y="40" width="64" height="12"/>
+					<box padding="0" topBorder="None" leftBorder="None" bottomBorder="None" rightBorder="None"/>
+					<textElement textAlignment="Center">
+						<font reportFont="Arial_Bold" fontName="Arial" size="7" isBold="false" isUnderline="false"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[DictionaryManager.getLabel($P{oid}, "rep-routTo", "Rout To")]]></textFieldExpression>
+				</textField>
+				<textField hyperlinkType="None">
+					<reportElement positionType="Float" isPrintRepeatedValues="false" x="374" y="40" width="24" height="12"/>
+					<box padding="0" topBorder="None" leftBorder="None" bottomBorder="None" rightBorder="None"/>
+					<textElement textAlignment="Center">
+						<font reportFont="Arial_Bold" fontName="Arial" size="7" isBold="false" isUnderline="false"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[DictionaryManager.getLabel($P{oid}, "label", "Cap?")]]></textFieldExpression>
+				</textField>
+				<subreport isUsingCache="false">
+					<reportElement positionType="Float" x="0" y="0" width="716" height="40"/>
+					<subreportParameter name="reportTitle">
+						<subreportParameterExpression><![CDATA[$P{reportTitle}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="oid">
+						<subreportParameterExpression><![CDATA[$P{oid}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="reportCriteria">
+						<subreportParameterExpression><![CDATA[$P{reportCriteria}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="userId">
+						<subreportParameterExpression><![CDATA[$P{userId}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="pageNumber">
+						<subreportParameterExpression><![CDATA[String.valueOf($V{PAGE_NUMBER})]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="companyName">
+						<subreportParameterExpression><![CDATA[$P{companyName}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="totalPages">
+						<subreportParameterExpression><![CDATA[String.valueOf($V{PAGE_COUNT})]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[JasperReportsHelper.loadSubReport("header-no-formats.jasper", $P{oid},"", $P{reportType})]]></subreportExpression>
+				</subreport>
+			</band>
+		</groupHeader>
+	</group>
+	<detail>
+		<band height="12">
+			<textField isBlankWhenNull="true" hyperlinkType="None">
+				<reportElement positionType="Float" x="312" y="0" width="62" height="12" forecolor="#000000"/>
+				<box border="None" padding="0"/>
+				<textElement textAlignment="Left">
+					<font reportFont="Arial_Normal" size="7"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{PoolApprView_userId}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true" hyperlinkType="None">
+				<reportElement positionType="Float" x="33" y="0" width="46" height="12" forecolor="#000000"/>
+				<box border="None" padding="0"/>
+				<textElement textAlignment="Left">
+					<font reportFont="Arial_Normal" size="7"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{PoolApprView_dept}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true" hyperlinkType="None">
+				<reportElement positionType="Float" x="207" y="0" width="105" height="12" forecolor="#000000"/>
+				<box border="None" padding="0"/>
+				<textElement textAlignment="Left">
+					<font reportFont="Arial_Normal" size="7"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{PoolApprView_name}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true" hyperlinkType="None">
+				<reportElement positionType="Float" x="0" y="0" width="33" height="12" isPrintInFirstWholeBand="true" forecolor="#000000"/>
+				<box border="None" padding="0"/>
+				<textElement textAlignment="Center">
+					<font reportFont="Arial_Bold" fontName="Arial" size="7" isBold="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{PoolApprView_entity}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true" hyperlinkType="None">
+				<reportElement positionType="Float" x="398" y="0" width="26" height="12" forecolor="#000000"/>
+				<box border="None" padding="0"/>
+				<textElement textAlignment="Center">
+					<font reportFont="Arial_Normal" size="7"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{PoolApprView_fyi}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true" hyperlinkType="None">
+				<reportElement positionType="Float" x="424" y="0" width="27" height="12" forecolor="#000000"/>
+				<box border="None" padding="0"/>
+				<textElement textAlignment="Center">
+					<font reportFont="Arial_Normal" size="7"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{PoolApprView_reqApp}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true" hyperlinkType="None">
+				<reportElement positionType="Float" x="451" y="0" width="68" height="12" forecolor="#000000"/>
+				<box border="None" padding="0"/>
+				<textElement textAlignment="Left">
+					<font reportFont="Arial_Normal" size="7"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{PoolApprView_callForward}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true" hyperlinkType="None">
+				<reportElement positionType="Float" x="79" y="0" width="64" height="12" forecolor="#000000"/>
+				<box border="None" padding="0"/>
+				<textElement textAlignment="Right">
+					<font reportFont="Arial_Normal" size="7"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{PoolApprView_amount}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true" hyperlinkType="None">
+				<reportElement positionType="Float" x="575" y="0" width="141" height="12" forecolor="#000000"/>
+				<box border="None" padding="0"/>
+				<textElement textAlignment="Left">
+					<font reportFont="Arial_Normal" size="7"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{PoolApprView_description}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true" hyperlinkType="None">
+				<reportElement positionType="Float" x="519" y="0" width="56" height="12" forecolor="#000000"/>
+				<box border="None" padding="0"/>
+				<textElement textAlignment="Left">
+					<font reportFont="Arial_Normal" size="7"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{PoolApprView_indPool}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true" hyperlinkType="None">
+				<reportElement positionType="Float" x="143" y="0" width="64" height="12" forecolor="#000000"/>
+				<box border="None" padding="0"/>
+				<textElement textAlignment="Left">
+					<font reportFont="Arial_Normal" size="7"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{PoolApprView_routTo}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true" hyperlinkType="None">
+				<reportElement positionType="Float" x="374" y="0" width="24" height="12" forecolor="#000000"/>
+				<box border="None" padding="0"/>
+				<textElement textAlignment="Center">
+					<font reportFont="Arial_Normal" size="7"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{PoolApprView_cap}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

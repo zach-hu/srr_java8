@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="requisitionApprove" connection-type="Transaction-Required" once-execution="true">
+  <activities>
+    <activity synchronous="true" continue-on-failure="false" name="approve">
+      <task synchronous="true" continue-on-failure="false" name="approve">
+        <task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+        <process-filename>requisition-approve-with-others.xml</process-filename>
+      </task>
+     </activity>
+    <activity synchronous="true" continue-on-failure="false" name="others">
+    	<task synchronous="true" continue-on-failure="false" name="others">
+        	<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+        	<process-filename>my-other-reqs-to-approve.xml</process-filename>
+      	</task>
+     </activity>
+  </activities>
+</process>

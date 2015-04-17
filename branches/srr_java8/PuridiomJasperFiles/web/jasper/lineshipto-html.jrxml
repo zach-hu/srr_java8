@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created using an evaluation version of JasperAssistant (http://www.jasperassistant.com) -->
+<!DOCTYPE jasperReport PUBLIC "-//JasperReports//DTD Report Design//EN" "http://jasperreports.sourceforge.net/dtds/jasperreport.dtd">
+
+<jasperReport name="LineShipTo" pageWidth="564" pageHeight="110" columnWidth="564" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+	<property name="com.jasperassistant.designer.GridWidth" value="12"/>
+	<property name="com.jasperassistant.designer.GridHeight" value="12"/>
+	<property name="com.jasperassistant.designer.DataSource" value="oracle"/>
+	<property name="com.jasperassistant.designer.SnapToGrid" value="false"/>
+	<property name="com.jasperassistant.designer.Grid" value="false"/>
+	<import value="com.tsa.puridiom.common.utility.HiltonUtility"/>
+	<import value="com.tsa.puridiom.jasperreports.*"/>
+	<import value="com.tsa.puridiom.reports.datasource.*"/>
+	<reportFont name="Arial_Normal" isDefault="false" fontName="Arial" size="8" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_bold" isDefault="false" fontName="Arial Black" size="8" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica-Bold" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Verdana" isDefault="true" fontName="Verdana" size="9" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Verdana_big" isDefault="false" fontName="Verdana" size="11" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Verdana_bold" isDefault="false" fontName="Verdana" size="9" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<parameter name="oid" class="java.lang.String"/>
+	<parameter name="rddSeeBelow" class="java.lang.Boolean">
+		<defaultValueExpression><![CDATA[new Boolean(true)]]></defaultValueExpression>
+	</parameter>
+	<field name="ShipTo_shipToCode" class="java.lang.String"/>
+	<field name="ShipTo_quantity" class="java.math.BigDecimal"/>
+	<field name="ShipTo_attention" class="java.lang.String"/>
+	<field name="ShipTo_shipToAddress" class="com.tsa.puridiom.entity.Address"/>
+	<field name="ShipTo_shipDate" class="java.util.Date"/>
+	<group name="shipheader">
+		<groupExpression><![CDATA[$V{REPORT_COUNT}]]></groupExpression>
+		<groupHeader>
+			<band height="14">
+				<staticText>
+					<reportElement positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="136" y="0" width="26" height="14" forecolor="#000000" backcolor="#F3F3F3"/>
+					<textElement verticalAlignment="Middle">
+						<font reportFont="Verdana" fontName="Verdana"/>
+					</textElement>
+					<text><![CDATA[Ship]]></text>
+				</staticText>
+				<textField isStretchWithOverflow="true" pattern="#,##0.00#" isBlankWhenNull="true">
+					<reportElement positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="162" y="0" width="33" height="14" isPrintWhenDetailOverflows="true" forecolor="#000000" backcolor="#F3F3F3"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font reportFont="Verdana" fontName="Verdana" size="8" isBold="false"/>
+					</textElement>
+					<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{ShipTo_quantity}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="195" y="0" width="22" height="14" forecolor="#000000" backcolor="#F3F3F3"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font reportFont="Verdana" fontName="Verdana"/>
+					</textElement>
+					<text><![CDATA[to:]]></text>
+				</staticText>
+				<textField isStretchWithOverflow="true">
+					<reportElement stretchType="RelativeToTallestObject" mode="Opaque" x="217" y="0" width="73" height="14" isPrintWhenDetailOverflows="true" forecolor="#000000" backcolor="#F3F3F3"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font reportFont="Verdana" fontName="Verdana" size="9"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{ShipTo_shipToCode}]]></textFieldExpression>
+				</textField>
+				<textField pattern="MM/dd/yyyy">
+					<reportElement stretchType="RelativeToTallestObject" mode="Opaque" x="314" y="0" width="80" height="14" forecolor="#000000" backcolor="#F3F3F3"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font reportFont="Verdana" fontName="Verdana"/>
+					</textElement>
+					<textFieldExpression class="java.util.Date"><![CDATA[$F{ShipTo_shipDate}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement stretchType="RelativeToTallestObject" mode="Opaque" x="290" y="0" width="24" height="14" forecolor="#000000" backcolor="#F3F3F3"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font reportFont="Verdana" fontName="Verdana"/>
+					</textElement>
+					<text><![CDATA[By: ]]></text>
+				</staticText>
+				<rectangle>
+					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="136" height="14" forecolor="#F3F3F3" backcolor="#F3F3F3"/>
+					<graphicElement/>
+				</rectangle>
+				<rectangle>
+					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="395" y="0" width="169" height="14" forecolor="#F3F3F3" backcolor="#F3F3F3"/>
+					<graphicElement/>
+				</rectangle>
+			</band>
+		</groupHeader>
+	</group>
+	<group name="attention">
+		<groupExpression><![CDATA[$V{REPORT_COUNT}]]></groupExpression>
+		<groupHeader>
+			<band height="14">
+				<printWhenExpression><![CDATA[new Boolean(!HiltonUtility.isEmpty($F{ShipTo_attention}))]]></printWhenExpression>
+				<textField isBlankWhenNull="true">
+					<reportElement positionType="Float" mode="Opaque" x="136" y="0" width="257" height="14" backcolor="#F3F3F3"/>
+					<textElement verticalAlignment="Middle">
+						<font reportFont="Verdana" isBold="false"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{ShipTo_attention}]]></textFieldExpression>
+				</textField>
+				<rectangle>
+					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="136" height="14" forecolor="#F3F3F3" backcolor="#F3F3F3"/>
+					<graphicElement/>
+				</rectangle>
+				<rectangle>
+					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="395" y="0" width="169" height="14" forecolor="#F3F3F3" backcolor="#F3F3F3"/>
+					<graphicElement/>
+				</rectangle>
+			</band>
+		</groupHeader>
+	</group>
+	<group name="address">
+		<groupExpression><![CDATA[$V{REPORT_COUNT}]]></groupExpression>
+		<groupHeader>
+			<band height="1">
+				<subreport>
+					<reportElement positionType="Float" x="0" y="0" width="564" height="1"/>
+					<dataSourceExpression><![CDATA[new EntityDataSource($F{ShipTo_shipToAddress}, $P{oid})]]></dataSourceExpression>
+					<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[JasperReportsHelper.loadSubReport("address-html.jasper", $P{oid})]]></subreportExpression>
+				</subreport>
+			</band>
+		</groupHeader>
+	</group>
+	<group name="separator">
+		<groupHeader>
+			<band height="6">
+				<rectangle>
+					<reportElement positionType="Float" x="0" y="0" width="564" height="6" forecolor="#F3F3F3" backcolor="#F3F3F3"/>
+					<graphicElement pen="None"/>
+				</rectangle>
+			</band>
+		</groupHeader>
+	</group>
+</jasperReport>

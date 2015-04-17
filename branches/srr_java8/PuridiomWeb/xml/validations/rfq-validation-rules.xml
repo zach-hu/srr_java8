@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<validation-rules>
+	<validations>
+	<save enabled="yes">
+		<rule>
+			<filename>rfq-shiptocode-mv.xml</filename>
+			<alias>ShipTo</alias>
+			<msg>You must enter/select a valid Ship To location.</msg>
+			<severity>E</severity>
+			<order>10</order>
+			<enabled>Y</enabled>
+			<fieldname>RfqHeader_shipToCode</fieldname>
+			<link><![CDATA[javascript: doSubmit('rfq/rfq_shipping.jsp', 'RfqHeaderShipToRetrieveById'); void(0);]]></link>	
+		</rule>
+		<rule>
+			<filename>rfq-shipvia-mv.xml</filename>
+			<alias>ShipVia</alias>
+			<msg>You must enter/select a valid Ship Via Code.</msg>
+			<severity>E</severity>
+			<order>15</order>
+			<enabled>Y</enabled>
+			<fieldname>RfqHeader_shippingCode</fieldname>
+			<link><![CDATA[javascript: doSubmit('rfq/rfq_shipping.jsp', 'RfqHeaderShipToRetrieveById'); void(0);]]></link>
+		</rule>
+		<rule>
+			<filename>rfq-fiscalyear-mv.xml</filename>
+			<alias>FiscalYear</alias>
+			<msg>You must enter an active Fiscal Year on the General Information page! </msg>
+			<severity>E</severity>
+			<order>20</order>
+			<enabled>Y</enabled>
+			<fieldname>RfqHeader_fiscalYear</fieldname>
+			<link><![CDATA[javascript: doSubmit('rfq/rfq_general_info.jsp', 'RfqHeaderRetrieveById'); void(0);]]></link>
+		</rule>
+    </save>
+	</validations>
+</validation-rules>

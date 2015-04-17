@@ -1,0 +1,126 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping>
+
+<class
+    name="com.tsa.puridiom.entity.InspectionLine"
+    table="INSPECTION_LINE"
+>
+    <id
+        name="icInspLine"
+        type="java.math.BigDecimal"
+        column="IC_INSP_LINE"
+    >
+        <generator class="assigned" />
+    </id>
+    <property
+        name="icInspNo"
+        type="java.math.BigDecimal"
+        column="IC_INSP_NO"
+        not-null="true"
+        length="22"
+    />
+    <property
+        name="inspectCode"
+        type="java.lang.String"
+        column="INSPECT_CODE"
+        length="15"
+    />
+    <property
+        name="seqNo"
+        type="java.math.BigDecimal"
+        column="SEQ_NO"
+        length="5"
+    />
+    <property
+        name="critNo"
+        type="java.lang.String"
+        column="CRIT_NO"
+        length="15"
+    />
+    <property
+        name="standardCode"
+        type="java.lang.String"
+        column="STANDARD_CODE"
+        length="15"
+    />
+    <property
+        name="lockFlag"
+        type="java.lang.String"
+        column="LOCK_FLAG"
+        length="1"
+    />
+    <property
+        name="udf01"
+        type="java.lang.String"
+        column="UDF_01"
+        length="15"
+    />
+    <property
+        name="udf02"
+        type="java.lang.String"
+        column="UDF_02"
+        length="15"
+    />
+    <property
+        name="udf03"
+        type="java.lang.String"
+        column="UDF_03"
+        length="15"
+    />
+    <property
+        name="udf04"
+        type="java.lang.String"
+        column="UDF_04"
+        length="15"
+    />
+    <property
+        name="udf05"
+        type="java.lang.String"
+        column="UDF_05"
+        length="15"
+    />
+    <property
+        name="dateEntered"
+        type="java.sql.Timestamp"
+        column="DATE_ENTERED"
+        length="7"
+    />
+    <property
+        name="status"
+        type="java.lang.String"
+        column="STATUS"
+        length="4"
+    />
+    <property
+        name="owner"
+        type="java.lang.String"
+        column="OWNER"
+        length="15"
+    />
+    <property
+        name="lastChange"
+        type="java.sql.Timestamp"
+        column="LAST_CHANGE"
+        length="7"
+    />
+    <property
+        name="lastChangeBy"
+        type="java.lang.String"
+        column="LAST_CHANGE_BY"
+        length="15"
+    />
+    <property
+        name="critDescription"
+        type="java.lang.String"
+        column="CRIT_DESCRIPTION"
+        length="255"
+    />
+
+    <!-- associations -->
+
+</class>
+</hibernate-mapping>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="poCreateReleaseFromReqBlanket" connection-type="Transaction-Required">
+  <activities>
+    <activity continue-on-failure="false" name="releaseRequest" synchronous="true">
+      <task synchronous="true" continue-on-failure="false" name="ReleaseOrderSetup">
+        <task-object-name>com.tsa.puridiom.po.tasks.PoCreateReleaseFromReqBlanketSetup</task-object-name>
+      </task>
+      <task synchronous="true" continue-on-failure="false" name="requisitionHeader">
+        <task-object-name>com.tsa.puridiom.requisitionheader.tasks.RequisitionHeaderRetrieveById</task-object-name>
+      </task>
+      <task synchronous="true" continue-on-failure="false" name="requisitionLineList">
+        <task-object-name>com.tsa.puridiom.requisitionline.tasks.RequisitionLineRetrieveByHeader</task-object-name>
+      </task>
+      <task synchronous="true" continue-on-failure="false" name="blanket">
+        <task-object-name>com.tsa.puridiom.poheader.tasks.PoHeaderRetrieveById</task-object-name>
+      </task>
+      <task synchronous="true" continue-on-failure="false" name="autoRelease">
+        <task-object-name>com.tsa.puridiom.po.tasks.PoCreateReleaseFromRevReq</task-object-name>
+      </task>
+   </activity>
+   <activity name="createRelease" continue-on-failure="false" synchronous="true">
+      <task synchronous="true" continue-on-failure="false" name="release">
+          <!-- <rule-filename>is-create-release-from-req.xml</rule-filename> -->
+          <task-object-name>com.tsa.puridiom.requisition.tasks.RequisitionReleaseAutoRelease</task-object-name>
+      </task>
+  </activity>
+  </activities>
+</process>

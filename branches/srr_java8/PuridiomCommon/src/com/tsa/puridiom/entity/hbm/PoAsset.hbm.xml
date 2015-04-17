@@ -1,0 +1,76 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+    
+<hibernate-mapping>
+
+<!-- 
+    Created by Middlegen Hibernate plugin
+
+    http://boss.bekk.no/boss/middlegen/
+    http://hibernate.sourceforge.net/
+-->
+
+<class 
+    name="com.tsa.puridiom.entity.PoAsset" 
+    table="PO_ASSET"
+>
+    <composite-id name="comp_id" class="com.tsa.puridiom.entity.PoAssetPK">
+        <key-property name="icPoLine" column="IC_PO_LINE" type="java.math.BigDecimal"/>
+        <key-property name="sequence" column="SEQUENCE" type="java.math.BigDecimal"/>
+    </composite-id>    
+    <property
+        name="icPoHeader"
+        type="java.math.BigDecimal"
+        column="IC_PO_HEADER"
+        not-null="true"
+        length="22"
+    />
+    <property
+        name="assetNumber"
+        type="java.lang.String"
+        column="ASSET_NUMBER"
+        length="20"
+    />
+    <property
+        name="serialNumber"
+        type="java.lang.String"
+        column="SERIAL_NUMBER"
+        length="30"
+    />
+    <property
+        name="endUser"
+        type="java.lang.String"
+        column="END_USER"
+        length="30"
+    />
+    <property
+        name="icRecHeader"
+        type="java.math.BigDecimal"
+        column="IC_REC_HEADER"
+        length="22"
+    />
+    <property
+        name="paymentStatus"
+        type="java.lang.String"
+        column="PAYMENT_STATUS"
+        length="2"
+    />
+    <property
+        name="faBatchId"
+        type="java.lang.String"
+        column="FA_BATCH_ID"
+        length="6"
+    />
+    <property
+        name="icInvHeader"
+        type="java.math.BigDecimal"
+        column="IC_INV_HEADER"
+        length="22"
+    />
+
+    <!-- associations -->
+
+</class>
+</hibernate-mapping>

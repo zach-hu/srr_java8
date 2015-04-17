@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="receiptProcessAutoDelivery" connection-type="New-Connection">
+	<activities>
+		<activity synchronous="true" commit-after="true" continue-on-failure="false" name="receiptNStepsUpdate">
+			<task synchronous="true" continue-on-failure="false" name="receiptNStepsUpdate">
+				<task-object-name>com.tsa.puridiom.receiptheader.tasks.InvokeReceiptNStepsUpdate</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="receiptLineObjSetup">
+			<task synchronous="true" continue-on-failure="false" name="ReceiptLine_icRecLine">
+				<task-object-name>com.tsa.puridiom.receiptline.tasks.ReceiptLineObjArraySetup</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true"  commit-after="true" continue-on-failure="false" name="receiptUpdate">
+			<task synchronous="true" continue-on-failure="false" name="receiptUpdate">
+				<task-object-name>com.tsa.puridiom.receiptheader.tasks.InvokeReceiptUpdate</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+	</activities>
+</process>

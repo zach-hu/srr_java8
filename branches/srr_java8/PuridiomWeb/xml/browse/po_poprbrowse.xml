@@ -1,0 +1,59 @@
+<browse_po_reqbrowse>
+	<columns>
+		<RequisitionHeader_requisitionType>
+			<label>poType</label>
+			<type>REQUISITION-TYPE</type>
+			<size>15</size>
+		</RequisitionHeader_requisitionType>
+		<RequisitionHeader_icReqHeader>
+	        <hidden>Y</hidden>
+		</RequisitionHeader_icReqHeader>
+		<RequisitionHeader_requisitionNumber>
+			<label>brw-requisitionNumber</label>
+			<link><![CDATA[javascript: createPurchaseRelease('#RequisitionHeader_icReqHeader^', '#RequisitionHeader_icRevisedOrder^'); void(0);]]></link>
+			<size>10</size>
+		</RequisitionHeader_requisitionNumber>
+		<RequisitionHeader_icRevisedOrder>
+			<label>brw-poRevisedOrder</label>
+	        <hidden>Y</hidden>
+		</RequisitionHeader_icRevisedOrder>
+		<RequisitionHeader_requisitionDate>
+			<label>requisitionDate</label>
+			<sort>D</sort>
+			<size>15</size>
+			<type>DATE</type>
+		</RequisitionHeader_requisitionDate>
+		<RequisitionHeader_requisitionerCode>
+			<label>brw-requisitioner</label>
+            <size>15</size>
+            <type>USER-ID</type>
+		</RequisitionHeader_requisitionerCode>
+		<RequisitionHeader_total>
+			<label>brw-total</label>
+			<type>BigDecimal</type>
+			<size>8</size>
+		</RequisitionHeader_total>
+		<RequisitionHeader_shipToCode>
+			<label>shipToCode</label>
+			<size>20</size>
+		</RequisitionHeader_shipToCode>
+		<RequisitionHeader_owner>
+			<label>brw-owner</label>
+			<hidden>Y</hidden>
+		</RequisitionHeader_owner>
+		<RequisitionHeader_internalComments>
+			<label>brw-purpose</label>
+            <detail>Y</detail>
+		</RequisitionHeader_internalComments>
+		<RequisitionHeader_fiscalYear>
+			<label>fiscalYear</label>
+			<visible>0</visible>
+		</RequisitionHeader_fiscalYear>
+	</columns>
+<sqlfrom>RequisitionHeader as RequisitionHeader</sqlfrom>
+<sqlwhere><![CDATA[RequisitionHeader.status = '1035' and (RequisitionHeader.requisitionType = 'V')]]></sqlwhere>
+<sqlorderby>RequisitionHeader.requisitionDate DESC</sqlorderby>
+<pagesize>15</pagesize>
+<title>Requisition Selection</title>
+</browse_po_reqbrowse>
+

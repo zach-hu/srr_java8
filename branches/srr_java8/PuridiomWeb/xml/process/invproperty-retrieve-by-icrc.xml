@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="invPropertyRetrieveByIcRc" connection-type="Connection-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="retrieveInvPropertyByIcRc">
+			<task synchronous="true" continue-on-failure="false" name="invPropertyList">
+				<task-object-name>com.tsa.puridiom.invproperty.tasks.InvPropertyRetrieveByIcRc</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+	</activities>
+</process>

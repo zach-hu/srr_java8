@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="invItemGenerateFormNumber" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="fiscalYearSetup">
+			<task synchronous="true" continue-on-failure="false" name="invItemFiscalYearActive">
+				<rule-filename>is-invitem-active-fiscal-year-required</rule-filename>
+				<task-object-name>com.tsa.puridiom.invitem.tasks.InvItemValidateActiveFiscalYear</task-object-name>
+				<post-action>exitActivity</post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="AutoGen_genYear">
+				<task-object-name>com.tsa.puridiom.common.tasks.GetDefaultFiscalYear</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="invItemGenerateNumber">
+			<task synchronous="true" continue-on-failure="false" name="InvItem_itemNumber">
+				<task-object-name>com.tsa.puridiom.common.tasks.AutoGenDocNumber</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="userProfile">
+				<task-object-name>com.tsa.puridiom.usermanager.tasks.UserManagerGetUser</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="invItemFormatSetup">
+				<task-object-name>com.tsa.puridiom.invitem.tasks.InvItemFormatNumberSetup</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="checkMax">
+				<task-object-name>com.tsa.puridiom.common.tasks.CheckMaxDocNumber</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="InvItem_itemNumber">
+				<task-object-name>com.tsa.puridiom.common.tasks.FormatDocNumber</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

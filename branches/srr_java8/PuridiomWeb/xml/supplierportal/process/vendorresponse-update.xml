@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="vendorResponseUpdate" connection-type="None">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="vendorResponseUpdate">
+			<task synchronous="true" continue-on-failure="false" name="vendorResponseUpdateSetup">
+				<task-object-name>com.tsa.puridiom.vendorresponse.tasks.VendorResponseUpdateListSetup</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="vendorResponseUpdateList">
+				<task-object-name>com.tsa.puridiom.supplierportal.InvokeSupplierPortalProcessTask</task-object-name>
+				<process-filename>vendorresponse-update-list.xml</process-filename>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="calculateEvaluationScore">
+				<task-object-name>com.tsa.puridiom.supplierportal.InvokeSupplierPortalProcessTask</task-object-name>
+				<process-filename>rfqvendor-calculate-evaluationscores.xml</process-filename>
+			</task>
+		</activity>
+	</activities>
+</process>

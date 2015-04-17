@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="rfqApprove" connection-type="Connection-Required">
+  <activities>
+    <activity synchronous="true" continue-on-failure="false" name="rfqApproveAndForward">
+      <task synchronous="true" continue-on-failure="false" name="myRfqsList">
+        <task-object-name>com.tsa.puridiom.rfq.tasks.RfqWaitingApproval</task-object-name>
+        <post-action></post-action>
+      </task>
+    </activity>
+  </activities>
+</process>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rule>
+	<clause type="Empty">
+		<left-side>
+			<source>incomingRequestObjectMethod</source>
+			<object>requisitionHeader</object>
+			<name>getWorkOrder</name>
+		</left-side>
+	</clause>
+	<logical-operator>OR</logical-operator>
+	<clause type="lookup">
+	<sql><![CDATA[from SrrWorkorderView SrrWorkorderView where '@workOrderMSR@' = SrrWorkorderView.workorderNo and '@statusMSR@' < '0900']]></sql>
+		<source>requisitionHeader</source>
+		<arguments>
+			<name>statusMSR</name>
+			<source>requisitionHeader</source>
+			<colName>getStatus</colName>
+		</arguments>
+		<arguments>
+			<name>workOrderMSR</name>
+			<source>requisitionHeader</source>
+			<colName>getWorkOrder</colName>
+		</arguments>
+	</clause>
+</rule>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="printAssignedRequisitions" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="printAssignedRequisitions">
+			<task synchronous="true" continue-on-failure="false" name="requisitionPdf">
+				<task-object-name>com.tsa.puridiom.requisition.tasks.PrintAssignedRequisitions</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

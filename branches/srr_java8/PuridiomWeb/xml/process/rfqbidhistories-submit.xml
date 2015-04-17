@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="rfqBidUpdate" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="setupRfqBidHistoryData">
+			<!-- <task synchronous="true" continue-on-failure="false" name="setupData">
+				<task-object-name>com.tsa.puridiom.rfqbidhistory.tasks.SetupRfqBidHistoryData</task-object-name>
+			</task> -->
+			<task synchronous="true" continue-on-failure="false" name="vendorList">
+				<task-object-name>com.tsa.puridiom.rfqbidhistory.tasks.SetupRfqBidHistoryList</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="rfqBidHistoriesUpdate">
+			<task synchronous="true" continue-on-failure="false" name="rfqBidHistoriesUpdate">
+				<task-object-name>com.tsa.puridiom.rfqbidhistory.tasks.RfqBidHistorySubmit</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

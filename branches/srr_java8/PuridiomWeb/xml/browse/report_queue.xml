@@ -1,0 +1,67 @@
+<browse_ReportQueue>
+	<columns>
+		<ReportQueue_icReportQueue>
+			<label>Report Code</label>
+			<visible>0</visible>
+			<distinct>Y</distinct>
+		</ReportQueue_icReportQueue>
+		<ReportQueue_alias>
+			<label>Name</label>
+			<link><![CDATA[javascript: viewReportQueue('#ReportQueue_name^','#ReportQueue_icReportQueue^'); void(0);]]></link>
+			<size>40</size>
+			<visible>1</visible>
+		</ReportQueue_alias>
+		<ReportQueue_module>
+			<label>Module</label>
+			<visible>0</visible>
+		</ReportQueue_module>
+		<ReportQueue_type>
+			<label> Type</label>
+			<visible>0</visible>
+		</ReportQueue_type>
+		<ReportQueue_owner>
+			<label>Owner</label>
+			<type>USER-ID</type>
+			<visible>0</visible>
+		</ReportQueue_owner>
+		<ReportQueue_name>
+			<label>Name</label>
+			<visible>0</visible>
+		</ReportQueue_name>
+		<ReportQueue_frequency>
+			<label>Frequency</label>
+			<type>REPORTQUEUE-FREQUENCY</type>
+			<size>10</size>
+			<visible>1</visible>
+		</ReportQueue_frequency>
+		<ReportQueue_startDate>
+			<label>Start Date</label>
+			<type>DATE</type>
+			<size>12</size>
+			<visible>1</visible>
+		</ReportQueue_startDate>
+		<ReportQueue_endDate>
+			<label>End Date</label>
+			<type>DATE</type>
+			<size>12</size>
+			<visible>1</visible>
+		</ReportQueue_endDate>
+		<ReportQueue_sendTo>
+			<label>Send To</label>
+			<type>EMAIL</type>
+			<size>26</size>
+			<visible>1</visible>
+		</ReportQueue_sendTo>
+		<ReportQueue_nextRun>
+			<label>Next Run</label>
+			<type>DATE</type>
+			<visible>0</visible>
+		</ReportQueue_nextRun>
+</columns>
+<sqlfrom>ReportQueue as ReportQueue, ReportUser as ReportUser</sqlfrom>
+<sqlwhere><![CDATA[ ( ReportQueue.icReportQueue = ReportUser.icReportQueue ) and
+	( ( ReportUser.userId = :as_userid ) or ( ReportQueue.owner = :as_userid ) ) ]]></sqlwhere>
+<sqlorderby>ReportQueue.icReportQueue ASC</sqlorderby>
+<pagesize>15</pagesize>
+<title>Reports</title>
+</browse_ReportQueue>

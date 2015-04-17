@@ -1,0 +1,60 @@
+<browse_po_reqbrowse>
+	<columns>
+		<RequisitionHeader_icReqHeader>
+	        <hidden>Y</hidden>
+		</RequisitionHeader_icReqHeader>
+		<RequisitionHeader_requisitionNumber>
+			<label>brw-requisitionNumber</label>
+			<link><![CDATA[javascript: createOrderFromReq('#RequisitionHeader_icReqHeader^','#RequisitionHeader_requisitionType^'); void(0);]]></link>
+			<size>15</size>
+		</RequisitionHeader_requisitionNumber>
+		<RequisitionHeader_requisitionDate>
+			<label>brw-requisitionDate</label>
+			<sort>D</sort>
+			<size>10</size>
+			<type>DATE</type>
+		</RequisitionHeader_requisitionDate>
+		<RequisitionHeader_requiredDate>
+			<label>brw-requiredDate</label>
+			<sort>D</sort>
+			<size>10</size>
+			<type>DATE</type>
+		</RequisitionHeader_requiredDate>
+		<RequisitionHeader_requisitionerCode>
+			<label>brw-requisitionerName</label>
+            <size>20</size>
+            <type>USER-ID</type>
+		</RequisitionHeader_requisitionerCode>
+		<RequisitionHeader_vendorId>
+			<label>brw-req-supplier</label>
+			<size>20</size>
+		</RequisitionHeader_vendorId>
+		<RequisitionHeader_shipToCode>
+			<label>shipToCode</label>
+			<size>10</size>
+		</RequisitionHeader_shipToCode>
+		<RequisitionHeader_total>
+			<label>brw-total</label>
+			<type>DollarDecimal</type>
+			<size>15</size>
+		</RequisitionHeader_total>
+		<RequisitionHeader_owner>
+			<label>brw-owner</label>
+			<hidden>Y</hidden>
+		</RequisitionHeader_owner>
+		<RequisitionHeader_internalComments>
+			<label>brw-purpose</label>
+            <detail>Y</detail>
+		</RequisitionHeader_internalComments>
+		<RequisitionHeader_fiscalYear>
+			<label>fiscalYear</label>
+			<visible>0</visible>
+		</RequisitionHeader_fiscalYear>
+	</columns>
+<sqlfrom>RequisitionHeader as RequisitionHeader</sqlfrom>
+<sqlwhere><![CDATA[RequisitionHeader.status = '1035' and (RequisitionHeader.requisitionType = 'P'  or RequisitionHeader.requisitionType = 'R' or RequisitionHeader.requisitionType = 'C' or RequisitionHeader.requisitionType = 'A' or RequisitionHeader.requisitionType = 'E')]]></sqlwhere>
+<sqlorderby>RequisitionHeader.requisitionDate DESC</sqlorderby>
+<pagesize>15</pagesize>
+<title>Requisition Selection</title>
+</browse_po_reqbrowse>
+

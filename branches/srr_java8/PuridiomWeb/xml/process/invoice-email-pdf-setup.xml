@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="poHeaderRetrieveById" connection-type="Transaction-Required">
+  <activities>
+    <activity synchronous="true" continue-on-failure="false" name="pdfSendQueueSetup">
+      <task synchronous="true" continue-on-failure="false" name="invoiceDataRetrieve">
+		<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+		<process-filename>invoice-retrieve.xml</process-filename>
+	  </task>
+      <task synchronous="true" continue-on-failure="false" name="invoiceHeader">
+        <task-object-name>com.tsa.puridiom.invoice.tasks.QueueAddInvoicePdf</task-object-name>
+      </task>
+    </activity>
+  </activities>
+</process>

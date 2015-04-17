@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<BrowseRfqBidRfqLine>
+  <columns>
+	<RfqLine_rfqNumber>
+		<label>Rfq Number</label>
+		<type>STRING</type>
+	</RfqLine_rfqNumber>
+	<RfqLine_rfqLine>
+		<label>Rfq Line</label>
+		<type>STRING</type>
+	</RfqLine_rfqLine>
+	<RfqLine_itemNumber>
+		<label>Item Number</label>
+		<type>STRING</type>
+	</RfqLine_itemNumber>
+	<RfqLine_umCode>
+		<label>Um Code</label>
+		<type>STRING</type>
+	</RfqLine_umCode>
+	<RfqLine_quantity>
+		<label>Quantity</label>
+		<type>STRING</type>
+	</RfqLine_quantity>
+	<RfqLine_commodity>
+		<label>Commodity</label>
+		<type>STRING</type>
+	</RfqLine_commodity>
+	<RfqLine_description>
+		<label>Description</label>
+		<type>STRING</type>
+	</RfqLine_description>
+	<RfqBid_vendorId>
+		<label>Vendor</label>
+		<type>STRING</type>
+	</RfqBid_vendorId>
+	<RfqBid_quantity>
+		<label>Quantity</label>
+		<type>STRING</type>
+	</RfqBid_quantity>
+	<RfqBid_umCode>
+		<label>Um Code</label>
+		<type>STRING</type>
+	</RfqBid_umCode>
+	<RfqBid_unitPrice>
+		<label>Unit Price</label>
+		<type>STRING</type>
+	</RfqBid_unitPrice>
+	<RfqBid_discountSource>
+		<label>Discount Source</label>
+		<type>STRING</type>
+	</RfqBid_discountSource>
+	<RfqBid_discountAmount>
+		<label>Discount Amount</label>
+		<type>STRING</type>
+	</RfqBid_discountAmount>
+	<RfqBid_discountPercent>
+		<label>Discount Percent</label>
+		<type>STRING</type>
+	</RfqBid_discountPercent>
+	<RfqBid_shippingCharges>
+		<label>Shipping Charges</label>
+		<type>STRING</type>
+	</RfqBid_shippingCharges>
+	<RfqBid_otherCharges>
+		<label>Other Charges</label>
+		<type>STRING</type>
+	</RfqBid_otherCharges>
+	<RfqBid_taxPercent>
+		<label>Tax Percent</label>
+		<type>STRING</type>
+	</RfqBid_taxPercent>
+	<RfqBid_taxAmount>
+		<label>Tax Amount</label>
+		<type>STRING</type>
+	</RfqBid_taxAmount>
+	<RfqBid_shippingTaxAmt>
+		<label>Shipping Tax Amt</label>
+		<type>STRING</type>
+	</RfqBid_shippingTaxAmt>
+	<RfqBid_otherTaxAmount>
+		<label>Other Tax Amount</label>
+		<type>STRING</type>
+	</RfqBid_otherTaxAmount>
+	</columns>
+  <sqlfrom>RfqBid as RfqBid, RfqLine as RfqLine</sqlfrom>
+  <sqlwhere>( RfqBid.icRfqHeader = RfqLine.icRfqHeader )</sqlwhere>
+  <title>RFQ Supplier Bid Detail Report</title>
+</BrowseRfqBidRfqLine>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="poHeaderRetrieveForAutoAwardRevision" connection-type="New-Connection">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="poHeaderRetrieveByChangeRequest">
+			<task synchronous="true" continue-on-failure="false" name="poHeaderList">
+				<task-object-name>com.tsa.puridiom.poheader.autoawardrevision.tasks.PoHeaderRetrieveByChangeRequest</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="autoAwardRevision">
+			<task synchronous="true" continue-on-failure="false" name="autoAwardRevision">
+				<task-object-name>com.tsa.puridiom.poheader.autoawardrevision.tasks.PoHeaderAutoAwardRevision</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

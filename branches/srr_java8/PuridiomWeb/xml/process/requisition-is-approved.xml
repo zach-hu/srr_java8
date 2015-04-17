@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="requisitionApprove" connection-type="Transaction-Required">
+  	<rule-filename>is-req-approved.xml</rule-filename>
+  	<activities>
+		<!--  <activity synchronous="true" continue-on-failure="false" name="buyerAssignment">
+      		<task synchronous="true" continue-on-failure="false" name="buyerAssignment">
+        	<task-object-name>com.tsa.puridiom.requisition.tasks.SendQueueAddReqApproved</task-object-name>
+        	<process-filename>requisition-approve-final.xml</process-filename>
+      	</task>
+    	</activity>-->
+    	<activity name="assignPoNumberInReqAward" continue-on-failure="false" synchronous="true">
+    		<rule-filename>is-assign-ponumber-in-reqaward.xml;is-purchase-request.xml</rule-filename>
+    		<task synchronous="true" continue-on-failure="false" name="poGetNumberSetup">
+				<task-object-name>com.tsa.puridiom.requisition.tasks.PoGetNumberSetupFromReq</task-object-name>
+			</task>
+    		<!-- task synchronous="true" continue-on-failure="false" name="getNumber">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>po-generate-form-number.xml</process-filename>
+			</task -->
+			<task synchronous="true" continue-on-failure="false" name="PoHeader_poNumber">
+				<task-object-name>com.tsa.puridiom.common.tasks.FormatDocNumber</task-object-name>
+			</task>
+			<task continue-on-failure="false" name="requisitionHeader" synchronous="true">
+      			<task-object-name>com.tsa.puridiom.requisition.tasks.AssignPoNumberInRequisition</task-object-name>
+    		</task>
+  		</activity>
+    	<activity name="autoAwardAllReqSetup" continue-on-failure="false" synchronous="true">
+    		<task continue-on-failure="false" name="requisitionHeader" synchronous="true">
+				<rule-filename>is-autoaward-all-req.xml</rule-filename>
+      			<task-object-name>com.tsa.puridiom.requisitionheader.autoawardrequisition.tasks.AutoAwardAllRequisitionSetup</task-object-name>
+    		</task>
+  		</activity>
+    	<activity synchronous="true" continue-on-failure="false" name="buyerAssignment">
+    		<rule-filename>is-buyerassignment-process-active.xml</rule-filename>
+      		<task synchronous="true" continue-on-failure="false" name="buyerAssignment">
+		  		<rule-filename check-for-false="true">is-check-request.xml</rule-filename>
+        		<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+        		<process-filename>buyer-assignment.xml</process-filename>
+      		</task>
+    		<task continue-on-failure="false" name="requisitionHeader" synchronous="true">
+				<rule-filename check-for-false="true">is-check-request.xml</rule-filename>
+      			<task-object-name>com.tsa.puridiom.requisition.buyerassignment.tasks.RequisitionHeaderAssignment</task-object-name>
+    		</task>
+    	</activity>
+  		<activity synchronous="true" continue-on-failure="false" name="history">
+    		<task synchronous="true" continue-on-failure="false" name="requisitionHeaderHistory">
+      			<task-object-name>com.tsa.puridiom.requisitionheader.history.tasks.RequisitionHeaderHistory</task-object-name>
+    		</task>
+    		<task synchronous="true" continue-on-failure="false" name="requisitionLineListHistory">
+      			<task-object-name>com.tsa.puridiom.requisitionline.history.tasks.RequisitionLineListHistory</task-object-name>
+    		</task>
+  		</activity>
+  		<activity synchronous="true" continue-on-failure="false" name="autoadditem">
+			<rule-filename>is-organization-hoy.xml</rule-filename>
+    		<task synchronous="true" continue-on-failure="false" name="requisitionLineListAutoAdd">
+      			<task-object-name>com.tsa.puridiom.requisitionline.autoaddcatalogitem.tasks.RequisitionLineListAutoAddCatalogItem</task-object-name>
+    		</task>
+  		</activity>
+  		<activity synchronous="true" continue-on-failure="false" name="autorelease">
+   			<task synchronous="true" continue-on-failure="false" name="autoRevision">
+				<rule-filename>is-change-request-auto-award.xml</rule-filename>
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>po-create-revision-from-req.xml</process-filename>
+				<post-action>exitActivity</post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="autorelease">
+				<rule-filename>is-release-request.xml</rule-filename>
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>po-create-release-from-req.xml</process-filename>
+				<post-action>exitActivity</post-action>
+			</task>
+			<!-- Used with new approvals process. -->
+	   		<task synchronous="true" continue-on-failure="false" name="autorelease">
+	     		<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+	      		<process-filename>requisition-autorelease-initial.xml</process-filename>
+	      		<post-action></post-action>
+    		</task>
+  		</activity>
+    	<activity name="emailNotifications" continue-on-failure="false" synchronous="true">
+    		<task synchronous="true" continue-on-failure="false" name="emailRequisitioner">
+      			<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+      			<process-filename>req-email-requisitioner.xml</process-filename>
+    		</task>
+  		</activity>
+  		<activity name="updateBuyerCodeFromChangeRequest" continue-on-failure="false" synchronous="true">
+			<rule-filename>is-organization-bly.xml;is-change-request.xml;</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="updateBuyerCodeFromChangeRequest">
+				<task-object-name>com.tsa.puridiom.poheader.tasks.PoAmendedUpdateFieldsFromChangeRequest</task-object-name>
+				<post-action></post-action>
+			</task>
+  		</activity>
+  		<activity synchronous="true" continue-on-failure="false" name="buyerAssignmentByFPE">
+    		<rule-filename>is-requisition-owner-a-fpe.xml;is-bor-req-bidwaiver.xml;is-purchase-request.xml</rule-filename>
+    		<task continue-on-failure="false" name="assignmentByFPESetup" synchronous="true">
+      			<task-object-name>com.tsa.puridiom.requisition.buyerassignment.tasks.RequisitionHeaderBuyerAssignmentByFPESetup</task-object-name>
+    		</task>
+    		<task synchronous="true" continue-on-failure="false" name="assignmentByFPE">
+        		<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+        		<process-filename>requisitionheader-buyer-assignment-update.xml</process-filename>
+      		</task>
+    	</activity>
+ 	</activities>
+</process>

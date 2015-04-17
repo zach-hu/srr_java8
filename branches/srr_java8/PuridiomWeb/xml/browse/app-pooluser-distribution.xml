@@ -1,0 +1,54 @@
+<app_pooluser_distribution>
+	<columns>
+		<c_checkbox>
+			<label>Select</label>
+			<type>Checkbox</type>
+			<size>3</size>
+			<selectsql>N</selectsql>
+			<store-request-value>Y</store-request-value>
+		</c_checkbox>
+		<AppPool_poolid>
+			<label>Pool Id</label>
+			<size>15</size>
+			<hidden-input>Y</hidden-input>
+			<hidden>Y</hidden>
+			<key>Y</key>
+			<alias>RadioValue</alias>
+		</AppPool_poolid>
+		<UserProfile_firstName>
+			<label>First Name</label>
+			<size>10</size>
+			<alias>FirstName</alias>
+		</UserProfile_firstName>
+		<UserProfile_lastName>
+			<label>Last Name</label>
+			<size>10</size>
+			<alias>LastName</alias>
+		</UserProfile_lastName>
+		<AppPooluser_id_poolid>
+			<label>Pool Id</label>
+			<size>15</size>
+			<hidden-input>Y</hidden-input>
+			<hidden>Y</hidden>
+			<alias>RadioValueUserPoolId</alias>
+		</AppPooluser_id_poolid>
+		<AppPooluser_id_userId>
+			<label>UserId</label>
+			<hidden-input>Y</hidden-input>
+			<hidden>Y</hidden>
+			<key>Y</key>
+			<size>15</size>
+		</AppPooluser_id_userId>
+		<AppPool_pooldesc>
+			<label>Distribution List Name</label>
+			<size>30</size>
+			<hidden-input>Y</hidden-input>
+		</AppPool_pooldesc>
+		
+		
+	</columns>
+<sqlfrom>AppPool as AppPool, AppPooluser as AppPooluser, UserProfile as UserProfile</sqlfrom>
+<sqlwhere><![CDATA[ (AppPool.poolflag2 = 'Y') and ( AppPooluser.id.poolid = AppPool.poolid ) and (UserProfile.userId = AppPooluser.id.userId) ]]></sqlwhere>
+<pagesize>15</pagesize>
+<title>Distribution Lists</title>
+</app_pooluser_distribution>

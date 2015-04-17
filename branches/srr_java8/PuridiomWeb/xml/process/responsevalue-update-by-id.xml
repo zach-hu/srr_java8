@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="responseValueUpdate" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="responseValueUpdateSetup">
+			<task synchronous="true" continue-on-failure="false" name="responseValue">
+				<task-object-name>com.tsa.puridiom.responsevalue.tasks.ResponseValueRetrieveById</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="responseValueAdd">
+			<task synchronous="true" continue-on-failure="false" name="responseValueAdd">
+				<rule-filename>is-responsevalue-empty.xml</rule-filename>
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>responsevalue-add.xml</process-filename>
+				<post-action>exitProcess</post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="responseValueUpdate">
+			<task synchronous="true" continue-on-failure="false" name="responseValue">
+				<task-object-name>com.tsa.puridiom.responsevalue.tasks.ResponseValueSetValues</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="responseValue">			
+				<task-object-name>com.tsa.puridiom.responsevalue.tasks.ResponseValueUpdate</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

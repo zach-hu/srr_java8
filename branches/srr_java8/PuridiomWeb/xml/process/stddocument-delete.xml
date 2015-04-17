@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="stdDocumentDelete" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="stdDocumentDelete">
+			<task synchronous="true" continue-on-failure="false" name="stdDocumentDeleteSetup">			
+				<task-object-name>com.tsa.puridiom.stddocument.tasks.StdDocumentDeleteByIdSetup</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="stdDocument">			
+				<task-object-name>com.tsa.puridiom.stddocument.tasks.StdDocumentDeleteById</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="deleteFile">
+				<task-object-name>com.tsa.puridiom.documentfile.tasks.DocumentFileDelete</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

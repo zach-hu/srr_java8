@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="rfqApprovalRetrieve" connection-type="Connection-Required">
+  <activities>
+    <activity synchronous="true" continue-on-failure="false" name="rfqHeaderRetrieveById">
+      <task synchronous="true" continue-on-failure="false" name="rfqHeader">
+        <task-object-name>com.tsa.puridiom.rfqheader.tasks.RfqHeaderRetrieveById</task-object-name>
+        <post-action></post-action>
+      </task>
+    </activity>
+    <activity synchronous="true" continue-on-failure="false" name="rfqHeaderRetrieveById">
+      <rule-filename>is-rfqstatus-pending-approval-from-entity.xml</rule-filename>
+		<task synchronous="true" continue-on-failure="false" name="retrieveAllData">
+			  <task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>rfq-retrieve.xml</process-filename>
+		</task>
+      <task synchronous="true" continue-on-failure="false" name="approvalLogList">
+        <task-object-name>com.tsa.puridiom.approvals.tasks.ApprovalLogRetrieveByHeader</task-object-name>
+        <post-action></post-action>
+      </task>
+    </activity>
+    <activity synchronous="true" continue-on-failure="false" name="alreadyApprovedRfq">
+      <rule-filename check-for-false="true">is-rfqstatus-pending-approval-from-entity.xml</rule-filename>
+      <task synchronous="true" continue-on-failure="false" name="alreadyApproved">
+        <task-object-name>com.tsa.puridiom.rfqheader.tasks.RfqHeaderAlreadyApproved</task-object-name>
+        <post-action></post-action>
+      </task>
+    </activity>
+    <activity synchronous="true" continue-on-failure="false" name="invalidApprover">
+      <rule-filename>is-rfqstatus-pending-approval-from-entity.xml</rule-filename>
+      <task synchronous="true" continue-on-failure="false" name="invalidApprover">
+        <task-object-name>com.tsa.puridiom.requisition.tasks.InvalidApprover</task-object-name>
+        <post-action></post-action>
+      </task>
+    </activity>
+    <activity synchronous="true" continue-on-failure="false" name="otherRfqsWaitingMyApproval">
+	     <task synchronous="true" continue-on-failure="false" name="otherRfqsWaitingMyApproval">
+	        <task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+	        <process-filename>my-other-rfqs-to-approve.xml</process-filename>
+	        <post-action></post-action>
+	      </task>
+	  </activity>
+  </activities>
+	<activity synchronous="true" continue-on-failure="false" name="budgetUdfSetup">
+      <rule-filename>is-account-budget-module-active</rule-filename>
+		<task synchronous="true" continue-on-failure="false" name="budgetUdfSetup">
+			<task-object-name>com.tsa.puridiom.budget.tasks.BudgetUdfSetup</task-object-name>
+			<post-action></post-action>
+		</task>
+		<task synchronous="true" continue-on-failure="false" name="budgetReviewRetrieveSetup">
+			<task-object-name>com.tsa.puridiom.rfq.tasks.RfqForwardBudgetSetup</task-object-name>
+			<post-action></post-action>
+		</task>
+		<task synchronous="true" continue-on-failure="false" name="budgetReviewList">
+			<task-object-name>com.tsa.puridiom.budget.tasks.BudgetReviewRetrieve</task-object-name>
+			<post-action></post-action>
+		</task>
+	</activity>
+</process>

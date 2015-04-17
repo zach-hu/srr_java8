@@ -1,0 +1,63 @@
+<approval-rules>
+	<columns>
+		<UserProfile_userId>
+			<label>User ID</label>
+		</UserProfile_userId>
+		<UserProfile_firstName>
+			<label>First Name</label>
+		</UserProfile_firstName>
+		<UserProfile_lastName>
+			<label>Last Name</label>
+		</UserProfile_lastName>
+		<UserProfile_mailId>
+			<label>E-mail Address</label>
+		</UserProfile_mailId>
+		<AppRule_id_userId>
+			<label>user-userId</label>
+			<type>STRING</type>
+		</AppRule_id_userId>
+		<AppRule_id_udf1Code>
+			<label>Department</label>
+			<type>STRING</type>
+		</AppRule_id_udf1Code>
+		<AppRule_id_udf2Code>
+			<label>Commodity</label>
+			<type>STRING</type>
+		</AppRule_id_udf2Code>
+		<AppRule_amount>
+			<label>Approval Amount</label>
+			<type>BIGDECIMAL</type>
+		</AppRule_amount>
+		<AppRule_excludeLess>
+			<label>Exclude Less</label>
+			<type>BIGDECIMAL</type>
+		</AppRule_excludeLess>
+		<UserProfile_approvalAmount>
+			<label>Approval Amount</label>
+			<type>BIGDECIMAL</type>
+		</UserProfile_approvalAmount>
+		<UserProfile_excludeLess>
+			<label>User Exclude Less</label>
+			<type>BIGDECIMAL</type>
+		</UserProfile_excludeLess>
+		<AppRule_excludeLess>
+			<label>Rule Exclude Less</label>
+			<type>BIGDECIMAL</type>
+		</AppRule_excludeLess>
+		<UserProfile_approveByLine>
+			<label>Approve By Line</label>
+			<type>STRING</type>
+		</UserProfile_approveByLine>
+		<AppRule_fyiApprover>
+			<label>FYI Approver</label>
+			<type>STRING</type>
+		</AppRule_fyiApprover>
+		<AppRule_requiredApprover>
+			<label>Required Approver</label>
+			<type>STRING</type>
+		</AppRule_requiredApprover>
+	</columns>
+<sqlfrom>UserProfile as UserProfile, AppRule as AppRule</sqlfrom>
+<sqlwhere><![CDATA[(UserProfile.userId = AppRule.id.userId) and UserProfile.approver = 'Y' and UserProfile.status <> '03' ]]></sqlwhere>
+<title>Approval Rules For Approver Report</title>
+</approval-rules>

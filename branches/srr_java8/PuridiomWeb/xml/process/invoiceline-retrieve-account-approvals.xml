@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="invoiceLineAccountRetrieveApprovals" connection-type="Connection-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="invoiceLineAccountRetrieveApprovals">
+			<task synchronous="true" continue-on-failure="false" name="resetAccountIc">
+				<task-object-name>com.tsa.puridiom.invoiceline.tasks.InvoiceLineResetAccountIc</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="retrieveAccount">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>account-retrieve-by-line.xml</process-filename>
+			</task>
+		</activity>
+	</activities>
+</process>

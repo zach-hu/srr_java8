@@ -1,0 +1,17 @@
+<rule>
+	<clause type="StringCompare">
+		<left-side>
+			<source>Singleton</source>
+			<object>com.tsa.puridiom.property.PropertiesManager</object>
+			<name>getProperty</name>
+			<argument-value>APPROVALS</argument-value>
+			<argument-value>REBUILD ROUTING</argument-value>
+			<argument-value>Y</argument-value>
+		</left-side>
+		<operator>NOTEQUAL</operator>
+		<right-side>
+			<source>constant</source>
+			<value>N</value>
+		</right-side>
+	</clause>
+</rule>

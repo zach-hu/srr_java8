@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping>
+
+<!--
+    Created by Middlegen Hibernate plugin
+
+    http://boss.bekk.no/boss/middlegen/
+    http://hibernate.sourceforge.net/
+-->
+
+<class
+    name="com.tsa.puridiom.entity.VwBlanketReleases"
+    table="VW_BLANKET_RELEASES"
+>
+    <id
+        name="poNumber"
+        type="java.lang.String"
+        column="PO_NUMBER"
+         length="20"
+     >
+     <generator class="assigned" />
+    </id>
+
+    <property
+        name="lastRelease"
+        type="java.math.BigDecimal"
+        column="LAST_RELEASE"
+        length="22"
+    />
+    <property
+        name="releaseCount"
+        type="java.math.BigDecimal"
+        column="RELEASE_COUNT"
+        length="22"
+    />
+    <property
+        name="totalReleased"
+        type="java.math.BigDecimal"
+        column="TOTAL_RELEASED"
+        length="22"
+    />
+
+</class>
+</hibernate-mapping>

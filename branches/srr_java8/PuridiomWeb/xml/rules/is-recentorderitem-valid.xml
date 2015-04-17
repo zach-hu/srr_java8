@@ -1,0 +1,22 @@
+<rule>
+	<clause type="NotEmpty">
+		<left-side>
+			<source>incomingRequest</source>
+			<name>RecentOrderItem_itemLocation</name>
+		</left-side>
+	</clause>
+	<logical-operator>AND</logical-operator>
+	<clause type="NotEmpty">
+		<left-side>
+			<source>incomingRequest</source>
+			<name>RecentOrderItem_itemNumber</name>
+		</left-side>
+	</clause>
+	<logical-operator>AND</logical-operator>
+	<clause type="NotEmpty">
+		<left-side>
+			<source>incomingRequest</source>
+			<name>RecentOrderItem_buyerCode</name>
+		</left-side>
+	</clause>
+</rule>

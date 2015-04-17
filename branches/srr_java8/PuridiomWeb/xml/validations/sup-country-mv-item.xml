@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rule>
+	<clause type="lookup" elementSource="true">
+		<sql> from Country as Country where Country.countryCode = '@country@' AND (Country.status = '02' OR (Country.status = '01' AND Country.dateExpires >= @today@))</sql>
+		<source>address</source>
+		<arguments>
+			<name>country</name>
+			<source>address</source>
+			<colName>getCountry</colName>
+		</arguments>
+	</clause>
+</rule>

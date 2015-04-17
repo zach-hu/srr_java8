@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="poCreateRelease" connection-type="New-Transaction">
+	<activities>
+	    <activity synchronous="true" continue-on-failure="false" name="poRetrieve">
+	        <task synchronous="true" continue-on-failure="false" name="blanketIc">
+				<task-object-name>com.tsa.puridiom.po.tasks.PoGetBlanketIc</task-object-name>
+				<!-- This task also retrieves vendor_class and puts it in incoming request as PoHeader_vendorClass. -->
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="poHeader">
+				<task-object-name>com.tsa.puridiom.poheader.tasks.PoHeaderRetrieveById</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="poHeaderReleaseSetup">
+				<task-object-name>com.tsa.puridiom.poheader.tasks.PoHeaderReleaseSetup</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="poHeaderRetrieveSetup">
+				<task-object-name>com.tsa.puridiom.poheader.tasks.PoHeaderRetrieveSetup</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="poLineList">
+				<task-object-name>com.tsa.puridiom.poline.tasks.PoLineRetrieveByHeader</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="poSaveas">
+			<task synchronous="true" continue-on-failure="false" name="poSaveasSetup">
+				<task-object-name>com.tsa.puridiom.po.tasks.PoSaveasSetup</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="poHeaderSaveas">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>poheader-saveas.xml</process-filename>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="poLineList">
+				<rule-filename>copy-item-from-blanket-to-release.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.poline.tasks.PoLineSaveasList</task-object-name>
+			</task>
+			<!-- task synchronous="true" continue-on-failure="false" name="poLineList">
+				<rule-filename>is-poheader-potype-do.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.poline.tasks.PoLineSaveasList</task-object-name>
+				<post-action>exitActivity</post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="poLineList">
+				<rule-filename>copy-item-from-bo-to-ro.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.poline.tasks.PoLineSaveasList</task-object-name>
+			</task -->
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="initRelease">
+		    <task synchronous="true" continue-on-failure="false" name="setup">
+				<task-object-name>com.tsa.puridiom.po.tasks.PoReleaseCreateSetup</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="schedules">
+    			<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+    			<process-filename>po_schedules.xml</process-filename>
+    		</task>
+    		<task synchronous="true" continue-on-failure="false" name="nextRelease">
+    			<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+    			<process-filename>po-next-release.xml</process-filename>
+    		</task>
+    		<task synchronous="true" continue-on-failure="false" name="poHeader">
+				<rule-filename></rule-filename>
+				<task-object-name>com.tsa.puridiom.poheader.tasks.PoHeaderSetValues</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="poHeader">
+				<task-object-name>com.tsa.puridiom.poheader.tasks.PoHeaderUpdate</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="updateReleaseLine">
+			<task synchronous="true" continue-on-failure="false" name="poLineList">
+				<task-object-name>com.tsa.puridiom.poline.tasks.PoLineReleaseSetup</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="recalculate">
+			<task synchronous="true" continue-on-failure="false" name="poHeaderCommentSaveas">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>po-recalculate.xml</process-filename>
+			</task>
+    	</activity>
+    	<activity synchronous="true" continue-on-failure="false" name="history">
+		    <task synchronous="true" continue-on-failure="false" name="poHeaderHistory">
+				<task-object-name>com.tsa.puridiom.poheader.history.tasks.PoHeaderHistory</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="poLineListHistory">
+				<task-object-name>com.tsa.puridiom.poline.history.tasks.PoLineListHistory</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="newPoRetrieve">
+			<task synchronous="true" continue-on-failure="false" name="PoHeader_icPoHeader">
+				<task-object-name>com.tsa.puridiom.poheader.tasks.PoHeaderRetrieveNewIc</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="recentOrderActivity">
+			<task synchronous="true" continue-on-failure="false" name="recentOrderAdd">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>recentorder-add-txn-required.xml</process-filename>
+			</task>
+		</activity>
+	</activities>
+</process>

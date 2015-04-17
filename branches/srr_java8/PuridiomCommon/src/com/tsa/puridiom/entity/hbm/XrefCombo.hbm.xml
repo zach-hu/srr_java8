@@ -1,0 +1,165 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping>
+
+<!--
+    Created by Middlegen Hibernate plugin
+
+    http://boss.bekk.no/boss/middlegen/
+    http://hibernate.sourceforge.net/
+-->
+
+<class
+    name="com.tsa.puridiom.entity.XrefCombo"
+    table="XREF_COMBO"
+>
+    <id
+        name="icXref"
+        type="java.math.BigDecimal"
+        column="IC_XREF"
+    >
+        <generator class="assigned" />
+    </id>
+    <property
+        name="xrefType"
+        type="java.lang.String"
+        column="XREF_TYPE"
+        length="4"
+    />
+    <property
+        name="code1"
+        type="java.lang.String"
+        column="CODE_1"
+        length="50"
+    />
+    <property
+        name="code2"
+        type="java.lang.String"
+        column="CODE_2"
+        length="50"
+    />
+    <property
+        name="code3"
+        type="java.lang.String"
+        column="CODE_3"
+        length="50"
+    />
+    <property
+        name="code4"
+        type="java.lang.String"
+        column="CODE_4"
+        length="50"
+    />
+    <property
+        name="code5"
+        type="java.lang.String"
+        column="CODE_5"
+        length="50"
+    />
+    <property
+        name="code6"
+        type="java.lang.String"
+        column="CODE_6"
+        length="50"
+    />
+    <property
+        name="code7"
+        type="java.lang.String"
+        column="CODE_7"
+        length="50"
+    />
+    <property
+        name="code8"
+        type="java.lang.String"
+        column="CODE_8"
+        length="50"
+    />
+    <property
+        name="code9"
+        type="java.lang.String"
+        column="CODE_9"
+        length="50"
+    />
+    <property
+        name="code10"
+        type="java.lang.String"
+        column="CODE_10"
+        length="50"
+    />
+    <property
+        name="code11"
+        type="java.lang.String"
+        column="CODE_11"
+        length="50"
+    />
+    <property
+        name="code12"
+        type="java.lang.String"
+        column="CODE_12"
+        length="50"
+    />
+    <property
+        name="code13"
+        type="java.lang.String"
+        column="CODE_13"
+        length="50"
+    />
+    <property
+        name="code14"
+        type="java.lang.String"
+        column="CODE_14"
+        length="50"
+    />
+    <property
+        name="code15"
+        type="java.lang.String"
+        column="CODE_15"
+        length="50"
+    />
+
+    <property
+        name="xrefInd"
+        type="java.math.BigDecimal"
+        column="XREF_IND"
+        length="6"
+    />
+     <property
+        name="xrefAmt"
+        type="java.math.BigDecimal"
+        column="XREF_AMT"
+        length="15"
+    />
+    <property
+        name="dateEntered"
+        type="java.util.Date"
+        column="DATE_ENTERED"
+        length="7"
+    />
+    <property
+        name="dateExpires"
+        type="java.util.Date"
+        column="DATE_EXPIRES"
+        length="7"
+    />
+
+    <property
+        name="status"
+        type="java.lang.String"
+        column="STATUS"
+        length="4"
+    />
+    <property
+        name="owner"
+        type="java.lang.String"
+        column="OWNER"
+        length="15"
+    />
+
+    <!-- associations -->
+    <!-- bi-directional one-to-many association to BudgetAuditx -->
+
+</class>
+</hibernate-mapping>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="BuyerData" connection-type="Connection-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="BuyerData">
+			<rule-filename>is-user-buyer.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="poCount">
+				<task-object-name>com.tsa.puridiom.graphs.tasks.BuyerPoCountData</task-object-name> 
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="reqCount">
+				<task-object-name>com.tsa.puridiom.graphs.tasks.BuyerReqCountData</task-object-name> 
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="vendorCount">
+				<task-object-name>com.tsa.puridiom.graphs.tasks.BuyerVendorCountData</task-object-name> 
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="BuyerData">
+			<!-- <rule-filename>is-user-requisitioner.xml</rule-filename> -->
+			<task synchronous="true" continue-on-failure="false" name="requisitionerReqCount">
+				<task-object-name>com.tsa.puridiom.graphs.tasks.RequisitionerReqCountData</task-object-name> 
+			</task>
+		</activity>
+	</activities>
+</process>

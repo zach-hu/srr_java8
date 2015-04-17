@@ -1,0 +1,758 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created using an evaluation version of JasperAssistant (http://www.jasperassistant.com) -->
+<!DOCTYPE jasperReport PUBLIC "-//JasperReports//DTD Report Design//EN" "http://jasperreports.sourceforge.net/dtds/jasperreport.dtd">
+
+<jasperReport name="QriWorksheet" pageWidth="842" pageHeight="595" orientation="Landscape" whenNoDataType="BlankPage" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="10" bottomMargin="20">
+	<property name="com.jasperassistant.designer.GridHeight" value="12"/>
+	<property name="com.jasperassistant.designer.GridWidth" value="12"/>
+	<property name="com.jasperassistant.designer.Rulers" value="true"/>
+	<property name="com.jasperassistant.designer.SnapToGrid" value="false"/>
+	<property name="com.jasperassistant.designer.Margins" value="true"/>
+	<property name="com.jasperassistant.designer.Grid" value="true"/>
+	<property name="com.jasperassistant.designer.SnapToGuides" value="true"/>
+	<import value="com.tsa.puridiom.entity.RfqHeader"/>
+	<import value="com.tsa.puridiom.vendor.VendorManager"/>
+	<import value="com.tsa.puridiom.common.utility.HiltonUtility"/>
+	<import value="com.tsa.puridiom.jasperreports.*"/>
+	<import value="com.tsa.puridiom.entity.Vendor"/>
+	<import value="com.tsagate.properties.*"/>
+	<reportFont name="Arial_Normal" isDefault="true" fontName="Arial" size="8" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Bold" isDefault="false" fontName="Arial Black" size="7" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica-Bold" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Bold_Big" isDefault="false" fontName="Arial Black" size="9" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica-Bold" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<parameter name="oid" class="java.lang.String">
+		<defaultValueExpression><![CDATA["alaska"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="linesDS" class="com.tsa.puridiom.reports.datasource.HibernateQueryResultDataSource"/>
+	<parameter name="lines" class="java.util.List"/>
+	<parameter name="shipToDS" class="com.tsa.puridiom.reports.datasource.EntityDataSource"/>
+	<parameter name="groupNumber" class="java.lang.String">
+		<defaultValueExpression><![CDATA["1"]]></defaultValueExpression>
+	</parameter>
+	<field name="WorkSheetHeader_date" class="java.util.Date"/>
+	<field name="WorkSheetHeader_bidNumber" class="java.lang.String"/>
+	<field name="WorkSheetHeader_vendorName1" class="java.lang.String"/>
+	<field name="WorkSheetHeader_vendorName2" class="java.lang.String"/>
+	<field name="WorkSheetHeader_vendorName3" class="java.lang.String"/>
+	<field name="WorkSheetHeader_vendorName4" class="java.lang.String"/>
+	<field name="WorkSheetHeader_vendorName5" class="java.lang.String"/>
+	<field name="WorkSheet_buyer" class="java.lang.String"/>
+	<field name="WorkSheetHeader_status" class="java.lang.String"/>
+	<field name="WorkSheetHeader_vendorId1" class="java.lang.String"/>
+	<field name="WorkSheetHeader_vendorId2" class="java.lang.String"/>
+	<field name="WorkSheetHeader_vendorId3" class="java.lang.String"/>
+	<field name="WorkSheetHeader_vendorId4" class="java.lang.String"/>
+	<field name="WorkSheetHeader_contactId4" class="java.lang.String"/>
+	<field name="WorkSheetHeader_contactId1" class="java.lang.String"/>
+	<field name="WorkSheetHeader_contactId2" class="java.lang.String"/>
+	<field name="WorkSheetHeader_contactId3" class="java.lang.String"/>
+	<field name="WorkSheetHeader_contactId5" class="java.lang.String"/>
+	<field name="WorkSheetHeader_contactName1" class="java.lang.String"/>
+	<field name="WorkSheetHeader_contactName2" class="java.lang.String"/>
+	<field name="WorkSheetHeader_contactName3" class="java.lang.String"/>
+	<field name="WorkSheetHeader_contactName4" class="java.lang.String"/>
+	<field name="WorkSheetHeader_contactName5" class="java.lang.String"/>
+	<field name="WorkSheetHeader_bidResponseCode1" class="java.lang.String"/>
+	<field name="WorkSheetHeader_bidResponseCode2" class="java.lang.String"/>
+	<field name="WorkSheetHeader_bidResponseCode3" class="java.lang.String"/>
+	<field name="WorkSheetHeader_bidResponseCode4" class="java.lang.String"/>
+	<field name="WorkSheetHeader_bidResponseCode5" class="java.lang.String"/>
+	<field name="WorkSheetHeader_dateResponseRecv1" class="java.util.Date"/>
+	<field name="WorkSheetHeader_dateResponseRecv2" class="java.util.Date"/>
+	<field name="WorkSheetHeader_dateResponseRecv3" class="java.util.Date"/>
+	<field name="WorkSheetHeader_dateResponseRecv4" class="java.util.Date"/>
+	<field name="WorkSheetHeader_dateResponseRecv5" class="java.util.Date"/>
+	<field name="WorkSheetHeader_shipping1" class="java.math.BigDecimal"/>
+	<field name="WorkSheetHeader_tax1" class="java.math.BigDecimal"/>
+	<field name="WorkSheetHeader_fob1" class="java.lang.String"/>
+	<field name="WorkSheetHeader_terms1" class="java.lang.String"/>
+	<field name="WorkSheetHeader_datePromised1" class="java.util.Date"/>
+	<field name="WorkSheetHeader_bidValidTo1" class="java.util.Date"/>
+	<field name="WorhSheetHeader_others1" class="java.math.BigDecimal"/>
+	<field name="WorkSheetHeader_shipping2" class="java.math.BigDecimal"/>
+	<field name="WorkSheetHeader_tax2" class="java.math.BigDecimal"/>
+	<field name="WorkSheetHeader_fob2" class="java.lang.String"/>
+	<field name="WorkSheetHeader_terms2" class="java.lang.String"/>
+	<field name="WorkSheetHeader_datePromised2" class="java.util.Date"/>
+	<field name="WorkSheetHeader_bidValidTo2" class="java.util.Date"/>
+	<field name="WorhSheetHeader_others2" class="java.math.BigDecimal"/>
+	<field name="WorkSheetHeader_shipping3" class="java.math.BigDecimal"/>
+	<field name="WorkSheetHeader_tax3" class="java.math.BigDecimal"/>
+	<field name="WorkSheetHeader_fob3" class="java.lang.String"/>
+	<field name="WorkSheetHeader_terms3" class="java.lang.String"/>
+	<field name="WorkSheetHeader_datePromised3" class="java.util.Date"/>
+	<field name="WorkSheetHeader_bidValidTo3" class="java.util.Date"/>
+	<field name="WorhSheetHeader_others3" class="java.math.BigDecimal"/>
+	<field name="WorkSheetHeader_shipping4" class="java.math.BigDecimal"/>
+	<field name="WorkSheetHeader_tax4" class="java.math.BigDecimal"/>
+	<field name="WorkSheetHeader_fob4" class="java.lang.String"/>
+	<field name="WorkSheetHeader_terms4" class="java.lang.String"/>
+	<field name="WorkSheetHeader_datePromised4" class="java.util.Date"/>
+	<field name="WorkSheetHeader_bidValidTo4" class="java.util.Date"/>
+	<field name="WorhSheetHeader_others4" class="java.math.BigDecimal"/>
+	<field name="WorkSheetHeader_vendorSubTotal1" class="java.math.BigDecimal"/>
+	<field name="WorkSheetHeader_vendorSubTotal2" class="java.math.BigDecimal"/>
+	<field name="WorkSheetHeader_vendorSubTotal3" class="java.math.BigDecimal"/>
+	<field name="WorkSheetHeader_vendorSubTotal4" class="java.math.BigDecimal"/>
+	<field name="WorkSheetHeader_rfqHeader" class="java.lang.Object"/>
+	<variable name="totalPages" class="java.lang.Integer" resetType="None" incrementType="Report">
+		<variableExpression><![CDATA[$V{REPORT_COUNT}]]></variableExpression>
+		<initialValueExpression><![CDATA[$V{REPORT_COUNT}]]></initialValueExpression>
+	</variable>
+	<variable name="subtotal1" class="java.math.BigDecimal"/>
+	<variable name="subtotal2" class="java.math.BigDecimal"/>
+	<variable name="subtotal3" class="java.math.BigDecimal"/>
+	<variable name="subtotal4" class="java.math.BigDecimal"/>
+	<group name="Group_1"/>
+	<background>
+		<band height="565">
+			<line>
+				<reportElement positionType="Float" x="3" y="95" width="796" height="1"/>
+				<graphicElement/>
+			</line>
+			<line>
+				<reportElement positionType="Float" x="3" y="95" width="1" height="455"/>
+				<graphicElement/>
+			</line>
+			<line>
+				<reportElement positionType="Float" x="799" y="95" width="1" height="455"/>
+				<graphicElement/>
+			</line>
+			<line>
+				<reportElement positionType="Float" x="480" y="95" width="1" height="454"/>
+				<graphicElement/>
+			</line>
+			<line>
+				<reportElement positionType="Float" x="692" y="95" width="1" height="454"/>
+				<graphicElement/>
+			</line>
+			<line>
+				<reportElement positionType="Float" x="374" y="95" width="1" height="454"/>
+				<graphicElement/>
+			</line>
+			<line>
+				<reportElement positionType="Float" x="586" y="95" width="1" height="454"/>
+				<graphicElement/>
+			</line>
+			<line>
+				<reportElement positionType="Float" x="427" y="206" width="1" height="215"/>
+				<graphicElement/>
+			</line>
+			<line>
+				<reportElement positionType="Float" x="533" y="206" width="1" height="215"/>
+				<graphicElement/>
+			</line>
+			<line>
+				<reportElement positionType="Float" x="639" y="206" width="1" height="215"/>
+				<graphicElement/>
+			</line>
+			<line>
+				<reportElement positionType="Float" x="745" y="206" width="1" height="215"/>
+				<graphicElement/>
+			</line>
+		</band>
+	</background>
+	<pageHeader>
+		<band height="207">
+			<staticText>
+				<reportElement positionType="Float" x="283" y="33" width="210" height="25"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font reportFont="Arial_Normal" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[BID SUMMARY RECORD]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="694" y="72" width="36" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font reportFont="Arial_Normal" size="11" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Page ]]></text>
+			</staticText>
+			<textField>
+				<reportElement positionType="Float" x="731" y="72" width="41" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font reportFont="Arial_Normal" size="11" isBold="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[String.valueOf($V{PAGE_NUMBER}) + " of "]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement positionType="Float" x="772" y="72" width="27" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font reportFont="Arial_Normal" size="11" isBold="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["   " + String.valueOf($V{PAGE_NUMBER})]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement positionType="Float" x="3" y="95" width="60" height="14"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font reportFont="Arial_Bold"/>
+				</textElement>
+				<text><![CDATA[DATE:  ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="3" y="109" width="60" height="14"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font reportFont="Arial_Bold"/>
+				</textElement>
+				<text><![CDATA[BID #:  ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="280" y="95" width="90" height="14"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font reportFont="Arial_Bold"/>
+				</textElement>
+				<text><![CDATA[SUPPLIER:   ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="280" y="109" width="90" height="14"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font reportFont="Arial_Bold"/>
+				</textElement>
+				<text><![CDATA[SUPPLIER NAME:   ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="280" y="123" width="90" height="14"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font reportFont="Arial_Bold"/>
+				</textElement>
+				<text><![CDATA[CONTACT PERSON:   ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="3" y="179" width="49" height="28"/>
+				<box topBorder="1Point" leftBorder="None" bottomBorder="1Point" rightBorder="1Point"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<font reportFont="Arial_Bold" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ITEM]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="52" y="179" width="49" height="28"/>
+				<box topBorder="1Point" leftBorder="None" bottomBorder="1Point" rightBorder="1Point"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<font reportFont="Arial_Bold" isBold="true"/>
+				</textElement>
+				<text><![CDATA[QTY]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="101" y="179" width="49" height="28"/>
+				<box topBorder="1Point" leftBorder="None" bottomBorder="1Point" rightBorder="1Point"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<font reportFont="Arial_Bold" isBold="true"/>
+				</textElement>
+				<text><![CDATA[UNIT]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="151" y="179" width="224" height="28"/>
+				<box topBorder="1Point" leftBorder="None" bottomBorder="1Point" rightBorder="1Point"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<font reportFont="Arial_Bold" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ITEM DESCRIPTION]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="375" y="179" width="53" height="28"/>
+				<box topBorder="None" leftBorder="None" bottomBorder="1Point" rightBorder="1Point"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<font reportFont="Arial_Bold" isBold="true"/>
+				</textElement>
+				<text><![CDATA[UNIT
+PRICE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="428" y="179" width="53" height="28"/>
+				<box topBorder="None" leftBorder="None" bottomBorder="1Point" rightBorder="1Point"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<font reportFont="Arial_Bold" isBold="true"/>
+				</textElement>
+				<text><![CDATA[EXT.
+PRICE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="534" y="179" width="53" height="28"/>
+				<box topBorder="None" leftBorder="None" bottomBorder="1Point" rightBorder="1Point"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<font reportFont="Arial_Bold" isBold="true"/>
+				</textElement>
+				<text><![CDATA[EXT.
+PRICE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="481" y="179" width="53" height="28"/>
+				<box topBorder="None" leftBorder="None" bottomBorder="1Point" rightBorder="1Point"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<font reportFont="Arial_Bold" isBold="true"/>
+				</textElement>
+				<text><![CDATA[UNIT
+PRICE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="587" y="179" width="53" height="28"/>
+				<box topBorder="None" leftBorder="None" bottomBorder="1Point" rightBorder="1Point"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<font reportFont="Arial_Bold" isBold="true"/>
+				</textElement>
+				<text><![CDATA[UNIT
+PRICE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="640" y="179" width="53" height="28"/>
+				<box topBorder="None" leftBorder="None" bottomBorder="1Point" rightBorder="1Point"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<font reportFont="Arial_Bold" isBold="true"/>
+				</textElement>
+				<text><![CDATA[EXT.
+PRICE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="693" y="179" width="53" height="28"/>
+				<box topBorder="None" leftBorder="None" bottomBorder="1Point" rightBorder="1Point"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<font reportFont="Arial_Bold" isBold="true"/>
+				</textElement>
+				<text><![CDATA[UNIT
+PRICE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="746" y="179" width="53" height="28"/>
+				<box topBorder="None" leftBorder="None" bottomBorder="1Point" rightBorder="None"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<font reportFont="Arial_Bold" isBold="true"/>
+				</textElement>
+				<text><![CDATA[EXT.
+PRICE]]></text>
+			</staticText>
+			<textField>
+				<reportElement positionType="Float" x="65" y="95" width="170" height="14"/>
+				<box topBorder="None" leftBorder="None" bottomBorder="1Point" rightBorder="None"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[HiltonUtility.getFormattedDate($F{WorkSheetHeader_date}, $P{oid})]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement positionType="Float" x="64" y="109" width="170" height="14"/>
+				<box topBorder="None" leftBorder="None" bottomBorder="1Point" rightBorder="None"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{WorkSheetHeader_bidNumber}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement positionType="Float" x="280" y="137" width="90" height="14"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font reportFont="Arial_Bold"/>
+				</textElement>
+				<text><![CDATA[PHONE NUMBER:   ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="280" y="151" width="90" height="14"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font reportFont="Arial_Bold"/>
+				</textElement>
+				<text><![CDATA[RESPONSE DATE:   ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="280" y="165" width="90" height="14"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font reportFont="Arial_Bold"/>
+				</textElement>
+				<text><![CDATA[BID RESPONSE:   ]]></text>
+			</staticText>
+			<textField>
+				<reportElement positionType="Float" x="64" y="123" width="170" height="14"/>
+				<box topBorder="None" leftBorder="None" bottomBorder="1Point" rightBorder="None"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[ReportUtils.getDepartmentData(((RfqHeader)$F{WorkSheetHeader_rfqHeader}).getDepartmentCode(), "name", $P{oid})]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement positionType="Float" x="631" y="72" width="34" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font size="11" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Group]]></text>
+			</staticText>
+			<textField>
+				<reportElement positionType="Float" x="668" y="72" width="21" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{groupNumber}]]></textFieldExpression>
+			</textField>
+			<subreport>
+				<reportElement positionType="Float" x="375" y="95" width="106" height="85"/>
+				<subreportParameter name="WorkSheetHeader_contactName">
+					<subreportParameterExpression><![CDATA[$F{WorkSheetHeader_contactName1}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="WorkSheetHeader_vendorName">
+					<subreportParameterExpression><![CDATA[$F{WorkSheetHeader_vendorName1}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="WorkSheetHeader_bidResponseCode">
+					<subreportParameterExpression><![CDATA[$F{WorkSheetHeader_bidResponseCode1}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="oid">
+					<subreportParameterExpression><![CDATA[$P{oid}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="WorkSheetHeader_vendorId">
+					<subreportParameterExpression><![CDATA[$F{WorkSheetHeader_vendorId1}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="WorkSheetHeader_dateResponseRecv">
+					<subreportParameterExpression><![CDATA[$F{WorkSheetHeader_dateResponseRecv1}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="WorkSheetHeader_contactId">
+					<subreportParameterExpression><![CDATA[$F{WorkSheetHeader_contactId1}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[new JREmptyDataSource(1)]]></dataSourceExpression>
+				<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[JasperReportsHelper.loadSubReport("wrk-vendor-top.jasper", $P{oid})]]></subreportExpression>
+			</subreport>
+			<subreport isUsingCache="false">
+				<reportElement positionType="Float" x="481" y="95" width="106" height="85"/>
+				<subreportParameter name="WorkSheetHeader_contactName">
+					<subreportParameterExpression><![CDATA[$F{WorkSheetHeader_contactName2}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="WorkSheetHeader_vendorName">
+					<subreportParameterExpression><![CDATA[$F{WorkSheetHeader_vendorName2}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="WorkSheetHeader_bidResponseCode">
+					<subreportParameterExpression><![CDATA[$F{WorkSheetHeader_bidResponseCode2}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="oid">
+					<subreportParameterExpression><![CDATA[$P{oid}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="WorkSheetHeader_vendorId">
+					<subreportParameterExpression><![CDATA[$F{WorkSheetHeader_vendorId2}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="WorkSheetHeader_dateResponseRecv">
+					<subreportParameterExpression><![CDATA[$F{WorkSheetHeader_dateResponseRecv2}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="WorkSheetHeader_contactId">
+					<subreportParameterExpression><![CDATA[$F{WorkSheetHeader_contactId2}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[new JREmptyDataSource(1)]]></dataSourceExpression>
+				<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[JasperReportsHelper.loadSubReport("wrk-vendor-top.jasper", $P{oid})]]></subreportExpression>
+			</subreport>
+			<subreport isUsingCache="false">
+				<reportElement positionType="Float" x="587" y="95" width="106" height="85"/>
+				<subreportParameter name="WorkSheetHeader_contactName">
+					<subreportParameterExpression><![CDATA[$F{WorkSheetHeader_contactName3}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="WorkSheetHeader_vendorName">
+					<subreportParameterExpression><![CDATA[$F{WorkSheetHeader_vendorName3}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="WorkSheetHeader_bidResponseCode">
+					<subreportParameterExpression><![CDATA[$F{WorkSheetHeader_bidResponseCode3}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="oid">
+					<subreportParameterExpression><![CDATA[$P{oid}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="WorkSheetHeader_vendorId">
+					<subreportParameterExpression><![CDATA[$F{WorkSheetHeader_vendorId3}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="WorkSheetHeader_dateResponseRecv">
+					<subreportParameterExpression><![CDATA[$F{WorkSheetHeader_dateResponseRecv3}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="WorkSheetHeader_contactId">
+					<subreportParameterExpression><![CDATA[$F{WorkSheetHeader_contactId3}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[new JREmptyDataSource(1)]]></dataSourceExpression>
+				<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[JasperReportsHelper.loadSubReport("wrk-vendor-top.jasper", $P{oid})]]></subreportExpression>
+			</subreport>
+			<subreport isUsingCache="false">
+				<reportElement positionType="Float" x="693" y="95" width="106" height="85"/>
+				<subreportParameter name="WorkSheetHeader_contactName">
+					<subreportParameterExpression><![CDATA[$F{WorkSheetHeader_contactName4}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="WorkSheetHeader_vendorName">
+					<subreportParameterExpression><![CDATA[$F{WorkSheetHeader_vendorName4}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="WorkSheetHeader_bidResponseCode">
+					<subreportParameterExpression><![CDATA[$F{WorkSheetHeader_bidResponseCode4}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="oid">
+					<subreportParameterExpression><![CDATA[$P{oid}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="WorkSheetHeader_vendorId">
+					<subreportParameterExpression><![CDATA[$F{WorkSheetHeader_vendorId4}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="WorkSheetHeader_dateResponseRecv">
+					<subreportParameterExpression><![CDATA[$F{WorkSheetHeader_dateResponseRecv4}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="WorkSheetHeader_contactId">
+					<subreportParameterExpression><![CDATA[$F{WorkSheetHeader_contactId4}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[new JREmptyDataSource(1)]]></dataSourceExpression>
+				<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[JasperReportsHelper.loadSubReport("wrk-vendor-top.jasper", $P{oid})]]></subreportExpression>
+			</subreport>
+			<image isUsingCache="true">
+				<reportElement positionType="Float" x="6" y="3" width="262" height="68"/>
+				<graphicElement/>
+				<imageExpression class="java.lang.String"><![CDATA[JasperReportsHelper.getImgUrl($P{oid}, "logo.gif")]]></imageExpression>
+			</image>
+			<textField>
+				<reportElement positionType="Float" x="3" y="123" width="60" height="14"/>
+				<textElement textAlignment="Right">
+					<font reportFont="Arial_Bold"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[DictionaryManager.getLabel($P{oid}, "department", "Department") + ":"]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="43">
+			<subreport isUsingCache="false">
+				<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="26" y="1" width="772" height="39"/>
+				<subreportParameter name="oid">
+					<subreportParameterExpression><![CDATA[$P{oid}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="lines">
+					<subreportParameterExpression><![CDATA[$P{lines}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[$P{linesDS}]]></dataSourceExpression>
+				<returnValue subreportVariable="subtotal1" toVariable="subtotal1"/>
+				<returnValue subreportVariable="subtotal2" toVariable="subtotal2"/>
+				<returnValue subreportVariable="subtotal3" toVariable="subtotal3"/>
+				<returnValue subreportVariable="subtotal4" toVariable="subtotal4"/>
+				<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[JasperReportsHelper.loadSubReport("worksheetbids.jasper", $P{oid})]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="145">
+			<staticText>
+				<reportElement positionType="Float" x="280" y="72" width="90" height="14"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font reportFont="Arial_Bold"/>
+				</textElement>
+				<text><![CDATA[TAX:  ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="280" y="2" width="90" height="14"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font reportFont="Arial_Bold"/>
+				</textElement>
+				<text><![CDATA[FOB:  ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="280" y="58" width="90" height="14"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font reportFont="Arial_Bold"/>
+				</textElement>
+				<text><![CDATA[SUBTOTAL:  ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="4" y="130" width="93" height="14"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[AWARDED SUPPLIER:  ]]></text>
+			</staticText>
+			<subreport isUsingCache="false">
+				<reportElement positionType="Float" x="3" y="2" width="239" height="71"/>
+				<subreportParameter name="oid">
+					<subreportParameterExpression><![CDATA[$P{oid}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[$P{shipToDS}]]></dataSourceExpression>
+				<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[JasperReportsHelper.loadSubReport("shipto-pdf.jasper", $P{oid})]]></subreportExpression>
+			</subreport>
+			<staticText>
+				<reportElement positionType="Float" x="280" y="44" width="90" height="14"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font reportFont="Arial_Bold"/>
+				</textElement>
+				<text><![CDATA[BID VALID TO:  ]]></text>
+			</staticText>
+			<line>
+				<reportElement positionType="Float" x="3" y="129" width="796" height="1"/>
+				<graphicElement/>
+			</line>
+			<staticText>
+				<reportElement positionType="Float" x="4" y="77" width="72" height="14"/>
+				<textElement verticalAlignment="Middle">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Buyer's Name:  ]]></text>
+			</staticText>
+			<image isUsingCache="true" isLazy="true" onErrorType="Blank">
+				<reportElement positionType="Float" x="78" y="93" width="197" height="34"/>
+				<graphicElement/>
+				<imageExpression class="java.lang.String"><![CDATA[JasperReportsHelper.getSigUrl(((RfqHeader)$F{WorkSheetHeader_rfqHeader}).getBuyer(), $P{oid})]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement positionType="Float" x="280" y="100" width="90" height="14"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font reportFont="Arial_Bold"/>
+				</textElement>
+				<text><![CDATA[OTHER:  ]]></text>
+			</staticText>
+			<line>
+				<reportElement positionType="Float" x="3" y="0" width="796" height="1"/>
+				<graphicElement/>
+			</line>
+			<staticText>
+				<reportElement positionType="Float" x="280" y="16" width="90" height="14"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font reportFont="Arial_Bold"/>
+				</textElement>
+				<text><![CDATA[TERMS:  ]]></text>
+			</staticText>
+			<textField>
+				<reportElement positionType="Float" x="78" y="77" width="165" height="14"/>
+				<box topBorder="None" leftBorder="None" bottomBorder="1Point" rightBorder="None"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[ReportUtils.getUserName(((RfqHeader)$F{WorkSheetHeader_rfqHeader}).getBuyer(), $P{oid})]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement positionType="Float" x="280" y="86" width="90" height="14"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font reportFont="Arial_Bold"/>
+				</textElement>
+				<text><![CDATA[SHIPPING:  ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="280" y="30" width="90" height="14"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font reportFont="Arial_Bold"/>
+				</textElement>
+				<text><![CDATA[PROMISED DATE:  ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="280" y="114" width="90" height="14"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font reportFont="Arial_Bold"/>
+				</textElement>
+				<text><![CDATA[TOTAL:  ]]></text>
+			</staticText>
+			<subreport isUsingCache="false">
+				<reportElement positionType="Float" x="375" y="2" width="106" height="127"/>
+				<subreportParameter name="WorkSheetHeader_subtotal">
+					<subreportParameterExpression><![CDATA[$F{WorkSheetHeader_vendorSubTotal1}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="WorkSheetHeader_shippingTaxAmt">
+					<subreportParameterExpression><![CDATA[$F{WorkSheetHeader_shipping1}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="oid">
+					<subreportParameterExpression><![CDATA[$P{oid}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="WorkSheetHeader_paymentTerms">
+					<subreportParameterExpression><![CDATA[$F{WorkSheetHeader_terms1}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="WorkSheetHeader_total"/>
+				<subreportParameter name="WorkSheetHeader_bidValidTo">
+					<subreportParameterExpression><![CDATA[$F{WorkSheetHeader_bidValidTo1}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="WorkSheetHeader_taxAmt">
+					<subreportParameterExpression><![CDATA[$F{WorkSheetHeader_tax1}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="WorkSheetHeader_otherTaxAmount">
+					<subreportParameterExpression><![CDATA[$F{WorhSheetHeader_others1}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="WorkSheetHeader_datePromised">
+					<subreportParameterExpression><![CDATA[$F{WorkSheetHeader_datePromised1}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="WorkSheetHeader_fob">
+					<subreportParameterExpression><![CDATA[$F{WorkSheetHeader_fob1}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[new JREmptyDataSource(1)]]></dataSourceExpression>
+				<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[JasperReportsHelper.loadSubReport("wrk-vendor-bottom.jasper", $P{oid})]]></subreportExpression>
+			</subreport>
+			<subreport isUsingCache="false">
+				<reportElement positionType="Float" x="481" y="2" width="106" height="127"/>
+				<subreportParameter name="WorkSheetHeader_subtotal">
+					<subreportParameterExpression><![CDATA[$F{WorkSheetHeader_vendorSubTotal2}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="WorkSheetHeader_shippingTaxAmt">
+					<subreportParameterExpression><![CDATA[$F{WorkSheetHeader_shipping2}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="oid">
+					<subreportParameterExpression><![CDATA[$P{oid}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="WorkSheetHeader_paymentTerms">
+					<subreportParameterExpression><![CDATA[$F{WorkSheetHeader_terms2}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="WorkSheetHeader_total"/>
+				<subreportParameter name="WorkSheetHeader_bidValidTo">
+					<subreportParameterExpression><![CDATA[$F{WorkSheetHeader_bidValidTo2}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="WorkSheetHeader_taxAmt">
+					<subreportParameterExpression><![CDATA[$F{WorkSheetHeader_tax2}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="WorkSheetHeader_otherTaxAmount">
+					<subreportParameterExpression><![CDATA[$F{WorhSheetHeader_others2}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="WorkSheetHeader_datePromised">
+					<subreportParameterExpression><![CDATA[$F{WorkSheetHeader_datePromised2}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="WorkSheetHeader_fob">
+					<subreportParameterExpression><![CDATA[$F{WorkSheetHeader_fob2}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[new JREmptyDataSource(1)]]></dataSourceExpression>
+				<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[JasperReportsHelper.loadSubReport("wrk-vendor-bottom.jasper", $P{oid})]]></subreportExpression>
+			</subreport>
+			<subreport isUsingCache="false">
+				<reportElement positionType="Float" x="587" y="2" width="106" height="127"/>
+				<subreportParameter name="WorkSheetHeader_subtotal">
+					<subreportParameterExpression><![CDATA[$F{WorkSheetHeader_vendorSubTotal3}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="WorkSheetHeader_shippingTaxAmt">
+					<subreportParameterExpression><![CDATA[$F{WorkSheetHeader_shipping3}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="oid">
+					<subreportParameterExpression><![CDATA[$P{oid}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="WorkSheetHeader_paymentTerms">
+					<subreportParameterExpression><![CDATA[$F{WorkSheetHeader_terms3}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="WorkSheetHeader_total"/>
+				<subreportParameter name="WorkSheetHeader_bidValidTo">
+					<subreportParameterExpression><![CDATA[$F{WorkSheetHeader_bidValidTo3}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="WorkSheetHeader_taxAmt">
+					<subreportParameterExpression><![CDATA[$F{WorkSheetHeader_tax3}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="WorkSheetHeader_otherTaxAmount">
+					<subreportParameterExpression><![CDATA[$F{WorhSheetHeader_others3}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="WorkSheetHeader_datePromised">
+					<subreportParameterExpression><![CDATA[$F{WorkSheetHeader_datePromised3}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="WorkSheetHeader_fob">
+					<subreportParameterExpression><![CDATA[$F{WorkSheetHeader_fob3}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[new JREmptyDataSource(1)]]></dataSourceExpression>
+				<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[JasperReportsHelper.loadSubReport("wrk-vendor-bottom.jasper", $P{oid})]]></subreportExpression>
+			</subreport>
+			<subreport isUsingCache="false">
+				<reportElement positionType="Float" x="693" y="2" width="106" height="127"/>
+				<subreportParameter name="WorkSheetHeader_subtotal">
+					<subreportParameterExpression><![CDATA[$F{WorkSheetHeader_vendorSubTotal4}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="WorkSheetHeader_shippingTaxAmt">
+					<subreportParameterExpression><![CDATA[$F{WorkSheetHeader_shipping4}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="oid">
+					<subreportParameterExpression><![CDATA[$P{oid}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="WorkSheetHeader_paymentTerms">
+					<subreportParameterExpression><![CDATA[$F{WorkSheetHeader_terms4}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="WorkSheetHeader_total"/>
+				<subreportParameter name="WorkSheetHeader_bidValidTo">
+					<subreportParameterExpression><![CDATA[$F{WorkSheetHeader_bidValidTo4}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="WorkSheetHeader_taxAmt">
+					<subreportParameterExpression><![CDATA[$F{WorkSheetHeader_tax4}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="WorkSheetHeader_otherTaxAmount">
+					<subreportParameterExpression><![CDATA[$F{WorhSheetHeader_others4}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="WorkSheetHeader_datePromised">
+					<subreportParameterExpression><![CDATA[$F{WorkSheetHeader_datePromised4}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="WorkSheetHeader_fob">
+					<subreportParameterExpression><![CDATA[$F{WorkSheetHeader_fob4}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[new JREmptyDataSource(1)]]></dataSourceExpression>
+				<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[JasperReportsHelper.loadSubReport("wrk-vendor-bottom.jasper", $P{oid})]]></subreportExpression>
+			</subreport>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" x="97" y="130" width="380" height="14">
+					<printWhenExpression><![CDATA[new Boolean  ( !((String)((RfqHeader) $F{WorkSheetHeader_rfqHeader}).getVendorAwarded()).equalsIgnoreCase("MULTIPLE") )]]></printWhenExpression>
+				</reportElement>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[((Vendor)VendorManager.getInstance().getVendor($P{oid}, ((RfqHeader)$F{WorkSheetHeader_rfqHeader}).getVendorAwarded())).getVendorName()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>

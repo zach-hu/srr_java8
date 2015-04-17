@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="DisbLineAccountUpdateByLine" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="accountReallocation">
+			<task synchronous="true" continue-on-failure="false" name="allocateTotal">
+				<task-object-name>com.tsa.puridiom.disbheader.tasks.DisbHeaderGetSubtotal</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="disbLineUpdateIcAccount">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>disbline-update-icaccount.xml</process-filename>
+			</task>
+		</activity>
+	</activities>
+</process>

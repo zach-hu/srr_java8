@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="AccountHeaderAdd" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="UpdateAccount">
+			<task synchronous="true" continue-on-failure="false" name="UpdateAccount">
+					<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+					<process-filename>account-update-by-line.xml</process-filename>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="RetrieveLines">
+			<task synchronous="true" continue-on-failure="false" name="poLineList">
+				<rule-filename>is-po.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.poline.PoLineRetrieveByHeader</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="requisitionLines">
+				<rule-filename>is-req.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.requisitionline.RequisitionLineRetrieveByHeader</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

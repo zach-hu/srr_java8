@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="ItemUsage" connection-type="Connection-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="itemUsage">
+			<task synchronous="true" continue-on-failure="false" name="setup">
+				<task-object-name>com.tsa.puridiom.reports.itemusage.tasks.ItemDetailUsageSetup</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="invItem">
+				<task-object-name>com.tsa.puridiom.invitem.tasks.InvItemRetrieveById</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="inventorySummary">
+				<task-object-name>com.tsa.puridiom.invlocation.tasks.InvLocationRetrieveByItem</task-object-name>
+			</task>
+			<!--task synchronous="true" continue-on-failure="false" name="location">
+				<task-object-name>com.tsa.puridiom.invlocation.tasks.InvLocationRetrieveByItem</task-object-name>
+			</task-->
+			<task synchronous="true" continue-on-failure="false" name="item">
+				<task-object-name>com.tsa.puridiom.invitem.tasks.InvItemRetrieveById</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="itemUsage">
+				<task-object-name>com.tsa.puridiom.reports.itemusage.tasks.ItemUsageStart</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="itemDetailUsage">
+				<task-object-name>com.tsa.puridiom.reports.itemusage.tasks.ItemDetailUsageStart</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="quantities">
+				<task-object-name>com.tsa.puridiom.reports.itemusage.tasks.UsageQuantities</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="PoHeader_poNumber">
+				<task-object-name>com.tsa.puridiom.reports.itemusage.tasks.GetPoNumber</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="poHeader">
+				<task-object-name>com.tsa.puridiom.poheader.tasks.PoHeaderRetrievelastByNumber</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="itemsettings">
+				<task-object-name>com.tsa.puridiom.reports.itemusage.tasks.SetItemUsage</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="usageMonths">
+				<task-object-name>com.tsa.puridiom.reports.itemusage.tasks.GetItemUsage</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="itemDetailUsage">
+				<task-object-name>com.tsa.puridiom.reports.itemusage.tasks.CheckMonthUsage</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="ue_ok">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>item-usage-ok.xml</process-filename>
+			</task>
+		</activity>
+	</activities>
+</process>

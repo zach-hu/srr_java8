@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rule>
+	<clause type="lookup" elementSource="true">
+		<sql>from StdTable stdTable where stdTable.id.tableType = 'INSP' AND stdTable.id.tableKey = '@inspcode@' and (stdTable.status = '02' or (stdTable.status = '01' and stdTable.dateExpires >= @today@))</sql>
+		<source>item</source>
+		<arguments>
+			<name>inspcode</name>
+			<source>item</source>
+			<colName>getInspectionCode</colName>
+		</arguments>
+	</clause>
+</rule>

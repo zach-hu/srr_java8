@@ -1,0 +1,46 @@
+<car_project>
+	<columns>
+		<XrefCombo_icXref>
+			<visible>0</visible>
+			<hidden-input>Y</hidden-input>
+		</XrefCombo_icXref>
+		<XrefCombo_xrefType>
+			<label>poType</label>
+			<visible>0</visible>
+		</XrefCombo_xrefType>
+		<XrefCombo_code3>
+			<label>brw-cartt</label>
+			<size>20</size>
+			<link><![CDATA[javascript: returnMe('#XrefCombo_code3^'); void(0);]]></link>
+			<hidden-input>Y</hidden-input>
+			<visible>1</visible>
+		</XrefCombo_code3>
+		<StdTable_description>
+			<label>description</label>
+			<size>40</size>
+			<filter-default>Y</filter-default>
+		</StdTable_description>
+		<XrefCombo_code1>
+			<label>assetlocationdivision</label>
+			<visible>0</visible>
+			<hidden-input>Y</hidden-input>
+		</XrefCombo_code1>
+		<XrefCombo_code2>
+			<label>brw-projecttt</label>
+			<size>20</size>
+			<visible>1</visible>
+			<hidden-input>Y</hidden-input>
+		</XrefCombo_code2>
+		<XrefCombo_code4>
+			<label>brw-program</label>
+			<size>20</size>
+			<visible>1</visible>
+			<hidden-input>Y</hidden-input>
+		</XrefCombo_code4>
+	</columns>
+<sqlfrom>XrefCombo as XrefCombo, StdTable as StdTable</sqlfrom>
+<sqlwhere><![CDATA[ XrefCombo.xrefType = 'CARP' AND XrefCombo.code3 = StdTable.id.tableKey AND XrefCombo.status = '02' AND StdTable.status = '02' ]]></sqlwhere>
+<sqlorderby>XrefCombo.code2 ASC, XrefCombo.code3 ASC, XrefCombo.code4 ASC</sqlorderby>
+<pagesize>15</pagesize>
+<title>CAR/Project Browse</title>
+</car_project>

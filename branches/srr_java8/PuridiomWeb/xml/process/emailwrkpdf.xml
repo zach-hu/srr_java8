@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="PrintWrkPdf" connection-type="Connection-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="printWrkPdf">
+			<task synchronous="true" continue-on-failure="false" name="datasource">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>rfq-worksheet-data-retrieve.xml</process-filename>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="report">
+				<task-object-name>com.tsa.puridiom.formpdf.tasks.PrintWrkPdf</task-object-name>
+			</task>
+			<task name="messageText" synchronous="true" continue-on-failure="false">
+				<task-object-name>com.tsa.puridiom.formpdf.tasks.RfqPdfMessageText</task-object-name>
+			  </task>
+		</activity>
+	</activities>
+</process>

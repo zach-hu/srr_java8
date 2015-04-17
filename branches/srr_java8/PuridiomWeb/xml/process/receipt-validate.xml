@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="ReceiptValidate" connection-type="Connection-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="validationSetup">
+			<task synchronous="true" continue-on-failure="false" name="setup">
+				<task-object-name>com.tsa.puridiom.validationrules.tasks.ReceiptRulesSetup</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="dataSetup">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>receipt-create.xml</process-filename>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="receiptLineList">
+				<rule-filename check-for-false="true">is-receiptmethod-receivebypackage.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.receiptline.tasks.ReceiptLineSetList</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="receiptDataSetup">
+				<task-object-name>com.tsa.puridiom.receipt.tasks.ReceiptValidationRulesData</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="recLineRules">
+			<task synchronous="true" continue-on-failure="false" name="dispositionCodeRecLineRules">
+				<task-object-name>com.tsa.puridiom.validationrules.receipt.tasks.DispositionCodeRecLineRules</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="rejectionCodeRecLineRules">
+				<task-object-name>com.tsa.puridiom.validationrules.receipt.tasks.RejectionCodeRecLineRules</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="commodityCodeToleranceLineRules">
+				<task-object-name>com.tsa.puridiom.validationrules.receipt.tasks.CommodityCodeRecLineRules</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="qtyReceiptToleranceLineRules">
+				<task-object-name>com.tsa.puridiom.validationrules.receipt.tasks.ReceiptCodeRecLineRules</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="packageQtyRecivedNotZero">
+				<task-object-name>com.tsa.puridiom.validationrules.receipt.tasks.PackageQtyRecivedNotZero</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="receiptAtLeastOneQuantiyReturnedRules">
+				<task-object-name>com.tsa.puridiom.validationrules.receipt.tasks.ReceiptAtLeastOneQuantiyReturnedRules</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="labelsList">
+				<task-object-name>com.tsa.puridiom.labels.tasks.LabelsRetrieveBy</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="rules">
+				<task-object-name>com.tsa.puridiom.validationrules.tasks.DatabaseValidationRulesTask</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="validateRules">
+			<task synchronous="true" continue-on-failure="false" name="rules">
+				<rule-filename>is-receiptmethod-receivebypackage.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.validationrules.tasks.ValidationRulesTask</task-object-name>
+				<process-filename>rec-package-validation-rules.xml</process-filename>
+				<post-action>exitActivity</post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="rules">
+				<rule-filename>is-receiptmethod-return.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.validationrules.tasks.ValidationRulesTask</task-object-name>
+				<process-filename>rec-return-validation-rules.xml</process-filename>
+				<post-action>exitActivity</post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="rules">
+				<rule-filename>is-receiptmethod-receivebyorder.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.validationrules.tasks.ValidationRulesTask</task-object-name>
+				<process-filename>rec-validation-rules.xml</process-filename>
+				<post-action>exitActivity</post-action>
+			</task>
+		</activity>
+	</activities>
+</process>

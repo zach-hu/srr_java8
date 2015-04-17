@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="requisitionApprove" connection-type="Transaction-Required">
+  <activities>
+    <activity synchronous="true" continue-on-failure="false" name="setup">
+		<task synchronous="true" continue-on-failure="false" name="approve">
+        	<task-object-name>com.tsa.puridiom.requisition.tasks.RequisitionGetIcReqHeaderFromNumber</task-object-name>
+			<post-action></post-action>
+        </task>
+		<task synchronous="true" continue-on-failure="false" name="requisitionHeader">
+        	<task-object-name>com.tsa.puridiom.requisitionheader.tasks.RequisitionHeaderRetrieveByNumber</task-object-name>
+			<post-action></post-action>
+        </task>
+		<task synchronous="true" continue-on-failure="false" name="RequisitionHeader_icReqHeader">
+        	<task-object-name>com.tsa.puridiom.requisition.tasks.RequisitionWirelessApproveSetup</task-object-name>
+			<post-action></post-action>
+        </task>
+    </activity>
+    <activity synchronous="true" continue-on-failure="false" name="approve">
+      <task synchronous="true" continue-on-failure="false" name="approve">
+        <task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+        <process-filename>requisition-approve.xml</process-filename>
+        <post-action></post-action>
+      </task>
+     </activity>
+  </activities>
+</process>

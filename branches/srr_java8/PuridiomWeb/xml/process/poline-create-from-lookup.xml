@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="poLineCreateFromLookup" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="poLineCreate">
+			<task synchronous="true" continue-on-failure="false" name="poHeader">			
+				<task-object-name>com.tsa.puridiom.poheader.tasks.PoHeaderRetrieveById</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="poLineSetupForLookup">			
+				<task-object-name>com.tsa.puridiom.poline.tasks.PoLineSetupForLookup</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="poLineSetup">			
+				<task-object-name>com.tsa.puridiom.poline.tasks.PoLineCreateSetup</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="poLineSetup">
+				<task-object-name>com.tsa.puridiom.po.tasks.PoHeaderLinesMapUdfs</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="poLineSetupUmFactor">
+				<task-object-name>com.tsa.puridiom.poline.tasks.PoLineSetupUmFactor</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="PoLine_lineNumber">			
+				<task-object-name>com.tsa.puridiom.poline.tasks.PoLineGetNewLineNumber</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="poLine">			
+				<task-object-name>com.tsa.puridiom.poline.tasks.PoLineSetValues</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="poLine">			
+ 				<rule-filename>is-create-save.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.poline.tasks.PoLineAdd</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="history">
+			<task synchronous="true" continue-on-failure="false" name="poLineHistory">			
+				<task-object-name>com.tsa.puridiom.poline.history.tasks.PoLineHistorySetup</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="poLineHistory">			
+				<task-object-name>com.tsa.puridiom.poline.history.tasks.PoLineHistory</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

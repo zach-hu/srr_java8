@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="vendorCertification" connection-type="None" ldap-connection-type="None">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="vendorCertification">
+			<task synchronous="true" continue-on-failure="false" name="organizationId">
+				<task-object-name>com.tsa.puridiom.supplierportal.tasks.BidBoardUserGetOrganizationId</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="recaptchaValidation">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>recaptcha-validation.xml</process-filename>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="vendorCertification">
+				<task-object-name>com.tsa.puridiom.supplierportal.InvokeSupplierPortalProcessTask</task-object-name>
+				<process-filename>vendor-certification-auth.xml</process-filename>
+			</task>
+		</activity>
+		<!--activity synchronous="true" continue-on-failure="false" name="setUserInCache">
+			<task synchronous="true" continue-on-failure="false" name="setUserInCache">
+				<task-object-name>com.tsa.puridiom.supplierportal.authentication.tasks.SetBidBoardUserInCache</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity-->
+	</activities>
+</process>

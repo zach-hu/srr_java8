@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="forwardDisbursement" connection-type="new-transaction">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="forwardSetupDisbursement">
+			<task synchronous="true" continue-on-failure="false" name="Setup">
+				<task-object-name>com.tsa.puridiom.inventory.tasks.forward.ForwardSetup</task-object-name>
+			</task>
+		</activity>
+		<!--Forward a pending disbursement-->
+		<activity synchronous="true" continue-on-failure="false" name="forwardDisbursement">
+			<task synchronous="true" continue-on-failure="false" name="disbLines">
+				<rule-filename></rule-filename>
+				<task-object-name>com.tsa.puridiom.disbline.tasks.DisbLineRetrieveByHeader</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="disbHeader">
+				<rule-filename></rule-filename>
+				<task-object-name>com.tsa.puridiom.disbheader.tasks.DisbHeaderRetrieveById</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="updateInventory">
+			<task synchronous="true" continue-on-failure="false" name="disbLines">
+				<rule-filename>is-extended-inventory-module-active</rule-filename>
+				<task-object-name>com.tsa.puridiom.inventory.tasks.forward.ExtendedForwardLoadLines</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="disbLines">
+				<rule-filename>is-standard-inventory-module-active</rule-filename>
+				<task-object-name>com.tsa.puridiom.inventory.tasks.forward.StandardForwardLoadLines</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="updateDisbLines">
+			<task synchronous="true" continue-on-failure="false" name="disbLines">
+				<task-object-name>com.tsa.puridiom.disbline.tasks.DisbLineListUpdate</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="updateRequisitionLines">
+			<task synchronous="true" continue-on-failure="false" name="icReqLines">
+				<task-object-name>com.tsa.puridiom.inventory.tasks.forward.GetReqLinesIc</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="reqLines">
+				<task-object-name>com.tsa.puridiom.inventory.tasks.forward.GetReqLines</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="reqLines">
+				<task-object-name>com.tsa.puridiom.requisitionline.tasks.UpdateListReqLines</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="updateHeader">
+			<task synchronous="true" continue-on-failure="false" name="disbHeader">
+				<task-object-name>com.tsa.puridiom.inventory.tasks.forward.ForwardHeaderSetup</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="requisitionHeader">
+				<task-object-name>com.tsa.puridiom.requisitionheader.tasks.RequisitionHeaderRetrieveById</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="reqLines">
+				<task-object-name>com.tsa.puridiom.requisitionline.tasks.RequisitionLineRetrieveByHeader</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="requisitionHeader">
+				<task-object-name>com.tsa.puridiom.inventory.tasks.forward.ForwardCheckReqHeaderStatus</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="requisitionHeader">
+				<rule-filename>is-req-fully-backorder.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.requisitionheader.tasks.RequisitionHeaderUpdate</task-object-name>
+				<post-action>exitActivity</post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="requisitionHeader">
+				<task-object-name>com.tsa.puridiom.requisitionheader.tasks.RequisitionHeaderUpdate</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="disbHeader">
+				<task-object-name>com.tsa.puridiom.disbheader.tasks.DisbHeaderUpdate</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="updateusage">
+			<task synchronous="true" continue-on-failure="false" name="invusage">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>invusage-update.xml</process-filename>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="history">
+		    <task synchronous="true" continue-on-failure="false" name="disbHeaderHistory">			
+				<task-object-name>com.tsa.puridiom.disbheader.history.tasks.DisbHeaderHistory</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="disbLineListHistory">			
+				<task-object-name>com.tsa.puridiom.disbline.history.tasks.DisbursementLineListHistory</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

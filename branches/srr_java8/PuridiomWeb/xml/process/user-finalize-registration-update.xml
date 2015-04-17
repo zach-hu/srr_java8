@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Set connection-type as Transaction-Required so all processes below are in one transaction -->
+<process name="userFinalizeRegistration" connection-type="Transaction-Required" ldap-connection-type="None">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="registrationValidations">
+			<task synchronous="true" continue-on-failure="false" name="updateTempUser">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>userprofile-update.xml</process-filename>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="registrationValidations">
+			<rule-filename check-for-false="true">is-userprofile-onhold.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="updateTempUserGroupRel">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>usergrouprel-update-by-id.xml</process-filename>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="setCompanyInfo">
+				<task-object-name>com.tsa.puridiom.userpayments.tasks.CompanyInfoSetupFromANPayment</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="updateCompanyInfo">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>property-update.xml</process-filename>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="addDefaultBillToShipToAddresses">
+				<task-object-name>com.tsa.puridiom.userpayments.tasks.DefaultAddressSetupFromANPayment</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="address">
+				<task-object-name>com.tsa.puridiom.address.tasks.AddressSetValues</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="addAddress">
+				<task-object-name>com.tsa.puridiom.address.tasks.AddressAdd</task-object-name>
+			   </task>
+		</activity>
+	</activities>
+</process>

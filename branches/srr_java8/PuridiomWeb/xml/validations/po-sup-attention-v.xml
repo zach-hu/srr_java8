@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rule>
+	<clause type="Empty">
+		<left-side>
+			<source>incomingRequestObjectMethod</source>
+			<object>header</object>
+			<name>getVendContactCode</name>
+		</left-side>
+	</clause>
+  	<logical-operator>OR</logical-operator>
+  	<clause type="lookup">
+    	<sql>from Contact as Contact, Address as Address where Contact.addressCode =  Address.id.addressCode AND Contact.id.vendorId = Address.id.addressType AND Contact.status != '03' AND Contact.id.contactCode  = '@vendContactCode@'</sql>
+    	<source>header</source>
+    	<arguments>
+      		<name>vendContactCode</name>
+      		<source>header</source>
+      		<colName>getVendContactCode</colName>
+    	</arguments>
+  	</clause>
+</rule>

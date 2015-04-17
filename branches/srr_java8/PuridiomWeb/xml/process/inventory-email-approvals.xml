@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="EmailApprovals" connection-type="Connection-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="printPdf">
+			<task synchronous="true" continue-on-failure="false" name="invItem">
+				<task-object-name>com.tsa.puridiom.invitem.tasks.InvItemRetrieveByHistory</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="htmlName">
+				<task-object-name>com.tsa.puridiom.formhtml.tasks.InventoryEmailApprovals</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

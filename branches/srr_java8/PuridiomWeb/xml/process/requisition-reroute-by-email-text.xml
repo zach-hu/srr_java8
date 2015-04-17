@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="requisitionReroute" connection-type="Transaction-Required">
+  <activities>
+    <activity synchronous="true" continue-on-failure="false" name="requisitionAbleVerification">
+     <task synchronous="true" continue-on-failure="false" name="requisitionAbleVerification">
+        <task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+        <process-filename>requisition-approve-by-text-email-verification.xml</process-filename>
+      </task>
+    </activity>
+    <activity synchronous="true" continue-on-failure="false" name="reroute">
+      <task synchronous="true" continue-on-failure="false" name="reroute">
+        <rule-filename>is-req-approval-able-verification.xml</rule-filename>
+        <task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+        <process-filename>requisition-reroute.xml</process-filename>
+      </task>
+     </activity>
+  </activities>
+</process>
+
+

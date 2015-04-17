@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="docCommentUpdateById" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="docCommentUpdate">
+			<task synchronous="true" continue-on-failure="false" name="docComment">
+				<task-object-name>com.tsa.puridiom.doccomment.tasks.DocCommentRetrieveById</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="docComment">
+				<task-object-name>com.tsa.puridiom.doccomment.tasks.DocCommentSetValues</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="docComment">
+				<task-object-name>com.tsa.puridiom.doccomment.tasks.DocCommentUpdate</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="docText">
+			<task synchronous="true" continue-on-failure="false" name="DocText_icText">
+				<task-object-name>com.tsa.puridiom.doctext.tasks.DocTextGetIcTextFromDocComment</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="docText">
+				<task-object-name>com.tsa.puridiom.doctext.tasks.DocTextRetrieveById</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="docText">
+				<task-object-name>com.tsa.puridiom.doctext.tasks.DocTextSetValues</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="docText">
+				<task-object-name>com.tsa.puridiom.doctext.tasks.DocTextUpdate</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+	</activities>
+</process>

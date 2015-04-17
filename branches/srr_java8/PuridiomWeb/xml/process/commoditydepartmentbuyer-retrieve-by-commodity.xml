@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="xrefComboAdd" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="commodityDepartmentBuyerRetrieve">
+			<task synchronous="true" continue-on-failure="false" name="commodityDepartmentBuyer">
+				<task-object-name>com.tsa.puridiom.commoditydepartmentbuyer.tasks.CommodityDepartmentBuyerRetrieveByCommodity</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+	</activities>
+</process>

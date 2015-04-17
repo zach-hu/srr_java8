@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="catalogitem-by-itemlookup" connection-type="Connection-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="catalogItemLookupActivity">
+			<task synchronous="true" continue-on-failure="false" name="CatalogRetrieveSetup">
+				<task-object-name>com.tsa.puridiom.catalog.tasks.CatalogRetrieveSetup</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="catalog">
+				<task-object-name>com.tsa.puridiom.catalog.tasks.CatalogRetrieveById</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="catalogPriceBrk">
+				<task-object-name>com.tsa.puridiom.catalogpricebrk.tasks.CatalogPriceBrkRetrieveForItemLookup</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="itemLookup">
+				<task-object-name>com.tsa.puridiom.catalog.tasks.CatalogItemLookupSetValues</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="itemLookup">
+				<task-object-name>com.tsa.puridiom.catalog.tasks.CatalogItemAllowReleases</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<!-- <activity synchronous="true" continue-on-failure="false" name="catalogItemLookupActivity">
+			<task synchronous="true" continue-on-failure="false" name="explodeKit">
+				<rule-filename>is-itemlookup-kit</rule-filename>
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>catalogitem-explode-kit.xml</process-filename>
+				<post-action>exitProcess</post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="lineUpdateFromLookup">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>line-update-from-lookup.xml</process-filename>
+			</task>
+		</activity> -->
+	</activities>
+</process>

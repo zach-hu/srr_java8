@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="invFormAppbrowse" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="invFormAppBrowse">
+			<task synchronous="true" continue-on-failure="false" name="dw2">
+				<task-object-name>com.tsa.puridiom.invformapp.tasks.InvFormAppBackorder</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

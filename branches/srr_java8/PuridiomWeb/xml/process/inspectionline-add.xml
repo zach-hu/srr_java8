@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="inspectionLineAdd" connection-type="Requires-Transaction">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="addInspectionLine">
+			<task synchronous="true" continue-on-failure="false" name="inspectionLine">
+				<task-object-name>com.tsa.puridiom.inspectionline.tasks.InspectionLineSetValues</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="inspectionLine">
+				<task-object-name>com.tsa.puridiom.inspectionline.tasks.InspectionLineAdd</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+	</activities>
+</process>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="poHeaderVendorRetrieveById" connection-type="Connection-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="poHeaderRetrieveById">
+			<task synchronous="true" continue-on-failure="false" name="poHeader">
+				<task-object-name>com.tsa.puridiom.poheader.tasks.PoHeaderRetrieveById</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="vendorAddressRetrieve">
+			<task synchronous="true" continue-on-failure="false" name="vendorAddressSetup">
+				<task-object-name>com.tsa.puridiom.poheader.tasks.PoHeaderRetrieveVendorAddressSetup</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="vendorAddress">
+				<rule-filename>is-address-type-not-empty;is-address-code-not-empty</rule-filename>
+				<task-object-name>com.tsa.puridiom.address.tasks.AddressRetrieveById</task-object-name>
+				<post-action>exitActivity</post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="vendorAddress">
+				<rule-filename>is-address-type-not-empty</rule-filename>
+				<task-object-name>com.tsa.puridiom.address.tasks.AddressRetrievePrimary</task-object-name>
+				<post-action>exitActivity</post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="ContactRetrieve">
+			<task synchronous="true" continue-on-failure="false" name="contact">
+				<rule-filename>is-contact-code-not-empty</rule-filename>
+				<task-object-name>com.tsa.puridiom.contact.tasks.ContactRetrieveByCode</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="vendor">
+				<rule-filename>is-vendorId-not-empty</rule-filename>
+				<task-object-name>com.tsa.puridiom.vendor.tasks.VendorRetrieveById</task-object-name>
+			</task>
+	    </activity>
+		<activity synchronous="true" continue-on-failure="false" name="poHeaderDataSet">
+			<task synchronous="true" continue-on-failure="false" name="rpoHeaderDataSet">
+				<task-object-name>com.tsa.puridiom.poheader.tasks.PoHeaderDataSet</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="retrieveSubContractors">
+			<rule-filename>is-contract.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="retrieveSubContractors">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>poheader-retrieve-subcontractors.xml</process-filename>
+			</task>
+		</activity>
+	</activities>
+</process>

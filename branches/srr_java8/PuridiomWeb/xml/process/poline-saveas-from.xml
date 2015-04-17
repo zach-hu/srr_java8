@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="poLineSaveas" connection-type="Transaction-Required">
+  <activities>
+    <activity synchronous="true" continue-on-failure="false" name="poLineSaveas">
+      <task synchronous="true" continue-on-failure="false" name="poLineSaveasSetup">
+        <rule-filename>is-po-created-from-req.xml</rule-filename>
+        <task-object-name>com.tsa.puridiom.poline.tasks.PoLineSaveasFromReqSetup</task-object-name>
+      </task>
+      <task synchronous="true" continue-on-failure="false" name="poLineSaveasSetup">
+        <rule-filename>is-po-created-from-rfq.xml</rule-filename>
+        <task-object-name>com.tsa.puridiom.poline.tasks.PoLineSaveasFromRfqSetup</task-object-name>
+      </task>
+      <task synchronous="true" continue-on-failure="false" name="poLineAccountSaveas">
+        <!-- <rule-filename>is-rfq.xml</rule-filename> -->
+        <task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+        <process-filename>account-saveas.xml</process-filename>
+      </task>
+      <task synchronous="true" continue-on-failure="false" name="poLineCommentSaveas">
+        <task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+        <process-filename>doccomment-saveas.xml</process-filename>
+      </task>
+      <task synchronous="true" continue-on-failure="false" name="poLineAttachmentSaveas">
+		<rule-filename>is-documents-module-active.xml</rule-filename>
+		<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+		<process-filename>docattachment-saveas-by-line.xml</process-filename>
+	  </task>
+      <task synchronous="true" continue-on-failure="false" name="poLineAltTextSaveas">
+        <task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+        <process-filename>alttext-saveas.xml</process-filename>
+      </task>
+      <task synchronous="true" continue-on-failure="false" name="requisitionLineShipToSaveas">
+        <rule-filename check-for-false="true">is-autorelease-by-req-shipto.xml</rule-filename>
+        <task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+        <process-filename>shipto-saveas.xml</process-filename>
+      </task>
+    </activity>
+    <activity continue-on-failure="false" name="billto" synchronous="true">
+      <rule-filename check-for-false="true">is-create-release-from-req.xml</rule-filename>
+      <task synchronous="true" continue-on-failure="false" name="requisitionLineBillToSaveas">
+        <rule-filename>is-po-created-from-req.xml</rule-filename>
+        <task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+        <process-filename>billto-saveas.xml</process-filename>
+      </task>
+    </activity>
+  </activities>
+</process>

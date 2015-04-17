@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rule>
+	<clause type="lookup">
+		<sql>from TaxCode as TaxCode where TaxCode.taxCode = '@taxcode@' AND (TaxCode.status = '02' OR (TaxCode.status = '01' AND TaxCode.dateExpires >= @today@))</sql>
+		<source>header</source>
+		<arguments>
+			<name>taxcode</name>
+			<source>header</source>
+			<colName>getTaxCode</colName>
+		</arguments>
+	</clause>
+</rule>

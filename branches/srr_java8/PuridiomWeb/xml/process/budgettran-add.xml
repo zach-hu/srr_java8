@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="BudgetTranAdd" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="addBbudgetTran">
+			<task synchronous="true" continue-on-failure="false" name="budgetTranSetup">
+				<task-object-name>com.tsa.puridiom.budgettran.tasks.BudgetTranAddSetup</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="budgetTranSetValues">
+				<task-object-name>com.tsa.puridiom.budgettran.tasks.BudgetTranSetValues</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="budgetTranAdd">
+				<task-object-name>com.tsa.puridiom.budgettran.tasks.BudgetTranAdd</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+	</activities>
+</process>

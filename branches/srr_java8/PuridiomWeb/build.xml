@@ -1,0 +1,570 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project name="puridiom4" default="BUILD_WAR" basedir=".">
+
+<!-- ================= SET PROPERTY VARIABLES ================ -->
+
+  <!-- YOU MUST RESET THE FIRST THREE VARIABLES -->
+  <property name="app.name" value="PuridiomWeb" />
+  <property name="projects.dir" value="/JavaProjects/Puridiom4/workspace" />
+  <property name="compiler.dir" value="C:\\java\\jdk1.6.0_17\\bin" />
+
+  <property name="src.dir" value="src" />
+  <property name="build.dir" value="web/WEB-INF/classes" />
+  <property name="web.content.dir" value="web" />
+  <property name="properties.dir" value="properties" />
+  <property name="xml.content.dir" value="${projects.dir}/PuridiomWeb/xml" />
+  <property name="war.file" value="${app.name}.war"/>
+  <property name="build.type" value="FULL"/>
+  <property name="debug" value="false"/>
+  <property name="build.dir" value="web/WEB-INF/classes" />
+  <property name="build-xml.dir" value="web/WEB-INF/xml" />
+  <property name="build-classes.dir" value="web/build-classes" />
+  <property name="web-inf.lib" value="web/build/WEB-INF/lib" />
+  <property name="web-inf.properties" value="properties" />
+  <property name="com.dir" value="web/WEB-INF/classes/com" />
+  <property name="build.compiler" value="modern" />
+  <property name="webXMLFile" value="web/WEB-INF/web.xml" />
+
+
+<!-- ================== MAIN TARGETS ==================== -->
+
+  <target name="BUILD_WAR" depends="buildWAR,cleanup,footerback" />
+
+<!-- ================== removeCurrentWAR TARGET ==================== -->
+
+  <target name="removeCurrentWAR">
+    <echo message=" " />
+    <echo message="Removing war file........" />
+    <delete file="${war.file}" />
+    <echo message="Done removing war file." />
+    <echo message=" " />
+  </target>
+
+<!-- ================== removeFiles TARGET ==================== -->
+
+  <target name="removeFiles">
+    <echo message=" " />
+    <echo message="removing build files........" />
+    <delete dir="${com.dir}" />
+    <echo message="Done removing build files." />
+    <echo message=" " />
+  </target>
+
+	<target name="footer">
+		<echo message="Setting release #..." />
+		<tstamp>
+	      <format property="touch.time" pattern="yMMdd"/>
+		</tstamp>
+
+		<replaceregexp file="${web.content.dir}/system/footer.jsp"
+                         match="-datetime-"
+                         replace="${touch.time}"
+                         byline="true"/>
+	</target>
+	<target name="footerback">
+		<tstamp>
+	      <format property="touch.time" pattern="yMMdd"/>
+		</tstamp>
+
+		<replaceregexp file="${web.content.dir}/system/footer.jsp"
+                         match="${touch.time}"
+                         replace="-datetime-"
+                         byline="true"/>
+		<echo message="Done setting release #...." />
+	</target>
+
+<!-- ================== prepareToBuildWAR TARGET ==================== -->
+
+  <!-- here we are going to build the jar files we need and include them -->
+
+  <target name="prepareToBuildWAR">
+
+	<echo message="Calling ANT script for PuridiomAlerts(builds JAR)......" />
+    <ant antfile="${projects.dir}/PuridiomAlerts/build.xml" inheritall="false" target="BUILD_PURIDIOMALERTS_JAR" />
+    <copy todir="${web-inf.lib}" file="${projects.dir}/PuridiomAlerts/PuridiomAlerts.jar" />
+      <copy todir="${web-inf.lib}">
+        <fileset dir="${projects.dir}/PuridiomAlerts/lib">
+              <include name="*.jar" />
+        </fileset>
+      </copy>
+    <echo message="PuridiomAlerts ANT script complete."/>
+
+  	<echo message="Calling ANT script for PuridiomAssets(builds JAR)......" />
+  	<ant antfile="${projects.dir}/PuridiomAssets/build.xml" inheritall="false" target="BUILD_PURIDIOMASSETS_JAR" />
+  	<copy todir="${web-inf.lib}" file="${projects.dir}/PuridiomAssets/PuridiomAssets.jar" />
+  	  <copy todir="${web-inf.lib}">
+  	    <fileset dir="${projects.dir}/PuridiomAssets/lib">
+  	          <include name="*.jar" />
+  	    </fileset>
+  	  </copy>
+  	<echo message="PuridiomAssets ANT script complete."/>
+
+  	<echo message="Calling ANT script for PuridiomAudit (builds JAR)......" />
+  	  <ant antfile="${projects.dir}/PuridiomAudit/build.xml" inheritall="false" target="BUILD_PURIDIOMAUDIT_JAR" />
+  	  <copy todir="${web-inf.lib}" file="${projects.dir}/PuridiomAudit/PuridiomAudit.jar" />
+  	    <copy todir="${web-inf.lib}">
+  	      <fileset dir="${projects.dir}/PuridiomAudit/lib">
+  	            <include name="*.jar" />
+  	      </fileset>
+  	    </copy>
+  	  <echo message="PuridiomAudit ANT script complete."/>
+
+    <echo message="Calling ANT script for PuridiomBrowse(builds JAR)......" />
+    <ant antfile="${projects.dir}/PuridiomBrowse/build.xml" inheritall="false" target="BUILD_PURIDIOMBROWSE_JAR" />
+    <copy todir="${web-inf.lib}" file="${projects.dir}/PuridiomBrowse/PuridiomBrowse.jar" />
+      <copy todir="${web-inf.lib}">
+        <fileset dir="${projects.dir}/PuridiomBrowse/lib">
+              <include name="*.jar" />
+        </fileset>
+      </copy>
+    <echo message="PuridiomBrowse ANT script complete."/>
+
+	<echo message="Calling ANT script for PuridiomBudget (builds JAR)......" />
+	<ant antfile="${projects.dir}/PuridiomBudget/build.xml" inheritall="false" target="BUILD_PURIDIOMBUDGET_JAR" />
+	<copy todir="${web-inf.lib}" file="${projects.dir}/PuridiomBudget/PuridiomBudget.jar" />
+	  <copy todir="${web-inf.lib}">
+	    <fileset dir="${projects.dir}/PuridiomBudget/lib">
+	          <include name="*.jar" />
+	    </fileset>
+	  </copy>
+	<echo message="PuridiomBudget ANT script complete."/>
+
+
+    <echo message="Calling ANT script for PuridiomCommon (builds JAR)......" />
+    <ant antfile="${projects.dir}/PuridiomCommon/build.xml" inheritall="false" target="BUILD_PURIDIOMCOMMON_JAR" />
+    <copy todir="${web-inf.lib}" file="${projects.dir}/PuridiomCommon/PuridiomCommon.jar" />
+      <copy todir="${web-inf.lib}">
+        <fileset dir="${projects.dir}/PuridiomCommon/lib">
+              <include name="*.jar" />
+        </fileset>
+      </copy>
+    <echo message="PuridiomCommon ANT script complete."/>
+
+    <echo message="Calling ANT script for documents (builds JAR)......" />
+    <ant antfile="${projects.dir}/PuridiomDocuments/build.xml" inheritall="false" target="BUILD_PURIDIOMDOCUMENTS_JAR" />
+    <copy todir="${web-inf.lib}" file="${projects.dir}/PuridiomDocuments/PuridiomDocuments.jar" />
+      <copy todir="${web-inf.lib}">
+        <fileset dir="${projects.dir}/PuridiomDocuments/lib">
+              <include name="*.jar" />
+        </fileset>
+      </copy>
+    <echo message="Documents ANT script complete."/>
+
+    <echo message="Calling ANT script for emails (builds JAR)......" />
+        <ant antfile="${projects.dir}/PuridiomEmails/build.xml" inheritall="false" target="BUILD_PURIDIOMEMAILS_JAR" />
+        <copy todir="${web-inf.lib}" file="${projects.dir}/PuridiomEmails/PuridiomEmails.jar" />
+		<copy todir="${web-inf.lib}">
+			<fileset dir="${projects.dir}/PuridiomEmails/lib">
+				<include name="*.jar" />
+			</fileset>
+		</copy>
+	 <echo message="Emails ANT script complete."/>
+
+    <echo message="Calling ANT script for Foundation (builds JAR)......" />
+    <ant antfile="${projects.dir}/PuridiomFoundation/build.xml" inheritall="false" target="BUILD_PURIDIOMFOUNDATION_JAR" />
+       <copy todir="${web-inf.lib}" file="${projects.dir}/PuridiomFoundation/PuridiomFoundation.jar" />
+      <copy todir="${web-inf.lib}">
+        <fileset dir="${projects.dir}/PuridiomFoundation/lib">
+              <include name="*.jar" />
+        </fileset>
+      </copy>
+    <echo message="Foundation ANT script complete."/>
+
+    <echo message="Calling ANT script for graphs (builds JAR)......" />
+    <ant antfile="${projects.dir}/PuridiomGraphs/build.xml" inheritall="false" target="BUILD_PURIDIOMGRAPHS_JAR" />
+    <copy todir="${web-inf.lib}" file="${projects.dir}/PuridiomGraphs/PuridiomGraphs.jar" />
+      <copy todir="${web-inf.lib}">
+        <fileset dir="${projects.dir}/PuridiomGraphs/lib">
+              <include name="*.jar" />
+        </fileset>
+      </copy>
+    <echo message="Graphs ANT script complete."/>
+
+	<echo message="Calling ANT script for PuridiomInventory(builds JAR)......" />
+    <ant antfile="${projects.dir}/PuridiomInventory/build.xml" inheritall="false" target="BUILD_PURIDIOMINVENTORY_JAR" />
+    <copy todir="${web-inf.lib}" file="${projects.dir}/PuridiomInventory/PuridiomInventory.jar" />
+      <copy todir="${web-inf.lib}">
+        <fileset dir="${projects.dir}/PuridiomInventory/lib">
+              <include name="*.jar" />
+        </fileset>
+      </copy>
+    <echo message="PuridiomInventory ANT script complete."/>
+
+    <echo message="Calling ANT script for invoices (builds JAR)......" />
+    <ant antfile="${projects.dir}/PuridiomInvoices/build.xml" inheritall="false" target="BUILD_PURIDIOMINVOICES_JAR" />
+    <copy todir="${web-inf.lib}" file="${projects.dir}/PuridiomInvoices/PuridiomInvoices.jar" />
+      <copy todir="${web-inf.lib}">
+        <fileset dir="${projects.dir}/PuridiomInvoices/lib">
+              <include name="*.jar" />
+        </fileset>
+      </copy>
+    <echo message="Invoices ANT script complete."/>
+
+    <echo message="Calling ANT script for labels (builds JAR)......" />
+    <ant antfile="${projects.dir}/PuridiomLabels/build.xml" inheritall="false" target="BUILD_PURIDIOMLABELS_JAR" />
+    <copy todir="${web-inf.lib}" file="${projects.dir}/PuridiomLabels/PuridiomLabels.jar" />
+      <copy todir="${web-inf.lib}">
+        <fileset dir="${projects.dir}/PuridiomLabels/lib">
+              <include name="*.jar" />
+        </fileset>
+      </copy>
+    <echo message="Labels ANT script complete."/>
+
+    <echo message="Calling ANT script for payments (builds JAR)......" />
+    <ant antfile="${projects.dir}/PuridiomPayments/build.xml" inheritall="false" target="BUILD_PURIDIOMPAYMENTS_JAR" />
+    <copy todir="${web-inf.lib}" file="${projects.dir}/PuridiomPayments/PuridiomPayments.jar" />
+      <copy todir="${web-inf.lib}">
+        <fileset dir="${projects.dir}/PuridiomPayments/lib">
+              <include name="*.jar" />
+        </fileset>
+      </copy>
+    <echo message="payments ANT script complete."/>
+
+    <echo message="Calling ANT script for PuridiomProperties (builds JAR)......" />
+    <ant antfile="${projects.dir}/PuridiomProperties/build.xml" inheritall="false" target="BUILD_PURIDIOMPROPERTIES_JAR" />
+    <copy todir="${web-inf.lib}" file="${projects.dir}/PuridiomProperties/PuridiomProperties.jar" />
+      <copy todir="${web-inf.lib}">
+        <fileset dir="${projects.dir}/PuridiomProperties/lib">
+              <include name="*.jar" />
+        </fileset>
+      </copy>
+    <echo message="PuridiomProperties ANT script complete."/>
+
+    <echo message="Calling ANT script for purchase order (builds JAR)......" />
+    <ant antfile="${projects.dir}/PuridiomPurchaseOrders/build.xml" inheritall="false" target="BUILD_PURIDIOMPURCHASEORDERS_JAR" />
+    <copy todir="${web-inf.lib}" file="${projects.dir}/PuridiomPurchaseOrders/PuridiomPurchaseOrders.jar" />
+      <copy todir="${web-inf.lib}">
+        <fileset dir="${projects.dir}/PuridiomPurchaseOrders/lib">
+              <include name="*.jar" />
+        </fileset>
+      </copy>
+    <echo message="purchase order ANT script complete."/>
+
+    <echo message="Calling ANT script for receipts (builds JAR)......" />
+    <ant antfile="${projects.dir}/PuridiomReceipts/build.xml" inheritall="false" target="BUILD_PURIDIOMRECEIPTS_JAR" />
+    <copy todir="${web-inf.lib}" file="${projects.dir}/PuridiomReceipts/PuridiomReceipts.jar" />
+      <copy todir="${web-inf.lib}">
+        <fileset dir="${projects.dir}/PuridiomReceipts/lib">
+              <include name="*.jar" />
+        </fileset>
+      </copy>
+    <echo message="Receipts ANT script complete."/>
+
+    <echo message="Calling ANT script for reports (builds JAR)......" />
+    <ant antfile="${projects.dir}/PuridiomReports/build.xml" inheritall="false" target="BUILD_PURIDIOMREPORTS_JAR" />
+    <copy todir="${web-inf.lib}" file="${projects.dir}/PuridiomReports/PuridiomReports.jar" />
+      <copy todir="${web-inf.lib}">
+        <fileset dir="${projects.dir}/PuridiomReports/lib">
+              <include name="*.jar" />
+        </fileset>
+      </copy>
+    <echo message="Reports ANT script complete."/>
+
+    <echo message="Calling ANT script for request for quotes (builds JAR)......" />
+    <ant antfile="${projects.dir}/PuridiomRequestForQuotes/build.xml" inheritall="false" target="BUILD_PURIDIOMREQUESTFORQUOTES_JAR" />
+    <copy todir="${web-inf.lib}" file="${projects.dir}/PuridiomRequestForQuotes/PuridiomRequestForQuotes.jar" />
+      <copy todir="${web-inf.lib}">
+        <fileset dir="${projects.dir}/PuridiomRequestForQuotes/lib">
+              <include name="*.jar" />
+        </fileset>
+      </copy>
+    <echo message="RequestForQuotes ANT script complete."/>
+
+    <echo message="Calling ANT script for requisitions (builds JAR)......" />
+    <ant antfile="${projects.dir}/PuridiomRequisitions/build.xml" inheritall="false" target="BUILD_PURIDIOMREQUISITIONS_JAR" />
+    <copy todir="${web-inf.lib}" file="${projects.dir}/PuridiomRequisitions/PuridiomRequisitions.jar" />
+      <copy todir="${web-inf.lib}">
+        <fileset dir="${projects.dir}/PuridiomRequisitions/lib">
+              <include name="*.jar" />
+        </fileset>
+      </copy>
+    <echo message="Requisitions ANT script complete."/>
+
+	 <echo message="Calling ANT script for PuridiomReviewFinalize (builds JAR)......" />
+   <ant antfile="${projects.dir}/PuridiomReviewFinalize/build.xml" inheritall="false" target="BUILD_PURIDIOMREVIEWFINALIZE_JAR" />
+   <copy todir="${web-inf.lib}" file="${projects.dir}/PuridiomReviewFinalize/PuridiomReviewFinalize.jar" />
+     <copy todir="${web-inf.lib}">
+       <fileset dir="${projects.dir}/PuridiomReviewFinalize/lib">
+             <include name="*.jar" />
+       </fileset>
+     </copy>
+   <echo message="PuridiomReviewFinalize ANT script complete."/>
+
+	<echo message="Calling ANT script for PuridiomSupplierPortal (builds JAR)......" />
+		<ant antfile="${projects.dir}/PuridiomSupplierPortal/build.xml" inheritall="false" target="BUILD_PURIDIOMSUPPLIERPORTAL_JAR" />
+		<copy todir="${web-inf.lib}" file="${projects.dir}/PuridiomSupplierPortal/PuridiomSupplierPortal.jar" />
+		<copy todir="${web-inf.lib}">
+			<fileset dir="${projects.dir}/PuridiomSupplierPortal/lib">
+				<include name="*.jar" />
+			</fileset>
+		</copy>
+	<echo message="PuridiomSupplierPortal ANT script complete."/>
+
+	 <echo message="Calling ANT script for PuridiomTimerTask (builds JAR)......" />
+    <ant antfile="${projects.dir}/PuridiomTimerTask/build.xml" inheritall="false" target="BUILD_PURIDIOMTIMERTASK_JAR" />
+    <copy todir="${web-inf.lib}" file="${projects.dir}/PuridiomTimerTask/PuridiomTimerTask.jar" />
+      <copy todir="${web-inf.lib}">
+        <fileset dir="${projects.dir}/PuridiomTimerTask/lib">
+              <include name="*.jar" />
+        </fileset>
+      </copy>
+    <echo message="Vendors ANT script complete."/>
+
+    <echo message="Calling ANT script for user (builds JAR)......" />
+    <ant antfile="${projects.dir}/PuridiomUser/build.xml" inheritall="false" target="BUILD_PURIDIOMUSER_JAR" />
+    <copy todir="${web-inf.lib}" file="${projects.dir}/PuridiomUser/PuridiomUser.jar" />
+      <copy todir="${web-inf.lib}">
+        <fileset dir="${projects.dir}/PuridiomUser/lib">
+              <include name="*.jar" />
+        </fileset>
+      </copy>
+    <echo message="User ANT script complete."/>
+
+    <echo message="Calling ANT script for vendors (builds JAR)......" />
+    <ant antfile="${projects.dir}/PuridiomVendors/build.xml" inheritall="false" target="BUILD_PURIDIOMVENDORS_JAR" />
+    <copy todir="${web-inf.lib}" file="${projects.dir}/PuridiomVendors/PuridiomVendors.jar" />
+      <copy todir="${web-inf.lib}">
+        <fileset dir="${projects.dir}/PuridiomVendors/lib">
+              <include name="*.jar" />
+        </fileset>
+      </copy>
+    <echo message="Vendors ANT script complete."/>
+
+	 <echo message="Calling ANT script for PuridiomXmlService (builds JAR)......" />
+  	<ant antfile="${projects.dir}/PuridiomXmlService/build.xml" inheritall="false" target="BUILD_PURIDIOMXMLSERVICE_JAR" />
+  	<copy todir="${web-inf.lib}" file="${projects.dir}/PuridiomXmlService/PuridiomXmlService.jar" />
+	    <copy todir="${web-inf.lib}">
+      	<fileset dir="${projects.dir}/PuridiomXmlService/lib">
+            <include name="*.jar" />
+      	</fileset>
+   	</copy>
+  	<echo message="PuridiomXmlService ANT script complete."/>
+
+  	<echo message="Calling ANT script for PuridiomInterface (builds JAR)......" />
+  	  <ant antfile="${projects.dir}/PuridiomInterface/build.xml" inheritall="false" target="BUILD_PURIDIOMINTERFACE_JAR" />
+  	  <copy todir="${web-inf.lib}" file="${projects.dir}/PuridiomInterface/PuridiomInterface.jar" />
+  	    <copy todir="${web-inf.lib}">
+  	      <fileset dir="${projects.dir}/PuridiomInterface/lib">
+  	            <include name="*.jar" />
+  	      </fileset>
+  	 </copy>
+  	 <echo message="PuridiomInterface ANT script complete."/>
+  </target>
+
+  <!-- ================== COMPILE TARGET ==================== -->
+
+  <target name="compile" depends="removeFiles">
+
+    <echo message=" " />
+    <echo message="Compiling source code........" />
+
+    <delete dir="${build-classes.dir}" />
+    <echo message="Create temp classes directory......" />
+    <mkdir dir="${build-classes.dir}" />
+
+    <javac srcdir="${src.dir}" fork="true" executable="${compiler.dir}/javac.exe" listfiles="true" destdir="${build.dir}" debug="true">
+      <include name="**/*.java" />
+      <classpath>
+        <fileset dir="${web-inf.lib}">
+          <include name="**/*.jar" />
+        </fileset>
+      </classpath>
+    </javac>
+
+    <echo message="Done compiling." />
+    <echo message=" " />
+
+  </target>
+
+<!-- ================== buildWAR TARGET ==================== -->
+
+  <target name="buildWAR" depends="removeCurrentWAR,prepareToBuildWAR,footer,prepareXML,compile">
+    <echo message="Building war......" />
+  	<copy todir="${web-inf.lib}" file="${projects.dir}/PuridiomWeb/web/WEB-INF/lib/esapi-2.0_rc10.jar" />
+  	<mkdir dir="${build.dir}/.esapi"/>
+  	<copy todir="${build.dir}/.esapi">
+  		<fileset dir="${projects.dir}/PuridiomWeb/.esapi" />
+  	</copy>
+  	<war warfile="${war.file}" webxml="${webXMLFile}">
+      <classes dir="${build.dir}" includes="**/*.class, **/*.hbm.xml, **/*.properties" />
+      <classes dir="${projects.dir}/PuridiomProperties/WEB-INF/classes" includes="**/*.class" />
+      <classes dir="${projects.dir}/PuridiomCommon/src/com/tsa/puridiom/entity/hbm" includes="puridiom4.cfg.xml" />
+      <lib dir="${web-inf.lib}" includes="**/*.jar">
+        <exclude name="servlet.jar"/>
+        <exclude name="PuridiomProperties.jar"/>
+      	<exclude name="jsp-api.jar"/>
+      	<exclude name="el-api.jar"/>
+      </lib>
+      <fileset dir="${web.content.dir}" includes="**/*.jsp,**/*.html,**/*.bmp,**/*.gif,**/*.GIF,**/*.jpg,**/*.png,**/*.css,**/*.js,**/*.inc,**/*.swf,**/*.ttf,**/*.TTF">
+		<exclude name="temp/*"/>
+      </fileset>
+      <fileset dir="web/" includes="**/*.xml,**/*.jrxml,**/*.jasper,**/*.tld">
+        <exclude name="web.xml"/>
+      </fileset>
+    </war>
+    <echo message="Done building war."/>
+  </target>
+
+	<target name="prepareXML">
+		<echo message="Start logging to file......" />
+
+		<echo message="Delete xml directory......" />
+		<delete dir="${build-xml.dir}" />
+
+		<echo message="Create xml directory......" />
+		<mkdir dir="${build-xml.dir}" />
+
+		<echo message="Start copy ......" />
+
+		<echo message="Copy xml>app-ext-rules......" />
+		<record name="nr1.properties" action="start" />
+		<copy todir="${build-xml.dir}">
+			<fileset dir="${xml.content.dir}" casesensitive="false" includes="**/app-ext-rules/**/*.xml" />
+		</copy>
+		<record name="nr1.properties" action="stop" />
+		<replaceregexp file="nr1.properties" match=".*Copying (.*) file.*" replace="nr1=\1" />
+		<property file="nr1.properties" />
+		<property name="nr1" value="0" />
+		<echo message="Copied files: ${nr1}" />
+
+		<echo message="Copy xml>browse......" />
+		<record name="nr2.properties" action="start" />
+		<copy todir="${build-xml.dir}">
+			<fileset dir="${xml.content.dir}" casesensitive="false" includes="**/browse/**/*.xml" />
+		</copy>
+		<record name="nr2.properties" action="stop" />
+		<replaceregexp file="nr2.properties" match=".*Copying (.*) file.*" replace="nr2=\1" />
+		<property file="nr2.properties" />
+		<property name="nr2" value="0" />
+		<echo message="Copied files: ${nr2}" />
+
+		<echo message="Copy xml>extracts......" />
+		<record name="nr3.properties" action="start" />
+		<copy todir="${build-xml.dir}">
+			<fileset dir="${xml.content.dir}" casesensitive="false" includes="**/extracts/**/*.xml" />
+		</copy>
+		<record name="nr3.properties" action="stop" />
+		<replaceregexp file="nr3.properties" match=".*Copying (.*) file.*" replace="nr3=\1" />
+		<property file="nr3.properties" />
+		<property name="nr3" value="0" />
+		<echo message="Copied files: ${nr3}" />
+
+		<echo message="Copy xml>graphs......" />
+		<record name="nr4.properties" action="start" />
+		<copy todir="${build-xml.dir}">
+			<fileset dir="${xml.content.dir}" casesensitive="false" includes="**/graphs/**/*.xml" />
+		</copy>
+		<record name="nr4.properties" action="stop" />
+		<replaceregexp file="nr4.properties" match=".*Copying (.*) file.*" replace="nr4=\1" />
+		<property file="nr4.properties" />
+		<property name="nr4" value="0" />
+		<echo message="Copied files: ${nr4}" />
+
+		<echo message="Copy xml>process......" />
+		<record name="nr5.properties" action="start" />
+		<copy todir="${build-xml.dir}">
+			<fileset dir="${xml.content.dir}" casesensitive="false" includes="**/process/**/*.xml" />
+		</copy>
+		<record name="nr5.properties" action="stop" />
+		<replaceregexp file="nr5.properties" match=".*Copying (.*) file.*" replace="nr5=\1" />
+		<property file="nr5.properties" />
+		<property name="nr5" value="0" />
+		<echo message="Copied files: ${nr5}" />
+
+		<echo message="Copy xml>reports......" />
+		<record name="nr6.properties" action="start" />
+		<copy todir="${build-xml.dir}">
+			<fileset dir="${xml.content.dir}" casesensitive="false" includes="**/reports/**/*.xml,**/*.htm,**/*.xsd" />
+		</copy>
+		<record name="nr6.properties" action="stop" />
+		<replaceregexp file="nr6.properties" match=".*Copying (.*) file.*" replace="nr6=\1" />
+		<property file="nr6.properties" />
+		<property name="nr6" value="0" />
+		<echo message="Copied files: ${nr6}" />
+
+		<echo message="Copy xml>rules......" />
+		<record name="nr7.properties" action="start" />
+		<copy todir="${build-xml.dir}">
+			<fileset dir="${xml.content.dir}" casesensitive="false" includes="**/rules/**/*.xml" />
+		</copy>
+		<record name="nr7.properties" action="stop" />
+		<replaceregexp file="nr7.properties" match=".*Copying (.*) file.*" replace="nr7=\1" />
+		<property file="nr7.properties" />
+		<property name="nr7" value="0" />
+		<echo message="Copied files: ${nr7}" />
+
+		<echo message="Copy xml>schedules......" />
+		<record name="nr8.properties" action="start" />
+		<copy todir="${build-xml.dir}">
+			<fileset dir="${xml.content.dir}" casesensitive="false" includes="**/schedules/**/*.xml" />
+		</copy>
+		<record name="nr8.properties" action="stop" />
+		<replaceregexp file="nr8.properties" match=".*Copying (.*) file.*" replace="nr8=\1" />
+		<property file="nr8.properties" />
+		<property name="nr8" value="0" />
+		<echo message="Copied files: ${nr8}" />
+
+		<echo message="Copy xml>steps......" />
+		<record name="nr9.properties" action="start" />
+		<copy todir="${build-xml.dir}">
+			<fileset dir="${xml.content.dir}" casesensitive="false" includes="**/steps/**/*.xml" />
+		</copy>
+		<record name="nr9.properties" action="stop" />
+		<replaceregexp file="nr9.properties" match=".*Copying (.*) file.*" replace="nr9=\1" />
+		<property file="nr9.properties" />
+		<property name="nr9" value="0" />
+		<echo message="Copied files: ${nr9}" />
+
+		<echo message="Copy xml>validations......" />
+		<record name="nr10.properties" action="start" />
+		<copy todir="${build-xml.dir}">
+			<fileset dir="${xml.content.dir}" casesensitive="false" includes="**/validations/**/*.xml" />
+		</copy>
+		<record name="nr10.properties" action="stop" />
+		<replaceregexp file="nr10.properties" match=".*Copying (.*) file.*" replace="nr10=\1" />
+		<property file="nr10.properties" />
+		<property name="nr10" value="0" />
+		<echo message="Copied files: ${nr10}" />
+
+		<echo message="End copy ......" />
+
+	</target>
+
+
+<!-- ================== cleanup TARGET ==================== -->
+
+  <target name="cleanup">
+    <echo message="cleaning up......" />
+  	<delete file="${web-inf.lib}/PuridiomAlerts.jar" />
+  	<delete file="${web-inf.lib}/PuridiomAssets.jar" />
+  	<delete file="${web-inf.lib}/PuridiomAudit.jar" />
+    <delete file="${web-inf.lib}/PuridiomBrowse.jar" />
+    <delete file="${web-inf.lib}/PuridiomBudget.jar" />
+    <delete file="${web-inf.lib}/PuridiomCommon.jar" />
+    <delete file="${web-inf.lib}/PuridiomDocuments.jar" />
+    <delete file="${web-inf.lib}/PuridiomEmails.jar" />
+    <delete file="${web-inf.lib}/PuridiomFoundation.jar" />
+    <delete file="${web-inf.lib}/PuridiomGraphs.jar" />
+	<delete file="${web-inf.lib}/PuridiomInventory.jar" />
+	<delete file="${web-inf.lib}/PuridiomInvoices.jar" />
+    <delete file="${web-inf.lib}/PuridiomPayments.jar" />
+    <delete file="${web-inf.lib}/PuridiomProperties.jar" />
+    <delete file="${web-inf.lib}/PuridiomPurchaseOrders.jar" />
+    <delete file="${web-inf.lib}/PuridiomReceipts.jar" />
+    <delete file="${web-inf.lib}/PuridiomReports.jar" />
+    <delete file="${web-inf.lib}/PuridiomRequestForQuotes.jar" />
+    <delete file="${web-inf.lib}/PuridiomRequisitions.jar" />
+    <delete file="${web-inf.lib}/PuridiomReviewFinalize.jar" />
+    <delete file="${web-inf.lib}/PuridiomSupplierPortal.jar" />
+    <delete file="${web-inf.lib}/PuridiomTimerTask.jar" />
+    <delete file="${web-inf.lib}/PuridiomUser.jar" />
+    <delete file="${web-inf.lib}/PuridiomVendors.jar" />
+  	<delete file="${web-inf.lib}/PuridiomXmlService.jar" />
+	<delete file="${web-inf.lib}/PuridiomInterface.jar" />
+    <delete dir="${web-inf.lib}" />
+    <delete dir="${build-xml.dir}" />
+    <echo message="done cleaning up." />
+  </target>
+
+</project>

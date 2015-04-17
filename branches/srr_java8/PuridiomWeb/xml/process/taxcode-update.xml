@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="taxCodeUpdate" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="updateTaxCode">
+			<task synchronous="true" continue-on-failure="false" name="taxCode">
+				<task-object-name>com.tsa.puridiom.taxcode.tasks.TaxCodeRetrieveById</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="taxCode">
+				<task-object-name>com.tsa.puridiom.taxcode.tasks.TaxCodeSetValues</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="taxCode">
+				<task-object-name>com.tsa.puridiom.taxcode.tasks.TaxCodeUpdate</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+	</activities>
+</process>

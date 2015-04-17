@@ -1,0 +1,118 @@
+<r_aprovtime>
+	<columns>
+		<RequisitionHeader_requisitionNumber>
+			<label>Requisition Number</label>
+			<type>STRING</type>
+		</RequisitionHeader_requisitionNumber>
+		<RequisitionHeader_requisitionDate>
+			<label>Requisition Date</label>
+			<type>DATE</type>
+		</RequisitionHeader_requisitionDate>
+		<UserProfile_requisitioner>
+			<label>Requisitioner Code</label>
+			<type>STRING</type>
+		</UserProfile_requisitioner>
+		<UserProfile_firstName>
+			<label>First Name</label>
+			<type>STRING</type>
+		</UserProfile_firstName>
+		<UserProfile_lastName >
+			<label>Last Name</label>
+			<type>STRING</type>
+		</UserProfile_lastName >
+		<RequisitionHeader_requisitionType>
+			<label>Requisition Type</label>
+			<type>REQUISITION-TYPE</type>
+		</RequisitionHeader_requisitionType>
+		<RequisitionHeader_status>
+			<label>Status</label>
+			<type>STATUS</type>
+		</RequisitionHeader_status>
+		<RequisitionHeader_total>
+			<label>Total</label>
+			<type>BIGDECIMAL</type>
+		</RequisitionHeader_total>
+		<!-- <ApprovalLog_approverName>
+			<label>Approver Name</label>
+			<type>STRING</type>
+		</ApprovalLog_approverName> -->
+
+		<ApprovalLog_id_userId>
+			<label>Approver userId</label>
+			<type>STRING</type>
+		</ApprovalLog_id_userId>
+
+		<UserProfile_authorizedBy>
+			<label>Approver Authority</label>
+			<type>STRING</type>
+		</UserProfile_authorizedBy>
+		<ApprovalLog_ruleType>
+			<label>Rule Type</label>
+			<type>STRING</type>
+		</ApprovalLog_ruleType>
+		<ApprovalLog_dateAssigned>
+			<label>Date Assigned</label>
+			<type>DATE</type>
+		</ApprovalLog_dateAssigned>
+		<ApprovalLog_dateApproved>
+			<label>Date Approved</label>
+			<type>DATE</type>
+		</ApprovalLog_dateApproved>
+		<ApprovalLog_approverAmount>
+			<label>Approver Amount</label>
+			<type>BIGDECIMAL</type>
+		</ApprovalLog_approverAmount>
+		<RequisitionHeader_udf1Code>
+			<label>Udf 1</label>
+			<type>STRING</type>
+		</RequisitionHeader_udf1Code>
+		<RequisitionHeader_udf2Code>
+			<label>Udf 2</label>
+			<type>STRING</type>
+		</RequisitionHeader_udf2Code>
+		<RequisitionHeader_udf3Code>
+			<label>Udf 3</label>
+			<type>STRING</type>
+		</RequisitionHeader_udf3Code>
+		<RequisitionHeader_udf4Code>
+			<label>Udf 4</label>
+			<type>STRING</type>
+		</RequisitionHeader_udf4Code>
+		<RequisitionHeader_udf5Code>
+			<label>Udf 5</label>
+			<type>STRING</type>
+		</RequisitionHeader_udf5Code>
+		<RequisitionHeader_udf6Code>
+			<label>Udf 6</label>
+			<type>STRING</type>
+		</RequisitionHeader_udf6Code>
+		<RequisitionHeader_udf7Code>
+			<label>Udf 7</label>
+			<type>STRING</type>
+		</RequisitionHeader_udf7Code>
+		<RequisitionHeader_udf8Code>
+			<label>Udf 8</label>
+			<type>STRING</type>
+		</RequisitionHeader_udf8Code>
+		<RequisitionHeader_udf9Code>
+			<label>Udf 9</label>
+			<type>STRING</type>
+		</RequisitionHeader_udf9Code>
+		<RequisitionHeader_udf10Code>
+			<label>Udf 10</label>
+			<type>STRING</type>
+		</RequisitionHeader_udf10Code>
+		<RequisitionHeader_currencyCode>
+			<label>Curr Code</label>
+			<type>STRING</type>
+		</RequisitionHeader_currencyCode>
+	</columns>
+  <sqlfrom>ApprovalLog as ApprovalLog, RequisitionHeader as RequisitionHeader, UserProfile as UserProfile, RequisitionLine as RequisitionLine</sqlfrom>
+  <sqlwhere><![CDATA[
+  	( ApprovalLog.id.icHeader = RequisitionHeader.icReqHeader ) and
+  	( ApprovalLog.id.userId = UserProfile.userId ) and
+  	( RequisitionHeader.requisitionNumber = RequisitionLine.requisitionNumber ) and
+  	( RequisitionHeader.status <> '1000' )
+  	]]></sqlwhere>
+  <title>Total Approval Time</title>
+</r_aprovtime>

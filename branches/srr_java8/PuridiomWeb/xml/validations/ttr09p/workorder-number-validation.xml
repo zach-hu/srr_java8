@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rule>
+    <clause type="Rule">
+		<rule-filename>udf1-resale-and-outsidelabor.xml</rule-filename>
+	</clause>
+	<logical-operator>IFTHEN</logical-operator>
+	<clause type="NotEmpty" matchAll="true">
+		<left-side>
+			<source>incomingRequestObjectMethod</source>
+			<object>header</object>
+			<name>getUdf7Code</name>
+		</left-side>
+	</clause>
+</rule>

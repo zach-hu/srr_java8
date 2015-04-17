@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="invItemSaveas" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="invItemSaveas">
+			<task synchronous="true" continue-on-failure="false" name="invItem">			
+				<task-object-name>com.tsa.puridiom.invitem.tasks.InvItemRetrieveById</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="invItem">
+				<task-object-name>com.tsa.puridiom.invitem.tasks.InvItemSaveas</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="invItemFormDataSaveas">
+			<rule-filename>is-errormsg-empty.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="invItemSaveasSetup">
+				<task-object-name>com.tsa.puridiom.invitem.tasks.InvItemSaveasSetup</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="invFormData">
+				<task-object-name>com.tsa.puridiom.invformdata.tasks.InvFormDataRetrieveById</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="invFormData">
+				<rule-filename check-for-false="true">is-invformdata-empty.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.invformdata.tasks.InvFormDataSaveas</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="invItemFormPartSaveas">
+			<rule-filename>is-errormsg-empty.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="invFormPartList">
+				<task-object-name>com.tsa.puridiom.invformpart.tasks.InvFormPartRetrieveByItemNumber</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="invFormPartSaveasByItemNumber">
+				<rule-filename check-for-false="true">is-invformpartlist-empty.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.invformpart.tasks.InvFormPartSaveasByItemNumber</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="retrieveInvCrossRef">
+			<task synchronous="true" continue-on-failure="false" name="invItemRetrieveCrossRefSetup">
+				<task-object-name>com.tsa.puridiom.invitem.tasks.InvItemCrossRefRetrieveSetup</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="itemCrossRefList">
+				<task-object-name>com.tsa.puridiom.itemcrossref.tasks.ItemCrossRefRetrieveByItemNumber</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+	</activities>
+</process>

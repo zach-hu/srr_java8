@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="assetUpdate" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="assetUpdate">
+			<task synchronous="true" continue-on-failure="false" name="asset">
+				<task-object-name>com.tsa.puridiom.asset.tasks.AssetRetrieveById</task-object-name>
+			</task>
+
+			<task synchronous="true" continue-on-failure="false" name="asset">
+				<task-object-name>com.tsa.puridiom.asset.tasks.AssetChangePrintedValue</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="asset">
+				<task-object-name>com.tsa.puridiom.asset.tasks.AssetUpdate</task-object-name>
+				<post-action></post-action>
+			</task>
+
+		</activity>
+	</activities>
+</process>

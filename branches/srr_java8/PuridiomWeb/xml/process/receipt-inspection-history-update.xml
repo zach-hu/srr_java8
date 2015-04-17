@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="inspectionHistoryUpdate" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="inspectionHistoryRetrieve">
+			<task synchronous="true" continue-on-failure="false" name="inspectionHistorySetup">
+				<task-object-name>com.tsa.puridiom.inspectionhistory.tasks.InspectionHistoryAddSetup</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="inspectionHistory">
+				<task-object-name>com.tsa.puridiom.inspectionhistory.tasks.InspectionHistorySetValues</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="inspectionHistory">
+				<task-object-name>com.tsa.puridiom.inspectionhistory.tasks.InspectionHistoryAdd</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+
+	</activities>
+</process>

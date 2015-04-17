@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="SupplierDelete" connection-type="New-Transaction"> 
+	<activities>  
+		<activity synchronous="true" continue-on-failure="false" name="deleteSupplierActivity">
+			<task synchronous="true" continue-on-failure="false" name="vendor">    			
+				<task-object-name>com.tsa.puridiom.vendor.tasks.VendorRetrieveById</task-object-name>    
+				<post-action />    
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="contactRetrieveSetup">    			
+				<task-object-name>com.tsa.puridiom.vendor.tasks.ContactRetrieveSetup</task-object-name>    
+				<post-action />    
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="contacts">    			
+				<task-object-name>com.tsa.puridiom.contact.tasks.ContactRetrieveBySupplier</task-object-name>    
+				<post-action />    
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="contactsDeleteAddress">
+				<task-object-name>com.tsa.puridiom.contact.tasks.ContactsDeleteAddress</task-object-name>    
+				<post-action />    
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="contact">    			
+				<task-object-name>com.tsa.puridiom.contact.tasks.ContactAdd</task-object-name>    
+				<post-action />    
+			</task>   
+		  </activity>  
+	 </activities> 
+</process>

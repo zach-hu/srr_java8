@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="stdAttachmentUpdateById" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="stdAttachmentUpdate">
+			<task synchronous="true" continue-on-failure="false" name="stdAttachment">
+				<task-object-name>com.tsa.puridiom.stdattachment.tasks.StdAttachmentRetrieveById</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="stdAttachment">
+				<task-object-name>com.tsa.puridiom.stdattachment.tasks.StdAttachmentSetValues</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="stdAttachment">
+				<task-object-name>com.tsa.puridiom.stdattachment.tasks.StdAttachmentUpdate</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

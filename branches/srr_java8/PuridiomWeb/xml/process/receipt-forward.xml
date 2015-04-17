@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="receiptForward" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="receiptForward">
+			<task synchronous="true" continue-on-failure="false" name="receiptForward">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>receiptheader-update.xml</process-filename>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="receiptForward">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>receipt-order-retrieve.xml</process-filename>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="receiptForwardNotification">
+			<task synchronous="true" continue-on-failure="false" name="receiptForwardNotification">
+				<task-object-name>com.tsa.puridiom.receipt.tasks.ReceiptForwardNotification</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="receiptHeaderHistory">
+				<task-object-name>com.tsa.puridiom.receiptheader.history.tasks.ReceiptHeaderHistory</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

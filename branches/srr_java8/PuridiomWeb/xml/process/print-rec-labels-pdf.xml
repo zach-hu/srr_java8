@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="PrintRecPdf" connection-type="Connection-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="receiptRetrieve">
+			<task synchronous="true" continue-on-failure="false" name="datasource">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>receipt-retrieve.xml</process-filename>
+			</task>
+		</activity>	
+		<activity synchronous="true" continue-on-failure="false" name="poHeaderRetrieve">
+			<task synchronous="true" continue-on-failure="false" name="poHeader">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>poheader-retrieve-by-id.xml</process-filename>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="poHeaderRetrieveSetup">			
+				<task-object-name>com.tsa.puridiom.poheader.tasks.PoHeaderRetrieveSetup</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="accountList">			
+				<rule-filename></rule-filename>
+				<task-object-name>com.tsa.puridiom.account.tasks.AccountRetrieveByLine</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="requisitionHeaderRetrieve">
+			<task synchronous="true" continue-on-failure="false" name="requisitionHeader">
+				<rule-filename check-for-false="true">is-requisitionheader-icreqheader-empty.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.requisitionheader.tasks.RequisitionHeaderRetrieveById</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="printRecPdf">
+			<task synchronous="true" continue-on-failure="false" name="report">
+				<task-object-name>com.tsa.puridiom.formpdf.tasks.PrintRecLabelsPdf</task-object-name>
+			</task>
+			 <task name="messageText" synchronous="true" continue-on-failure="false">
+        		<rule-filename check-for-false="true">is-view-now.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.formpdf.tasks.RecPdfMessageText</task-object-name>
+			  </task>
+		</activity>
+	</activities>
+</process>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="requisitionRetrieveByLine" connection-type="Connection-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="requisitionRetrieveByLine">
+			<task synchronous="true" continue-on-failure="false" name="requisitionRetrieveByLine">
+				<task-object-name>com.tsa.puridiom.requisitionheader.tasks.ReqIcHeaderRetrieveByLine</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="requisitionRetrieve">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>requisition-retrieve.xml</process-filename>
+			</task>
+		</activity>
+	</activities>
+</process>

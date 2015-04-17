@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+    
+<hibernate-mapping>
+
+<!-- 
+    Created by Middlegen Hibernate plugin
+
+    http://boss.bekk.no/boss/middlegen/
+    http://hibernate.sourceforge.net/
+-->
+
+<class 
+    name="com.tsa.puridiom.entity.SecurityProfile" 
+    table="SECURITY_PROFILE"
+>
+    <composite-id name="comp_id" class="com.tsa.puridiom.entity.SecurityProfilePK">
+        <key-property name="profileType" column="PROFILE_TYPE" type="java.lang.String"/>
+        <key-property name="groupId" column="GROUP_ID" type="java.lang.String"/>
+        <key-property name="profile" column="PROFILE" type="java.lang.String"/>
+    </composite-id>    
+    <property
+        name="flags"
+        type="java.lang.String"
+        column="FLAGS"
+        length="15"
+    />
+    <property
+        name="accessValue"
+        type="java.math.BigDecimal"
+        column="ACCESS_VALUE"
+        length="5"
+    />
+
+    <!-- associations -->
+
+</class>
+</hibernate-mapping>

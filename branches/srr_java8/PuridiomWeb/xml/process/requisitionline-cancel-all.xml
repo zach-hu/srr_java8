@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="CancelPoLine" connection-type="Connection-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="cancelLine">
+			<task synchronous="true" continue-on-failure="false" name="recalculate">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>requisitionline-cancel-by-id.xml</process-filename>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="cancelHeader">
+				<task-object-name>com.tsa.puridiom.requisitionline.tasks.RequisitionHeaderCancelCheck</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="cancelRequisitionHeader">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>requisitionheader-update-status.xml</process-filename>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="setLineAsList">
+			<task synchronous="true" continue-on-failure="false" name="requisitionLine">
+				<task-object-name>com.tsa.puridiom.requisitionline.tasks.RequisitionLineRetrieveById</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="requisitionLineList">
+				<task-object-name>com.tsa.puridiom.requisitionline.tasks.RequisitionLineSetAsList</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="history">
+			<task synchronous="true" continue-on-failure="false" name="requisitionLineListHistory">
+				<task-object-name>com.tsa.puridiom.requisitionline.history.tasks.RequisitionLineListHistory</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="requisitionHeaderHistory">
+				<rule-filename>is-requisitionheader-cancel.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.requisitionheader.history.tasks.RequisitionHeaderHistory</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="rfqLineListCancel">
+			<task synchronous="true" continue-on-failure="false" name="rfqLineListCancel">
+				<task-object-name>com.tsa.puridiom.rfqline.tasks.RfqLineListCancel</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="poLineListCancel">
+			<task synchronous="true" continue-on-failure="false" name="poLineListCancel">
+				<task-object-name>com.tsa.puridiom.poline.tasks.PoLineListCancel</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

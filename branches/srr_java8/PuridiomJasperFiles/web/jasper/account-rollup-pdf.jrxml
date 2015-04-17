@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created using an evaluation version of JasperAssistant (http://www.jasperassistant.com) -->
+<!DOCTYPE jasperReport PUBLIC "-//JasperReports//DTD Report Design//EN" "http://jasperreports.sourceforge.net/dtds/jasperreport.dtd">
+
+<jasperReport name="accountRollup" pageWidth="595" pageHeight="842" columnWidth="595" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+	<import value="com.tsa.puridiom.jasperreports.*"/>
+	<reportFont name="Arial_Normal" isDefault="true" fontName="Arial" size="8" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_bold" isDefault="false" fontName="Arial Black" size="8" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica-Bold" pdfEncoding="Cp1252" isPdfEmbedded="true"/>
+	<parameter name="reportTitle" class="java.lang.String">
+		<defaultValueExpression><![CDATA["Account Summary"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="oid" class="java.lang.String">
+		<defaultValueExpression><![CDATA["hilton"]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="Account_allocAmount" class="java.math.BigDecimal"/>
+	<field name="Account_fld1" class="java.lang.String"/>
+	<field name="Account_fld2" class="java.lang.String"/>
+	<field name="Account_fld3" class="java.lang.String"/>
+	<field name="Account_fld4" class="java.lang.String"/>
+	<field name="Account_fld5" class="java.lang.String"/>
+	<field name="Account_fld6" class="java.lang.String"/>
+	<field name="Account_fld7" class="java.lang.String"/>
+	<field name="Account_fld8" class="java.lang.String"/>
+	<field name="Account_fld9" class="java.lang.String"/>
+	<field name="Account_fld10" class="java.lang.String"/>
+	<field name="Account_fld11" class="java.lang.String"/>
+	<field name="Account_fld12" class="java.lang.String"/>
+	<field name="Account_fld13" class="java.lang.String"/>
+	<field name="Account_fld14" class="java.lang.String"/>
+	<field name="Account_fld15" class="java.lang.String"/>
+	<title>
+		<band height="26">
+			<staticText>
+				<reportElement positionType="Float" x="134" y="0" width="295" height="24"/>
+				<textElement textAlignment="Center">
+					<font reportFont="Arial_bold"/>
+				</textElement>
+				<text><![CDATA[Account Summary
+(For Internal Use Only)]]></text>
+			</staticText>
+		</band>
+	</title>
+	<detail>
+		<band height="15">
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" x="134" y="0" width="220" height="14"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[ReportUtils.getAcctString($F{Account_fld1}, $F{Account_fld2}, $F{Account_fld3}, $F{Account_fld4}, $F{Account_fld5}, $F{Account_fld6}, $F{Account_fld7}, $F{Account_fld8}, $F{Account_fld9}, $F{Account_fld10}, $F{Account_fld11}, $F{Account_fld12},$F{Account_fld13}, $F{Account_fld14}, $F{Account_fld15}, $P{oid})]]></textFieldExpression>
+			</textField>
+			<textField pattern="¤#,##0.00;(¤#,##0.00)" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="354" y="0" width="72" height="14"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{Account_allocAmount}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

@@ -1,0 +1,67 @@
+<browse_disbursement>
+	<columns>
+		<DisbHeader_icDsbHeader>
+	        <hidden>Y</hidden>
+		</DisbHeader_icDsbHeader>
+		<DisbHeader_disbNumber>
+			<label>Disbursement Number</label>
+			<link><![CDATA[javascript: viewDsb('#DisbHeader_icDsbHeader^','#DisbHeader_disbType^'); void(0);]]></link>
+			<size>10</size>
+			<type>STRING</type>
+		</DisbHeader_disbNumber>
+		<DisbHeader_disbType>
+			<label>Created From</label>
+			<type>DISBURSEMENT-TYPE</type>
+			<size>15</size>
+		</DisbHeader_disbType>
+		<DisbHeader_disbDate>
+			<label>Disbursement Date</label>
+			<sort>D</sort>
+			<size>11</size>
+			<type>DATE</type>
+		</DisbHeader_disbDate>
+		<DisbHeader_status>
+			<label>brw-status</label>
+			<type>STATUS</type>
+			<size>12</size>
+		</DisbHeader_status>
+		<DisbHeader_internalComments>
+			<label>purpose</label>
+            <detail>Y</detail>
+            <type>STRING</type>
+		</DisbHeader_internalComments>
+		<DisbHeader_itemLocation>
+			<label>brw-itemLocation</label>
+			<size>14</size>
+			<type>STRING</type>
+		</DisbHeader_itemLocation>
+		<DisbHeader_shipToCode>
+			<label>shipToCode</label>
+			<size>14</size>
+			<type>STRING</type>
+		</DisbHeader_shipToCode>
+		<DisbHeader_owner>
+			<label>owner</label>
+	        <hidden>Y</hidden>
+		</DisbHeader_owner>
+		<DisbHeader_requisitionNumber>
+			<label>brw-requisitionNumber</label>
+            <size>10</size>
+            <type>STRING</type>
+		</DisbHeader_requisitionNumber>
+		<DisbHeader_requisitionerCode>
+			<label>brw-requisitioner</label>
+            <size>14</size>
+            <type>USER-ID</type>
+		</DisbHeader_requisitionerCode>
+		<DisbHeader_fiscalYear>
+			<label>fiscalYear</label>
+			<visible>0</visible>
+		</DisbHeader_fiscalYear>
+	</columns>
+<sqlfrom>DisbHeader as DisbHeader</sqlfrom>
+<sqlwhere><![CDATA[DisbHeader.disbNumber <> 'N/A'  ]]></sqlwhere>
+<sqlorderby>DisbHeader.disbDate DESC</sqlorderby>
+<pagesize>15</pagesize>
+<title>Disbursement Browse</title>
+</browse_disbursement>

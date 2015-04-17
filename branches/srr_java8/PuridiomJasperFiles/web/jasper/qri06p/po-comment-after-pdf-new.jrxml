@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created using an evaluation version of JasperAssistant (http://www.jasperassistant.com) -->
+<!DOCTYPE jasperReport PUBLIC "-//JasperReports//DTD Report Design//EN" "http://jasperreports.sourceforge.net/dtds/jasperreport.dtd">
+
+<jasperReport name="commentpdf" pageWidth="612" pageHeight="791" columnWidth="612" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" isIgnorePagination="true">
+	<reportFont name="Arial_Normal" isDefault="true" fontName="Arial" size="8" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Bolded" isDefault="false" fontName="Arial Black" size="8" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica-Bold" pdfEncoding="Cp1252" isPdfEmbedded="true"/>
+	<parameter name="oid" class="java.lang.String">
+		<defaultValueExpression><![CDATA["bsc04p"]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="DocComment_commentText" class="java.lang.String"/>
+	<field name="DocComment_commentBold" class="java.lang.String"/>
+	<field name="DocComment_commentPrint" class="java.lang.String"/>
+	<field name="DocComment_commentPlace" class="java.lang.String"/>
+	<group name="Group_4">
+		<groupHeader>
+			<band height="14">
+				<rectangle>
+					<reportElement x="0" y="0" width="533" height="14" forecolor="#FFFFFF"/>
+					<graphicElement/>
+				</rectangle>
+			</band>
+		</groupHeader>
+	</group>
+	<group name="Group_3">
+		<groupHeader>
+			<band height="14" isSplitAllowed="false">
+				<staticText>
+					<reportElement x="0" y="0" width="80" height="14"/>
+					<box border="None" topPadding="0" leftPadding="3" bottomPadding="0" rightPadding="0"/>
+					<textElement verticalAlignment="Middle">
+						<font reportFont="Arial_Bolded"/>
+					</textElement>
+					<text><![CDATA[Comments]]></text>
+				</staticText>
+			</band>
+		</groupHeader>
+	</group>
+	<group name="Group_1">
+		<groupExpression><![CDATA[$V{REPORT_COUNT}]]></groupExpression>
+		<groupHeader>
+			<band height="18" isSplitAllowed="false">
+				<printWhenExpression><![CDATA[new Boolean(($F{DocComment_commentPrint}.equals("Y") && $F{DocComment_commentPlace}.equalsIgnoreCase("A") ) && ($F{DocComment_commentBold}.equalsIgnoreCase("N") || $F{DocComment_commentBold}.equalsIgnoreCase("")))]]></printWhenExpression>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="0" y="1" width="555" height="14" isRemoveLineWhenBlank="true" isPrintInFirstWholeBand="true" isPrintWhenDetailOverflows="true"/>
+					<box border="None" topPadding="0" leftPadding="3" bottomPadding="0" rightPadding="0"/>
+					<textElement verticalAlignment="Middle">
+						<font reportFont="Arial_Normal"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{DocComment_commentText}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+	</group>
+	<group name="Group_2">
+		<groupExpression><![CDATA[$V{REPORT_COUNT}]]></groupExpression>
+		<groupHeader>
+			<band height="18">
+				<printWhenExpression><![CDATA[new Boolean(($F{DocComment_commentPrint}.equals("Y") && $F{DocComment_commentPlace}.equalsIgnoreCase("A") ) && $F{DocComment_commentBold}.equalsIgnoreCase("Y"))]]></printWhenExpression>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="0" y="1" width="555" height="14" isRemoveLineWhenBlank="true" isPrintInFirstWholeBand="true" isPrintWhenDetailOverflows="true" forecolor="#400040">
+						<printWhenExpression><![CDATA[new Boolean($F{DocComment_commentBold}.equalsIgnoreCase("Y"))]]></printWhenExpression>
+					</reportElement>
+					<box border="None" topPadding="0" leftPadding="3" bottomPadding="0" rightPadding="0"/>
+					<textElement verticalAlignment="Middle">
+						<font reportFont="Arial_Bolded"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{DocComment_commentText}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+	</group>
+</jasperReport>

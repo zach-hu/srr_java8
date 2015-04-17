@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="requisitionLineInvItemLookup" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="invItemLookup">
+			<task synchronous="true" continue-on-failure="false" name="invItem">
+				<!-- this task sets InvLocation invLocation in incomingRequest -->
+				<rule-filename>is-dsb</rule-filename>
+				<task-object-name>com.tsa.puridiom.invitem.tasks.InvItemRetrieveWithLocationAndBin</task-object-name>
+				<post-action>exitActivity</post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="invItem">
+				<!-- this task sets InvLocation invLocation in incomingRequest -->
+				<task-object-name>com.tsa.puridiom.invitem.tasks.InvItemRetrieveByLocation</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="explodeKit">
+			<rule-filename>is-invitem-kit</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="explodeKit">			
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>invitem-explode-kit.xml</process-filename>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="invItemExplodeKit">
+				<rule-filename check-for-false="true">is-kititemlist-empty</rule-filename>
+				<task-object-name>com.tsa.puridiom.invitem.tasks.InvItemExplodeKit</task-object-name>
+				<post-action>exitProcess</post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="itemLookup">
+			<task synchronous="true" continue-on-failure="false" name="itemLookup">
+				<rule-filename>is-dsb.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.invitem.tasks.OtcItemLookupSetValues</task-object-name>
+				<post-action>exitActivity</post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="invVendor">	
+				<rule-filename>is-msr-request.xml</rule-filename>		
+				<task-object-name>com.tsa.puridiom.invvendor.tasks.InvVendorRetrieveBy</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="itemLookup">			
+				<task-object-name>com.tsa.puridiom.invitem.tasks.InvItemLookupSetValues</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="lineUpdate">
+			<task synchronous="true" continue-on-failure="false" name="requisitionLineUpdate">
+				<rule-filename>is-req</rule-filename>
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>requisitionline-update-from-lookup.xml</process-filename>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="rfqLineUpdate">
+				<rule-filename>is-rfq</rule-filename>
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>rfqline-update-from-lookup.xml</process-filename>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="poLineUpdate">
+				<rule-filename>is-po.xml</rule-filename>
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>poline-update-from-lookup.xml</process-filename>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="disbLineUpdate">
+				<rule-filename>is-dsb.xml</rule-filename>
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>disbursementline-update-from-lookup.xml</process-filename>
+			</task>
+		</activity>
+	</activities>
+</process>

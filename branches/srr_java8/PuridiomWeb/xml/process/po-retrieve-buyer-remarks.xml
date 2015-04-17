@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="poRetrieveBuyerRemarks" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="poRetrieveBuyerRemarks">
+			<task synchronous="true" continue-on-failure="false" name="poHeader">
+				<task-object-name>com.tsa.puridiom.poheader.tasks.PoHeaderRetrieveById</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="poLineList">
+				<task-object-name>com.tsa.puridiom.poline.tasks.PoLineRetrieveByHeader</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="icReqHeaderList">
+				<task-object-name>com.tsa.puridiom.poline.tasks.PoLineListRetrieveIcReqHeaderList</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="buyerRemarksList">
+				<task-object-name>com.tsa.puridiom.poline.tasks.PoLineListRetrieveBuyerRemarksList</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="buyerPoRemarksList">
+				<task-object-name>com.tsa.puridiom.poline.tasks.PoLineListRetrieveBuyerRemarksFromNothingList</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+	</activities>
+</process>

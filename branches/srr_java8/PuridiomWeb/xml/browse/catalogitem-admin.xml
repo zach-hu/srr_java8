@@ -1,0 +1,71 @@
+<browse_catalog_item>
+	<columns>
+		<CatalogItem_id_catalogId>
+			<label>brw-catalogId</label>
+			<hidden>Y</hidden>
+			<hidden-input>Y</hidden-input>
+		</CatalogItem_id_catalogId>
+		<CatalogItem_id_itemNumber>
+			<label>brw-itemNumber</label>
+			<size>20</size>
+			<link><![CDATA[javascript: viewCatalogItem('#CatalogItem_id_catalogId^','#CatalogItem_id_itemNumber^'); void(0);]]></link>
+			<hidden-input>Y</hidden-input>
+		</CatalogItem_id_itemNumber>
+		<CatalogItem_commodity>
+			<label>commodity</label>
+			<size>15</size>
+		</CatalogItem_commodity>
+		<CatalogItem_cost>
+			<label>brw-cost</label>
+			<type>DollarDecimal</type>
+			<size>10</size>
+		</CatalogItem_cost>
+		<CatalogItem_umCode>
+			<label>brw-uom</label>
+			<size>5</size>
+		</CatalogItem_umCode>
+		<CatalogItem_status>
+			<label>brw-status</label>
+			<type>GENERALSTATUS</type>
+			<size>15</size>
+		</CatalogItem_status>
+		<!--CatalogItem_minReqQty>
+			<type>QtyDecimal</type>
+			<hidden>Y</hidden>
+		</CatalogItem_minReqQty>
+		<CatalogItem_maxReqQty>
+			<type>QtyDecimal</type>
+			<hidden>Y</hidden>
+		</CatalogItem_maxReqQty>
+		<CatalogItem_imageFile>
+			<hidden>Y</hidden>
+		</CatalogItem_imageFile-->
+		<CatalogItem_kit>
+			<label>brw-kit</label>
+			<size>5</size>
+		</CatalogItem_kit>
+		<CatalogItem_itemRestricted>
+			<label>brw-restricted</label>
+			<size>10</size>
+		</CatalogItem_itemRestricted>
+		<CatalogItem_mfgName>
+			<label>brw-manufacturer</label>
+			<size>20</size>
+		</CatalogItem_mfgName>
+		<CatalogItem_modelNumber>
+			<label>brw-modelNumber</label>
+			<size>15</size>
+		</CatalogItem_modelNumber>
+		<CatalogItem_description>
+			<label>description</label>
+			<detail>Y</detail>
+			<size>100</size>
+		</CatalogItem_description>
+	</columns>
+	<sqlfrom>CatalogItem as CatalogItem</sqlfrom>
+	<sqlorderby>CatalogItem.id.itemNumber ASC</sqlorderby>
+	<sqlwhere><![CDATA[ ]]></sqlwhere>
+	<title>Catalog Items</title>
+	<detail-visible>Y</detail-visible>
+	<pagesize>10</pagesize>
+</browse_catalog_item>

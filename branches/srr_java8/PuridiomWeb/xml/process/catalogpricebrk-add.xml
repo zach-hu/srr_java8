@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="CatalogPriceBrkAdd" connection-type="Transaction-Required"> 
+	<activities>  
+		<activity synchronous="true" continue-on-failure="false" name="addCatalogPriceBrkActivity">
+			<task synchronous="true" continue-on-failure="false" name="CatalogPriceBrk_sequence">
+				<task-object-name>com.tsa.puridiom.catalogpricebrk.tasks.GetCatalogPriceBrkSequence</task-object-name>
+				<post-action/>
+			</task>   
+			<task synchronous="true" continue-on-failure="false" name="addCatalogPriceBrk">    			
+				<task-object-name>com.tsa.puridiom.catalogpricebrk.tasks.CatalogPriceBrkAdd</task-object-name>    
+				<post-action />    
+			   </task>   
+		  </activity>  
+	 </activities> 
+</process>

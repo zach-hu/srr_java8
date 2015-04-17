@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="rfqQuestionRetrieveByHeader" connection-type="Connection-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="rfqQuestionRetrieveByHeader">
+			<task synchronous="true" continue-on-failure="false" name="rfqQuestionList">
+				<task-object-name>com.tsa.puridiom.rfqquestion.tasks.RfqQuestionRetrieveByHeader</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="rfqQuestionList">
+				<task-object-name>com.tsa.puridiom.rfqquestion.tasks.RfqQuestionRetrieveResponseValuesByList</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

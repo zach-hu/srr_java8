@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="invWorkCenterUpdate" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="updateInvWorkCenter">
+			<task synchronous="true" continue-on-failure="false" name="invWorkCenter">
+				<task-object-name>com.tsa.puridiom.invworkcenter.tasks.InvWorkCenterRetrieveById</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="invWorkCenter">
+				<task-object-name>com.tsa.puridiom.invworkcenter.tasks.InvWorkCenterSetValues</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="invWorkCenter">
+				<task-object-name>com.tsa.puridiom.invworkcenter.tasks.InvWorkCenterUpdate</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+	</activities>
+</process>

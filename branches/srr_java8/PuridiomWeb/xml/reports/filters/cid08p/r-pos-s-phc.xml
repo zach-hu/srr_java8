@@ -1,0 +1,79 @@
+<r_pocommod>
+<columns>
+		<PoLine_itemNumber>
+			<label><![CDATA[itemNumber]]></label>
+			<type>STRING</type>
+		</PoLine_itemNumber>
+		<PoLine_poNumber>
+			<label><![CDATA[poNumber]]></label>
+			<type>STRING</type>
+		</PoLine_poNumber>
+		<PoHeader_poDate>
+			<label><![CDATA[poDate]]></label>
+			<type>DATE</type>
+		</PoHeader_poDate>
+		<PoHeader_departmentCode>
+			<label><![CDATA[department]]></label>
+			<type>STRING</type>
+		</PoHeader_departmentCode>
+		<PoLine_quantity>
+			<label><![CDATA[quantity]]></label>
+			<type>BIGDECIMAL</type>
+		</PoLine_quantity>
+		<PoHeader_currencyFactor>
+			<label>Currency Factor</label>
+			<type>BIGDECIMAL</type>
+			<visible>0</visible>
+		</PoHeader_currencyFactor>
+		<PoLine_commodity>
+			<label><![CDATA[commodity]]></label>
+			<type>STRING</type>
+		</PoLine_commodity>
+		<PoLine_unitPrice>
+			<label><![CDATA[unitPrice]]></label>
+			<type>BIGDECIMAL</type>
+		</PoLine_unitPrice>
+		<PoLine_lineTotal>
+			<label><![CDATA[itemNumber]]></label>
+			<type>BIGDECIMAL</type>
+		</PoLine_lineTotal>
+		<Commodity_description>
+			<label><![CDATA[commodityDescription]]></label>
+			<type>STRING</type>
+		</Commodity_description>
+		<PoLine_description>
+			<label><![CDATA[description]]></label>
+			<type>STRING</type>
+		</PoLine_description>
+		<PoHeader_status>
+			<label><![CDATA[status]]></label>
+			<type>STATUS</type>
+		</PoHeader_status>
+		<PoHeader_buyerCode>
+			<label><![CDATA[buyer]]></label>
+			<type>STRING</type>
+		</PoHeader_buyerCode>
+		<PoLine_umCode>
+			<label><![CDATA[uom]]></label>
+			<type>STRING</type>
+		</PoLine_umCode>
+		<PoHeader_currencyCode>
+			<label><![CDATA[currency]]></label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</PoHeader_currencyCode>
+	</columns>
+<sqlfrom> PoLine as PoLine , Commodity as Commodity , PoHeader as PoHeader </sqlfrom>
+<sqlwhere><![CDATA[
+	( PoLine.commodity = Commodity.commodity ) and
+	( PoHeader.icPoHeader = PoLine.icPoHeader ) and
+	( PoHeader.lastRevision = 'C' ) and
+	( PoLine.commodity > '0' ) and ( PoHeader.poDate >= :as_baseReportDate ) and
+	( PoLine.status > '3020' ) and
+	( PoLine.status < '9020' ) and
+	( PoLine.itemNumber <> 'N/A' )
+	]]></sqlwhere>
+<sqlorderby>PoLine.commodity</sqlorderby>
+<title>Purchase Order History by Commodity Report</title>
+</r_pocommod>
+

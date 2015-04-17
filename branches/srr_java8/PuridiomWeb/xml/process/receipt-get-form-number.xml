@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="receiptGetFormNumber" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="generateReceiptNumber">
+			<task synchronous="true" continue-on-failure="false" name="generateNumber">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>receipt-generate-form-number.xml</process-filename>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="receiptHeaderUpdate">
+			<task synchronous="true" continue-on-failure="false" name="receiptHeaderUpdate">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>receiptheader-update.xml</process-filename>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="receiptLinesUpdate">
+			<task synchronous="true" continue-on-failure="false" name="receiptLineList">			
+				<task-object-name>com.tsa.puridiom.receiptline.tasks.ReceiptLineRetrieveByHeader</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="receiptLineList">
+				<task-object-name>com.tsa.puridiom.receiptline.tasks.ReceiptLineSetReceiptNumberFromHeader</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="receiptLineUpdate">			
+				<task-object-name>com.tsa.puridiom.receiptline.tasks.ReceiptLineUpdateEntityList</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="history">
+			<task synchronous="true" continue-on-failure="false" name="receiptHeaderHistory">
+				<task-object-name>com.tsa.puridiom.receiptheader.history.tasks.ReceiptHeaderHistory</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="recentReceiptActivity">
+			<task synchronous="true" continue-on-failure="false" name="recentReceiptAdd">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>recentreceipt-add.xml</process-filename>
+			</task>
+		</activity>
+	</activities>
+</process>

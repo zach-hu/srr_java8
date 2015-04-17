@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="appRuleUserProfileUpdate" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="appRuleGetUser">
+			<task synchronous="true" continue-on-failure="false" name="userProfile">
+				<task-object-name>com.tsa.puridiom.usermanager.tasks.UserManagerGetUser</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="appRuleAmountUpdateByUser">
+			<rule-filename>is-approvebyline-active.xml</rule-filename>
+				<task synchronous="true" continue-on-failure="false" name="appRuleUserUpdate">
+					<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+					<process-filename>userprofile-update</process-filename>
+				</task>
+				<task synchronous="true" continue-on-failure="false" name="appRuleAmountUpdateByUser">
+					<task-object-name>com.tsa.puridiom.apprule.tasks.AppRuleAmountUpdateByUser</task-object-name>
+				</task>	
+			<post-action>exitProcess</post-action>
+		</activity>
+	</activities>
+</process>
+
+			

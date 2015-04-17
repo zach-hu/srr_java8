@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="vendorRegistration" connection-type="Connection-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="vendorRetrieve">
+			<task synchronous="true" continue-on-failure="false" name="vendorName">
+				<rule-filename>is-temp-vendorname-empty</rule-filename>
+				<task-object-name>com.tsa.puridiom.supplierportal.registration.tasks.RegisterUserVendorNameStrip</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="retrieveVendorByVendorName">
+			<task synchronous="true" continue-on-failure="false" name="vendorRegistrationValidateIdSetup">
+				<!-- set Vendor_vendorName & VendorRegister_vendorName based on vendorName -->
+				<task-object-name>com.tsa.puridiom.supplierportal.registration.tasks.CheckExistingNamesSetup</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="vendorList">
+				<task-object-name>com.tsa.puridiom.vendor.tasks.VendorRetrieveByName</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="getValidVendorId">
+				<rule-filename check-for-false="true">is-vendor-list-empty</rule-filename>
+				<task-object-name>com.tsa.puridiom.supplierportal.InvokeSupplierPortalProcessTask</task-object-name>
+				<process-filename>vendor-registration-validate-ein-from-list.xml</process-filename>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="determineRegistrationType">
+			<rule-filename check-for-false="true">is-registeruser-qualified;is-registeruser-einvalid</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="vendorRegisterList">
+				<task-object-name>com.tsa.puridiom.vendorregister.tasks.VendorRegisterRetrieveByName</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="getValidVendorId">
+				<rule-filename check-for-false="true">is-vendorregister-list-empty</rule-filename>
+				<task-object-name>com.tsa.puridiom.supplierportal.InvokeSupplierPortalProcessTask</task-object-name>
+				<process-filename>registration-validate-registered-list-ein</process-filename>
+			</task>
+		</activity>
+	</activities>
+</process>

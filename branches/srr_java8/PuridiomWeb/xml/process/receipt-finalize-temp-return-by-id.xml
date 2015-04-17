@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="receiptFinalizeTempReturnById" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="receiptHeaderUpdate">
+			<task synchronous="true" continue-on-failure="false" name="receiptHeaderSetReceived">
+				<task-object-name>com.tsa.puridiom.receiptheader.tasks.ReceiptHeaderSetReceived</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="receiptHeader">			
+				<task-object-name>com.tsa.puridiom.receiptheader.tasks.ReceiptHeaderSetValues</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="receiptHeader">			
+				<task-object-name>com.tsa.puridiom.receiptheader.tasks.ReceiptHeaderUpdate</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="receiptLineList">
+				<task-object-name>com.tsa.puridiom.receiptline.tasks.ReceiptLineListSetReceived</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="receiptLineList">
+				<task-object-name>com.tsa.puridiom.receiptline.tasks.ReceiptLineUpdateEntityList</task-object-name>
+				<post-action></post-action>
+			</task>			
+		</activity>
+	</activities>
+</process>

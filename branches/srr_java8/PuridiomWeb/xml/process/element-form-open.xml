@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="ElementFormOpen" connection-type="Connection-Required">
+	<!--Retrieve all Addresses for a given id-->
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="ElementFormRetrieveByFormId">
+			  <task synchronous="true" continue-on-failure="false" name="formDefList">
+			  	<!--  Retrieve by form id -->
+				<task-object-name>com.tsa.puridiom.elementform.tasks.ElementFormRetrieveByFormId</task-object-name>
+				<post-action />
+			  </task>
+		  </activity>
+		<activity synchronous="true" continue-on-failure="false" name="ElementDataRetrieveById">
+			  <task synchronous="true" continue-on-failure="false" name="formDataList">
+				<task-object-name>com.tsa.puridiom.elementdata.tasks.ElementDataRetrieveByIcDocument</task-object-name>
+				<post-action />
+			  </task>
+		  </activity>
+	 </activities>
+</process>

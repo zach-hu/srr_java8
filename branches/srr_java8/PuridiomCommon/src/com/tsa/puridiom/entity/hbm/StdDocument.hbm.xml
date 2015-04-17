@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+    
+<hibernate-mapping>
+
+<!-- 
+    Created by Middlegen Hibernate plugin
+
+    http://boss.bekk.no/boss/middlegen/
+    http://hibernate.sourceforge.net/
+-->
+
+<class 
+    name="com.tsa.puridiom.entity.StdDocument" 
+    table="STD_DOCUMENT"
+>
+    <id
+        name="fileName"
+        type="java.lang.String"
+        column="FILE_NAME"
+    >
+        <generator class="assigned" />
+    </id>
+    <property
+        name="title"
+        type="java.lang.String"
+        column="TITLE"
+        not-null="true"
+        length="60"
+    />
+    <property
+        name="description"
+        type="java.lang.String"
+        column="DESCRIPTION"
+        length="255"
+    />
+    <property
+        name="docType"
+        type="java.lang.String"
+        column="DOC_TYPE"
+        length="2"
+    />
+    <property
+        name="datePosted"
+        type="java.sql.Timestamp"
+        column="DATE_POSTED"
+        length="7"
+    />
+    <property
+        name="hits"
+        type="java.math.BigDecimal"
+        column="HITS"
+        length="10"
+    />
+
+    <!-- associations -->
+
+</class>
+</hibernate-mapping>

@@ -1,0 +1,77 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+    
+<hibernate-mapping>
+
+<class 
+    name="com.tsa.puridiom.entity.BomMethod" 
+    table="BOM_METHOD"
+>
+    <id
+        name="icMethod"
+        type="java.math.BigDecimal"
+        column="IC_METHOD"
+    >
+        <generator class="assigned" />
+    </id>
+    <property
+        name="parentItem"
+        type="java.lang.String"
+        column="PARENT_ITEM"
+        length="30"
+    />
+    <property
+        name="componentItem"
+        type="java.lang.String"
+        column="COMPONENT_ITEM"
+        length="30"
+    />
+    <property
+        name="methodId"
+        type="java.lang.String"
+        column="METHOD_ID"
+        length="15"
+    />
+    <property
+        name="batchSize"
+        type="java.math.BigDecimal"
+        column="BATCH_SIZE"
+        length="15"
+    />
+    <property
+        name="unitOfMeasure"
+        type="java.lang.String"
+        column="UNIT_OF_MEASURE"
+        length="15"
+    />
+    <property
+        name="description"
+        type="java.lang.String"
+        column="DESCRIPTION"
+        length="50"
+    />
+    <property
+        name="notes"
+        type="java.lang.String"
+        column="NOTES"
+        length="2000"
+    />
+    <property
+        name="dateEntered"
+        type="java.sql.Timestamp"
+        column="DATE_ENTERED"
+        length="7"
+    />
+    <property
+        name="owner"
+        type="java.lang.String"
+        column="OWNER"
+        length="15"
+    />
+
+    <!-- associations -->
+
+</class>
+</hibernate-mapping>

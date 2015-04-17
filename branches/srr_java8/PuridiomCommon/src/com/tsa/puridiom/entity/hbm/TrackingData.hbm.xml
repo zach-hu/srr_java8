@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping>
+<class 
+    name="com.tsa.puridiom.entity.TrackingData" 
+    table="TRACKING_DATA"
+>
+    <composite-id name="comp_id" class="com.tsa.puridiom.entity.TrackingDataPK">
+    	<key-property name="icTracking" column="IC_TRACKING" type="java.math.BigDecimal"/>
+        <key-property name="icHeader" column="IC_HEADER" type="java.math.BigDecimal"/>
+        <key-property name="icLine" column="IC_LINE" type="java.math.BigDecimal"/>
+    </composite-id>    
+    <property
+        name="trackingNumber"
+        type="java.lang.String"
+        column="TRACKING_NO"
+        length="50"
+    />
+    <property
+        name="trackingDesc"
+        type="java.lang.String"
+        column="TRACKING_DESC"
+        length="255"
+    />
+    <property
+        name="owner"
+        type="java.lang.String"
+        column="OWNER"
+        length="15"
+    />
+    <!-- associations -->
+
+</class>
+</hibernate-mapping>

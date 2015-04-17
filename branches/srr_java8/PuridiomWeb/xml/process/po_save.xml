@@ -1,0 +1,41 @@
+<process name="PoSave" connection-type="Transaction-Required">
+    <!--when saving a PO Req/rfq status should be updated too. -->
+	<activities>
+	    <activity synchronous="true" continue-on-failure="false" name="posave">
+	    	<rule-filename check-for-false="true">is-autoaward-process.xml</rule-filename>
+		    <task synchronous="true" continue-on-failure="false" name="CheckReqStatusApproveFromPo">
+				<task-object-name>com.tsa.puridiom.po.notifications.tasks.CheckReqStatusApproveFromPo</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="setMessageTextOrderNoSave">
+				<rule-filename check-for-false="true">check-req-status-approved.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.po.notifications.tasks.SetMessageErrorPoSave</task-object-name>
+				<post-action>exitProcess</post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="verifyPoDuplicate">
+			<rule-filename>is-organization-msg.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="poHeader">
+				<task-object-name>com.tsa.puridiom.poheader.tasks.PoHeaderRetrieveById</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="poHeaderDuplicate">
+				<task-object-name>com.tsa.puridiom.poheader.tasks.PoHeaderVerifyDuplicate</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="poHeaderErrorDuplicate">
+				<rule-filename>is-duplicate-po.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.po.notifications.tasks.SetMessageErrorPoDuplicate</task-object-name>
+				<post-action>exitProcess</post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="posave">
+			<task synchronous="true" continue-on-failure="false" name="getNumber">
+				<rule-filename>is-fdcs-po-number-autogen-required.xml</rule-filename>
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>po-get-form-number.xml</process-filename>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="updatesourcestatus">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>po-update-source-status.xml</process-filename>
+			</task>
+		</activity>
+	</activities>
+</process>

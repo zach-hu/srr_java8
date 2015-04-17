@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="InsCategoryLevelAdd" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="checkDupInsCategoryLevel">
+			<task synchronous="true" continue-on-failure="false" name="existingInsCategoryLevel">
+				<task-object-name>com.tsa.puridiom.inscategorylevel.tasks.InsCategoryLevelRetrieveByIclLevel</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="insCategoryLevelSetup">    			
+				<task-object-name>com.tsa.puridiom.inscategorylevel.tasks.InsCategoryLevelSetup</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="insCategoryLevel">
+				<task-object-name>com.tsa.puridiom.inscategorylevel.tasks.InsCategoryLevelSetValues</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="insCategoryLevelValidation">
+			<rule-filename check-for-false="true">is-existing-inscategorylevel-empty.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="setErrorMsg">
+				<task-object-name>com.tsa.puridiom.inscategorylevelerrormsg.tasks.ErrorMsgSetDuplicateInsCategoryLevel</task-object-name>
+			</task>
+			<post-action>exitProcess</post-action>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="addInsCategoryLevelActivity">
+			<task synchronous="true" continue-on-failure="false" name="addInsCategoryLevel">
+				<task-object-name>com.tsa.puridiom.inscategorylevel.tasks.InsCategoryLevelAdd</task-object-name>
+			</task>
+		</activity>
+	 </activities>
+</process>

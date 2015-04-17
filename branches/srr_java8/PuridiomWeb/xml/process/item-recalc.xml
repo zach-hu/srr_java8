@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="usage.wf_recalc" connection-type="Connection-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="recalc">
+			<task synchronous="true" continue-on-failure="false" name="Setup">
+				<task-object-name>com.tsa.puridiom.reports.itemusage.tasks.InvUsageRecalcSetup</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="calc">
+			<rule-filename>is-invlocation-itemlocation-empty.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="disbsum">
+				<task-object-name>com.tsa.puridiom.disbursement.tasks.DisbHeaderRetrieveItemUsage</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="recalc">
+				<task-object-name>com.tsa.puridiom.reports.itemusage.tasks.DisbLineQtySum</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

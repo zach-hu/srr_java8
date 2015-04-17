@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created using an evaluation version of JasperAssistant (http://www.jasperassistant.com) -->
+<!DOCTYPE jasperReport PUBLIC "-//JasperReports//DTD Report Design//EN" "http://jasperreports.sourceforge.net/dtds/jasperreport.dtd">
+
+<jasperReport name="Terms" pageWidth="612" pageHeight="842" columnWidth="592" leftMargin="10" rightMargin="10" topMargin="10" bottomMargin="0">
+	<property name="com.jasperassistant.designer.GridWidth" value="12"/>
+	<property name="com.jasperassistant.designer.GridHeight" value="12"/>
+	<property name="com.jasperassistant.designer.DataSource" value="empty"/>
+	<property name="com.jasperassistant.designer.SnapToGrid" value="false"/>
+	<property name="com.jasperassistant.designer.Grid" value="false"/>
+	<property name="com.jasperassistant.designer.HGuides" value="22,574"/>
+	<import value="com.tsa.puridiom.jasperreports.*"/>
+	<reportFont name="Arial_Normal" isDefault="false" fontName="Arial" size="8" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<parameter name="imgUrl" class="java.lang.String">
+		<defaultValueExpression><![CDATA["http://test.puridiom.com/hilton/images/"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="oid" class="java.lang.String">
+		<defaultValueExpression><![CDATA["bsc04p"]]></defaultValueExpression>
+	</parameter>
+	<title>
+		<band height="55">
+			<image isLazy="true">
+				<reportElement positionType="Float" x="22" y="3" width="244" height="50"/>
+				<graphicElement/>
+				<imageExpression class="java.lang.String"><![CDATA[JasperReportsHelper.getImgUrl($P{oid}, "logo.gif")]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<detail>
+		<band height="754">
+			<staticText>
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="22" y="166" width="553" height="578" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Justified">
+					<font reportFont="Arial_Normal" size="10"/>
+				</textElement>
+				<text><![CDATA[1. Any Goods that Contractor ships or delivers to Quicksilver are subject to these Terms and Conditions regardless of Contractor’s execution of a Purchase Order covering such Goods. 
+
+2. No conditions, terms or provisions inserted by Contractor in acknowledging and accepting a Purchase Order are effective unless and only to the extent that they are accepted by Quicksilver in writing. 
+
+3. Contractor agrees to defend, indemnify and hold harmless Quicksilver, and all persons or entities who claim by, through and under Quicksilver, including any affiliates, co-owners and joint venture partners (collectively the “Quicksilver Group”), against all claims, demands and liability, including reasonable attorneys’ fees for actual or alleged infringement of any patent, trademark, copyright, or trade name (unless the Goods are produced pursuant to drawings or designs that Quicksilver furnishes) by the sale and delivery of the Goods.
+
+4. Quicksilver reserves the right to cancel an order by reason of changed plans or conditions, provided that Contractor has not shipped the Goods prior to cancellation.
+
+5. Quicksilver may require Contractor, at no cost to Quicksilver, to redesign, re-supply or otherwise correct defects in the Goods or to otherwise remedy a breach of its warranties, whether or not the Goods have been accepted, and to reimburse Quicksilver for any losses incurred as a result thereof.
+
+6. Contractor warrants good and merchantable title to all Goods sold and delivered. Contractor further warrants that, with respect to Goods which Contractor has manufactured, such Goods are and will be free from defects in material and workmanship; that the Goods will conform to applicable specifications, drawings and samples; and that all Goods which are not manufactured or produced to detailed designs furnished by Quicksilver shall be free from defects in design and be fit and sufficient for the purpose intended. Contractor further agrees to the warranties set forth in the preceding sentence with respect to such Goods it has not manufactured to the extent Contractor has received such warranties from the manufacturer thereof. 
+
+7. Unless specified otherwise in a Purchase Order, the price set forth in the Purchase Order shall include all charges for Contractor’s usual domestic packing and crating and for cartage to f.o.b. point.
+
+8. It is the Contractor’s responsibility to permit no claims of any kind to be fixed upon or against Quicksilver's property or the materials covered by the Order. If a lien or charge attaches to Quicksilver's property or the materials covered by the Order, by reason of failure of Contractor or Contractor's Suppliers to pay such indebtedness, Contractor shall be liable to Quicksilver, and shall indemnify, protect and save Quicksilver harmless against all such claims and liens.
+
+9. The waiver by Quicksilver of any condition or breach of a Purchase Order or of these Terms and Conditions shall be limited to the particular condition or instance of breach and shall not operate or be deemed to waive the condition in the future for any further or additional breach. 
+
+10. Contractor agrees that, during the performance of a Purchase Order, it and its subcontractors will comply with the provisions of all applicable federal, provincial and local statutes, laws, orders, ordinances, rules and regulations governing such performance and the Goods sold and delivered thereby. 
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" mode="Opaque" x="22" y="64" width="553" height="54"/>
+				<textElement textAlignment="Justified">
+					<font reportFont="Arial_Normal" size="10"/>
+				</textElement>
+				<text><![CDATA[These Terms and Conditions for Purchase of Goods (the “Terms and Conditions”) apply to one or more Purchase Orders (a “Purchase Order”) between Quicksilver Resources Canada Inc. (“Quicksilver”), on behalf of itself or an affiliate, and the contractor (“Contractor”) named in such Purchase Order for the sale of goods and/or equipment (collectively, the “Goods”) by Contractor to Quicksilver. ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="22" y="137" width="553" height="14"/>
+				<textElement textAlignment="Center">
+					<font reportFont="Arial_Normal" fontName="Arial" size="11" isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[Terms and Conditions]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="22" y="8" width="553" height="50" forecolor="#139ED4"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font reportFont="Arial_Normal" size="17" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Terms and Conditions for Purchase of Goods]]></text>
+			</staticText>
+		</band>
+	</detail>
+</jasperReport>

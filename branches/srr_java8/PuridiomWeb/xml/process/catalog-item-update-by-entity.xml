@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="catalogItemUpdate" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="catalogItemUpdate">
+			<task synchronous="true" continue-on-failure="false" name="catalogItem">			
+				<task-object-name>com.tsa.puridiom.catalog.tasks.CatalogItemSetValues</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="catalogItem">			
+				<task-object-name>com.tsa.puridiom.catalog.tasks.CatalogItemUpdate</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+	</activities>
+</process>

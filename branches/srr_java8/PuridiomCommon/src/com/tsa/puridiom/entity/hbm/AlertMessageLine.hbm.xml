@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping>
+
+<class
+    name="com.tsa.puridiom.entity.AlertMessageLine"
+    table="Alert_Message_Line"
+>
+    <id
+        name="icLine"
+        type="java.math.BigDecimal"
+        column="IC_Line"
+    >
+        <generator class="assigned" />
+    </id>
+    <property
+        name="icAlert"
+        type="java.math.BigDecimal"
+        column="IC_Alert"
+        length="22"
+    />
+    <property
+        name="lineSequence"
+        type="java.math.BigDecimal"
+        column="Line_Sequence"
+        length="5"
+    />
+    <property
+        name="alertBody"
+        type="java.lang.String"
+        column="ALERT_Body"
+        length="500"
+    />
+    <property
+        name="repeat"
+        type="java.lang.String"
+        column="Repeat"
+        length="1"
+    />
+    <property
+        name="sizeObject"
+        type="java.lang.String"
+        column="SIZE_OBJECT"
+        length="10"
+    />
+
+    <!-- associations -->
+
+</class>
+</hibernate-mapping>

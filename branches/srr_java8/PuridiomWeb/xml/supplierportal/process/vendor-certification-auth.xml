@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="vendorCertificationAuth" connection-type="New-Connection" ldap-connection-type="None">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="vendorRetrieveByEdiVendor">
+			<task synchronous="true" continue-on-failure="false" name="vendor">
+				<task-object-name>com.tsa.puridiom.vendor.tasks.VendorRetrieveByEdiVendor</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="errorMsgSetInvalidLogin">
+				<rule-filename>is-vendor-empty</rule-filename>
+				<task-object-name>com.tsa.puridiom.supplierportal.authentication.tasks.ErrorMsgSetInvalidControlNumber</task-object-name>
+				<post-action>exitProcess</post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="contactRetrieveSetup">
+				<task-object-name>com.tsa.puridiom.vendor.tasks.ContactRetrieveSetup</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="contact">
+				<task-object-name>com.tsa.puridiom.contact.tasks.ContactRetrieveById</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="address">
+				<task-object-name>com.tsa.puridiom.address.tasks.AddressRetrievePrimary</task-object-name>
+			</task>
+			<!--task synchronous="true" continue-on-failure="false" name="errorMsgSetInvalidLogin">
+				<rule-filename>is-contact-empty</rule-filename>
+				<task-object-name>com.tsa.puridiom.supplierportal.authentication.tasks.ErrorMsgSetInvalidContact</task-object-name>
+				<post-action>exitProcess</post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="contactRegistrationCheck">
+				<task-object-name>com.tsa.puridiom.contact.tasks.ContactRegistrationCheck</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="errorMsgSetInvalidContactRegistration">
+				<rule-filename>is-error-contact-flag</rule-filename>
+				<task-object-name>com.tsa.puridiom.supplierportal.authentication.tasks.ErrorMsgSetInvalidContactRegistration</task-object-name>
+				<post-action>exitProcess</post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="contactLoginRetrieveSetup">
+				<task-object-name>com.tsa.puridiom.vendor.tasks.ContactLoginRetrieveSetup</task-object-name>
+			</task-->
+		</activity>
+		<!--activity synchronous="true" continue-on-failure="false" name="retrieveSupplierRegisterUser">
+			<task synchronous="true" continue-on-failure="false" name="organizationId">
+				<task-object-name>com.tsa.puridiom.supplierportal.tasks.BidBoardUserGetOrganizationId</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="authenticate">
+				<task-object-name>com.tsa.puridiom.supplierportal.InvokeSupplierPortalProcessTask</task-object-name>
+				<process-filename>vendor-authentication.xml</process-filename>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="retrieveSupplierRegisterUser">
+			<task synchronous="true" continue-on-failure="false" name="authenticate">
+				<task-object-name>com.tsa.puridiom.supplierportal.InvokeSupplierPortalProcessTask</task-object-name>
+				<process-filename>vendor-contact-retrieve-by-email.xml</process-filename>
+			</task>
+		</activity-->
+	</activities>
+</process>

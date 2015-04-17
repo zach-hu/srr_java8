@@ -1,0 +1,64 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+    
+<hibernate-mapping>
+
+<class 
+    name="com.tsa.puridiom.entity.DocAttachment" 
+    table="DOC_ATTACHMENT"
+>
+    <composite-id name="comp_id" class="com.tsa.puridiom.entity.DocAttachmentPK">
+        <key-property name="icHeader" column="IC_HEADER" type="java.math.BigDecimal"/>
+        <key-property name="docIc" column="DOC_IC" type="java.math.BigDecimal"/>
+        <key-property name="icLine" column="IC_LINE" type="java.math.BigDecimal"/>
+    </composite-id>
+    <property
+        name="docSource"
+        type="java.lang.String"
+        column="DOC_SOURCE"
+        length="3"
+    />
+    <property
+        name="docTitle"
+        type="java.lang.String"
+        column="DOC_TITLE"
+        length="128"
+    />
+    <property
+        name="docFilename"
+        type="java.lang.String"
+        column="DOC_FILENAME"
+        length="20"
+    />
+    <property
+        name="docPrint"
+        type="java.lang.String"
+        column="DOC_PRINT"
+        length="1"
+    />
+    <property
+        name="docPost"
+        type="java.lang.String"
+        column="DOC_POST"
+        length="1"
+    />
+
+	<property
+        name="uploadedBy"
+        type="java.lang.String"
+        column="UPLOADED_BY"
+        length="40"
+    />
+    
+    <property
+        name="dateUploaded"
+        type="java.sql.Timestamp"
+        column="DATE_UPLOADED"
+        length="7"
+    />
+    <!-- associations -->
+
+</class>
+</hibernate-mapping>

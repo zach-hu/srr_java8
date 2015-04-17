@@ -1,0 +1,49 @@
+<browse_myreqitems>
+	<columns>
+		<c_checkbox>
+			<label>brw-select</label>
+			<type>Checkbox</type>
+			<size>6</size>
+			<selectsql>N</selectsql>
+			<store-request-value>Y</store-request-value>
+		</c_checkbox>
+		<RecentReqItem_id_requisitionerCode>
+			<hidden>Y</hidden>
+		</RecentReqItem_id_requisitionerCode>
+		<RecentReqItem_id_itemNumber>
+			<label>brw-itemNumber</label>
+			<size>18</size>
+			<hidden-input>Y</hidden-input>
+			<key>Y</key>
+		</RecentReqItem_id_itemNumber>
+		<RecentReqItem_description>
+			<label>brw-description </label>
+			<size>52</size>
+			<hidden-input>Y</hidden-input>
+			<key>Y</key>
+		</RecentReqItem_description>
+		<RecentReqItem_itemSource>
+			<hidden>Y</hidden>
+			<hidden-input>Y</hidden-input>
+			<key>Y</key>
+		</RecentReqItem_itemSource>
+		<RecentReqItem_id_itemLocation>
+			<label>brw-location</label>
+			<size>10</size>
+			<hidden-input>Y</hidden-input>
+			<key>Y</key>
+		</RecentReqItem_id_itemLocation>
+		<RecentReqItem_dateEntered>
+			<label>brw-lastRequested</label>
+			<size>14</size>
+			<type>DATE</type>
+			<sort>D</sort>
+		</RecentReqItem_dateEntered>
+	</columns>
+	<sqlfrom>RecentReqItem as RecentReqItem</sqlfrom>
+	<sqlwhere><![CDATA[RecentReqItem.id.requisitionerCode = :as_userid]]></sqlwhere>
+	<sqlorderby>RecentReqItem.dateEntered DESC</sqlorderby>
+	<pagesize>15</pagesize>
+	<title>My Requested Items Browse</title>
+</browse_myreqitems>
+

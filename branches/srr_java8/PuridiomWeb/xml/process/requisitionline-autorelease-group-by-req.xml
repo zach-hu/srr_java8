@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="autoRelease-Grpup-By-Order" connection-type="New-Connection">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="groupByReq">
+			<task synchronous="true" continue-on-failure="false" name="groupByReq">
+				<task-object-name>com.tsa.puridiom.requisitionline.autorelease.tasks.RequisitionLineGroupByReq</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="blanketOrdersList">
+				<task-object-name>com.tsa.puridiom.requisitionline.autorelease.tasks.BlanketOrderRetrieveListNoConsolidate</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+	</activities>
+</process>

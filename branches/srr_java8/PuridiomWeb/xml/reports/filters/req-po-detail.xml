@@ -1,0 +1,149 @@
+<req-po-detail>
+	<columns>
+		<PoHeader_poNumber>
+			<label>PO #</label>
+			<size>10</size>
+		</PoHeader_poNumber>
+		<PoHeader_releaseNumber>
+			<label>release</label>
+			<type>BIGDECIMAL</type>
+			<size>4</size>
+		</PoHeader_releaseNumber>
+		<PoHeader_revisionNumber>
+			<label>revision</label>
+			<type>BIGDECIMAL</type>
+			<size>4</size>
+		</PoHeader_revisionNumber>
+		<PoHeader_poDate>
+			<label>orderDate</label>
+			<type>DATE</type>
+			<size>10</size>
+		</PoHeader_poDate>
+		<PoHeader_requiredDate>
+			<label>po-requiredDate</label>
+			<type>DATE</type>
+			<size>10</size>
+		</PoHeader_requiredDate>
+		<PoHeader_vendorId>
+			<label>po-supplier</label>
+			<hidden>Y</hidden>
+		</PoHeader_vendorId>
+		<PoHeader_vendorName>
+			<label>Supplier Name</label>
+			<size>20</size>
+		</PoHeader_vendorName>
+		<PoHeader_status>
+			<label>Status</label>
+			<type>STATUS</type>
+			<size>15</size>
+		</PoHeader_status>
+		<PoHeader_total>
+			<label>po-total</label>
+			<size>8</size>
+			<type>DollarDecimal</type>
+		</PoHeader_total>
+		<PoLine_lineNumber>
+			<label>po-lineNumber</label>
+			<type>BIGDECIMAL</type>
+			<size>4</size>
+		</PoLine_lineNumber>
+		<PoLine_itemNumber>
+			<label>po-itemNumber</label>
+			<size>10</size>
+			<type>STRING</type>
+		</PoLine_itemNumber>
+		<PoLine_description>
+			<label>po-description</label>
+			<size>255</size>
+			<type>STRING</type>
+		</PoLine_description>
+		<PoLine_umCode>
+			<label>po-uom</label>
+			<size>10</size>
+			<type>STRING</type>
+		</PoLine_umCode>
+		<PoLine_quantity>
+			<label>po-quantity</label>
+			<size>10</size>
+			<type>qtyDecimal</type>
+		</PoLine_quantity>
+		<PoLine_unitPrice>
+			<label>po-unitCost</label>
+			<size>10</size>
+			<type>BigDecimal</type>
+		</PoLine_unitPrice>
+		<PoLine_lineTotal>
+			<label>po-extendedCost</label>
+			<size>10</size>
+			<type>qtyDecimal</type>
+		</PoLine_lineTotal>
+		<PoLine_status>
+			<label>Line Status</label>
+			<size>10</size>
+			<type>Line Status</type>
+		</PoLine_status>
+		<Account_fld1>
+			<label>AC01</label>
+			<type>String</type>
+		</Account_fld1>
+		<Account_fld2>
+			<label>AC02</label>
+			<type>String</type>
+		</Account_fld2>
+		<Account_fld3>
+			<label>AC03</label>
+			<type>String</type>
+		</Account_fld3>
+		<Account_fld4>
+			<label>AC04</label>
+			<type>String</type>
+		</Account_fld4>
+		<RequisitionLine_requisitionerCode>
+			<label>Requisitioner Code</label>
+			<type>STRING</type>
+		</RequisitionLine_requisitionerCode>
+		<RequisitionLine_udf1Code>
+			<label>req-LN01</label>
+			<type>STRING</type>
+		</RequisitionLine_udf1Code>
+		<RequisitionLine_requisitionNumber>
+			<label>Requisition #</label>
+			<type>STRING</type>
+		</RequisitionLine_requisitionNumber>
+		<Account_allocPercent>
+			<label>allocationPercent</label>
+			<type>BigDecimal</type>
+		</Account_allocPercent>
+		<Account_allocAmount>
+			<label>allocationAmount</label>
+			<type>BigDecimal</type>
+		</Account_allocAmount>
+		<PaymentAccount_invoiceNumber>
+			<label>Invoice Number</label>
+			<type>STRING</type>
+		</PaymentAccount_invoiceNumber>
+		<PaymentAccount_checkNumber>
+			<label>Check Number</label>
+			<type>STRING</type>
+		</PaymentAccount_checkNumber>
+		<PaymentAccount_tsrYear>
+			<label>Tsr Year</label>
+			<type>STRING</type>
+		</PaymentAccount_tsrYear>
+		<PaymentAccount_tsrYear>
+			<label>Tsr Month</label>
+			<type>BigDecimal</type>
+		</PaymentAccount_tsrYear>
+	</columns>
+	<sqlfrom>PoHeader as PoHeader, RequisitionLine as RequisitionLine, Account as Account, PoLine as PoLine, PaymentAccount as paymentAccount</sqlfrom>
+	<sqlwhere><![CDATA[( PoHeader.icPoHeader = PoLine.icPoHeader ) and
+         ( Account.id.icLine = PoLine.icPoLine ) and
+         ( PoLine.icReqLine = RequisitionLine.icReqLine ) and
+         ( ( PoHeader.lastRevision = 'C' ) AND
+         ( PoHeader.status >= '3000' ) AND
+         ( PoHeader.status < '9000' ) AND
+         ( PoHeader.fiscalYear > '2003' ) ) AND PoHeader.poNumber <> 'N/A'  ]]></sqlwhere>
+	<pagesize>15</pagesize>
+	<title>Requisition Purchase Order Detail Report</title>
+</req-po-detail>
+

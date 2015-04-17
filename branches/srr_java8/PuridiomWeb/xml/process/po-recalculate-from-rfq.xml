@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="poRecalculate" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="poRecalculateSetup">
+			<task synchronous="true" continue-on-failure="false" name="poHeader">			
+				<task-object-name>com.tsa.puridiom.poheader.tasks.PoHeaderRetrieveById</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="poHeaderUpdateSetup">			
+				<task-object-name>com.tsa.puridiom.poheader.tasks.PoHeaderUpdateSetup</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="poLineList">			
+				<rule-filename>is-polinelist-empty</rule-filename>
+				<task-object-name>com.tsa.puridiom.poline.tasks.PoLineRetrieveByHeader</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="poReCalculateTotals">
+			<task synchronous="true" continue-on-failure="false" name="poCalculateTotals">
+				<task-object-name>com.tsa.puridiom.po.tasks.PoCalculateTotals</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="poRecalculateSetup">
+			<task synchronous="true" continue-on-failure="false" name="poHeader">			
+				<rule-filename check-for-false="true">is-poheader-empty</rule-filename>
+				<task-object-name>com.tsa.puridiom.poheader.tasks.PoHeaderUpdate</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="poLineList">			
+				<rule-filename check-for-false="true">is-polinelist-empty</rule-filename>
+				<task-object-name>com.tsa.puridiom.poline.tasks.PoLineUpdateList</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+	</activities>
+</process>

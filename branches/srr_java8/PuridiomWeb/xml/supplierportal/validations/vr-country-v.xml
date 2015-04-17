@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rule>
+	<clause type="Empty">
+		<left-side>
+			<source>incomingRequestObjectMethod</source>
+			<object>vendorRegister</object>
+			<name>getAddressCountry</name>
+		</left-side>
+	</clause>
+	<logical-operator>OR</logical-operator>
+	<clause type="lookup">
+		<sql> from Country as Country where Country.countryCode = '@country@' AND (Country.status = '02' OR (Country.status = '01' AND Country.dateExpires >= @today@)) </sql>
+		<source>vendorRegister</source>
+		<arguments>
+			<name>country</name>
+			<source>vendorRegister</source>
+			<colName>getAddressCountry</colName>
+		</arguments>
+	</clause>
+</rule>

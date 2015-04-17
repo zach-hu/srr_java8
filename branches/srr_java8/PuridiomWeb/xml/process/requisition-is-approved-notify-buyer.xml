@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="requisitionApprove" connection-type="Transaction-Required">
+  <activities>
+    <activity name="buyerNotificationByLine" synchronous="true" continue-on-failure="false">
+      <rule-filename>is-buyer-assignment-by-line.xml</rule-filename>
+      <task synchronous="true" continue-on-failure="false" name="buyerAssignment">
+        <task-object-name>com.tsa.puridiom.requisition.buyerassignment.tasks.RequisitionLineApprovedNotification</task-object-name>
+        <post-action>exitProcess</post-action>
+      </task>
+    </activity>
+  <activity name="buyerNotificationByHeader" synchronous="true" continue-on-failure="false">
+    <task synchronous="true" continue-on-failure="false" name="requisitionHeaderHistory">
+      <task-object-name>com.tsa.puridiom.requisition.buyerassignment.tasks.RequisitionHeaderApprovedNotification</task-object-name>
+    </task>
+  </activity>
+  </activities>
+</process>

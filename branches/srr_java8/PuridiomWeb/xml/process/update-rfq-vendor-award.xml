@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="update-rfq-vendor-award" connection-type="Connection-Required">
+	<rule-filename></rule-filename>
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="">
+			<rule-filename></rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="rfqLine">
+				<task-object-name>com.tsa.puridiom.rfqline.tasks.RfqLineRetrieveById</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="RfqHeader_icRfqHeader">
+				<task-object-name>com.tsa.puridiom.rfqline.tasks.RfqHeaderUpdateAwardDateSetup</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="awardedDate">
+				<task-object-name>com.tsa.puridiom.rfqline.tasks.RfqHeaderUpdateAwardDate</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

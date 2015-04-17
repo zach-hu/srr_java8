@@ -1,0 +1,82 @@
+<browse-receipt-return-order>
+<columns>
+	<PoHeader_icPoHeader>
+		<hidden>Y</hidden>
+		<visible>0</visible>
+	</PoHeader_icPoHeader> 
+	<PoHeader_poNumber>
+		<label>brw-poNumber</label>
+		<link><![CDATA[javascript: receiptReturn('#PoHeader_icPoHeader^'); void(0);]]></link>
+		<size>12</size>
+	</PoHeader_poNumber>
+	<PoHeader_poType>
+		<label>poType</label>
+		<type>ORDER-TYPE</type>
+		<size>14</size>
+	</PoHeader_poType>
+	<PoHeader_releaseNumber>
+		<label>brw-releaseNumber</label>
+		<type>STRING</type>
+		<size>5</size>
+	</PoHeader_releaseNumber>
+	<PoHeader_revisionNumber>
+		<label>brw-relvisionNumber</label>
+		<type>STRING</type>
+		<hidden>Y</hidden>
+	</PoHeader_revisionNumber>
+	<PoHeader_status>
+		<label>brw-status</label>
+		<type>STATUS</type>
+		<size>15</size>
+	</PoHeader_status>
+	<PoHeader_poDate>
+		<label>brw-poDate</label>
+		<type>DATE</type>
+		<size>11</size>
+	</PoHeader_poDate>
+	<PoHeader_vendorId>
+		<label>brw-vendorId</label>
+		<hidden>Y</hidden>
+	</PoHeader_vendorId>
+	<PoHeader_vendorName>
+		<label>brw-vendorName</label>
+		<size>19</size>
+	</PoHeader_vendorName>
+	<PoHeader_buyerCode>
+		<label>brw-buyer</label>
+		<size>13</size>
+		<type>USER-ID</type>
+	</PoHeader_buyerCode>
+	<PoHeader_requiredDate>
+		<label>brw-requiredDate</label>
+		<type>DATE</type>
+		<size>11</size>
+	</PoHeader_requiredDate>
+	<PoHeader_internalComments>
+		<label>purpose</label>
+		<detail>Y</detail>
+	</PoHeader_internalComments>
+	<PoHeader_requisitionerCode>
+		<label>brw-requisitionerCode</label>
+		<size>19</size>	
+		<detail>Y</detail>
+	</PoHeader_requisitionerCode>	
+</columns>
+<sqlfrom>PoHeader as PoHeader</sqlfrom>
+<sqlwhere><![CDATA[PoHeader.poNumber is not null 
+	and PoHeader.poNumber <> 'null' 
+	and PoHeader.status >= '4005' 
+	and PoHeader.status <= '4010' 
+	and PoHeader.status <> '3045' 
+	and PoHeader.lastRevision = 'C'
+	and PoHeader.poType <> 'BO'
+	and PoHeader.poType <> 'DO'
+	and PoHeader.poType <> 'SB'
+	and PoHeader.icPoHeader in (SELECT ReceiptHeader.icPoHeader FROM ReceiptHeader as ReceiptHeader)
+	and PoHeader.icPoHeader in (SELECT ReceiptLine.icPoHeader FROM ReceiptLine as ReceiptLine)
+	]]></sqlwhere>
+<sqlorderby>PoHeader.poDate DESC</sqlorderby>
+<pagesize>15</pagesize>
+<title>Order Browse for Returns</title>
+</browse-receipt-return-order>
+

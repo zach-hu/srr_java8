@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="requisitionLineSaveasFromPo" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="requisitionLineSaveas">
+			<task synchronous="true" continue-on-failure="false" name="requisitionLineSaveasSetup">
+				<task-object-name>com.tsa.puridiom.requisitionline.tasks.RequisitionLineSaveasFromPoSetup</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="requisitionLineAccountSaveas">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>account-saveas.xml</process-filename>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="requisitionLineCommentSaveas">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>doccomment-saveas.xml</process-filename>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="requisitionLineAttachmentSaveas">
+				<rule-filename>is-documents-module-active.xml</rule-filename>
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>docattachment-saveas-by-line.xml</process-filename>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="requisitionLineShipToSaveas">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>shipto-saveas.xml</process-filename>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="requisitionLineBillToSaveas">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>billto-saveas.xml</process-filename>
+			</task>
+		</activity>
+	</activities>
+</process>

@@ -1,0 +1,77 @@
+<browse_req_assigned_by_line>
+	<columns>
+		<RequisitionHeader_requisitionType>
+			<label>Type</label>
+			<type>REQUISITION-TYPE</type>
+			<size>15</size>
+		</RequisitionHeader_requisitionType>
+		<RequisitionHeader_icReqHeader>
+			<label>Ic Req Header</label>
+	        <hidden>Y</hidden>
+		</RequisitionHeader_icReqHeader>
+		<RequisitionHeader_requisitionNumber>
+			<label>Req. #</label>
+			<link><![CDATA[javascript: viewReq('#RequisitionHeader_icReqHeader^','#RequisitionHeader_requisitionType^'); void(0);]]></link>
+			<size>10</size>
+		</RequisitionHeader_requisitionNumber>
+		<RequisitionHeader_requisitionDate>
+			<label>Request Date</label>
+			<sort>D</sort>
+			<size>15</size>
+			<type>DATE</type>
+		</RequisitionHeader_requisitionDate>
+		<RequisitionHeader_status>
+			<label>brw-status</label>
+			<type>STATUS</type>
+			<size>11</size>
+		</RequisitionHeader_status>
+		<RequisitionHeader_requiredDate>
+			<label>Required Date</label>
+			<size>15</size>
+			<type>DATE</type>
+		</RequisitionHeader_requiredDate>
+		<RequisitionHeader_total>
+			<label>brw-total</label>
+			<type>CurrencyFormat</type>
+			<arguments>
+				<col type="BrowseColumn">RequisitionHeader_currencyCode</col>
+			</arguments>
+			<size>9</size>
+		</RequisitionHeader_total>
+		<RequisitionHeader_currencyCode>
+			<hidden>Y</hidden>
+		</RequisitionHeader_currencyCode>
+		<RequisitionHeader_requisitionerCode>
+			<label>Requisitioner</label>
+            <size>20</size>
+            <type>USER-ID</type>
+		</RequisitionHeader_requisitionerCode>
+		<RequisitionHeader_shipToCode>
+			<label>Ship To</label>
+			<hidden>Y</hidden>
+			<size>30</size>
+		</RequisitionHeader_shipToCode>
+		<RequisitionHeader_owner>
+			<label>Owner</label>
+			<hidden>Y</hidden>
+		</RequisitionHeader_owner>
+		<RequisitionHeader_internalComments>
+			<label>Purpose</label>
+            <detail>Y</detail>
+		</RequisitionHeader_internalComments>
+		<RequisitionHeader_fiscalYear>
+			<label>Fiscal Year</label>
+			<visible>0</visible>
+		</RequisitionHeader_fiscalYear>
+	</columns>
+<sqlfrom>RequisitionHeader as RequisitionHeader</sqlfrom>
+<sqlwhere><![CDATA[(RequisitionHeader.requisitionType = 'H' or RequisitionHeader.requisitionType = 'P' or RequisitionHeader.requisitionType = 'R' or RequisitionHeader.requisitionType = 'C' or RequisitionHeader.requisitionType = 'A' or RequisitionHeader.requisitionType = 'E') and
+			RequisitionHeader.requisitionNumber <> 'N/A' and ( RequisitionHeader.icReqHeader in (
+			SELECT RequisitionLine.icReqHeader FROM RequisitionLine as RequisitionLine
+			WHERE  ( RequisitionLine.assignedBuyer = :as_userid AND RequisitionLine.status >= '1035' AND RequisitionLine.status <= '3000' ) ) )]]></sqlwhere>
+<sqlorderby>RequisitionHeader.requisitionNumber DESC</sqlorderby>
+<pagesize>15</pagesize>
+<title>Requisition Selection</title>
+</browse_req_assigned_by_line>
+
+

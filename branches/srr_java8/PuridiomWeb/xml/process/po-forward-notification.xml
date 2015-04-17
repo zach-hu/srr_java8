@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process connection-type="Transaction-Required" name="poForward">
+  <activities>
+    <activity continue-on-failure="false" name="checkReleaseLimits" synchronous="true">
+      <task synchronous="true" continue-on-failure="false" name="forward">
+        <task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+        <process-filename>po-forward-new.xml</process-filename>
+      </task>
+    </activity>
+    <activity continue-on-failure="false" name="emailRequisitioner" synchronous="true">
+      <task synchronous="true" continue-on-failure="false" name="isEmailRequisitioner">
+          <task-object-name>com.tsa.puridiom.poheader.tasks.PoHeaderFindRequisitioner</task-object-name>
+      </task>
+    <task synchronous="true" continue-on-failure="false" name="emailRequisitioner">
+      <rule-filename>is-po-notify-requisitioner.xml</rule-filename>
+      <task-object-name>com.tsa.puridiom.emails.po.tasks.PoApproveEmailRequisitioner</task-object-name>
+    </task>
+    </activity>
+  </activities>
+</process>

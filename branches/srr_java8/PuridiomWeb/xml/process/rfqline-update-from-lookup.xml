@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="requisitionLineInvItemLookup" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="rfqLineUpdate">
+		    <task synchronous="true" continue-on-failure="false" name="rfqLineUpdateSetup">
+				<task-object-name>com.tsa.puridiom.rfqline.tasks.RfqLineLookupSetup</task-object-name>
+				<post-action></post-action>
+			</task>
+		    <task synchronous="true" continue-on-failure="false" name="rfqLine">
+				<rule-filename>is-rfqline-icrfqline-not-empty.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.rfqline.tasks.RfqLineRetrieveById</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="rfqLineSetValues">
+				<rule-filename>is-item-found.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.rfqline.tasks.RfqLineLookupSetValues</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="rfqLineCreate">
+				<rule-filename>is-rfqline-empty</rule-filename>
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>rfqline-create-from-lookup.xml</process-filename>
+				<post-action>exitActivity</post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="rfqLineSaveas">
+			<rule-filename>can-create-comments-from-item.xml;is-item-found.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="rfqLineSaveasFromLookup">
+				<task-object-name>com.tsa.puridiom.rfqline.tasks.RfqLineSaveasFromLookup</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="rfqLineCommentSaveas">
+	        	<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+	        	<process-filename>doccomment-saveas.xml</process-filename>
+	        </task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="rfqLine">
+			<task synchronous="true" continue-on-failure="false" name="rfqLine">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>rfqline-update-by-id.xml</process-filename>
+			</task>
+		</activity>
+	</activities>
+</process>

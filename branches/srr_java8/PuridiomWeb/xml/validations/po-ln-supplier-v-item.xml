@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rule>
+	<clause type="NotEmpty">
+		<left-side elementSource="true">
+			<source>incomingRequestObjectMethod</source>
+			<object>lineItem</object>
+			<name>getVendorId</name>
+		</left-side>
+	</clause>
+	<logical-operator>IFTHEN</logical-operator>
+	<clause type="lookup" elementSource="true">
+		<sql>from Vendor vendor where vendor.id = '@vendorid@' AND (vendor.status = '02' OR (vendor.status = '01' AND vendor.dateExpires >= @today@))</sql>
+		<source>lineItem</source>
+		<arguments>
+			<name>vendorid</name>
+			<source>lineItem</source>
+			<colName>getVendorId</colName>
+		</arguments>
+	</clause>
+</rule>

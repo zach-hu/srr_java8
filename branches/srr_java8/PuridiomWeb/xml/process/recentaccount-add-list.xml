@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="recentaccount-add-list" connection-type="Connection-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="recentAccountAddList">
+			<task synchronous="true" continue-on-failure="false" name="accountList">
+				<rule-filename>is-account-list-empty.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.account.tasks.AccountRetrieveByHeader</task-object-name>
+				<post-action></post-action>
+			</task>
+		    <task synchronous="true" continue-on-failure="false" name="recentAccountAddList">
+				<task-object-name>com.tsa.puridiom.recentaccount.tasks.RecentAccountAddListFromAccount</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

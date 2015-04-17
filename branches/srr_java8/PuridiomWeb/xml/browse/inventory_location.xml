@@ -1,0 +1,51 @@
+<browse_location>
+	<columns>
+		<Address_id_addressType>
+			<label>brw-addressType</label>
+			<visible>0</visible>
+		</Address_id_addressType>
+		<Address_id_addressCode>
+			<label>brw-addressCode</label>
+			<sort>A</sort>
+			<link><![CDATA[javascript: createReplenishReq('#Address_id_addressCode^'); void(0);]]></link>
+			<size>15</size>
+		</Address_id_addressCode>
+		<Address_addressLine1>
+			<label>brw-addressLine1</label>
+			<size>20</size>
+		</Address_addressLine1>
+		<Address_addressLine2>
+			<label>brw-addressLine2</label>
+			<size>15</size>
+		</Address_addressLine2>
+		<Address_addressLine3>
+			<label>brw-addressLine3</label>
+			<size>10</size>
+		</Address_addressLine3>
+		<Address_addressLine4>
+			<label>brw-addressLine4</label>
+			<size>10</size>
+		</Address_addressLine4>
+		<Address_city>
+			<label>city</label>
+			<size>10</size>
+		</Address_city>
+		<Address_state>
+			<label>state</label>
+			<size>5</size>
+		</Address_state>
+		<Address_postalCode>
+			<label>zip</label>
+			<size>10</size>
+		</Address_postalCode>
+		<Address_country>
+			<label>country</label>
+			<size>5</size>
+		</Address_country>
+	</columns>
+<sqlfrom>Address as Address</sqlfrom>
+<sqlwhere><![CDATA[ (Address.inventory = 'Y') AND (Address.status <> '03') ]]></sqlwhere>
+<sqlorderby>Address.id.addressCode ASC</sqlorderby>
+<pagesize>15</pagesize>
+<title>Item Location Browse</title>
+</browse_location>

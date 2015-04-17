@@ -1,0 +1,24 @@
+<top-suppliers>
+	<columns>
+		<Account_allocAmount>
+			<aggregate>
+				<function>sum</function>
+			</aggregate>
+			<label>Total</label>
+			<size>8</size>
+			<type>BIGDECIMAL</type>
+		</Account_allocAmount>
+		<Account_fld2>
+			<label>Cost Center</label>
+			<type>STRING</type>
+			<size>20</size>
+		</Account_fld2>
+	</columns>
+<sqlfrom>PoHeader as PoHeader, Account as Account, PoLine as PoLine</sqlfrom>
+<sqlwhere><![CDATA[PoHeader.icPoHeader = PoLine.icPoHeader and PoLine.icAccount = Account.id.icLine and PoHeader.status >= '3030' and PoHeader.status < '9000' and PoHeader.lastRevision = 'C' AND Account.fld2 IS NOT NULL ]]></sqlwhere>
+<sqlgroupby>Account.fld2</sqlgroupby>
+<sqlorderby>sum(total) desc</sqlorderby>
+<pagesize>15</pagesize>
+<title>Top Cost Centers By Order Total Report</title>
+</top-suppliers>
+

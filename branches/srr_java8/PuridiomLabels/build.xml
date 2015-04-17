@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project name="PuridiomLabels" default="BUILD_PURIDIOMLABELS_JAR" basedir=".">
+
+<!-- ================= SET PROPERTY VARIABLES ================ -->
+
+	<!-- YOU MUST RESET THE FIRST THREE VARIABLES -->
+	<property name="app.name" value="PuridiomLabels" />
+	<property name="projects.dir" value="/JavaProjects/Puridiom4/workspace" />
+	<property name="compiler.dir" value="C:\\java\\jdk1.6.0_17\\bin" />
+
+	<property name="src.dir" value="src" />
+	<property name="lib.dir" value="lib" />
+	<property name="build.dir" value="WEB-INF/classes" />
+	<property name="jar.file" value="${app.name}.jar" />
+	<property name="com.dir" value="build/com" />
+	<property name="build.compiler" value="modern" />
+
+
+<!-- ================== MAIN TARGETS ==================== -->
+
+	<target name="BUILD_PURIDIOMLABELS_JAR" depends="buildJAR,cleanup" />
+
+
+<!-- ================== removeCurrentJAR TARGET ==================== -->
+
+	<target name="removeCurrentJAR">
+
+		<echo message=" " />
+		<echo message="Removing jar file........" />
+		<delete file="${jar.file}" />
+		<echo message="Done removing jar file." />
+		<echo message=" " />
+
+
+	</target>
+
+<!-- ================== removeFiles TARGET ==================== -->
+
+	<target name="removeFiles">
+
+		<echo message=" " />
+		<echo message="removing build files........" />
+		<delete dir="${com.dir}" />
+		<echo message="Done removing build files." />
+		<echo message=" " />
+
+	</target>
+
+<!-- ================== prepareToBuildJAR TARGET ==================== -->
+
+	<!-- here we are going to JAR PuridiomCommon -->
+
+	<target name="prepareToBuildJAR">
+		<echo message="Calling ANT script for PuridiomCommon (builds JAR)......" />
+		<ant antfile="${projects.dir}/PuridiomCommon/build.xml" inheritall="false" target="BUILD_PURIDIOMCOMMON_JAR" />
+
+
+		<copy todir="${lib.dir}" file="/JavaProjects/Puridiom4/workspace/PuridiomCommon/PuridiomCommon.jar" />
+
+		<echo message="common ANT script complete."/>
+	</target>
+
+
+
+<!-- ================== COMPILE TARGET ==================== -->
+
+	<target name="compile" depends="removeFiles">
+
+		<echo message=" " />
+		<echo message="Compiling source code........" />
+
+		<javac srcdir="${src.dir}" fork="true" executable="${compiler.dir}/javac.exe" listfiles="true" destdir="${build.dir}">
+			<include name="**/*.java" />
+			<classpath>
+				<fileset dir="${lib.dir}">
+					<include name="**/*.jar" />
+				</fileset>
+			</classpath>
+		</javac>
+
+		<echo message="Done compiling." />
+		<echo message=" " />
+
+	</target>
+
+
+
+<!-- ================== buildJAR TARGET ==================== -->
+
+	<target name="buildJAR" depends="prepareToBuildJAR,removeCurrentJAR,compile">
+		<echo message="Building jar......" />
+		<jar jarfile="${jar.file}" basedir="${build.dir}" includes="**/*.class">
+<!--
+			<fileset dir="${lib.dir}">
+				<include name="**/*.jar" />
+			</fileset>
+-->
+		</jar>
+		<echo message="Done building jar"/>
+	</target>
+
+
+
+<!-- ================== cleanup TARGET ==================== -->
+
+	<target name="cleanup">
+		<echo message="cleaning up......" />
+		<delete file="${lib.dir}/PuridiomCommon.jar" />
+		<echo message="done cleaning up." />
+	</target>
+
+</project>

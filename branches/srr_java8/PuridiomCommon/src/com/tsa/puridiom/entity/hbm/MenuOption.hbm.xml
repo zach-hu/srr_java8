@@ -1,0 +1,63 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+    
+<hibernate-mapping>
+
+<!-- 
+    Created by Middlegen Hibernate plugin
+
+    http://boss.bekk.no/boss/middlegen/
+    http://hibernate.sourceforge.net/
+-->
+
+<class 
+    name="com.tsa.puridiom.entity.MenuOption" 
+    table="MENU_OPTIONS"
+>
+    <composite-id name="comp_id" class="com.tsa.puridiom.entity.MenuOptionPK">
+        <key-property name="userType" column="USER_TYPE" type="java.lang.String"/>
+        <key-property name="alias" column="ALIAS" type="java.lang.String"/>
+    </composite-id>    
+    <property
+        name="title"
+        type="java.lang.String"
+        column="TITLE"
+        length="255"
+    />
+    <property
+        name="type"
+        type="java.lang.String"
+        column="TYPE"
+        length="30"
+    />
+    <property
+        name="userAccess"
+        type="java.math.BigDecimal"
+        column="USER_ACCESS"
+        length="15"
+    />
+    <property
+        name="xml"
+        type="java.lang.String"
+        column="XML"
+        length="255"
+    />
+    <property
+        name="graphHeight"
+        type="java.math.BigDecimal"
+        column="GRAPH_HEIGHT"
+        length="15"
+    />
+    <property
+        name="graphWidth"
+        type="java.math.BigDecimal"
+        column="GRAPH_WIDTH"
+        length="15"
+    />
+
+    <!-- associations -->
+
+</class>
+</hibernate-mapping>

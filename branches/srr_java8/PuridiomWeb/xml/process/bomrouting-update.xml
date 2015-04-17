@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="bomRoutingUpdate" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="updateBomRouting">
+			<task synchronous="true" continue-on-failure="false" name="bomRouting">
+				<task-object-name>com.tsa.puridiom.bomrouting.tasks.BomRoutingRetrieveById</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="bomRouting">
+				<task-object-name>com.tsa.puridiom.bomrouting.tasks.BomRoutingSetValues</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="bomRouting">
+				<task-object-name>com.tsa.puridiom.bomrouting.tasks.BomRoutingUpdate</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+	</activities>
+</process>

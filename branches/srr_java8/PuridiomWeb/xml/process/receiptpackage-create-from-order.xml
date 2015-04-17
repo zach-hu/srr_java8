@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="receiptPackageCreateFromOrder" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="poHeaderRetrieveById">
+			<task synchronous="true" continue-on-failure="false" name="poHeader">
+				<task-object-name>com.tsa.puridiom.poheader.tasks.PoHeaderRetrieveById</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="poLineList">
+				<task-object-name>com.tsa.puridiom.poline.tasks.PoLineRetrieveByHeader</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="receiptPackageCreate">
+			<task synchronous="true" continue-on-failure="false" name="receiptPackageCreateFromOrderSetup">
+				<task-object-name>com.tsa.puridiom.receipt.tasks.ReceiptPackageCreateFromOrderSetup</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="receiptHeader">
+				<task-object-name>com.tsa.puridiom.receiptheader.tasks.ReceiptHeaderSetValuesFromPoHeader</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="receiptHeader">
+				<task-object-name>com.tsa.puridiom.receiptheader.tasks.ReceiptHeaderSetValues</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="receiptHeaderAdd">
+				<task-object-name>com.tsa.puridiom.receiptheader.tasks.ReceiptHeaderAdd</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

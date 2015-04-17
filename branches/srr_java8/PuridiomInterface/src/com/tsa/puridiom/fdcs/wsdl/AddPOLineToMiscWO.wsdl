@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:axis2="http://addpolinetomiscwo.wsbeans.iseries" xmlns:ns1="http://org.apache.axis2/xsd" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:ns0="http://addpolinetomiscwo.wsbeans.iseries/xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://addpolinetomiscwo.wsbeans.iseries">
+    <wsdl:documentation>AddPOLineToMiscWO</wsdl:documentation>
+    <wsdl:types>
+        <xs:schema xmlns:ns="http://addpolinetomiscwo.wsbeans.iseries/xsd" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://addpolinetomiscwo.wsbeans.iseries/xsd">
+            <xs:element name="poi950">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="param0" nillable="true" type="ns:POI950Input"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:complexType name="POI950Input">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="_PI_CHGCD" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="_PI_DESC" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="_PI_EPIDNO" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="_PI_OQTY" nillable="true" type="xs:decimal"/>
+                    <xs:element minOccurs="0" name="_PI_PONUMB" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="_PI_POSEQN" nillable="true" type="xs:decimal"/>
+                    <xs:element minOccurs="0" name="_PI_SPLRNM" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="_PI_UNCS" nillable="true" type="xs:decimal"/>
+                    <xs:element minOccurs="0" name="_PI_WONO" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="_PI_WOOPNO" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="_PI_WOSGNO" nillable="true" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:element name="poi950Response">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" nillable="true" type="ns:POI950Result"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:complexType name="POI950Result">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="_PO_ERRORCODE" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="_PO_ERRORDESC" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="_PO_SQN01" nillable="true" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:element name="poi950_XML">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="param0" nillable="true" type="ns:POI950Input"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="poi950_XMLResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:schema>
+    </wsdl:types>
+    <wsdl:message name="poi950_XMLRequest">
+        <wsdl:part name="parameters" element="ns0:poi950_XML"/>
+    </wsdl:message>
+    <wsdl:message name="poi950_XMLResponse">
+        <wsdl:part name="parameters" element="ns0:poi950_XMLResponse"/>
+    </wsdl:message>
+    <wsdl:message name="poi950Request">
+        <wsdl:part name="parameters" element="ns0:poi950"/>
+    </wsdl:message>
+    <wsdl:message name="poi950Response">
+        <wsdl:part name="parameters" element="ns0:poi950Response"/>
+    </wsdl:message>
+    <wsdl:portType name="AddPOLineToMiscWOPortType">
+        <wsdl:operation name="poi950_XML">
+            <wsdl:input message="axis2:poi950_XMLRequest" wsaw:Action="urn:poi950_XML"/>
+            <wsdl:output message="axis2:poi950_XMLResponse" wsaw:Action="urn:poi950_XMLResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="poi950">
+            <wsdl:input message="axis2:poi950Request" wsaw:Action="urn:poi950"/>
+            <wsdl:output message="axis2:poi950Response" wsaw:Action="urn:poi950Response"/>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="AddPOLineToMiscWOSOAP11Binding" type="axis2:AddPOLineToMiscWOPortType">
+        <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+        <wsdl:operation name="poi950_XML">
+            <soap:operation soapAction="urn:poi950_XML" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="poi950">
+            <soap:operation soapAction="urn:poi950" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="AddPOLineToMiscWO">
+        <wsdl:port name="AddPOLineToMiscWOSOAP11port_http" binding="axis2:AddPOLineToMiscWOSOAP11Binding">
+            <soap:address location="http://10.172.4.11:10021/web/services/AddPOLineToMiscWO"/>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>

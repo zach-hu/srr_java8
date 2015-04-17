@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="requisitionCreate" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="requisitionCreate">
+		    <task synchronous="true" continue-on-failure="false" name="requisitionCreateSetup">
+    			<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+    			<process-filename>requisition-create-setup.xml</process-filename>
+    		</task>
+			<task synchronous="true" continue-on-failure="false" name="setDefaultShippingTaxable">
+				<rule-filename>is-requisition-default-shipping.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.requisition.tasks.RequisitionDefaultShippingTaxable</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="requisitionHeaderAdd">
+				<rule-filename></rule-filename>
+				<task-object-name>com.tsa.puridiom.requisitionheader.tasks.RequisitionHeaderAdd</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+	</activities>
+</process>

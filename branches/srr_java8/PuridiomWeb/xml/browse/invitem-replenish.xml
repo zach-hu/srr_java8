@@ -1,0 +1,68 @@
+<browse_invitem_invlocation>
+	<columns>
+		<c_checkbox>
+			<label>brw-reorder</label>
+			<type>Checkbox</type>
+			<size>5</size>
+			<selectsql>N</selectsql>
+			<store-request-value>Y</store-request-value>
+		</c_checkbox>
+		<InvLocation_id_itemLocation>
+			<label>brw-location</label>
+			<hidden-input>Y</hidden-input>
+			<hidden>Y</hidden>
+			<key>Y</key>
+		</InvLocation_id_itemLocation>
+		<InvLocation_id_itemNumber>
+			<label>brw-itemNumber</label>
+			<size>15</size>
+			<hidden-input>Y</hidden-input>
+			<key>Y</key>
+		</InvLocation_id_itemNumber>
+		<InvItem_description>
+			<label>description</label>
+			<size>40</size>
+		</InvItem_description>
+		<InvItem_commodity>
+			<label>commodity</label>
+			<size>15</size>
+		</InvItem_commodity>
+		<InvItem_issueCost>
+			<label>brw-cost</label>
+			<type>DollarDecimal</type>
+			<size>10</size>
+		</InvItem_issueCost>
+		<InvLocation_qtyEoq>
+			<label>quantity</label>
+			<type>QtyDecimal</type>
+			<size>10</size>
+			<key>Y</key>
+			<hidden-input>Y</hidden-input>
+			<alias>quantity</alias>
+		</InvLocation_qtyEoq>
+		<InvItem_unitOfIssue>
+			<label>brw-uom</label>
+			<size>5</size>
+		</InvItem_unitOfIssue>
+		<InvItem_minReqQty>
+			<type>QtyDecimal</type>
+			<hidden>Y</hidden>
+		</InvItem_minReqQty>
+		<InvItem_maxReqQty>
+			<type>QtyDecimal</type>
+			<hidden>Y</hidden>
+		</InvItem_maxReqQty>
+	</columns>
+	<sqlfrom>InvItem as InvItem, InvLocation as InvLocation</sqlfrom>
+	<sqlorderby>InvItem.itemNumber ASC</sqlorderby>
+	<sqlwhere>
+		<![CDATA[
+			((InvItem.status <> '03') or (InvItem.status = 'null') or (InvItem.status is null)) and
+			InvItem.itemNumber = InvLocation.id.itemNumber and
+			InvLocation.autoReplenish = 'Y' and
+			InvLocation.qtyOnHand - InvLocation.qtyAlloc + InvLocation.qtyOnOrder < InvLocation.minOnHand
+		]]>
+	</sqlwhere>
+	<title>Replenish Items</title>
+	<pagesize>15</pagesize>
+</browse_invitem_invlocation>

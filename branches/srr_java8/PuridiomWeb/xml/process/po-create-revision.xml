@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="RevisionSetup">
+			<task synchronous="true" continue-on-failure="false" name="setup">
+				<task-object-name>com.tsa.puridiom.po.tasks.PoRevisionSetup</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="originalPoHeader">
+				<task-object-name>com.tsa.puridiom.po.tasks.PoGetOriginalIc</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="newPoHeader_revisionNumber">
+				<task-object-name>com.tsa.puridiom.po.tasks.PoRevision</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="PoUpdateBlanketLastRevisionNumber">
+				<task-object-name>com.tsa.puridiom.po.tasks.PoUpdateBlanketLastRevisionNumber</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="UpdateLastRevision">
+				<task-object-name>com.tsa.puridiom.po.tasks.PoUpdateOriginalLastRevision</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="UpdateIcPoStatus">
+				<task-object-name>com.tsa.puridiom.po.tasks.PoUpdateIcPoStatus</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="UpdateRevisiedPoHeaderStatus">
+				<task-object-name>com.tsa.puridiom.poheader.tasks.PoHeaderUpdateAmmendedRevision</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="UpdateRevisiedPoLineStatus">
+				<task-object-name>com.tsa.puridiom.poline.tasks.PoLineUpdateAmmendedRevision</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="CreateRevision">
+			<task synchronous="true" continue-on-failure="false" name="poSave">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>po-saveas.xml</process-filename>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="poSave">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>performancedetail-saveas.xml</process-filename>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="retrieveBlanketInfo">
+			<task synchronous="true" continue-on-failure="false" name="retrieveBlanketInfo">
+				<rule-filename>is-blanket-or-release-order.xml</rule-filename>
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>po-get-blanket-info.xml</process-filename>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<!--activity synchronous="true" continue-on-failure="false" name="deleteVendorInsurance">
+			<rule-filename>is-contract-type.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="vendorInsurance">
+				<task-object-name>com.tsa.puridiom.vendorinsurance.tasks.VendorInsuranceRetrieveById</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="vendorInsurance">
+				<task-object-name>com.tsa.puridiom.vendorinsurance.tasks.VendorInsuranceDeleteById</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity-->
+	</activities>
+</process>

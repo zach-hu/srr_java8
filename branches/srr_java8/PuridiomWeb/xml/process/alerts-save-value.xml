@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="Alerts_configuration" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="alertsConfiguration">
+			<task synchronous="true" continue-on-failure="false" name="alertList">
+				<task-object-name>com.tsa.puridiom.alerts.tasks.AlertGetList</task-object-name>
+				<post-action />
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="newValue">
+				<task-object-name>com.tsa.puridiom.alerts.tasks.AlertGetNewValue</task-object-name>
+				<post-action />
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="alertList">
+				<task-object-name>com.tsa.puridiom.alerts.tasks.AlertsWriter</task-object-name>
+				<post-action />
+			</task>
+		</activity>
+	</activities>
+</process>

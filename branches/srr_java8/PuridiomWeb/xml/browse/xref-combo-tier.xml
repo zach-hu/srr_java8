@@ -1,0 +1,26 @@
+<xref_combo_table>
+	<columns>
+		<XrefCombo_code1>
+			<label>brw-inv-aisle</label>
+			<hidden-input>Y</hidden-input>
+		</XrefCombo_code1>
+		<XrefCombo_code2>
+			<label>brw-inv-row</label>
+			<hidden-input>Y</hidden-input>
+		</XrefCombo_code2>
+		<XrefCombo_code3>
+			<label>brw-inv-tier</label>
+			<link><![CDATA[javascript: returnMe('#XrefCombo_code3^'); void(0);]]></link>
+			<hidden-input>Y</hidden-input>
+		</XrefCombo_code3>
+		<XrefCombo_code4>
+			<label>brw-inv-bin</label>
+			<hidden-input>Y</hidden-input>
+		</XrefCombo_code4>
+	</columns>
+<sqlfrom>XrefCombo as XrefCombo</sqlfrom>
+<sqlwhere><![CDATA[ XrefCombo.xrefType = 'BINS' ]]></sqlwhere>
+<sqlorderby>XrefCombo.code1 ASC, XrefCombo.code2 ASC, XrefCombo.code3 ASC, XrefCombo.code4 ASC</sqlorderby>
+<pagesize>15</pagesize>
+<title>Aisle Browse</title>
+</xref_combo_table>

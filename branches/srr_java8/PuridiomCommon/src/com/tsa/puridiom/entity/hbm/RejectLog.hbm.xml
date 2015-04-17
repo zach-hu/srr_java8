@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 2.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+<class name="com.tsa.puridiom.entity.RejectLog" table="REJECT_LOG">
+<id name="icReject" column="IC_REJECT" type="java.math.BigDecimal">
+<generator class="assigned"/>
+</id>
+<property name="icHeader" column="IC_HEADER" type="java.math.BigDecimal" length="22" not-null="true"/>
+<property name="sequence" column="SEQUENCE" type="java.math.BigDecimal" length="5" not-null="true"/>
+<property name="userId" column="USER_ID" type="java.lang.String" length="15" not-null="true"/>
+<property name="amount" column="AMOUNT" type="java.math.BigDecimal" length="15"/>
+<property name="approverAmount" column="APPROVER_AMOUNT" type="java.math.BigDecimal" length="15"/>
+<property name="approved" column="APPROVED" type="java.lang.String" length="1"/>
+<property name="udfValues" column="UDF_VALUES" type="java.lang.String" length="254"/>
+<property name="authorized" column="AUTHORIZED" type="java.lang.String" length="1"/>
+<property name="alternateUserid" column="ALTERNATE_USERID" type="java.lang.String" length="15"/>
+<property name="dateAssigned" column="DATE_ASSIGNED" type="java.util.Date" length="7"/>
+<property name="dateApproved" column="DATE_APPROVED" type="java.util.Date" length="7"/>
+<property name="approverType" column="APPROVER_TYPE" type="java.lang.String" length="1"/>
+<property name="ruleType" column="RULE_TYPE" type="java.lang.String" length="3"/>
+<property name="poolid" column="POOLID" type="java.lang.String" length="15"/>
+<property name="ruleAction" column="RULE_ACTION" type="java.lang.String" length="1"/>
+<property name="approverSig" column="APPROVER_SIG" type="java.lang.String" length="1"/>
+<property name="callForward" column="CALL_FORWARD" type="java.lang.String" length="15"/>
+<property name="ruleSource" column="RULE_SOURCE" type="java.lang.String" length="3"/>
+<property name="approverNotes" column="APPROVER_NOTES" type="java.lang.String" length="255"/>
+</class>
+</hibernate-mapping>

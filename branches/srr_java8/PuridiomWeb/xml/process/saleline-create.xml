@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="saleLineCreate" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="saleLineCreate">
+			<task synchronous="true" continue-on-failure="false" name="saleLineSetup">			
+				<task-object-name>com.tsa.puridiom.saleline.tasks.SaleLineCreateSetup</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="saleHeader">
+				<rule-filename>is-saleheader-empty.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.saleheader.tasks.SaleHeaderRetrieveById</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="saleLineSetDefaultsFromHeader">			
+				<task-object-name>com.tsa.puridiom.saleline.tasks.SaleLineSetDefaultsFromHeader</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="saleLine">	
+				<task-object-name>com.tsa.puridiom.saleline.tasks.SaleLineSetValues</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="saleLineAdd">			
+				<task-object-name>com.tsa.puridiom.saleline.tasks.SaleLineAdd</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

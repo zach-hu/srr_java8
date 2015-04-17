@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="reportUserUpdate" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="reportUserUpdate">
+			<task synchronous="true" continue-on-failure="false" name="check">
+				<task-object-name>com.tsa.puridiom.reportuser.tasks.ReportUserCheckId</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="reportUser">
+				<task-object-name>com.tsa.puridiom.reportuser.tasks.ReportUserRetrieveById</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="reportUser">
+				<task-object-name>com.tsa.puridiom.reportuser.tasks.ReportUserSetValues</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="reportUser">
+				<task-object-name>com.tsa.puridiom.reportuser.tasks.ReportUserAdd</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

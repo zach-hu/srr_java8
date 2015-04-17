@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="poRoutingList" connection-type="Connection-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="retrievePO">
+			<task synchronous="true" continue-on-failure="false" name="poHeader">
+				<task-object-name>com.tsa.puridiom.poheader.tasks.PoHeaderRetrieveById</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="retrieveIt">
+			<rule-filename>is-routing-for-display.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="setup">
+				<task-object-name>com.tsa.puridiom.po.tasks.PoRoutingDisplaySetup</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="routingList">
+				<task-object-name>com.tsa.puridiom.approvals.tasks.ApprovalLogRetrieveByHeader</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="routingListGroups">
+				<task-object-name>com.tsa.puridiom.approvals.tasks.ApprovalLogListGroupByRule</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="poRoutingListSetup">
+			<rule-filename>is-po-forward-available.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="poRoutingSetup">
+				<task-object-name>com.tsa.puridiom.po.approvals.tasks.PoRoutingSetup</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="poLineList">
+				<task-object-name>com.tsa.puridiom.poline.tasks.PoLineRetrieveByHeader</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="accountList">
+				<task-object-name>com.tsa.puridiom.account.tasks.AccountRetrieveByHeader</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="poRoutingList">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>routing-list-build.xml</process-filename>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="routingList">
+				<task-object-name>com.tsa.puridiom.approvals.tasks.ApprovalLogListBuild</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="routingListGroups">
+				<task-object-name>com.tsa.puridiom.approvals.tasks.ApprovalLogListGroupByRule</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="routingListUpdate">
+				<rule-filename>is-routing-for-forward.xml</rule-filename>
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>approvallog-update-temp-list.xml</process-filename>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="retrieveIt">
+			<task synchronous="true" continue-on-failure="false" name="setup">
+				<task-object-name>com.tsa.puridiom.po.tasks.PoRoutingDisplaySetup</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="routingList">
+				<task-object-name>com.tsa.puridiom.approvals.tasks.ApprovalLogRetrieveByHeader</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="approvalLogListOrderedByUserId">
+				<task-object-name>com.tsa.puridiom.approvals.tasks.ApprovalLogRetrieveByHeaderOrderedByUserId</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="routingListDefaultSendTo">
+				<rule-filename>is-routing-for-forward.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.approvals.tasks.ApprovalLogListDefaultSendTo</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

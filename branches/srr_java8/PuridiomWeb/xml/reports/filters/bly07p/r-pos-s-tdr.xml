@@ -1,0 +1,162 @@
+<r-pos-s-tdr>
+  <columns>
+        <ReceiptHeader_receiptNumber>
+			<label>Receipt number</label>
+			<type>STRING</type>
+		</ReceiptHeader_receiptNumber>
+
+		<ReceiptHeader_receiptDate>
+			<label>Receipt Date</label>
+			<type>DATE</type>
+		</ReceiptHeader_receiptDate>
+		<ReceiptHeader_receivedBy>
+			<label>receivedBy</label>
+			<type>STRING</type>
+		</ReceiptHeader_receivedBy>
+		<PoHeader_releaseNumber>
+			<label>Release Number</label>
+			<type>BIGDECIMAL</type>
+         </PoHeader_releaseNumber>
+         <PoHeader_poNumber>
+			<label>PO Number</label>
+			<type>STRING</type>
+         </PoHeader_poNumber>
+         <PoHeader_revisionNumber>
+			<label>Revision Number</label>
+			<type>BIGDECIMAL</type>
+		 </PoHeader_revisionNumber>
+		 <PoHeader_requiredDate>
+			<label>Required Date</label>
+			<type>DATE</type>
+		 </PoHeader_requiredDate>
+         <PoHeader_promisedDate>
+			<label>Promised Date</label>
+			<type>DATE</type>
+		 </PoHeader_promisedDate>
+         <PoLine_lineNumber>
+			<label>Line Number</label>
+			<type>BIGDECIMAL</type>
+         </PoLine_lineNumber>
+         <PoLine_poNumber>
+			<label>Po Number</label>
+			<type>STRING</type>
+         </PoLine_poNumber>
+    	<Vendor_vendorId>
+			<label>Vendor Code</label>
+			<type>STRING</type>
+		</Vendor_vendorId>
+		<Vendor_vendorName>
+			<label>Supplier Name</label>
+			<type>STRING</type>
+		</Vendor_vendorName>
+		<Vendor_vendorAccount>
+			<label>Vendor Account</label>
+			<type>STRING</type>
+		</Vendor_vendorAccount>
+		<ReceiptHeader_pkgsReceived>
+			<label>Num Of Packages</label>
+			<type>BIGDECIMAL</type>
+		</ReceiptHeader_pkgsReceived>
+		<ReceiptHeader_packingSlip>
+			<label>packingSlip</label>
+			<type>STRING</type>
+		</ReceiptHeader_packingSlip>
+		<ReceiptHeader_carrierCode>
+			<label>Carrier Code</label>
+			<type>STRING</type>
+		</ReceiptHeader_carrierCode>
+		<ReceiptLine_inspectionCode>
+			<label>INSP</label>
+			<type>STRING</type>
+		</ReceiptLine_inspectionCode>
+		<PoLine_itemNumber>
+			<label>Item Number</label>
+			<type>STRING</type>
+		</PoLine_itemNumber>
+		<PoLine_description>
+			<label>Description</label>
+			<type>STRING</type>
+		</PoLine_description>
+		<PoLine_quantity>
+			<label>Quantity Ordered</label>
+			<type>BIGDECIMAL</type>
+		</PoLine_quantity>
+		<ReceiptLine_qtyReceived>
+			<label>Quantity Received</label>
+			<type>BIGDECIMAL</type>
+		</ReceiptLine_qtyReceived>
+		<ReceiptLine_qtyReturned>
+			<label>Quantity Returned</label>
+			<type>BIGDECIMAL</type>
+		</ReceiptLine_qtyReturned>
+		<ReceiptLine_qtyRejected>
+			<label>Quantity Rejected</label>
+			<type>BIGDECIMAL</type>
+		</ReceiptLine_qtyRejected>
+		<PoHeader_status>
+			<label>Status</label>
+			<type>STATUS</type>
+		</PoHeader_status>
+		<PoHeader_currencyCode>
+			<label>Currency Code</label>
+			<type>STRING</type>
+		</PoHeader_currencyCode>
+		<PoHeader_buyerCode>
+			<label>Buyer Code</label>
+			<type>STRING</type>
+		</PoHeader_buyerCode>
+		<PoHeader_currencyFactor>
+			<label>Currency Factor</label>
+			<type>BIGDECIMAL</type>
+		</PoHeader_currencyFactor>
+		<PoLine_umCode>
+			<label>Unit Of Measure</label>
+			<type>STRING</type>
+		</PoLine_umCode>
+		<PoLine_unitPrice>
+			<label>Unit Cost</label>
+			<type>BIGDECIMAL</type>
+		</PoLine_unitPrice>
+		<PoLine_lineTotal>
+			<label>Line Total</label>
+			<type>BIGDECIMAL</type>
+		</PoLine_lineTotal>
+		<PoHeader_poDate>
+			<label>PO Date</label>
+			<type>DATE</type>
+		</PoHeader_poDate>
+		<PoLine_commodity>
+			<label>Commodity</label>
+			<type>STRING</type>
+		</PoLine_commodity>
+		<PoLine_udf6Code>
+			<label>Cost Center</label>
+			<type>STRING</type>
+		</PoLine_udf6Code>
+		<Account_fld2>
+			<label>GL Account</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</Account_fld2>
+		<PoLine_status>
+			<label>Line Status</label>
+			<type>STRING</type>
+		</PoLine_status>
+  </columns>
+<sqlfrom>ReceiptHeader as ReceiptHeader , PoHeader as PoHeader , PoLine as PoLine, ReceiptLine as ReceiptLine , Vendor as Vendor, Account as Account </sqlfrom>
+<sqlwhere><![CDATA[
+( ReceiptLine.icRecHeader = ReceiptHeader.icRecHeader ) and
+( ReceiptLine.icPoLine = PoLine.icLineKey ) and
+( PoLine.icPoHeader = PoHeader.icPoHeader ) and
+( ReceiptHeader.receiptType <> 'T' ) and
+( ReceiptHeader.vendorId = Vendor.vendorId ) and
+( PoLine.status < '9020' ) and
+( PoLine.status > '4000' ) and
+( PoHeader.icPoHeader = Account.id.icHeader ) and
+( PoLine.icAccount = Account.id.icLine ) and
+( PoHeader.lastRevision = 'C') and
+( ReceiptLine.qtyReceived <> 0 )
+]]></sqlwhere>
+<sqlorderby>PoLine.poNumber</sqlorderby>
+<title>Purchase Order On Time Delivery Report</title>
+</r-pos-s-tdr>

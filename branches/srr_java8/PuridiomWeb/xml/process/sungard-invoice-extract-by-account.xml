@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="SungardInvoiceExtractByAccount" connection-type="None">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="extractByAccount">
+			<task synchronous="true" continue-on-failure="false" name="extractByAccountSetup">
+				<task-object-name>com.tsa.puridiom.sungard.extract.tasks.SungardInvoiceExtractByAccountSetup</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="accountList">
+				<task-object-name>com.tsa.puridiom.account.tasks.AccountRollup</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="extractByAccount">
+				<task-object-name>com.tsa.puridiom.sungard.extract.tasks.SungardInvoiceExtractByAccount</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="stdCommentDelete" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="deleteStdComment">
+			<task synchronous="true" continue-on-failure="false" name="stdComment">			
+				<task-object-name>com.tsa.puridiom.stdcomment.tasks.StdCommentDeleteById</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+	</activities>
+</process>

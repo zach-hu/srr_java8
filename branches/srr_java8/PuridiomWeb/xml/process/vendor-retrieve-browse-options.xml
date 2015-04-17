@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="VendorRetrieveBrowseOptions" connection-type="Connection-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="retrieveVendorNames">
+			<task synchronous="true" continue-on-failure="false" name="vendorNameList">
+				<rule-filename>is-organization-msg.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.vendor.tasks.VendorRetrieveActiveVendorNames</task-object-name>
+				<post-action>exitActivity</post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="vendorNameList">
+				<task-object-name>com.tsa.puridiom.vendor.tasks.VendorRetrieveVendorNames</task-object-name>
+				<post-action />
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="retrieveVendorClasses">
+			<task synchronous="true" continue-on-failure="false" name="vendorClassList">
+				<task-object-name>com.tsa.puridiom.stdtable.tasks.StdTableRetrieveVendorClasses</task-object-name>
+				<post-action />
+			</task>
+		</activity>
+	</activities>
+</process>

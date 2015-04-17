@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="puridiomUpdateServiceDelete" connection-type="New-Transaction">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="deletePartial">
+			<task synchronous="true" continue-on-failure="false" name="deleteObject">
+				<rule-filename>is-stdtable-delete.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.updateservice.tasks.PuridiomUpdateServiceDeleteObject</task-object-name>
+				<post-action>ExitProcess</post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="deleteAllObject">
+				<task-object-name>com.tsa.puridiom.updateservice.tasks.PuridiomUpdateServiceDeleteAllObject</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+	</activities>
+</process>

@@ -1,0 +1,56 @@
+<browse_userprofile>
+	<columns>
+		<AuditRecord_entity1>
+			<label>brw-entity1</label>
+			<link><![CDATA[javascript: adminUserProfileAuditTrail('#AuditRecord_entity1^'); void(0);]]></link>
+			<type>STRING</type>
+			<size>15</size>
+			<distinct>Y</distinct>
+		</AuditRecord_entity1>
+		<AuditRecord_created>
+			<label>auditRecord-dateCreated</label>
+			<type>DATE</type>
+			<size>15</size>
+			<selectsql>N</selectsql>
+			<allowfilter>Y</allowfilter>
+			<hidden>Y</hidden>
+		</AuditRecord_created>
+		<AuditRecord_ipAddress>
+			<label>brw-iPAddress</label>
+			<type>STRING</type>
+			<size>15</size>
+			<selectsql>N</selectsql>
+			<allowfilter>Y</allowfilter>
+			<hidden>Y</hidden>
+		</AuditRecord_ipAddress>
+		<AuditRecord_entity4>
+			<label>auditRecord-entity4</label>
+			<type>STRING</type>
+			<size>15</size>
+			<selectsql>N</selectsql>
+			<allowfilter>Y</allowfilter>
+			<hidden>Y</hidden>
+		</AuditRecord_entity4>
+		<AuditRecord_entity2>
+			<label>auditRecord-entity2</label>
+			<type>STRING</type>
+			<size>15</size>
+			<selectsql>N</selectsql>
+			<allowfilter>Y</allowfilter>
+			<hidden>Y</hidden>
+		</AuditRecord_entity2>
+		<AuditRecord_entity3>
+			<label>auditRecord-entity3</label>
+			<type>STRING</type>
+			<size>15</size>
+			<selectsql>N</selectsql>
+			<allowfilter>Y</allowfilter>
+			<hidden>Y</hidden>
+		</AuditRecord_entity3>
+	</columns>
+<sqlfrom>AuditRecord as AuditRecord</sqlfrom>
+<sqlwhere><![CDATA[(AuditRecord.entityClass = 'UserProfile') and (AuditRecord.entity1 not like '%UserProfile%')]]></sqlwhere>
+<sqlorderby>AuditRecord.entity1 ASC</sqlorderby>
+<pagesize>15</pagesize>
+<title>User Profile</title>
+</browse_userprofile>

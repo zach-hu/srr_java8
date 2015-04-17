@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="requisitionLineCreate" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="poLineRetrieve">
+			<rule-filename>is-poline-empty.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="poLine">			
+				<task-object-name>com.tsa.puridiom.poline.tasks.PoLineRetrieveById</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="requisitionLineCreate">
+			<task synchronous="true" continue-on-failure="false" name="requisitionLineSetup">			
+				<task-object-name>com.tsa.puridiom.requisitionline.tasks.RequisitionLineSetup</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="requisitionLineSetupUmFactor">
+				<task-object-name>com.tsa.puridiom.requisitionline.tasks.RequisitionLineSetupUmFactor</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="RequisitionLine_lineNumber">			
+				<task-object-name>com.tsa.puridiom.requisitionline.tasks.RequisitionLineGetNewLineNumber</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="requisitionLineSetPoLineValues">			
+				<task-object-name>com.tsa.puridiom.requisitionline.tasks.RequisitionLineSetPoLineValues</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="requisitionLine">			
+				<task-object-name>com.tsa.puridiom.requisitionline.tasks.RequisitionLineSetValues</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="requisitionLineSaveasFromPo">
+			<task synchronous="true" continue-on-failure="false" name="requisitionLineSaveasFromPo">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>requisitionline-saveas-from-po.xml</process-filename>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="requisitionLineAdd">
+			<task synchronous="true" continue-on-failure="false" name="requisitionLine">			
+				<task-object-name>com.tsa.puridiom.requisitionline.tasks.RequisitionLineAdd</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

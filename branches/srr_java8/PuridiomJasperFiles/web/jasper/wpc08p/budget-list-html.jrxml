@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created using an evaluation version of JasperAssistant (http://www.jasperassistant.com) -->
+<!DOCTYPE jasperReport PUBLIC "-//JasperReports//DTD Report Design//EN" "http://jasperreports.sourceforge.net/dtds/jasperreport.dtd">
+
+<jasperReport name="BudgetInfoHtml" pageWidth="595" pageHeight="842" columnWidth="595" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+	<property name="com.jasperassistant.designer.Grid" value="false"/>
+	<property name="com.jasperassistant.designer.SnapToGrid" value="false"/>
+	<property name="com.jasperassistant.designer.GridWidth" value="12"/>
+	<property name="com.jasperassistant.designer.GridHeight" value="12"/>
+	<import value="com.tsagate.properties.DictionaryManager"/>
+	<import value="com.tsa.puridiom.common.utility.HiltonUtility"/>
+	<reportFont name="Arial_Normal" isDefault="false" fontName="Arial" size="8" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Bold" isDefault="false" fontName="Arial Black" size="8" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica-Bold" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Bold_Big" isDefault="false" fontName="Arial Black" size="9" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica-Bold" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Big" isDefault="false" fontName="Arial" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Verdana" isDefault="false" fontName="Verdana" size="9" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_black" isDefault="false" fontName="Arial Black" size="9" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica-Bold" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Verdana_big" isDefault="false" fontName="Verdana" size="11" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Verdana_bold" isDefault="false" fontName="Verdana" size="9" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<parameter name="oid" class="java.lang.String">
+		<defaultValueExpression><![CDATA["demo"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="reportTitle" class="java.lang.String">
+		<defaultValueExpression><![CDATA["Budget Info Summary"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="RequisitionLine_extCost" class="java.math.BigDecimal"/>
+	<parameter name="RequisitionHeader_currencyCode" class="java.lang.String"/>
+	<parameter name="RequisitionLine_taxAmount" class="java.math.BigDecimal"/>
+	<field name="BudgetCenter_budget1" class="java.lang.String"/>
+	<field name="BudgetCenter_budget2" class="java.lang.String"/>
+	<field name="BudgetCenter_budget3" class="java.lang.String"/>
+	<field name="BudgetCenter_budget4" class="java.lang.String"/>
+	<field name="BudgetCenter_budget5" class="java.lang.String"/>
+	<field name="BudgetCenter_budgeted" class="java.math.BigDecimal"/>
+	<field name="BudgetCenter_budgetPeriod" class="java.lang.String"/>
+	<variable name="budgetAccounts" class="java.lang.String">
+		<variableExpression><![CDATA[$F{BudgetCenter_budget1}.toString() + "-" + $F{BudgetCenter_budget2}.toString() + "-" + $F{BudgetCenter_budget3}.toString() + "-" + $F{BudgetCenter_budget4}.toString()]]></variableExpression>
+	</variable>
+	<group name="Group_1">
+		<groupHeader>
+			<band height="23">
+				<staticText>
+					<reportElement positionType="Float" mode="Opaque" x="1" y="-2" width="560" height="23" forecolor="#000000" backcolor="#E4E4E4"/>
+					<box border="None" topPadding="0" leftPadding="2" bottomPadding="0" rightPadding="2"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font reportFont="Verdana_bold"/>
+					</textElement>
+					<text><![CDATA[ Budget   Information]]></text>
+				</staticText>
+			</band>
+		</groupHeader>
+	</group>
+	<group name="Budget_Title">
+		<groupHeader>
+			<band height="24">
+				<textField>
+					<reportElement positionType="Float" mode="Opaque" x="1" y="0" width="75" height="23" forecolor="#000000" backcolor="#E4E4E4"/>
+					<box border="None" topPadding="0" leftPadding="2" bottomPadding="0" rightPadding="2"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font reportFont="Verdana_bold"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA["Department"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement positionType="Float" mode="Opaque" x="76" y="0" width="75" height="23" forecolor="#000000" backcolor="#E4E4E4"/>
+					<box border="None" topPadding="0" leftPadding="2" bottomPadding="0" rightPadding="2"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font reportFont="Verdana_bold"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA["Location"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement positionType="Float" mode="Opaque" x="151" y="0" width="75" height="23" forecolor="#000000" backcolor="#E4E4E4"/>
+					<box border="None" topPadding="0" leftPadding="2" bottomPadding="0" rightPadding="2"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font reportFont="Verdana_bold"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA["Account"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement positionType="Float" mode="Opaque" x="226" y="0" width="75" height="23" forecolor="#000000" backcolor="#E4E4E4"/>
+					<box border="None" topPadding="0" leftPadding="2" bottomPadding="0" rightPadding="2"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font reportFont="Verdana_bold"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA["CAR#"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement positionType="Float" mode="Opaque" x="301" y="0" width="90" height="23" forecolor="#000000" backcolor="#E4E4E4"/>
+					<box border="None" topPadding="0" leftPadding="2" bottomPadding="0" rightPadding="0"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font reportFont="Verdana_bold"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA["Project"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement positionType="Float" mode="Opaque" x="391" y="0" width="85" height="23" forecolor="#000000" backcolor="#E4E4E4"/>
+					<box border="None" topPadding="0" leftPadding="2" bottomPadding="0" rightPadding="2"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font reportFont="Verdana_bold"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA["Fiscal Year"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement positionType="Float" mode="Opaque" x="476" y="0" width="85" height="23" forecolor="#000000" backcolor="#E4E4E4"/>
+					<box border="None" topPadding="0" leftPadding="2" bottomPadding="0" rightPadding="2"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font reportFont="Verdana_bold"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA["Budgeted"]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+	</group>
+	<group name="Budget_Detail">
+		<groupHeader>
+			<band height="16">
+				<textField>
+					<reportElement mode="Opaque" x="476" y="0" width="85" height="16" backcolor="#F3F3F3"/>
+					<textElement textAlignment="Right">
+						<font reportFont="Verdana"/>
+					</textElement>
+					<textFieldExpression class="java.math.BigDecimal"><![CDATA[HiltonUtility.getFormattedDollar($F{BudgetCenter_budgeted}, $P{oid})]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement mode="Opaque" x="301" y="0" width="90" height="16" backcolor="#F3F3F3"/>
+					<textElement textAlignment="Center">
+						<font reportFont="Verdana" size="10"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{BudgetCenter_budget5}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement mode="Opaque" x="391" y="0" width="85" height="16" backcolor="#F3F3F3"/>
+					<textElement textAlignment="Center">
+						<font reportFont="Verdana" size="10"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{BudgetCenter_budgetPeriod}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement mode="Opaque" x="1" y="0" width="75" height="16" forecolor="#000000" backcolor="#F3F3F3"/>
+					<textElement textAlignment="Center"/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{BudgetCenter_budget1}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement mode="Opaque" x="76" y="0" width="75" height="16" forecolor="#000000" backcolor="#F3F3F3"/>
+					<textElement textAlignment="Center"/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{BudgetCenter_budget2}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement mode="Opaque" x="151" y="0" width="75" height="16" forecolor="#000000" backcolor="#F3F3F3"/>
+					<textElement textAlignment="Center"/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{BudgetCenter_budget3}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement mode="Opaque" x="226" y="0" width="75" height="16" forecolor="#000000" backcolor="#F3F3F3"/>
+					<textElement textAlignment="Center">
+						<font fontName="Verdana"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{BudgetCenter_budget4}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+	</group>
+</jasperReport>

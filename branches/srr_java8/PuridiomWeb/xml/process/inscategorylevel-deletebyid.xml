@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="InsCategoryLevelDeletebyid" connection-type="New-Transaction"> 
+	<activities>  
+		<activity synchronous="true" continue-on-failure="false" name="deletebyidInsCategoryLevelActivity">
+			<task synchronous="true" continue-on-failure="false" name="deletebyidInsCategoryLevel">    			
+				<task-object-name>com.tsa.puridiom.inscategorylevel.tasks.InsCategoryLevelDeleteById</task-object-name>
+			</task>   
+		</activity>  
+	</activities> 
+</process>

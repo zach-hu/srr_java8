@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="VendorInsuranceUpdate" connection-type="Transaction-Required"> 
+	<activities>  
+		<activity synchronous="true" continue-on-failure="false" name="updateVendorInsuranceActivity">
+		<task synchronous="true" continue-on-failure="false" name="vendorInsurance">			
+				<task-object-name>com.tsa.puridiom.vendorinsurance.tasks.VendorInsuranceRetrieveById</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="vendorInsurance">
+				<task-object-name>com.tsa.puridiom.vendorinsurance.tasks.VendorInsuranceSetValues</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="vendorInsuranceUpdate">    			
+				<task-object-name>com.tsa.puridiom.vendorinsurance.tasks.VendorInsuranceUpdate</task-object-name>    
+				<post-action></post-action>   
+			 </task>   
+		  </activity>  
+	 </activities> 
+</process>

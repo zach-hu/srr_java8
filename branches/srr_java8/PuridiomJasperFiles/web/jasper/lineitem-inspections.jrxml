@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created using an evaluation version of JasperAssistant (http://www.jasperassistant.com) -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="lineitem_account" pageWidth="569" pageHeight="18" columnWidth="569" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+	<import value="com.tsa.puridiom.jasperreports.*"/>
+	<reportFont name="Arial_Normal" isDefault="false" fontName="Arial" size="8" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Verdana" isDefault="true" fontName="Verdana" size="9" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Verdana_bold" isDefault="false" fontName="Verdana" size="9" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<parameter name="reportTitle" class="java.lang.String">
+		<defaultValueExpression><![CDATA["Account Summary"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="oid" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="criteriaSR" class="net.sf.jasperreports.engine.JasperReport">
+		<defaultValueExpression><![CDATA[JasperReportsHelper.loadSubReport("lineitem-criteria.jasper", $P{oid})]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="InspectionHeader_inspectType" class="java.lang.String"/>
+	<field name="InspectionHeader_standardCode" class="java.lang.String"/>
+	<field name="InspectionHeader_inspectionLineList" class="java.util.List"/>
+	<detail>
+		<band height="18">
+			<rectangle>
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="152" height="15" forecolor="#F3F3F3" backcolor="#F3F3F3"/>
+			</rectangle>
+			<textField isBlankWhenNull="true" hyperlinkType="None">
+				<reportElement positionType="Float" mode="Opaque" x="207" y="0" width="120" height="15" isRemoveLineWhenBlank="true" backcolor="#F3F3F3"/>
+				<textElement verticalAlignment="Middle">
+					<font reportFont="Verdana"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{InspectionHeader_inspectType}.equals("RI") ? "Receipt Inspection (RICP)" : $F{InspectionHeader_inspectType}.equals("FI") ? "Field Inspection" : $F{InspectionHeader_inspectType}.equals("GI") ? "General Inspection" : $F{InspectionHeader_inspectType}.equals("CG") ? "CGD Inspection" : ""]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true" hyperlinkType="None">
+				<reportElement positionType="Float" mode="Opaque" x="430" y="0" width="40" height="15" isRemoveLineWhenBlank="true" backcolor="#F3F3F3"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font reportFont="Verdana"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{InspectionHeader_standardCode}]]></textFieldExpression>
+			</textField>
+			<textField hyperlinkType="None">
+				<reportElement positionType="Float" mode="Opaque" x="152" y="0" width="55" height="15" backcolor="#F3F3F3">
+					<printWhenExpression><![CDATA[new Boolean($V{REPORT_COUNT}.equals(new Integer(1)))]]></printWhenExpression>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font reportFont="Verdana_bold"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Inspection: "]]></textFieldExpression>
+			</textField>
+			<textField hyperlinkType="None">
+				<reportElement positionType="Float" mode="Opaque" x="345" y="0" width="85" height="15" backcolor="#F3F3F3">
+					<printWhenExpression><![CDATA[new Boolean($V{REPORT_COUNT}.equals(new Integer(1)))]]></printWhenExpression>
+				</reportElement>
+				<textElement verticalAlignment="Middle" markup="none">
+					<font reportFont="Verdana_bold"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Standard Code: "]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="470" y="0" width="100" height="15" forecolor="#F3F3F3" backcolor="#F3F3F3"/>
+			</rectangle>
+			<rectangle>
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="327" y="0" width="18" height="15" forecolor="#F3F3F3" backcolor="#F3F3F3"/>
+			</rectangle>
+			<subreport>
+				<reportElement positionType="Float" mode="Opaque" x="0" y="16" width="567" height="2" isRemoveLineWhenBlank="true" backcolor="#F3F3F3"/>
+				<subreportParameter name="oid"/>
+				<dataSourceExpression><![CDATA[ReportUtils.getDS($F{InspectionHeader_inspectionLineList})]]></dataSourceExpression>
+				<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[$P{criteriaSR}]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+	<summary>
+		<band height="3">
+			<rectangle>
+				<reportElement positionType="Float" x="0" y="0" width="569" height="3" forecolor="#F3F3F3" backcolor="#F3F3F3"/>
+			</rectangle>
+		</band>
+	</summary>
+</jasperReport>

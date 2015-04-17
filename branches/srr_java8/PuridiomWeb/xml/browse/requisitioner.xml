@@ -1,0 +1,41 @@
+<browse_requisitioner>
+	<columns>
+		<UserProfile_userId>
+			<label>user-userId</label>
+			<link><![CDATA[javascript: returnMe('#UserProfile_userId^'); void(0);]]></link>
+			<size>15</size>
+		</UserProfile_userId>
+		<UserProfile_firstName>
+			<label>firstName</label>
+			<size>15</size>
+		</UserProfile_firstName>
+		<UserProfile_lastName>
+			<label>lastName</label>
+			<sort>A</sort>
+			<filter-default>Y</filter-default>
+			<size>20</size>
+		</UserProfile_lastName>
+		<UserProfile_mailId>
+			<label>emailAddress</label>
+			<size>35</size>
+		</UserProfile_mailId>
+		<UserProfile_department>
+			<label>department</label>
+			<hidden-input>Y</hidden-input>
+			<size>10</size>
+		</UserProfile_department>
+		<UserProfile_displayName>
+			<userName>
+				<col>UserProfile_userId</col>
+			</userName>
+			<hidden>Y</hidden>
+			<hidden-input>Y</hidden-input>
+			<selectsql>N</selectsql>
+		</UserProfile_displayName>
+	</columns>
+<sqlfrom>UserProfile as UserProfile</sqlfrom>
+<sqlwhere><![CDATA[ (UserProfile.requisitioner = 'Y') AND (UserProfile.status <> '03') AND (UserProfile.userId <> 'SYSADM') ]]></sqlwhere>
+<sqlorderby>UserProfile.lastName ASC</sqlorderby>
+<pagesize>15</pagesize>
+<title>Requisitioner Browse</title>
+</browse_requisitioner>

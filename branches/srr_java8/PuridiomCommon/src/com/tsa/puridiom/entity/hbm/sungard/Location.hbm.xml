@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+<class name="com.tsa.puridiom.entity.sungard.Location" table="LOCATION">
+<id name="locationCode" type="java.lang.String" column="LOCATION_CODE">
+	<generator class="assigned" />
+</id>
+<property name="locationTypeCode" column="LOCATION_TYPE_CODE" type="java.lang.String" length="5"/>
+<property name="shortDescription" column="SHORT_DESCRIPTION" type="java.lang.String" length="20"/>
+<property name="description" column="DESCRIPTION" type="java.lang.String" length="50"/>
+</class>
+</hibernate-mapping>

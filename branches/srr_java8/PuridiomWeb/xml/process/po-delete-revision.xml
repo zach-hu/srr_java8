@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="poDeleteRevision" connection-type="None">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="poDeleteRevision">
+			<task synchronous="true" continue-on-failure="false" name="poDelete">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>po-delete.xml</process-filename>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="poSetLastRevision">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>po-set-last-revision.xml</process-filename>
+			</task>
+		</activity>
+	</activities>
+</process>

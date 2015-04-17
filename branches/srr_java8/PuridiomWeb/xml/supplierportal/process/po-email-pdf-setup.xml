@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="poHeaderRetrieveById" connection-type="Connection-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="pdfSendQueueSetup">
+			<task synchronous="true" continue-on-failure="false" name="poHeader">
+				<task-object-name>com.tsa.puridiom.po.tasks.QueueAddOrderPdf</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

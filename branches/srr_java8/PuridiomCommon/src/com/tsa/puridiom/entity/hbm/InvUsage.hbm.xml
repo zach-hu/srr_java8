@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+    
+<hibernate-mapping>
+
+<!-- 
+    Created by Middlegen Hibernate plugin
+
+    http://boss.bekk.no/boss/middlegen/
+    http://hibernate.sourceforge.net/
+-->
+
+<class 
+    name="com.tsa.puridiom.entity.InvUsage" 
+    table="INV_USAGE"
+>
+    <composite-id name="comp_id" class="com.tsa.puridiom.entity.InvUsagePK">
+        <key-property name="itemNumber" column="ITEM_NUMBER" type="java.lang.String" />
+        <key-property name="usageYear" column="USAGE_YEAR" type="java.math.BigDecimal"/>
+        <key-property name="usageMonth" column="USAGE_MONTH" type="java.math.BigDecimal"/>
+    </composite-id>    
+    <property
+        name="quantity"
+        type="java.math.BigDecimal"
+        column="QUANTITY"
+        length="15"
+    />
+
+    <!-- associations -->
+
+</class>
+</hibernate-mapping>

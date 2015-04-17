@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="checklistResponseUpdate" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="checklistResponseUpdate">
+			<task synchronous="true" continue-on-failure="false" name="checklistResponse">			
+				<task-object-name>com.tsa.puridiom.checklistresponse.tasks.ChecklistResponseRetrieveById</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="checklistResponseAdd">
+				<rule-filename>is-checklistresponse-empty.xml</rule-filename>
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>checklistresponse-add.xml</process-filename>
+				<post-action>exitActivity</post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="checklistResponse">
+				<task-object-name>com.tsa.puridiom.checklistresponse.tasks.ChecklistResponseSetValues</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="checklistResponse">			
+				<task-object-name>com.tsa.puridiom.checklistresponse.tasks.ChecklistResponseUpdate</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

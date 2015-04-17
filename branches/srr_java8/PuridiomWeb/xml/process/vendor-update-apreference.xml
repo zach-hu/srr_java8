@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="vendorUpdateApReference" connection-type="Transaction-Required">
+	<activities>
+		<!-- first check to see if vendor exists  -->
+		<activity synchronous="true" continue-on-failure="false" name="vendorRetrieve">
+			<task synchronous="true" continue-on-failure="false" name="vendorUpdateApReferenceSetup">
+				<task-object-name>com.tsa.puridiom.vendor.tasks.VendorUpdateApReferenceSetup</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="vendor">
+				<task-object-name>com.tsa.puridiom.vendor.tasks.VendorRetrieveById</task-object-name>
+			</task>
+		</activity>
+
+		<activity synchronous="true" continue-on-failure="false" name="vendorUpdateApReference">
+			<rule-filename check-for-false="true">is-vendor-empty.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="vendorUpdateApReference">
+				<task-object-name>com.tsa.puridiom.vendor.tasks.VendorUpdateApReference</task-object-name>
+			</task>
+		</activity>
+
+		<!--  add history  -->
+		<activity synchronous="true" continue-on-failure="false" name="vendorUpdateApReference">
+			<rule-filename>is-apreference-changed.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="vendorUpdateApReference">
+				<task-object-name>com.tsa.puridiom.vendor.history.tasks.VendorHistory</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

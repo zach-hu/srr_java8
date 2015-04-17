@@ -1,0 +1,119 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+    
+<hibernate-mapping>
+
+<!-- 
+    Created by Middlegen Hibernate plugin
+
+    http://boss.bekk.no/boss/middlegen/
+    http://hibernate.sourceforge.net/
+-->
+
+<class 
+    name="com.tsa.puridiom.entity.OrganizationPackage" 
+    table="ORGANIZATION_PACKAGE"
+>
+    <id
+        name="icOrgPackage"
+        type="java.math.BigDecimal"
+        column="IC_ORG_PACKAGE"
+    >
+        <generator class="assigned" />
+    </id>
+    <property
+        name="organizationId"
+        type="java.lang.String"
+        column="ORGANIZATION_ID"
+        length="15"
+    />
+    <property
+        name="icPackage"
+        type="java.math.BigDecimal"
+        column="IC_PACKAGE"
+        length="22"
+    />
+    <property
+        name="packageType"
+        type="java.lang.String"
+        column="PACKAGE_TYPE"
+        length="1"
+    />
+    <property
+        name="unitPrice"
+        type="java.math.BigDecimal"
+        column="UNIT_PRICE"
+        length="15"
+    />
+    <property
+        name="quantity"
+        type="java.math.BigDecimal"
+        column="QUANTITY"
+        length="15"
+    />
+    <property
+        name="total"
+        type="java.math.BigDecimal"
+        column="TOTAL"
+        length="15"
+    />	
+    <property
+	    name="buyerCount"
+	    type="java.math.BigDecimal"
+	    column="BUYER_COUNT"
+	    length="5"
+	/>
+    <property
+	    name="requisitionerCount"
+	    type="java.math.BigDecimal"
+	    column="REQUISITIONER_COUNT"
+	    length="5"
+	/>
+    <property
+        name="purchasedBy"
+        type="java.lang.String"
+        column="PURCHASED_BY"
+        length="60"
+    />
+    <property
+        name="datePurchased"
+        type="java.sql.Timestamp"
+        column="DATE_PURCHASED"
+        length="7"
+    />
+    <property
+        name="datePaid"
+        type="java.sql.Timestamp"
+        column="DATE_PAID"
+        length="7"
+    />
+    <property
+        name="transactionId"
+        type="java.lang.String"
+        column="TRANSACTION_ID"
+        length="30"
+    />
+    <property
+        name="status"
+        type="java.lang.String"
+        column="STATUS"
+        length="4"
+    />
+    <property
+        name="dateActive"
+        type="java.sql.Timestamp"
+        column="DATE_ACTIVE"
+        length="7"
+    />
+    <property
+        name="dateExpires"
+        type="java.sql.Timestamp"
+        column="DATE_EXPIRES"
+        length="7"
+    />
+    <!-- associations -->
+
+</class>
+</hibernate-mapping>

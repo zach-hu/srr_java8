@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="invoiceRetrieve" connection-type="Connection-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="invoiceRetrieve">
+			<task synchronous="true" continue-on-failure="false" name="invoiceHeader">
+				<task-object-name>com.tsa.puridiom.invoiceheader.tasks.InvoiceHeaderRetrieveById</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="invoiceDataRetrieve">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>invoiceheaderdata-retrieve.xml</process-filename>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="invoiceLineDataRetrieve">
+				<task-object-name>com.tsa.puridiom.invoiceline.tasks.InvoiceLineDataRetrieve</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="invoicePoLineList">
+				<task-object-name>com.tsa.puridiom.invoiceline.tasks.InvoiceLineRetrievePoLine</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+
+		<activity synchronous="true" continue-on-failure="false" name="accountRollupRetrieve">
+			<task synchronous="true" continue-on-failure="false" name="accountRollupRetrieve">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>account-rollup-retrieve.xml</process-filename>
+			</task>
+		</activity>
+<!--
+		<activity synchronous="true" continue-on-failure="false" name="accountRollupRetrieve">
+			<task synchronous="true" continue-on-failure="false" name="accountRollupList">
+				<task-object-name>com.tsa.puridiom.account.tasks.InvoiceAccountRollupRetrieve</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+-->
+	</activities>
+</process>

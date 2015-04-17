@@ -1,0 +1,64 @@
+<browse_assetlocation>
+	<columns>
+
+		<Asset_tagNumber>
+			<label>brw-tagNumber</label>
+			<link><![CDATA[javascript: viewAssetLocation('#AssetLocation_id_tagNumber^', '#AssetLocation_id_sequenceNo^', assetINum+assetDesc+assetTNum); void(0);]]></link>
+			<visible>1</visible>
+		</Asset_tagNumber>
+
+		<Asset_trackingNumber>
+			<visible>0</visible>
+		</Asset_trackingNumber>
+
+		<AssetLocation_id_tagNumber>
+			<visible>0</visible>
+		</AssetLocation_id_tagNumber>
+
+		<AssetLocation_id_sequenceNo>
+			<label>routingSequence</label>
+			<visible>1</visible>
+		</AssetLocation_id_sequenceNo>
+		<AssetLocation_locationType>
+			<label>assetlocation-locationtype</label>
+			<visible>1</visible>
+		</AssetLocation_locationType>
+		<AssetLocation_division>
+			<label>assetlocationdivision</label>
+			<visible>1</visible>
+		</AssetLocation_division>
+		<AssetLocation_department>
+			<label>department</label>
+			<visible>0</visible>
+		</AssetLocation_department>
+		<AssetLocation_facility>
+			<label>Facility</label>
+			<visible>0</visible>
+		</AssetLocation_facility>
+		<AssetLocation_building>
+			<label>assetlocation-building</label>
+			<visible>0</visible>
+		</AssetLocation_building>
+		<AssetLocation_room>
+			<label>assetlocation-room</label>
+			<visible>0</visible>
+		</AssetLocation_room>
+		<AssetLocation_dateAssigned>
+			<label>assetlocation-dateassigned</label>
+			<visible>0</visible>
+		</AssetLocation_dateAssigned>
+		<AssetLocation_telephone>
+			<label>assetlocation-telephone</label>
+			<visible>0</visible>
+		</AssetLocation_telephone>
+		<AssetLocation_dateChanged>
+			<label>assetnote-datechanged</label>
+			<visible>0</visible>
+		</AssetLocation_dateChanged>
+	</columns>
+<sqlfrom>Asset as Asset, AssetLocation AssetLocation</sqlfrom>
+<sqlwhere><![CDATA[ Asset.tagNumber = AssetLocation.id.tagNumber ]]></sqlwhere>
+<sqlorderby>AssetLocation.id.sequenceNo DESC</sqlorderby>
+<pagesize>15</pagesize>
+<title>Asset Location Browse</title>
+</browse_assetlocation>

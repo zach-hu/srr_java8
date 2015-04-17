@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="requisitionLineCreate" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="requisitionLineCreate">
+			<task synchronous="true" continue-on-failure="false" name="requisitionHeader">
+				<task-object-name>com.tsa.puridiom.requisitionheader.tasks.RequisitionHeaderRetrieveById</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="requisitionLineSetup">
+				<rule-filename check-for-false="true">is-duplicate-item.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.requisitionline.tasks.RequisitionLineSetup</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="requisitionLineSetupWarehouse">
+				<rule-filename>is-not-duplicate-item.xml;is-organization-bly.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.requisitionline.tasks.RequisitionLineSetupWarehouse</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="requisitionLineSetup">
+				<task-object-name>com.tsa.puridiom.requisitionline.tasks.RequisitionLineSetupForLookup</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="requisitionLineSetup">
+				<task-object-name>com.tsa.puridiom.requisition.tasks.RequisitionHeaderLinesMapUdfs</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="requisitionLineSetupUmFactor">
+				<task-object-name>com.tsa.puridiom.requisitionline.tasks.RequisitionLineSetupUmFactor</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="requisitionLineSetupTaxableFromCommodity">
+				<rule-filename>is-req-taxable-from-commodity.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.requisitionline.tasks.RequisitionLineSetTaxableFromCommodity</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="RequisitionLine_lineNumber">
+				<task-object-name>com.tsa.puridiom.requisitionline.tasks.RequisitionLineGetNewLineNumber</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="requisitionLineAccountRetrieveSetup">
+				<rule-filename>is-duplicate-item.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.requisitionline.tasks.RequisitionLineAccountRetrieveSetup</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="requisitionLineSetupIcRevisedPoLine">
+				<rule-filename>is-duplicate-item.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.requisitionline.tasks.RequisitionLineSetupIcRevisedPoLine</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="requisitionLine">
+				<task-object-name>com.tsa.puridiom.requisitionline.tasks.RequisitionLineSetValues</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="requisitionLine">
+				<rule-filename>is-duplicate-item.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.requisitionline.tasks.RequisitionLineDuplicate</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="requisitionLineAdd">
+ 				<rule-filename>is-create-save.xml</rule-filename>
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>requisitionline-add.xml</process-filename>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="requisitionSetupDefaultAccount">
+			<rule-filename>is-default-all-items-enabled.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="itemAccountAdd">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>requisitionline-default-accounts-from-commodity.xml</process-filename>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="requisitionLineDataSet">
+				<task-object-name>com.tsa.puridiom.requisitionline.tasks.RequisitionLineDataSet</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="requisitionLineDuplicateAccounts">
+			<rule-filename>is-duplicate-item.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="requisitionLineAccountRetrieveSetup">
+				<task-object-name>com.tsa.puridiom.requisitionline.tasks.RequisitionLineDuplicateAccountRetrieveSetup</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="requisitionLineAccountSaveas">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>account-saveas.xml</process-filename>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="requisitionLineDataRetrieve">
+			<rule-filename>is-duplicate-item.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="requisitionLineRetrieveSetup">
+				<task-object-name>com.tsa.puridiom.requisitionline.tasks.RequisitionLineRetrieveSetup</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="billToListRetrieve">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>billtodata-retrieve-by-line.xml</process-filename>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="shipToListRetrieve">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>shiptodata-retrieve-by-line.xml</process-filename>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="accountList">
+				<rule-filename></rule-filename>
+				<task-object-name>com.tsa.puridiom.account.tasks.AccountRetrieveByLine</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="accountList">
+				<rule-filename></rule-filename>
+				<task-object-name>com.tsa.puridiom.account.tasks.AccountPopulateAllocationDescriptionByList</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="requisitionLineCommentsRetrieve">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>doccomment-retrieve-by-line.xml</process-filename>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="rfqInfoList">
+				<task-object-name>com.tsa.puridiom.requisitionline.tasks.RequisitionLineRetrieveRfqInfo</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="poInfoList">
+				<task-object-name>com.tsa.puridiom.requisitionline.tasks.RequisitionLineRetrievePoInfo</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="requisitionLineDataSet">
+				<task-object-name>com.tsa.puridiom.requisitionline.tasks.RequisitionLineDataSet</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="catalogPriceBrkList">
+				<rule-filename check-for-false="true">is-catalogpricebrk-catalogid-empty.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.catalogpricebrk.tasks.CatalogPriceBrkRetrieveBy</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="catalogItemImageFile">
+				<rule-filename check-for-false="true">is-catalogid-empty.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.catalog.tasks.CatalogItemRetrieveImageFile</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="ListSettingsUDF">
+			<rule-filename check-for-false="false">is-organization-ttr.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="chargeCodeListSetup">
+				<task-object-name>com.tsa.puridiom.requisition.tasks.ChargeCodeListSetup</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="chargeCodeList">
+				<task-object-name>com.tsa.puridiom.stdtable.tasks.StdTableRetrieveBy</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

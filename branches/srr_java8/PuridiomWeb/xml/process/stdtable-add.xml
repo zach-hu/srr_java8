@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="stdTableAdd" connection-type="New-Transaction">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="checkDupRecord">
+			<task synchronous="true" continue-on-failure="false" name="StdTable_tableKey">
+				<rule-filename>is-stdtable-tablekey-empty.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.stdtable.tasks.StdTableGenerateCode</task-object-name>
+			 </task>
+			<task synchronous="true" continue-on-failure="false" name="existingRecord">
+				<task-object-name>com.tsa.puridiom.stdtable.tasks.StdTableRetrieveById</task-object-name>
+				<post-action />
+			 </task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="stdTableValidation">
+			<task synchronous="true" continue-on-failure="false" name="setErrorMsg">
+				<rule-filename check-for-false="true">is-existing-record-empty.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.stdtableerrormsg.tasks.ErrorMsgSetDuplicateRecord</task-object-name>
+				<post-action>exitProcess</post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="addStdtable">
+			<task synchronous="true" continue-on-failure="false" name="stdTable">
+				<task-object-name>com.tsa.puridiom.stdtable.tasks.StdTableSetValues</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="stdTable">
+				<task-object-name>com.tsa.puridiom.stdtable.tasks.StdTableAdd</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+	</activities>
+</process>

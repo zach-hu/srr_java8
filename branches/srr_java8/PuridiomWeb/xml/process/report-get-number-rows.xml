@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="ExecuteReport" connection-type="Connection-Required">
+<activities>
+	<activity synchronous="true" continue-on-failure="false" name="getDatasources">
+      <task synchronous="true" continue-on-failure="false" name="browseObject">
+        <task-object-name>com.tsa.puridiom.browse.tasks.GenerateReportObject</task-object-name>
+      </task>
+      <task synchronous="true" continue-on-failure="false" name="browseObject">
+        <task-object-name>com.tsa.puridiom.browse.tasks.GenerateBrowseFilter</task-object-name>
+      </task>
+      <task synchronous="true" continue-on-failure="false" name="ReportQueue_whereClause">
+        <task-object-name>com.tsa.puridiom.browse.tasks.BrowseRetrieve</task-object-name>
+      </task>
+    </activity>
+    <activity synchronous="true" continue-on-failure="false" name="addReportQueue">
+		<task synchronous="true" continue-on-failure="false" name="createSetup">
+			<task-object-name>com.tsa.puridiom.reportqueue.tasks.ReportQueueCreateSetup</task-object-name>
+		</task>
+		<task synchronous="true" continue-on-failure="false" name="alterSetup">
+			<task-object-name>com.tsa.puridiom.reportqueue.tasks.ReportQueueSetPreviewValues</task-object-name>
+		</task>
+		<task synchronous="true" continue-on-failure="false" name="reportQueue">
+			<task-object-name>com.tsa.puridiom.reportqueue.tasks.ReportQueueSetValues</task-object-name>
+		</task>
+    </activity>
+	<activity synchronous="true" continue-on-failure="false" name="getBrowseObject">
+		<task synchronous="true" continue-on-failure="false" name="datasource">
+				<task-object-name>com.tsa.puridiom.reportqueue.tasks.ReportQueueExecuteSetup</task-object-name>
+		</task>
+<!--	    <task synchronous="true" continue-on-failure="false" name="browseObject">-->
+<!--    		<task-object-name>com.puridiom.hilton.browse.tasks.GenerateReportObject</task-object-name>-->
+<!--      	</task>-->
+		  	<task synchronous="true" continue-on-failure="false" name="reportExtensive">
+        	<task-object-name>com.tsa.puridiom.report.tasks.ReportExtensive</task-object-name>
+		</task>
+		<task synchronous="true" continue-on-failure="false" name="reportQueue">
+			<rule-filename check-for-false="true">is-report-extensive.xml</rule-filename>
+			<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+			<process-filename>print-reportqueue.xml</process-filename>
+		</task>
+	</activity>
+	<activity synchronous="true" continue-on-failure="false" name="setBrowseInCache">
+			<rule-filename>is-report-extensive.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="browse">
+				<task-object-name>com.tsa.puridiom.browse.tasks.BrowseSetup</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="setBrowseInCache">
+				<task-object-name>com.tsa.puridiom.browse.tasks.SetBrowseInCache</task-object-name>
+			</task>
+	</activity>
+
+  </activities>
+</process>

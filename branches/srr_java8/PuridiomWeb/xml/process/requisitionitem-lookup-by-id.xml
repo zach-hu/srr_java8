@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="requisitionitem-lookup-by-id" connection-type="Connection-Required">
+	<rule-filename>is-requisitionline-icreqline-not-empty.xml</rule-filename>
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="requisitionItemLookupActivity">
+			<task synchronous="true" continue-on-failure="false" name="requisitionLine">
+				<task-object-name>com.tsa.puridiom.requisitionline.tasks.RequisitionLineRetrieveById</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="rfqLineUpdateFromReqItem">
+			<rule-filename>is-rfq.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="requisitionLineStatusUpdate">
+				<task-object-name>com.tsa.puridiom.rfqline.tasks.RfqLineFromReqSetup</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="rfqLineUpdate">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>rfqline-update-from-lookup.xml</process-filename>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="requisitionLineStatusUpdate">
+				<rule-filename>is-rfqline-rfqnumber-set.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.rfqline.tasks.RfqLineUpdateReqLineStatus</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="poLineUpdateFromReqItem">
+			<rule-filename>is-po.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="poHeaderSetupIcHeader">
+				<task-object-name>com.tsa.puridiom.poheader.tasks.PoHeaderSetupIcHeader</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="poHeader">
+				<task-object-name>com.tsa.puridiom.poheader.tasks.PoHeaderRetrieveById</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="loadPoLineFromReqLine">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>poline-load-from-req.xml</process-filename>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="reqLineUpdateFromReqItem">
+			<rule-filename>is-req.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="itemLookup">
+				<task-object-name>com.tsa.puridiom.requisitionitem.tasks.RequisitionItemLookupSetValues</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="clearIcReqLine">
+				<task-object-name>com.tsa.puridiom.requisitionline.tasks.RequisitionLineClearIcReqLine</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="requisitionHeaderSetupIcHeader">
+				<task-object-name>com.tsa.puridiom.requisitionheader.tasks.RequisitionHeaderSetupIcHeader</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="reqLineUpdate">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>requisitionline-update-from-lookup.xml</process-filename>
+			</task>
+		</activity>
+	</activities>
+</process>

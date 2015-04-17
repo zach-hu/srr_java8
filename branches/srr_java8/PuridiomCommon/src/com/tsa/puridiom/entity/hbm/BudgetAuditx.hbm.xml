@@ -1,0 +1,127 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+    
+<hibernate-mapping>
+
+<!-- 
+    Created by Middlegen Hibernate plugin
+
+    http://boss.bekk.no/boss/middlegen/
+    http://hibernate.sourceforge.net/
+-->
+
+<class 
+    name="com.tsa.puridiom.entity.BudgetAuditx" 
+    table="BUDGET_AUDITX"
+>
+    <id
+        name="auditId"
+        type="java.lang.String"
+        column="AUDIT_ID"
+    >
+        <generator class="assigned" />
+    </id>
+    <property
+        name="authority"
+        type="java.lang.String"
+        column="AUTHORITY"
+        length="15"
+    />
+    <property
+        name="icLine"
+        type="java.math.BigDecimal"
+        column="IC_LINE"
+        length="22"
+    />
+    <property
+        name="actionCode"
+        type="java.lang.String"
+        column="ACTION_CODE"
+        length="1"
+    />
+    <property
+        name="actionType"
+        type="java.lang.String"
+        column="ACTION_TYPE"
+        length="1"
+    />
+    <property
+        name="actionMake"
+        type="java.lang.String"
+        column="ACTION_MAKE"
+        length="1"
+    />
+    <property
+        name="actionDate"
+        type="java.lang.String"
+        column="ACTION_DATE"
+        length="10"
+    />
+    <property
+        name="actionTime"
+        type="java.lang.String"
+        column="ACTION_TIME"
+        length="12"
+    />
+    <property
+        name="priorAmt"
+        type="java.math.BigDecimal"
+        column="PRIOR_AMT"
+        length="16"
+    />
+    <property
+        name="tranAmt"
+        type="java.math.BigDecimal"
+        column="TRAN_AMT"
+        length="16"
+    />
+    <property
+        name="parentType"
+        type="java.lang.String"
+        column="PARENT_TYPE"
+        length="3"
+    />
+    <property
+        name="lineType"
+        type="java.lang.String"
+        column="LINE_TYPE"
+        length="3"
+    />
+    <property
+        name="owner"
+        type="java.lang.String"
+        column="OWNER"
+        length="15"
+    />
+    <property
+        name="budgetFlag"
+        type="java.lang.String"
+        column="BUDGET_FLAG"
+        length="2"
+    />
+    <property
+        name="exportCode"
+        type="java.lang.String"
+        column="EXPORT_CODE"
+        length="8"
+    />
+    <property
+        name="exportDate"
+        type="java.lang.String"
+        column="EXPORT_DATE"
+        length="10"
+    />
+    <property
+        name="exportGroup"
+        type="java.lang.String"
+        column="EXPORT_GROUP"
+        length="10"
+    />
+
+    <!-- associations -->
+    <!-- bi-directional many-to-one association to BudgetCenter -->
+
+</class>
+</hibernate-mapping>

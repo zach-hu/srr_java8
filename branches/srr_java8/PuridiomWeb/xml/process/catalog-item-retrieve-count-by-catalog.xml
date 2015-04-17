@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="CatalogItemRetrieveByCatalog" connection-type="Connection-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="CatalogItemCountRetrieveByCatalog">
+			<task synchronous="true" continue-on-failure="false" name="catalogItemCount">
+				<task-object-name>com.tsa.puridiom.catalog.tasks.CatalogItemRetrieveCountByCatalog</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+	</activities>
+</process>

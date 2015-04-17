@@ -1,0 +1,45 @@
+<r_rqhs>
+  <columns>
+		<RequisitionHeader_requisitionNumber>
+			<label>Requisition Number</label>
+			<type>STRING</type>
+		</RequisitionHeader_requisitionNumber>
+		<RequisitionHeader_requisitionDate>
+			<label>Requisition Date</label>
+			<type>DATE</type>
+		</RequisitionHeader_requisitionDate>
+		<RequisitionHeader_requisitionerCode>
+			<label>Requisitioner Code</label>
+			<type>STRING</type>
+		</RequisitionHeader_requisitionerCode>
+		<UserProfile_firstName>
+			<label>First Name</label>
+			<type>STRING</type>
+		</UserProfile_firstName>
+		<UserProfile_lastName>
+			<label>Last Name</label>
+			<type>STRING</type>
+		</UserProfile_lastName>
+		<RequisitionHeader_departmentCode>
+			<label>Department</label>
+			<type>STRING</type>
+		</RequisitionHeader_departmentCode>
+		<RequisitionHeader_requisitionType>
+			<label>Requisition Type</label>
+			<type>STRING</type>
+		</RequisitionHeader_requisitionType>
+		<RequisitionHeader_status>
+			<label>Status</label>
+			<type>STRING</type>
+		</RequisitionHeader_status>
+		<RequisitionHeader_total>
+			<label>Total</label>
+			<type>BIGDECIMAL</type>
+		</RequisitionHeader_total>
+</columns>
+  <sqlfrom> RequisitionHeader as RequisitionHeader , UserProfile as UserProfile </sqlfrom>
+   <sqlorderby>RequisitionHeader.requisitionNumber ASC</sqlorderby>
+  <sqlwhere><![CDATA[ ( UserProfile.userId = RequisitionHeader.requisitionerCode ) ]]></sqlwhere>
+  <title>Requisition Account Transaction Report (Summary)</title>
+</r_rqhs>
+

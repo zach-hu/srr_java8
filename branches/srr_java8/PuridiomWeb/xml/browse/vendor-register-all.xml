@@ -1,0 +1,68 @@
+<browse_vendor-register>
+	<columns>
+		<VendorRegister_id_vendorId>
+			<label>brw-vendorId</label>
+			<link><![CDATA[javascript: viewPrequalifiedVendor('#VendorRegister_id_vendorId^', '#VendorRegister_id_contactEmailAddr^'); void(0);]]></link>
+			<hidden-input>Y</hidden-input>
+			<size>10</size>
+			<key>Y</key>
+		</VendorRegister_id_vendorId>
+		<VendorRegister_vendorName>
+			<label>brw-vendorName</label>
+			<size>30</size>
+		</VendorRegister_vendorName>
+		<!--<VendorRegister_vendorVendTerms>
+			<label>Terms</label>
+			<size>5</size>
+		</VendorRegister_vendorVendTerms>-->
+		<VendorRegister_addressCity>
+			<label>city</label>
+			<size>15</size>
+		</VendorRegister_addressCity>
+		<VendorRegister_addressState>
+			<label>state</label>
+			<size>5</size>
+		</VendorRegister_addressState>
+		<!--VendorRegister_contactType>
+			<label>Contact Type</label>
+			<hidden-input>Y</hidden-input>
+			<size>10</size>
+		</VendorRegister_contactType-->
+		<VendorRegister_contactFirstName>
+			<label>firstName</label>
+			<size>10</size>
+		</VendorRegister_contactFirstName>
+		<VendorRegister_contactLastName>
+			<label>lastName</label>
+			<size>15</size>
+		</VendorRegister_contactLastName>
+		<VendorRegister_status>
+			<label>brw-status</label>
+			<size>15</size>
+			<type>STATUS</type>
+		</VendorRegister_status>
+		<VendorRegister_id_contactEmailAddr>
+			<label>brw-contactEmailAddress</label>
+			<hidden-input>Y</hidden-input>
+			<detail>Y</detail>
+			<size>50</size>
+			<key>Y</key>
+		</VendorRegister_id_contactEmailAddr>
+		<VendorRegister_vendorSic>
+			<label>brw-sicCode</label>
+			<detail>Y</detail>
+			<size>25</size>
+		</VendorRegister_vendorSic>
+		<VendorRegister_vendorDuns>
+			<label>brw-dunsNumber</label>
+			<detail>Y</detail>
+			<size>25</size>
+		</VendorRegister_vendorDuns>
+	</columns>
+<sqlfrom>VendorRegister as VendorRegister</sqlfrom>
+<sqlwhere><![CDATA[VendorRegister.contactType = 'MAIN' ]]></sqlwhere>
+<sqlorderby>VendorRegister.id.vendorId ASC, VendorRegister.contactType DESC</sqlorderby>
+<pagesize>15</pagesize>
+<title>Pre-Qualified Suppliers</title>
+<detail-visible>Y</detail-visible>
+</browse_vendor-register>

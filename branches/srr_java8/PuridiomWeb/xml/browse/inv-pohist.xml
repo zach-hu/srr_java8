@@ -1,0 +1,51 @@
+<browse-inv-pohist>
+	<columns>
+		<PoLine_poNumber>
+			<label>brw-poNumber</label>
+			<size>10</size>
+		</PoLine_poNumber>
+		<PoLine_releaseNumber>
+			<label>brw-releaseNumber</label>
+			<size>6</size>
+		</PoLine_releaseNumber>
+		<PoHeader_revisionNumber>
+			<label>brw-revisionNumber</label>
+			<size>6</size>
+		</PoHeader_revisionNumber>
+		<PoHeader_poDate>
+			<label>poDate</label>
+			<size>12</size>
+		</PoHeader_poDate>
+		<PoLine_lineNumber>
+			<label>Line</label>
+			<size>5</size>
+		</PoLine_lineNumber>
+		<PoLine_quantity>
+			<label>hdg-quantity</label>
+			<size>12</size>
+			<type>QtyDecimal</type>
+		</PoLine_quantity>
+		<PoLine_umCode>
+			<label>brw-u/M</label>
+			<size>5</size>
+		</PoLine_umCode>
+		<PoLine_unitPrice>
+			<label>brw-unitPrice</label>
+			<size>10</size>
+			<type>DollarDecimal</type>
+		</PoLine_unitPrice>
+		<PoHeader_vendorId>
+			<label>brw-vendorId</label>
+			<size>17</size>
+		</PoHeader_vendorId>
+		<PoHeader_status>
+			<label>brw-status</label>
+			<size>15</size>
+			<type>STATUS</type>
+		</PoHeader_status>
+	</columns>
+<sqlfrom>PoHeader as PoHeader, PoLine as PoLine</sqlfrom>
+<sqlwhere><![CDATA[ (PoHeader.icPoHeader = PoLine.icPoHeader) and PoHeader.poNumber <> 'N/A' ]]></sqlwhere>
+<pagesize>15</pagesize>
+<title>Order History</title>
+</browse-inv-pohist>

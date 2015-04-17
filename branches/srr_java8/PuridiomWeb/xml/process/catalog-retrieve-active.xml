@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="catalogRetrieveActive" connection-type="Connection-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="retrieveAllActiveCatalogs">		
+			<rule-filename>is-activate-catalogsecurity.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="userProfile">
+				<task-object-name>com.tsa.puridiom.userprofile.tasks.UserProfileRetrieveSetup</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="userProfile">
+				<task-object-name>com.tsa.puridiom.userprofile.tasks.UserProfileRetrieveById</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="catalogList">
+				<task-object-name>com.tsa.puridiom.catalogsecurity.tasks.CatalogRetrieveActiveByCatalogSecurity</task-object-name>
+				<post-action>exitProcess</post-action>
+			</task>			
+		</activity>	
+		<activity synchronous="true" continue-on-failure="false" name="retrieveAllActiveCatalogs">			
+			<task synchronous="true" continue-on-failure="false" name="catalogList">
+				<task-object-name>com.tsa.puridiom.catalog.tasks.CatalogRetrieveActive</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+	</activities>
+</process>

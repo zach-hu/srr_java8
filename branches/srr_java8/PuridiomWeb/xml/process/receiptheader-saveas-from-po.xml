@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="RecSaveas" connection-type="transaction-required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="receiptHeaderSaveas">
+			<task synchronous="true" continue-on-failure="false" name="receiptHeaderSaveasSetup">
+				<task-object-name>com.tsa.puridiom.receiptheader.tasks.ReceiptHeaderSaveasFromPoSetup</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="poHeaderCommentSaveas">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>doccomment-saveas.xml</process-filename>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="poHeaderAttachmentSaveas">
+				<rule-filename>is-documents-module-active.xml</rule-filename>
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>docattachment-saveas.xml</process-filename>
+			</task>
+		</activity>
+	</activities>
+</process>

@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="requisitionForward" connection-type="Transaction-Required">
+	<activities>
+	<activity synchronous="true" continue-on-failure="false" name="requisitionForwardSetup">
+    	<task synchronous="true" continue-on-failure="false" name="requisitionHeader">
+        	<task-object-name>com.tsa.puridiom.requisitionheader.tasks.RequisitionHeaderRetrieveById</task-object-name>
+        	<post-action></post-action>
+      	</task>
+      	<task synchronous="true" continue-on-failure="false" name="requisitionForwardSetup">
+        	<task-object-name>com.tsa.puridiom.requisitionheader.tasks.RequisitionHeaderUpdateSetup</task-object-name>
+        	<post-action></post-action>
+      	</task>
+      	<task synchronous="true" continue-on-failure="false" name="requisitionLineList">
+        	<task-object-name>com.tsa.puridiom.requisitionline.tasks.RequisitionLineRetrieveByHeader</task-object-name>
+        	<post-action></post-action>
+      	</task>
+	</activity>
+	<activity synchronous="true" continue-on-failure="false" name="requisitionPricingReqCheck">
+    	<task synchronous="true" continue-on-failure="false" name="requisitionForwardPricingCheck">
+        	<rule-filename>is-pricing-requisition.xml</rule-filename>
+        	<task-object-name>com.tsa.puridiom.requisition.tasks.RequisitionForwardPricingCheck</task-object-name>
+        	<post-action>exitActivity</post-action>
+      	</task>
+      	<task synchronous="true" continue-on-failure="false" name="requisitionForwardNotPricing">
+        	<rule-filename>is-pricing-requisition.xml</rule-filename>
+        	<task-object-name>com.tsa.puridiom.requisition.tasks.RequisitionForwardNotPricing</task-object-name>
+        	<post-action></post-action>
+      	</task>
+    </activity>
+    <activity synchronous="true" continue-on-failure="false" name="requisitionBudgetUpdate">
+    	<rule-filename>is-budget-request;is-account-budget-module-active</rule-filename>
+      	<task synchronous="true" continue-on-failure="false" name="requisitionBudgetForward">
+        	<rule-filename check-for-false="true">is-account-budget-service-active.xml</rule-filename>
+        	<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+        	<process-filename>budget-requisition-forward.xml</process-filename>
+        	<post-action>exitActivity</post-action>
+      	</task>
+      	<task synchronous="true" continue-on-failure="false" name="requisitionForwardBudgetSetup">
+        	<task-object-name>com.tsa.puridiom.requisition.tasks.RequisitionForwardBudgetServiceSetup</task-object-name>
+        	<post-action></post-action>
+      	</task>
+      	<task synchronous="true" continue-on-failure="false" name="requisitionBudgetForward">
+       		<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+       		<process-filename>budgetservice-update.xml</process-filename>
+       		<post-action></post-action>
+      	</task>
+    </activity>
+    <activity synchronous="true" continue-on-failure="false" name="requisitionForwardApprovals">
+      	<rule-filename>is-extended-approvals-module-active.xml;is-not-requisition-split</rule-filename>
+      	<task synchronous="true" continue-on-failure="false" name="requisitionForwardToNextApprover">
+        	<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+        	<process-filename>requisition-forward-to-next.xml</process-filename>
+      	</task>
+    </activity>
+    <activity synchronous="true" continue-on-failure="false" name="requisitionForward">
+      	<task synchronous="true" continue-on-failure="false" name="requisitionApproveAndForward">
+        	<task-object-name>com.tsa.puridiom.requisition.tasks.RequisitionApproveAndForward</task-object-name>
+        	<post-action></post-action>
+      	</task>
+    </activity>
+    <activity synchronous="true" continue-on-failure="false" name="requisitionForward">
+      	<task synchronous="true" continue-on-failure="false" name="requisitionSetStatus">
+        	<task-object-name>com.tsa.puridiom.requisition.tasks.RequisitionSetStatus</task-object-name>
+        	<post-action></post-action>
+      	</task>
+      	<task synchronous="true" continue-on-failure="false" name="requisitionSetRqSubType">
+        	<task-object-name>com.tsa.puridiom.requisition.tasks.RequisitionSetRqSubType</task-object-name>
+        	<post-action></post-action>
+      	</task>
+    </activity>
+	<activity synchronous="true" continue-on-failure="false" name="update">
+    	<task synchronous="true" continue-on-failure="false" name="requisitionHeaderUpdate">
+        	<task-object-name>com.tsa.puridiom.requisitionheader.tasks.RequisitionHeaderUpdate</task-object-name>
+        	<post-action></post-action>
+      	</task>
+      	<task synchronous="true" continue-on-failure="false" name="requisitionLineUpdate">
+        	<task-object-name>com.tsa.puridiom.requisitionline.tasks.RequisitionLineUpdateList</task-object-name>
+        	<post-action></post-action>
+      	</task>
+    </activity>
+    <activity synchronous="true" continue-on-failure="false" name="autorelease">
+      	<rule-filename>is-req-approved.xml</rule-filename>
+      	<task synchronous="true" continue-on-failure="false" name="autorelease">
+        	<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+        	<process-filename>requisition-is-approved.xml</process-filename>
+        	<post-action></post-action>
+      	</task>
+    </activity>
+    <activity synchronous="true" continue-on-failure="false" name="buyerAssignment">
+    	<rule-filename>is-pricing-req-forwaded.xml;is-buyerassignment-process-active.xml</rule-filename>
+      	<task synchronous="true" continue-on-failure="false" name="buyerAssignmentLines">
+        	<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+        	<process-filename>buyer-assignment.xml</process-filename>
+      	</task>
+      	<task continue-on-failure="false" name="requisitionHeader" synchronous="true">
+			<rule-filename check-for-false="true">is-check-request.xml</rule-filename>
+        	<task-object-name>com.tsa.puridiom.requisition.buyerassignment.tasks.RequisitionHeaderAssignment</task-object-name>
+      	</task>
+      	<task synchronous="true" continue-on-failure="false" name="requisitionHeaderHistory">
+        	<task-object-name>com.tsa.puridiom.requisitionheader.history.tasks.RequisitionHeaderHistory</task-object-name>
+        </task>
+    </activity>
+    <activity synchronous="true" continue-on-failure="false" name="requisitionHeaderUpdateAppBy">
+    	<rule-filename>is-update-app-by-active.xml</rule-filename>
+      	<task synchronous="true" continue-on-failure="false" name="requisitionHeaderUpdateAppBy">
+        	<task-object-name>com.tsa.puridiom.requisitionheader.tasks.RequisitionHeaderUpdateAppBy</task-object-name>
+        </task>
+    </activity>
+	<activity synchronous="true" continue-on-failure="false" name="requisitionCheckRequestExtract">
+        	<rule-filename>is-req-approved.xml;is-check-request.xml</rule-filename>
+    			<task synchronous="true" continue-on-failure="false" name="extractByAccount">
+				<rule-filename>is-sungard-checkrequest-extract-active.xml</rule-filename>
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>sungard-checkrequest-extract-start.xml</process-filename>
+			</task>
+    </activity>
+    <activity synchronous="true" continue-on-failure="false" name="recentReqItemActivity">
+      	<task synchronous="true" continue-on-failure="false" name="recentReqItemAdd">
+        	<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+        	<process-filename>recentreqitem-add-list.xml</process-filename>
+      	</task>
+    </activity>
+	<activity synchronous="true" continue-on-failure="false" name="recentAccountActivity">
+		<task synchronous="true" continue-on-failure="false" name="recentAccountAdd">
+			<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+			<process-filename>recentaccount-add-list.xml</process-filename>
+		</task>
+	</activity>
+	<activity synchronous="true" continue-on-failure="false" name="requisitionReflectStatus">
+    	<rule-filename check-for-false="true">is-msr-request.xml</rule-filename>
+		<task synchronous="true" continue-on-failure="false" name="requisitionReflectStatus">
+			<task-object-name>com.tsa.puridiom.requisition.tasks.RequisitionReflectStatus</task-object-name>
+			<post-action></post-action>
+		</task>
+	</activity>
+  </activities>
+</process>

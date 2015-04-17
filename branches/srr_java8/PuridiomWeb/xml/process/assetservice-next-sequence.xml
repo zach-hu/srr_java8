@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="assetServiceAdd" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="assetServiceAdd">
+			<task synchronous="true" continue-on-failure="false" name="assetServiceLastSequence">
+				<task-object-name>com.tsa.puridiom.assetservice.serv.tasks.AssetServiceLastSequence</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="AssetService_sequenceNo">
+				<task-object-name>com.tsa.puridiom.assetservice.serv.tasks.AssetServiceNewSequence</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+	</activities>
+</process>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="requisitionline-item-lookup" connection-type="None">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="requisitionLineItemLookupActivity">
+			<task synchronous="true" continue-on-failure="false" name="requisitionLineItemLookupSetup">
+				<task-object-name>com.tsa.puridiom.requisitionline.tasks.RequisitionLineItemLookup</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="invItemLookupActivity">
+			<task synchronous="true" continue-on-failure="false" name="invItemLookup">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>invitem-browse-retrieve.xml</process-filename>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="browseList">
+				<task-object-name>com.tsa.puridiom.itemlookup.tasks.ItemLookupAddList</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="catalogItemLookupActivity">
+			<task synchronous="true" continue-on-failure="false" name="catalogItemLookup">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>catalogitem-browse-retrieve.xml</process-filename>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="browseList">
+				<task-object-name>com.tsa.puridiom.itemlookup.tasks.ItemLookupAddList</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="browseRetrieve">
+			<task synchronous="true" continue-on-failure="false" name="browseObject">
+				<task-object-name>com.tsa.puridiom.browse.tasks.GenerateBrowseObject</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="browseList">
+				<task-object-name>com.tsa.puridiom.browse.tasks.GenerateBrowseListFromItemLookup</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="browse">
+				<task-object-name>com.tsa.puridiom.browse.tasks.BrowseSetupByPattern</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="setBrowseInCache">
+				<task-object-name>com.tsa.puridiom.browse.tasks.SetBrowseInCache</task-object-name>
+			</task>
+		</activity>
+<!--		<activity synchronous="true" continue-on-failure="false" name="requisitionLineUpdateActivity">-->
+<!--			<task synchronous="true" continue-on-failure="false" name="requisitionLineUpdate">-->
+<!--				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>-->
+<!--				<process-filename>requisitionline-update-from-lookup.xml</process-filename>-->
+<!--			</task>-->
+<!--		</activity>-->
+	</activities>
+</process>

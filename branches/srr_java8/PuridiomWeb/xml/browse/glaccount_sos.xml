@@ -1,0 +1,40 @@
+<endp_table>
+	<columns>
+		<XrefCombo_icXref>
+			<visible>0</visible>
+			<hidden-input>Y</hidden-input>
+		</XrefCombo_icXref>
+		<XrefCombo_xrefType>
+			<label>poType</label>
+			<visible>0</visible>
+		</XrefCombo_xrefType>
+		<XrefCombo_xrefAmt>
+			<label>GL Account</label>
+			<link><![CDATA[javascript: returnMe('#XrefCombo_xrefAmt^'); void(0);]]></link>
+			<visible>1</visible>
+		</XrefCombo_xrefAmt>
+		<XrefCombo_code1>
+			<label>S.O.Supply</label>
+			<visible>1</visible>
+		</XrefCombo_code1>
+		<XrefCombo_code2>
+			<label>Name</label>
+			<visible>1</visible>
+		</XrefCombo_code2>
+		<StdTable_id_tableType>
+			<label>poType</label>
+			<visible>0</visible>
+		</StdTable_id_tableType>
+		<StdTable_description>
+			<label>description</label>
+			<size>45</size>
+		</StdTable_description>
+	</columns>
+<sqlfrom>XrefCombo as XrefCombo, StdTable as StdTable</sqlfrom>
+<sqlwhere><![CDATA[ XrefCombo.status='02' AND XrefCombo.xrefType='CARP'
+					AND XrefCombo.code1=StdTable.id.tableKey
+					AND StdTable.status='02' ]]></sqlwhere>
+<sqlorderby>XrefCombo.code2 ASC, XrefCombo.code3 ASC, XrefCombo.code4 ASC</sqlorderby>
+<pagesize>15</pagesize>
+<title>GL Account Browse</title>
+</endp_table>

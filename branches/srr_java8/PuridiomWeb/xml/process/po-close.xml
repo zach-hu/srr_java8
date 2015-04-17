@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="ClosePo" connection-type="Transaction-Required">
+  <activities>
+	 <activity synchronous="true" continue-on-failure="false" name="closePoSetup">
+      <task synchronous="true" continue-on-failure="false" name="closePoSetup">
+        <task-object-name>com.tsa.puridiom.po.tasks.PoCancelSetup</task-object-name>
+        <post-action></post-action>
+      </task>
+      <task synchronous="true" continue-on-failure="false" name="poRetrieve">
+        <task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+        <process-filename>po-retrieve.xml</process-filename>
+      </task>
+	</activity>
+    <activity synchronous="true" continue-on-failure="false" name="closePoChecks">
+      <task synchronous="true" continue-on-failure="false" name="ClosePoCheck">
+        <task-object-name>com.tsa.puridiom.po.tasks.PoCancelCheck</task-object-name>
+        <post-action></post-action>
+      </task>
+    </activity>
+    <activity synchronous="true" continue-on-failure="false" name="closePo">
+	  <task synchronous="true" continue-on-failure="false" name="poHeader">
+        <task-object-name>com.tsa.puridiom.po.tasks.PoCloseSetValues</task-object-name>
+        <post-action></post-action>
+      </task>
+      <task synchronous="true" continue-on-failure="false" name="updatePoHeader">
+        <task-object-name>com.tsa.puridiom.poheader.tasks.PoHeaderUpdate</task-object-name>
+        <post-action></post-action>
+      </task>
+    </activity>
+	<activity synchronous="true" continue-on-failure="false" name="poHeaderHistory">
+      <task synchronous="true" continue-on-failure="false" name="poHeaderHistory">
+        <task-object-name>com.tsa.puridiom.poheader.history.tasks.PoHeaderHistory</task-object-name>
+      </task>
+    </activity>
+  </activities>
+</process>

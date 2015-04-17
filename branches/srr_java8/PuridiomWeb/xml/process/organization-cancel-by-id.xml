@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="organizationCancel" connection-type="Transaction-Required" connection-name="host" ldap-connection-type="None">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="organizationCancel">
+			<task synchronous="true" continue-on-failure="false" name="organization">
+				<task-object-name>com.tsa.puridiom.organization.tasks.OrganizationManagerGetOrganization</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="organization">
+				<task-object-name>com.tsa.puridiom.organization.tasks.OrganizationSetToInactive</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="organization">
+				<task-object-name>com.tsa.puridiom.organization.tasks.OrganizationUpdate</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="organizationPackageCancel">
+				<task-object-name>com.tsa.puridiom.organizationpackage.tasks.OrganizationPackageInactivateByOrganization</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="organizationSetInCache">
+				<task-object-name>com.tsa.puridiom.organization.tasks.OrganizationManagerSetInCache</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

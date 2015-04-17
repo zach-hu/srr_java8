@@ -1,0 +1,134 @@
+<browse_labels>
+	<columns>
+		<Labels_icLabel>
+	        <hidden>Y</hidden>
+			<hidden-input>Y</hidden-input>
+			<key>Y</key>
+		</Labels_icLabel>
+		<Labels_labelCode>
+			<hidden>Y</hidden>
+			<hidden-input>Y</hidden-input>
+		</Labels_labelCode>
+		<Labels_moduleAccess>
+			<hidden>Y</hidden>
+			<hidden-input>Y</hidden-input>
+		</Labels_moduleAccess>
+		<!--Link_deleteLabel>
+			<link><![CDATA[javascript: deleteLabel('#Labels_icLabel^','#Labels_moduleAccess^','#Labels_labelCode^'); void(0);]]></link>
+			<linkImage>delete.gif</linkImage>
+			<selectsql>N</selectsql>
+			<align>center</align>
+			<size>2</size>
+		</Link_deleteLabel-->
+		<Labels_labelCode>
+			<label><![CDATA[brw-labelcode]]></label>
+			<link><![CDATA[javascript: editLabel('#Labels_icLabel^'); void(0);]]></link>
+			<size>19</size>
+			<concatenate>
+				<col>Labels_labelCode</col>
+			</concatenate>
+			<type>UPPERCASE</type>
+			<sort>A</sort>
+		</Labels_labelCode>
+		<Labels_labelValue>
+			<label><![CDATA[brw-labelvalue]]></label>
+			<size>22</size>
+			<text-input>Y</text-input>
+			<input-size>27</input-size>
+			<store-request-value>Y</store-request-value>
+		</Labels_labelValue>
+		<Labels_abbreviation>
+			<label><![CDATA[brw-abbreviation]]></label>
+			<size>13</size>
+			<input-size>12</input-size>
+			<text-input>Y</text-input>
+			<store-request-value>Y</store-request-value>
+		</Labels_abbreviation>
+		<Labels_hoverHelp>
+			<label><![CDATA[brw-hoverhelp]]></label>
+			<size>22</size>
+			<text-input>Y</text-input>
+			<input-size>26</input-size>
+			<detail>N</detail>
+			<store-request-value>Y</store-request-value>
+		</Labels_hoverHelp>
+		<!--Labels_status>
+			<label>brw-status</label>
+			<size>9</size>
+			<select-input>Y</select-input>
+			<input-size>10</input-size>
+			<arguments>
+				<col type="02">Permanent</col>
+				<col type="01">Temporary</col>
+				<col type="03">Inactive</col>
+			</arguments>
+			<store-request-value>Y</store-request-value>
+		</Labels_status-->
+		<Labels_visible>
+			<label><![CDATA[brw-labelvisible]]></label>
+			<size>6</size>
+			<checkbox>Y</checkbox>
+			<align>center</align>
+			<hidden-input>Y</hidden-input>
+			<store-request-value>Y</store-request-value>
+		</Labels_visible>
+		<Labels_required>
+			<label><![CDATA[brw-labelrequired]]></label>
+			<size>6</size>
+			<checkbox>Y</checkbox>
+			<align>center</align>
+			<hidden-input>Y</hidden-input>
+			<store-request-value>Y</store-request-value>
+		</Labels_required>
+		<Labels_validation>
+			<label><![CDATA[brw-labelvalidation]]></label>
+			<size>6</size>
+			<checkbox>Y</checkbox>
+			<align>center</align>
+			<hidden-input>Y</hidden-input>
+			<store-request-value>Y</store-request-value>
+		</Labels_validation>
+		<Labels_readOnly>
+			<label><![CDATA[brw-labelreadOnly]]></label>
+			<size>6</size>
+			<checkbox>Y</checkbox>
+			<align>center</align>
+			<hidden-input>Y</hidden-input>
+			<store-request-value>Y</store-request-value>
+		</Labels_readOnly>
+		<Link_validationInfo>
+			<link><![CDATA[javascript: triggerLabelDetails(); void(0);]]></link>
+			<linkImage>plus.gif</linkImage>
+			<selectsql>N</selectsql>
+			<align>center</align>
+			<type>ConditionalLink</type>
+			<size>3</size>
+		</Link_validationInfo>
+		<Labels_validationMessage>
+			<label><![CDATA[brw-validationMessage]]></label>
+			<size>100</size>
+			<text-input>Y</text-input>
+			<input-size>100</input-size>
+			<detail>Y</detail>
+			<store-request-value>Y</store-request-value>
+		</Labels_validationMessage>
+		<Labels_validationSeverity>
+			<label><![CDATA[brw-validationSeverity]]></label>
+			<size>100</size>
+			<select-input>Y</select-input>
+			<arguments>
+				<col type="E">Error</col>
+				<col type="W">Warning</col>
+			</arguments>
+			<input-size>20</input-size>
+			<detail>Y</detail>
+			<store-request-value>Y</store-request-value>
+		</Labels_validationSeverity>
+	</columns>
+<sqlfrom>Labels as Labels</sqlfrom>
+<sqlwhere><![CDATA[]]></sqlwhere>
+<sqlorderby>Labels.labelCode ASC</sqlorderby>
+<pagesize>50</pagesize>
+<detail-visible>N</detail-visible>
+<title>Labels Management</title>
+</browse_labels>

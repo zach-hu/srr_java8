@@ -1,0 +1,44 @@
+<browse_rfq_header>
+	<columns>
+		<RfqHeader_rfqDescription>
+			<label>Synopsis</label>
+			<trim>100</trim>
+			<size>30</size>
+		</RfqHeader_rfqDescription>
+		<RfqHeader_icRfqHeader>
+			<label>Ic Rfq Header</label>
+	        <hidden>Y</hidden>
+	        <visible>0</visible>
+		</RfqHeader_icRfqHeader> 
+		<RfqHeader_rfqNumber>
+			<label>Rfq. #</label>
+			<link><![CDATA[javascript: viewRfq('#RfqHeader_icRfqHeader^','#RfqHeader_rfqType^'); void(0);]]></link>
+			<size>15</size>
+		</RfqHeader_rfqNumber>
+		<RfqHeader_rfqAmendment>
+			<label>Amendment</label>
+			<size>10</size>
+		</RfqHeader_rfqAmendment>
+		<RfqHeader_status>
+			<label>Status</label>
+			<type>STATUS</type>
+			<hidden>Y</hidden>
+		</RfqHeader_status>
+		<RfqHeader_appDate>
+			<label>Posted Date</label>
+			<type>DATE</type>
+			<size>12</size>
+		</RfqHeader_appDate>
+		<RfqHeader_dueDate>
+			<label>Due Date</label>
+			<type>DATE</type>
+			<size>12</size>
+		</RfqHeader_dueDate>
+		
+	</columns>
+<sqlfrom>RfqHeader as RfqHeader</sqlfrom>
+<sqlwhere><![CDATA[RfqHeader.rfqNumber is not null and RfqHeader.rfqNumber <> 'null'  ]]></sqlwhere>
+<pagesize>15</pagesize>
+<title>Solicitation Search Results</title>
+</browse_rfq_header>
+

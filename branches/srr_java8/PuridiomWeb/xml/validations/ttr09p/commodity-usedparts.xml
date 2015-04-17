@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?><!--
+    Copyright (c) 2011 IBM Corporation and others.
+    All rights reserved. This program and the accompanying materials
+    are made available under the terms of the Eclipse Public License v1.0
+    which accompanies this distribution, and is available at
+    http://www.eclipse.org/legal/epl-v10.html
+   
+    Contributors:
+        IBM Corporation - initial API and implementation
+ -->
+
+<rule>
+	<clause type="StringCompare" matchAll="true">
+		<left-side>
+			<source>incomingRequest</source>
+			<object>header</object>
+			<name>getUdf1Code</name>
+		</left-side>
+		<operator>EQUALS</operator>
+		<right-side>
+			<source>constant</source>
+			<value>USEDPARTS</value>
+		</right-side>
+	</clause>
+	<logical-operator>IFTHEN</logical-operator>
+	<clause type="StringCompare" matchAll="true">
+    	<left-side>
+      		<source>incomingRequestList</source>
+      		<object>lineitems</object>
+      		<name>getCommodityCode</name>
+    	</left-side>
+    	<operator>EQUAL</operator>
+    	<right-side>
+      		<source>constant</source>
+      		<value>718300</value>
+    	</right-side>
+	</clause>
+</rule>
+

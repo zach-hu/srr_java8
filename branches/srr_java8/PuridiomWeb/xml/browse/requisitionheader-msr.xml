@@ -1,0 +1,152 @@
+<browse_requisition_header>
+	<columns>
+		<RequisitionHeader_icReqHeader>
+	        <hidden>Y</hidden>
+	        <distinct>Y</distinct>
+		</RequisitionHeader_icReqHeader>
+		<RequisitionHeader_requisitionNumber>
+			<label><![CDATA[brw-requisitionNumber]]></label>
+			<sort>D</sort>
+			<link><![CDATA[javascript: viewReq('#RequisitionHeader_icReqHeader^','#RequisitionHeader_requisitionType^'); void(0);]]></link>
+			<size>12</size>
+		</RequisitionHeader_requisitionNumber>
+		<RequisitionHeader_requisitionDate>
+			<label><![CDATA[brw-requisitionDate]]></label>
+			<size>10</size>
+			<type>DATE</type>
+		</RequisitionHeader_requisitionDate>
+		<RequisitionHeader_dateEntered>
+			<label><![CDATA[brw-dateentered]]></label>
+			<hidden>Y</hidden>
+			<type>DATE</type>
+		</RequisitionHeader_dateEntered>
+		<RequisitionHeader_requiredDate>
+			<label><![CDATA[brw-requiredDate]]></label>
+			<size>10</size>
+			<type>DATE</type>
+			<hidden>Y</hidden>
+		</RequisitionHeader_requiredDate>
+		<RequisitionHeader_plannedDate>
+			<label>Forecasted Completion</label>
+			<size>10</size>
+			<type>DATE</type>
+		</RequisitionHeader_plannedDate>
+		<RequisitionHeader_requisitionerCode>
+			<label>Requestor Id</label>
+            <size>10</size>
+		</RequisitionHeader_requisitionerCode>
+		<RequisitionHeader_requisitionerCode>
+			<label>Requestor Name</label>
+            <size>20</size>
+            <type>USER-ID</type>
+		</RequisitionHeader_requisitionerCode>
+		<RequisitionHeader_priorityCode>
+			<label>Proc Level</label>
+            <size>10</size>
+		</RequisitionHeader_priorityCode>
+		<RequisitionHeader_udf14Code>
+			<label>Focus Group</label>
+			<size>10</size>
+		</RequisitionHeader_udf14Code>
+		<RequisitionHeader_udf7Code>
+			<label>Functional Class</label>
+            <size>10</size>
+		</RequisitionHeader_udf7Code>
+		<RequisitionHeader_departmentCode>
+			<label><![CDATA[brw-department]]></label>
+            <visible>0</visible>
+		</RequisitionHeader_departmentCode>
+		<RequisitionHeader_fiscalYear>
+			<label><![CDATA[brw-fiscalYear]]></label>
+			<visible>0</visible>
+		</RequisitionHeader_fiscalYear>
+		<RequisitionHeader_status>
+			<label><![CDATA[brw-status]]></label>
+			<type>STATUS</type>
+			<size>15</size>
+		</RequisitionHeader_status>
+		<RequisitionHeader_total>
+			<label><![CDATA[brw-total]]></label>
+			<type>DollarDecimal</type>
+			<size>15</size>
+			<visible>0</visible>
+			<hidden>Y</hidden>
+		</RequisitionHeader_total>
+		<RequisitionHeader_udf1Code>
+			<label><![CDATA[req-rq01]]></label>
+			<visible>0</visible>
+			<allowfilter>Y</allowfilter>
+		</RequisitionHeader_udf1Code>
+		<RequisitionHeader_udf3Code>
+			<label><![CDATA[req-rq03]]></label>
+			<visible>0</visible>
+			<allowfilter>Y</allowfilter>
+		</RequisitionHeader_udf3Code>
+		<RequisitionHeader_udf4Code>
+			<label><![CDATA[req-rq04]]></label>
+			<visible>0</visible>
+			<allowfilter>Y</allowfilter>
+		</RequisitionHeader_udf4Code>
+		<RequisitionHeader_udf5Code>
+			<label><![CDATA[req-rq05]]></label>
+			<visible>0</visible>
+			<allowfilter>Y</allowfilter>
+		</RequisitionHeader_udf5Code>
+		<RequisitionHeader_udf6Code>
+			<label><![CDATA[req-rq06]]></label>
+			<visible>0</visible>
+			<allowfilter>Y</allowfilter>
+		</RequisitionHeader_udf6Code>
+		<RequisitionHeader_udf7Code>
+			<label><![CDATA[req-rq07]]></label>
+			<visible>0</visible>
+			<allowfilter>Y</allowfilter>
+		</RequisitionHeader_udf7Code>
+		<RequisitionHeader_udf8Code>
+			<label><![CDATA[req-rq08]]></label>
+			<visible>0</visible>
+			<allowfilter>Y</allowfilter>
+		</RequisitionHeader_udf8Code>
+		<RequisitionHeader_itemLocation>
+			<label><![CDATA[req-Kit/InventoryLocation]]></label>
+			<visible>0</visible>
+			<allowfilter>Y</allowfilter>
+		</RequisitionHeader_itemLocation>
+		<RequisitionHeader_udf12Code>
+			<label><![CDATA[req-rq12]]></label>
+			<visible>0</visible>
+			<allowfilter>Y</allowfilter>
+		</RequisitionHeader_udf12Code>
+		<RequisitionHeader_udf13Code>
+			<label>MSR Type</label>
+			<visible>0</visible>
+			<allowfilter>Y</allowfilter>
+		</RequisitionHeader_udf13Code>
+		<RequisitionHeader_owner>
+			<label>FPE Id</label>
+            <size>10</size>
+            <detail>Y</detail>
+		</RequisitionHeader_owner>
+		<RequisitionHeader_owner>
+			<label>FPE Name</label>
+            <size>20</size>
+            <type>USER-ID</type>
+            <detail>Y</detail>
+		</RequisitionHeader_owner>
+		<RequisitionHeader_workOrder>
+			<label>Work Order#</label>
+			<visible>0</visible>
+			<allowfilter>Y</allowfilter>
+		</RequisitionHeader_workOrder>
+		<RequisitionHeader_internalComments>
+			<label><![CDATA[brw-req-purpose]]></label>
+            <size>100</size>
+            <detail>Y</detail>
+		</RequisitionHeader_internalComments>
+	</columns>
+<sqlfrom>RequisitionHeader as RequisitionHeader</sqlfrom>
+<sqlwhere><![CDATA[RequisitionHeader.requisitionType = 'M' AND RequisitionHeader.requisitionNumber <> 'N/A' AND RequisitionHeader.requisitionNumber <> 'N&#x2f;A']]></sqlwhere>
+<sqlorderby>RequisitionHeader.requisitionNumber DESC</sqlorderby>
+<pagesize>15</pagesize>
+<title>MSR Browse</title>
+</browse_requisition_header>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="checklistEntryAdd" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="checklistEntryAdd">
+			<task synchronous="true" continue-on-failure="false" name="checklistEntrySetup">			
+				<task-object-name>com.tsa.puridiom.checklistentry.tasks.ChecklistEntryCreateSetup</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="ChecklistEntry_sequence">			
+				<task-object-name>com.tsa.puridiom.checklistentry.tasks.ChecklistEntryGetNextSequence</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="checklistEntry">
+				<task-object-name>com.tsa.puridiom.checklistentry.tasks.ChecklistEntrySetValues</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="checklistEntry">
+				<task-object-name>com.tsa.puridiom.checklistentry.tasks.ChecklistEntryAdd</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

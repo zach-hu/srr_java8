@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created using an evaluation version of JasperAssistant (http://www.jasperassistant.com) -->
+<!DOCTYPE jasperReport PUBLIC "-//JasperReports//DTD Report Design//EN" "http://jasperreports.sourceforge.net/dtds/jasperreport.dtd">
+
+<jasperReport name="rfq_line_list" pageWidth="595" pageHeight="95" whenNoDataType="BlankPage" columnWidth="595" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+	<property name="com.jasperassistant.designer.GridHeight" value="24"/>
+	<property name="com.jasperassistant.designer.GridWidth" value="24"/>
+	<property name="com.jasperassistant.designer.Rulers" value="true"/>
+	<property name="com.jasperassistant.designer.DataSource" value="hilton1p"/>
+	<property name="com.jasperassistant.designer.SnapToGrid" value="false"/>
+	<property name="com.jasperassistant.designer.Margins" value="true"/>
+	<property name="com.jasperassistant.designer.Grid" value="true"/>
+	<property name="com.jasperassistant.designer.SnapToGuides" value="true"/>
+	<import value="com.tsa.puridiom.common.utility.HiltonUtility"/>
+	<import value="com.tsa.puridiom.common.documents.DocumentStatus"/>
+	<import value="com.tsa.puridiom.jasperreports.*"/>
+	<import value="com.tsa.puridiom.reports.datasource.*"/>
+	<reportFont name="Arial_Normal" isDefault="true" fontName="Arial" size="8" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Bold" isDefault="false" fontName="Arial Black" size="8" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica-Bold" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<parameter name="oid" class="java.lang.String">
+		<defaultValueExpression><![CDATA["bsc04p"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="lines" class="java.util.List"/>
+	<parameter name="requisitionerCode" class="java.lang.String"/>
+	<parameter name="requisitionNumber" class="java.lang.String"/>
+	<parameter name="shipToCode" class="java.lang.String"/>
+	<parameter name="requiredDate" class="java.util.Date"/>
+	<parameter name="rddSeeBelow" class="java.lang.Boolean"/>
+	<parameter name="PoHeader_currencyCode" class="java.lang.String"/>
+	<field name="RfqLine_description" class="java.lang.String"/>
+	<field name="RfqLine_itemNumber" class="java.lang.String"/>
+	<field name="RfqLine_rfqLine" class="java.math.BigDecimal"/>
+	<field name="RfqLine_quantity" class="java.math.BigDecimal"/>
+	<field name="RfqLine_status" class="java.lang.String"/>
+	<field name="RfqLine_umCode" class="java.lang.String"/>
+	<field name="RfqLine_docCommentList" class="java.util.List"/>
+	<field name="RfqLine_umFactor" class="java.math.BigDecimal"/>
+	<field name="RfqLine_udf2Code" class="java.lang.String"/>
+	<field name="RfqLine_shipToList" class="java.util.List"/>
+	<field name="RfqLine_routing" class="java.lang.String"/>
+	<variable name="today" class="java.util.Date">
+		<variableExpression><![CDATA[new java.util.Date()]]></variableExpression>
+		<initialValueExpression><![CDATA[new java.util.Date()]]></initialValueExpression>
+	</variable>
+	<variable name="reportTitle_var" class="java.lang.String">
+		<variableExpression><![CDATA["Requisition Line"]]></variableExpression>
+	</variable>
+	<group name="commentsBefore">
+		<groupExpression><![CDATA[$V{REPORT_COUNT}]]></groupExpression>
+		<groupHeader>
+			<band height="1">
+				<subreport>
+					<reportElement positionType="Float" x="3" y="0" width="554" height="1" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true"/>
+					<parametersMapExpression><![CDATA[$P{REPORT_PARAMETERS_MAP}]]></parametersMapExpression>
+					<subreportParameter name="oid">
+						<subreportParameterExpression><![CDATA[$P{oid}]]></subreportParameterExpression>
+					</subreportParameter>
+					<dataSourceExpression><![CDATA[new HibernateQueryResultDataSource($F{RfqLine_docCommentList})]]></dataSourceExpression>
+					<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[JasperReportsHelper.loadSubReport("comment-before-pdf.jasper", $P{oid})]]></subreportExpression>
+				</subreport>
+			</band>
+		</groupHeader>
+	</group>
+	<group name="lines">
+		<groupExpression><![CDATA[$V{REPORT_COUNT}]]></groupExpression>
+		<groupHeader>
+			<band height="14" isSplitAllowed="false">
+				<textField isBlankWhenNull="true">
+					<reportElement positionType="Float" x="100" y="0" width="32" height="14"/>
+					<textElement verticalAlignment="Middle">
+						<font reportFont="Arial_Normal"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{RfqLine_umCode}]]></textFieldExpression>
+				</textField>
+				<textField pattern="###0." isBlankWhenNull="true">
+					<reportElement positionType="Float" x="3" y="0" width="46" height="14"/>
+					<textElement verticalAlignment="Middle">
+						<font reportFont="Arial_Normal"/>
+					</textElement>
+					<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{RfqLine_rfqLine}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement positionType="Float" x="492" y="0" width="10" height="14"/>
+					<textElement/>
+					<textFieldExpression class="java.lang.String"><![CDATA["$"]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement positionType="Float" x="49" y="0" width="44" height="14"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font reportFont="Arial_Normal"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[HiltonUtility.getFormattedQtyCurrency($F{RfqLine_quantity}, $P{PoHeader_currencyCode}, $P{oid})]]></textFieldExpression>
+				</textField>
+				<line>
+					<reportElement positionType="Float" x="439" y="13" width="48" height="1"/>
+					<graphicElement/>
+				</line>
+				<textField>
+					<reportElement positionType="Float" x="430" y="0" width="10" height="14"/>
+					<textElement/>
+					<textFieldExpression class="java.lang.String"><![CDATA["$"]]></textFieldExpression>
+				</textField>
+				<line>
+					<reportElement positionType="Float" x="503" y="13" width="54" height="1"/>
+					<graphicElement/>
+				</line>
+				<textField isBlankWhenNull="true">
+					<reportElement positionType="Float" x="134" y="0" width="295" height="14"/>
+					<textElement verticalAlignment="Middle">
+						<font reportFont="Arial_Normal"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{RfqLine_itemNumber}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement positionType="Float" x="295" y="0" width="295" height="14" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true" forecolor="#FF0000">
+						<printWhenExpression><![CDATA[new Boolean($F{RfqLine_status}.equalsIgnoreCase(DocumentStatus.CANCELLED))]]></printWhenExpression>
+					</reportElement>
+					<textElement textAlignment="Center">
+						<font reportFont="Arial_Bold" size="11"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA["*** Line Item Cancelled ***"]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+	</group>
+	<group name="description">
+		<groupHeader>
+			<band height="14">
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement positionType="Float" x="134" y="0" width="295" height="14" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true"/>
+					<textElement verticalAlignment="Middle"/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{RfqLine_description}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+	</group>
+	<group name="routing">
+		<groupHeader>
+			<band height="14">
+				<textField isStretchWithOverflow="true">
+					<reportElement positionType="Float" x="134" y="0" width="80" height="13">
+						<printWhenExpression><![CDATA[new Boolean($F{RfqLine_udf2Code}.length() > 0)]]></printWhenExpression>
+					</reportElement>
+					<textElement verticalAlignment="Middle">
+						<font reportFont="Arial_Bold"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA["Floor:"]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement positionType="Float" x="215" y="0" width="217" height="13" isRemoveLineWhenBlank="true"/>
+					<textElement verticalAlignment="Middle"/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{RfqLine_routing}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+	</group>
+	<group name="commentsAfter">
+		<groupExpression><![CDATA[$V{REPORT_COUNT}]]></groupExpression>
+		<groupHeader>
+			<band height="1">
+				<subreport>
+					<reportElement positionType="Float" x="3" y="0" width="554" height="1" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true"/>
+					<parametersMapExpression><![CDATA[$P{REPORT_PARAMETERS_MAP}]]></parametersMapExpression>
+					<subreportParameter name="oid">
+						<subreportParameterExpression><![CDATA[$P{oid}]]></subreportParameterExpression>
+					</subreportParameter>
+					<dataSourceExpression><![CDATA[new HibernateQueryResultDataSource($F{RfqLine_docCommentList})]]></dataSourceExpression>
+					<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[JasperReportsHelper.loadSubReport("comment-after-pdf-new.jasper", $P{oid})]]></subreportExpression>
+				</subreport>
+			</band>
+		</groupHeader>
+	</group>
+	<group name="shipto">
+		<groupHeader>
+			<band height="1">
+				<subreport>
+					<reportElement positionType="Float" x="3" y="0" width="554" height="1" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true"/>
+					<parametersMapExpression><![CDATA[$P{REPORT_PARAMETERS_MAP}]]></parametersMapExpression>
+					<subreportParameter name="oid">
+						<subreportParameterExpression><![CDATA[$P{oid}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="rddSeeBelow">
+						<subreportParameterExpression><![CDATA[$P{rddSeeBelow}]]></subreportParameterExpression>
+					</subreportParameter>
+					<dataSourceExpression><![CDATA[new HibernateQueryResultDataSource($F{RfqLine_shipToList})]]></dataSourceExpression>
+					<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[JasperReportsHelper.loadSubReport("lineshipto-pdf.jasper", $P{oid})]]></subreportExpression>
+				</subreport>
+			</band>
+		</groupHeader>
+	</group>
+</jasperReport>

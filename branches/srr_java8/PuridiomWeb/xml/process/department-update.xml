@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="departmentUpdate" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="updateDepartment">
+			<task synchronous="true" continue-on-failure="false" name="department">
+				<task-object-name>com.tsa.puridiom.department.tasks.DepartmentRetrieveById</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="department">
+				<task-object-name>com.tsa.puridiom.department.tasks.DepartmentSetValues</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="department">
+				<task-object-name>com.tsa.puridiom.department.tasks.DepartmentUpdate</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+	</activities>
+</process>

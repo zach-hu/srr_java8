@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="commodityDepartmentBuyer" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="commodityDepartmentBuyerDeleteByCommodity">
+			<task synchronous="true" continue-on-failure="false" name="commodityDepartmentBuyerDeleteByCommodity">
+				<task-object-name>com.tsa.puridiom.commoditydepartmentbuyer.tasks.CommodityDepartmentBuyerDeleteByCommodity</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="commodityDepartmentBuyer">
+				<task-object-name>com.tsa.puridiom.commoditydepartmentbuyer.tasks.CommodityDepartmentBuyerUpdateByLine</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+	</activities>
+</process>

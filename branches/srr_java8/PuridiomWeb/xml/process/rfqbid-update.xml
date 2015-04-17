@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="rfqBidUpdate" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="rfqBidUpdate">
+			<task synchronous="true" continue-on-failure="false" name="rfqBidUpdate">
+				<task-object-name>com.tsa.puridiom.rfqbid.tasks.RfqBidUpdate</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="rfqVendorBidUpdate">
+				<task-object-name>com.tsa.puridiom.rfqvendor.tasks.RfqVendorSetBidsEnteredFromBidUpdate</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

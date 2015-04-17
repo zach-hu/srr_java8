@@ -1,0 +1,18 @@
+<rule>
+	<clause type="StringCompare">
+		<left-side>
+			<source>incomingRequestObjectMethod</source>
+			<object>userProfile</object>
+			<name>getSecurityAnswer</name>
+		</left-side>
+		<operator>EQUALS</operator>
+		<right-side>
+			<source>incomingRequest</source>
+			<name>securityAnswer</name>
+		</right-side>
+	</clause>
+	<logical-operator>OR</logical-operator>
+	<clause type="rule">
+		<rule-filename check-for-false="true">is-security-question-required.xml</rule-filename>
+	</clause>
+</rule>

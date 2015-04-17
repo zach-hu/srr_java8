@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="invoiceLineUpdate" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="invoiceLineDelete">
+			<task synchronous="true" continue-on-failure="false" name="invoiceLineDelete">
+				<task-object-name>com.tsa.puridiom.invoiceline.tasks.InvoiceLineDeleteByLine</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="invoiceLineUpdate">
+			<rule-filename>is-not-delete-all</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="invoiceLineUpdate">
+				<task-object-name>com.tsa.puridiom.invoiceline.tasks.InvoiceLineUpdateByLine</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="invoiceHeaderUpdateTotals">
+			<task synchronous="true" continue-on-failure="false" name="accountRecalculate">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>invoiceheader-update.xml</process-filename>
+			</task>
+		</activity>
+		<!--<activity synchronous="true" continue-on-failure="false" name="invoiceHeaderUpdateAccounts">
+			<task synchronous="true" continue-on-failure="false" name="retrieveAccounts">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>invoiceheader-retrieve-accounts.xml</process-filename>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="taxAccountRecalculate">
+				<task-object-name>com.tsa.puridiom.invoice.tasks.InvoiceTaxAccountRecalculate</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="taxAccountRecalculate">
+				<task-object-name>com.tsa.puridiom.invoice.tasks.InvoiceShippingAccountRecalculate</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="taxAccountRecalculate">
+				<task-object-name>com.tsa.puridiom.invoice.tasks.InvoiceOtherAccountRecalculate</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="accountRecalculate">
+			<task synchronous="true" continue-on-failure="false" name="accountRecalculate">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>invoiceheader-account-update.xml</process-filename>
+			</task>
+		</activity>-->
+	</activities>
+</process>

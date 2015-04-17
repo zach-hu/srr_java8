@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="commodityUpdate" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="updateCommodity">
+			<task synchronous="true" continue-on-failure="false" name="commodity">
+				<task-object-name>com.tsa.puridiom.commodity.tasks.CommodityRetrieveById</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="commodityClassLevels">
+				<task-object-name>com.tsa.puridiom.commodity.tasks.CommoditySetClassLevels</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="commodityClassLevels">
+				<rule-filename>is-commoditytype-nigp.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.commodity.tasks.CommoditySetNIGPLevel</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="commodity">
+				<task-object-name>com.tsa.puridiom.commodity.tasks.CommoditySetValues</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="commodity">
+				<task-object-name>com.tsa.puridiom.commodity.tasks.CommodityUpdate</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="setCommodityInCache">
+				<task-object-name>com.tsa.puridiom.commodity.tasks.CommoditySetInCache</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+	</activities>
+</process>

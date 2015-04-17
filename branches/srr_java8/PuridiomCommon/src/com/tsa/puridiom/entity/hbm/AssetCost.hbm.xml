@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 2.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+<class name="com.tsa.puridiom.entity.AssetCost" table="ASSET_COST">
+<composite-id name="comp_id" class="com.tsa.puridiom.entity.AssetCostPK">
+<key-property name="sequenceNo" column="SEQUENCE_NO" type="java.math.BigDecimal" length="5"/>
+<key-property name="tagNumber" column="TAG_NUMBER" type="java.lang.String" length="20"/>
+</composite-id>
+<property name="amount" column="AMOUNT" type="java.math.BigDecimal" length="15"/>
+<property name="extendLifeFlag" column="EXTEND_LIFE_FLAG" type="java.lang.String" length="1"/>
+<property name="dateEntered" column="DATE_ENTERED" type="java.sql.Timestamp" length="7"/>
+<property name="dateReceived" column="DATE_RECEIVED" type="java.sql.Timestamp" length="7"/>
+<property name="poNumber" column="PO_NUMBER" type="java.lang.String" length="30"/>
+<property name="poVendor" column="PO_VENDOR" type="java.lang.String" length="40"/>
+<property name="description" column="DESCRIPTION" type="java.lang.String" length="255"/>
+<property name="lastChgBy" column="LAST_CHG_BY" type="java.lang.String" length="25"/>
+<property name="dateChanged" column="DATE_CHANGED" type="java.sql.Timestamp" length="7"/>
+</class>
+</hibernate-mapping>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="accountAdd" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="accountAdd">
+			<task synchronous="true" continue-on-failure="false" name="account">			
+				<task-object-name>com.tsa.puridiom.account.tasks.AccountAdd</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+	</activities>
+</process>

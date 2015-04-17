@@ -1,0 +1,57 @@
+<browse_PRWV>
+	<columns>
+  	<PrmReqWorkloadView_userId>
+		<label>brw-buyer</label>
+		<link><![CDATA[javascript: viewBuyerAssignment('#PrmReqWorkloadView_userId^');  void(0);]]></link>
+		<size>20</size>
+    </PrmReqWorkloadView_userId>
+    <PrmReqWorkloadView_firstName>
+		<label>buyerName</label>
+		<size>10</size>
+    </PrmReqWorkloadView_firstName>
+    <PrmReqWorkloadView_lastName>
+		<label></label>
+		<size>15</size>
+    </PrmReqWorkloadView_lastName>
+    <!-- PrmReqWorkloadView_firstName>
+		<concatenate>
+			<col>PrmReqWorkloadView_firstName</col>
+			<col>PrmReqWorkloadView_lastName</col>
+		</concatenate>
+		<label>Buyer Name</label>
+		<type>STRING</type>
+		<size>20</size>
+		<selectsql>Y</selectsql>
+	</PrmReqWorkloadView_firstName -->
+    <PrmReqWorkloadView_assigned>
+		<label>brw-pendWork</label>
+		<type>NroDecimal</type>
+		<link><![CDATA[javascript: summaryProcurementWorkloadReq('#PrmReqWorkloadView_userId^','A');  void(0);]]></link>
+		<size>10</size>
+    </PrmReqWorkloadView_assigned>
+    <PrmReqWorkloadView_sourcing>
+    	<label>brw-pendSourcing</label>
+    	<type>NroDecimal</type>
+		<link><![CDATA[javascript: summaryProcurementWorkloadReq('#PrmReqWorkloadView_userId^','S'); void(0);]]></link>
+		<size>15</size>
+    </PrmReqWorkloadView_sourcing>
+    <PrmReqWorkloadView_pendingAward>
+		<label>brw-pendAward</label>
+		<type>NroDecimal</type>
+		<link><![CDATA[javascript: summaryProcurementWorkloadReq('#PrmReqWorkloadView_userId^','PA'); void(0);]]></link>
+		<size>15</size>
+    </PrmReqWorkloadView_pendingAward>
+    <PrmReqWorkloadView_total>
+		<label>brw-reqTotal</label>
+		<type>PriceQuantity</type>		
+		<link><![CDATA[javascript: summaryProcurementWorkloadReq('#PrmReqWorkloadView_userId^','T');  void(0);]]></link>
+		<size>15</size>
+    </PrmReqWorkloadView_total>
+  </columns>
+<sqlfrom>PrmReqWorkloadView as PrmReqWorkloadView</sqlfrom>
+<sqlwhere><![CDATA[]]></sqlwhere>
+<sqlorderby></sqlorderby>
+<pagesize>40</pagesize>
+<title>Procurement Summary Workload - Requisitions</title>
+</browse_PRWV>
+

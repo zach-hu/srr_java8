@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="requisitionLineSourcingRetrieveByLineHistory" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="requisitionLineRetrieveByHeader">
+			<task synchronous="true" continue-on-failure="false" name="requisitionLineList">
+				<task-object-name>com.tsa.puridiom.requisitionline.tasks.RequisitionLineSourcingRetrieveByLineHistory</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="requisitionLineHistoryReqList">
+				<task-object-name>com.tsa.puridiom.requisitionline.tasks.RequisitionLineSourcingRetrieveNewReqNumber</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="requisitionLineHistoryPoList">
+				<task-object-name>com.tsa.puridiom.requisitionline.tasks.RequisitionLineSourcingRetrieveNewPoNumber</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="requisitionLineHistoryRecList">
+				<task-object-name>com.tsa.puridiom.requisitionline.tasks.RequisitionLineSourcingRetrieveNewRecNumber</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="requisitionLineHistoryInvList">
+				<task-object-name>com.tsa.puridiom.requisitionline.tasks.RequisitionLineSourcingRetrieveNewInvNumber</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="requisitionHeader">
+				<task-object-name>com.tsa.puridiom.requisitionheader.tasks.RequisitionHeaderRetrieveById</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+	</activities>
+</process>

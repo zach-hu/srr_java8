@@ -1,0 +1,175 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping>
+
+<!--
+    Created by Middlegen Hibernate plugin
+
+    http://boss.bekk.no/boss/middlegen/
+    http://hibernate.sourceforge.net/
+-->
+
+<class
+    name="com.tsa.puridiom.entity.Contact"
+    table="CONTACT"
+>
+    <composite-id name="comp_id" class="com.tsa.puridiom.entity.ContactPK">
+        <key-property name="contactCode" column="CONTACT_CODE" type="java.lang.String"/>
+        <key-property name="contactType" column="CONTACT_TYPE" type="java.lang.String"/>
+        <key-property name="vendorId" column="VENDOR_ID" type="java.lang.String"/>
+    </composite-id>
+    <property
+        name="lastName"
+        type="java.lang.String"
+        column="LAST_NAME"
+        length="20"
+    />
+    <property
+        name="firstName"
+        type="java.lang.String"
+        column="FIRST_NAME"
+        length="20"
+    />
+    <property
+        name="middleInit"
+        type="java.lang.String"
+        column="MIDDLE_INIT"
+        length="2"
+    />
+    <property
+        name="salutation"
+        type="java.lang.String"
+        column="SALUTATION"
+        length="5"
+    />
+    <property
+        name="contactTitle"
+        type="java.lang.String"
+        column="CONTACT_TITLE"
+        length="30"
+    />
+    <property
+        name="phoneNumber"
+        type="java.lang.String"
+        column="PHONE_NUMBER"
+        length="30"
+    />
+    <property
+        name="phoneFormat"
+        type="java.lang.String"
+        column="PHONE_FORMAT"
+        length="2"
+    />
+	<property
+        name="mobileNumber"
+        type="java.lang.String"
+        column="MOBILE_NUMBER"
+        length="30"
+    />
+    <property
+        name="mobileFormat"
+        type="java.lang.String"
+        column="MOBILE_FORMAT"
+        length="2"
+    />
+    <property
+        name="faxNumber"
+        type="java.lang.String"
+        column="FAX_NUMBER"
+        length="30"
+    />
+    <property
+        name="faxFormat"
+        type="java.lang.String"
+        column="FAX_FORMAT"
+        length="2"
+    />
+    <property
+        name="addressCode"
+        type="java.lang.String"
+        column="ADDRESS_CODE"
+        length="15"
+    />
+    <property
+        name="dateEntered"
+        type="java.sql.Timestamp"
+        column="DATE_ENTERED"
+        length="7"
+    />
+    <property
+        name="dateExpires"
+        type="java.sql.Timestamp"
+        column="DATE_EXPIRES"
+        length="7"
+    />
+    <property
+        name="status"
+        type="java.lang.String"
+        column="STATUS"
+        length="4"
+    />
+    <property
+        name="owner"
+        type="java.lang.String"
+        column="OWNER"
+        length="15"
+    />
+    <property
+        name="emailAddr"
+        type="java.lang.String"
+        column="EMAIL_ADDR"
+        length="50"
+    />
+    <property
+        name="info1"
+        type="java.lang.String"
+        column="INFO_1"
+        length="50"
+    />
+    <property
+        name="info2"
+        type="java.lang.String"
+        column="INFO_2"
+        length="50"
+    />
+    <property
+        name="info3"
+        type="java.lang.String"
+        column="INFO_3"
+        length="50"
+    />
+    <property
+        name="info4"
+        type="java.lang.String"
+        column="INFO_4"
+        length="50"
+    />
+    <property
+        name="contactPassword"
+        type="java.lang.String"
+        column="CONTACT_PASSWORD"
+        length="12"
+    />
+    <property
+        name="passChanged"
+        type="java.lang.String"
+        column="PASS_CHANGED"
+        length="10"
+    />
+    <property
+        name="priorPassword"
+        type="java.lang.String"
+        column="PRIOR_PASSWORD"
+        length="255"
+    />
+    <property
+        name="lockLogin"
+        type="java.lang.String"
+        column="LOCK_LOGIN"
+        length="1"
+    />
+</class>
+</hibernate-mapping>

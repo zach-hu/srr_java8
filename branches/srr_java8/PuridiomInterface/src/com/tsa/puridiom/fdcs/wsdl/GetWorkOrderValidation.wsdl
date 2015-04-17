@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:axis2="http://getworkordervalidation.wsbeans.iseries" xmlns:ns1="http://org.apache.axis2/xsd" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:ns0="http://getworkordervalidation.wsbeans.iseries/xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://getworkordervalidation.wsbeans.iseries">
+    <wsdl:documentation>GetWorkOrderValidation</wsdl:documentation>
+    <wsdl:types>
+        <xs:schema xmlns:ns="http://getworkordervalidation.wsbeans.iseries/xsd" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://getworkordervalidation.wsbeans.iseries/xsd">
+            <xs:element name="poi957">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="param0" nillable="true" type="ns:POI957Input"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:complexType name="POI957Input">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="_PI_CUNO" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="_PI_WONO" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="_PI_WOOPNO" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="_PI_WOSGNO" nillable="true" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:element name="poi957Response">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" nillable="true" type="ns:POI957Result"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:complexType name="POI957Result">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="_PO_ARRAY_COUNT" nillable="true" type="xs:long"/>
+                    <xs:element maxOccurs="unbounded" minOccurs="0" name="_PO_DATA_ARRAY" nillable="true" type="ns:PO_DATA_ARRAY"/>
+                    <xs:element minOccurs="0" name="_PO_ERRORCODE" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="_PO_ERRORDESC" nillable="true" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="PO_DATA_ARRAY">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="_AUTREQ_O" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="_CUNO_O" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="_TRNTYP_O" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="_WOOPNO_O" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="_WOSGNO_O" nillable="true" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:element name="poi957_XML">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="param0" nillable="true" type="ns:POI957Input"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="poi957_XMLResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:schema>
+    </wsdl:types>
+    <wsdl:message name="poi957Request">
+        <wsdl:part name="parameters" element="ns0:poi957"/>
+    </wsdl:message>
+    <wsdl:message name="poi957Response">
+        <wsdl:part name="parameters" element="ns0:poi957Response"/>
+    </wsdl:message>
+    <wsdl:message name="poi957_XMLRequest">
+        <wsdl:part name="parameters" element="ns0:poi957_XML"/>
+    </wsdl:message>
+    <wsdl:message name="poi957_XMLResponse">
+        <wsdl:part name="parameters" element="ns0:poi957_XMLResponse"/>
+    </wsdl:message>
+    <wsdl:portType name="GetWorkOrderValidationPortType">
+        <wsdl:operation name="poi957">
+            <wsdl:input message="axis2:poi957Request" wsaw:Action="urn:poi957"/>
+            <wsdl:output message="axis2:poi957Response" wsaw:Action="urn:poi957Response"/>
+        </wsdl:operation>
+        <wsdl:operation name="poi957_XML">
+            <wsdl:input message="axis2:poi957_XMLRequest" wsaw:Action="urn:poi957_XML"/>
+            <wsdl:output message="axis2:poi957_XMLResponse" wsaw:Action="urn:poi957_XMLResponse"/>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="GetWorkOrderValidationSOAP11Binding" type="axis2:GetWorkOrderValidationPortType">
+        <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+        <wsdl:operation name="poi957">
+            <soap:operation soapAction="urn:poi957" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="poi957_XML">
+            <soap:operation soapAction="urn:poi957_XML" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="GetWorkOrderValidation">
+        <wsdl:port name="GetWorkOrderValidationSOAP11port_http" binding="axis2:GetWorkOrderValidationSOAP11Binding">
+            <soap:address location="http://10.172.4.11:10021/web/services/GetWorkOrderValidation"/>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>

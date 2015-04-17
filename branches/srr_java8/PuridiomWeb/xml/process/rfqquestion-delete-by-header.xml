@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="rfqQuestionDelete" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="rfqQuestionDelete">
+			<task synchronous="true" continue-on-failure="false" name="rfqQuestionDeleteSetup">
+				<task-object-name>com.tsa.puridiom.rfqquestion.tasks.RfqQuestionDeleteSetup</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="rfqQuestion">			
+				<task-object-name>com.tsa.puridiom.rfqquestion.tasks.RfqQuestionDeleteByHeader</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

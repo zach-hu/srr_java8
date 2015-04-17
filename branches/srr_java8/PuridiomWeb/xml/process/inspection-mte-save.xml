@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="InspectionMteUpdate" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="InspectionMteRetrieve">
+			<task synchronous="true" continue-on-failure="false" name="inspectionMteRetrieveSetup">
+				<task-object-name>com.tsa.puridiom.inspectionmte.tasks.InspectionMteRetrieveSetup</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="inspectionMteList">
+				<task-object-name>com.tsa.puridiom.inspectionmte.tasks.InspectionMteRetrieveByReceiptLine</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="InspectionMteDelete">
+			<task synchronous="true" continue-on-failure="false" name="InspectionMteDeleteList">
+				<task-object-name>com.tsa.puridiom.inspectionmte.tasks.InspectionMteDeleteList</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="InspectionMteSaveActivity">
+			<task synchronous="true" continue-on-failure="false" name="InspectionMteSave">
+				<task-object-name>com.tsa.puridiom.inspectionmte.tasks.InspectionMteSave</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+	</activities>
+</process>

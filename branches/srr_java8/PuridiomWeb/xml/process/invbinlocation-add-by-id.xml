@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="InvBinLocationAddById" connection-type="New-Transaction">
+	<rule-filename>is-add-inventorybinlocation-valid.xml</rule-filename>
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="addInvBinLocationActivity">
+			<task synchronous="true" continue-on-failure="false" name="invBinLocation">
+				<task-object-name>com.tsa.puridiom.invbinlocation.tasks.InvBinLocationAddSetup</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="invBinLocation">
+				<task-object-name>com.tsa.puridiom.invbinlocation.tasks.InvBinLocationSetValues</task-object-name>
+				<post-action></post-action>
+			</task>
+
+			<task synchronous="true" continue-on-failure="false" name="invBinLocation">
+				<task-object-name>com.tsa.puridiom.invbinlocation.tasks.InvBinLocationAdd</task-object-name>
+				<post-action />
+		   </task>
+			<task synchronous="true" continue-on-failure="false" name="invBinLocHistory">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>invbinlochistory-add.xml</process-filename>
+			</task>
+		  </activity>
+
+	 </activities>
+</process>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rule>
+	<clause type="Empty">
+		<left-side>
+			<source>incomingRequestObjectMethod</source>
+			<object>header</object>
+			<name>getIclLevel</name>
+		</left-side>
+	</clause>
+	<logical-operator>OR</logical-operator>
+	<clause type="lookup">
+		<sql> from InsCategoryLevel as InsCategoryLevel where InsCategoryLevel.iclLevel = '@icllevel@' AND (InsCategoryLevel.status = '02' OR (InsCategoryLevel.status = '01' AND InsCategoryLevel.dateExpires >= @today@))</sql>
+		<source>header</source>
+		<arguments>
+			<name>icllevel</name>
+			<source>header</source>
+			<colName>getIclLevel</colName>
+		</arguments>
+	</clause>
+</rule>

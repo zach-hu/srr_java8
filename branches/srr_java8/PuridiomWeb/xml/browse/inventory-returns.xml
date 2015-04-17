@@ -1,0 +1,57 @@
+<browse_inventory_returns>
+	<columns>
+		<InvReturn_requisitionNumber>
+			<label>brw-requisitionNumber</label>
+			<size>10</size>
+		</InvReturn_requisitionNumber>
+		<InvReturn_lineNo>
+			<label>hdg-lineNumber</label>
+			<size>10</size>
+		</InvReturn_lineNo>
+		<InvReturn_itemNumber>
+			<link><![CDATA[javascript: viewInvReturn('#InvReturn_icReqLine^', '#InvReturn_icBin^','#InvReturn_itemNumber^'); void(0);]]></link>
+			<label>hdg-itemNumber</label>
+			<size>10</size>
+		</InvReturn_itemNumber>
+		<InvReturn_icReqHeader>
+	        <hidden>Y</hidden>
+		</InvReturn_icReqHeader>
+		<InvReturn_icReqLine>
+			<label>brw-icReqLine</label>
+	        <hidden>Y</hidden>
+		</InvReturn_icReqLine>
+		<InvReturn_icBin>
+	        <hidden>Y</hidden>
+		</InvReturn_icBin>
+		<RequisitionLine_description>
+			<label>description</label>
+			<detail>Y</detail>
+			<size>100</size>
+		</RequisitionLine_description>
+		<RequisitionLine_quantity>
+			<label>brw-requestedQty</label>
+			<type>QtyDecimal</type>
+			<size>10</size>
+		</RequisitionLine_quantity>
+		<InvReturn_recAmount>
+			<label>brw-qtyReturned</label>
+	       <type>QtyDecimal</type>
+	       <size>10</size>
+		</InvReturn_recAmount>
+		<InvReturn_recBy>
+			<label>brw-receivedBy</label>
+			 <type>USER-ID</type>
+	        <size>10</size>
+		</InvReturn_recBy>
+		<InvReturn_recDate>
+			<label>asset-datereceived</label>
+			<type>DATE</type>
+	        <size>10</size>
+		</InvReturn_recDate>
+	</columns>
+<sqlfrom>InvReturn as InvReturn, RequisitionLine as RequisitionLine</sqlfrom>
+<sqlwhere><![CDATA[ InvReturn.icReqLine = RequisitionLine.icReqLine ]]></sqlwhere>
+<sqlorderby>InvReturn.recDate DESC</sqlorderby>
+<pagesize>15</pagesize>
+<title>Return To Inventory</title>
+</browse_inventory_returns>

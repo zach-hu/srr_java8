@@ -1,0 +1,336 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created using an evaluation version of JasperAssistant (http://www.jasperassistant.com) -->
+<!DOCTYPE jasperReport PUBLIC "-//JasperReports//DTD Report Design//EN" "http://jasperreports.sourceforge.net/dtds/jasperreport.dtd">
+
+<jasperReport name="CatalogItemRegister" language="java" pageWidth="612" pageHeight="791" columnWidth="562" leftMargin="25" rightMargin="25" topMargin="25" bottomMargin="25">
+	<property name="com.jasperassistant.designer.GridHeight" value="12"/>
+	<property name="com.jasperassistant.designer.GridWidth" value="12"/>
+	<property name="com.jasperassistant.designer.DataSource" value="Hilton1p Test"/>
+	<property name="com.jasperassistant.designer.SnapToGrid" value="false"/>
+	<property name="com.jasperassistant.designer.Grid" value="false"/>
+	<import value="com.tsa.puridiom.property.PropertiesManager"/>
+	<import value="com.tsa.puridiom.common.documents.*"/>
+	<import value="java.util.*"/>
+	<import value="com.tsa.puridiom.entity.*"/>
+	<import value="net.sf.jasperreports.engine.JRDataSource"/>
+	<import value="com.tsagate.foundation.utility.Utility"/>
+	<import value="com.tsagate.properties.*"/>
+	<import value="com.tsa.puridiom.jasperreports.*"/>
+	<import value="java.net.*"/>
+	<reportFont name="Arial_Normal" isDefault="true" fontName="Arial" size="8" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Bold" isDefault="false" fontName="Arial Black" size="9" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica-Bold" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Bold_Big" isDefault="false" fontName="Arial Black" size="12" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica-Bold" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Big" isDefault="false" fontName="Arial" size="12" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Medium" isDefault="false" fontName="Arial" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<parameter name="oid" class="java.lang.String">
+		<defaultValueExpression><![CDATA["HILTON"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="reportTitle" class="java.lang.String">
+		<defaultValueExpression><![CDATA["Catalog Item Register"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="reportCriteria" class="java.lang.String">
+	</parameter>
+	<parameter name="userId" class="java.lang.String">
+		<defaultValueExpression><![CDATA["Puridiom"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="footerText" class="java.lang.String">
+		<defaultValueExpression><![CDATA["Puridiom.com"]]></defaultValueExpression>
+	</parameter>
+	<queryString><![CDATA[SELECT  catalog.catalog_id Catalog_catalogId,
+           catalog.title Catalog_title,
+           catalog.vendor_id Catalog_vendorId,
+           catalog.po_number Catalog_poNumber,
+           catalog_item.um_code CatalogItem_umCode,
+           catalog_item.commodity CatalogItem_commodity,
+           catalog_item.cost CatalogItem_cost,
+           catalog_item.std_cost CatalogItem_stdCost,
+           catalog_item.taxable CatalogItem_taxable,
+           catalog_item.udf_1_code CatalogItem_udf1Code,
+           catalog_item.udf_2_code CatalogItem_udf2Code,
+           catalog_item.udf_3_code CatalogItem_udf3Code,
+           catalog_item.udf_4_code CatalogItem_udf4Code,
+           catalog_item.udf_5_code CatalogItem_udf5Code,
+           catalog_item.description CatalogItem_description,
+           catalog_item.item_number CatalogItem_itemNumber
+     FROM catalog ,           catalog_item 
+     WHERE ( catalog.catalog_id = catalog_item.catalog_id )
+     ORDER BY catalog.catalog_id, catalog_item.item_number]]></queryString>
+	<field name="CatalogItem_commodity" class="java.lang.String">
+	</field>
+	<field name="CatalogItem_cost" class="java.math.BigDecimal">
+	</field>
+	<field name="CatalogItem_description" class="java.lang.String">
+	</field>
+	<field name="CatalogItem_itemNumber" class="java.lang.String">
+	</field>
+	<field name="CatalogItem_taxable" class="java.lang.String">
+	</field>
+	<field name="CatalogItem_udf1Code" class="java.lang.String">
+	</field>
+	<field name="CatalogItem_udf2Code" class="java.lang.String">
+	</field>
+	<field name="CatalogItem_udf3Code" class="java.lang.String">
+	</field>
+	<field name="CatalogItem_udf4Code" class="java.lang.String">
+	</field>
+	<field name="CatalogItem_udf5Code" class="java.lang.String">
+	</field>
+	<field name="CatalogItem_umCode" class="java.lang.String">
+	</field>
+	<field name="Catalog_catalogId" class="java.lang.String">
+	</field>
+	<field name="Catalog_title" class="java.lang.String">
+	</field>
+	<field name="Catalog_poNumber" class="java.lang.String">
+	</field>
+	<field name="Catalog_vendorId" class="java.lang.String">
+	</field>
+	<field name="CatalogItem_stdCost" class="java.math.BigDecimal">
+	</field>
+	<variable name="today" class="java.util.Date">
+		<variableExpression><![CDATA[new Date()]]></variableExpression>
+	</variable>
+	<variable name="groupCount" class="java.math.BigDecimal" resetType="Group" resetGroup="Group_1" calculation="Count">
+		<variableExpression><![CDATA[new BigDecimal(1)]]></variableExpression>
+	</variable>
+	<variable name="reportCount" class="java.math.BigDecimal" resetType="None" calculation="Count">
+		<variableExpression><![CDATA[new BigDecimal(1)]]></variableExpression>
+	</variable>
+	<group name="Group_1" isReprintHeaderOnEachPage="true">
+		<groupExpression><![CDATA[$F{Catalog_catalogId}]]></groupExpression>
+		<groupHeader>
+		<band height="44">
+			<textField>
+				<reportElement positionType="Float" x="15" y="0" width="80" height="13"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{Catalog_catalogId}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement positionType="Float" x="99" y="0" width="246" height="13"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{Catalog_title}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement positionType="Float" x="11" y="24" width="66" height="20"/>
+				<box topBorder="None" leftBorder="None" bottomBorder="1Point" rightBorder="None"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Item Number]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="80" y="24" width="180" height="20"/>
+				<box topBorder="None" leftBorder="None" bottomBorder="1Point" rightBorder="None"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Description]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="364" y="24" width="58" height="20"/>
+				<box topBorder="None" leftBorder="None" bottomBorder="1Point" rightBorder="None"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Cost]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="297" y="24" width="66" height="20"/>
+				<box topBorder="None" leftBorder="None" bottomBorder="1Point" rightBorder="None"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Commodity]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="262" y="24" width="32" height="20"/>
+				<box topBorder="None" leftBorder="None" bottomBorder="1Point" rightBorder="None"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[U/M]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="424" y="24" width="66" height="20"/>
+				<box topBorder="None" leftBorder="None" bottomBorder="1Point" rightBorder="None"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[UDF 1]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="490" y="24" width="66" height="20"/>
+				<box topBorder="None" leftBorder="None" bottomBorder="1Point" rightBorder="None"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[UDF 2]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" x="435" y="0" width="80" height="13"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{Catalog_vendorId}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" x="350" y="0" width="80" height="13"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{Catalog_poNumber}]]></textFieldExpression>
+			</textField>
+		</band>
+		</groupHeader>
+		<groupFooter>
+		<band height="43">
+			<textField pattern="#,##0">
+				<reportElement positionType="Float" x="238" y="11" width="66" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{groupCount}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement positionType="Float" x="63" y="12" width="88" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Total Items for Catalog]]></text>
+			</staticText>
+			<textField>
+				<reportElement positionType="Float" x="153" y="12" width="80" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font isItalic="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{Catalog_catalogId}]]></textFieldExpression>
+			</textField>
+		</band>
+		</groupFooter>
+	</group>
+	<title>
+		<band height="3">
+		</band>
+	</title>
+	<pageHeader>
+		<band height="95">
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" x="127" y="2" width="292" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font reportFont="Arial_Medium" fontName="Arial" size="10"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[//PropertiesManager.getInstance($P{oid}).getProperty("COMPANY", "Name", "TSA")
+"Technical Services Associates Inc."]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement positionType="Float" x="91" y="20" width="363" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font reportFont="Arial_Big"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{reportTitle}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement positionType="Float" x="31" y="46" width="499" height="20">
+					<printWhenExpression><![CDATA[new Boolean($P{reportCriteria}.length() > 0)]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA["Report Criteria: " + $P{reportCriteria}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement positionType="Float" x="471" y="4" width="57" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA["Page " + String.valueOf($V{PAGE_NUMBER}) + " of "]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement positionType="Float" x="530" y="4" width="24" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[" " + String.valueOf($V{PAGE_NUMBER})]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement positionType="Float" x="435" y="75" width="80" height="20"/>
+				<box topBorder="None" leftBorder="None" bottomBorder="1Point" rightBorder="None"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Supplier Id]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="99" y="75" width="246" height="20"/>
+				<box topBorder="None" leftBorder="None" bottomBorder="1Point" rightBorder="None"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Catalog Id]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="15" y="75" width="80" height="20"/>
+				<box topBorder="None" leftBorder="None" bottomBorder="1Point" rightBorder="None"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Catalog Id]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="351" y="75" width="80" height="20"/>
+				<box topBorder="None" leftBorder="None" bottomBorder="1Point" rightBorder="None"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Order Number]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="12">
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" x="298" y="0" width="66" height="12"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{CatalogItem_commodity}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00#" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="366" y="0" width="58" height="12"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{CatalogItem_cost}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="80" y="0" width="179" height="12"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{CatalogItem_description}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" x="262" y="0" width="32" height="12"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{CatalogItem_umCode}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" x="425" y="0" width="66" height="12"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{CatalogItem_udf1Code}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" x="493" y="0" width="66" height="12"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{CatalogItem_udf2Code}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" x="11" y="1" width="66" height="11"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{CatalogItem_itemNumber}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="30">
+			<line>
+				<reportElement positionType="Float" x="0" y="-1" width="558" height="2"/>
+				<graphicElement/>
+			</line>
+			<textField pattern="MMM d, yyyy h:mm a">
+				<reportElement positionType="Float" x="0" y="3" width="409" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA["Created " + Utility.getDateFormat($V{today}.toString(), "MMM d, yyyy h:mm a") + " by " + $P{userId}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement positionType="Float" x="475" y="6" width="80" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{footerText}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="50">
+			<staticText>
+				<reportElement positionType="Float" x="67" y="13" width="87" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Total Items on Report]]></text>
+			</staticText>
+			<textField pattern="#,##0">
+				<reportElement positionType="Float" x="164" y="13" width="60" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{reportCount}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

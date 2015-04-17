@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="rfqLineRetrieveById" connection-type="Connection-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="rfqLineRetrieveById">
+			<task synchronous="true" continue-on-failure="false" name="rfqLine">			
+				<task-object-name>com.tsa.puridiom.rfqline.tasks.RfqLineRetrieveById</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="rfqLineDataRetrieve">
+				<task-object-name>com.tsa.puridiom.supplierportal.InvokeSupplierPortalProcessTask</task-object-name>
+				<process-filename>rfqlinedata-retrieve-by-id.xml</process-filename>
+			</task>
+		</activity>
+	</activities>
+</process>

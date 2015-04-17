@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE jasperReport PUBLIC "-//JasperReports//DTD Report Design//EN" "http://jasperreports.sourceforge.net/dtds/jasperreport.dtd">
+<!-- Created using an evaluation version of JasperAssistant (http://www.jasperassistant.com) -->
+
+<jasperReport name="RVepoave" language="java" pageWidth="842" pageHeight="595" orientation="Landscape" whenNoDataType="AllSectionsNoDetail" columnWidth="832" leftMargin="5" rightMargin="5" topMargin="5" bottomMargin="5" whenResourceMissingType="Empty">
+	<property name="com.jasperassistant.designer.GridWidth" value="12"></property>
+	<property name="com.jasperassistant.designer.GridHeight" value="12"></property>
+	<property name="com.jasperassistant.designer.DataSource" value="one"></property>
+	<property name="com.jasperassistant.designer.SnapToGrid" value="false"></property>
+	<property name="com.jasperassistant.designer.Grid" value="false"></property>
+	<import value="com.tsa.puridiom.property.PropertiesManager"></import>
+	<import value="java.util.*"></import>
+	<import value="com.tsa.puridiom.common.documents.*"></import>
+	<import value="com.tsa.puridiom.entity.*"></import>
+	<import value="net.sf.jasperreports.engine.JRDataSource"></import>
+	<import value="com.tsa.puridiom.common.utility.HiltonUtility"/>
+	<import value="com.tsagate.foundation.utility.Utility"></import>
+	<import value="com.tsagate.properties.*"></import>
+	<import value="com.tsa.puridiom.jasperreports.*"></import>
+	<import value="java.net.*"></import>
+	<reportFont name="Arial_Normal" isDefault="true" fontName="Arial" size="9" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"></reportFont>
+	<reportFont name="Arial_Bold" isDefault="false" fontName="Arial Black" size="9" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica-Bold" pdfEncoding="Cp1252" isPdfEmbedded="false"></reportFont>
+	<reportFont name="Arial_Bold_Big" isDefault="false" fontName="Arial Black" size="12" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica-Bold" pdfEncoding="Cp1252" isPdfEmbedded="false"></reportFont>
+	<reportFont name="Arial_Big" isDefault="false" fontName="Arial" size="12" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"></reportFont>
+	<parameter name="oid" class="java.lang.String" isForPrompting="true">
+		<defaultValueExpression><![CDATA["HILTON"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="reportTitle" class="java.lang.String" isForPrompting="true">
+		<defaultValueExpression><![CDATA["Supplier Purchases Summary Report - Summary"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="reportCriteria" class="java.lang.String" isForPrompting="true">
+	</parameter>
+	<parameter name="userId" class="java.lang.String" isForPrompting="true">
+		<defaultValueExpression><![CDATA["Puridiom"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="reportType" class="java.lang.String" isForPrompting="true">
+		<defaultValueExpression><![CDATA["Y"]]></defaultValueExpression>
+	</parameter>
+
+	<parameter name="companyName" class="java.lang.String">
+		<defaultValueExpression><![CDATA[PropertiesManager.getInstance($P{oid}).getProperty("COMPANY", "Name", "TSA")]]></defaultValueExpression>
+	</parameter>
+	<parameter name="today" class="java.lang.String">
+		<defaultValueExpression><![CDATA["Created " + Utility.getDateFormat(new Date(), "MMM d, yyyy h:mm a") +"  "+$P{userId}]]></defaultValueExpression>
+	</parameter>
+	<parameter name="footerText" class="java.lang.String">
+		<defaultValueExpression><![CDATA[$P{companyName}]]></defaultValueExpression>
+	</parameter>
+
+	<field name="Vendor_vendorName" class="java.lang.String">
+	</field>
+	<field name="Vendor_vendorId" class="java.lang.String">
+	</field>
+	<!-- <variable name="today" class="java.util.Date" calculation="Nothing" incrementType="None" resetType="Report">
+		<variableExpression><![CDATA[new Date()]]></variableExpression>
+	</variable>
+	<variable name="companyName" class="java.lang.String">
+		<variableExpression><![CDATA[PropertiesManager.getInstance($P{oid}).getProperty("COMPANY", "Name", "TSA")]]></variableExpression>
+	</variable> -->
+	<pageHeader>
+		<band height="85">
+			<subreport isUsingCache="false">
+				<reportElement positionType="Float" x="0" y="0" width="830" height="62"/>
+				<subreportParameter name="reportTitle">
+				</subreportParameter>
+				<subreportParameter name="reportCriteria">
+				</subreportParameter>
+				<subreportParameter name="oid">
+					<subreportParameterExpression><![CDATA[$P{oid}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="footerText">
+				</subreportParameter>
+				<subreportParameter name="pageNumber">
+					<subreportParameterExpression><![CDATA[String.valueOf($V{PAGE_NUMBER})]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="companyName">
+					<subreportParameterExpression><![CDATA[$P{companyName}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="totalPages">
+					<subreportParameterExpression><![CDATA[String.valueOf($V{PAGE_COUNT})]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[JasperReportsHelper.loadSubReport("header.jasper", $P{oid},"", $P{reportType})]]></subreportExpression>
+			</subreport>
+			<staticText>
+				<reportElement positionType="Float" x="0" y="62" width="150" height="14" isPrintInFirstWholeBand="false" isRemoveLineWhenBlank="false" isPrintWhenDetailOverflows="false" isPrintRepeatedValues="true" stretchType="NoStretch"></reportElement>
+				<box topBorder="None" leftBorder="None" bottomBorder="1Point" rightBorder="None"></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"></textElement>
+				<text><![CDATA[Vendor Name]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="150" y="62" width="150" height="14" isPrintInFirstWholeBand="false" isRemoveLineWhenBlank="false" isPrintWhenDetailOverflows="false" isPrintRepeatedValues="true" stretchType="NoStretch"></reportElement>
+				<box topBorder="None" leftBorder="None" bottomBorder="1Point" rightBorder="None"></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"></textElement>
+				<text><![CDATA[Vendor Id]]></text>
+			</staticText>
+			<textField>
+				<reportElement positionType="Float" x="722" y="3" width="60" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA["Page  " + String.valueOf($V{PAGE_NUMBER}) + "  of  "]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement positionType="Float" x="785" y="3" width="25" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[" " + String.valueOf($V{PAGE_NUMBER})]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="14" isSplitAllowed="true">
+			<textField hyperlinkTarget="Self" bookmarkLevel="0" hyperlinkType="None" isStretchWithOverflow="false" evaluationTime="Now" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="0" y="0" width="150" height="14" isPrintInFirstWholeBand="false" isRemoveLineWhenBlank="false" isPrintWhenDetailOverflows="false" isPrintRepeatedValues="true" stretchType="NoStretch"></reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle"></textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{Vendor_vendorName}]]></textFieldExpression>
+			</textField>
+			<textField hyperlinkTarget="Self" bookmarkLevel="0" hyperlinkType="None" isStretchWithOverflow="false" evaluationTime="Now" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="150" y="0" width="150" height="14" isPrintInFirstWholeBand="false" isRemoveLineWhenBlank="false" isPrintWhenDetailOverflows="false" isPrintRepeatedValues="true" stretchType="NoStretch"></reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle"></textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{Vendor_vendorId}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<lastPageFooter>
+		<band height="20">
+			<subreport isUsingCache="false">
+				<reportElement positionType="Float" x="0" y="0" width="580" height="20"/>
+				<subreportParameter name="reportTitle">
+				</subreportParameter>
+				<subreportParameter name="reportCriteria">
+				</subreportParameter>
+				<subreportParameter name="oid">
+					<subreportParameterExpression><![CDATA[$P{oid}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="footerText">
+					<subreportParameterExpression><![CDATA[$P{footerText}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="today">
+					<subreportParameterExpression><![CDATA[$P{today}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[JasperReportsHelper.loadSubReport("footer.jasper", $P{oid}, "", $P{reportType})]]></subreportExpression>
+			</subreport>
+		</band>
+	</lastPageFooter>
+</jasperReport>

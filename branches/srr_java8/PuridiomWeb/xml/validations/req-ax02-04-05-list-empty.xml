@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rule>
+	<clause type="ElementRule" matchAll="true">
+		<left-side>
+			<source>incomingRequestObjectMethod</source>
+			<object>header</object>
+			<name>getAccountList</name>
+			<rule-filename>req-ax02-ac04-mv-item.xml</rule-filename>
+		</left-side>
+	</clause>
+	<logical-operator>AND</logical-operator>
+	<clause type="ElementRule" matchAll="true">
+		<left-side>
+			<source>incomingRequestObjectMethod</source>
+			<object>header</object>
+			<name>getAccountList</name>
+			<rule-filename>req-ax02-04-05-check-empty.xml</rule-filename>
+		</left-side>
+	</clause>
+</rule>

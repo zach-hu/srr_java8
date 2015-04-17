@@ -1,0 +1,120 @@
+<browse_requisitionline-for-purchasing>
+	<columns>
+		<RequisitionLine_icReqLine>
+			<hidden>Y</hidden>
+			<hidden-input>Y</hidden-input>
+			<key>Y</key>
+		</RequisitionLine_icReqLine>
+		<RequisitionLine_requisitionNumber>
+			<label>brw-requisitionNumber</label>
+			<size>12</size>
+			<hidden-input>Y</hidden-input>
+		</RequisitionLine_requisitionNumber>
+		<RequisitionLine_lineNumber>
+			<label>brw-line</label>
+			<size>8</size>
+		</RequisitionLine_lineNumber>
+		<RequisitionLine_itemNumber>
+			<label>brw-itemNumber</label>
+			<size>15</size>
+			<hidden-input>Y</hidden-input>
+		</RequisitionLine_itemNumber>
+		<RequisitionLine_quantity>
+			<label>quantity</label>
+			<size>15</size>
+			<type>QtyDecimal</type>
+			<hidden-input>Y</hidden-input>
+			<key>Y</key>
+			<alias>quantity</alias>
+		</RequisitionLine_quantity>
+		<RequisitionLine_commodityCode>
+			<label>commodity</label>
+			<size>15</size>
+		</RequisitionLine_commodityCode>
+		<RequisitionLine_unitPrice>
+			<label>brw-unitPrice</label>
+			<type>DollarDecimal</type>
+			<size>15</size>
+		</RequisitionLine_unitPrice>
+		<RequisitionLine_umCode>
+			<label>brw-uom</label>
+			<size>10</size>
+		</RequisitionLine_umCode>
+		<c_checkbox>
+			<label>select</label>
+			<type>Checkbox</type>
+			<size>5</size>
+			<selectsql>N</selectsql>
+			<store-request-value>Y</store-request-value>
+		</c_checkbox>
+		<RequisitionLine_description>
+			<label>description</label>
+			<detail>Y</detail>
+			<size>100</size>
+		</RequisitionLine_description>
+		<RequisitionLine_catalogId>
+			<label>brw-catalogId</label>
+			<detail>Y</detail>
+			<size>20</size>
+		</RequisitionLine_catalogId>
+		<RequisitionLine_mfgName>
+			<label>manufacturer</label>
+			<detail>Y</detail>
+			<size>40</size>
+		</RequisitionLine_mfgName>
+		<RequisitionLine_modelNumber>
+			<label>brw-manufacturer</label>
+			<detail>Y</detail>
+			<size>40</size>
+		</RequisitionLine_modelNumber>
+		<RequisitionLine_udf1Code>
+			<label>UDF 1</label>
+			<detail>Y</detail>
+			<size>33</size>
+		</RequisitionLine_udf1Code>
+		<RequisitionLine_udf2Code>
+			<label>UDF 2</label>
+			<detail>Y</detail>
+			<size>34</size>
+		</RequisitionLine_udf2Code>
+		<RequisitionLine_udf3Code>
+			<label>UDF 3</label>
+			<detail>Y</detail>
+			<size>33</size>
+		</RequisitionLine_udf3Code>
+	</columns>
+	<group-filters>
+		<RequisitionLine_catalogId>
+			<label>catalog</label>
+			<sqlselect>select Catalog.catalogId, count(RequisitionLine.catalogId)</sqlselect>
+			<sqlfrom>Catalog as Catalog, RequisitionLine as RequisitionLine</sqlfrom>
+			<sqlwhere><![CDATA[Catalog.catalogId = RequisitionLine.catalogId]]></sqlwhere>
+			<sqlgroupby>Catalog.catalogId</sqlgroupby>
+		</RequisitionLine_catalogId>
+		<RequisitionLine_commodityCode>
+			<label>commodity</label>
+			<sqlselect>select Commodity.commodity, count(RequisitionLine.commodityCode)</sqlselect>
+			<sqlfrom>Commodity as Commodity, RequisitionLine as RequisitionLine</sqlfrom>
+			<sqlwhere><![CDATA[Commodity.commodity = RequisitionLine.commodityCode]]></sqlwhere>
+			<sqlgroupby>Commodity.commodity</sqlgroupby>
+		</RequisitionLine_commodityCode>
+		<RequisitionLine_unitPrice>
+			<label>brw-cost</label>
+			<type>CostRange</type>
+			<sqlselect>select CostRange.description, count(RequisitionLine.unitPrice), CostRange.minimumCost</sqlselect>
+			<sqlfrom>CostRange as CostRange, RequisitionLine as RequisitionLine</sqlfrom>
+			<sqlwhere><![CDATA[CostRange.minimumCost <= RequisitionLine.unitPrice and CostRange.maximumCost >= RequisitionLine.unitPrice and CostRange.itemType = 'REQ']]></sqlwhere>
+			<sqlgroupby>CostRange.minimumCost, CostRange.description</sqlgroupby>
+		</RequisitionLine_unitPrice>
+		<RequisitionLine_description>
+			<label>brw-keyword(s)</label>
+			<type>Keywords</type>
+		</RequisitionLine_description>
+	</group-filters>
+	<sqlfrom>RequisitionLine as RequisitionLine</sqlfrom>
+	<sqlwhere><![CDATA[RequisitionLine.status = '1035' and RequisitionLine.assignedBuyer = :as_userid]]></sqlwhere>
+	<sqlorderby>RequisitionLine.requisitionNumber ASC</sqlorderby>
+	<title>Requisition Items Browse</title>
+	<pagesize>10</pagesize>
+</browse_requisitionline-for-purchasing>
+

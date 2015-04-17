@@ -1,0 +1,37 @@
+<browse_commodity>
+	<columns>
+		<Commodity_commodity>
+			<label><![CDATA[brw-commoditycode]]></label>
+			<sort>A</sort>
+			<link><![CDATA[javascript: returnMe('#Commodity_commodity^'); void(0);]]></link>
+			<size>15</size>
+		</Commodity_commodity>
+		<Commodity_description>
+			<label><![CDATA[description]]></label>
+			<hidden-input>Y</hidden-input>
+			<filter-default>Y</filter-default>
+			<size>60</size>
+		</Commodity_description>
+		<Commodity_buyerCode>
+			<label><![CDATA[brw-buyerName]]></label>
+			<size>15</size>
+            <type>USER-ID</type>
+		</Commodity_buyerCode>
+		<Commodity_taxable>
+			<label><![CDATA[brw-taxable]]></label>
+	        <hidden-input>Y</hidden-input>
+		</Commodity_taxable>
+		<Commodity_iclLevel>
+			<label><![CDATA[brw-iclLevel]]></label>
+			<hidden>Y</hidden>
+	        <visible>0</visible>
+	        <hidden-input>Y</hidden-input>
+	        <size>15</size>
+		</Commodity_iclLevel>
+	</columns>
+<sqlfrom>Commodity as Commodity</sqlfrom>
+<sqlwhere><![CDATA[ (Commodity.status = '02' OR (Commodity.status = '01' AND Commodity.dateExpires >= :as_today)) ]]></sqlwhere>
+<sqlorderby>Commodity.commodity ASC</sqlorderby>
+<pagesize>15</pagesize>
+<title>Commodity Browse</title>
+</browse_commodity>

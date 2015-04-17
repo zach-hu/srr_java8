@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="bomMethodRetrieveByItem" connection-type="Connection-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="retrieveBomMethodByItem">
+			<task synchronous="true" continue-on-failure="false" name="bomMethodList">
+				<task-object-name>com.tsa.puridiom.bommethod.tasks.BomMethodRetrieveByItem</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+	</activities>
+</process>

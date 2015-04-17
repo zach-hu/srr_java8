@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="poCreateFromContract" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="poCreateFromContract">
+			<task synchronous="true" continue-on-failure="false" name="poCreateFromContractSetup">
+				<task-object-name>com.tsa.puridiom.po.tasks.PoCreateFromContractSetup</task-object-name>
+			</task>
+			<!--task synchronous="true" continue-on-failure="false" name="UpdateContractPoHeaderStatus">
+				<task-object-name>com.tsa.puridiom.poheader.tasks.PoHeaderUpdateOrderContractStatus</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="UpdateContractPoLineStatus">
+				<task-object-name>com.tsa.puridiom.poline.tasks.PoLineUpdateOrderContractStatus</task-object-name>
+				<post-action></post-action>
+			</task-->
+			<task synchronous="true" continue-on-failure="false" name="poGenerateNumber">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>po-saveas.xml</process-filename>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="requisitionLineStatusUpdate">
+				<task-object-name>com.tsa.puridiom.poline.tasks.PoLineUpdateReqLineStatusByList</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

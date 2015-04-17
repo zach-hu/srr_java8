@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="invoiceAddressCreate" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="invoiceAddressCreate">
+			<task synchronous="true" continue-on-failure="false" name="InvoiceAddress_addressCode">
+    			<task-object-name>com.tsa.puridiom.invoiceaddress.tasks.InvoiceAddressGetNextAddressCode</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="invoiceAddress">
+    			<task-object-name>com.tsa.puridiom.invoiceaddress.tasks.InvoiceAddressCreate</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="newAddress">
+    			<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+    			<process-filename>invoiceaddress-add.xml</process-filename>
+			</task>
+		</activity>
+	</activities>
+</process>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="recentrfq-add" connection-type="New-Transaction">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="recentRfqSetup">
+		    <task synchronous="true" continue-on-failure="false" name="recentRfqSetup">			
+				<task-object-name>com.tsa.puridiom.recentrfq.tasks.RecentRfqSetupFromRfqHeader</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="recentRfq">
+				<task-object-name>com.tsa.puridiom.recentrfq.tasks.RecentRfqRetrieveById</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="recentRfqAdd">
+			<rule-filename>is-recentrfq-empty.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="recentRfq">
+				<task-object-name>com.tsa.puridiom.recentrfq.tasks.RecentRfqSetValues</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="recentRfq">
+				<task-object-name>com.tsa.puridiom.recentrfq.tasks.RecentRfqAdd</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>
+

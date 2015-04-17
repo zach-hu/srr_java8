@@ -1,0 +1,64 @@
+<browse_ReportQueue>
+	<columns>
+		<ReportQueue_icReportQueue>
+			<label>brw-reportCode</label>
+			<visible>0</visible>
+		</ReportQueue_icReportQueue>
+		<ReportQueue_alias>
+			<label>name</label>
+			<link><![CDATA[javascript: viewReportQueue('#ReportQueue_name^','#ReportQueue_icReportQueue^'); void(0);]]></link>
+			<size>40</size>
+			<visible>1</visible>
+		</ReportQueue_alias>
+		<ReportQueue_module>
+			<label>brw-module</label>
+			<visible>0</visible>
+		</ReportQueue_module>
+		<ReportQueue_type>
+			<label>poType</label>
+			<visible>0</visible>
+		</ReportQueue_type>
+		<ReportQueue_owner>
+			<label>owner</label>
+			<type>USER-ID</type>
+			<visible>0</visible>
+		</ReportQueue_owner>
+		<ReportQueue_name>
+			<label>name</label>
+			<visible>0</visible>
+		</ReportQueue_name>
+		<ReportQueue_frequency>
+			<label>brw-frequency</label>
+			<type>REPORTQUEUE-FREQUENCY</type>
+			<size>10</size>
+			<visible>1</visible>
+		</ReportQueue_frequency>
+		<ReportQueue_startDate>
+			<label>Start Date</label>
+			<type>DATE</type>
+			<size>12</size>
+			<visible>1</visible>
+		</ReportQueue_startDate>
+		<ReportQueue_endDate>
+			<label>End Date</label>
+			<type>DATE</type>
+			<size>12</size>
+			<visible>1</visible>
+		</ReportQueue_endDate>
+		<ReportQueue_sendTo>
+			<label>brw-sendTo</label>
+			<type>EMAIL</type>
+			<size>26</size>
+			<visible>1</visible>
+		</ReportQueue_sendTo>
+		<ReportQueue_nextRun>
+			<label>brw-nextRun</label>
+			<type>DATE</type>
+			<visible>0</visible>
+		</ReportQueue_nextRun>
+</columns>
+<sqlfrom>ReportQueue as ReportQueue</sqlfrom>
+<sqlwhere><![CDATA[ReportQueue.publicView = 'Y']]></sqlwhere>
+<pagesize>15</pagesize>
+<title>Reports</title>
+</browse_ReportQueue>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="bomManufacturerUpdate" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="updateBomManufacturer">
+			<task synchronous="true" continue-on-failure="false" name="bomManufacturer">
+				<task-object-name>com.tsa.puridiom.bommanufacturer.tasks.BomManufacturerRetrieveById</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="bomManufacturer">
+				<task-object-name>com.tsa.puridiom.bommanufacturer.tasks.BomManufacturerSetValues</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="bomManufacturer">
+				<task-object-name>com.tsa.puridiom.bommanufacturer.tasks.BomManufacturerUpdate</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+	</activities>
+</process>

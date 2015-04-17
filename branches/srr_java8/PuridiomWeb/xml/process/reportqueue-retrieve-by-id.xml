@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="reportQueueRetrieve" connection-type="Connection-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="reportQueueRetrieve">
+			<task synchronous="true" continue-on-failure="false" name="check">
+				<task-object-name>com.tsa.puridiom.reportqueue.tasks.ReportQueueIdCheck</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="reportQueue">
+				<task-object-name>com.tsa.puridiom.reportqueue.tasks.ReportQueueRetrieveById</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="optionsReport">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>report-get-options.xml</process-filename>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="whereClauseList">
+				<task-object-name>com.tsa.puridiom.reportqueue.tasks.ReportQueueWhereClauseDecod</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="reportUserList">
+				<task-object-name>com.tsa.puridiom.reportuser.tasks.ReportUserRetrieveByReportQueueId</task-object-name>
+			</task>
+<!--
+			<task synchronous="true" continue-on-failure="false" name="userProfile">
+				<task-object-name>com.tsa.puridiom.userprofile.tasks.UserProfileRetrieveAll</task-object-name>
+			</task>
+-->
+		</activity>
+	</activities>
+</process>

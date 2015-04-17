@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="disbHeaderRetrieveAll" connection-type="Connection-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="retrieveAlldisbheader">
+			<task synchronous="true" continue-on-failure="false" name="disbHeader">			
+				<task-object-name>com.tsa.puridiom.disbheader.tasks.DisbHeaderRetrieveAll</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+	</activities>
+</process>

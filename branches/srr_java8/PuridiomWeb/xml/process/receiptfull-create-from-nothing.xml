@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="receiptFullCreateFromNothing" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="receiptFullCreateFromNothing">
+			<task synchronous="true" continue-on-failure="false" name="receiptFullCreateFromNothingSetup">
+				<task-object-name>com.tsa.puridiom.receipt.tasks.ReceiptFullCreateFromNothingSetup</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="receiptHeader">
+				<task-object-name>com.tsa.puridiom.receiptheader.tasks.ReceiptHeaderSetValues</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="receiptHeaderAdd">
+				<task-object-name>com.tsa.puridiom.receiptheader.tasks.ReceiptHeaderAdd</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

@@ -1,0 +1,23 @@
+<rule>
+	<clause type="Rule">
+		<rule-filename>is-vendorregister-vendorein-not-empty.xml</rule-filename>
+	</clause>
+	<logical-operator>AND</logical-operator>
+	<clause type="Rule">
+		<rule-filename>is-registeruser-vendorein-not-empty.xml</rule-filename>
+	</clause>
+	<logical-operator>AND</logical-operator>
+	<clause type="StringCompare">
+		<left-side>
+			<source>incomingRequestObjectMethod</source>
+			<object>registerUser</object>
+			<name>getVendorEin</name>
+		</left-side>
+		<operator>EQUALS</operator>
+		<right-side>
+			<source>incomingRequestObjectMethod</source>
+			<object>vendorRegister</object>
+			<name>getVendorEin</name>
+		</right-side>
+	</clause>
+</rule>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="" connection-type="Connection-Required">
+	<rule-filename></rule-filename>
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="getShipto">
+			<task synchronous="true" continue-on-failure="false" name="getShipTo">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>get-shipto-location.xml</process-filename>
+			</task>
+		</activity>
+		<!-- activity synchronous="true" continue-on-failure="false" name="getTotalReceived">
+			<task synchronous="true" continue-on-failure="false" name="receipts">
+				<task-object-name>com.tsa.puridiom.receipt.tasks.</task-object-name>
+			</task>
+		</activity -->
+		<activity synchronous="true" continue-on-failure="false" name="updateOnOrder">
+			<task synchronous="true" continue-on-failure="false" name="invItem">
+				<task-object-name>com.tsa.puridiom.po.tasks.PoUpdateOnOrderSetup</task-object-name>
+			</task>			
+			<task synchronous="true" continue-on-failure="false" name="invItem">
+				<task-object-name>com.tsa.puridiom.invitem.tasks.InvItemRetrieveById</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="invLocation">
+				<task-object-name>com.tsa.puridiom.invlocation.tasks.InvLocationRetrieveById</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="qtyOnOrder">
+				<task-object-name>com.tsa.puridiom.po.tasks.PoGetQtyOnOrder</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="updateOnOrder">
+				<task-object-name>com.tsa.puridiom.invlocation.tasks.InvLocationUpdateOnOrder</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

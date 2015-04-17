@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="rfqBidUpdate" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="submitRfqBidHistory">
+			<task synchronous="true" continue-on-failure="false" name="idCheck">
+				<task-object-name>com.tsa.puridiom.supplierportal.InvokeSupplierPortalProcessTask</task-object-name>
+				<process-filename>rfqbidhistory-header-line-vendor-check.xml</process-filename>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="idCheck">
+				<task-object-name>com.tsa.puridiom.supplierportal.InvokeSupplierPortalProcessTask</task-object-name>
+				<process-filename>rfqbidhistory-price-quantity-check.xml</process-filename>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="RfqBidHistory_processName">
+				<task-object-name>com.tsa.puridiom.rfqbidhistory.tasks.RfqBidHistorySetProcessName</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="RfqBidHistory_lastSequence">
+				<task-object-name>com.tsa.puridiom.rfqbidhistory.tasks.RfqBidHistoryGetLastSequence</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="RfqBidHistory_bidSequence">
+				<task-object-name>com.tsa.puridiom.rfqbidhistory.tasks.RfqBidHistorySetNextSequence</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="rfqBidHistoryList">
+				<task-object-name>com.tsa.puridiom.rfqbidhistory.tasks.RfqBidHistoryListSave</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+	</activities>
+</process>

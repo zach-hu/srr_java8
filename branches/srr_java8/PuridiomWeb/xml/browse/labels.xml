@@ -1,0 +1,106 @@
+<browse_labels>
+	<columns>
+		<Labels_icLabel>
+	        <hidden>Y</hidden>
+			<hidden-input>Y</hidden-input>
+			<key>Y</key>
+		</Labels_icLabel>
+		<Labels_labelCode>
+			<hidden>Y</hidden>
+			<hidden-input>Y</hidden-input>
+		</Labels_labelCode>
+		<Labels_labelCode>
+			<hidden>Y</hidden>
+			<hidden-input>Y</hidden-input>
+		</Labels_labelCode>
+		<Labels_labelCode>
+			<label><![CDATA[brw-labelcode]]></label>
+			<link><![CDATA[javascript: getLabelHelp('#Labels_labelCode^','#Labels_module^','#Labels_moduleType^'); void(0);]]></link>
+			<size>21</size>
+			<concatenate>
+				<col>Labels_labelCode</col>
+			</concatenate>
+			<type>UPPERCASE</type>
+			<sort>A</sort>
+		</Labels_labelCode>
+		<Labels_labelValue>
+			<label><![CDATA[brw-labelvalue]]></label>
+			<size>24</size>
+			<text-input>Y</text-input>
+			<input-size>34</input-size>
+			<store-request-value>Y</store-request-value>
+		</Labels_labelValue>
+		<Labels_abbreviation>
+			<label><![CDATA[brw-abbreviation]]></label>
+			<size>12</size>
+			<input-size>14</input-size>
+			<text-input>Y</text-input>
+			<store-request-value>Y</store-request-value>
+		</Labels_abbreviation>
+		<Labels_hoverHelp>
+			<label><![CDATA[brw-hoverhelp]]></label>
+			<size>23</size>
+			<text-input>Y</text-input>
+			<input-size>32</input-size>
+			<detail>N</detail>
+			<store-request-value>Y</store-request-value>
+		</Labels_hoverHelp>
+		<Labels_visible>
+			<label><![CDATA[brw-labelvisible]]></label>
+			<size>5</size>
+			<checkbox>Y</checkbox>
+			<align>center</align>
+			<hidden-input>Y</hidden-input>
+			<store-request-value>Y</store-request-value>
+		</Labels_visible>
+		<Labels_required>
+			<label><![CDATA[brw-labelrequired]]></label>
+			<size>5</size>
+			<checkbox>Y</checkbox>
+			<align>center</align>
+			<hidden-input>Y</hidden-input>
+			<store-request-value>Y</store-request-value>
+		</Labels_required>
+		<Labels_validation>
+			<label><![CDATA[brw-labelvalidation]]></label>
+			<size>5</size>
+			<checkbox>Y</checkbox>
+			<align>center</align>
+			<hidden-input>Y</hidden-input>
+			<store-request-value>Y</store-request-value>
+		</Labels_validation>
+		<Link_validationInfo>
+			<link><![CDATA[javascript: triggerLabelDetails(); void(0);]]></link>
+			<linkImage>plus.gif</linkImage>
+			<selectsql>N</selectsql>
+			<align>center</align>
+			<type>ConditionalLink</type>
+		</Link_validationInfo>
+		<Labels_validationMessage>
+			<label><![CDATA[brw-validationMessage]]></label>
+			<size>100</size>
+			<text-input>Y</text-input>
+			<input-size>100</input-size>
+			<detail>Y</detail>
+			<store-request-value>Y</store-request-value>
+		</Labels_validationMessage>
+		<Labels_validationSeverity>
+			<label><![CDATA[brw-validationSeverity]]></label>
+			<size>100</size>
+			<select-input>Y</select-input>
+			<arguments>
+				<col type="E">Error</col>
+				<col type="W">Warning</col>
+			</arguments>
+			<input-size>20</input-size>
+			<detail>Y</detail>
+			<store-request-value>Y</store-request-value>
+		</Labels_validationSeverity>
+	</columns>
+<sqlfrom>Labels as Labels</sqlfrom>
+<sqlwhere><![CDATA[(Labels.status = '03' or Labels.status = '02') and Labels.allowEdit = 'Y'  ]]></sqlwhere>
+<sqlorderby>Labels.labelCode ASC</sqlorderby>
+<pagesize>50</pagesize>
+<detail-visible>N</detail-visible>
+<title>Labels Management</title>
+</browse_labels>

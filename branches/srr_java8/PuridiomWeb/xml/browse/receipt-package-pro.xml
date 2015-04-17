@@ -1,0 +1,51 @@
+<browse-receipt-package>
+	<columns>
+		<ReceiptHeader_icRecHeader>
+			<label>brw-icRecHeader</label>
+	        <hidden>Y</hidden>
+	        <visible>0</visible>
+		</ReceiptHeader_icRecHeader>
+		<ReceiptHeader_receiptNumber>
+			<label>brw-receiptNumber</label>
+			<sort>D</sort>
+			<link><![CDATA[javascript: viewReceipt('#ReceiptHeader_icRecHeader^'); void(0);]]></link>
+			<size>10</size>
+		</ReceiptHeader_receiptNumber>
+		<ReceiptHeader_receiptType>
+			<label>brw-receiptType</label>
+			<type>RECEIPT-TYPE</type>
+			<size>15</size>
+		</ReceiptHeader_receiptType>
+		<ReceiptHeader_receiptStatus>
+			<label>brw-receiptStatus</label>
+			<type>STATUS</type>
+			<size>15</size>
+		</ReceiptHeader_receiptStatus>
+		<ReceiptHeader_receiptDate>
+			<label>brw-receiptDate</label>
+			<type>DATE</type>
+			<size>15</size>
+		</ReceiptHeader_receiptDate>
+		<ReceiptHeader_forwardTo>
+			<label>brw-forwardTo</label>
+			<type>USER-ID</type>
+			<size>20</size>
+		</ReceiptHeader_forwardTo>
+		<TrackingData_trackingNumber>
+			<label>PRO #</label>
+			<!-- selectsql>N</selectsql>
+			<allowfilter>Y</allowfilter>
+			<hidden>N</hidden-->
+		</TrackingData_trackingNumber>
+	</columns>
+<sqlfrom>ReceiptHeader as ReceiptHeader, TrackingData as TrackingData</sqlfrom>
+<sqlwhere><![CDATA[ReceiptHeader.receiptNumber is not null
+	and ReceiptHeader.receiptNumber <> 'null'
+	and ReceiptHeader.receiptNumber <> 'N/A'
+	and ReceiptHeader.receiptType = 'A'
+	and ReceiptHeader.icRecHeader = TrackingData.id.icHeader
+	]]></sqlwhere>
+<sqlorderby>ReceiptHeader.receiptNumber DESC, ReceiptHeader.receiptDate DESC</sqlorderby>
+<pagesize>15</pagesize>
+<title>Receipt Package Browse</title>
+</browse-receipt-package>

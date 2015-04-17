@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="rfqline-update" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="rfqLineSetupActivity">
+			<task synchronous="true" continue-on-failure="false" name="rfqLine">
+				<rule-filename>is-rfqline-empty.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.rfqline.tasks.RfqLineRetrieveById</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="rfqLineYoda">
+			<rule-filename check-for-false="true">is-rfqline-empty.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="rfqLineUpdateSetup">
+				<task-object-name>com.tsa.puridiom.rfqline.tasks.RfqLineUpdateSetup</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="rfqLine">
+				<task-object-name>com.tsa.puridiom.rfqline.tasks.RfqLineSetValues</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="rfqLine">
+				<task-object-name>com.tsa.puridiom.rfqline.tasks.RfqLineUpdate</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="rfqHeaderUpdate">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>rfqheader-update-status.xml</process-filename>
+			</task>
+			<!-- task synchronous="true" continue-on-failure="false" name="rfqLineHistory">
+		  		<task-object-name>com.tsa.puridiom.rfqline.history.tasks.RfqLineHistory</task-object-name>
+			</task -->
+		</activity>
+	</activities>
+</process>

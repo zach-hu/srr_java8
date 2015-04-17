@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="appRulesExtRetrieveByRuleType" connection-type="Connection-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="appRulesExtRetrieveByRuleType">
+			<task synchronous="true" continue-on-failure="false" name="appRulesExtList">
+				<task-object-name>com.tsa.puridiom.apprulesext.tasks.AppRulesExtRetrieveByRuleType</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="ruleFilenameList">
+				<task-object-name>com.tsa.puridiom.apprulesext.tasks.AppRulesExtRetrieveXmlFileOptions</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

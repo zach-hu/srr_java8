@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="departmentDelete" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="deleteDepartment">
+			<task synchronous="true" continue-on-failure="false" name="department">
+				<task-object-name>com.tsa.puridiom.department.tasks.DepartmentDeleteById</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="departmentbuyer">
+				<task-object-name>com.tsa.puridiom.departmentbuyer.tasks.DepartmentBuyerDeleteByDept</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+	</activities>
+</process>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rule>
+	<clause type="lookup">
+	<sql>from XrefCombo XrefCombo where XrefCombo.code1 = '@fld1@' and XrefCombo.code2 = '@fld2@' and XrefCombo.code3 = '@fld3@' and XrefCombo.code4 = '@fld4@'</sql>
+		<source>invBinLocation</source>
+		<arguments>
+			<name>fld1</name>
+			<source>account</source>
+			<colName>getAisle</colName>
+		</arguments>
+		<arguments>
+			<name>fld2</name>
+			<source>account</source>
+			<colName>getLocrow</colName>
+		</arguments>
+		<arguments>
+			<name>fld3</name>
+			<source>account</source>
+			<colName>getTier</colName>
+		</arguments>
+		<arguments>
+			<name>fld4</name>
+			<source>account</source>
+			<colName>getBin</colName>
+		</arguments>
+	</clause>
+</rule>

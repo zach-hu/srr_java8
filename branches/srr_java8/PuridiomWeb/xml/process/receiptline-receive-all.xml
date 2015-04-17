@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="receiptLineRetrieveByHeader" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="receiptLineRetrieveByHeader">
+			<task synchronous="true" continue-on-failure="false" name="receiptLineRetrieveAll">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>receiptline-retrieve-by-header.xml</process-filename>
+			</task>
+
+			<task synchronous="true" continue-on-failure="false" name="receiptLineList">
+				<task-object-name>com.tsa.puridiom.receiptline.tasks.ReceiptLineReceiveAll</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

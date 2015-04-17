@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="requisitionForward" connection-type="Transaction-Required">
+  <activities>
+  	<activity continue-on-failure="false" synchronous="true" name="loadRequisition">
+	    <task synchronous="true" continue-on-failure="false" name="loadRequisition">
+			<rule-filename>is-requisitionheader-empty.xml</rule-filename>
+    		<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+    		<process-filename>requisition-retrieve.xml</process-filename>
+		</task>
+	</activity>
+    <activity synchronous="true" continue-on-failure="false" name="requisitionBudgetUpdate">
+      <rule-filename>is-budget-request;is-account-budget-module-active</rule-filename>
+      <task synchronous="true" continue-on-failure="false" name="requisitionForwardBudgetSetup">
+        <task-object-name>com.tsa.puridiom.requisition.tasks.RequisitionForwardBudgetSetup</task-object-name>
+        <post-action></post-action>
+      </task>
+      <task synchronous="true" continue-on-failure="false" name="budgetCheck">
+        <task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+        <process-filename>requisition-budget-check.xml</process-filename>
+        <post-action></post-action>
+      </task>
+      <task synchronous="true" continue-on-failure="false" name="requisitionBudgetCenterUpdate">
+        <task-object-name>com.tsa.puridiom.budgetcenter.tasks.BudgetCenterUpdateList</task-object-name>
+        <post-action></post-action>
+      </task>
+      <task synchronous="true" continue-on-failure="false" name="requisitionBudgetAuditUpdate">
+        <task-object-name>com.tsa.puridiom.budgetaudit.tasks.BudgetAuditUpdateList</task-object-name>
+        <post-action></post-action>
+      </task>
+    </activity>
+  </activities>
+</process>

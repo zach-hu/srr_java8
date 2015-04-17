@@ -1,0 +1,25 @@
+<rule>
+	<clause type="StringCompare">
+		<left-side>
+			<source>incomingRequest</source>
+			<name>addBinList</name>
+		</left-side>
+		<operator>NOTEQUAL</operator>
+		<right-side>
+			<source>constant</source>
+			<value>true</value>
+		</right-side>
+	</clause>
+	<logical-operator>OR</logical-operator>
+	<clause type="BigDecimalCompare">
+		<left-side>
+			<source>incomingRequest</source>
+			<name>InvBinLocation_qtyReceived</name>
+		</left-side>
+		<operator>GREATER</operator>
+		<right-side>
+			<source>constant</source>
+			<value>0.0000</value>
+		</right-side>
+	</clause>
+</rule>

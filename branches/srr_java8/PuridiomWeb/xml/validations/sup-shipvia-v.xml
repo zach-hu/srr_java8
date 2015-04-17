@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rule>
+	<clause type="Empty">
+		<left-side>
+			<source>incomingRequestObjectMethod</source>
+			<object>vendor</object>
+			<name>getShipVia</name>
+		</left-side>
+	</clause>
+	<logical-operator>OR</logical-operator>
+	<clause type="lookup">
+		<sql> from StdTable as StdTable where StdTable.id.tableType = 'SHP' AND StdTable.id.tableKey = '@shipvia@' AND (StdTable.status = '02' OR (StdTable.status = '01' AND StdTable.dateExpires >= @today@))</sql>
+		<source>vendor</source>
+		<arguments>
+			<name>shipvia</name>
+			<source>vendor</source>
+			<colName>getShipVia</colName>
+		</arguments>
+	</clause>
+</rule>

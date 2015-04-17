@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="requisitionRoutingCopyRevised" connection-type="Connection-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="invoiceRoutingList">
+			<task synchronous="true" continue-on-failure="false" name="approverListVsrrProj">
+				<task-object-name>com.tsa.puridiom.invoice.tasks.InvoiceApproverListVsrrProj</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="routingList">
+				<task-object-name>com.tsa.puridiom.invoice.approvals.tasks.SetupApproversFromPoSubType</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+	</activities>
+</process>
+

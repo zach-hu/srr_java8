@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created using an evaluation version of JasperAssistant (http://www.jasperassistant.com) -->
+<!DOCTYPE jasperReport PUBLIC "-//JasperReports//DTD Report Design//EN" "http://jasperreports.sourceforge.net/dtds/jasperreport.dtd">
+
+<jasperReport name="reqline" pageWidth="569" pageHeight="842" columnWidth="569" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+	<property name="com.jasperassistant.designer.GridHeight" value="12"/>
+	<property name="com.jasperassistant.designer.GridWidth" value="12"/>
+	<property name="com.jasperassistant.designer.SnapToGrid" value="false"/>
+	<property name="com.jasperassistant.designer.Grid" value="false"/>
+	<import value="com.tsa.puridiom.common.utility.HiltonUtility"/>
+	<reportFont name="Verdana" isDefault="true" fontName="Verdana" size="9" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Verdana_bold" isDefault="false" fontName="Verdana" size="9" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<parameter name="oid" class="java.lang.String">
+		<defaultValueExpression><![CDATA["test"]]></defaultValueExpression>
+	</parameter>
+	<field name="RequisitionLine_description" class="java.lang.String"/>
+	<field name="RequisitionLine_itemNumber" class="java.lang.String"/>
+	<field name="RequisitionLine_lineNumber" class="java.math.BigDecimal"/>
+	<field name="RequisitionLine_lineTotal" class="java.math.BigDecimal"/>
+	<field name="RequisitionLine_quantity" class="java.math.BigDecimal"/>
+	<field name="RequisitionLine_umCode" class="java.lang.String"/>
+	<field name="RequisitionLine_unitPrice" class="java.math.BigDecimal"/>
+	<field name="RequisitionLine_umFactor" class="java.math.BigDecimal"/>
+	<variable name="extendedPrice" class="java.math.BigDecimal">
+		<variableExpression><![CDATA[((BigDecimal)$F{RequisitionLine_unitPrice}).multiply(((BigDecimal)$F{RequisitionLine_quantity})).multiply(((BigDecimal)$F{RequisitionLine_umFactor}))]]></variableExpression>
+	</variable>
+	<detail>
+		<band height="31">
+			<textField pattern="###0." isBlankWhenNull="true">
+				<reportElement positionType="Float" mode="Opaque" x="0" y="0" width="24" height="15" backcolor="#F3F3F3"/>
+				<box borderColor="#FFFFFF" padding="1"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{RequisitionLine_lineNumber}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" mode="Opaque" x="24" y="0" width="66" height="15" backcolor="#F3F3F3"/>
+				<box borderColor="#FFFFFF" padding="1"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[HiltonUtility.getFormattedQuantity($F{RequisitionLine_quantity}, $P{oid})]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement positionType="Float" x="90" y="0" width="5" height="15" forecolor="#F3F3F3" backcolor="#F3F3F3"/>
+				<graphicElement/>
+			</rectangle>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" mode="Opaque" x="95" y="0" width="57" height="15" backcolor="#F3F3F3"/>
+				<box borderColor="#FFFFFF" padding="1"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{RequisitionLine_umCode}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" mode="Opaque" x="152" y="0" width="281" height="15" backcolor="#F3F3F3"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{RequisitionLine_itemNumber}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00#" isBlankWhenNull="true">
+				<reportElement positionType="Float" mode="Opaque" x="433" y="0" width="59" height="15" backcolor="#F3F3F3"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{RequisitionLine_unitPrice}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00#" isBlankWhenNull="true">
+				<reportElement positionType="Float" mode="Opaque" x="492" y="0" width="76" height="15" backcolor="#F3F3F3"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{extendedPrice}]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="0" y="15" width="152" height="15" forecolor="#F3F3F3" backcolor="#F3F3F3">
+					<printWhenExpression><![CDATA[new Boolean($F{RequisitionLine_description}.length() > 0)]]></printWhenExpression>
+				</reportElement>
+				<graphicElement/>
+			</rectangle>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" mode="Opaque" x="152" y="15" width="281" height="15" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true" backcolor="#F3F3F3"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{RequisitionLine_description}]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="433" y="15" width="135" height="15" forecolor="#F3F3F3" backcolor="#F3F3F3">
+					<printWhenExpression><![CDATA[new Boolean($F{RequisitionLine_description}.length() > 0)]]></printWhenExpression>
+				</reportElement>
+				<graphicElement/>
+			</rectangle>
+		</band>
+	</detail>
+	<summary>
+		<band height="5">
+			<rectangle>
+				<reportElement positionType="Float" x="0" y="0" width="569" height="5" backcolor="#F3F3F3"/>
+				<graphicElement/>
+			</rectangle>
+		</band>
+	</summary>
+</jasperReport>

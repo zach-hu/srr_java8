@@ -1,0 +1,41 @@
+<browse_inv_approval_list>
+	<columns>
+		<InvItem_itemNumber>
+			<label>brw-itemNumber</label>
+			<size>15</size>
+			<link><![CDATA[javascript: retrieveInventoryApproval('#InvItem_itemNumber^','#InvItem_source^'); void(0);]]></link>
+			<hidden-input>Y</hidden-input>
+			<!-- type>InvItem</type -->
+		</InvItem_itemNumber>
+		<InvItem_commodity>
+			<label>commodity</label>
+			<size>15</size>
+			<hidden-input>Y</hidden-input>
+		</InvItem_commodity>
+		<InvItem_description>
+			<label>description</label>
+			<size>60</size>
+		</InvItem_description>
+		<InvItem_unitOfOrder>
+			<label>Unit of Order</label>
+			<size>4</size>
+		</InvItem_unitOfOrder>
+		<InvItem_cost>
+			<label>Cost</label>
+			<type>BigDecimal</type>
+			<size>6</size>
+		</InvItem_cost>
+		<InvItem_imageFile>
+			<hidden>Y</hidden>
+		</InvItem_imageFile>
+		<InvItem_source>
+			<hidden>Y</hidden>
+			<hidden-input>Y</hidden-input>
+		</InvItem_source>
+	</columns>
+	<sqlfrom>InvItem as InvItem, ApprovalLog as ApprovalLog</sqlfrom>
+	<sqlwhere><![CDATA[InvItem.icHeaderHistory = ApprovalLog.id.icHeader AND InvItem.approveStatus = '5115' AND ApprovalLog.approved = 'A' ]]>
+	</sqlwhere>
+	<sqlorderby>InvItem.itemNumber ASC</sqlorderby>
+	<title>Inventory Waiting My Approval</title>
+</browse_inv_approval_list>

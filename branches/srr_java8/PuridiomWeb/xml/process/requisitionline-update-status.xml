@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="requisitionline-update" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="requisitionLineSetupActivity">
+			<task synchronous="true" continue-on-failure="false" name="requisitionLine">
+				<rule-filename>is-requisitionline-empty.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.requisitionline.tasks.RequisitionLineRetrieveById</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="requisitionLineYoda">
+			<rule-filename check-for-false="true">is-requisitionline-empty.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="requisitionLineUpdateSetup">
+				<task-object-name>com.tsa.puridiom.requisitionline.tasks.RequisitionLineUpdateSetup</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="requisitionLine">
+				<task-object-name>com.tsa.puridiom.requisitionline.tasks.RequisitionLineSetValues</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="requisitionLine">
+				<task-object-name>com.tsa.puridiom.requisitionline.tasks.RequisitionLineUpdate</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="requisitionHeaderUpdate">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>requisitionheader-update-status.xml</process-filename>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="RequisitionLineHistory">
+		  		<task-object-name>com.tsa.puridiom.requisitionline.history.tasks.RequisitionLineHistory</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

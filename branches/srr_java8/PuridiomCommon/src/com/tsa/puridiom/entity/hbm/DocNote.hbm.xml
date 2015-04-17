@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+    
+<hibernate-mapping>
+
+<class 
+    name="com.tsa.puridiom.entity.DocNote" 
+    table="DOC_NOTE"
+>
+    <id
+        name="icNotes"
+        type="java.math.BigDecimal"
+        column="IC_NOTES"
+    >
+        <generator class="assigned" />
+    </id>
+    <property
+        name="notes"
+        type="java.lang.String"
+        column="NOTES"
+        length="2000"
+    />
+    <property
+        name="referenceType"
+        type="java.lang.String"
+        column="REFERENCE_TYPE"
+        length="3"
+    />
+    <property
+        name="idReference"
+        type="java.lang.String"
+        column="ID_REFERENCE"
+        length="70"
+    />
+
+    <!-- associations -->
+
+</class>
+</hibernate-mapping>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="SendQueueRetrieveByStatus" connection-type="New-Connection">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="SendQueueRetrieveByStatus">
+			<task synchronous="true" continue-on-failure="false" name="resetNotificationSetup">
+				<task-object-name>com.tsa.puridiom.alerts.tasks.SendQueueResetPoHTENSetup</task-object-name>
+				<post-action />
+			  </task>
+			  <task synchronous="true" continue-on-failure="false" name="approvalLog">
+				<task-object-name>com.tsa.puridiom.po.approvals.tasks.ApprovalLogRetrieveByPendingApproval</task-object-name>
+				<post-action />
+			  </task>
+			<task synchronous="true" continue-on-failure="false" name="retrieveRequisition">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>po-retrieve.xml</process-filename>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="approvalLogList">
+		        <task-object-name>com.tsa.puridiom.po.approvals.tasks.ApprovalLogRetrieveByHeader</task-object-name>
+		        <post-action></post-action>
+		      </task>
+			<task synchronous="true" continue-on-failure="false" name="resetNotificationSetup">
+				<task-object-name>com.tsa.puridiom.alerts.tasks.ResetEmailNotificationSetup</task-object-name>
+				<post-action />
+			  </task>
+			<!-- email -->
+			  <task continue-on-failure="false" name="queueAddOrderRequest" synchronous="true">
+				<task-object-name>com.tsa.puridiom.po.approvals.tasks.QueueAddPoApproverEmail</task-object-name>
+			  </task>
+		  </activity>
+	 </activities>
+</process>

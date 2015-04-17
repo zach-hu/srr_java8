@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="InvPropertyAdd" connection-type="None"> 
+	<activities>
+		  <activity synchronous="true" continue-on-failure="false" name="invPropertyAdd">
+			<task synchronous="true" continue-on-failure="false" name="invPropertyAddById">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>invproperty-add-by-id.xml</process-filename>
+			</task>
+		</activity>  
+	 </activities> 
+</process>

@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created using an evaluation version of JasperAssistant (http://www.jasperassistant.com) -->
+<!DOCTYPE jasperReport PUBLIC "-//JasperReports//DTD Report Design//EN" "http://jasperreports.sourceforge.net/dtds/jasperreport.dtd">
+
+<jasperReport name="BarbecueReport" pageWidth="252" pageHeight="81" orientation="Landscape" whenNoDataType="BlankPage" columnWidth="250" leftMargin="1" rightMargin="1" topMargin="1" bottomMargin="1">
+	<property name="com.jasperassistant.designer.Units" value="Inches"/>
+	<import value="net.sourceforge.barbecue.BarcodeFactory"/>
+	<field name="PoHeader_poNumber" class="java.lang.String">
+		<fieldDescription><![CDATA[Po Number]]></fieldDescription>
+	</field>
+	<field name="PoLine_description" class="java.lang.String">
+		<fieldDescription><![CDATA[Description]]></fieldDescription>
+	</field>
+	<field name="PoHeader_vendorName" class="java.lang.String">
+		<fieldDescription><![CDATA[Vendor Name]]></fieldDescription>
+	</field>
+	<field name="PoLine_itemNumber" class="java.lang.String">
+		<fieldDescription><![CDATA[Item Number]]></fieldDescription>
+	</field>
+	<field name="PoLine_altItemNumber" class="java.lang.String">
+		<fieldDescription><![CDATA[altItemNumber]]></fieldDescription>
+	</field>
+	<field name="PoHeader_departmentCode" class="java.lang.String"/>
+	<field name="PoLine_udf5Code" class="java.lang.String"/>
+	<field name="InvProperty_tagNumber" class="java.lang.String"/>
+	<field name="InvProperty_serialNumber" class="java.lang.String"/>
+	<detail>
+		<band height="76">
+			<staticText>
+				<reportElement x="1" y="2" width="33" height="13"/>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[PO:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="36" y="2" width="59" height="13"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{PoHeader_poNumber}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="86" y="2" width="50" height="13"/>
+				<textElement textAlignment="Right"/>
+				<text><![CDATA[Vendor:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="138" y="2" width="94" height="13"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{PoHeader_vendorName}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="138" y="12" width="93" height="13"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{PoLine_udf5Code}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="86" y="12" width="50" height="14"/>
+				<textElement textAlignment="Right"/>
+				<text><![CDATA[Location:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="36" y="12" width="45" height="13"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{PoHeader_departmentCode}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="1" y="12" width="33" height="13"/>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[ORG:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1" y="23" width="33" height="13"/>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[GPIN:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="36" y="23" width="59" height="13"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{InvProperty_tagNumber}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="86" y="23" width="50" height="14"/>
+				<textElement textAlignment="Right"/>
+				<text><![CDATA[SRL:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="138" y="23" width="95" height="13"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{InvProperty_serialNumber}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="36" y="33" width="118" height="13"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{PoLine_itemNumber}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="1" y="33" width="33" height="13"/>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[NSN:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1" y="43" width="33" height="13"/>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[DESC:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="36" y="43" width="194" height="13"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{PoLine_description}]]></textFieldExpression>
+			</textField>
+			<image scaleImage="FillFrame" hAlign="Center">
+				<reportElement positionType="Float" x="1" y="56" width="237" height="18"/>
+				<graphicElement/>
+				<imageExpression class="net.sf.jasperreports.engine.JRRenderable"><![CDATA[new net.sf.jasperreports.renderers.BarbecueRendererVSE(BarcodeFactory.createCode39($F{PoLine_itemNumber},true))]]></imageExpression>
+			</image>
+		</band>
+	</detail>
+</jasperReport>

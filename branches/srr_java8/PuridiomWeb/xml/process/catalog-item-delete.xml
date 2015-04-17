@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="catalogItemDelete" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="catalogItemDelete">
+			<!--<task synchronous="true" continue-on-failure="false" name="catalog">
+				<rule-filename></rule-filename>
+				<task-object-name>com.tsa.puridiom.catalog.tasks.CatalogItemDeleteSetup</task-object-name>
+				<post-action></post-action>
+			</task>-->
+			<task synchronous="true" continue-on-failure="false" name="catalog">			
+				<task-object-name>com.tsa.puridiom.catalog.tasks.CatalogItemDeleteById</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+	</activities>
+</process>

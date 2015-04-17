@@ -1,0 +1,19 @@
+<browse_workcenter>
+	<columns>
+		<InvWorkCenter_workCenterId>
+			<label>brw-workCenterId</label>
+			<sort>A</sort>
+			<link><![CDATA[javascript: returnMe('#InvWorkCenter_workCenterId^'); void(0);]]></link>
+			<size>15</size>
+		</InvWorkCenter_workCenterId>
+		<InvWorkCenter_description>
+			<label>description</label>
+			<size>50</size>
+		</InvWorkCenter_description>
+	</columns>
+<sqlfrom>InvWorkCenter as InvWorkCenter</sqlfrom>
+<sqlwhere><![CDATA[ (InvWorkCenter.status <> '03') ]]></sqlwhere>
+<sqlorderby>InvWorkCenter.workCenterId ASC</sqlorderby>
+<pagesize>15</pagesize>
+<title>Work Center Browse</title>
+</browse_workcenter>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rule>
+	<clause type="NotEmpty">
+		<left-side>
+			<source>incomingRequestObjectMethod</source>
+			<object>requisitionHeader</object>
+			<name>getOwner</name>
+		</left-side>
+	</clause>
+	<logical-operator>AND</logical-operator>
+	<clause type="lookup">
+		<sql>from UserProfile as UserProfile where UserProfile.userId = '@owner@' and UserProfile.fpe = 'Y'</sql>
+		<source>requisitionHeader</source>
+		<arguments>
+			<name>owner</name>
+			<source>requisitionHeader</source>
+			<colName>getOwner</colName>
+		</arguments>
+	</clause>
+</rule>

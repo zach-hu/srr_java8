@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PoHeader>
+	<columns>
+		<PoHeader_poNumber>
+			<label>Order Number</label>
+			<type>STRING</type>
+		</PoHeader_poNumber>
+		<PoHeader_releaseNumber>
+			<label>Release Number</label>
+			<type>STRING</type>
+		</PoHeader_releaseNumber>
+		<PoHeader_revisionNumber>
+			<label>Revision Number</label>
+			<type>STRING</type>
+		</PoHeader_revisionNumber>
+		<PoHeader_poType>
+			<label>Order Type</label>
+			<type>STRING</type>
+		</PoHeader_poType>
+		<PoHeader_poDate>
+			<label>Order Date</label>
+			<type>STRING</type>
+		</PoHeader_poDate>
+		<PoHeader_status>
+			<label>Order Status</label>
+			<type>STRING</type>
+		</PoHeader_status>
+		<PoHeader_buyerCode>
+			<label>Buyer Code</label>
+			<type>STRING</type>
+		</PoHeader_buyerCode>
+		<PoHeader_effectiveDate>
+			<label>Effective Date</label>
+			<type>STRING</type>
+		</PoHeader_effectiveDate>
+		<PoHeader_expirationDate>
+			<label>Expiration Date</label>
+			<type>STRING</type>
+		</PoHeader_expirationDate>
+		<PoHeader_vendorId>
+			<label>Supplier Id</label>
+			<type>STRING</type>
+		</PoHeader_vendorId>
+		<PoHeader_requiredDate>
+			<label>Required Date</label>
+			<type>STRING</type>
+		</PoHeader_requiredDate>
+		<PoHeader_requisitionerCode>
+			<label>Requisitioner Code</label>
+			<type>STRING</type>
+		</PoHeader_requisitionerCode>
+		<PoHeader_departmentCode>
+			<label>Department Code</label>
+			<type>STRING</type>
+		</PoHeader_departmentCode>
+		<PoHeader_icPoHeader>
+			<label>Po Header Ic</label>
+			<type>STRING</type>
+		</PoHeader_icPoHeader>
+		<PoHeader_currencyCode>
+			<label>Currency Code</label>
+			<type>STRING</type>
+		</PoHeader_currencyCode>
+		<PoHeader_total>
+			<label>Order Total</label>
+			<type>STRING</type>
+		</PoHeader_total>
+		<PoHeader_currencyFactor>
+			<label>Currency Factor</label>
+			<type>STRING</type>
+		</PoHeader_currencyFactor>
+		<PoHeader_shippingTax>
+			<label>Shipping Tax</label>
+			<type>STRING</type>
+		</PoHeader_shippingTax>
+		<PoHeader_otherTax>
+			<label>Other Tax</label>
+			<type>STRING</type>
+		</PoHeader_otherTax>
+		<PoHeader_taxAmount>
+			<label>Order Tax</label>
+			<type>STRING</type>
+		</PoHeader_taxAmount>
+		<Vendor_vendorClass>
+			<label>Vendor Class</label>
+			<type>STRING</type>
+		</Vendor_vendorClass>
+		<PoHeader_revisionDate>
+			<label>Revision Date</label>
+			<type>STRING</type>
+		</PoHeader_revisionDate>
+		<PoHeader_udf1Code>
+			<label>UDF 1 Code</label>
+			<type>STRING</type>
+		</PoHeader_udf1Code>
+		<PoHeader_udf2Code>
+			<label>UDF 2 Code</label>
+			<type>STRING</type>
+		</PoHeader_udf2Code>
+		<PoHeader_udf3Code>
+			<label>UDF 3 Code</label>
+			<type>STRING</type>
+		</PoHeader_udf3Code>
+		<PoHeader_udf4Code>
+			<label>UDF 4 Code</label>
+			<type>STRING</type>
+		</PoHeader_udf4Code>
+		<PoHeader_udf5Code>
+			<label>UDF 5 Code</label>
+			<type>STRING</type>
+		</PoHeader_udf5Code>
+		<PoHeader_udf6Code>
+			<label>UDF 6 Code</label>
+			<type>STRING</type>
+		</PoHeader_udf6Code>
+		<PoHeader_udf7Code>
+			<label>UDF 7 Code</label>
+			<type>STRING</type>
+		</PoHeader_udf7Code>
+		<PoHeader_udf8Code>
+			<label>UDF 8 Code</label>
+			<type>STRING</type>
+		</PoHeader_udf8Code>
+		<PoHeader_udf9Code>
+			<label>UDF 9 Code</label>
+			<type>STRING</type>
+		</PoHeader_udf9Code>
+		<PoHeader_udf10Code>
+			<label>UDF 10 Code</label>
+			<type>STRING</type>
+		</PoHeader_udf10Code>
+		<PoHeader_taxCode>
+			<label>Tax Code</label>
+			<type>STRING</type>
+		</PoHeader_taxCode>
+		<PoHeader_contractNo>
+			<label>Contract No</label>
+			<type>STRING</type>
+		</PoHeader_contractNo>
+		<PoHeader_shipToCode>
+			<label>Ship To Code</label>
+			<type>STRING</type>
+		</PoHeader_shipToCode>
+		<PoHeader_vendorName>
+			<label>Supplier Name</label>
+			<type>STRING</type>
+		</PoHeader_vendorName>
+	</columns>
+	<sqlfrom>PoHeader as PoHeader, Vendor as Vendor</sqlfrom>
+	<sqlwhere>(PoHeader.vendorId = Vendor.vendorId ) and (PoHeader.poNumber &lt;&gt; 'N/A')	and (( PoHeader.lastRevision = 'C') and  (PoHeader.status &lt;&gt; '9010' ) and (PoHeader.poType &lt;&gt; 'NO' ))</sqlwhere>
+	<sqlorderby>PoHeader.poNumber ASC</sqlorderby>
+	<pagesize>15</pagesize>
+	<title>Purchase Order Summary Report</title>
+</PoHeader>
+

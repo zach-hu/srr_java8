@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- set connection-type="None" because connection will be obtained in HostUserAdd w/ host.cfg.xml -->
+<process name="hostUserAdd" connection-type="None" ldap-connection-type="None">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="hostUserAdd">
+			<task synchronous="true" continue-on-failure="false" name="hostUser">
+				<task-object-name>com.tsa.puridiom.hostuser.tasks.HostUserSetValues</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="hostUser">
+				<task-object-name>com.tsa.puridiom.hostuser.tasks.HostUserAdd</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

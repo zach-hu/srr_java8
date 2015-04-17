@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="poCreatefromreq" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="RetrieveSourceCreate">
+			<task synchronous="true" continue-on-failure="false" name="requisitionHeader">
+				<task-object-name>com.tsa.puridiom.requisitionheader.tasks.RequisitionHeaderRetrieveById</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="bidWaiverCheck">
+			<rule-filename>is-check-bidwaiver.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="needBidWaiver">
+				<task-object-name>com.tsa.puridiom.requisition.tasks.NoBidWaiver</task-object-name>
+				<post-action>exitProcess</post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="poCreate">
+			<task synchronous="true" continue-on-failure="false" name="poCreateSetup">
+				<task-object-name>com.tsa.puridiom.poheader.tasks.PoHeaderSetup</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="poCreateSetup">
+				<task-object-name>com.tsa.puridiom.po.tasks.PoCreateSetup</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="MapUserUdfs">
+				<task-object-name>com.tsa.puridiom.po.tasks.PoUserMap</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="MapReqUdfs">
+				<task-object-name>com.tsa.puridiom.po.tasks.PoReqMapUdfs</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="poCreateFromReqSetup">
+				<task-object-name>com.tsa.puridiom.po.tasks.PoCreateFromReqSetup</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="getCurrencyFactor">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+		        <process-filename>get-currency-factor.xml</process-filename>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="poHeader">
+				<task-object-name>com.tsa.puridiom.poheader.tasks.PoHeaderSetValues</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity continue-on-failure="false" synchronous="true" name="loadSupplier">
+		    <task synchronous="true" continue-on-failure="false" name="loadSupplier">
+				<rule-filename>is-vendor-not-empty.xml</rule-filename>
+    			<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+    			<process-filename>po-load-supplier.xml</process-filename>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="CreatePo">
+			<task synchronous="true" continue-on-failure="false" name="poHeader">
+				<task-object-name>com.tsa.puridiom.poheader.tasks.PoHeaderAdd</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="PoHeaderSaveasfromReq">
+			<task synchronous="true" continue-on-failure="false" name="poHeaderCommentSaveas">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>poheader-saveas-from-req.xml</process-filename>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="PoLineCreateFromReq">
+			<task synchronous="true" continue-on-failure="false" name="requisitionLines">
+				<task-object-name>com.tsa.puridiom.requisitionline.tasks.RequisitionLineRetrieveByHeader</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="requisitionLinesToCopy">
+				<rule-filename check-for-false="true">is-autoaward-process.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.requisitionline.tasks.RequisitionLineNotOnOrder</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="requisitionLinesToCopy">
+				<rule-filename>is-autoaward-process.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.requisitionline.tasks.RequisitionLineNotOnOrderAutoawardByLine</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="PoLineCreateFromReq">
+			<rule-filename>is-there-reqLines-tocopy.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="poLineCreateFromReq">
+				<task-object-name>com.tsa.puridiom.poline.tasks.PoLineLoadReqLines</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="recalculate">
+			<task synchronous="true" continue-on-failure="false" name="poHeaderCommentSaveas">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>po-recalculate.xml</process-filename>
+			</task>
+    	</activity>
+    	<activity synchronous="true" continue-on-failure="false" name="updatePoHeaderStatus">	
+			<task synchronous="true" continue-on-failure="false" name="poLineSetAwardedByList">
+				<task-object-name>com.tsa.puridiom.poline.tasks.PoLineSetAwardedByList</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="requisitionLineStatusUpdate">
+				<task-object-name>com.tsa.puridiom.poline.tasks.PoLineUpdateReqLineStatusByList</task-object-name>
+				<post-action></post-action>
+			</task>
+	     	<task synchronous="true" continue-on-failure="false" name="poHeaderSetStatusByLineList">
+				<task-object-name>com.tsa.puridiom.poheader.tasks.PoHeaderSetStatusByLineList</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="updateStatus">
+				<task-object-name>com.tsa.puridiom.poheader.tasks.PoHeaderSetReqStatusByLineList</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="xmlOrder">
+				<task-object-name>com.tsa.puridiom.poline.tasks.PoLineSetXmlFlag</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="poReflectStatus">
+			<task synchronous="true" continue-on-failure="false" name="poReflectStatus">
+				<task-object-name>com.tsa.puridiom.po.tasks.PoReflectStatus</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+	</activities>
+</process>

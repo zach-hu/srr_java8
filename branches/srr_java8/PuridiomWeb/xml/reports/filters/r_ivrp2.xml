@@ -1,0 +1,89 @@
+<r_ivrp2>
+	
+  <columns>
+		<InvItem_commodity>
+			<label>Commodity</label>
+			<type>STRING</type>
+		</InvItem_commodity>
+		<InvBinLocation_maxOnHand>
+			<label>Max On Hand</label>
+			<type>BIGDECIMAL</type>
+		</InvBinLocation_maxOnHand>
+		<InvBinLocation_minOnHand>
+			<label>Min On Hand</label>
+			<type>BIGDECIMAL</type>
+		</InvBinLocation_minOnHand>
+		<InvBinLocation_qtyOnHand>
+			<label>Qty On Hand</label>
+			<type>BIGDECIMAL</type>
+		</InvBinLocation_qtyOnHand>
+		<InvBinLocation_qtyOnOrder>
+			<label>Qty On Order</label>
+			<type>BIGDECIMAL</type>
+		</InvBinLocation_qtyOnOrder>
+		<InvItem_unitOfOrder>
+			<label>Unit Of Order</label>
+			<type>STRING</type>
+		</InvItem_unitOfOrder>
+		<InvBinLocation_udf1Code>
+			<label>Udf 1 Code</label>
+			<type>STRING</type>
+		</InvBinLocation_udf1Code>
+		<InvBinLocation_udf2Code>
+			<label>Udf 2 Code</label>
+			<type>STRING</type>
+		</InvBinLocation_udf2Code>
+		<InvBinLocation_udf3Code>
+			<label>Udf 3 Code</label>
+			<type>STRING</type>
+		</InvBinLocation_udf3Code>
+		<InvBinLocation_udf4Code>
+			<label>Udf 4 Code</label>
+			<type>STRING</type>
+		</InvBinLocation_udf4Code>
+		<InvBinLocation_udf5Code>
+			<label>Udf 5 Code</label>
+			<type>STRING</type>
+		</InvBinLocation_udf5Code>
+		<InvItem_description>
+			<label>Description</label>
+			<type>STRING</type>
+		</InvItem_description>
+		<InvBinLocation_qtyRequested>
+			<label>Qty Requested</label>
+			<type>BIGDECIMAL</type>
+		</InvBinLocation_qtyRequested>
+		<InvBinLocation_qtyEoq>
+			<label>Qty Eoq</label>
+			<type>BIGDECIMAL</type>
+		</InvBinLocation_qtyEoq>
+		<InvBinLocation_itemNumber>
+			<label>Item Number</label>
+			<type>STRING</type>
+		</InvBinLocation_itemNumber>
+		<InvItem_udf1Code>
+			<label>Udf 1 Code</label>
+			<type>STRING</type>
+		</InvItem_udf1Code>
+		<InvItem_udf2Code>
+			<label>Udf 2 Code</label>
+			<type>STRING</type>
+		</InvItem_udf2Code>
+		<InvBinLocation_itemLocation>
+			<label>Item Location</label>
+			<type>STRING</type>
+		</InvBinLocation_itemLocation>
+		<InvBinLocation_qtyAlloc>
+			<label>Qty Alloc</label>
+			<type>BIGDECIMAL</type>
+		</InvBinLocation_qtyAlloc>
+	</columns>
+	
+  <sqlfrom> InvBinLocation as InvBinLocation , InvItem as InvItem </sqlfrom>
+	
+  <sqlwhere><![CDATA[(InvBinLocation.itemNumber = InvItem.itemNumber) and ((((InvBinLocation.qtyOnHand - InvBinLocation.qtyAlloc) + InvBinLocation.qtyOnOrder + InvBinLocation.qtyRequested) < InvBinLocation.minOnHand) and (InvItem.status <> '03' ))]]></sqlwhere>
+	
+  <title>InvBinLocation Items Requirements</title>
+
+</r_ivrp2>
+

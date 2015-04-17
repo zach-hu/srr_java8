@@ -1,0 +1,51 @@
+<browse_po_rfqbrowse>
+	<columns>
+		<RfqHeader_rfqType>
+			<label>poType</label>
+			<type>RFQ-TYPE</type>
+			<size>18</size>
+		</RfqHeader_rfqType>
+		<RfqHeader_icRfqHeader>
+	        <hidden>Y</hidden>
+		</RfqHeader_icRfqHeader>
+		<RfqHeader_rfqNumber>
+			<label>brw-solicitationNumber</label>
+			<!--<link><![CDATA[javascript: createOrderFromRfq('#RfqHeader_icRfqHeader^','#RfqHeader_rfqType^'); void(0);]]></link>-->
+			<link><![CDATA[javascript: selectItemsForOrder('#RfqHeader_icRfqHeader^','#RfqHeader_rfqType^'); void(0);]]></link>
+			<size>12</size>
+		</RfqHeader_rfqNumber>
+		<RfqHeader_rfqAmendment>
+			<label>brw-amendment</label>
+			<size>10</size>
+		</RfqHeader_rfqAmendment>
+		<RfqHeader_status>
+			<label>brw-status</label>
+			<type>STATUS</type>
+			<size>14</size>
+		</RfqHeader_status>
+		<RfqHeader_rfqDate>
+			<label>brw-solDate</label>
+			<type>DATE</type>
+			<size>10</size>
+		</RfqHeader_rfqDate>
+		<RfqHeader_dueDate>
+			<label>brw-dueDate</label>
+			<type>DATE</type>
+			<size>10</size>
+		</RfqHeader_dueDate>
+		<RfqHeader_buyer>
+			<label>brw-buyer</label>
+            <size>16</size>
+            <type>USER-ID</type>
+		</RfqHeader_buyer>
+		<RfqHeader_rfqDescription>
+			<label>purpose</label>
+			<detail>Y</detail>
+		</RfqHeader_rfqDescription>
+	</columns>
+<sqlfrom>RfqHeader as RfqHeader</sqlfrom>
+<sqlwhere><![CDATA[RfqHeader.status = '2020']]></sqlwhere>
+<sqlorderby>RfqHeader.rfqDate DESC</sqlorderby>
+<pagesize>15</pagesize>
+<title>Solicitation Selection</title>
+</browse_po_rfqbrowse>

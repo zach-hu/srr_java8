@@ -1,0 +1,45 @@
+<browse-country>
+	<columns>
+		<Country_countryCode>
+			<label>brw-countryCode</label>
+			<sort>A</sort>
+			<link><![CDATA[javascript: returnMe('#Country_countryCode^'); void(0);]]></link>
+			<size>12</size>
+		</Country_countryCode>
+		<Country_countryName>
+			<label>brw-countryName</label>
+			<size>26</size>
+			<hidden-input>Y</hidden-input>
+		</Country_countryName>
+		<Country_language>
+			<label>language</label>
+			<size>12</size>
+			<hidden-input>Y</hidden-input>
+		</Country_language>
+		<Country_currencyCode>
+			<label>currency</label>
+			<size>12</size>
+			<hidden-input>Y</hidden-input>
+		</Country_currencyCode>
+		<Country_timeZone>
+			<label>timezone</label>
+			<size>12</size>
+			<hidden-input>Y</hidden-input>
+		</Country_timeZone>
+		<Country_dateFormat>
+			<label>dateformat</label>
+			<size>13</size>
+			<hidden-input>Y</hidden-input>
+		</Country_dateFormat>
+		<Country_status>
+			<label>brw-status</label>
+			<type>STATUS</type>
+			<size>13</size>
+		</Country_status>
+	</columns>
+<sqlfrom>Country as Country</sqlfrom>
+<sqlwhere><![CDATA[ Country.status = '02' or (Country.status = '01' and Country.dateExpires >= :as_today) ]]></sqlwhere>
+<sqlorderby>Country.countryCode ASC</sqlorderby>
+<pagesize>15</pagesize>
+<title>Country Browse</title>
+</browse-country>

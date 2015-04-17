@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="appPoolUpdate" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="updateAppPool">
+			<task synchronous="true" continue-on-failure="false" name="appPool">
+				<task-object-name>com.tsa.puridiom.apppool.tasks.AppPoolRetrieveById</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="appPool">
+				<task-object-name>com.tsa.puridiom.apppool.tasks.AppPoolSetValues</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="appPool">
+				<task-object-name>com.tsa.puridiom.apppool.tasks.AppPoolUpdate</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="setAppPoolInCache">
+				<task-object-name>com.tsa.puridiom.apppool.AppPoolManagerSetAppPoolInCache</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

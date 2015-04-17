@@ -1,0 +1,24 @@
+<rule>
+	<clause type="IntegerCompare">
+		<left-side>
+			<source>incomingRequest</source>
+			<name>vendorIdCheckCount</name>
+		</left-side>
+		<operator>NOTEQUAL</operator>
+		<right-side>
+			<source>constant</source>
+		</right-side>
+	</clause>
+	<logical-operator>AND</logical-operator>
+	<clause type="IntegerCompare">
+		<left-side>
+			<source>incomingRequest</source>
+			<name>vendorIdCheckCount</name>
+		</left-side>
+		<operator>GREATER</operator>
+		<right-side>
+			<source>constant</source>
+			<value>9</value>
+		</right-side>
+	</clause>
+</rule>

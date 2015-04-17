@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="stdDocumentAdd" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="stdDocumentAdd">
+			<task synchronous="true" continue-on-failure="false" name="stdDocumentAddSetup">
+				<task-object-name>com.tsa.puridiom.stddocument.tasks.StdDocumentAddSetup</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="stdDocument">
+				<task-object-name>com.tsa.puridiom.stddocument.tasks.StdDocumentSetValues</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="stdQuestion">
+				<task-object-name>com.tsa.puridiom.stddocument.tasks.StdDocumentAdd</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

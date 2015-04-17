@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="userRegistrationEmail" connection-type="None" ldap-connection-type="None">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="emailAccountLoginInformation">
+			<task synchronous="true" continue-on-failure="false" name="resetPasswordLinkSetup">
+				<task-object-name>com.tsa.puridiom.resetpasswordlink.tasks.ResetPasswordLinkCreateSetup</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="resetPasswordLinkAdd">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>resetpasswordlink-add.xml</process-filename>
+			</task>
+			<task continue-on-failure="false" name="queueAddActivateLoginEmail" synchronous="true">
+				<task-object-name>com.tsa.puridiom.userregistration.tasks.QueueAddAccountActivationLinkEmail</task-object-name>
+			</task>
+			<task continue-on-failure="false" name="queueAddPuridiomEmail" synchronous="true">
+				<task-object-name>com.tsa.puridiom.userregistration.tasks.QueueAddOrganizationRegisteredEmail</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<InvoiceVoucherStatus>
+	
+    <columns>
+		<InvoiceHeader_invoiceNumber>
+			<label>Invoice Number</label>
+			<type>STRING</type>
+		</InvoiceHeader_invoiceNumber>
+		<InvoiceHeader_status>
+			<label>Status</label>
+			<type>STRING</type>
+		</InvoiceHeader_status>
+		<InvoiceHeader_invoiceType>
+			<label>Invoice Type</label>
+			<type>STRING</type>
+		</InvoiceHeader_invoiceType>
+		<InvoiceHeader_invoiceDate>
+			<label>Invoice Date</label>
+			<type>DATE</type>
+		</InvoiceHeader_invoiceDate>
+		<InvoiceHeader_dateEntered>
+			<label>Date Entered</label>
+			<type>DATE</type>
+		</InvoiceHeader_dateEntered>
+		<InvoiceHeader_poNumber>
+			<label>PO Number</label>
+			<type>STRING</type>
+		</InvoiceHeader_poNumber>
+		<InvoiceHeader_vendorId>
+			<label>Vendor ID</label>
+			<type>STRING</type>
+		</InvoiceHeader_vendorId>
+		<InvoiceHeader_vendorName>
+			<label>Vendor Name</label>
+			<type>STRING</type>
+		</InvoiceHeader_vendorName>
+		<InvoiceHeader_invoiceRejecting>
+			<label>Rejected Amount</label>
+			<type>BIGDECIMAL</type>
+		</InvoiceHeader_invoiceRejecting>
+		<InvoiceHeader_reasonCode>
+			<label>Reason Code</label>
+			<type>STRING</type>
+		</InvoiceHeader_reasonCode>
+		<InvoiceHeader_invoiceTotal>
+			<label>Invoice Total</label>
+			<type>BIGDECIMAL</type>
+		</InvoiceHeader_invoiceTotal>
+	</columns>
+	
+	
+	
+  <sqlfrom>InvoiceHeader as InvoiceHeader</sqlfrom>
+	
+	
+  <sqlwhere><![CDATA[ (InvoiceHeader.invoiceNumber <> 'N/A') and (InvoiceHeader.invoiceNumber is not NULL) ]]></sqlwhere>
+	
+	
+  <pagesize>15</pagesize>
+	
+	
+	
+  <title>Invoice Voucher Status Report</title>
+	
+	
+	
+
+
+
+</InvoiceVoucherStatus>
+

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="invFormPartAdd" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="invFormPartAdd">
+			<task synchronous="true" continue-on-failure="false" name="invFormPart">
+				<task-object-name>com.tsa.puridiom.invformpart.tasks.InvFormPartSetup</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="invFormPart">
+				<task-object-name>com.tsa.puridiom.invformpart.tasks.InvFormPartSetValues</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="invFormPart">
+				<task-object-name>com.tsa.puridiom.invformpart.tasks.InvFormPartAdd</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

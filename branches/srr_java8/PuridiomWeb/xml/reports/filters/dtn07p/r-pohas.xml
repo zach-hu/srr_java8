@@ -1,0 +1,161 @@
+<r-pohas>
+  <columns>
+		<PoHeader_poNumber>
+			<label>poNumber</label>
+			<type>STRING</type>
+			<distinct>Y</distinct>
+			<visible>1</visible>
+		</PoHeader_poNumber>
+		<PoHeader_releaseNumber>
+			<label>releaseNumber</label>
+			<type>BIGDECIMAL</type>
+			<!-- <distinct>Y</distinct> -->
+			<visible>1</visible>
+		</PoHeader_releaseNumber>
+		<PoHeader_revisionNumber>
+			<label>revisionNumber</label>
+			<type>BIGDECIMAL</type>
+			<visible>1</visible>
+		</PoHeader_revisionNumber>
+		<PoHeader_poType>
+			<label>poType</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</PoHeader_poType>
+		<PoHeader_buyerCode>
+			<label>buyerCode</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</PoHeader_buyerCode>
+		<PoHeader_status>
+			<label>Status</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</PoHeader_status>
+		<PoHeader_vendorId>
+			<label>vendorId</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</PoHeader_vendorId>
+		<PoHeader_poDate>
+			<label>poDate</label>
+			<type>DATE</type>
+			<visible>1</visible>
+		</PoHeader_poDate>
+		<PoHeader_requisitionerCode>
+			<label>requisitionerCode</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</PoHeader_requisitionerCode>
+		<PoHeader_departmentCode>
+			<label>departmentCode</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</PoHeader_departmentCode>
+		<PoHeader_requisitionNumber>
+			<label>requisitionNumber</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</PoHeader_requisitionNumber>
+		<PoHeader_shipToCode>
+			<label>shipToCode</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</PoHeader_shipToCode>
+		<PoHeader_total>
+			<label>Total</label>
+			<type>BIGDECIMAL</type>
+			<visible>1</visible>
+		</PoHeader_total>
+		<PoHeader_vendorName>
+			<label>vendorName</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</PoHeader_vendorName>
+		<PoHeader_requiredDate>
+			<label>requiredDate</label>
+			<type>DATE</type>
+			<visible>1</visible>
+		</PoHeader_requiredDate>
+		<PoHeader_appDate>
+			<label>App Date</label>
+			<type>DATE</type>
+			<visible>1</visible>
+		</PoHeader_appDate>
+		<PoHeader_appBy>
+			<label>po-appBy</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</PoHeader_appBy>
+		<PoHeader_appDate>
+			<label>App Date</label>
+			<type>DATE</type>
+			<visible>1</visible>
+		</PoHeader_appDate>
+		<UserProfile_firstName>
+			<label>First Name</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</UserProfile_firstName>
+		<UserProfile_lastName>
+			<label>Last Name</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</UserProfile_lastName>
+		<RequisitionHeader_authorizationCode>
+			<label>authorizationCode</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</RequisitionHeader_authorizationCode>
+		<RequisitionHeader_appBy>
+			<label>req-appBy</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</RequisitionHeader_appBy>
+		<RequisitionHeader_appDate>
+			<label>req-appDate</label>
+			<type>DATE</type>
+			<visible>1</visible>
+		</RequisitionHeader_appDate>
+		<RequisitionHeader_appSigned>
+			<label>req-appSigned</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</RequisitionHeader_appSigned>
+		<PoHeader_internalComments>
+			<label>internalComments</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</PoHeader_internalComments>
+		<PoHeader_currencyCode>
+			<label>Currency Code</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</PoHeader_currencyCode>
+		<PoHeader_currencyFactor>
+			<label>Currency Factor</label>
+			<type>BIGDECIMAL</type>
+			<visible>1</visible>
+		</PoHeader_currencyFactor>
+		<!-- <Account_id_sequence>
+			<label>Sequence</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</Account_id_sequence>
+		<Account_fld1>
+			<label>AC01</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</Account_fld1> -->
+		<Account_fld2>
+			<label>AC02</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</Account_fld2>
+	</columns>
+  <sqlfrom> PoHeader as PoHeader, UserProfile as UserProfile, RequisitionHeader as RequisitionHeader, Account as Account</sqlfrom>
+  <sqlwhere><![CDATA[ ( PoHeader.icReqHeader *= RequisitionHeader.icReqHeader ) and ( PoHeader.requisitionerCode *= UserProfile.userId ) and ( PoHeader.icPoHeader = Account.id.icHeader ) and ( PoHeader.lastRevision = 'C' ) and ( PoHeader.status > '3020' ) and ( PoHeader.status < '9020' ) and ( PoHeader.poDate >= :as_baseReportDate ) ]]></sqlwhere>
+  <sqlorderby>PoHeader.poNumber, PoHeader.releaseNumber</sqlorderby>
+  <title>Order Approver Summary Report</title>
+</r-pohas>
+

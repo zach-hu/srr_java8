@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="setContactName" connection-type="Connection-Required"> 
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="setContactName">
+			<task synchronous="true" continue-on-failure="false" name="contactNameSetup">
+				<task-object-name>com.tsa.puridiom.poheader.tasks.SetContactName</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="PoHeader_contactName">
+				<task-object-name>com.tsa.puridiom.contact.tasks.GetContactName</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="poHeader">
+				<task-object-name>com.tsa.puridiom.poheader.tasks.PoHeaderSetContactName</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

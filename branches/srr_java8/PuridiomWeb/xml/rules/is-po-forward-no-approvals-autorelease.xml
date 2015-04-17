@@ -1,0 +1,70 @@
+<rule>
+	<clause type="BooleanCompare">
+		<left-side>
+			<source>Singleton</source>
+			<object>com.tsa.puridiom.property.PropertiesManager</object>
+			<name>isModuleActive</name>
+			<argument-value>Po Approvals</argument-value>
+		</left-side>
+		<operator>NOTEQUAL</operator>
+		<right-side>
+			<source>constant</source>
+			<value>true</value>
+		</right-side>
+	</clause>
+	<logical-operator>OR</logical-operator>
+	<clause type="StringCompare">
+		<left-side>
+			<source>incomingRequest</source>
+			<name>createReleaseFromReq</name>
+		</left-side>
+		<operator>EQUALS</operator>
+		<right-side>
+			<source>constant</source>
+			<value>true</value>
+		</right-side>
+	</clause>
+	<logical-operator>OR</logical-operator>
+	<clause type="BooleanCompare">
+		<left-side>
+			<source>Singleton</source>
+			<object>com.tsa.puridiom.property.PropertiesManager</object>
+			<name>isModuleActive</name>
+			<argument-value>Po Approvals</argument-value>
+		</left-side>
+		<operator>EQUALS</operator>
+		<right-side>
+			<source>constant</source>
+			<value>true</value>
+		</right-side>
+	</clause>
+	<logical-operator>AND</logical-operator>
+	<clause type="StringCompare">
+		<left-side>
+			<source>Singleton</source>
+			<object>com.tsa.puridiom.property.PropertiesManager</object>
+				<name>getProperty</name>
+			<argument-value>PO APPROVALS</argument-value>
+			<argument-value>CONTRACTAPPROVALS</argument-value>
+			<argument-value>Y</argument-value>
+		</left-side>
+		<operator>NOTEQUAL</operator>
+		<right-side>
+			<source>constant</source>
+			<value>Y</value>
+		</right-side>
+	</clause>
+	<logical-operator>AND</logical-operator>
+	<clause type="StringCompare">
+		<left-side>
+			<source>incomingRequestObjectMethod</source>
+			<object>poHeader</object>
+			<name>getPoType</name>
+		</left-side>
+		<operator>EQUALS</operator>
+		<right-side>
+			<source>constant</source>
+			<value>CT</value>
+		</right-side>
+	</clause>
+</rule>

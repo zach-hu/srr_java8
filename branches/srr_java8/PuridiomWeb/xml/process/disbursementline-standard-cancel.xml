@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="CancelStandardDisbursementLine" connection-type="transaction-required">
+	<activities>
+		<!--Standard inventory will have only one disbline per requisitionline-->
+		<activity synchronous="true" continue-on-failure="false" name="DisbursementLineCancelSetup">
+			<task synchronous="true" continue-on-failure="false" name="disbLine">
+				<task-object-name>com.tsa.puridiom.disbline.tasks.DisbLineRetrieveById</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="setup">
+				<task-object-name>com.tsa.puridiom.disbline.tasks.DisbLineCancelSetup</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="invLocation">
+				<task-object-name>com.tsa.puridiom.invlocation.tasks.InvLocationRetrieveById</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="invLocation">
+				<task-object-name>com.tsa.puridiom.inventory.tasks.StandardUpdateInventoryCancelLine</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="requisitionLine">
+				<task-object-name>com.tsa.puridiom.requisitionline.tasks.RequisitionLineRetrieveById</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="requisitionLine">
+				<task-object-name>com.tsa.puridiom.inventory.tasks.RequisitionLineUpdateCancelStatus</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="disbHeader">
+				<task-object-name>com.tsa.puridiom.disbheader.tasks.DisbHeaderRetrieveById</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="RequisitionHeader_icReqHeader">
+				<task-object-name>com.tsa.puridiom.inventory.tasks.FindRequisitionHeaderIc</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="requisitionHeader">
+				<task-object-name>com.tsa.puridiom.requisitionheader.tasks.RequisitionHeaderRetrieveById</task-object-name>
+			</task>
+			<!--update documents-->
+			<task synchronous="true" continue-on-failure="false" name="invLocation">
+				<task-object-name>com.tsa.puridiom.invlocation.tasks.InvLocationUpdate</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="disbLine">
+				<task-object-name>com.tsa.puridiom.disbline.tasks.DisbLineUpdate</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="requisitionLine">
+				<task-object-name>com.tsa.puridiom.requisitionline.tasks.RequisitionLineUpdate</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="disbLines">
+				<task-object-name>com.tsa.puridiom.disbline.tasks.DisbLineRetrieveByHeader</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="requisitionHeader">
+				<task-object-name>com.tsa.puridiom.inventory.tasks.RequisitionHeaderUpdateCancelStatus</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="requisitionHeader">
+				<task-object-name>com.tsa.puridiom.requisitionheader.tasks.RequisitionHeaderUpdate</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

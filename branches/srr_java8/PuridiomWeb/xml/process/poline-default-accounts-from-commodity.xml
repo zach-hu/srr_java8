@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="requisitionline-update" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="retrieveAccountsLine">
+			<task synchronous="true" continue-on-failure="false" name="poLineAccountRetrieveSetup">
+				<task-object-name>com.tsa.puridiom.poline.tasks.PoLineAccountRetrieveSetup</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="accountList">
+				<task-object-name>com.tsa.puridiom.account.tasks.AccountRetrieveByLine</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="requisitionSetupDefaultAccount">
+			<rule-filename>is-account-list-empty.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="itemAccountAdd">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>commodity-retrieve-account.xml</process-filename>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="accountList">
+				<task-object-name>com.tsa.puridiom.requisitionline.tasks.RequisitionLineAccountSetDefaultValues</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="account">
+				<task-object-name>com.tsa.puridiom.account.tasks.ItemAccountSetup</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="account">
+				<task-object-name>com.tsa.puridiom.account.tasks.ItemAccountAdd</task-object-name>
+			</task>
+			<post-action>exitProcess</post-action>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="requisitionSetupDefaultExistAccount">
+			<rule-filename>is-account-default-commodity-all-item.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="itemAccountAdd">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>commodity-retrieve-account.xml</process-filename>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="accountList">
+				<task-object-name>com.tsa.puridiom.requisitionline.tasks.RequisitionLineAccountSetDefaultValues</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="accountListUpdate">
+				<task-object-name>com.tsa.puridiom.account.tasks.AccountListUpdate</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+	</activities>
+</process>

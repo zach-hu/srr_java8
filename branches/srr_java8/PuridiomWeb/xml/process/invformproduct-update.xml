@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="invFormProductUpdate" connection-type="New-Transaction">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="invFormProductDeleteByItem">
+			<task synchronous="true" continue-on-failure="false" name="invFormProductDeleteByItem">
+				<task-object-name>com.tsa.puridiom.invformproduct.tasks.InvFormProductDeleteByItem</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="invFormProductUpdateById">
+			<rule-filename>is-not-delete-all</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="invFormProductUpdateById">			
+				<task-object-name>com.tsa.puridiom.invformproduct.tasks.InvFormProductUpdateById</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+	</activities>
+</process>

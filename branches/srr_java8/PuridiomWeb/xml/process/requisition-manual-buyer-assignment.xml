@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="requisitionManualBuyerAssignment" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="buyerAssignment">
+			<task synchronous="true" continue-on-failure="false" name="requisitionLineAssigment">
+				<rule-filename>is-buyer-assignment-by-line.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.requisition.buyerassignment.tasks.ManualAssignmentByLine</task-object-name>
+				<post-action>exitProcess</post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="requisitionHeaderAssignment">
+				<task-object-name>com.tsa.puridiom.requisition.buyerassignment.tasks.ManualAssignmentByHeader</task-object-name>
+				<post-action>exitProcess</post-action>
+			</task>
+		</activity>
+	</activities>
+</process>

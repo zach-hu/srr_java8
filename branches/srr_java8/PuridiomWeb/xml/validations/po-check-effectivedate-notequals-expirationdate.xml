@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rule>
+	<clause type="DateCompare">
+		<left-side>
+			<source>incomingRequestObjectMethod</source>
+			<object>header</object>
+			<name>getExpirationDate</name>
+		</left-side>
+		<operator>NOTEQUAL</operator>
+		<right-side>
+			<source>incomingRequestObjectMethod</source>
+			<object>header</object>
+			<name>getEffectiveDate</name>
+		</right-side>
+	</clause>
+</rule>

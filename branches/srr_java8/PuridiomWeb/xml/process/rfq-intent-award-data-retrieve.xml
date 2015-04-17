@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="rfqRetrieve" connection-type="Connection-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="rfqHeaderDataRetrieve">
+			<task synchronous="true" continue-on-failure="false" name="rfqHeader">
+				<task-object-name>com.tsa.puridiom.rfqheader.tasks.RfqHeaderRetrieveById</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="rfqHeaderRetrieveSetup">
+				<task-object-name>com.tsa.puridiom.rfqheader.tasks.RfqHeaderRetrieveSetup</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="rfqVendorList">
+				<task-object-name>com.tsa.puridiom.rfqvendor.tasks.RfqVendorRetrieveByHeader</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="rfqHeaderCalculateBidTotals">
+			<!-- <rule-filename>is-print-total.xml</rule-filename>-->
+			<task synchronous="true" continue-on-failure="false" name="rfqVendorList">
+				<task-object-name>com.tsa.puridiom.rfqvendor.tasks.RfqVendorRetrieveBidList</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="rfqVendorList">
+				<task-object-name>com.tsa.puridiom.rfqvendor.tasks.RfqVendorCalculateTotals</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="rfqHeaderSplitVendors">
+			<task synchronous="true" continue-on-failure="false" name="rfqVendorAwardedList">
+				<rule-filename>is-rfq-on-order.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.rfqvendor.tasks.RfqVendorAwardedRetrieve</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="rfqVendorAwardedList">
+				<rule-filename check-for-false="true">is-rfq-on-order.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.rfqvendor.tasks.RfqVendorAwardedNotOnOrder</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="vendorsRejectedList">
+				<task-object-name>com.tsa.puridiom.rfqheader.tasks.RfqVendorToAwardRetrieveAddress</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="securityGroupRetrieveAll" connection-type="Connection-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="retrieveAllSecurityGroups">
+			<task synchronous="true" continue-on-failure="false" name="securityGroupList">			
+				<task-object-name>com.tsa.puridiom.securitygroup.tasks.SecurityGroupRetrieveAll</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+	</activities>
+</process>

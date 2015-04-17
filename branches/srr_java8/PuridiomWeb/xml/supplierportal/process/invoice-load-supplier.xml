@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="loadsupplier" connection-type="Connection-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="LoadSupplier">
+			<task synchronous="true" continue-on-failure="false" name="vendor">
+				<task-object-name>com.tsa.puridiom.vendor.tasks.VendorRetrieveById</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="VendorAddressRetrieve">
+			<task synchronous="true" continue-on-failure="false" name="vendorAddress">
+				<rule-filename>is-address-type-not-empty</rule-filename>
+				<task-object-name>com.tsa.puridiom.address.tasks.AddressRetrieveRemitTo</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="vendorAddress">
+				<rule-filename>is-vendor-address-empty;is-address-type-not-empty;is-address-code-not-empty</rule-filename>
+				<task-object-name>com.tsa.puridiom.address.tasks.AddressRetrieveById</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="vendorAddress">
+				<rule-filename>is-vendor-address-empty</rule-filename>
+				<task-object-name>com.tsa.puridiom.address.tasks.AddressRetrievePrimary</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="LoadSupplierFromOrder">
+			<task synchronous="true" continue-on-failure="false" name="loadOrderSupplierInfo">
+				<task-object-name>com.tsa.puridiom.invoicevendor.tasks.InvoiceVendorLoadOrderSupplier</task-object-name>
+			</task>
+		</activity>
+		<activity continue-on-failure="false" synchronous="true" name="loadSupplier">
+		    <task synchronous="true" continue-on-failure="false" name="loadSupplier">
+    			<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+    			<process-filename>invoicevendor-add.xml</process-filename>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="loadSupplier">
+    			<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+    			<process-filename>invoiceaddress-add.xml</process-filename>
+			</task>
+		</activity>
+	</activities>
+</process>

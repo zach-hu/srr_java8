@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="budgetCenterRetrieve" connection-type="Connection-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="budgetCenterRetrieve">
+			<task synchronous="true" continue-on-failure="false" name="check">
+				<task-object-name>com.tsa.puridiom.budgetcenter.tasks.BudgetCenterIdCheck</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="budgetCenter">
+				<task-object-name>com.tsa.puridiom.budgetcenter.tasks.BudgetCenterRetrieveById</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="budgetDrawerRetrieve">
+			<task synchronous="true" continue-on-failure="false" name="budgetDrawerList">
+				<task-object-name>com.tsa.puridiom.budgetdrawer.tasks.BudgetDrawerListRetrieveById</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

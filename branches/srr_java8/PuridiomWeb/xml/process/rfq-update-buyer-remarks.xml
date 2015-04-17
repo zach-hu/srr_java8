@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="rfq-update-buyer-remarks" connection-type="Connection-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="rfqUpdateBuyerRemarks">
+			<task synchronous="true" continue-on-failure="false" name="rfqLineList">
+				<task-object-name>com.tsa.puridiom.rfqline.tasks.RfqLineRetrieveByHeader</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="icReqHeaderList">
+				<task-object-name>com.tsa.puridiom.requisitionline.tasks.RequisitionLineListRetrieveIcReqHeaderList</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="requisitionUpdateBuyerRemarks">
+				<task-object-name>com.tsa.puridiom.requisition.tasks.RequisitionUpdateBuyerRemarks</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+	</activities>
+</process>

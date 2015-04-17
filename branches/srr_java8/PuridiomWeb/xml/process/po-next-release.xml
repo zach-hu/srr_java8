@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="GetReleaseNumber" connection-type="Transaction-Required">
+  <activities>
+      <activity synchronous="true" continue-on-failure="false" name="nextRelease">
+      <task synchronous="true" continue-on-failure="false" name="blanketType">
+        <task-object-name>com.tsa.puridiom.po.tasks.PoGetBlanketType</task-object-name>
+      </task>
+      <task synchronous="true" continue-on-failure="false" name="currentRelease">
+        <task-object-name>com.tsa.puridiom.po.tasks.PoGetLastRelease</task-object-name>
+      </task>
+      <task synchronous="true" continue-on-failure="false" name="PoHeader_releaseNumber">
+        <task-object-name>com.tsa.puridiom.po.tasks.PoUpdateBlanketLastRelease</task-object-name>
+      </task>
+    </activity>
+  </activities>
+</process>

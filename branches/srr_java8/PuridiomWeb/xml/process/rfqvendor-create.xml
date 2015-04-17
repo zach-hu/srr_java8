@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="rfqVendorCreate" connection-type="Connection-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="rfqVendorCreate">
+			<task synchronous="true" continue-on-failure="false" name="rfqHeader">			
+				<task-object-name>com.tsa.puridiom.rfqheader.tasks.RfqHeaderRetrieveById</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="rfqVendorSetup">			
+				<task-object-name>com.tsa.puridiom.rfqvendor.tasks.RfqVendorSetup</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="rfqVendorDefaults">			
+				<task-object-name>com.tsa.puridiom.rfqvendor.tasks.RfqVendorSetDefaultsFromHeader</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="rfqVendor">			
+				<task-object-name>com.tsa.puridiom.rfqvendor.tasks.RfqVendorSetValues</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

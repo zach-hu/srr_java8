@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="assetDelete" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="assetDelete">
+
+			<task synchronous="true" continue-on-failure="false" name="check">
+				<task-object-name>com.tsa.puridiom.assetservice.serv.tasks.AssetServiceTagNumberCheck</task-object-name>
+			</task>
+
+			<task synchronous="true" continue-on-failure="false" name="assetService">
+				<task-object-name>com.tsa.puridiom.assetservice.serv.tasks.AssetServiceDeleteByTagNumber</task-object-name>
+			</task>
+
+
+		</activity>
+	</activities>
+</process>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="accountUpdate" connection-type="New-Connection">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="generateReport">
+			<!-- <task synchronous="true" continue-on-failure="false" name="report">
+				<task-object-name>com.tsa.puridiom.jasperreports.requisitionline.RequisitionLineReport</task-object-name>
+				<post-action></post-action>
+			</task> -->
+			<task synchronous="true" continue-on-failure="false" name="report">
+				<task-object-name>com.tsa.puridiom.jasperreports.requisitionline.RequisitionLineReportHtml</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+	</activities>
+</process>

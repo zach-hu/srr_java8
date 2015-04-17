@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created using JasperAssistant (http://www.jasperassistant.com) -->
+<!DOCTYPE jasperReport PUBLIC "-//JasperReports//DTD Report Design//EN" "http://jasperreports.sourceforge.net/dtds/jasperreport.dtd">
+
+<jasperReport name="billtosb" pageWidth="226" pageHeight="70" columnWidth="226" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+	<property name="com.jasperassistant.designer.GridWidth" value="12"/>
+	<property name="com.jasperassistant.designer.GridHeight" value="12"/>
+	<property name="com.jasperassistant.designer.DataSource" value="oracle"/>
+	<property name="com.jasperassistant.designer.SnapToGrid" value="false"/>
+	<property name="com.jasperassistant.designer.Grid" value="false"/>
+	<parameter name="billtocode" class="java.lang.String">
+	</parameter>
+	<queryString><![CDATA[select ADDRESS_LINE_1 AddressLine1, ADDRESS_LINE_2 AddressLine2, ADDRESS_LINE_3 AddressLine3, city, STATE, POSTAL_CODE, COUNTRY  from ADDRESS where ADDRESS_TYPE = 'ADDR' AND ADDRESS_CODE =  $P{billtocode} AND bill_TO = 'Y']]></queryString>
+	<field name="Address_addressLine1" class="java.lang.String">
+	</field>
+	<field name="Address_addressLine2" class="java.lang.String">
+	</field>
+	<field name="Address_addressLine3" class="java.lang.String">
+	</field>
+	<field name="Address_city" class="java.lang.String">
+	</field>
+	<field name="Address_country" class="java.lang.String">
+	</field>
+	<field name="Address_postalCode" class="java.lang.String">
+	</field>
+	<field name="Address_state" class="java.lang.String">
+	</field>
+	<field name="Address_cityStatePostal" class="java.lang.String">
+	</field>
+	<detail>
+		<band height="70">
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" x="0" y="0" width="224" height="14"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{Address_addressLine1}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" x="0" y="14" width="224" height="14"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{Address_addressLine2}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" x="0" y="28" width="224" height="14"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{Address_addressLine3}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" x="0" y="41" width="224" height="14"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{Address_cityStatePostal}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" x="0" y="55" width="224" height="14"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{Address_country}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

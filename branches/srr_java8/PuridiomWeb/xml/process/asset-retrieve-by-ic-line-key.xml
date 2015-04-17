@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="assetRetrieve" connection-type="Connection-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="assetRetrieve">
+			<task synchronous="true" continue-on-failure="false" name="check">
+				<task-object-name>com.tsa.puridiom.asset.tasks.AssetIcLineKeyCheck</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="assetList">
+				<task-object-name>com.tsa.puridiom.asset.tasks.AssetRetrieveByIcLineKey</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

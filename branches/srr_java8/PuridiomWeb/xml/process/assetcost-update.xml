@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="assetCostUpdate" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="assetCostUpdate">
+			<task synchronous="true" continue-on-failure="false" name="assetCostValuesChanged">
+				<task-object-name>com.tsa.puridiom.assetcost.serv.tasks.AssetCostSetValuesChanged</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="assetCost">
+				<task-object-name>com.tsa.puridiom.assetcost.tasks.AssetCostSetValues</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="assetCost">
+				<task-object-name>com.tsa.puridiom.assetcost.tasks.AssetCostUpdate</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="assetUpdateCost">
+			<task synchronous="true" continue-on-failure="false" name="asset">
+        		<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+        		<process-filename>asset-retrieve-by-id.xml</process-filename>
+      		</task>
+			<task synchronous="true" continue-on-failure="false" name="assetCostList">
+        		<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+        		<process-filename>assetcost-retrieve-by-tagnumber.xml</process-filename>
+      		</task>
+      		<task synchronous="true" continue-on-failure="false" name="assetUpdateCost">
+        		<task-object-name>com.tsa.puridiom.asset.serv.tasks.AssetUpdateCost</task-object-name>
+      		</task>
+		</activity>
+	</activities>
+</process>

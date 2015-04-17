@@ -1,0 +1,84 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+    
+<hibernate-mapping>
+
+<!-- 
+    Created by Middlegen Hibernate plugin
+
+    http://boss.bekk.no/boss/middlegen/
+    http://hibernate.sourceforge.net/
+-->
+
+<class 
+    name="com.tsa.puridiom.entity.VendorQuestion" 
+    table="VENDOR_QUESTION"
+>
+    <id
+        name="icVendorQuestion"
+        type="java.math.BigDecimal"
+        column="IC_VENDOR_QUESTION"
+		length="38"
+    >
+        <generator class="assigned" />
+    </id>
+    <property
+        name="icRfqHeader"
+        type="java.math.BigDecimal"
+        column="IC_RFQ_HEADER"
+        length="38"
+    />
+    <property
+        name="vendorId"
+        type="java.lang.String"
+        column="VENDOR_ID"
+        length="15"
+    />
+    <property
+        name="questionTitle"
+        type="java.lang.String"
+        column="QUESTION_TITLE"
+        length="60"
+    />
+    <property
+        name="questionText"
+        type="java.lang.String"
+        column="QUESTION_TEXT"
+        length="255"
+    />
+    <property
+        name="datePosted"
+        type="java.sql.Timestamp"
+        column="DATE_POSTED"
+        length="7"
+    />
+    <property
+        name="timePosted"
+        type="java.lang.String"
+        column="TIME_POSTED"
+        length="8"
+    />
+    <property
+        name="responseText"
+        type="java.lang.String"
+        column="RESPONSE_TEXT"
+        length="255"
+    />
+    <property
+        name="responseDate"
+        type="java.sql.Timestamp"
+        column="RESPONSE_DATE"
+        length="7"
+    />
+    <property
+        name="responseTime"
+        type="java.lang.String"
+        column="RESPONSE_TIME"
+        length="8"
+    />
+    <!-- associations -->
+
+</class>
+</hibernate-mapping>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="browseRetrieve" connection-type="Connection-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false"
+			name="browseRetrieve">
+			<task synchronous="true" continue-on-failure="false" name="browseObject">
+				<task-object-name>com.tsa.puridiom.browse.tasks.GenerateBrowseObject</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="browseRetrieve">
+			<task synchronous="true" continue-on-failure="false" name="browseList">
+				<task-object-name>com.tsa.puridiom.fdcs.tasks.BrowseRetrieveWoElements</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="browseSetup">
+			<task synchronous="true" continue-on-failure="false" name="browse">
+				<task-object-name>com.tsa.puridiom.browse.tasks.BrowseSetup</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="setBrowseInCache">
+				<task-object-name>com.tsa.puridiom.browse.tasks.SetBrowseInCache</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="modeRetrieveAllRegisters">
+				<task-object-name>com.tsa.puridiom.browse.tasks.SetRetrieveAllRegisters</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

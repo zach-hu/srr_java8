@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<poobligation>
+  <columns>
+		<PoHeader_poType>
+			<label>PoType</label>
+			<type>STRING</type>
+		</PoHeader_poType>
+		<PoHeader_poNumber>
+			<label>PoNumber</label>
+			<type>STRING</type>
+		</PoHeader_poNumber>
+		<PoHeader_releaseNumber>
+			<label>ReleaseNumber</label>
+			<type>STRING</type>
+		</PoHeader_releaseNumber>
+		<PoHeader_revisionNumber>
+			<label>RevisionNumber</label>
+			<type>STRING</type>
+		</PoHeader_revisionNumber>
+		<PoHeader_vendorId>
+			<label>VendorId</label>
+			<type>STRING</type>
+		</PoHeader_vendorId>
+		<PoHeader_appDate>
+			<label>AppDate</label>
+			<type>DATE</type>
+		</PoHeader_appDate>
+		<PoHeader_poDate>
+			<label>PoDate</label>
+			<type>DATE</type>
+		</PoHeader_poDate>
+		<PoHeader_buyerCode>
+			<label>BuyerCode</label>
+			<type>STRING</type>
+		</PoHeader_buyerCode>
+		<PoHeader_taxAmount>
+			<label>TaxAmount</label>
+			<type>STRING</type>
+		</PoHeader_taxAmount>
+		<PoHeader_total>
+			<label>Total</label>
+			<type>STRING</type>
+		</PoHeader_total>
+		<PoHeader_status>
+			<label>Status</label>
+			<type>STRING</type>
+		</PoHeader_status>
+		<PoHeader_icPoHeader>
+			<label>IcPoHeader</label>
+			<type>STRING</type>
+		</PoHeader_icPoHeader>
+		<Vendor_vendorName>
+			<label>VendorName</label>
+			<type>STRING</type>
+		</Vendor_vendorName>
+		<Vendor_vendorClass>
+			<label>VendorClass</label>
+			<type>STRING</type>
+		</Vendor_vendorClass>
+		<Vendor_vendorSic>
+			<label>Vendor Sic</label>
+			<type>STRING</type>
+		</Vendor_vendorSic>
+		<Account_fld1>
+			<label>Fld1</label>
+			<type>STRING</type>
+		</Account_fld1>
+		<Account_fld2>
+			<label>Fld2</label>
+			<type>STRING</type>
+		</Account_fld2>
+		<Account_allocAmount>
+			<label>AllocAmount</label>
+			<type>STRING</type>
+		</Account_allocAmount>
+	</columns>
+	<sqlfrom>PoHeader as PoHeader, Account as Account, Vendor as Vendor</sqlfrom>
+  <sqlwhere><![CDATA[( PoHeader.vendorId = Vendor.vendorCode ) and ( PoHeader.icPoHeader = Accounts.headerIc ) and  ( ( PoHeader.status >= '3030' ) AND  ( PoHeader.status < '9000' ) AND( PoHeader.approved = 'Y' ) ) ]]></sqlwhere>
+  <title>Po Obligation Report</title>
+</poobligation>
+

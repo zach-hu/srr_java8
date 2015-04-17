@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="poHeaderAllocateAmount" connection-type="Connection-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="poHeaderAllocateAmount">
+			<task synchronous="true" continue-on-failure="false" name="poHeaderAllocAmountSetup">			
+				<task-object-name>com.tsa.puridiom.poheader.tasks.PoHeaderAllocateAmountSetup</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="poHeader">			
+				<task-object-name>com.tsa.puridiom.poheader.tasks.PoHeaderRetrieveById</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="allocatedTotal">			
+				<task-object-name>com.tsa.puridiom.account.tasks.AccountAllocatedForLines</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="amountToAllocate">			
+				<task-object-name>com.tsa.puridiom.poheader.tasks.PoHeaderAllocateAmount</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+	</activities>
+</process>

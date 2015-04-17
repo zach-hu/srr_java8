@@ -1,0 +1,83 @@
+<browse_requisition_header>
+  <columns>
+    <RequisitionHeader_requisitionType>
+      <label>poType</label>
+      <type>REQUISITION-TYPE</type>
+      <size>15</size>
+    </RequisitionHeader_requisitionType>
+    <RequisitionHeader_icReqHeader>
+           <hidden>Y</hidden>
+    </RequisitionHeader_icReqHeader>
+    <RequisitionHeader_requisitionNumber>
+		<label>brw-requisitionNumber</label>
+		<sort>D</sort>
+		<link><![CDATA[javascript: viewReq('#RequisitionHeader_icReqHeader^','#RequisitionHeader_requisitionType^'); void(0);]]></link>
+		<size>10</size>
+    </RequisitionHeader_requisitionNumber>
+    <RequisitionHeader_requisitionDate>
+      <label>requisitionDate</label>
+      <size>11</size>
+      <type>DATE</type>
+    </RequisitionHeader_requisitionDate>
+    <RequisitionHeader_status>
+      <label>brw-status</label>
+      <type>STATUS</type>
+      <size>11</size>
+    </RequisitionHeader_status>
+    <RequisitionHeader_owner>
+      <label>owner</label>
+          <hidden>Y</hidden>
+    </RequisitionHeader_owner>
+	  <RequisitionHeader_vendorId>
+			<label>brw-vendorId</label>
+			<size>40</size>
+			<detail>Y</detail>
+		</RequisitionHeader_vendorId>
+		<RequisitionHeader_vendorName>
+			<label>brw-vendorName</label>
+			<size>60</size>
+			<detail>Y</detail>
+		</RequisitionHeader_vendorName>
+		<RequisitionHeader_buyer>
+			<label>brw-suggestedBuyer</label>
+			<detail>Y</detail>
+			<size>100</size>
+			<type>USER-ID</type>
+		</RequisitionHeader_buyer>
+    <RequisitionHeader_internalComments>
+      <label>purpose</label>
+            <trim>35</trim>
+            <size>30</size>
+            <detail>Y</detail>
+    </RequisitionHeader_internalComments>
+    <RequisitionHeader_fiscalYear>
+      <label>fiscalYear</label>
+      <visible>0</visible>
+    </RequisitionHeader_fiscalYear>
+    <RequisitionHeader_dateEntered>
+      <label>dateEntered</label>
+      <hidden>Y</hidden>
+      <type>DATE</type>
+    </RequisitionHeader_dateEntered>
+    <RequisitionHeader_total>
+      <label>brw-total</label>
+      <type>BigDecimal</type>
+      <size>8</size>
+    </RequisitionHeader_total>
+    <RequisitionHeader_approved>
+      <label>appDate</label>
+      <hidden>Y</hidden>
+    </RequisitionHeader_approved>
+    <RequisitionHeader_requisitionerCode>
+      <label>requisitioner</label>
+            <size>15</size>
+            <type>USER-ID</type>
+    </RequisitionHeader_requisitionerCode>
+  </columns>
+<sqlfrom>RequisitionHeader as RequisitionHeader</sqlfrom>
+<sqlwhere><![CDATA[RequisitionHeader.requisitionNumber <> 'N/A']]></sqlwhere>
+<sqlorderby>RequisitionHeader.requisitionNumber DESC</sqlorderby>
+<pagesize>15</pagesize>
+<title>Requisition Browse</title>
+</browse_requisition_header>
+

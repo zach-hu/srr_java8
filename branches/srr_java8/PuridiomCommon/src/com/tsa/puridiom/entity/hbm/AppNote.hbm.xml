@@ -1,0 +1,78 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+    
+<hibernate-mapping>
+
+<!-- 
+    Created by Middlegen Hibernate plugin
+
+    http://boss.bekk.no/boss/middlegen/
+    http://hibernate.sourceforge.net/
+-->
+
+<class 
+    name="com.tsa.puridiom.entity.AppNote" 
+    table="APP_NOTE"
+>
+    <id
+        name="icNote"
+        type="java.math.BigDecimal"
+        column="IC_NOTE"
+    >
+        <generator class="assigned" />
+    </id>
+    <property
+        name="icDoc"
+        type="java.math.BigDecimal"
+        column="IC_DOC"
+        length="22"
+    />
+    <property
+        name="docType"
+        type="java.lang.String"
+        column="DOC_TYPE"
+        length="3"
+    />
+    <property
+        name="userType"
+        type="java.lang.String"
+        column="USER_TYPE"
+        length="1"
+    />
+    <property
+        name="userId"
+        type="java.lang.String"
+        column="USER_ID"
+        length="15"
+    />
+    <property
+        name="notetype"
+        type="java.lang.String"
+        column="NOTETYPE"
+        length="1"
+    />
+    <property
+        name="notetext"
+        type="java.lang.String"
+        column="NOTETEXT"
+        length="2000"
+    />
+    <property
+        name="adddate"
+        type="java.sql.Timestamp"
+        column="ADDDATE"
+        length="7"
+    />
+    <property
+        name="addtime"
+        type="java.lang.String"
+        column="ADDTIME"
+        length="10"
+    />
+
+    <!-- associations -->
+
+</class>
+</hibernate-mapping>

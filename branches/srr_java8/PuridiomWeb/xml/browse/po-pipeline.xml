@@ -1,0 +1,99 @@
+<browse_po_header>
+	<columns>
+		<PoHeader_icPoHeader>
+			<label>Ic Po Header</label>
+	        <hidden>Y</hidden>
+   			<distinct>Y</distinct>
+		</PoHeader_icPoHeader>
+		<PoHeader_poType>
+			<label>Type</label>
+			<type>ORDER-TYPE</type>
+			<size>15</size>
+		</PoHeader_poType>
+		<ApprovalLog_id_icHeader>
+			<label>Ic Header</label>
+	        <hidden>Y</hidden>
+		</ApprovalLog_id_icHeader>
+		<PoHeader_poNumber>
+			<label>Po. #</label>
+			<sort>D</sort>
+			<link><![CDATA[javascript: viewPoRoutingList('#ApprovalLog_id_icHeader^', '#PoHeader_poType^'); void(0);]]></link>
+			<size>10</size>
+		</PoHeader_poNumber>
+		<PoHeader_poDate>
+			<label>Order Date</label>
+			<size>11</size>
+			<type>DATE</type>
+			<hidden>Y</hidden>
+		</PoHeader_poDate>
+		<PoHeader_owner>
+			<label>Owner</label>
+	        <hidden>Y</hidden>
+		</PoHeader_owner>
+		<PoHeader_fiscalYear>
+			<label>Fiscal Year</label>
+			<visible>0</visible>
+		</PoHeader_fiscalYear>
+		<PoHeader_dateEntered>
+			<label>Date Entered</label>
+			<hidden>Y</hidden>
+			<type>DATE</type>
+		</PoHeader_dateEntered>
+		<ApprovalLog_dateAssigned>
+			<label>Date Assigned</label>
+			<type>DATE</type>
+			<size>12</size>
+		</ApprovalLog_dateAssigned>
+		<PoHeader_total>
+			<label>brw-total</label>
+			<type>CurrencyDecimal</type>
+			<arguments>
+				<col type="BrowseColumn">PoHeader_currencyCode</col>
+			</arguments>
+			<size>15</size>
+		</PoHeader_total>
+		<PoHeader_currencyCode>
+			<hidden>Y</hidden>
+		</PoHeader_currencyCode>
+		<PoHeader_approved>
+			<label>Approved</label>
+			<hidden>Y</hidden>
+		</PoHeader_approved>
+		<ApprovalLog_id_userId>
+			<label>Current Approver</label>
+			<size>15</size>
+			<type>USER-ID</type>
+		</ApprovalLog_id_userId>
+		<PoHeader_requisitionerCode>
+			<label>Requisitioner</label>
+            <size>15</size>
+            <type>USER-ID</type>
+		</PoHeader_requisitionerCode>
+		<PoHeader_vendorId>
+			<label>Supplier Code</label>
+			<size>40</size>
+			<detail>Y</detail>
+		</PoHeader_vendorId>
+		<PoHeader_vendorName>
+			<label>brw-vendorName</label>
+			<size>60</size>
+			<detail>Y</detail>
+		</PoHeader_vendorName>
+		<PoHeader_buyerCode>
+			<label>suggestedBuyer</label>
+			<detail>Y</detail>
+			<size>100</size>
+			<type>USER-ID</type>
+		</PoHeader_buyerCode>
+		<PoHeader_internalComments>
+			<label>Purpose</label>
+            <size>100</size>
+            <detail>Y</detail>
+		</PoHeader_internalComments>
+	</columns>
+<sqlfrom>PoHeader as PoHeader, ApprovalLog as ApprovalLog</sqlfrom>
+<sqlwhere><![CDATA[PoHeader.status = '3020' AND PoHeader.icPoHeader = ApprovalLog.id.icHeader AND ApprovalLog.approved = 'A']]></sqlwhere>
+<sqlorderby>PoHeader.poNumber DESC</sqlorderby>
+<pagesize>15</pagesize>
+<title>Order Browse</title>
+</browse_po_header>

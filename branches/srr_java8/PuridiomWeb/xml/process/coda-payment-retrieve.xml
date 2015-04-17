@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="CodaPaymentRetrieve" connection-type="New-Connection">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="InvoiceHeaderRetrieve">
+				<task synchronous="true" continue-on-failure="false" name="invoiceHeader">
+					<task-object-name>com.tsa.puridiom.invoiceheader.tasks.InvoiceHeaderRetrieveById</task-object-name>
+					<post-action></post-action>
+				</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="CodaPaymentRetrieve">
+			  <task synchronous="true" continue-on-failure="false" name="paymentAccountList">
+				<task-object-name>com.tsa.puridiom.coda.tasks.CodaRetrieveSelector</task-object-name>
+				<post-action></post-action>
+			  </task>
+		  </activity>
+	 </activities>
+</process>

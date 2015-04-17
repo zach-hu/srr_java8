@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="accountDeleteByCheckingActive" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="accountDeleteNoActive">
+			<task synchronous="true" continue-on-failure="false" name="accountListByHeader">
+				<task-object-name>com.tsa.puridiom.account.tasks.AccountRetrieveByHeader</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="accounts">
+				<task-object-name>com.tsa.puridiom.account.tasks.AccountDeleteNoActive</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

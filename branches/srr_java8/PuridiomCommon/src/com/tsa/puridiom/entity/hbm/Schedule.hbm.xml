@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping>
+
+<class
+    name="com.tsa.puridiom.entity.Schedule"
+    table="SCHEDULE"
+>
+    <composite-id name="comp_id" class="com.tsa.puridiom.entity.SchedulePK">
+        <key-property name="scheduleType" column="SCHEDULE_TYPE" type="java.lang.String"/>
+        <key-property name="documentType" column="DOCUMENT_TYPE" type="java.lang.String"/>
+        <key-property name="icHeader" column="IC_HEADER" type="java.math.BigDecimal"/>
+        <key-property name="lineNumber" column="LINE_NUMBER" type="java.math.BigDecimal"/>
+    </composite-id>
+    <property
+        name="description"
+        type="java.lang.String"
+        column="DESCRIPTION"
+        length="255"
+    />
+    <property
+        name="scheduleDate"
+        type="java.sql.Timestamp"
+        column="SCHEDULE_DATE"
+        length="7"
+    />
+    <property
+        name="completionDate"
+        type="java.sql.Timestamp"
+        column="COMPLETION_DATE"
+        length="7"
+    />
+    <property
+        name="status"
+        type="java.lang.String"
+        column="STATUS"
+        length="10"
+    />
+    <property
+        name="revisedDate"
+        type="java.sql.Timestamp"
+        column="REVISED_DATE"
+        length="7"
+    />
+ 	<property
+        name="scheduleAmount"
+        type="java.math.BigDecimal"
+        column="SCHEDULE_AMOUNT"
+        length="15"
+    />
+    
+    <!-- associations -->
+
+</class>
+</hibernate-mapping>

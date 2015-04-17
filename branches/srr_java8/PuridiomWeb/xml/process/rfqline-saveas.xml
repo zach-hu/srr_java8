@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="rfqLineSaveas" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="rfqLineSaveas">
+			<task synchronous="true" continue-on-failure="false" name="rfqLine">
+				<task-object-name>com.tsa.puridiom.rfqline.tasks.RfqLineSaveas</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="rfqLine">
+				<rule-filename>is-amendment-saveas</rule-filename>
+				<task-object-name>com.tsa.puridiom.rfqline.tasks.RfqLineAmendment</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="rfqLine">
+				<task-object-name>com.tsa.puridiom.rfqline.tasks.RfqLineAdd</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="rfqLineSaveasSetup">
+				<task-object-name>com.tsa.puridiom.rfqline.tasks.RfqLineSaveasSetup</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="rfqLineCommentSaveas">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>doccomment-saveas.xml</process-filename>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="rfqLineShipToSaveas">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>shipto-saveas.xml</process-filename>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="rfqBidSaveas">
+				<rule-filename>is-amendment-saveas</rule-filename>
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>rfqbid-saveas-by-line.xml</process-filename>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="rfqBidList">
+				<rule-filename check-for-false="true">is-amendment-saveas</rule-filename>
+				<task-object-name>com.tsa.puridiom.rfqbid.tasks.RfqBidAddForLine</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="rfqNoteSaveas">
+				<rule-filename>is-amendment-saveas</rule-filename>
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>rfqnote-saveas-by-line.xml</process-filename>
+			</task>		
+		</activity>
+	</activities>
+</process>

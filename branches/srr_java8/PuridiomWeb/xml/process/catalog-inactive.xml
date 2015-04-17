@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="itemInactive" connection-type="Connection-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="itemInactiveRetrieve">
+			<task synchronous="true" continue-on-failure="false" name="itemInactiveObject">
+				<task-object-name>com.tsa.puridiom.catalog.tasks.CatalogInactiveById</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rule>
+	<clause type="NotEmpty">
+		<left-side>
+			<source>incomingRequestObjectMethod</source>
+			<object>requisitionHeader</object>
+			<name>getShippingTaxable</name>
+		</left-side>
+	</clause>
+	<logical-operator>AND</logical-operator>
+	<clause type="StringCompare">
+		<left-side>
+			<source>incomingRequestObjectMethod</source>
+			<object>requisitionHeader</object>
+			<name>getShippingTaxable</name>
+		</left-side>
+		<operator>EQUAL</operator>
+		<right-side>
+			<source>constant</source>
+			<value>Y</value>
+		</right-side>
+	</clause>
+</rule>

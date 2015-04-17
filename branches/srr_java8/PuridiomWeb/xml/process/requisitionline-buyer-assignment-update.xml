@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="requisitionline-update" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="requisitionLineSetupActivity">
+			<task synchronous="true" continue-on-failure="false" name="requisitionLine">
+				<rule-filename>is-requisitionline-empty.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.requisitionline.tasks.RequisitionLineRetrieveById</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="requisitionLineUpdateActivity">
+			<task synchronous="true" continue-on-failure="false" name="requisitionLineSetup">
+				<task-object-name>com.tsa.puridiom.requisitionline.tasks.RequisitionLineAssignBuyerSetup</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="requisitionLine">
+				<task-object-name>com.tsa.puridiom.requisitionline.tasks.RequisitionLineSetValues</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="requisitionLine">
+				<task-object-name>com.tsa.puridiom.requisitionline.tasks.RequisitionLineUpdate</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="requisitionHeader">
+				<task-object-name>com.tsa.puridiom.requisitionheader.tasks.RequisitionHeaderRetrieveById</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="headerAssignment">
+			<rule-filename>is-assign-header-required.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="requisitionHeader">
+				<task-object-name>com.tsa.puridiom.requisition.buyerassignment.tasks.RequisitionHeaderAssignment</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="requisitionHeader">
+				<task-object-name>com.tsa.puridiom.requisitionheader.tasks.RequisitionHeaderUpdate</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="history">
+			<task synchronous="true" continue-on-failure="false" name="requisitionLineHistory">
+				<task-object-name>com.tsa.puridiom.requisitionline.history.tasks.RequisitionLineHistoryManualAssignmentSetup</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="requisitionLineHistory">
+				<task-object-name>com.tsa.puridiom.requisitionline.history.tasks.RequisitionLineHistory</task-object-name>
+			</task>
+		</activity>
+		<!-- activity synchronous="true" continue-on-failure="false" name="assignmentNotification">
+			<task synchronous="true" continue-on-failure="false" name="notification">
+				<task-object-name>com.tsa.puridiom.requisition.buyerassignment.tasks.AssignmentNotificationByLine</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity-->
+	</activities>
+</process>

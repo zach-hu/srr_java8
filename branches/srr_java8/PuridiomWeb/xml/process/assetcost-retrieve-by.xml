@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="assetCostRetrieveById" connection-type="Connection-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="assetCostRetrieveBy">
+
+			<task synchronous="true" continue-on-failure="false" name="check">
+				<task-object-name>com.tsa.puridiom.assetcost.tasks.AssetCostIdCheck</task-object-name>
+			</task>
+
+			<task synchronous="true" continue-on-failure="false" name="asset">
+				<task-object-name>com.tsa.puridiom.assetcost.tasks.AssetCostRetrieveBy</task-object-name>
+			</task>
+
+
+		</activity>
+	</activities>
+</process>

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="PaymentAccountAdd" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="PaymentAccountAdd">
+			<task synchronous="true" continue-on-failure="false" name="PaymentAccountSetup">
+				<task-object-name>com.tsa.puridiom.paymentaccount.tasks.PaymentAccountSetup</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="paymentAccount">
+				<task-object-name>com.tsa.puridiom.paymentaccount.tasks.PaymentAccountSetValues</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="paymentAccount">
+				<task-object-name>com.tsa.puridiom.paymentaccount.tasks.PaymentAccountAdd</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="InvoiceSetStatus">
+			<task synchronous="true" continue-on-failure="false" name="invoicePaidSetup">
+				<task-object-name>com.tsa.puridiom.invoice.tasks.InvoicePaidSetup</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="invoiceHeader">
+				<task-object-name>com.tsa.puridiom.invoiceheader.tasks.InvoiceHeaderRetrieveById</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="invoiceLineList">
+				<task-object-name>com.tsa.puridiom.invoiceline.tasks.InvoiceLineRetrieveByHeader</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="invoiceSetStatus">
+				<task-object-name>com.tsa.puridiom.invoice.tasks.InvoiceSetStatus</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="CheckAutoPoCloseOut">
+			<rule-filename>is-auto-po-closeout.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="retrievePaymentTotal">
+				<task-object-name>com.tsa.puridiom.paymentaccount.tasks.PaymentAccountRetrieveByIcPoHeader</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="PoSetStatus">
+			<rule-filename>is-auto-po-closeout.xml;is-po-paid.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="poHeader">
+				<task-object-name>com.tsa.puridiom.poheader.tasks.PoHeaderRetrieveById</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="poLineList">
+				<task-object-name>com.tsa.puridiom.poline.tasks.PoLineRetrieveByHeader</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="PoSetStatus">
+				<task-object-name>com.tsa.puridiom.po.tasks.PoSetStatus</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="poHeaderUpdate">
+				<task-object-name>com.tsa.puridiom.poheader.tasks.PoHeaderUpdate</task-object-name>
+			</task>
+		</activity>
+	 </activities>
+</process>

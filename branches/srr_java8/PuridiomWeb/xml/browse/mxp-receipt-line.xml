@@ -1,0 +1,32 @@
+<browse-mxp-receipt-line>
+	<columns>
+		<ReceiptLine_icRecLine>
+			<label>brw-icRecHeader</label>
+	        <hidden>Y</hidden>
+	        <visible>0</visible>
+	        <distinct>Y</distinct>
+		</ReceiptLine_icRecLine>
+		<ReceiptLine_receiptNumber>
+			<label>brw-receiptNumber</label>
+			<sort>D</sort>
+			<link><![CDATA[javascript: returnMe('#ReceiptLine_receiptNumber^'); void(0);]]></link>
+			<size>10</size>
+		</ReceiptLine_receiptNumber>
+		<ReceiptLine_receiptDate>
+			<label>Receipt Date</label>
+			<size>20</size>
+		</ReceiptLine_receiptDate>
+		<ReceiptLine_receivedBy>
+			<label>Received By</label>
+			<size>20</size>
+		</ReceiptLine_receivedBy>
+	</columns>
+<sqlfrom>InvoiceLine as InvoiceLine, ReceiptLine as ReceiptLine</sqlfrom>
+<sqlwhere><![CDATA[ReceiptLine.receiptNumber is not null
+	and ReceiptLine.receiptNumber <> 'null'
+	and ReceiptLine.receiptNumber <> 'N/A'
+	and InvoiceLine.icPoLine = ReceiptLine.icPoLine	]]></sqlwhere>
+<sqlorderby>ReceiptLine.receiptNumber DESC</sqlorderby>
+<pagesize>15</pagesize>
+<title>MXP Receipt Browse</title>
+</browse-mxp-receipt-line>

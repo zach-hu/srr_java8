@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:axis2="http://updatestockorder.wsbeans.iseries" xmlns:ns1="http://org.apache.axis2/xsd" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:ns0="http://updatestockorder.wsbeans.iseries/xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://updatestockorder.wsbeans.iseries">
+    <wsdl:documentation>UpdateStockOrder</wsdl:documentation>
+    <wsdl:types>
+        <xs:schema xmlns:ns="http://updatestockorder.wsbeans.iseries/xsd" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://updatestockorder.wsbeans.iseries/xsd">
+            <xs:element name="poi961">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="param0" nillable="true" type="ns:POI961Input"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:complexType name="POI961Input">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="_PI_DBSKEY" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="_PI_PONUMB" nillable="true" type="xs:decimal"/>
+                    <xs:element minOccurs="0" name="_PI_POSEQN" nillable="true" type="xs:decimal"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:element name="poi961Response">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" nillable="true" type="ns:POI961Result"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:complexType name="POI961Result">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="_PO_ERRORCODE" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="_PO_ERRORDESC" nillable="true" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:element name="poi961_XML">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="param0" nillable="true" type="ns:POI961Input"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="poi961_XMLResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:schema>
+    </wsdl:types>
+    <wsdl:message name="poi961_XMLRequest">
+        <wsdl:part name="parameters" element="ns0:poi961_XML"/>
+    </wsdl:message>
+    <wsdl:message name="poi961_XMLResponse">
+        <wsdl:part name="parameters" element="ns0:poi961_XMLResponse"/>
+    </wsdl:message>
+    <wsdl:message name="poi961Request">
+        <wsdl:part name="parameters" element="ns0:poi961"/>
+    </wsdl:message>
+    <wsdl:message name="poi961Response">
+        <wsdl:part name="parameters" element="ns0:poi961Response"/>
+    </wsdl:message>
+    <wsdl:portType name="UpdateStockOrderPortType">
+        <wsdl:operation name="poi961_XML">
+            <wsdl:input message="axis2:poi961_XMLRequest" wsaw:Action="urn:poi961_XML"/>
+            <wsdl:output message="axis2:poi961_XMLResponse" wsaw:Action="urn:poi961_XMLResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="poi961">
+            <wsdl:input message="axis2:poi961Request" wsaw:Action="urn:poi961"/>
+            <wsdl:output message="axis2:poi961Response" wsaw:Action="urn:poi961Response"/>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="UpdateStockOrderSOAP11Binding" type="axis2:UpdateStockOrderPortType">
+        <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+        <wsdl:operation name="poi961_XML">
+            <soap:operation soapAction="urn:poi961_XML" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="poi961">
+            <soap:operation soapAction="urn:poi961" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="UpdateStockOrder">
+        <wsdl:port name="UpdateStockOrderSOAP11port_http" binding="axis2:UpdateStockOrderSOAP11Binding">
+            <soap:address location="http://10.172.4.11:10010/web/services/UpdateStockOrder"/>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>

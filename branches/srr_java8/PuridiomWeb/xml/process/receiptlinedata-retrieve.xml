@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="receiptLineDataRetrieve" connection-type="Connection-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="receiptLineDataRetrieve">
+			<task synchronous="true" continue-on-failure="false" name="receiptLineRetrieveSetup">
+				<task-object-name>com.tsa.puridiom.receiptline.tasks.ReceiptLineRetrieveSetup</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="poLine">
+				<task-object-name>com.tsa.puridiom.poline.tasks.PoLineRetrieveById</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="requisitionLine">
+				<rule-filename>is-requisitionline-icreqline-not-empty.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.requisitionline.tasks.RequisitionLineRetrieveById</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="msrLine">
+				<task-object-name>com.tsa.puridiom.requisitionline.tasks.RequisitionLineRetrieveByMsr</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="msrHeader">
+				<task-object-name>com.tsa.puridiom.requisitionheader.tasks.MsrHeaderRetrieveByMsrLine</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="inspectionListActivity">
+			<task synchronous="true" continue-on-failure="false" name="inspectionListSetup">
+				<task-object-name>com.tsa.puridiom.inspection.tasks.RecInspectionHeaderRetrieveSetup</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="inspectionStatusList">
+				<task-object-name>com.tsa.puridiom.stdtable.tasks.StdTableRetrieveByType</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="inspectionList">
+				<task-object-name>com.tsa.puridiom.inspectionheader.tasks.InspectionHeaderListRetrieveByIcRecLine</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="inspectionList">
+			    <rule-filename>is-inspectionlist-empty.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.inspectionheader.tasks.InspectionHeaderListRetrieveByIcMsrLine</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="inspectionList">
+				<task-object-name>com.tsa.puridiom.inspectionheader.tasks.InspectionHeaderDataRetrieve</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="inspectionHistoryList">
+				<task-object-name>com.tsa.puridiom.inspectionhistory.tasks.InspectionHistoryRetrieveByIcRecLine</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="poLineDataSet">
+			<task synchronous="true" continue-on-failure="false" name="poLine">
+				<task-object-name>com.tsa.puridiom.poline.tasks.PoLineDataSet</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="receiptLineDataSet">
+			<task synchronous="true" continue-on-failure="false" name="receiptLine">
+				<task-object-name>com.tsa.puridiom.receiptline.tasks.ReceiptLineDataSet</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

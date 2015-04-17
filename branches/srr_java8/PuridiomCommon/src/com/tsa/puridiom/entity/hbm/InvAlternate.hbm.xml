@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+    
+<hibernate-mapping>
+
+<class 
+    name="com.tsa.puridiom.entity.InvAlternate" 
+    table="INV_ALTERNATE"
+>
+    <id
+        name="icAlternate"
+        type="java.math.BigDecimal"
+        column="IC_ALTERNATE"
+    >
+        <generator class="assigned" />
+    </id>
+    <property
+        name="itemNumber"
+        type="java.lang.String"
+        column="ITEM_NUMBER"
+        length="30"
+    />
+    <property
+        name="altItemNumber"
+        type="java.lang.String"
+        column="ALT_ITEM_NUMBER"
+        length="30"
+    />
+    <property
+        name="dateEntered"
+        type="java.sql.Timestamp"
+        column="DATE_ENTERED"
+        length="7"
+    />
+    <property
+        name="owner"
+        type="java.lang.String"
+        column="OWNER"
+        length="15"
+    />
+
+    <!-- associations -->
+
+</class>
+</hibernate-mapping>

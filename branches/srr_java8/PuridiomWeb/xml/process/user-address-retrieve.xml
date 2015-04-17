@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="userShipToAddressRetrieve" connection-type="Connection-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="userShipToAddressRetrieve">
+			<task synchronous="true" continue-on-failure="false" name="userShipToAddressRetrieveSetup">
+				<task-object-name>com.tsa.puridiom.rfqheader.tasks.RfqHeaderRetrieveBuyerAddressSetup</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="userShipToAddress">
+				<rule-filename>is-address-code-not-empty</rule-filename>
+				<task-object-name>com.tsa.puridiom.address.tasks.AddressRetrieveShipTo</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

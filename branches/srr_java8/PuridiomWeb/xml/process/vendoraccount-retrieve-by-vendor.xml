@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="vendorAccountRetrieveByVendor" connection-type="Connection-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="vendorAccountRetrieveById">
+			<task synchronous="true" continue-on-failure="false" name="vendorAccountList">
+				<task-object-name>com.tsa.puridiom.vendoraccount.tasks.VendorAccountRetrieveByVendor</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

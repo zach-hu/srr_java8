@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="recentrequisition-delete-by-ic" connection-type="New-Transaction">
+	<rule-filename check-for-false="true">is-requisitionheader-empty.xml</rule-filename>
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="recentRequisitionSetup">
+		    <task synchronous="true" continue-on-failure="false" name="recentRequisitionSetup">			
+				<task-object-name>com.tsa.puridiom.recentrequisition.tasks.RecentRequisitionSetupFromRequisitionHeader</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="recentRequisitionDelete">
+				<task-object-name>com.tsa.puridiom.recentrequisition.tasks.RecentRequisitionDeleteByIc</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>
+

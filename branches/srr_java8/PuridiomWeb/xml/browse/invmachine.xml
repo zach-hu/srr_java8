@@ -1,0 +1,27 @@
+<browse_machine>
+	<columns>
+		<InvMachine_machineId>
+			<label>brw-machineId</label>
+			<sort>A</sort>
+			<link><![CDATA[javascript: returnMe('#InvMachine_machineId^'); void(0);]]></link>
+			<size>15</size>
+		</InvMachine_machineId>
+		<InvMachine_description>
+			<label>description</label>
+			<size>50</size>
+		</InvMachine_description>
+		<InvMachine_workCenterId>
+			<label>brw-workCenterId</label>
+			<size>15</size>
+		</InvMachine_workCenterId>
+		<InvMachine_assetId>
+			<label>brw-assetId</label>
+			<size>20</size>
+		</InvMachine_assetId>
+	</columns>
+<sqlfrom>InvMachine as InvMachine</sqlfrom>
+<sqlwhere><![CDATA[ (InvMachine.status <> '03') ]]></sqlwhere>
+<sqlorderby>InvMachine.machineId ASC</sqlorderby>
+<pagesize>15</pagesize>
+<title>Machine Browse</title>
+</browse_machine>

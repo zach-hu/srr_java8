@@ -1,0 +1,59 @@
+<browse_user>
+	<columns>
+		<UserProfile_userId>
+			<label>user-userId</label>
+			<link><![CDATA[javascript: returnMe('#UserProfile_userId^'); void(0);]]></link>
+			<size>15</size>
+			<hidden-input>Y</hidden-input>
+		</UserProfile_userId>
+		<UserProfile_firstName>
+			<label>firstName</label>
+			<size>15</size>
+		</UserProfile_firstName>
+		<!--<UserProfile_middleInit>
+			<label>M.I.</label>
+			<size>5</size>
+		</UserProfile_middleInit>-->
+		<UserProfile_lastName>
+			<label>lastName</label>
+			<size>20</size>
+			<sort>A</sort>
+			<filter-default>Y</filter-default>
+		</UserProfile_lastName>
+		<UserProfile_mailId>
+			<label>emailAddress</label>
+			<hidden-input>Y</hidden-input>
+			<size>25</size>
+		</UserProfile_mailId>
+		<UserProfile_department>
+			<label>department</label>
+			<hidden-input>Y</hidden-input>
+			<size>20</size>
+		</UserProfile_department>
+		<UserProfile_displayName>
+			<userName>
+				<col>UserProfile_userId</col>
+			</userName>
+			<hidden>Y</hidden>
+			<hidden-input>Y</hidden-input>
+			<selectsql>N</selectsql>
+		</UserProfile_displayName>
+		<UserProfile_phoneNumber>
+			<hidden>Y</hidden>
+			<hidden-input>Y</hidden-input>
+		</UserProfile_phoneNumber>
+		<UserProfile_routing>
+			<hidden>Y</hidden>
+			<hidden-input>Y</hidden-input>
+		</UserProfile_routing>
+		<UserProfile_shipToCode>
+			<hidden>Y</hidden>
+			<hidden-input>Y</hidden-input>
+		</UserProfile_shipToCode>
+	</columns>
+<sqlfrom>UserProfile as UserProfile</sqlfrom>
+<sqlwhere><![CDATA[ UserProfile.status <> '03' AND (UserProfile.userId <> 'SYSADM') ]]></sqlwhere>
+<sqlorderby>UserProfile.lastName ASC</sqlorderby>
+<pagesize>15</pagesize>
+<title>Employee Browse</title>
+</browse_user>

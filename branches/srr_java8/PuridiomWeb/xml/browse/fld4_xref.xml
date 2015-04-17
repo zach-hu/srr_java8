@@ -1,0 +1,26 @@
+<endp_table>
+	<columns>
+		<XrefCombo_code4>
+			<label>AC04</label>
+			<link><![CDATA[javascript: returnMe('#XrefCombo_code4^'); void(0);]]></link>
+			<visible>1</visible>
+			<size>4</size>
+			<sort>A</sort>
+			<distinct>Y</distinct>
+		</XrefCombo_code4>
+		<StdTable_description>
+			<label>description</label>
+			<hidden-input>Y</hidden-input>
+			<size>20</size>
+			<filter-default>Y</filter-default>
+		</StdTable_description>
+	</columns>
+<sqlfrom>XrefCombo as XrefCombo, StdTable as StdTable</sqlfrom>
+<sqlwhere><![CDATA[ XrefCombo.status='02' AND
+					XrefCombo.xrefType='CODA' AND
+					StdTable.id.tableType='AC04' AND
+					XrefCombo.code4 = StdTable.id.tableKey ]]></sqlwhere>
+<sqlorderby>XrefCombo.code4 ASC</sqlorderby>
+<pagesize>15</pagesize>
+<title>LOB Browse</title>
+</endp_table>

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="rfqForwardUpdatePricingReq" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="retrieveRecords">
+			<task synchronous="true" continue-on-failure="false" name="requisitionHeader">
+				<task-object-name>com.tsa.puridiom.requisitionheader.tasks.RequisitionHeaderRetrieveById</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="requisitionLineList">
+				<task-object-name>com.tsa.puridiom.requisitionline.tasks.RequisitionLineRetrieveByHeader</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="rfqSetStatusToClosed">
+				<rule-filename>is-requisitionheader-empty.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.rfq.tasks.RfqSetStatusToClosed</task-object-name>
+				<post-action>exitProcess</post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="rfqBidList">
+				<task-object-name>com.tsa.puridiom.rfqbid.tasks.RfqBidRetrieveByHeader</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="rfqVendor">
+				<task-object-name>com.tsa.puridiom.rfqvendor.tasks.RfqVendorRetrieveById</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="vendor">
+				<task-object-name>com.tsa.puridiom.vendor.tasks.VendorRetrieveById</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="requisitionUpdatePricing">
+			<task synchronous="true" continue-on-failure="false" name="requisitionSetVendorInfoFromRfq">
+				<task-object-name>com.tsa.puridiom.requisition.tasks.RequisitionSetSelectedVendorInfo</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="requisitionLineSetPricedItems">
+				<task-object-name>com.tsa.puridiom.requisitionline.tasks.RequisitionLineSetPricedItems</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="requisitionSetStatusToPriced">
+				<task-object-name>com.tsa.puridiom.requisition.tasks.RequisitionSetStatusToPriced</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="rfqSetStatusToClosed">
+				<task-object-name>com.tsa.puridiom.rfq.tasks.RfqSetStatusToClosed</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="requisitionUpdate">
+			<task synchronous="true" continue-on-failure="false" name="requisitionHeaderUpdate">
+				<task-object-name>com.tsa.puridiom.requisitionheader.tasks.RequisitionHeaderUpdate</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="requisitionLineUpdateList">
+				<task-object-name>com.tsa.puridiom.requisitionline.tasks.RequisitionLineUpdateList</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="requisitionRecalculate">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>requisition-recalculate.xml</process-filename>
+			</task>
+		</activity>
+		<!--[Requisitioner Notification] -->
+		<activity synchronous="true" continue-on-failure="false" name="emailRequisitioner">
+			<task synchronous="true" continue-on-failure="false" name="email">
+				<task-object-name>com.tsa.puridiom.requisition.tasks.RequisitionerReqPricedEmail</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

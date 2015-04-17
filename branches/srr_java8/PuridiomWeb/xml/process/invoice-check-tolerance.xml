@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="invoiceCheckTolerance" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="invoiceDataRetreive">
+			<task synchronous="true" continue-on-failure="false" name="invoiceQuantity">
+				<task-object-name>com.tsa.puridiom.invoiceline.tasks.InvoiceLineRetrieveByIcPoLine</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="checkQuanitityExceptions">
+				<task-object-name>com.tsa.puridiom.invoiceline.tasks.InvoiceLineCheckQuantityReceived</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

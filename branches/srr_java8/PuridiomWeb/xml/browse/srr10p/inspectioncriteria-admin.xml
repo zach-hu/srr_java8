@@ -1,0 +1,28 @@
+<browse_inspection_crit>
+	<columns>
+		<InspectionCrit_id_inspectCode>
+			<label>Inspection Code</label>
+			<visible>1</visible>
+			<size>15</size>
+			<sort>A</sort>
+			<hidden-input>Y</hidden-input>
+		</InspectionCrit_id_inspectCode>
+		<InspectionCrit_id_critNo>
+			<label>Criteria Number</label>
+			<size>15</size>
+			<link><![CDATA[javascript: returnInspectionCriteria( '#InspectionCrit_id_inspectCode^','#InspectionCrit_id_critNo^'); void(0);]]></link>
+			<visible>1</visible>
+			<hidden-input>Y</hidden-input>
+		</InspectionCrit_id_critNo>
+		<InspectionCrit_description>
+			<label>Description</label>
+			<size>70</size>
+			<hidden-input>Y</hidden-input>
+		</InspectionCrit_description>
+	</columns>
+<sqlfrom>InspectionCrit as InspectionCrit</sqlfrom>
+<sqlwhere></sqlwhere>
+<sqlorderby>InspectionCrit.id.inspectCode, InspectionCrit.id.critNo ASC</sqlorderby>
+<pagesize>15</pagesize>
+<title>Inspection Criteria Admin Browse</title>
+</browse_inspection_crit>

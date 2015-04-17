@@ -1,0 +1,162 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping>
+
+<!--
+    Created by Middlegen Hibernate plugin
+
+    http://boss.bekk.no/boss/middlegen/
+    http://hibernate.sourceforge.net/
+-->
+
+<class
+    name="com.tsa.puridiom.entity.InvStage"
+    table="INV_STAGE"
+>
+    <id
+        name="stageId"
+        type="java.lang.String"
+        column="STAGE_ID"
+    >
+        <generator class="assigned" />
+    </id>
+    <property
+        name="description"
+        type="java.lang.String"
+        column="DESCRIPTION"
+        length="50"
+    />
+    <property
+        name="respons"
+        type="java.lang.String"
+        column="RESPONS"
+        length="20"
+    />
+    <property
+        name="notes"
+        type="java.lang.String"
+        column="NOTES"
+        length="2000"
+    />
+    <property
+        name="workCenterId"
+        type="java.lang.String"
+        column="WORK_CENTER_ID"
+        length="15"
+    />
+    <property
+        name="utilization"
+        type="java.math.BigDecimal"
+        column="UTILIZATION"
+        length="15"
+    />
+    <property
+        name="qtyDays"
+        type="java.math.BigDecimal"
+        column="QTY_DAYS"
+        length="15"
+    />
+    <property
+        name="setupHours"
+        type="java.math.BigDecimal"
+        column="SETUP_HOURS"
+        length="15"
+    />
+    <property
+        name="partsHour"
+        type="java.math.BigDecimal"
+        column="PARTS_HOUR"
+        length="15"
+    />
+    <property
+        name="timePart"
+        type="java.math.BigDecimal"
+        column="TIME_PART"
+        length="15"
+    />
+    <property
+        name="vendorName"
+        type="java.lang.String"
+        column="VENDOR_NAME"
+        length="40"
+    />
+    <property
+        name="leadTime"
+        type="java.math.BigDecimal"
+        column="LEAD_TIME"
+        length="15"
+    />
+    <property
+        name="outside"
+        type="java.lang.String"
+        column="OUTSIDE"
+        length="1"
+    />
+    <property
+        name="descriptor"
+        type="java.lang.String"
+        column="DESCRIPTOR"
+        length="30"
+    />
+    <property
+        name="machineId"
+        type="java.lang.String"
+        column="MACHINE_ID"
+        length="20"
+    />
+    <property
+        name="backflush"
+        type="java.lang.String"
+        column="BACKFLUSH"
+        length="1"
+    />
+    <property
+        name="persons"
+        type="java.math.BigDecimal"
+        column="PERSONS"
+        length="15"
+    />
+    <property
+        name="ccost"
+        type="java.math.BigDecimal"
+        column="CCOST"
+        length="15"
+    />
+    <property
+        name="unitOfMeasure"
+        type="java.lang.String"
+        column="UNIT_OF_MEASURE"
+        length="15"
+    />
+    <property
+        name="dateEntered"
+        type="java.sql.Timestamp"
+        column="DATE_ENTERED"
+        length="7"
+    />
+    <property
+        name="dateExpires"
+        type="java.sql.Timestamp"
+        column="DATE_EXPIRES"
+        length="7"
+    />
+    <property
+        name="owner"
+        type="java.lang.String"
+        column="OWNER"
+        length="15"
+    />
+    <property
+        name="status"
+        type="java.lang.String"
+        column="STATUS"
+        length="4"
+    />
+
+    <!-- associations -->
+
+</class>
+</hibernate-mapping>

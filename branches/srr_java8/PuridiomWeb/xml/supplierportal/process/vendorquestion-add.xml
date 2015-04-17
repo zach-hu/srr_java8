@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="vendorQuestionAdd" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="vendorQuestionAdd">
+			<task synchronous="true" continue-on-failure="false" name="vendorQuestionSetup">
+				<task-object-name>com.tsa.puridiom.vendorquestion.tasks.VendorQuestionAddSetup</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="vendorQuestion">
+				<task-object-name>com.tsa.puridiom.vendorquestion.tasks.VendorQuestionSetValues</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="vendorQuestion">
+				<task-object-name>com.tsa.puridiom.vendorquestion.tasks.VendorQuestionAdd</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+	</activities>
+</process>

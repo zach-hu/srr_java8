@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rule>
+	<clause type="Rule">
+		<rule-filename>is-not-po-blanket-order.xml</rule-filename>
+	</clause>
+	<logical-operator>IFTHEN</logical-operator>
+	<clause type="lookup">
+		<sql>from StdTable stdTable where stdTable.id.tableType = 'SHP' AND stdTable.id.tableKey = '@shipvia@' AND (stdTable.status = '02' OR (stdTable.status = '01' AND stdTable.dateExpires >= @today@))</sql>
+		<source>header</source>
+		<arguments>
+			<name>shipvia</name>
+			<source>header</source>
+			<colName>getShipViaCode</colName>
+		</arguments>
+	</clause>
+</rule>

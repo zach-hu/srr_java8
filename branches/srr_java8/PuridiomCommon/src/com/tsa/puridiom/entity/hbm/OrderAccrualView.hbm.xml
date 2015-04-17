@@ -1,0 +1,113 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping>
+
+<!--
+    Created by Middlegen Hibernate plugin
+
+    http://boss.bekk.no/boss/middlegen/
+    http://hibernate.sourceforge.net/
+-->
+
+<class
+    name="com.tsa.puridiom.entity.OrderAccrualView"
+    table="ORDER_ACCRUAL_VIEW"
+>
+  <id
+        name="poNumber"
+        type="java.lang.String"
+        column="PO_NUMBER"
+    >
+        <generator class="assigned" />
+    </id>
+    <property
+        name="totalPaid"
+        type="java.math.BigDecimal"
+        column="TOTAL_PAID"
+        length="15"
+    />
+     <property
+        name="poDate"
+        type="java.sql.Timestamp"
+        column="PO_DATE"
+        length="10"
+    />
+    <property
+        name="vendorId"
+        type="java.lang.String"
+        column="VENDOR_ID"
+        length="15"
+    />
+    <property
+        name="buyerCode"
+        type="java.lang.String"
+        column="BUYER_CODE"
+        length="40"
+    />
+    <property
+        name="shipToCode"
+        type="java.lang.String"
+        column="SHIP_TO_CODE"
+        length="40"
+    />
+    <property
+        name="status"
+        type="java.lang.String"
+        column="STATUS"
+        length="4"
+    />
+    <property
+        name="currencyCode"
+        type="java.lang.String"
+        column="CURRENCY_CODE"
+        length="15"
+    />
+    <property
+        name="requisitionerCode"
+        type="java.lang.String"
+        column="REQUISITIONER_CODE"
+        length="15"
+    />
+    <property
+        name="departmentCode"
+        type="java.lang.String"
+        column="DEPARTMENT_CODE"
+        length="15"
+    />
+    <property
+        name="poType"
+        type="java.lang.String"
+        column="PO_TYPE"
+        length="15"
+    />
+    <property
+        name="requiredDate"
+        type="java.sql.Timestamp"
+        column="REQUIRED_DATE"
+        length="7"
+    />
+    <property
+        name="orderTotal"
+        type="java.math.BigDecimal"
+        column="ORDER_TOTAL"
+        length="15"
+    />
+    <property
+        name="supplierName"
+        type="java.lang.String"
+        column="VENDOR_NAME"
+        length="255"
+    />
+    <property
+        name="purpose"
+        type="java.lang.String"
+        column="PURPOSE"
+        length="255"
+    />
+    <!-- associations -->
+
+</class>
+</hibernate-mapping>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="rfqSaveas" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="rfqRetrieve">
+			<task synchronous="true" continue-on-failure="false" name="rfqHeader">
+				<task-object-name>com.tsa.puridiom.rfqheader.tasks.RfqHeaderRetrieveById</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="rfqHeaderRetrieveSetup">
+				<task-object-name>com.tsa.puridiom.rfqheader.tasks.RfqHeaderRetrieveSetup</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="rfqLineList">
+				<task-object-name>com.tsa.puridiom.rfqline.tasks.RfqLineRetrieveByHeader</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="rfqSaveas">
+			<task synchronous="true" continue-on-failure="false" name="rfqGenerateNumberSetup">
+				<task-object-name>com.tsa.puridiom.rfq.tasks.RfqSaveasGenerateNumberSetup</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="rfqGenerateNumber">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>rfq-generate-form-number.xml</process-filename>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="rfqGenerateNumberSetup">
+				<task-object-name>com.tsa.puridiom.rfq.tasks.RfqSaveasSetup</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="rfqHeaderSaveas">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>rfqheader-saveas.xml</process-filename>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="rfqLineSaveasList">
+				<task-object-name>com.tsa.puridiom.rfqline.tasks.RfqLineSaveasList</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="rfqSaveasCleanup">
+				<task-object-name>com.tsa.puridiom.rfq.tasks.RfqSaveasCleanup</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="history">
+		    <task synchronous="true" continue-on-failure="false" name="rfqHeaderHistory">
+				<task-object-name>com.tsa.puridiom.rfqheader.history.tasks.RfqHeaderHistory</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="rfqLineListHistory">
+				<task-object-name>com.tsa.puridiom.rfqline.history.tasks.RfqLineListHistory</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="recentRfqActivity">
+			<task synchronous="true" continue-on-failure="false" name="recentRfqAdd">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>recentrfq-add.xml</process-filename>
+			</task>
+		</activity>
+	</activities>
+</process>

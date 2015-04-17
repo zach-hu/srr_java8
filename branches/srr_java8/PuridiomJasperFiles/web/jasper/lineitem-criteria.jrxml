@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created using an evaluation version of JasperAssistant (http://www.jasperassistant.com) -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="lineitem_account" pageWidth="569" pageHeight="35" columnWidth="569" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+	<import value="com.tsa.puridiom.jasperreports.*"/>
+	<reportFont name="Arial_Normal" isDefault="false" fontName="Arial" size="8" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Verdana" isDefault="true" fontName="Verdana" size="9" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Verdana_bold" isDefault="false" fontName="Verdana" size="9" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="InspectionLine_critNo" class="java.lang.String"/>
+	<field name="InspectionLine_inspectCode" class="java.lang.String"/>
+	<field name="InspectionLine_critDescription" class="java.lang.String"/>
+	<detail>
+		<band height="35">
+			<rectangle>
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="152" height="35" forecolor="#F3F3F3" backcolor="#F3F3F3"/>
+			</rectangle>
+			<textField isBlankWhenNull="true" hyperlinkType="None">
+				<reportElement positionType="Float" mode="Opaque" x="212" y="0" width="115" height="15" isRemoveLineWhenBlank="true" backcolor="#F3F3F3"/>
+				<textElement verticalAlignment="Middle">
+					<font reportFont="Verdana"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{InspectionLine_critNo}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true" hyperlinkType="None">
+				<reportElement positionType="Float" mode="Opaque" x="415" y="0" width="40" height="15" isRemoveLineWhenBlank="true" backcolor="#F3F3F3"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font reportFont="Verdana"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{InspectionLine_inspectCode}]]></textFieldExpression>
+			</textField>
+			<textField hyperlinkType="None">
+				<reportElement positionType="Float" mode="Opaque" x="152" y="0" width="60" height="15" backcolor="#F3F3F3">
+					<printWhenExpression><![CDATA[new Boolean($V{REPORT_COUNT}.equals(new Integer(1)))]]></printWhenExpression>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font reportFont="Verdana_bold"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Inspection: "]]></textFieldExpression>
+			</textField>
+			<textField hyperlinkType="None">
+				<reportElement positionType="Float" mode="Opaque" x="345" y="0" width="70" height="15" backcolor="#F3F3F3">
+					<printWhenExpression><![CDATA[new Boolean($V{REPORT_COUNT}.equals(new Integer(1)))]]></printWhenExpression>
+				</reportElement>
+				<textElement verticalAlignment="Middle" markup="none">
+					<font reportFont="Verdana_bold"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Insp. Code: "]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="455" y="0" width="114" height="35" forecolor="#F3F3F3" backcolor="#F3F3F3"/>
+			</rectangle>
+			<rectangle>
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="327" y="0" width="18" height="15" forecolor="#F3F3F3" backcolor="#F3F3F3"/>
+			</rectangle>
+			<textField isBlankWhenNull="true" hyperlinkType="None">
+				<reportElement positionType="Float" mode="Opaque" x="152" y="15" width="303" height="20" isRemoveLineWhenBlank="true" backcolor="#F3F3F3"/>
+				<textElement verticalAlignment="Top" markup="none">
+					<font reportFont="Verdana"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{InspectionLine_critDescription}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

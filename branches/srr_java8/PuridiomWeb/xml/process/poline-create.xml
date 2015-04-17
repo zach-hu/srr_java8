@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?><!--
+    Copyright (c) 2011 IBM Corporation and others.
+    All rights reserved. This program and the accompanying materials
+    are made available under the terms of the Eclipse Public License v1.0
+    which accompanies this distribution, and is available at
+    http://www.eclipse.org/legal/epl-v10.html
+
+    Contributors:
+        IBM Corporation - initial API and implementation
+ -->
+
+<process name="poLineCreate" connection-type="New-Transaction">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="poLineCreate">
+			<task synchronous="true" continue-on-failure="false" name="poHeader">
+				<task-object-name>com.tsa.puridiom.poheader.tasks.PoHeaderRetrieveById</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="poLineSetup">
+				<task-object-name>com.tsa.puridiom.poline.tasks.PoLineSetup</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="poLineSetup">
+				<task-object-name>com.tsa.puridiom.poline.tasks.PoLineCreateSetup</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="poLineSetup">
+				<task-object-name>com.tsa.puridiom.po.tasks.PoHeaderLinesMapUdfs</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="poLineSetupUmFactor">
+				<task-object-name>com.tsa.puridiom.poline.tasks.PoLineSetupUmFactor</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="poLineSetupTaxableFromCommodity">
+				<rule-filename>is-po-taxable-from-commodity.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.poline.tasks.PoLineSetTaxableFromCommodity</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="PoLine_lineNumber">
+				<task-object-name>com.tsa.puridiom.poline.tasks.PoLineGetNewLineNumber</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="poLine">
+				<task-object-name>com.tsa.puridiom.poline.tasks.PoLineSetValues</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="poLineAdd">
+ 				<rule-filename>is-create-save.xml</rule-filename>
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>poline-add.xml</process-filename>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="requisitionSetupDefaultAccount">
+			<rule-filename>is-default-all-items-enabled.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="itemAccountAdd">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>poline-default-accounts-from-commodity.xml</process-filename>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="poLineDataSet">
+				<task-object-name>com.tsa.puridiom.poline.tasks.PoLineDataSet</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="history">
+			<task synchronous="true" continue-on-failure="false" name="poLineHistory">
+				<task-object-name>com.tsa.puridiom.poline.history.tasks.PoLineHistorySetup</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="poLineHistory">
+				<task-object-name>com.tsa.puridiom.poline.history.tasks.PoLineHistory</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="ListSettingsUDF">
+			<rule-filename check-for-false="false">is-organization-ttr.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="chargeCodeListSetup">
+				<task-object-name>com.tsa.puridiom.requisition.tasks.ChargeCodeListSetup</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="chargeCodeList">
+				<task-object-name>com.tsa.puridiom.stdtable.tasks.StdTableRetrieveBy</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="SungardGenerateInternalVendorId" connection-type="New-Transaction">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="generateInternalVendorId">
+			<task synchronous="true" continue-on-failure="false" name="internalVendorId">
+				<task-object-name>com.tsa.puridiom.sungard.keyid.tasks.GenerateInternalVendorId</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

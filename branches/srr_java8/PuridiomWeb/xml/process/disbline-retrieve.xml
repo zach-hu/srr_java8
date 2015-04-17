@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="disbLineRetrieve" connection-type="Connection-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="disbLineRetrieve">
+			<task synchronous="true" continue-on-failure="false" name="disbLine">
+				<task-object-name>com.tsa.puridiom.disbline.tasks.DisbLineRetrieveById</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="disbLineDataRetrieve">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>disbline-data-retrieve.xml</process-filename>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="originalQtyRequested">
+			<task synchronous="true" continue-on-failure="false" name="RequisitionLine_icReqLine">
+				<task-object-name>com.tsa.puridiom.disbline.tasks.DisbLineGetIcReqLine</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="originalQtyRequested">
+				<task-object-name>com.tsa.puridiom.requisitionline.tasks.RequisitionLineQuantityRequested</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="retrieveInvLocation">
+			<task synchronous="true" continue-on-failure="false" name="invLocation">
+				<task-object-name>com.tsa.puridiom.invlocation.tasks.InvLocationSetupFromDisbLine</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="invLocation">
+				<task-object-name>com.tsa.puridiom.invlocation.tasks.InvLocationRetrieveById</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

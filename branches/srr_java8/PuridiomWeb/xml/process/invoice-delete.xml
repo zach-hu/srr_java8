@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="invoiceDelete" connection-type="transaction-required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="invoiceDelete">
+			<task synchronous="true" continue-on-failure="false" name="invoiceHeader">
+				<rule-filename></rule-filename>
+				<task-object-name>com.tsa.puridiom.invoiceheader.tasks.InvoiceHeaderRetrieveById</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="invoiceDeleteSetup">
+				<rule-filename></rule-filename>
+				<task-object-name>com.tsa.puridiom.invoice.tasks.InvoiceDeleteSetup</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="accountDeleteByHeader">
+				<rule-filename></rule-filename>
+				<task-object-name>com.tsa.puridiom.account.tasks.AccountDeleteByHeader</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="invoiceLineDeleteByHeader">
+				<rule-filename></rule-filename>
+				<task-object-name>com.tsa.puridiom.invoiceline.tasks.InvoiceLineDeleteByHeader</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="invoiceHeaderDeleteById">
+				<rule-filename></rule-filename>
+				<task-object-name>com.tsa.puridiom.invoiceheader.tasks.InvoiceHeaderDeleteById</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+	</activities>
+</process>

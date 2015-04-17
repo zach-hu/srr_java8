@@ -1,0 +1,104 @@
+<browse_requisition_header>
+	<columns>
+		<RequisitionHeader_icReqHeader>
+			<label>Ic Req Header</label>
+	        <hidden>Y</hidden>
+   			<distinct>Y</distinct>
+		</RequisitionHeader_icReqHeader>
+		<RequisitionHeader_requisitionType>
+			<label>Type</label>
+			<type>REQUISITION-TYPE</type>
+			<size>15</size>
+		</RequisitionHeader_requisitionType>
+		<ApprovalLog_id_icHeader>
+			<label>Ic Header</label>
+	        <hidden>Y</hidden>
+		</ApprovalLog_id_icHeader>
+		<RequisitionHeader_requisitionNumber>
+			<label>Req. #</label>
+			<sort>D</sort>
+			<link><![CDATA[javascript: viewRoutingList('#ApprovalLog_id_icHeader^'); void(0);]]></link>
+			<size>10</size>
+		</RequisitionHeader_requisitionNumber>
+		<RequisitionHeader_requisitionDate>
+			<label>Request Date</label>
+			<size>11</size>
+			<type>DATE</type>
+			<hidden>Y</hidden>
+		</RequisitionHeader_requisitionDate>
+		<RequisitionHeader_owner>
+			<label>Owner</label>
+	        <hidden>Y</hidden>
+		</RequisitionHeader_owner>
+		<RequisitionHeader_fiscalYear>
+			<label>Fiscal Year</label>
+			<visible>0</visible>
+		</RequisitionHeader_fiscalYear>
+		<RequisitionHeader_dateEntered>
+			<label>Date Entered</label>
+			<hidden>Y</hidden>
+			<type>DATE</type>
+		</RequisitionHeader_dateEntered>
+		<ApprovalLog_dateAssigned>
+			<label>Date Assigned</label>
+			<type>DATE</type>
+			<size>12</size>
+		</ApprovalLog_dateAssigned>
+		<RequisitionHeader_total>
+			<label>brw-total</label>
+			<type>CurrencyDecimal</type>
+			<arguments>
+				<col type="BrowseColumn">RequisitionHeader_currencyCode</col>
+			</arguments>
+			<size>15</size>
+		</RequisitionHeader_total>
+		<RequisitionHeader_currencyCode>
+			<hidden>Y</hidden>
+		</RequisitionHeader_currencyCode>
+		<RequisitionHeader_approved>
+			<label>Approved</label>
+			<hidden>Y</hidden>
+		</RequisitionHeader_approved>
+		<!--<RequisitionHeader_appBy>
+			<label>Approved By</label>
+            <size>15</size>
+            <type>USER-ID</type>
+		</RequisitionHeader_appBy>-->
+		<ApprovalLog_id_userId>
+			<label>Current Approver</label>
+			<size>15</size>
+			<type>USER-ID</type>
+		</ApprovalLog_id_userId>
+		<RequisitionHeader_requisitionerCode>
+			<label>Requisitioner</label>
+            <size>15</size>
+            <type>USER-ID</type>
+		</RequisitionHeader_requisitionerCode>
+		<RequisitionHeader_vendorId>
+			<label>Supplier Code</label>
+			<size>40</size>
+			<detail>Y</detail>
+		</RequisitionHeader_vendorId>
+		<RequisitionHeader_vendorName>
+			<label>Vendor Name</label>
+			<size>60</size>
+			<detail>Y</detail>
+		</RequisitionHeader_vendorName>
+		<RequisitionHeader_buyer>
+			<label>suggestedBuyer</label>
+			<detail>Y</detail>
+			<size>100</size>
+			<type>USER-ID</type>
+		</RequisitionHeader_buyer>
+		<RequisitionHeader_internalComments>
+			<label>Purpose</label>
+            <size>100</size>
+            <detail>Y</detail>
+		</RequisitionHeader_internalComments>
+	</columns>
+<sqlfrom>RequisitionHeader as RequisitionHeader, ApprovalLog as ApprovalLog</sqlfrom>
+<sqlwhere><![CDATA[(RequisitionHeader.status = '1030' OR RequisitionHeader.status = '0530') AND RequisitionHeader.icReqHeader = ApprovalLog.id.icHeader AND ApprovalLog.approved = 'A']]></sqlwhere>
+<sqlorderby>RequisitionHeader.requisitionNumber DESC</sqlorderby>
+<pagesize>15</pagesize>
+<title>Requisition Browse</title>
+</browse_requisition_header>

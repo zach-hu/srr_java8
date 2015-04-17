@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rule>
+	<clause type="BigDecimalCompare">
+		<left-side elementSource="true">
+			<source>incomingRequestObjectMethod</source>
+			<object>item</object>
+			<name>getQtyRejected</name>
+		</left-side>
+		<operator>GREATER</operator>
+		<right-side>
+			<source>constant</source>
+			<value>0</value>
+		</right-side>
+	</clause>
+	<logical-operator>IFTHEN</logical-operator>
+	<clause type="lookup" elementSource="true">
+		<sql>from StdTable stdTable where stdTable.id.tableType = 'REJ' AND stdTable.id.tableKey = '@rejectionCode@' AND (stdTable.status = '02' OR (stdTable.status = '01' AND stdTable.dateExpires >= @today@))</sql>
+		<source>item</source>
+		<arguments>
+			<name>rejectionCode</name>
+			<source>item</source>
+			<colName>getRejectionCode</colName>
+		</arguments>
+	</clause>
+</rule>

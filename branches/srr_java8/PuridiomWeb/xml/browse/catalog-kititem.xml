@@ -1,0 +1,37 @@
+<browse_catalog_kit_items>
+	<columns>
+		<KitItem_id_parentCatalogId>
+			<hidden>Y</hidden>
+		</KitItem_id_parentCatalogId>
+		<KitItem_id_parentItemNumber>
+			<hidden>Y</hidden>
+		</KitItem_id_parentItemNumber>
+		<KitItem_id_childCatalogId>
+			<label>brw-catalogId</label>
+			<size>15</size>
+		</KitItem_id_childCatalogId>
+		<KitItem_id_childItemNumber>
+			<label>brw-itemNumber</label>
+			<size>15</size>
+		</KitItem_id_childItemNumber>
+		<CatalogItem_description>
+			<label>brw-description</label>
+			<size>60</size>
+		</CatalogItem_description>
+		<KitItem_childQuantity>
+			<label>quantity</label>
+			<size>10</size>
+			<type>QtyDecimal</type>
+		</KitItem_childQuantity>
+<!--		<Space_filler>
+			<label> </label>
+			<size>45</size>
+			<selectsql>N</selectsql>
+		</Space_filler>-->
+	</columns>
+	<sqlfrom>KitItem as KitItem, CatalogItem as CatalogItem</sqlfrom>
+	<sqlorderby>KitItem.id.parentCatalogId ASC</sqlorderby>
+	<sqlwhere><![CDATA[ KitItem.id.childItemNumber = CatalogItem.id.itemNumber ]]></sqlwhere>
+	<title>Catalog Kit Items</title>
+	<pagesize>10</pagesize>
+</browse_catalog_kit_items>

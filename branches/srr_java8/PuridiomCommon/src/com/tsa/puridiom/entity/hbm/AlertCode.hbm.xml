@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+    
+<hibernate-mapping>
+
+<class 
+    name="com.tsa.puridiom.entity.AlertCode" 
+    table="ALERT_CODE"
+>
+    <id
+        name="refType"
+        type="java.lang.String"
+        column="REF_TYPE"
+    >
+        <generator class="assigned" />
+    </id>
+    <property
+        name="refDescription"
+        type="java.lang.String"
+        column="REF_DESCRIPTION"
+        length="60"
+    />
+
+    <!-- associations -->
+
+</class>
+</hibernate-mapping>

@@ -1,0 +1,30 @@
+<browse_stdtable>
+	<columns>
+		<StdTable_id_tableType>
+			<label>poType</label>
+			<visible>0</visible>
+		</StdTable_id_tableType>
+		<StdTable_id_tableKey>
+			<label>brw-code</label>
+			<link><![CDATA[javascript: returnMe('#StdTable_id_tableKey^'); void(0);]]></link>
+			<size>15</size>
+		</StdTable_id_tableKey>
+		<StdTable_description>
+			<label>description</label>
+			<hidden-input>Y</hidden-input>
+			<size>45</size>
+			<sort>Y</sort>
+			<filter-default>Y</filter-default>
+		</StdTable_description>
+		<StdTable_status>
+			<label>brw-status</label>
+			<type>STATUS</type>
+			<size>10</size>
+		</StdTable_status>
+	</columns>
+<sqlfrom>StdTable as StdTable</sqlfrom>
+<sqlwhere><![CDATA[StdTable.id.tableType = 'RQ13'  ]]></sqlwhere>
+<sqlorderby>StdTable.id.tableKey ASC</sqlorderby>
+<pagesize>15</pagesize>
+<title>MSR Type</title>
+</browse_stdtable>

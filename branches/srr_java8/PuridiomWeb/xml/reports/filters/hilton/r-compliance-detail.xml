@@ -1,0 +1,114 @@
+<r-compliance-detail>
+  <columns>
+		<VendorInsurance_contNumber>
+			<label>Cont Number</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</VendorInsurance_contNumber>
+		<VendorInsurance_contType>
+			<label>Cont Type</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</VendorInsurance_contType>
+		<Address_addressLine1>
+			<label>Address Line 1</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</Address_addressLine1>
+		<Address_addressLine2>
+			<label>Address Line 2</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</Address_addressLine2>
+		<Address_addressLine3>
+			<label>Address Line 3</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</Address_addressLine3>
+		<Address_addressLine4>
+			<label>Address Line 4</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</Address_addressLine4>
+		<Address_city>
+			<label>city</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</Address_city>
+		<Address_state>
+			<label>state</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</Address_state>
+		<Address_postalCode>
+			<label>Postal Code</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</Address_postalCode>
+		<VendorInsurance_contOwner>
+			<label>Cont Owner</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</VendorInsurance_contOwner>
+		<VendorInsurance_contAdmin>
+			<label>Cont Admin</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</VendorInsurance_contAdmin>
+		<VendorInsurance_contUdf1>
+			<label>Cont Udf1</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</VendorInsurance_contUdf1>
+		<VendorInsurance_certStatus2>
+			<label>Cert Status 2</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</VendorInsurance_certStatus2>
+		<VendorInsurance_certStatus4>
+			<label>Cert Status 4</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</VendorInsurance_certStatus4>
+		<VendorInsurance_certUdf2>
+			<label>Cert Udf 2</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</VendorInsurance_certUdf2>
+		<VendorInsurance_certUdf1>
+			<label>Cert Udf 1</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</VendorInsurance_certUdf1>
+		<VendorInsurance_certUdf4>
+			<label>Cert Udf 4</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</VendorInsurance_certUdf4>
+		<VendorInsurance_certifiedDate2>
+			<label>Certified Date 2</label>
+			<type>DATE</type>
+			<visible>1</visible>
+		</VendorInsurance_certifiedDate2>
+		<VendorInsurance_notifiedDate>
+			<label>Notified Date</label>
+			<type>DATE</type>
+			<visible>1</visible>
+		</VendorInsurance_notifiedDate>
+		<VendorInsurance_dollarValue>
+			<label>Dollar Value</label>
+			<type>BIGDECIMAL</type>
+			<visible>1</visible>
+		</VendorInsurance_dollarValue>
+		<VendorInsurance_contRequestDate>
+			<label>Cont Request Date</label>
+			<type>DATE</type>
+			<visible>1</visible>
+		</VendorInsurance_contRequestDate>
+	</columns>
+  <sqlfrom> Address as Address , VendorInsurance as VendorInsurance , Vendor as Vendor </sqlfrom>
+  <!--<sqlwhere><![CDATA[(VendorInsurance.vendorId = Address.id.addressType) and (VendorInsurance.vendorId = Vendor.vendorId) and ((Address.id.addressCode = 'MSC' ) and ( Vendor.status <> '03' ))]]></sqlwhere>-->
+  <sqlwhere><![CDATA[(VendorInsurance.vendorId = Address.id.addressType) and (VendorInsurance.vendorId = Vendor.vendorId) and ( Vendor.status <> '03' )]]></sqlwhere>
+  <title>Contractor Compliance Report</title>
+</r-compliance-detail>
+

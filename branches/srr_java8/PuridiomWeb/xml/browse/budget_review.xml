@@ -1,0 +1,71 @@
+<browse_budget>
+	<columns>
+		<BudgetCenter_budgetId>
+			<label>Budget Id</label>
+			<visible>0</visible>
+			<hidden-input>Y</hidden-input>
+		</BudgetCenter_budgetId>
+		<BudgetCenter_budgetPeriod>
+			<label>Fiscal Year</label>
+			<visible>1</visible>
+			<size>10</size>
+		</BudgetCenter_budgetPeriod>
+		<BudgetCenter_budget1>
+			<visible>1</visible>
+			<size>6</size>
+		</BudgetCenter_budget1>
+		<BudgetCenter_budget2>
+			<visible>1</visible>
+			<size>7</size>
+		</BudgetCenter_budget2>
+		<BudgetCenter_budget3>
+			<label>budget String</label>
+			<visible>1</visible>
+			<size>7</size>
+		</BudgetCenter_budget3>
+		<BudgetCenter_budget4>
+			<visible>1</visible>
+			<size>7</size>
+		</BudgetCenter_budget4>
+		<BudgetCenter_budget5>
+			<visible>1</visible>
+			<size>9</size>
+		</BudgetCenter_budget5>
+		<BudgetCenter_budget6>
+			<visible>1</visible>
+			<size>9</size>
+		</BudgetCenter_budget6>
+		<BudgetCenter_budgeted>
+			<label>Budgeted</label>
+			<visible>1</visible>
+			<type>DollarDecimal</type>
+			<size>12</size>
+		</BudgetCenter_budgeted>
+		<BudgetTran_preEncumbered>
+			<label>Pre Encumbered</label>
+			<type>DollarDecimal</type>
+			<visible>1</visible>
+			<size>12</size>
+		</BudgetTran_preEncumbered>
+		<BudgetTran_encumbered>
+			<label>Encumbered</label>
+			<type>DollarDecimal</type>
+			<visible>1</visible>
+			<size>12</size>
+		</BudgetTran_encumbered>
+		<BudgetTran_expensed>
+			<label>Expensed</label>
+			<type>DollarDecimal</type>
+			<visible>1</visible>
+			<size>12</size>
+		</BudgetTran_expensed>
+		<BudgetCenter_comments>
+			<detail>Y</detail>
+		</BudgetCenter_comments>
+	</columns>
+<sqlfrom>BudgetTran as BudgetTran,BudgetCenter as BudgetCenter, BudgetAudit as BudgetAudit</sqlfrom>
+<sqlwhere><![CDATA[ ( BudgetTran.budgetId = BudgetCenter.budgetId ) and ( BudgetTran.auditId = BudgetAudit.auditId ) ]]></sqlwhere>
+<pagesize>15</pagesize>
+<detail-visible>Y</detail-visible>
+<title>Budget Center</title>
+</browse_budget>

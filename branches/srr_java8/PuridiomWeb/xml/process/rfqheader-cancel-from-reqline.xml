@@ -1,0 +1,33 @@
+<process name="rfqLineCancel" connection-type="New-Transaction">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="rfqHeaderCancel">
+			<task synchronous="true" continue-on-failure="false" name="rfqHeader">
+				<task-object-name>com.tsa.puridiom.rfqheader.tasks.RfqHeaderRetrieveById</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="rfqLineList">
+				<task-object-name>com.tsa.puridiom.rfqline.tasks.RfqLineRetrieveByHeader</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="rfqHeaderSetup">
+				<task-object-name>com.tsa.puridiom.rfqheader.tasks.RfqHeaderSetStatusByLineList</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="rfqHeader">
+				<task-object-name>com.tsa.puridiom.rfqheader.tasks.RfqHeaderSetValues</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="rfqHeader">
+				<task-object-name>com.tsa.puridiom.rfqheader.tasks.RfqHeaderUpdate</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="rfqHeaderHistoryCancel">
+			<rule-filename>is-rfqheader-cancel.xml</rule-filename>
+			<task continue-on-failure="false" synchronous="true" name="rfqHeaderHistory">
+				<task-object-name>com.tsa.puridiom.rfqheader.history.tasks.RfqHeaderHistory</task-object-name>
+			</task>
+		</activity>
+		<!-- EMAIL SET -->
+		<activity synchronous="true" continue-on-failure="false" name="sendQueueSettings">
+			<task synchronous="true" continue-on-failure="false" name="SendQueue_messagetext">
+				<task-object-name>com.tsa.puridiom.rfq.notifications.tasks.SetMessageTextToRfqHeaderCancel</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

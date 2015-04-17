@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="BudgetServiceCheck" connection-type="Transaction-Required" once-execution="true">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="requisitionLineRetrieve">
+			<rule-filename>is-req.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="header">
+				<task-object-name>com.tsa.puridiom.requisitionheader.tasks.RequisitionHeaderRetrieveById</task-object-name>
+				<post-action></post-action>
+			</task>
+ 			<task synchronous="true" continue-on-failure="false" name="lineItems">
+  				<task-object-name>com.tsa.puridiom.requisitionline.tasks.RequisitionLineRetrieveByHeader</task-object-name> 
+  			</task>
+  			<task synchronous="true" continue-on-failure="false" name="poHeaderOriginal">
+			 	<rule-filename>is-change-request.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.poheader.tasks.PoRetrieveFromReqById</task-object-name>
+		    </task>
+  		</activity>
+  		<activity synchronous="true" continue-on-failure="false" name="poLineRetrieve">
+			<rule-filename>is-po.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="header">
+				<task-object-name>com.tsa.puridiom.poheader.tasks.PoHeaderRetrieveById</task-object-name>
+				<post-action></post-action>
+			</task>
+  			<task synchronous="true" continue-on-failure="false" name="lineItems">
+				<task-object-name>com.tsa.puridiom.poline.tasks.PoLineRetrieveByHeader</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="invoiceLineRetrieve">
+			<rule-filename>is-invoice.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="header">
+				<task-object-name>com.tsa.puridiom.invoiceheader.tasks.InvoiceHeaderRetrieveById</task-object-name>
+				<post-action></post-action>
+			</task>
+  			<task synchronous="true" continue-on-failure="false" name="lineItems">
+				<task-object-name>com.tsa.puridiom.invoiceline.tasks.InvoiceLineRetrieveByHeader</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="budgetServiceSetup">
+			<rule-filename check-for-false="true">is-lineitems-empty.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="budgetServiceType">
+				<task-object-name>com.tsa.puridiom.budget.tasks.BudgetSetupType</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="budgetServiceActions">
+				<task-object-name>com.tsa.puridiom.budget.tasks.BudgetSetupActions</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="budgetSetupEntityList">
+			<rule-filename check-for-false="true">is-lineitems-empty.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="budgetEntityList">
+				<rule-filename>is-req-budget.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.budget.tasks.BudgetSetupReqEntities</task-object-name>
+				<post-action>exitActivity</post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="budgetEntityList">
+				<rule-filename>is-po-budget.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.budget.tasks.BudgetSetupPoEntities</task-object-name>
+				<post-action>exitActivity</post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="budgetEntityList">
+				<rule-filename>is-invoice-budget.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.budget.tasks.BudgetSetupInvoiceEntities</task-object-name>
+				<post-action>exitActivity</post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="budgetServiceCheck">
+			<rule-filename check-for-false="true">is-lineitems-empty.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="budgetSetup">
+				<task-object-name>com.tsa.puridiom.budget.tasks.BudgetSetupFromEntityList</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="budgetReturn">
+				<task-object-name>com.tsa.puridiom.budget.tasks.BudgetServiceGetUnlock</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="errorList">
+				<task-object-name>com.tsa.puridiom.budget.tasks.BudgetServiceGetException</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="errorList">
+				<rule-filename check-for-false="true">is-change-request.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.budget.tasks.BudgetServiceCheck</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="errorList">
+				<rule-filename>is-change-request.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.budget.tasks.BudgetServiceChangeReqCheck</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="budgetCheckStatus">
+				<task-object-name>com.tsa.puridiom.budget.tasks.BudgetServiceSetCheckStatus</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="requisitionHeaderBudgetServiceFlagSetup">
+			<rule-filename check-for-false="true">is-lineitems-empty.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="requisitionHeaderBudgetServiceFlagSetup">
+				<rule-filename>is-req-budget.xml</rule-filename>
+				<task-object-name>com.puridiom.service.budget.tasks.RequisitionHeaderBudgetServiceFlagUpdate</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="accountBudgetServiceFlagSetup">
+			<rule-filename check-for-false="true">is-lineitems-empty.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="accountBudgetServiceFlagSetup">
+				<task-object-name>com.puridiom.service.budget.tasks.AccountListBudgetServiceFlagUpdate</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="accountListUpdate">
+				<task-object-name>com.tsa.puridiom.account.tasks.AccountListUpdate</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+	</activities>
+</process>

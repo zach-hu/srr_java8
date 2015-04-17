@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="userLogin" connection-type="None" ldap-connection-type="None">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="ldapAuth">
+			<task synchronous="true" continue-on-failure="false" name="LDAPActive">
+				<task-object-name>com.tsa.puridiom.authentication.tasks.LDAPInitialization</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="verifyLDAPAuthentication">
+				<rule-filename>is-ldap-authentication-required.xml</rule-filename>
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>ldap-authentication.xml</process-filename>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="authenticationSetup">
+			<task synchronous="true" continue-on-failure="false" name="puridiomSessionId">
+				<rule-filename>is-puridiomsessionid-empty</rule-filename>
+				<task-object-name>com.tsa.puridiom.authentication.tasks.GenerateHiltonSessionId</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="userProfile">
+				<!-- set HostUser_mailId, UserProfile_mailId from mailId -->
+				<task-object-name>com.tsa.puridiom.authentication.tasks.AuthenticationMailIdSetup</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="hostUser">
+				<task-object-name>com.tsa.puridiom.hostuser.tasks.HostUserRetrieveById</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="idAuthenticationSetup">
+			<rule-filename>is-hostuser-empty.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="hostUser">
+				<task-object-name>com.tsa.puridiom.hostuser.tasks.HostUserRetrieveByOrgId</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="userProfileSetup">
+			<task synchronous="true" continue-on-failure="false" name="userProfileInfoSetup">
+				<rule-filename check-for-false="true">is-hostuser-empty.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.hostuser.tasks.HostUserSetUserProfileInfo</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="verifyAuthentication">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>userprofile-verify-authentication.xml</process-filename>
+			</task>
+		</activity>
+	</activities>
+</process>

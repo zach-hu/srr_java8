@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created using an evaluation version of JasperAssistant (http://www.jasperassistant.com) -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="receiving" pageWidth="288" pageHeight="452" columnWidth="268" leftMargin="10" rightMargin="10" topMargin="10" bottomMargin="10">
+	<property name="com.jasperassistant.designer.GridWidth" value="12"/>
+	<property name="com.jasperassistant.designer.GridHeight" value="12"/>
+	<property name="com.jasperassistant.designer.SnapToGrid" value="false"/>
+	<property name="com.jasperassistant.designer.Grid" value="false"/>
+	<import value="com.tsa.puridiom.entity.*"/>
+	<import value="com.tsa.puridiom.reports.datasource.*"/>
+	<import value="com.tsa.puridiom.jasperreports.*"/>
+	<import value="com.tsa.puridiom.common.documents.*"/>
+	<import value="java.net.*"/>
+	<import value="net.sf.jasperreports.engine.JRDataSource"/>
+	<import value="com.tsagate.properties.*"/>
+	<reportFont name="Arial_Normal" isDefault="true" fontName="Arial" size="8" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Bold" isDefault="false" fontName="Arial Black" size="8" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica-Bold" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Bold_Big" isDefault="false" fontName="Arial Black" size="9" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica-Bold" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Big" isDefault="false" fontName="Arial" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<parameter name="poHeader" class="com.tsa.puridiom.entity.PoHeader"/>
+	<parameter name="oid" class="java.lang.String">
+		<defaultValueExpression><![CDATA["legion"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="receiptHeader" class="com.tsa.puridiom.entity.ReceiptHeader"/>
+	<parameter name="requisitionHeader" class="com.tsa.puridiom.entity.RequisitionHeader"/>
+	<parameter name="account" class="com.tsa.puridiom.entity.Account"/>
+	<parameter name="routingNumber" class="java.lang.String"/>
+	<parameter name="deliverTo" class="com.tsa.puridiom.entity.UserProfile"/>
+	<field name="ReceiptHeader_receiptLineList" class="java.util.List"/>
+	<detail>
+		<band height="45">
+			<subreport>
+				<reportElement positionType="Float" x="0" y="3" width="259" height="39"/>
+				<subreportParameter name="poHeader">
+					<subreportParameterExpression><![CDATA[$P{poHeader}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="receiptHeader">
+					<subreportParameterExpression><![CDATA[$P{receiptHeader}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="oid">
+					<subreportParameterExpression><![CDATA[$P{oid}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="deliverTo">
+					<subreportParameterExpression><![CDATA[$P{deliverTo}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="account">
+					<subreportParameterExpression><![CDATA[$P{account}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="requisitionHeader">
+					<subreportParameterExpression><![CDATA[$P{requisitionHeader}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="routingNumber">
+					<subreportParameterExpression><![CDATA[$P{routingNumber}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[new HibernateQueryResultDataSource($P{receiptHeader}.getReceiptLineList())]]></dataSourceExpression>
+				<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[JasperReportsHelper.loadSubReport("rec-line-list-pdf.jasper", $P{oid})]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+</jasperReport>

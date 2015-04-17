@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created using an evaluation version of JasperAssistant (http://www.jasperassistant.com) -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RecLineListEmail" pageWidth="600" pageHeight="842" whenNoDataType="BlankPage" columnWidth="600" leftMargin="0" rightMargin="0" topMargin="1" bottomMargin="1">
+	<property name="com.jasperassistant.designer.GridHeight" value="24"/>
+	<property name="com.jasperassistant.designer.GridWidth" value="24"/>
+	<property name="com.jasperassistant.designer.Rulers" value="true"/>
+	<property name="com.jasperassistant.designer.DataSource" value="hilton1p"/>
+	<property name="com.jasperassistant.designer.SnapToGrid" value="false"/>
+	<property name="com.jasperassistant.designer.Margins" value="true"/>
+	<property name="com.jasperassistant.designer.Grid" value="true"/>
+	<property name="com.jasperassistant.designer.SnapToGuides" value="true"/>
+	<import value="com.tsa.puridiom.entity.*"/>
+	<import value="com.tsa.puridiom.reports.datasource.*"/>
+	<import value="com.tsa.puridiom.jasperreports.*"/>
+	<import value="com.tsa.puridiom.currcode.*"/>
+	<import value="com.tsa.puridiom.common.documents.DocumentStatus"/>
+	<reportFont name="Arial_Normal" isDefault="true" fontName="Arial" size="8" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_bold" isDefault="false" fontName="Arial Black" size="8" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica-Bold" pdfEncoding="Cp1252" isPdfEmbedded="true"/>
+	<parameter name="oid" class="java.lang.String">
+		<defaultValueExpression><![CDATA["HILTON"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="lines" class="java.util.List"/>
+	<parameter name="receiptHeader" class="com.tsa.puridiom.entity.ReceiptHeader"/>
+	<parameter name="dbs" class="com.tsagate.foundation.database.DBSession"/>
+	<parameter name="receiptLine" class="com.tsa.puridiom.entity.ReceiptLine"/>
+	<parameter name="poHeader" class="com.tsa.puridiom.entity.PoHeader"/>
+	<parameter name="poLine" class="com.tsa.puridiom.entity.PoLine"/>
+	<parameter name="inspectionHeader" class="com.tsa.puridiom.entity.InspectionHeader"/>
+	<variable name="today" class="java.util.Date">
+		<variableExpression><![CDATA[new java.util.Date()]]></variableExpression>
+		<initialValueExpression><![CDATA[new java.util.Date()]]></initialValueExpression>
+	</variable>
+	<variable name="reportTitle_var" class="java.lang.String">
+		<variableExpression><![CDATA["Requisition Line"]]></variableExpression>
+	</variable>
+	<detail>
+		<band height="20">
+			<subreport>
+				<reportElement x="0" y="0" width="600" height="20"/>
+				<subreportParameter name="dbs">
+					<subreportParameterExpression><![CDATA[$P{dbs}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="poLine">
+					<subreportParameterExpression><![CDATA[$P{poLine}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="poHeader">
+					<subreportParameterExpression><![CDATA[$P{poHeader}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="oid">
+					<subreportParameterExpression><![CDATA[$P{oid}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="receiptHeader">
+					<subreportParameterExpression><![CDATA[$P{receiptHeader}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="receiptLine">
+					<subreportParameterExpression><![CDATA[$P{receiptLine}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[ReportUtils.getDS($P{inspectionHeader})]]></dataSourceExpression>
+				<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[JasperReportsHelper.loadSubReport("rec-inspection-email.jasper", $P{oid})]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+</jasperReport>

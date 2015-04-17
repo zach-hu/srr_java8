@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping>
+
+<sql-query name="psp_XrefCombo" callable="true">
+			<return-scalar column="CODE_1" type="string"/>
+			<return-scalar column="CODE_2" type="string"/>
+			<return-scalar column="CODE_3" type="string"/>
+			<return-scalar column="CODE_4" type="string"/>
+			<return-scalar column="CODE_5" type="string"/>
+			<return-scalar column="CODE_6" type="string"/>
+			<return-scalar column="CODE_7" type="string"/>
+			<return-scalar column="CODE_8" type="string"/>
+			<return-scalar column="CODE_9" type="string"/>
+			<return-scalar column="CODE_10" type="string"/>
+			<return-scalar column="DESCRIPTION" type="string"/>
+			<return-scalar column="XREF_AMT" type="java.math.BigDecimal"/>
+	    { call PSP_XREF_COMBO( :p0,:p1,:p2,:p3,:p4,:p5,:p6,:p7,:p8,:p9,:p10,:pd,:pu) }
+</sql-query>
+
+</hibernate-mapping>

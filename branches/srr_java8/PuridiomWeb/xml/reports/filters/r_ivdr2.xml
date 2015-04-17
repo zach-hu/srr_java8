@@ -1,0 +1,70 @@
+<r_ivdr2>
+	
+  <columns>
+		<DisbLine_commodityCode>
+			<label>Commodity Code</label>
+			<type>STRING</type>
+		</DisbLine_commodityCode>
+		<DisbHeader_disbDate>
+			<label>Disb Date</label>
+			<type>DATE</type>
+		</DisbHeader_disbDate>
+		<DisbLine_quantity>
+			<label>Quantity</label>
+			<type>BIGDECIMAL</type>
+		</DisbLine_quantity>
+		<DisbLine_unitPrice>
+			<label>Unit Price</label>
+			<type>BIGDECIMAL</type>
+		</DisbLine_unitPrice>
+		<DisbLine_description>
+			<label>Description</label>
+			<type>STRING</type>
+		</DisbLine_description>
+		<DisbLine_unitOfMeasure>
+			<label>Unit Of Measure</label>
+			<type>STRING</type>
+		</DisbLine_unitOfMeasure>
+		<RequisitionHeader_departmentCode>
+			<label>Department Code</label>
+			<type>STRING</type>
+		</RequisitionHeader_departmentCode>
+		<DisbLine_itemNumber>
+			<label>Item Number</label>
+			<type>STRING</type>
+		</DisbLine_itemNumber>
+		<DisbHeader_disbNumber>
+			<label>Disb Number</label>
+			<type>STRING</type>
+		</DisbHeader_disbNumber>
+		<DisbHeader_invLocation>
+			<label>Inv Location</label>
+			<type>STRING</type>
+		</DisbHeader_invLocation>
+		<DisbHeader_requisitionerCode>
+			<label>Requisitioner Code</label>
+			<type>STRING</type>
+		</DisbHeader_requisitionerCode>
+		<DisbHeader_requisitionNumber>
+			<label>Requisition Number</label>
+			<type>STRING</type>
+		</DisbHeader_requisitionNumber>
+		<RequisitionHeader_shipToCode>
+			<label>Ship To Code</label>
+			<type>STRING</type>
+		</RequisitionHeader_shipToCode>
+		<DisbLine_location>
+			<label>Location</label>
+			<type>STRING</type>
+		</DisbLine_location>
+	</columns>
+
+  <sqlfrom> DisbHeader as DisbHeader, DisbLine as DisbLine </sqlfrom>
+
+  <sqlwhere><![CDATA[(DisbHeader.icDisbHeader = DisbLine.icDisbHeader ) and ((DisbHeader.disbStatus <> '99' ))]]></sqlwhere>
+
+  <title>Inventory Disbursement Report</title>
+
+
+</r_ivdr2>
+

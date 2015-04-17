@@ -1,0 +1,379 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created using an evaluation version of JasperAssistant (http://www.jasperassistant.com) -->
+<!DOCTYPE jasperReport PUBLIC "-//JasperReports//DTD Report Design//EN" "http://jasperreports.sourceforge.net/dtds/jasperreport.dtd">
+
+<jasperReport name="RPoasSmMabXLS" pageWidth="791" pageHeight="612" orientation="Landscape" whenNoDataType="AllSectionsNoDetail" columnWidth="791" leftMargin="0" rightMargin="0" topMargin="15" bottomMargin="15">
+	<import value="com.tsa.puridiom.common.documents.OrderType"/>
+	<import value="com.tsa.puridiom.property.PropertiesManager"/>
+	<import value="com.tsa.puridiom.common.documents.*"/>
+	<import value="java.util.*"/>
+	<import value="com.tsa.puridiom.entity.*"/>
+	<import value="net.sf.jasperreports.engine.JRDataSource"/>
+	<import value="com.tsa.puridiom.common.utility.HiltonUtility"/>
+	<import value="com.tsagate.foundation.utility.Utility"/>
+	<import value="com.tsa.puridiom.currcode.CurrencyManager"/>
+	<import value="com.tsagate.properties.*"/>
+	<import value="com.tsa.puridiom.jasperreports.*"/>
+	<import value="java.net.*"/>
+	<reportFont name="Arial_Normal" isDefault="true" fontName="Arial" size="8" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Bold" isDefault="false" fontName="Arial Black" size="7" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica-Bold" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Bold_Big" isDefault="false" fontName="Arial Black" size="12" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica-Bold" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Big" isDefault="false" fontName="Arial" size="12" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<parameter name="oid" class="java.lang.String">
+		<defaultValueExpression><![CDATA["HILTON"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="reportTitle" class="java.lang.String">
+		<defaultValueExpression><![CDATA[$P{reportTitle}]]></defaultValueExpression>
+	</parameter>
+	<parameter name="reportCriteria" class="java.lang.String">
+		<defaultValueExpression><![CDATA[$P{reportCriteria}]]></defaultValueExpression>
+	</parameter>
+	<parameter name="userId" class="java.lang.String">
+		<defaultValueExpression><![CDATA["Puridiom"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="reportType" class="java.lang.String">
+		<defaultValueExpression><![CDATA["Y"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="companyName" class="java.lang.String">
+		<defaultValueExpression><![CDATA[PropertiesManager.getInstance($P{oid}).getProperty("COMPANY", "Name", "TSA")]]></defaultValueExpression>
+	</parameter>
+	<parameter name="today" class="java.lang.String">
+		<defaultValueExpression><![CDATA["Created " + Utility.getDateFormat(new Date(), "MMM d, yyyy h:mm a") +" by "+$P{userId}]]></defaultValueExpression>
+	</parameter>
+	<parameter name="month" class="java.lang.String">
+		<defaultValueExpression><![CDATA[String.valueOf(new Date().getMonth())]]></defaultValueExpression>
+	</parameter>
+	<parameter name="footerText" class="java.lang.String">
+		<defaultValueExpression><![CDATA[$P{companyName}]]></defaultValueExpression>
+	</parameter>
+	<parameter name="currencyManager" class="com.tsa.puridiom.currcode.CurrencyManager">
+		<defaultValueExpression><![CDATA[CurrencyManager.getInstance($P{oid})]]></defaultValueExpression>
+	</parameter>
+	<field name="MonthlyDetailActivityBuyer_buyerCode" class="java.lang.String"/>
+	<field name="MonthlyDetailActivityBuyer_period1" class="java.lang.String"/>
+	<field name="MonthlyDetailActivityBuyer_action1" class="java.math.BigDecimal"/>
+	<field name="MonthlyDetailActivityBuyer_amount1" class="java.math.BigDecimal"/>
+	<field name="MonthlyDetailActivityBuyer_action2" class="java.math.BigDecimal"/>
+	<field name="MonthlyDetailActivityBuyer_amount2" class="java.math.BigDecimal"/>
+	<field name="MonthlyDetailActivityBuyer_action3" class="java.math.BigDecimal"/>
+	<field name="MonthlyDetailActivityBuyer_amount3" class="java.math.BigDecimal"/>
+	<field name="MonthlyDetailActivityBuyer_action4" class="java.math.BigDecimal"/>
+	<field name="MonthlyDetailActivityBuyer_amount4" class="java.math.BigDecimal"/>
+	<field name="MonthlyDetailActivityBuyer_period2" class="java.lang.String"/>
+	<field name="MonthlyDetailActivityBuyer_period3" class="java.lang.String"/>
+	<field name="MonthlyDetailActivityBuyer_period4" class="java.lang.String"/>
+	<variable name="SumAction" class="java.math.BigDecimal" resetType="None">
+		<variableExpression><![CDATA[($F{MonthlyDetailActivityBuyer_action1}).add($F{MonthlyDetailActivityBuyer_action2}).add($F{MonthlyDetailActivityBuyer_action3}).add($F{MonthlyDetailActivityBuyer_action4})]]></variableExpression>
+	</variable>
+	<variable name="TotalAmount" class="java.math.BigDecimal">
+		<variableExpression><![CDATA[($F{MonthlyDetailActivityBuyer_amount1}).add($F{MonthlyDetailActivityBuyer_amount2}).add($F{MonthlyDetailActivityBuyer_amount3}).add($F{MonthlyDetailActivityBuyer_amount4})]]></variableExpression>
+	</variable>
+	<variable name="SumAmount" class="java.math.BigDecimal" resetType="None" calculation="Sum">
+		<variableExpression><![CDATA[($F{MonthlyDetailActivityBuyer_amount1}).add($F{MonthlyDetailActivityBuyer_amount2}).add($F{MonthlyDetailActivityBuyer_amount3}).add($F{MonthlyDetailActivityBuyer_amount4})]]></variableExpression>
+	</variable>
+	<variable name="GrandSumAction" class="java.math.BigDecimal" resetType="None" calculation="Sum">
+		<variableExpression><![CDATA[$V{SumAction}]]></variableExpression>
+	</variable>
+	<variable name="GrandTotalAmount" class="java.math.BigDecimal" resetType="None" calculation="Sum">
+		<variableExpression><![CDATA[$V{TotalAmount}]]></variableExpression>
+	</variable>
+	<variable name="buyerSumAction1" class="java.math.BigDecimal" resetType="Group" resetGroup="Group_Header" calculation="Sum">
+		<variableExpression><![CDATA[$F{MonthlyDetailActivityBuyer_action1}]]></variableExpression>
+		<initialValueExpression><![CDATA[$F{MonthlyDetailActivityBuyer_action1}]]></initialValueExpression>
+	</variable>
+	<variable name="buyerSumAction2" class="java.math.BigDecimal" resetType="Group" resetGroup="Group_Header" calculation="Sum">
+		<variableExpression><![CDATA[$F{MonthlyDetailActivityBuyer_action2}]]></variableExpression>
+		<initialValueExpression><![CDATA[$F{MonthlyDetailActivityBuyer_action2}]]></initialValueExpression>
+	</variable>
+	<variable name="buyerSumAction3" class="java.math.BigDecimal" resetType="Group" resetGroup="Group_Header" calculation="Sum">
+		<variableExpression><![CDATA[$F{MonthlyDetailActivityBuyer_action3}]]></variableExpression>
+		<initialValueExpression><![CDATA[$F{MonthlyDetailActivityBuyer_action3}]]></initialValueExpression>
+	</variable>
+	<variable name="buyerSumAction4" class="java.math.BigDecimal" resetType="Group" resetGroup="Group_Header" calculation="Sum">
+		<variableExpression><![CDATA[$F{MonthlyDetailActivityBuyer_action4}]]></variableExpression>
+		<initialValueExpression><![CDATA[$F{MonthlyDetailActivityBuyer_action4}]]></initialValueExpression>
+	</variable>
+	<variable name="buyerSumAmount1" class="java.math.BigDecimal" resetType="Group" resetGroup="Group_Header" calculation="Sum">
+		<variableExpression><![CDATA[$F{MonthlyDetailActivityBuyer_amount1}]]></variableExpression>
+		<initialValueExpression><![CDATA[$F{MonthlyDetailActivityBuyer_amount1}]]></initialValueExpression>
+	</variable>
+	<variable name="buyerSumAmount2" class="java.math.BigDecimal" resetType="Group" resetGroup="Group_Header" calculation="Sum">
+		<variableExpression><![CDATA[$F{MonthlyDetailActivityBuyer_amount2}]]></variableExpression>
+		<initialValueExpression><![CDATA[$F{MonthlyDetailActivityBuyer_amount2}]]></initialValueExpression>
+	</variable>
+	<variable name="buyerSumAmount3" class="java.math.BigDecimal" resetType="Group" resetGroup="Group_Header" calculation="Sum">
+		<variableExpression><![CDATA[$F{MonthlyDetailActivityBuyer_amount3}]]></variableExpression>
+		<initialValueExpression><![CDATA[$F{MonthlyDetailActivityBuyer_amount3}]]></initialValueExpression>
+	</variable>
+	<variable name="buyerSumAmount4" class="java.math.BigDecimal" resetType="Group" resetGroup="Group_Header" calculation="Sum">
+		<variableExpression><![CDATA[$F{MonthlyDetailActivityBuyer_amount4}]]></variableExpression>
+		<initialValueExpression><![CDATA[$F{MonthlyDetailActivityBuyer_amount4}]]></initialValueExpression>
+	</variable>
+	<variable name="buyerTotalAction" class="java.math.BigDecimal" resetType="Group" resetGroup="Group_Buyer">
+		<variableExpression><![CDATA[($V{buyerSumAction1}).add($V{buyerSumAction2}).add($V{buyerSumAction3}).add($V{buyerSumAction4})]]></variableExpression>
+	</variable>
+	<variable name="buyerTotalAmount" class="java.math.BigDecimal" resetType="Group" resetGroup="Group_Buyer">
+		<variableExpression><![CDATA[($V{buyerSumAmount1}).add($V{buyerSumAmount2}).add($V{buyerSumAmount3}).add($V{buyerSumAmount4})]]></variableExpression>
+	</variable>
+	<group name="Group_Title">
+		<groupHeader>
+			<band height="41">
+				<subreport isUsingCache="false">
+					<reportElement positionType="Float" x="0" y="0" width="791" height="40"/>
+					<subreportParameter name="month">
+						<subreportParameterExpression><![CDATA[$P{month}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="reportTitle">
+						<subreportParameterExpression><![CDATA[$P{reportTitle}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="reportCriteria">
+						<subreportParameterExpression><![CDATA[$P{reportCriteria}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="today">
+						<subreportParameterExpression><![CDATA[$P{today}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="oid">
+						<subreportParameterExpression><![CDATA[$P{oid}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="footerText"/>
+					<subreportParameter name="pageNumber">
+						<subreportParameterExpression><![CDATA[String.valueOf($V{PAGE_NUMBER})]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="companyName">
+						<subreportParameterExpression><![CDATA[$P{companyName}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="totalPages">
+						<subreportParameterExpression><![CDATA[String.valueOf($V{PAGE_COUNT})]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[JasperReportsHelper.loadSubReport("header.jasper", $P{oid},"", $P{reportType})]]></subreportExpression>
+				</subreport>
+			</band>
+		</groupHeader>
+	</group>
+	<group name="Group_Banda">
+		<groupExpression><![CDATA[$F{MonthlyDetailActivityBuyer_period1}]]></groupExpression>
+		<groupFooter>
+			<band height="14">
+				<staticText>
+					<reportElement positionType="Float" x="0" y="0" width="60" height="14"/>
+					<box border="None" padding="0"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font reportFont="Arial_Normal" fontName="Arial" size="7" isBold="true" isUnderline="false" pdfFontName="Helvetica-Bold"/>
+					</textElement>
+					<text><![CDATA[]]></text>
+				</staticText>
+			</band>
+		</groupFooter>
+	</group>
+	<group name="Group_Header">
+		<groupExpression><![CDATA[$F{MonthlyDetailActivityBuyer_period1}]]></groupExpression>
+		<groupHeader>
+			<band height="28">
+				<staticText>
+					<reportElement positionType="Float" x="0" y="0" width="60" height="27" forecolor="#000000"/>
+					<box padding="0" topBorder="1Point" leftBorder="1Point" bottomBorder="1Point" rightBorder="None"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font reportFont="Arial_Normal" fontName="Arial" size="7" isBold="true" isUnderline="false" pdfFontName="Helvetica-Bold"/>
+					</textElement>
+					<text><![CDATA[Buyer Code]]></text>
+				</staticText>
+				<staticText>
+					<reportElement positionType="Float" x="60" y="15" width="65" height="12"/>
+					<box padding="0" topBorder="None" leftBorder="1Point" bottomBorder="1Point" rightBorder="None"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+						<font reportFont="Arial_Normal" fontName="Arial" size="7" isBold="true" isUnderline="false" pdfFontName="Helvetica-Bold"/>
+					</textElement>
+					<text><![CDATA[Action]]></text>
+				</staticText>
+				<staticText>
+					<reportElement positionType="Float" x="125" y="15" width="70" height="12"/>
+					<box padding="0" topBorder="None" leftBorder="1Point" bottomBorder="1Point" rightBorder="1Point"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+						<font reportFont="Arial_Normal" fontName="Arial" size="7" isBold="true" isUnderline="false" pdfFontName="Helvetica-Bold"/>
+					</textElement>
+					<text><![CDATA[Amount]]></text>
+				</staticText>
+				<staticText>
+					<reportElement positionType="Float" x="195" y="15" width="65" height="12"/>
+					<box padding="0" topBorder="None" leftBorder="None" bottomBorder="1Point" rightBorder="None"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font reportFont="Arial_Normal" fontName="Arial" size="7" isBold="true" isUnderline="false" pdfFontName="Helvetica-Bold"/>
+					</textElement>
+					<text><![CDATA[Action
+]]></text>
+				</staticText>
+				<staticText>
+					<reportElement positionType="Float" x="260" y="15" width="70" height="12"/>
+					<box padding="0" topBorder="None" leftBorder="1Point" bottomBorder="1Point" rightBorder="1Point"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font reportFont="Arial_Normal" fontName="Arial" size="7" isBold="true" isUnderline="false" pdfFontName="Helvetica-Bold"/>
+					</textElement>
+					<text><![CDATA[Amount]]></text>
+				</staticText>
+				<staticText>
+					<reportElement positionType="Float" x="330" y="15" width="65" height="12"/>
+					<box padding="0" topBorder="None" leftBorder="None" bottomBorder="1Point" rightBorder="None"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font reportFont="Arial_Normal" fontName="Arial" size="7" isBold="true" isUnderline="false" pdfFontName="Helvetica-Bold"/>
+					</textElement>
+					<text><![CDATA[Action]]></text>
+				</staticText>
+				<staticText>
+					<reportElement positionType="Float" x="395" y="15" width="66" height="12"/>
+					<box padding="0" topBorder="None" leftBorder="1Point" bottomBorder="1Point" rightBorder="1Point"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font reportFont="Arial_Normal" fontName="Arial" size="7" isBold="true" isUnderline="false" pdfFontName="Helvetica-Bold"/>
+					</textElement>
+					<text><![CDATA[Amount]]></text>
+				</staticText>
+				<staticText>
+					<reportElement positionType="Float" x="461" y="15" width="65" height="12"/>
+					<box padding="0" topBorder="None" leftBorder="None" bottomBorder="1Point" rightBorder="None"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font reportFont="Arial_Normal" fontName="Arial" size="7" isBold="true" isUnderline="false" pdfFontName="Helvetica-Bold"/>
+					</textElement>
+					<text><![CDATA[Action]]></text>
+				</staticText>
+				<staticText>
+					<reportElement positionType="Float" x="526" y="15" width="61" height="12"/>
+					<box padding="0" topBorder="None" leftBorder="1Point" bottomBorder="1Point" rightBorder="1Point"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font reportFont="Arial_Normal" fontName="Arial" size="7" isBold="true" isUnderline="false" pdfFontName="Helvetica-Bold"/>
+					</textElement>
+					<text><![CDATA[Amount]]></text>
+				</staticText>
+				<staticText>
+					<reportElement positionType="Float" x="587" y="0" width="66" height="27"/>
+					<box padding="0" topBorder="1Point" leftBorder="None" bottomBorder="1Point" rightBorder="1Point"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font reportFont="Arial_Normal" fontName="Arial" size="7" isBold="true" isUnderline="false" pdfFontName="Helvetica-Bold"/>
+					</textElement>
+					<text><![CDATA[Total Actions]]></text>
+				</staticText>
+				<staticText>
+					<reportElement positionType="Float" x="653" y="0" width="70" height="27"/>
+					<box padding="0" topBorder="1Point" leftBorder="1Point" bottomBorder="1Point" rightBorder="1Point"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font reportFont="Arial_Normal" fontName="Arial" size="7" isBold="true" isUnderline="false" pdfFontName="Helvetica-Bold"/>
+					</textElement>
+					<text><![CDATA[Total Amount]]></text>
+				</staticText>
+				<textField>
+					<reportElement positionType="Float" x="60" y="0" width="135" height="15"/>
+					<box padding="0" topBorder="1Point" leftBorder="1Point" bottomBorder="1Point" rightBorder="1Point"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+						<font reportFont="Arial_Normal" fontName="Arial" isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[( $F{MonthlyDetailActivityBuyer_period1}!=null )?  $F{MonthlyDetailActivityBuyer_period1} : ""]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="195" y="0" width="135" height="15"/>
+					<box padding="0" topBorder="1Point" leftBorder="None" bottomBorder="1Point" rightBorder="1Point"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font reportFont="Arial_Normal" fontName="Arial" isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[( $F{MonthlyDetailActivityBuyer_period2}!=null )?  $F{MonthlyDetailActivityBuyer_period2} : ""]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="330" y="0" width="131" height="15"/>
+					<box padding="0" topBorder="1Point" leftBorder="None" bottomBorder="1Point" rightBorder="1Point"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font reportFont="Arial_Normal" fontName="Arial" isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[( $F{MonthlyDetailActivityBuyer_period3}!=null )?  $F{MonthlyDetailActivityBuyer_period3} : ""]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="461" y="0" width="126" height="15"/>
+					<box padding="0" topBorder="1Point" leftBorder="None" bottomBorder="1Point" rightBorder="1Point"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font reportFont="Arial_Normal" fontName="Arial" isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[( $F{MonthlyDetailActivityBuyer_period4}!=null )?  $F{MonthlyDetailActivityBuyer_period4} : ""]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="14">
+				<staticText>
+					<reportElement positionType="Float" x="0" y="0" width="60" height="14"/>
+					<box border="None" padding="0"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font reportFont="Arial_Normal" fontName="Arial" size="7" isBold="true" isUnderline="false" pdfFontName="Helvetica-Bold"/>
+					</textElement>
+					<text><![CDATA[Sub Total:]]></text>
+				</staticText>
+			</band>
+		</groupFooter>
+	</group>
+	<group name="Group_Buyer">
+		<groupExpression><![CDATA[$F{MonthlyDetailActivityBuyer_period1} + $F{MonthlyDetailActivityBuyer_buyerCode}]]></groupExpression>
+		<groupHeader>
+			<band height="14">
+				<textField pattern="#,##0.###">
+					<reportElement positionType="Float" x="60" y="0" width="65" height="14">
+						<printWhenExpression><![CDATA[new Boolean(  $F{MonthlyDetailActivityBuyer_action1}.intValue() > 0 )]]></printWhenExpression>
+					</reportElement>
+					<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single"/>
+					<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{MonthlyDetailActivityBuyer_action1}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="0" y="0" width="60" height="14">
+						<printWhenExpression><![CDATA[new Boolean(  $F{MonthlyDetailActivityBuyer_buyerCode}!= null )]]></printWhenExpression>
+					</reportElement>
+					<box padding="0" topBorder="None" leftBorder="None" bottomBorder="None" rightBorder="None"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{MonthlyDetailActivityBuyer_buyerCode}]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0.00">
+					<reportElement positionType="Float" x="125" y="0" width="70" height="14">
+						<printWhenExpression><![CDATA[new Boolean(  $F{MonthlyDetailActivityBuyer_amount1}.intValue() > 0 )]]></printWhenExpression>
+					</reportElement>
+					<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single"/>
+					<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{MonthlyDetailActivityBuyer_amount1}]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0.###">
+					<reportElement x="195" y="0" width="65" height="14">
+						<printWhenExpression><![CDATA[new Boolean(  $F{MonthlyDetailActivityBuyer_action2}.intValue() > 0 )]]></printWhenExpression>
+					</reportElement>
+					<textElement textAlignment="Right" verticalAlignment="Middle"/>
+					<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{MonthlyDetailActivityBuyer_action2}]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0.00">
+					<reportElement x="260" y="0" width="70" height="14">
+						<printWhenExpression><![CDATA[new Boolean(  $F{MonthlyDetailActivityBuyer_amount2}.intValue() > 0 )]]></printWhenExpression>
+					</reportElement>
+					<textElement textAlignment="Right" verticalAlignment="Middle"/>
+					<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{MonthlyDetailActivityBuyer_amount2}]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0.###">
+					<reportElement x="330" y="0" width="65" height="14">
+						<printWhenExpression><![CDATA[new Boolean(  $F{MonthlyDetailActivityBuyer_action3}.intValue() > 0 )]]></printWhenExpression>
+					</reportElement>
+					<textElement textAlignment="Right" verticalAlignment="Middle"/>
+					<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{MonthlyDetailActivityBuyer_action3}]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0.00">
+					<reportElement x="395" y="0" width="66" height="14">
+						<printWhenExpression><![CDATA[new Boolean(  $F{MonthlyDetailActivityBuyer_amount3}.intValue() > 0 )]]></printWhenExpression>
+					</reportElement>
+					<textElement textAlignment="Right" verticalAlignment="Middle"/>
+					<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{MonthlyDetailActivityBuyer_amount3}]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0.###">
+					<reportElement x="461" y="0" width="65" height="14">
+						<printWhenExpression><![CDATA[new Boolean(  $F{MonthlyDetailActivityBuyer_action4}.intValue() > 0 )]]></printWhenExpression>
+					</reportElement>
+					<textElement textAlignment="Right" verticalAlignment="Middle"/>
+					<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{MonthlyDetailActivityBuyer_action4}]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0.00">
+					<reportElement x="526" y="0" width="61" height="14">
+						<printWhenExpression><![CDATA[new Boolean(  $F{MonthlyDetailActivityBuyer_amount4}.intValue() > 0 )]]></printWhenExpression>
+					</reportElement>
+					<textElement textAlignment="Right" verticalAlignment="Middle"/>
+					<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{MonthlyDetailActivityBuyer_amount4}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+	</group>
+</jasperReport>

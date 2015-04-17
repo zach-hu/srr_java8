@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="shipToDataRetrieveById" connection-type="Connection-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="shipToDataRetrieveById">
+			<task synchronous="true" continue-on-failure="false" name="shipToAddressSetup">
+				<task-object-name>com.tsa.puridiom.shipto.tasks.ShipToRetrieveAddressSetup</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="shipToAddress">
+				<rule-filename>is-address-code-not-empty</rule-filename>
+				<task-object-name>com.tsa.puridiom.address.tasks.AddressRetrieveShipTo</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="shipToDataSet">
+				<task-object-name>com.tsa.puridiom.shipto.tasks.ShipToDataSet</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

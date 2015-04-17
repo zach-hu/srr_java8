@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="rfqForwardToPurchasing" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="rfqForwardToPurchasing">
+			<task synchronous="true" continue-on-failure="false" name="rfqHeaderSetToPurchasing">
+				<task-object-name>com.tsa.puridiom.rfqheader.tasks.RfqHeaderSetToPurchasing</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="rfqSetApprovalInformation">
+				<task-object-name>com.tsa.puridiom.rfqheader.tasks.RfqHeaderSetApprovalInformation</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

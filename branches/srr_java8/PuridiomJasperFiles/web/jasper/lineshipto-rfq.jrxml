@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created using JasperAssistant (http://www.jasperassistant.com) -->
+<!DOCTYPE jasperReport PUBLIC "-//JasperReports//DTD Report Design//EN" "http://jasperreports.sourceforge.net/dtds/jasperreport.dtd">
+
+<jasperReport name="shiptosb" language="java" pageWidth="569" pageHeight="105" whenNoDataType="BlankPage" columnWidth="569" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+	<property name="com.jasperassistant.designer.GridHeight" value="12"/>
+	<property name="com.jasperassistant.designer.GridWidth" value="12"/>
+	<property name="com.jasperassistant.designer.DataSource" value="oracle"/>
+	<property name="com.jasperassistant.designer.SnapToGrid" value="false"/>
+	<property name="com.jasperassistant.designer.Grid" value="false"/>
+	<reportFont name="Arial_Normal" isDefault="false" fontName="Arial" size="8" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_bold" isDefault="false" fontName="Arial Black" size="8" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica-Bold" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Verdana" isDefault="false" fontName="Verdana" size="9" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Verdana_bold" isDefault="false" fontName="Verdana" size="9" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<parameter name="shiptocode" class="java.lang.String">
+	</parameter>
+	<parameter name="shipto_quantity" class="java.lang.String">
+	</parameter>
+	<field name="Address_addressLine1" class="java.lang.String">
+	</field>
+	<field name="Address_shipToCode" class="java.lang.String">
+	</field>
+	<field name="Address_quantity" class="java.math.BigDecimal">
+	</field>
+	<field name="Address_attention" class="java.lang.String">
+	</field>
+	<field name="Address_addressLine2" class="java.lang.String">
+	</field>
+	<field name="Address_addressLine3" class="java.lang.String">
+	</field>
+	<field name="Address_cityStatePostal" class="java.lang.String">
+	</field>
+	<field name="Address_country" class="java.lang.String">
+	</field>
+	<group name="Group_1">
+		<groupExpression><![CDATA[$V{REPORT_COUNT}]]></groupExpression>
+		<groupHeader>
+		<band height="15">
+			<printWhenExpression><![CDATA[new Boolean($F{Address_quantity}.compareTo(new BigDecimal(0)) > 0)]]></printWhenExpression>
+			<staticText>
+				<reportElement positionType="Float" mode="Opaque" x="152" y="0" width="32" height="15" backcolor="#f3f3f3"/>
+				<textElement verticalAlignment="Middle">
+					<font reportFont="Verdana"/>
+				</textElement>
+				<text><![CDATA[Ship :]]></text>
+			</staticText>
+			<textField pattern="#,##0.00#" isBlankWhenNull="true">
+				<reportElement positionType="Float" mode="Opaque" x="184" y="0" width="90" height="15" isRemoveLineWhenBlank="true" backcolor="#f3f3f3"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font reportFont="Verdana_bold"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{Address_quantity}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement positionType="Float" mode="Opaque" x="274" y="0" width="164" height="15" backcolor="#f3f3f3"/>
+				<textElement verticalAlignment="Middle">
+					<font reportFont="Verdana"/>
+				</textElement>
+				<text><![CDATA[to:]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="152" height="15" forecolor="#f3f3f3" backcolor="#f3f3f3"/>
+				<graphicElement/>
+			</rectangle>
+			<rectangle>
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="438" y="0" width="131" height="15" forecolor="#f3f3f3" backcolor="#f3f3f3"/>
+				<graphicElement/>
+			</rectangle>
+		</band>
+		</groupHeader>
+	</group>
+	<group name="Group_2">
+		<groupHeader>
+		<band height="15">
+			<printWhenExpression><![CDATA[new Boolean($F{Address_attention}.length() > 0)]]></printWhenExpression>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" mode="Opaque" x="152" y="0" width="286" height="15" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true" backcolor="#f3f3f3"/>
+				<textElement>
+					<font reportFont="Verdana_bold"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{Address_attention}]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="152" height="15" forecolor="#f3f3f3" backcolor="#f3f3f3"/>
+				<graphicElement/>
+			</rectangle>
+			<rectangle>
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="438" y="0" width="131" height="15" forecolor="#f3f3f3" backcolor="#f3f3f3"/>
+				<graphicElement/>
+			</rectangle>
+		</band>
+		</groupHeader>
+	</group>
+	<group name="Group_3">
+		<groupHeader>
+		<band height="15">
+			<printWhenExpression><![CDATA[new Boolean($F{Address_addressLine1}.length() > 0)]]></printWhenExpression>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" mode="Opaque" x="152" y="0" width="286" height="15" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true" backcolor="#f3f3f3"/>
+				<textElement>
+					<font reportFont="Verdana"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{Address_addressLine1}]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="152" height="15" forecolor="#f3f3f3" backcolor="#f3f3f3"/>
+				<graphicElement/>
+			</rectangle>
+			<rectangle>
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="438" y="0" width="131" height="15" forecolor="#f3f3f3" backcolor="#f3f3f3"/>
+				<graphicElement/>
+			</rectangle>
+		</band>
+		</groupHeader>
+	</group>
+	<group name="Group_4">
+		<groupHeader>
+		<band height="15">
+			<printWhenExpression><![CDATA[new Boolean($F{Address_addressLine2}.length() > 0)]]></printWhenExpression>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" mode="Opaque" x="152" y="0" width="286" height="15" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true" backcolor="#f3f3f3"/>
+				<textElement>
+					<font reportFont="Verdana"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{Address_addressLine2}]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="152" height="15" forecolor="#f3f3f3" backcolor="#f3f3f3"/>
+				<graphicElement/>
+			</rectangle>
+			<rectangle>
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="438" y="0" width="131" height="15" forecolor="#f3f3f3" backcolor="#f3f3f3"/>
+				<graphicElement/>
+			</rectangle>
+		</band>
+		</groupHeader>
+	</group>
+	<group name="Group_5">
+		<groupHeader>
+		<band height="15">
+			<printWhenExpression><![CDATA[new Boolean($F{Address_addressLine3}.length() > 0)]]></printWhenExpression>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" mode="Opaque" x="152" y="0" width="286" height="15" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true" backcolor="#f3f3f3"/>
+				<textElement>
+					<font reportFont="Verdana"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{Address_addressLine3}]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="152" height="15" forecolor="#f3f3f3" backcolor="#f3f3f3"/>
+				<graphicElement/>
+			</rectangle>
+			<rectangle>
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="438" y="0" width="131" height="15" forecolor="#f3f3f3" backcolor="#f3f3f3"/>
+				<graphicElement/>
+			</rectangle>
+		</band>
+		</groupHeader>
+	</group>
+	<group name="Group_6">
+		<groupHeader>
+		<band height="15">
+			<printWhenExpression><![CDATA[new Boolean($F{Address_cityStatePostal}.length() > 0)]]></printWhenExpression>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" mode="Opaque" x="152" y="0" width="286" height="15" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true" backcolor="#f3f3f3"/>
+				<textElement>
+					<font reportFont="Verdana"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{Address_cityStatePostal}]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="152" height="15" forecolor="#f3f3f3" backcolor="#f3f3f3"/>
+				<graphicElement/>
+			</rectangle>
+			<rectangle>
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="438" y="0" width="131" height="15" forecolor="#f3f3f3" backcolor="#f3f3f3"/>
+				<graphicElement/>
+			</rectangle>
+		</band>
+		</groupHeader>
+	</group>
+	<group name="Group_7">
+		<groupHeader>
+		<band height="15">
+			<printWhenExpression><![CDATA[new Boolean($F{Address_country}.length() > 0 && !$F{Address_country}.equalsIgnoreCase("USA"))]]></printWhenExpression>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" mode="Opaque" x="152" y="0" width="286" height="15" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true" backcolor="#f3f3f3"/>
+				<textElement>
+					<font reportFont="Verdana"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{Address_country}]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="152" height="15" forecolor="#f3f3f3" backcolor="#f3f3f3"/>
+				<graphicElement/>
+			</rectangle>
+			<rectangle>
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="438" y="0" width="131" height="15" forecolor="#f3f3f3" backcolor="#f3f3f3"/>
+				<graphicElement/>
+			</rectangle>
+		</band>
+		</groupHeader>
+	</group>
+	<group name="Group_8">
+		<groupHeader>
+		<band height="5">
+			<staticText>
+				<reportElement positionType="Float" mode="Opaque" x="0" y="0" width="569" height="5" forecolor="#f3f3f3" backcolor="#f3f3f3"/>
+				<textElement/>
+				<text><![CDATA[sep]]></text>
+			</staticText>
+		</band>
+		</groupHeader>
+	</group>
+	<summary>
+		<band height="5">
+			<staticText>
+				<reportElement positionType="Float" mode="Opaque" x="0" y="0" width="569" height="5" forecolor="#f3f3f3" backcolor="#f3f3f3"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[hiiiiiiii]]></text>
+			</staticText>
+		</band>
+	</summary>
+</jasperReport>

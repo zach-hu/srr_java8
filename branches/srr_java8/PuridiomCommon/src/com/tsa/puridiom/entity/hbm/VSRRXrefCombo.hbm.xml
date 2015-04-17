@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping>
+
+<class
+    name="com.tsa.puridiom.entity.VSRRXrefCombo"
+    table="VSRR_XREF_COMBO"
+>
+    <id
+        name="icXref"
+        type="java.math.BigDecimal"
+        column="IC_XREF"
+    >
+        <generator class="assigned" />
+    </id>
+    <property
+        name="organizationID"
+        type="java.lang.String"
+        column="org_id"
+        length="20"
+    />
+    <property
+        name="accountID"
+        type="java.lang.String"
+        column="acct_id"
+        length="15"
+    />
+    <property
+        name="projectID"
+        type="java.lang.String"
+        column="proj_id"
+        length="30"
+    />
+
+    <!-- associations -->
+
+</class>
+</hibernate-mapping>

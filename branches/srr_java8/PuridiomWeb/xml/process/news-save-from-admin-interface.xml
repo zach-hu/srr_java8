@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="NewsSaveFromAdminInterface" connection-type="Transaction-Required">
+	<activities>
+			<activity synchronous="true" continue-on-failure="false" name="NewsSaveFromAdminInterface">
+				<task synchronous="true" continue-on-failure="false" name="newsUpdateFromAdminInterface">
+					<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+					<process-filename>news-update-from-admin-interface.xml</process-filename>
+				</task>
+				<task synchronous="true" continue-on-failure="false" name="newsDeleteFromAdminInterface">
+					<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+					<process-filename>news-delete-list.xml</process-filename>
+				</task>
+			</activity>
+	</activities>
+</process>

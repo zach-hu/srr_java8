@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="appRuleUpdate" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="appRuleRetrieveByUser">
+			<task synchronous="true" continue-on-failure="false" name="appRuleList">
+				<task-object-name>com.tsa.puridiom.apprule.tasks.AppRuleRetrieveByUser</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="appRuleSwapApprover">
+			<task synchronous="true" continue-on-failure="false" name="appRuleSwapApprover">
+				<task-object-name>com.tsa.puridiom.apprule.tasks.AppRuleDeleteByOriginalId</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="appRuleSwapApprover">
+			<task synchronous="true" continue-on-failure="false" name="appRuleSwapApprover">
+				<task-object-name>com.tsa.puridiom.apprule.tasks.AppRuleSwapApprover</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+	</activities>
+</process>

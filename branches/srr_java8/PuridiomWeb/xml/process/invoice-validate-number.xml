@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="validateNumber" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="validateNumber">
+			<task synchronous="true" continue-on-failure="false" name="validateNumber">
+				<rule-filename>is-invoice-number-changed.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.invoice.tasks.InvoiceValidateNumber</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="setInvoiceNumber">
+			<rule-filename check-for-false="true">is-valid-number.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="true" name="setInvoiceNumber">
+				<task-object-name>com.tsa.puridiom.invoiceheader.tasks.InvoiceHeaderSetInvoiceNumber</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="setErrorMsg">
+				<task-object-name>com.tsa.puridiom.invoiceerrormsg.tasks.ErrorMsgSetDuplicateInvoiceNumber</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="invoiceHeaderUpdate">
+			<task synchronous="true" continue-on-failure="false" name="invoiceHeaderUpdate">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>invoiceheader-update.xml</process-filename>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="invoiceLinesUpdate">
+			<rule-filename>is-valid-number.xml;is-invoice-number-changed.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="invoiceLineList">
+				<task-object-name>com.tsa.puridiom.invoiceline.tasks.InvoiceLineRetrieveByHeader</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="invoiceLineList">
+				<task-object-name>com.tsa.puridiom.invoiceline.tasks.InvoiceLineSetInvoiceNumberFromHeader</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="invoiceLineUpdate">
+				<task-object-name>com.tsa.puridiom.invoiceline.tasks.InvoiceLineUpdateEntityList</task-object-name>
+			</task>
+		</activity>
+		<!--<activity synchronous="true" continue-on-failure="false" name="retrieveInvoiceHeader">
+			<task synchronous="true" continue-on-failure="false" name="retrieveInvoiceHeader">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>invoiceheader-shipto-retrieve-by-id.xml</process-filename>
+			</task>
+		</activity>-->
+		<activity synchronous="true" continue-on-failure="false" name="history">
+			<task synchronous="true" continue-on-failure="false" name="historyLogList">
+				<task-object-name>com.tsa.puridiom.historylog.tasks.HistoryLogRetrieveByHistoryHeader</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<!--  only write create history if it is not already written  -->
+		<activity synchronous="true" continue-on-failure="false" name="history">
+			<rule-filename>is-history-empty.xml</rule-filename>
+		    <task synchronous="true" continue-on-failure="false" name="invoiceHeaderHistory">
+				<task-object-name>com.tsa.puridiom.invoiceheader.history.tasks.InvoiceHeaderHistory</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="invoiceLineListHistory">
+				<task-object-name>com.tsa.puridiom.invoiceline.history.tasks.InvoiceLineListHistory</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

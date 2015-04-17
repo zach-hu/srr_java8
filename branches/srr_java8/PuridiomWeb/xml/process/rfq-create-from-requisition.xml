@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="rfqCreate" connection-type="transaction-required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="requisitionRetrieve">
+			<task synchronous="true" continue-on-failure="false" name="requisitionHeader">
+				<task-object-name>com.tsa.puridiom.requisitionheader.tasks.RequisitionHeaderRetrieveById</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="requisitionHeaderRetrieveSetup">
+				<task-object-name>com.tsa.puridiom.requisitionheader.tasks.RequisitionHeaderRetrieveSetup</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="requisitionLineList">
+				<task-object-name>com.tsa.puridiom.requisitionline.tasks.RequisitionLineRetrieveByHeader</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="requisitionLineList">
+				<task-object-name>com.tsa.puridiom.requisitionline.tasks.RequisitionLineGetApprovedOnly</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="requisitionLineList">
+				<rule-filename>is-create-from-assigned-only-set</rule-filename>
+				<task-object-name>com.tsa.puridiom.requisitionline.tasks.RequisitionLineGetAssignedOnly</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="requisitionRetrieve">
+			<task synchronous="true" continue-on-failure="false" name="rfqHeaderRetrieveByReq">
+				<task-object-name>com.tsa.puridiom.rfqheader.tasks.RfqHeaderRetrieveByReq</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="requisitionHeaderRetrieveSetup">
+				<rule-filename check-for-false="true">is-rfqheader-icrfqheader-empty.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.rfqheader.tasks.RfqHeaderRetrieveById</task-object-name>
+				<post-action>exitProcess</post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="rfqCreate">
+			<task synchronous="true" continue-on-failure="false" name="rfqCreateSetup">
+				<task-object-name>com.tsa.puridiom.rfq.tasks.RfqCreateSetup</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="rfqWebpostSetup">
+				<rule-filename>is-rfq-type-solicitation</rule-filename>
+				<task-object-name>com.tsa.puridiom.rfq.tasks.RfqWebpostSetup</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="rfqSetValuesFromRequisition">
+				<task-object-name>com.tsa.puridiom.rfqheader.tasks.RfqHeaderSetRequisitionValues</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="requisitionToRfqMapping">
+				<task-object-name>com.tsa.puridiom.rfq.tasks.RfqRequisitionMap</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="rfqGenerateNumber">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>rfq-generate-form-number.xml</process-filename>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="rfqHeader">
+				<task-object-name>com.tsa.puridiom.rfqheader.tasks.RfqHeaderSetValues</task-object-name>
+			</task>
+<!-- update history here -->
+			<task synchronous="true" continue-on-failure="false" name="rfqHeaderAdd">
+				<task-object-name>com.tsa.puridiom.rfqheader.tasks.RfqHeaderAdd</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="rfqCreateLinesFromRequisition">
+				<task-object-name>com.tsa.puridiom.rfq.tasks.RfqCreateLinesFromRequisition</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="requisitionHeaderSaveasSetup">
+				<task-object-name>com.tsa.puridiom.rfqheader.tasks.RfqHeaderSaveasFromReqSetup</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="rfqHeaderCommentSaveas">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>doccomment-saveas.xml</process-filename>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="rfqHeaderAttachmentSaveas">
+				<rule-filename>is-documents-module-active.xml</rule-filename>
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>docattachment-saveas.xml</process-filename>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="rfqHeaderAttachmentSaveas">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>schedule-saveas.xml</process-filename>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="RequisitionHeader_status">
+				<task-object-name>com.tsa.puridiom.rfq.tasks.RfqGetNewRequisitionStatus</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="updateRequisitionStatus">
+				<task-object-name>com.tsa.puridiom.requisitionheader.tasks.RequisitionHeaderUpdateStatus</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="updateRequisitionLineStatus">
+				<task-object-name>com.tsa.puridiom.requisitionline.tasks.RequisitionLineUpdateStatusByHeader</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="history">
+		    <task synchronous="true" continue-on-failure="false" name="rfqHeaderHistory">
+				<task-object-name>com.tsa.puridiom.rfqheader.history.tasks.RfqHeaderHistory</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

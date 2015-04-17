@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="accountUpdateByLineFromHeader" connection-type="Transaction-Required" once-execution="true">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="accountRetrieveByLine">
+			<task synchronous="true" continue-on-failure="false" name="accountHeaderList">
+				<task-object-name>com.tsa.puridiom.account.tasks.AccountRetrieveByLine</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="documentLineListRetrieve">
+			<task synchronous="true" continue-on-failure="false" name="lineItems">
+				<rule-filename>is-req.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.requisitionline.tasks.RequisitionLineListRetrieveWithoutAccounts</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="lineItems">
+				<rule-filename>is-po.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.poline.tasks.PoLineListRetrieveWithoutAccounts</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="lineItems">
+				<rule-filename>is-invoice.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.invoiceline.tasks.InvoiceLineListRetrieveWithoutAccounts</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="documentLineGetAccountsFromHeader">
+			<rule-filename check-for-false="true">is-lineitems-empty.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="accountDeleteByLineSetup">
+				<task-object-name>com.tsa.puridiom.account.tasks.AccountDeleteByLineSetup</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="accountDeleteByLine">
+				<task-object-name>com.tsa.puridiom.account.tasks.AccountDeleteByLine</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="documentLineGetAccountsFromHeader">
+				<task-object-name>com.tsa.puridiom.common.documents.DocumentLineGetAccountsFromHeader</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+	</activities>
+</process>

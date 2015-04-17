@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="receiptCreateFromTransfer" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="requisitionHeaderRetrieveById">
+			<task synchronous="true" continue-on-failure="false" name="requisitionHeader">
+				<task-object-name>com.tsa.puridiom.requisitionheader.tasks.RequisitionHeaderRetrieveById</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="requisitionLineList">
+				<task-object-name>com.tsa.puridiom.requisitionline.tasks.RequisitionLineRetrieveByHeader</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="receiptCreate">
+			<task synchronous="true" continue-on-failure="false" name="receiptCreateFromRequestSetup">
+				<task-object-name>com.tsa.puridiom.receipt.tasks.ReceiptCreateFromReqTransferSetup</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="receiptHeader">
+				<task-object-name>com.tsa.puridiom.receiptheader.tasks.ReceiptHeaderSetValuesFromReqTransfer</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="receiptHeader">
+				<task-object-name>com.tsa.puridiom.receiptheader.tasks.ReceiptHeaderSetValues</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="receiptHeaderAdd">
+				<task-object-name>com.tsa.puridiom.receiptheader.tasks.ReceiptHeaderAdd</task-object-name>
+			</task>
+		</activity>
+		<!--
+		<activity synchronous="true" continue-on-failure="false" name="receiptCreateLines">
+			<task synchronous="true" continue-on-failure="false" name="receiptLineListCreate">
+				<task-object-name>com.tsa.puridiom.receiptline.tasks.ReceiptLineCreateFromPoLineList</task-object-name>
+			</task>
+		</activity>
+		-->
+	</activities>
+</process>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+<class name="com.tsa.puridiom.entity.sungard.ApBstrnHeader" table="AP_BSTRN_HEADER">
+<id name="tranId" type="java.math.BigDecimal" column="TRAN_ID">
+	<generator class="assigned" />
+</id>
+<property name="statusInd" column="STATUS_IND" type="java.lang.String" length="1" not-null="true"/>
+<property name="advicePrint" column="ADVICE_PRINT" type="java.lang.String" length="1" not-null="true"/>
+<property name="checkNumber" column="CHECK_NUMBER" type="java.lang.String" length="11" not-null="true"/>
+<property name="combineInd" column="COMBINE_IND" type="java.lang.String" length="1" not-null="true"/>
+<property name="entrydate" column="ENTRYDATE" type="java.lang.String" length="26" not-null="true"/>
+<property name="holdInd" column="HOLD_IND" type="java.lang.String" length="1" not-null="true"/>
+<property name="invoiceDate" column="INVOICE_DATE" type="java.sql.Date" length="23" not-null="true"/>
+<property name="memoCheckInd" column="MEMO_CHECK_IND" type="java.lang.String" length="1" not-null="true"/>
+<property name="payDate" column="PAY_DATE" type="java.sql.Date" length="23" not-null="true"/>
+<property name="companyCode" column="COMPANY_CODE" type="java.lang.String" length="5" not-null="true"/>
+<property name="paymentMode" column="PAYMENT_MODE" type="java.lang.String" length="1" not-null="true"/>
+<property name="sortCode" column="SORT_CODE" type="java.lang.String" length="4" not-null="true"/>
+<property name="irsCodeId" column="IRS_CODE_ID" type="java.math.BigDecimal" length="10" not-null="true"/>
+<property name="tin" column="TIN" type="java.lang.String" length="10" not-null="true"/>
+<property name="tinType" column="TIN_TYPE" type="java.lang.String" length="1" not-null="true"/>
+<property name="useTaxInd" column="USE_TAX_IND" type="java.lang.String" length="1" not-null="true"/>
+<property name="vendorId" column="VENDOR_ID" type="java.lang.String" length="15" not-null="true"/>
+<property name="vendorType" column="VENDOR_TYPE" type="java.lang.String" length="1" not-null="true"/>
+<property name="checkReconStatus" column="CHECK_RECON_STATUS" type="java.lang.String" length="1" not-null="true"/>
+<property name="checkReconDate" column="CHECK_RECON_DATE" type="java.sql.Date" length="23" not-null="true"/>
+<property name="discountPct" column="DISCOUNT_PCT" type="java.math.BigDecimal" length="6" not-null="true"/>
+<property name="discountAmt" column="DISCOUNT_AMT" type="java.math.BigDecimal" length="15" not-null="true"/>
+<property name="discountDays" column="DISCOUNT_DAYS" type="java.math.BigDecimal" length="10" not-null="true"/>
+<property name="salesTaxPct" column="SALES_TAX_PCT" type="java.math.BigDecimal" length="6" not-null="true"/>
+<property name="salesTaxAmt" column="SALES_TAX_AMT" type="java.math.BigDecimal" length="15" not-null="true"/>
+<property name="shippingAmt" column="SHIPPING_AMT" type="java.math.BigDecimal" length="15" not-null="true"/>
+<property name="withholdingAmt" column="WITHHOLDING_AMT" type="java.math.BigDecimal" length="15" not-null="true"/>
+<property name="invoiceAmt" column="INVOICE_AMT" type="java.math.BigDecimal" length="15" not-null="true"/>
+<property name="netInvoiceAmt" column="NET_INVOICE_AMT" type="java.math.BigDecimal" length="15" not-null="true"/>
+<property name="checkAmt" column="CHECK_AMT" type="java.math.BigDecimal" length="15" not-null="true"/>
+<property name="creditMemoInd" column="CREDIT_MEMO_IND" type="java.lang.String" length="1" not-null="true"/>
+<property name="whOverrideInd" column="WH_OVERRIDE_IND" type="java.lang.String" length="1" not-null="true"/>
+<property name="checkDate" column="CHECK_DATE" type="java.sql.Date" length="23" not-null="true"/>
+<property name="eftAdviceNum" column="EFT_ADVICE_NUM" type="java.lang.String" length="11" not-null="true"/>
+<property name="eftTraceNum" column="EFT_TRACE_NUM" type="java.lang.String" length="15" not-null="true"/>
+<property name="eftAmt" column="EFT_AMT" type="java.math.BigDecimal" length="15" not-null="true"/>
+<property name="poNumber" column="PO_NUMBER" type="java.lang.String" length="10" not-null="true"/>
+<property name="rpNumber" column="RP_NUMBER" type="java.lang.String" length="10" not-null="true"/>
+<property name="entryOperator" column="ENTRY_OPERATOR" type="java.lang.String" length="8" not-null="true"/>
+<property name="approvalOperator" column="APPROVAL_OPERATOR" type="java.lang.String" length="8" not-null="true"/>
+<property name="bank" column="BANK" type="java.lang.String" length="10" not-null="true"/>
+<property name="accrAcctgTranId" column="ACCR_ACCTG_TRAN_ID" type="java.math.BigDecimal" length="10" not-null="true"/>
+<property name="bankAccount" column="BANK_ACCOUNT" type="java.lang.String" length="15" not-null="true"/>
+<property name="vendorName1" column="VENDOR_NAME1" type="java.lang.String" length="60" not-null="true"/>
+</class>
+</hibernate-mapping>

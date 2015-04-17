@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="VendorInsuranceDefaultValidateOrders" connection-type="Connection-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="VendorInsuranceDefaultValidateOrdersSetup">
+			<task synchronous="true" continue-on-failure="false" name="insCategoryLevelCheckFromPoLines">
+				<task-object-name>com.tsa.puridiom.inscategorylevel.tasks.InsCategoryLevelCheckFromPoLines</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="VendorInsuranceDefaultValidateOrders">
+			<rule-filename>validate-vendorinsurancedefault.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="insCategoryLevel">
+				<task-object-name>com.tsa.puridiom.inscategorylevel.tasks.InsCategoryLevelRetrieveByIclLevel</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="vendorInsuranceDefault">
+				<task-object-name>com.tsa.puridiom.vendorinsurancedefault.tasks.VendorInsuranceDefaultRetrieveById</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="vendorInsuranceDefaultValidate">
+				<task-object-name>com.tsa.puridiom.vendorinsurancedefault.tasks.VendorInsuranceDefaultValidate</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="ValidateRules" connection-type="Connection-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="setUpRequisitionData">
+			<task synchronous="true" continue-on-failure="false" name="setup">
+				<task-object-name>com.tsa.puridiom.validationrules.tasks.RequisitionLineRulesSetup</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="requisitionHeader">
+				<task-object-name>com.tsa.puridiom.requisitionheader.tasks.RequisitionHeaderRetrieveById</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="requisitionHeaderDataRetrieve">
+				<task-object-name>com.tsa.puridiom.requisitionheader.tasks.RequisitionHeaderDataRetrieve</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="lineitems">
+				<task-object-name>com.tsa.puridiom.requisitionline.tasks.RequisitionLineSingleDataRetrieve</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="lineitems">
+				<task-object-name>com.tsa.puridiom.validationrules.tasks.RemoveCancelledLineItems</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="accounts">
+				<task-object-name>com.tsa.puridiom.account.tasks.AccountRetrieveHeader</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="comments">
+				<task-object-name>com.tsa.puridiom.doccomment.tasks.DocCommentRetrieveHeader</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="attachments">
+				<task-object-name>com.tsa.puridiom.docattachment.tasks.DocAttachmentRetrieveByLine</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="FinalDataSetup">
+				<task-object-name>com.tsa.puridiom.requisition.tasks.RequisitionValidationRulesData</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="otherRules">
+			<task synchronous="true" continue-on-failure="false" name="otherRule">
+				<task-object-name>com.tsa.puridiom.rules.CommodityLineXMLNotEmptyRule</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="RequisitionLineExistAccount">
+				<task-object-name>com.tsa.puridiom.requisition.rules.RequisitionLineExistAccount</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="requisitionValidAccounts">
+				<task-object-name>com.tsa.puridiom.requisition.rules.RequisitionValidAccounts</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="otherRule">
+				<rule-filename>is-coda-enabled.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.rules.ValidAccountsRules</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="otherRule">
+				<rule-filename>is-coda-enabled.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.coda.tasks.CodaAccountsValidate</task-object-name>
+			</task>
+    		<task synchronous="true" continue-on-failure="false" name="otherRule">
+    			<rule-filename>is-fdcs-enabled.xml</rule-filename>
+    			<task-object-name>com.tsa.puridiom.fdcs.tasks.FdcsGetWorkOrderLineValidation</task-object-name>
+    		</task>
+			<task synchronous="true" continue-on-failure="false" name="otherRule">
+				<task-object-name>com.tsa.puridiom.account.tasks.AccValidateCCADFWellFacility</task-object-name>
+			</task>
+		</activity>
+		<!--<activity synchronous="true" continue-on-failure="false" name="setupValuesLinesBlankFields">
+			<task synchronous="true" continue-on-failure="false" name="setupValuesLinesBlankFields">
+				<task-object-name>com.tsa.puridiom.requisitionline.tasks.SetupValuesFromHeaderToBlankFieldsLines</task-object-name>
+			</task>
+		</activity>-->
+		<activity synchronous="true" continue-on-failure="false" name="validateRulesMSR">
+			<task synchronous="true" continue-on-failure="false" name="inspectionCriteria">
+				<task-object-name>com.tsa.puridiom.requisition.rules.RequisitionValidInspectonCriteria</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="inspectionStdCode">
+				<task-object-name>com.tsa.puridiom.requisition.rules.RequisitionValidInspectonStdCode</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="procurementLevel">
+				<task-object-name>com.tsa.puridiom.requisition.rules.RequisitionValidProcurementLevel</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="markTag">
+				<task-object-name>com.tsa.puridiom.requisition.rules.RequisitionValidMarkTag</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="RequestCategory">
+				<task-object-name>com.tsa.puridiom.requisition.rules.RequisitionValidRequestCat</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="attachmentTitle">
+				<task-object-name>com.tsa.puridiom.requisition.rules.RequisitionValidateAttachmentTitle</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="otherLineValidations">
+				<task-object-name>com.tsa.puridiom.requisition.rules.RequisitionLineOtherValidations</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="sourcingValuesValid">
+				<task-object-name>com.tsa.puridiom.requisition.rules.RequisitionValidBeforeSourcing</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="validAccount">
+			<rule-filename>is-storedprocedure-call-for-account-validation.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.validationrules.tasks.ValidAccountSPCall</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="validateRules">
+			<task synchronous="true" continue-on-failure="false" name="labelsList">
+				<task-object-name>com.tsa.puridiom.labels.tasks.LabelsRetrieveBy</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="rules">
+				<task-object-name>com.tsa.puridiom.validationrules.tasks.DatabaseValidationRulesTask</task-object-name>
+				<!--process-filename>req-validation-rules.xml</process-filename-->
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="rules">
+				<task-object-name>com.tsa.puridiom.validationrules.tasks.ValidationRulesTask</task-object-name>
+				<process-filename>req-line-validation-rules.xml</process-filename>
+			</task>
+		</activity>
+	</activities>
+</process>

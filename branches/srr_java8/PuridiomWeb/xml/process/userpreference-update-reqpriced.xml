@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="userPreferenceUpdateReqPriced" connection-type="New-Transaction">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="userPreferenceUpdateReqPriced">
+			<task synchronous="true" continue-on-failure="false" name="userIdDocumentCountList">
+				<task-object-name>com.tsa.puridiom.userprofile.tasks.UserProfileRetrieveBuyerReqPriced</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="UserPreferenceDeleteUserIdDocumentCount">
+				<task-object-name>com.tsa.puridiom.userpreference.tasks.UserPreferenceDeleteUserIdDocumentCount</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="userPreferenceUpdateUserIdDocumentCount">
+				<task-object-name>com.tsa.puridiom.userpreference.tasks.UserPreferenceUpdateUserIdDocumentCount</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

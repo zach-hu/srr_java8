@@ -1,0 +1,20 @@
+<browse_procurementlevel>
+	<columns>
+		<StdTable_id_tableType>
+			<label>tableType</label>
+			<visible>0</visible>
+		</StdTable_id_tableType>
+		<StdTable_id_tableKey>
+			<label>PRIO</label>
+			<sort>A</sort>
+			<link><![CDATA[javascript: returnMe('#StdTable_id_tableKey^'); void(0);]]></link>
+		</StdTable_id_tableKey>
+		<StdTable_description>
+			<label>description</label>
+		</StdTable_description>
+	</columns>
+<sqlfrom>StdTable as StdTable</sqlfrom>
+<sqlwhere><![CDATA[ (StdTable.status <> '03' and StdTable.id.tableType = 'PROCLVL') ]]></sqlwhere>
+<pagesize>15</pagesize>
+<title>Procurement Level Browse</title>
+</browse_procurementlevel>

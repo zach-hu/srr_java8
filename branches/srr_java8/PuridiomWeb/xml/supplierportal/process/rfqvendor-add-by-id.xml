@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="rfqVendorAdd" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="rfqVendorAdd">
+			<task synchronous="true" continue-on-failure="false" name="rfqVendor">			
+				<task-object-name>com.tsa.puridiom.rfqvendor.tasks.RfqVendorSetValues</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="rfqVendor">			
+				<task-object-name>com.tsa.puridiom.rfqvendor.tasks.RfqVendorAdd</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="rfqBidsAdd">
+			<task synchronous="true" continue-on-failure="false" name="rfqBidsAdd">
+				<task-object-name>com.tsa.puridiom.supplierportal.InvokeSupplierPortalProcessTask</task-object-name>
+				<process-filename>rfqbid-add-for-vendor.xml</process-filename>
+			</task>
+		</activity>
+	</activities>
+</process>

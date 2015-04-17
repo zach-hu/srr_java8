@@ -1,0 +1,81 @@
+<browse_shipTo>
+	<columns>
+		<Address_id_addressCode>
+			<label>brw-addressCode</label>
+			<sort>A</sort>
+			<link><![CDATA[javascript: returnMe('#Address_id_addressCode^'); void(0);]]></link>
+			<hidden-input>Y</hidden-input>
+			<size>20</size>
+		</Address_id_addressCode>
+		<Address_id_addressType>
+			<label>brw-addressType</label>
+			<visible>0</visible>
+		</Address_id_addressType>
+		<Address_addressLine1>
+			<label>brw-addressLine1</label>
+			<hidden-input>Y</hidden-input>
+			<size>30</size>
+		</Address_addressLine1>
+		<dummy_space>
+			<selectsql>N</selectsql>
+			<size>20</size>
+			<detail>Y</detail>
+		</dummy_space>
+		<Address_addressLine2>
+			<hidden-input>Y</hidden-input>
+			<size>80</size>
+			<detail>Y</detail>
+		</Address_addressLine2>
+		<dummy_space>
+			<selectsql>N</selectsql>
+			<size>20</size>
+			<detail>Y</detail>
+		</dummy_space>
+		<Address_addressLine3>
+			<hidden-input>Y</hidden-input>
+			<size>80</size>
+			<detail>Y</detail>
+		</Address_addressLine3>
+		<dummy_space>
+			<selectsql>N</selectsql>
+			<size>20</size>
+			<detail>Y</detail>
+		</dummy_space>
+		<Address_addressLine4>
+			<hidden-input>Y</hidden-input>
+			<size>80</size>
+			<detail>Y</detail>
+		</Address_addressLine4>
+		<Address_city>
+			<label>city</label>
+			<hidden-input>Y</hidden-input>
+			<size>25</size>
+		</Address_city>
+		<Address_state>
+			<label>state</label>
+			<hidden-input>Y</hidden-input>
+			<size>5</size>
+		</Address_state>
+		<Address_postalCode>
+			<label>zip</label>
+			<hidden-input>Y</hidden-input>
+			<size>10</size>
+		</Address_postalCode>
+		<Address_country>
+			<label>country</label>
+			<hidden-input>Y</hidden-input>
+			<hidden>Y</hidden>
+			<size>5</size>
+		</Address_country>
+		<Address_inventory>
+			<label>inventory</label>
+			<hidden-input>Y</hidden-input>
+			<hidden>Y</hidden>
+		</Address_inventory>
+	</columns>
+<sqlfrom>Address as Address</sqlfrom>
+<sqlwhere><![CDATA[ ((Address.status = '02' or (Address.status = '01' and Address.dateExpires >= :as_today) or Address.status = 'null' or Address.status is null) and Address.shipTo = 'Y' and Address.id.addressType <> 'SHIPTO') ]]></sqlwhere>
+<sqlorderby>Address.id.addressCode ASC</sqlorderby>
+<pagesize>15</pagesize>
+<title>Ship To Browse</title>
+</browse_shipTo>

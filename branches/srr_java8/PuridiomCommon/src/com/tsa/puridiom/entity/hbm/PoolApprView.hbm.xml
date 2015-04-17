@@ -1,0 +1,97 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping>
+
+<!--
+    Created by Middlegen Hibernate plugin
+
+    http://boss.bekk.no/boss/middlegen/
+    http://hibernate.sourceforge.net/
+-->
+
+<class
+    name="com.tsa.puridiom.entity.PoolApprView"
+    table="POOL_APPR_VIEW"
+>
+    <id
+        name="userId"
+        type="java.lang.String"
+        column="USER_ID"
+        length="20"
+    ><generator class="assigned" />
+    </id>
+    <property
+        name="entity"
+        type="java.lang.String"
+        column="ENTITY"
+        unique="true"
+        length="5"
+    />
+    <property
+        name="dept"
+        type="java.lang.String"
+        column="DEPT"
+        unique="true"
+        length="20"
+    />
+    <property
+        name="amount"
+        type="java.math.BigDecimal"
+        column="AMOUNT"
+        length="15"
+    />
+    <property
+        name="name"
+        type="java.lang.String"
+        column="NAME"
+        length="50"
+    />
+    <property
+        name="indPool"
+        type="java.lang.String"
+        column="IND_POOL"
+        length="20"
+    />
+    
+    <property
+        name="cap"
+        type="java.lang.String"
+        column="CAP"
+        length="1"
+    />
+    
+    <property
+        name="fyi"
+        type="java.lang.String"
+        column="FYI"
+        length="1"
+    />
+    <property
+        name="reqApp"
+        type="java.lang.String"
+        column="REQ_APP"
+        length="1"
+    />
+    <property
+        name="callForward"
+        type="java.lang.String"
+        column="CALL_FORWARD"
+        length="15"
+    />
+    <property
+        name="routTo"
+        type="java.lang.String"
+        column="ROUT_TO"
+        length="30"
+    />
+     <property
+        name="description"
+        type="java.lang.String"
+        column="DESCRIPTION"
+        length="80"
+    />
+</class>
+</hibernate-mapping>

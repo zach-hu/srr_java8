@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="requisitionLineRetrieve" connection-type="Connection-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="receiptRetrieve">
+			<task synchronous="true" continue-on-failure="false" name="receiptHeader">
+				<task-object-name>com.tsa.puridiom.receiptheader.tasks.ReceiptHeaderRetrieveById</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="receiptLine">
+				<task-object-name>com.tsa.puridiom.receiptline.tasks.ReceiptLineRetrieveById</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="ReceiptLineDataRetrieve">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>receiptlinedata-retrieve.xml</process-filename>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="inspectionDetailActivity">
+			<task synchronous="true" continue-on-failure="false" name="inspectionDetailSetup">
+				<task-object-name>com.tsa.puridiom.inspection.tasks.RecInspectionHeaderRetrieveSetup</task-object-name>
+				<post-action></post-action>
+			</task>
+<!--
+			<task synchronous="true" continue-on-failure="false" name="inspectionHeader">
+				<task-object-name>com.tsa.puridiom.inspectionheader.tasks.InspectionHeaderRetrieveByIcRecLine</task-object-name>
+				<post-action></post-action>
+			</task>
+-->
+			<task synchronous="true" continue-on-failure="false" name="inspectionHeader">
+				<!--  rule-filename>is-inspectionheader-empty</rule-filename -->
+				<task-object-name>com.tsa.puridiom.inspectionheader.tasks.InspectionHeaderRetrieveById</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="inspectionLineSetup">
+				<task-object-name>com.tsa.puridiom.inspection.tasks.InspectionDetailRetrieveSetup</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="inspectionStdList">
+				<task-object-name>com.tsa.puridiom.inspectionstd.tasks.InspectionStdRetrieveByCode</task-object-name>
+				<post-action></post-action>
+			</task>
+
+			<task synchronous="true" continue-on-failure="false" name="inspectionLineList">
+				<task-object-name>com.tsa.puridiom.inspectionline.tasks.InspectionLineRetrieveByIcInspNo</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="inspectionLineList">
+				<task-object-name>com.tsa.puridiom.inspection.tasks.InspectionLineListSetDescriptions</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="inspectionMap">
+				<task-object-name>com.tsa.puridiom.inspectionline.tasks.InspectionLineListParse</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="docCommentRetrieveByHeader">
+			<task synchronous="true" continue-on-failure="false" name="docCommentList">
+				<task-object-name>com.tsa.puridiom.doccomment.tasks.DocCommentRetrieveByHeader</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="docTextList">
+				<task-object-name>com.tsa.puridiom.doccomment.tasks.DocCommentTextRetrieveByLine</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="docAttachmentRetrieveByHeader">
+			<task synchronous="true" continue-on-failure="false" name="docAttachmentList">
+				<task-object-name>com.tsa.puridiom.docattachment.tasks.DocAttachmentRetrieveByHeader</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="poHeaderComments">
+			<rule-filename check-for-false="true">is-poheader-icpoheader-empty.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="poHeader">
+				<task-object-name>com.tsa.puridiom.poheader.tasks.PoHeaderRetrieveById</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="poHeaderSetup">
+				<task-object-name>com.tsa.puridiom.poheader.tasks.PoHeaderRetrieveSetup</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="poHeaderDocCommentList">
+				<task-object-name>com.tsa.puridiom.doccomment.tasks.DocCommentWithTextRetrieveByHeader</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="poLineComments">
+			<rule-filename>is-poline-icpoline-not-empty.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="poLine">
+				<task-object-name>com.tsa.puridiom.poline.tasks.PoLineRetrieveById</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="poLineSetup">
+				<task-object-name>com.tsa.puridiom.poline.tasks.PoLineRetrieveSetup</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="poLineDocCommentList">
+				<task-object-name>com.tsa.puridiom.doccomment.tasks.DocCommentWithTextRetrieveByLine</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="inspectionMfrRetrieveActivity">
+			  <task synchronous="true" continue-on-failure="false" name="mfrList">
+				<task-object-name>com.tsa.puridiom.inspectionmfr.tasks.InspectionMfrRetrieveByIcInspNo</task-object-name>
+				<post-action />
+			</task>
+		</activity>
+	</activities>
+</process>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="sendQueueAdd" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="addSendQueue">
+			<task synchronous="true" continue-on-failure="false" name="sendQueue">
+				<task-object-name>com.tsa.puridiom.sendqueue.tasks.SendQueueUpdate</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+	</activities>
+</process>

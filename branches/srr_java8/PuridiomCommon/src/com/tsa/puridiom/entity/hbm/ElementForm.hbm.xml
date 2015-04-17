@@ -1,0 +1,80 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping>
+
+<class
+    name="com.tsa.puridiom.entity.ElementForm"
+    table="ELEMENT_FORM"
+>
+    <composite-id name="comp_id" class="com.tsa.puridiom.entity.ElementFormPK">
+        <key-property name="formId" column="FORM_ID" type="java.lang.String"/>
+        <key-property name="elementIndex" column="ELEMENT_INDEX" type="java.math.BigDecimal" />
+    </composite-id>
+    <property
+        name="elementModule"
+        type="java.lang.String"
+        column="ELEMENT_MODULE"
+        length="30"
+    />
+    <property
+        name="elementId"
+        type="java.lang.String"
+        column="ELEMENT_ID"
+        length="30"
+    />
+    <property
+        name="elementType"
+        type="java.lang.String"
+        column="ELEMENT_TYPE"
+        length="10"
+    />
+    <property
+        name="elementLength"
+        type="java.math.BigDecimal"
+        column="ELEMENT_LENGTH"
+        length="5"
+    />
+    <property
+        name="elementCase"
+        type="java.lang.String"
+        column="ELEMENT_CASE"
+        length="1"
+    />
+    <property
+        name="elementFormat"
+        type="java.lang.String"
+        column="ELEMENT_FORMAT"
+        length="30"
+    />
+    <property
+        name="elementLabel"
+        type="java.lang.String"
+        column="ELEMENT_LABEL"
+        length="80"
+    />
+    <property
+        name="elementDefault"
+        type="java.lang.String"
+        column="ELEMENT_DEFAULT"
+        length="2000"
+    />
+    <property
+        name="elementTb"
+        type="java.math.BigDecimal"
+        column="ELEMENT_TB"
+        length="2"
+    />
+    <property
+        name="elementTc"
+        type="java.math.BigDecimal"
+        column="ELEMENT_TC"
+        length="2"
+    />
+
+    <!-- associations -->
+
+</class>
+</hibernate-mapping>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="rfqLineItemLookup" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="rfqLineItemLookup">
+			<task synchronous="true" continue-on-failure="false" name="rfqLineItemLookup">			
+				<task-object-name>com.tsa.puridiom.rfqline.tasks.RfqLineItemLookup</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="invItemLookup">
+			<task synchronous="true" continue-on-failure="false" name="invItemList">
+				<rule-filename>is-invlocation-itemlocation-empty</rule-filename>	
+				<!-- this task sets List InvLocation invLocationList in incomingRequest -->
+				<task-object-name>com.tsa.puridiom.invitem.tasks.InvItemRetrieveWithLocationsBy</task-object-name>
+				<post-action>exitActivity</post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="invItem">
+				<!-- this task sets InvLocation invLocation in incomingRequest -->
+				<task-object-name>com.tsa.puridiom.invitem.tasks.InvItemRetrieveByLocation</task-object-name>
+				<post-action>exitActivity</post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="invItemLookupSetValues">
+			<task synchronous="true" continue-on-failure="false" name="itemLookup">			
+				<task-object-name>com.tsa.puridiom.invitem.tasks.InvItemLookupSetValues</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="catalogItemLookup">
+		    <rule-filename>is-item-not-found.xml</rule-filename>			
+			<task synchronous="true" continue-on-failure="false" name="catalogItemList">			
+				<task-object-name>com.tsa.puridiom.catalog.tasks.CatalogItemRetrieveBy</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="itemLookup">			
+				<task-object-name>com.tsa.puridiom.catalog.tasks.CatalogItemLookupSetValues</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="rfqLineUpdate">
+			<task synchronous="true" continue-on-failure="false" name="rfqLineUpdate">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>rfqline-update-from-lookup.xml</process-filename>
+			</task>
+		</activity>
+	</activities>
+</process>

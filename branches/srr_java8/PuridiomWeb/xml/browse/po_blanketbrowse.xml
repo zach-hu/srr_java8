@@ -1,0 +1,75 @@
+<browse_po_header>
+	<columns>
+		<PoHeader_poType>
+			<label>poType</label>
+			<type>ORDER-TYPE</type>
+			<hidden>Y</hidden>
+			<visible>0</visible>
+		</PoHeader_poType>
+		<PoHeader_icPoHeader>
+	        <hidden>Y</hidden>
+	        <visible>0</visible>
+		</PoHeader_icPoHeader>
+		<PoHeader_poNumber>
+			<label>brw-poNumber</label>
+			<link><![CDATA[javascript: createRelease('#PoHeader_icPoHeader^','#PoHeader_poNumber^'); void(0);]]></link>
+			<size>15</size>
+		</PoHeader_poNumber>
+		<PoHeader_releaseNumber>
+			<label>brw-releaseNumber</label>
+			<type>STRING</type>
+			<size>5</size>
+			<visible>0</visible>
+		</PoHeader_releaseNumber>
+		<PoHeader_revisionNumber>
+			<label>brw-revisionNumber</label>
+			<type>STRING</type>
+			<size>5</size>
+			<visible>0</visible>
+		</PoHeader_revisionNumber>
+		<PoHeader_status>
+			<label>brw-status</label>
+			<type>STATUS</type>
+			<size>15</size>
+		</PoHeader_status>
+		<!--PoHeader_poDate>
+			<label>PO Date</label>
+			<type>DATE</type>
+			<size>10</size>
+		</PoHeader_poDate-->
+		<PoHeader_effectiveDate>
+			<label>brw-effectiveDate</label>
+			<type>DATE</type>
+			<size>11</size>
+		</PoHeader_effectiveDate>
+		<PoHeader_expirationDate>
+			<label>brw-dateExpires</label>
+			<type>DATE</type>
+			<size>11</size>
+		</PoHeader_expirationDate>
+		<PoHeader_vendorId>
+			<label>brw-vendorId</label>
+			<hidden>Y</hidden>
+		</PoHeader_vendorId>
+		<PoHeader_vendorName>
+			<label>brw-vendorName</label>
+			<size>32</size>
+		</PoHeader_vendorName>
+		<PoHeader_buyerCode>
+			<label>brw-buyer</label>
+            <size>15</size>
+            <type>USER-ID</type>
+		</PoHeader_buyerCode>
+		<!--PoHeader_requiredDate>
+			<label>Required Date</label>
+			<type>DATE</type>
+			<size>10</size>
+		</PoHeader_requiredDate-->
+	</columns>
+<sqlfrom>PoHeader PoHeader</sqlfrom>
+<sqlwhere><![CDATA[PoHeader.status >= '3030' AND PoHeader.status <= '4010' AND PoHeader.lastRevision = 'C' ]]></sqlwhere>
+<sqlorderby>PoHeader.poDate DESC</sqlorderby>
+<pagesize>15</pagesize>
+<title>Order Create Selection</title>
+</browse_po_header>
+

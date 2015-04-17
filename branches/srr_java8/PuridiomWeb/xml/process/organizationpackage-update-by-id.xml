@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Should use host.cfg.xml for database connection -->
+<process name="organizationAdd" connection-type="Transaction-Required" connection-name="host" ldap-connection-type="None">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="setup">
+			<task synchronous="true" continue-on-failure="false" name="organizationPackageUpdateSetup">
+				<task-object-name>com.tsa.puridiom.organizationpackage.tasks.OrganizationPackageUpdateSetup</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="packagePricing">
+				<task-object-name>com.tsa.puridiom.packagepricing.tasks.PackagePricingRetrieveById</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="organizationPackageRegisterNew">
+			<task synchronous="true" continue-on-failure="false" name="organizationPackage">
+				<task-object-name>com.tsa.puridiom.organizationpackage.tasks.OrganizationPackageRegisterNew</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="userRegistrationProcessBilling" connection-type="None" ldap-connection-type="None">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="processBillingInfo">
+			<task synchronous="true" continue-on-failure="false" name="organizationPackageList">
+				<task-object-name>com.tsa.puridiom.organizationpackage.tasks.OrganizationPackageProcessList</task-object-name>
+			</task>
+			<!--task synchronous="true" continue-on-failure="false" name="organizationPackageList">
+				<task-object-name>com.tsa.puridiom.userprofile.tasks.ProcessRegistrationBilling</task-object-name>
+			</task-->
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="processBillingInfo">
+			<rule-filename>is-billing-processed.xml</rule-filename>
+			<!-- Update transactionId, datePaid, and status -->
+			<!--task synchronous="true" continue-on-failure="false" name="organizationPackageList">
+				<task-object-name>com.tsa.puridiom.organizationpackage.tasks.OrganizationPackagePaymentProcesed</task-object-name>
+			</task-->
+			<!-- update status & dateExpires -->
+			<!--task synchronous="true" continue-on-failure="false" name="organization">
+				<rule-filename>is-billing-processed.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.organization.tasks.OrganizationUpdate</task-object-name>
+			</task-->
+		</activity>
+	</activities>
+</process>

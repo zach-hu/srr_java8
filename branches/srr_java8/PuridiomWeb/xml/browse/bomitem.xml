@@ -1,0 +1,28 @@
+<browse_bom_item>
+	<columns>
+		<InvItem_itemNumber>
+			<label>brw-itemNumber</label>
+			<size>15</size>
+			<link><![CDATA[javascript: viewBomItem('#InvItem_itemNumber^','#InvItem_description^'); void(0);]]></link>
+			<hidden-input>Y</hidden-input>
+			<!-- type>InvItem</type -->
+		</InvItem_itemNumber>
+		<InvItem_description>
+			<label>description</label>
+			<size>70</size>
+		</InvItem_description>
+		<InvItem_commodity>
+			<label>commodity</label>
+			<size>15</size>
+			<hidden-input>Y</hidden-input>
+		</InvItem_commodity>
+		<InvItem_imageFile>
+			<hidden>Y</hidden>
+		</InvItem_imageFile>
+	</columns>
+	<sqlfrom>InvItem as InvItem</sqlfrom>
+	<sqlorderby>InvItem.itemNumber ASC</sqlorderby>
+	<sqlwhere><![CDATA[(InvItem.status <> '03') and (InvItem.actionCode = 'M')]]></sqlwhere>
+	<title>Bill of Materials</title>
+	<pagesize>10</pagesize>
+</browse_bom_item>

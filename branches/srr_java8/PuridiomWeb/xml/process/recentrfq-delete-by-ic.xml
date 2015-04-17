@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="recentrfq-delete-by-ic" connection-type="New-Transaction">
+	<rule-filename check-for-false="true">is-rfqheader-empty.xml</rule-filename>
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="recentRfqSetup">
+		    <task synchronous="true" continue-on-failure="false" name="recentRfqSetup">			
+				<task-object-name>com.tsa.puridiom.recentrfq.tasks.RecentRfqSetupFromRfqHeader</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="recentRfqDelete">
+				<task-object-name>com.tsa.puridiom.recentrfq.tasks.RecentRfqDeleteByIc</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>
+

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="contractsRetrieveByVendorId" connection-type="Connection-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="contractsRetrieveByVendorId">
+			<task synchronous="true" continue-on-failure="false" name="contractsRetrieveByVendorIdSetup">
+				<task-object-name>com.tsa.puridiom.poheader.tasks.ContractsRetrieveByVendorIdSetup</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="contractsList">
+				<task-object-name>com.tsa.puridiom.poheader.tasks.PoHeaderRetrieveContractsByVendorId</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

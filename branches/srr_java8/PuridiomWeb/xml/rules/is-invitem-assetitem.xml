@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rule>
+ 	<clause type="BooleanCompare">
+		<left-side>
+			<source>Singleton</source>
+			<object>com.tsa.puridiom.property.PropertiesManager</object>
+			<name>isModuleActive</name>
+			<argument-value>Assets</argument-value>
+		</left-side>
+		<operator>EQUALS</operator>
+		<right-side>
+			<source>constant</source>
+			<value>true</value>
+		</right-side>
+	</clause>
+	<logical-operator>AND</logical-operator>
+	<clause type="StringCompare">
+		<left-side>
+		  	<source>incomingRequestObjectMethod</source>
+			  <object>invItem</object>
+			  <name>getAssetCode</name>
+		</left-side>
+		<operator>EQUAL</operator>
+		<right-side>
+		  	<source>constant</source>
+			  <value>Y</value>
+		</right-side>
+	</clause>
+</rule>

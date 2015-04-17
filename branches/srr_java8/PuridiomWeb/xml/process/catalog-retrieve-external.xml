@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="catalogRetrieveExternal" connection-type="Connection-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="retrieveExternalCatalogs">
+			<task synchronous="true" continue-on-failure="false" name="catalogList">			
+				<task-object-name>com.tsa.puridiom.catalog.tasks.CatalogRetrieveExternal</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+	</activities>
+</process>

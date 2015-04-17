@@ -1,0 +1,113 @@
+<browse_po_blanket>
+	<columns>
+		<PoHeader_icPoHeader>
+			<label>Ic Po Header</label>
+	        <hidden>Y</hidden>
+	        <visible>0</visible>
+		</PoHeader_icPoHeader>
+		<PoHeader_poNumber>
+			<label>PO #</label>
+			<sort>D</sort>
+			<link><![CDATA[javascript: createChangeReq('#PoHeader_icPoHeader^'); void(0);]]></link>
+			<size>15</size>
+		</PoHeader_poNumber>
+		<PoHeader_releaseNumber>
+			<label>brw-releaseNumber</label>
+			<type>NoDecimal</type>
+			<size>4</size>
+		</PoHeader_releaseNumber>
+		<PoHeader_revisionNumber>
+			<label>brw-revisionNumber</label>
+			<type>NoDecimal</type>
+			<size>4</size>
+		</PoHeader_revisionNumber>
+		<PoHeader_status>
+			<label>brw-status</label>
+			<type>STATUS</type>
+			<size>12</size>
+		</PoHeader_status>
+		<PoHeader_poDate>
+			<label>PO Date</label>
+			<type>DATE</type>
+			<size>10</size>
+		</PoHeader_poDate>
+		<PoHeader_buyerCode>
+			<label>brw-buyer</label>
+            <size>12</size>
+            <type>USER-ID</type>
+		</PoHeader_buyerCode>
+		<PoHeader_total>
+			<label>brw-total</label>
+			<size>10</size>
+			<type>DollarDecimal</type>
+		</PoHeader_total>
+		<PoHeader_vendorId>
+			<label>Supplier ID</label>
+			<detail>Y</detail>
+			<size>40</size>
+		</PoHeader_vendorId>
+		<PoHeader_vendorName>
+			<label>brw-vendorName</label>
+			<detail>Y</detail>
+			<size>60</size>
+		</PoHeader_vendorName>
+		<PoHeader_requisitionNumber>
+			<label>Req. #</label>
+			<detail>Y</detail>
+			<size>25</size>
+		</PoHeader_requisitionNumber>
+		<PoHeader_requisitionerCode>
+			<label>Requisitioner</label>
+			<detail>Y</detail>
+			<size>50</size>
+			<type>USER-ID</type>
+		</PoHeader_requisitionerCode>
+		<PoHeader_departmentCode>
+			<label>Department</label>
+			<detail>Y</detail>
+			<size>25</size>
+		</PoHeader_departmentCode>
+		<PoHeader_internalComments>
+			<label>Purpose</label>
+			<detail>Y</detail>
+			<size>100</size>
+		</PoHeader_internalComments>
+		<PoHeader_expirationDate>
+			<label>Expiration Date</label>
+			<type>DATE</type>
+			<size>10</size>
+			<visible>0</visible>
+		</PoHeader_expirationDate>
+		<PoHeader_owner>
+			<label>Owner</label>
+			<detail>Y</detail>
+            <type>USER-ID</type>
+		</PoHeader_owner>
+		<PoHeader_requiredDate>
+			<label>Required By</label>
+			<type>DATE</type>
+			<hidden>Y</hidden>
+		</PoHeader_requiredDate>
+	</columns>
+<sqlfrom>PoHeader as PoHeader, RequisitionHeader as RequisitionHeader</sqlfrom>
+<sqlwhere>
+	<![CDATA[PoHeader.icReqHeader = RequisitionHeader.icReqHeader
+		and PoHeader.poNumber is not null
+		and PoHeader.poNumber <> 'null'
+		and PoHeader.poNumber <> 'N/A'
+		and PoHeader.poType <> 'NO'
+		and PoHeader.lastRevision = 'C'
+		and PoHeader.pyStatus < '6060'
+		and PoHeader.status >= '3030'
+		and PoHeader.status < '9000'
+		and NOT EXISTS ( select RH.icRevisedOrder from RequisitionHeader as RH
+		where PoHeader.icPoHeader = RH.icRevisedOrder
+		and RH.status < '3030'
+		and RH.requisitionType = 'C'
+		and RH.requisitionNumber <> 'N/A')
+		and (RequisitionHeader.requisitionerCode = :as_userid or RequisitionHeader.owner = :as_userid
+		or PoHeader.buyerCode = :as_userid or PoHeader.owner = :as_userid)]]>
+</sqlwhere>
+<pagesize>15</pagesize>
+<title>Order Selection</title>
+</browse_po_blanket>

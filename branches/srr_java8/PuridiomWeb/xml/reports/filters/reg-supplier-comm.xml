@@ -1,0 +1,111 @@
+<reg-supplier-comm>
+	<columns>
+		<VendorRegister_id_vendorId>
+			<label>Vendor Code</label>
+		</VendorRegister_id_vendorId>
+		<VendorRegister_id_contactEmailAddr>
+			<label>Contact Email Address</label>
+		</VendorRegister_id_contactEmailAddr>
+		<VendorRegister_vendorName>
+			<label>Supplier Name</label>
+		</VendorRegister_vendorName>
+		<VendorRegister_vendorFaxNumber>
+			<label>Vendor Fax Number</label>
+		</VendorRegister_vendorFaxNumber>
+		<VendorRegister_vendorSic>
+			<label>SIC Code</label>
+		</VendorRegister_vendorSic>
+		<VendorRegister_vendorDuns>
+			<label>Duns Number</label>
+		</VendorRegister_vendorDuns>
+		<VendorRegister_contactLastName>
+			<label>Contact Last Name</label>
+		</VendorRegister_contactLastName>
+		<VendorRegister_contactFirstName>
+			<label>Contact First Name</label>
+		</VendorRegister_contactFirstName>
+		<VendorRegister_contactTitle>
+			<label>Contact Title</label>
+		</VendorRegister_contactTitle>
+		<VendorRegister_contactPhoneNo>
+			<label>Contact Phone No</label>
+		</VendorRegister_contactPhoneNo>
+		<VendorRegister_contactFaxNumber>
+			<label>Contact Fax Number</label>
+		</VendorRegister_contactFaxNumber>
+		<VendorRegister_addressLine2>
+			<label>Address Line 2</label>
+			<size>12</size>
+		</VendorRegister_addressLine2>
+		<VendorRegister_addressLine3>
+			<label>Address Line 3</label>
+			<size>12</size>
+		</VendorRegister_addressLine3>
+		<VendorRegister_addressLine4>
+			<label>Address Line 4</label>
+			<size>12</size>
+		</VendorRegister_addressLine4>
+		<VendorRegister_addressCity>
+			<label>City</label>
+		</VendorRegister_addressCity>
+		<VendorRegister_addressState>
+			<label>State</label>
+		</VendorRegister_addressState>
+		<VendorRegister_addressZipCode>
+			<label>Address Zip Code</label>
+		</VendorRegister_addressZipCode>
+		<VendorRegister_addressCountry>
+			<label>Country</label>
+		</VendorRegister_addressCountry>
+		<VendorRegister_vendorClass>
+			<label>Vendor Class</label>
+		</VendorRegister_vendorClass>
+		<VendorRegister_vendorWebAddress>
+			<label>Vendor Web Address</label>
+		</VendorRegister_vendorWebAddress>
+		<VendorRegister_vendorVendTerms>
+			<label>Terms</label>
+			<size>10</size>
+		</VendorRegister_vendorVendTerms>
+		<VendorRegister_vendorYears>
+			<label>Years</label>
+		</VendorRegister_vendorYears>
+		<VendorRegister_vendorLeadDays>
+			<label>Lead Days</label>
+		</VendorRegister_vendorLeadDays>
+		<VendorRegister_vendorEin>
+			<label>Ein</label>
+		</VendorRegister_vendorEin>
+		<VendorRegister_vendorNotes>
+			<label>Notes</label>
+		</VendorRegister_vendorNotes>
+		<VendorRegister_contactType>
+			<label>Contact Type</label>
+		</VendorRegister_contactType>
+		<VendorRegister_vendorNaics>
+			<label>Vendor Naics</label>
+		</VendorRegister_vendorNaics>
+		<VendorRegister_diversityProgram>
+			<label>Diversity Program</label>
+		</VendorRegister_diversityProgram>
+		<VendorRegister_subContract>
+			<label>Sub Contract</label>
+		</VendorRegister_subContract>
+		<VendorRegister_subContract>
+			<label>Sub Contract</label>
+		</VendorRegister_subContract>
+		<VendorRegister_ownershipType>
+			<label>Ownership Type</label>
+		</VendorRegister_ownershipType>
+		<VendorRegister_diverseCertOrgs>
+			<label>Diverse Cert Orgs</label>
+		</VendorRegister_diverseCertOrgs>
+		<VendorRegComm_id_commodityCode>
+			<label>Commodity Code</label>
+		</VendorRegComm_id_commodityCode>
+	</columns>
+<sqlfrom>VendorRegister as VendorRegister, VendorRegComm as VendorRegComm</sqlfrom>
+<sqlwhere><![CDATA[VendorRegister.id.VendorId = VendorRegComm.id.vendorId ]]></sqlwhere>
+<sqlorderby>VendorRegister.id.vendorId ASC, VendorRegister.contactType DESC</sqlorderby>
+<title>Registered Suppliers by Commodity Report</title>
+</reg-supplier-comm>

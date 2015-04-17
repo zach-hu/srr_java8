@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created using an evaluation version of JasperAssistant (http://www.jasperassistant.com) -->
+<!DOCTYPE jasperReport PUBLIC "-//JasperReports//DTD Report Design//EN" "http://jasperreports.sourceforge.net/dtds/jasperreport.dtd">
+
+<jasperReport name="IntentToAward" pageWidth="612" pageHeight="791" whenNoDataType="AllSectionsNoDetail" columnWidth="592" leftMargin="10" rightMargin="10" topMargin="10" bottomMargin="10">
+	<property name="com.jasperassistant.designer.GridWidth" value="2"/>
+	<property name="com.jasperassistant.designer.GridHeight" value="8"/>
+	<property name="com.jasperassistant.designer.Rulers" value="true"/>
+	<property name="com.jasperassistant.designer.SnapToGrid" value="false"/>
+	<property name="com.jasperassistant.designer.Margins" value="true"/>
+	<property name="com.jasperassistant.designer.Grid" value="true"/>
+	<property name="com.jasperassistant.designer.SnapToGuides" value="true"/>
+	<property name="com.jasperassistant.designer.VGuides.Title" value="320,405"/>
+	<import value="com.tsa.puridiom.entity.*"/>
+	<import value="com.tsa.puridiom.common.documents.*"/>
+	<import value="java.net.*"/>
+	<import value="com.tsa.puridiom.jasperreports.*"/>
+	<import value="net.sf.jasperreports.engine.JRDataSource"/>
+	<import value="com.tsagate.properties.*"/>
+	<reportFont name="Arial_Normal" isDefault="true" fontName="Arial" size="8" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Bold" isDefault="false" fontName="Arial Black" size="8" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica-Bold" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Bold_Big" isDefault="false" fontName="Arial Black" size="9" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica-Bold" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Big" isDefault="false" fontName="Arial" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<parameter name="oid" class="java.lang.String">
+		<defaultValueExpression><![CDATA["hilton"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="linesSR" class="net.sf.jasperreports.engine.JasperReport">
+		<parameterDescription><![CDATA[RfqVendorList]]></parameterDescription>
+		<defaultValueExpression><![CDATA[JasperReportsHelper.loadSubReport("rfqvendor.jasper", $P{oid})]]></defaultValueExpression>
+	</parameter>
+	<parameter name="linesDS" class="com.tsa.puridiom.reports.datasource.HibernateQueryResultDataSource"/>
+	<parameter name="vendorSR" class="net.sf.jasperreports.engine.JasperReport">
+		<defaultValueExpression><![CDATA[JasperReportsHelper.loadSubReport("vendor-req-pdf.jasper", $P{oid})]]></defaultValueExpression>
+	</parameter>
+	<parameter name="vendorDS" class="com.tsa.puridiom.reports.datasource.HibernateQueryResultDataSource"/>
+	<parameter name="imgUrl" class="java.lang.String">
+		<defaultValueExpression><![CDATA["http://localhost:8085/hilton/images/"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="awardedVendor" class="java.lang.String"/>
+	<parameter name="vendorsRejectedDS" class="com.tsa.puridiom.reports.datasource.HibernateQueryResultDataSource"/>
+	<parameter name="numberVendorsRejected" class="java.math.BigDecimal">
+		<defaultValueExpression><![CDATA[new BigDecimal(0)]]></defaultValueExpression>
+	</parameter>
+	<field name="RfqHeader_rfqNumber" class="java.lang.String"/>
+	<field name="RfqHeader_shipToCode" class="java.lang.String"/>
+	<field name="RfqHeader_billToCode" class="java.lang.String"/>
+	<field name="RfqHeader_vendorAwarded" class="java.lang.String"/>
+	<field name="RfqHeader_requiredDate" class="java.util.Date"/>
+	<field name="RfqHeader_dueDate" class="java.util.Date"/>
+	<field name="RfqHeader_shippingCode" class="java.lang.String"/>
+	<field name="RfqHeader_requisitionNumber" class="java.lang.String"/>
+	<field name="RfqHeader_routing" class="java.lang.String"/>
+	<field name="RfqHeader_rfqType" class="java.lang.String"/>
+	<field name="RfqHeader_buyer" class="java.lang.String"/>
+	<field name="RfqHeader_status" class="java.lang.String"/>
+	<field name="RfqHeader_rfqDate" class="java.util.Date"/>
+	<field name="RfqHeader_shipToContact" class="java.lang.String"/>
+	<field name="RfqHeader_rfqDescription" class="java.lang.String"/>
+	<variable name="title1" class="java.lang.String">
+		<initialValueExpression><![CDATA["Puridiom Purchasing Center Home"]]></initialValueExpression>
+	</variable>
+	<variable name="siteName" class="java.lang.String">
+		<initialValueExpression><![CDATA["Puridiom"]]></initialValueExpression>
+	</variable>
+	<variable name="siteUrl" class="java.lang.String">
+		<initialValueExpression><![CDATA["http://localhost:8085/hilton/"]]></initialValueExpression>
+	</variable>
+	<background>
+		<band height="770">
+			<rectangle>
+				<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="3" y="0" width="586" height="770" isPrintWhenDetailOverflows="true"/>
+				<graphicElement/>
+			</rectangle>
+			<line>
+				<reportElement positionType="Float" x="3" y="81" width="586" height="1"/>
+				<graphicElement/>
+			</line>
+			<line>
+				<reportElement positionType="Float" x="3" y="115" width="586" height="1"/>
+				<graphicElement/>
+			</line>
+			<line>
+				<reportElement positionType="Float" x="3" y="148" width="586" height="1"/>
+				<graphicElement/>
+			</line>
+			<line>
+				<reportElement positionType="Float" x="3" y="306" width="586" height="1"/>
+				<graphicElement/>
+			</line>
+		</band>
+	</background>
+	<title>
+		<band height="422">
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" x="4" y="128" width="345" height="20"/>
+				<box topBorder="None" leftBorder="None" bottomBorder="None" rightBorder="1Point"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{RfqHeader_rfqNumber}]]></textFieldExpression>
+			</textField>
+			<textField pattern="MM/dd/yyyy" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="419" y="95" width="147" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.util.Date"><![CDATA[$F{RfqHeader_rfqDate}]]></textFieldExpression>
+			</textField>
+			<subreport>
+				<reportElement positionType="Float" x="158" y="322" width="260" height="83"/>
+				<subreportParameter name="oid">
+					<subreportParameterExpression><![CDATA[$P{oid}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[$P{vendorDS}]]></dataSourceExpression>
+				<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[JasperReportsHelper.loadSubReport("rfqvendor.jasper", $P{oid})]]></subreportExpression>
+			</subreport>
+			<image>
+				<reportElement positionType="Float" x="6" y="3" width="211" height="75"/>
+				<graphicElement/>
+				<imageExpression class="java.lang.String"><![CDATA[JasperReportsHelper.getImgUrl($P{oid}, "logo.gif")]]></imageExpression>
+			</image>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" x="219" y="20" width="334" height="35"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="15" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["NOTICE OF INTENT TO AWARD"]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement positionType="Float" x="10" y="257" width="555" height="2" forecolor="#FFFFFF"/>
+				<graphicElement/>
+			</rectangle>
+			<staticText>
+				<reportElement positionType="Float" x="4" y="81" width="415" height="14"/>
+				<box topBorder="None" leftBorder="None" bottomBorder="None" rightBorder="1Point"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[1. Name of Program, Project, or Service(Use RFP Title)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="419" y="81" width="147" height="14"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[2. Date Issued]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" x="4" y="95" width="415" height="20"/>
+				<box topBorder="None" leftBorder="None" bottomBorder="None" rightBorder="1Point"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{RfqHeader_rfqDescription}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement positionType="Float" x="4" y="115" width="345" height="14"/>
+				<box topBorder="None" leftBorder="None" bottomBorder="None" rightBorder="1Point"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[3. Authority Number(s)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="349" y="115" width="217" height="14"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[4. Name Of Procurement Officer]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" x="349" y="128" width="217" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[ReportUtils.getUserName($F{RfqHeader_buyer}, $P{oid})]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement positionType="Float" x="18" y="153" width="533" height="150"/>
+				<textElement textAlignment="Justified"/>
+				<text><![CDATA[This is a notice of our intent to award a contract. The offeror, identified here as apparent successful offeror, is instructed NOT TO PROCEED until a signed contract or other written notice of award is officially received from our Contracts department. A firm or person who proceeds prior to receiving a signed contract or other written notice of award does so at their own risk.
+
+An offeror who wishes to protest this Notice of Intent must file a protest within ten (10) calendar days following the date this notice is issued. If the tenth day falls on a weekend or holiday, the last day of the protest period is the first working day following the tenth day.
+
+The protest shall be filed with the Procurement Director in writing and include the following information:
+
+     (1) the name, address, and telephone number of the protester;
+     (2) the signature of the protester or the protester's representative;
+     (3) identification of the contracting official and the solicitation or contract at issue;
+     (4) a detailed statement of the legal and factual grounds of the protest, including copies of relevant documents; and
+     (5) the form of relief requested.
+
+The above notwithstanding, we reserve the right to ultimately cancel this award if it is so deemed to be in the best interest of our organization.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="5" y="307" width="240" height="14"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[5. Name and Address of Apparent Successful Offeror(s)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="5" y="406" width="561" height="14">
+					<printWhenExpression><![CDATA[new Boolean($P{numberVendorsRejected}.compareTo(new BigDecimal(0)) > 0)]]></printWhenExpression>
+				</reportElement>
+				<box topBorder="1Point" leftBorder="None" bottomBorder="None" rightBorder="None"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[6. Names and Addresses of All other Respondents]]></text>
+			</staticText>
+			<textField>
+				<reportElement positionType="Float" x="511" y="1" width="57" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA["Page " + String.valueOf($V{PAGE_NUMBER}) + " of "]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement positionType="Float" x="568" y="1" width="24" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[" " + String.valueOf($V{PAGE_NUMBER})]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="30">
+			<printWhenExpression><![CDATA[new Boolean($V{PAGE_NUMBER}.intValue() > 1)]]></printWhenExpression>
+			<textField>
+				<reportElement positionType="Float" x="511" y="1" width="57" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA["Page " + String.valueOf($V{PAGE_NUMBER}) + " of "]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement positionType="Float" x="568" y="1" width="24" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[" " + String.valueOf($V{PAGE_NUMBER})]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="46">
+			<subreport isUsingCache="false">
+				<reportElement positionType="Float" x="15" y="2" width="546" height="39"/>
+				<subreportParameter name="oid">
+					<subreportParameterExpression><![CDATA[$P{oid}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[$P{linesDS}]]></dataSourceExpression>
+				<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[$P{linesSR}]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+</jasperReport>

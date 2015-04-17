@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="InvTaskAdd" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="checkDupInvTask">
+			<task synchronous="true" continue-on-failure="false" name="existingInvTask">
+				<task-object-name>com.tsa.puridiom.invtask.tasks.InvTaskRetrieveById</task-object-name>
+				<post-action />
+			 </task>
+			<task synchronous="true" continue-on-failure="false" name="invTask">
+				<task-object-name>com.tsa.puridiom.invtask.tasks.InvTaskSetValues</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+<!--
+		<activity synchronous="true" continue-on-failure="false" name="invTaskValidation">
+			<rule-filename check-for-false="true">is-existing-invtask-empty.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="setErrorMsg">
+				<task-object-name>com.tsa.puridiom.invtaskerrormsg.tasks.ErrorMsgSetDuplicateInvTask</task-object-name>
+			</task>
+			<post-action>exitProcess</post-action>
+		</activity>
+-->
+		<activity synchronous="true" continue-on-failure="false" name="InvTaskAdd">
+			<task synchronous="true" continue-on-failure="false" name="invTask">
+				<task-object-name>com.tsa.puridiom.invtask.tasks.InvTaskAdd</task-object-name>
+				<post-action />
+			</task>
+		  </activity>
+	 </activities>
+</process>

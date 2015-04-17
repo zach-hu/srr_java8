@@ -1,0 +1,62 @@
+<autoacc_carprjcom>
+	<columns>
+		<XrefCombo_icXref>
+			<label>Ic Header</label>
+			<visible>0</visible>
+			<type>BIGDECIMAL</type>
+		</XrefCombo_icXref>
+		<XrefCombo_xrefType>
+			<label>Type</label>
+			<visible>0</visible>
+			<type>STRING</type>
+		</XrefCombo_xrefType>
+		<XrefCombo_code1>
+			<label>Division</label>
+			<size>10</size>
+			<visible>1</visible>
+			<type>STRING</type>
+		</XrefCombo_code1>
+		<XrefCombo_code2>
+			<label>Project#</label>
+			<size>10</size>
+			<visible>1</visible>
+			<type>STRING</type>
+		</XrefCombo_code2>
+		<XrefCombo_code3>
+			<label>CAR</label>
+			<size>8</size>
+			<link><![CDATA[javascript: reviewXrefComboGeneral('#XrefCombo_icXref^','#XrefCombo_xrefType^'); void(0);]]></link>
+			<visible>1</visible>
+			<type>STRING</type>
+		</XrefCombo_code3>
+		<StdTable_description>
+			<label>Description</label>
+			<size>37</size>
+			<visible>1</visible>
+			<type>STRING</type>
+		</StdTable_description>
+		<XrefCombo_code4>
+			<label>Program Code</label>
+			<size>15</size>
+			<visible>1</visible>
+			<type>STRING</type>
+		</XrefCombo_code4>
+		<XrefCombo_xrefAmt>
+			<label>Amount</label>
+			<size>10</size>
+			<visible>1</visible>
+			<type>BIGDECIMAL</type>
+		</XrefCombo_xrefAmt>
+		<XrefCombo_status>
+			<label>Status</label>
+			<size>10</size>
+			<visible>1</visible>
+			<type>STATUS</type>
+		</XrefCombo_status>
+
+	</columns>
+<sqlfrom>XrefCombo as XrefCombo, StdTable as StdTable</sqlfrom>
+<sqlwhere><![CDATA[ XrefCombo.xrefType = 'CARP' AND XrefCombo.code3 = StdTable.id.tableKey]]></sqlwhere>
+<sqlorderby>XrefCombo.code1 ASC, XrefCombo.code3 ASC, XrefCombo.code4 ASC</sqlorderby>
+<title>CAR / Project Combinations</title>
+</autoacc_carprjcom>

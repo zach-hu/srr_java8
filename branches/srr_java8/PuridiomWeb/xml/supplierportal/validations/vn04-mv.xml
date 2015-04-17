@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rule>
+  <clause type="lookup">
+    <sql>from StdTable stdTable where stdTable.id.tableType = 'VN04' AND stdTable.id.tableKey = '@udf@' AND (stdTable.status = '02' OR (stdTable.status = '01' AND stdTable.dateExpires >= @today@))</sql>
+    <source>vendor</source>
+    <arguments>
+      <name>udf</name>
+      <source>vendor</source>
+      <colName>getVendUdf4</colName>
+    </arguments>
+  </clause>
+</rule>
+

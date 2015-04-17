@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="appPoolDelete" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="deleteAppPool">
+			<task synchronous="true" continue-on-failure="false" name="appPool">
+				<task-object-name>com.tsa.puridiom.apppool.tasks.AppPoolDeleteById</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="appPoolRemoveFromCache">
+				<task-object-name>com.tsa.puridiom.apppool.AppPoolManagerRemoveAppPoolFromCache</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

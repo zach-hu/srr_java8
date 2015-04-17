@@ -1,0 +1,24 @@
+<browse_review_finalize>
+	<columns>
+		<ReviewFinalize_icHeader>
+			<type>REQUISITION-TYPE</type>
+			<size>18</size>
+		</ReviewFinalize_icHeader>
+		<ReviewFinalize_step>
+			<label>brw-step</label>
+	        <hidden>Y</hidden>
+		</ReviewFinalize_step>
+		<ReviewFinalize_owner>
+			<label>owner</label>
+			<sort>D</sort>
+			<link><![CDATA[javascript: viewReq('#ReviewFinalize_icHeader^','#ReviewFinalize_step^'); void(0);]]></link>
+			<size>10</size>
+		</ReviewFinalize_owner>
+	</columns>
+<sqlfrom>ReviewFinalize as ReviewFinalize</sqlfrom>
+<sqlwhere><![CDATA[ReviewFinalize.icHeader <> 'N/A']]></sqlwhere>
+<sqlorderby>ReviewFinalize.icHeader DESC</sqlorderby>
+<pagesize>15</pagesize>
+<title>ReviewFinalize Browse</title>
+</browse_review_finalize>
+

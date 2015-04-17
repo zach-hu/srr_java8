@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created using an evaluation version of JasperAssistant (http://www.jasperassistant.com) -->
+<!DOCTYPE jasperReport PUBLIC "-//JasperReports//DTD Report Design//EN" "http://jasperreports.sourceforge.net/dtds/jasperreport.dtd">
+
+<jasperReport name="Unnamed" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="1" rightMargin="1" topMargin="10" bottomMargin="5">
+	<property name="com.jasperassistant.designer.GridWidth" value="12"/>
+	<property name="com.jasperassistant.designer.GridHeight" value="12"/>
+	<property name="com.jasperassistant.designer.DataSource" value="hilton1p"/>
+	<property name="com.jasperassistant.designer.SnapToGrid" value="false"/>
+	<property name="com.jasperassistant.designer.Grid" value="false"/>
+	<parameter name="vendorId" class="java.lang.String">
+		<defaultValueExpression><![CDATA["DELL"]]></defaultValueExpression>
+	</parameter>
+	<queryString><![CDATA[select ACCOUNT.FLD_2 fld2, SUM(ACCOUNT.ALLOC_AMOUNT) total from po_header, account where PO_HEADER.IC_PO_HEADER = ACCOUNT.IC_HEADER AND po_header.VENDOR_ID = $P{vendorId} GROUP BY ACCOUNT.FLD_2]]></queryString>
+	<field name="FLD2" class="java.lang.String">
+	</field>
+	<field name="TOTAL" class="java.math.BigDecimal">
+	</field>
+	<variable name="allocated" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{TOTAL}]]></variableExpression>
+	</variable>
+	<pageHeader>
+		<band height="23">
+			<staticText>
+				<reportElement positionType="Float" x="139" y="3" width="80" height="13"/>
+				<box topBorder="None" leftBorder="None" bottomBorder="1Point" rightBorder="None"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Cost Center]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="229" y="4" width="80" height="15"/>
+				<box topBorder="None" leftBorder="None" bottomBorder="1Point" rightBorder="None"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Total]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="21">
+			<textField>
+				<reportElement positionType="Float" x="144" y="4" width="80" height="16"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{FLD2}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement positionType="Float" x="228" y="4" width="80" height="16"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{TOTAL}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="20">
+			<textField>
+				<reportElement positionType="Float" x="227" y="4" width="80" height="16"/>
+				<box topBorder="1Point" leftBorder="None" bottomBorder="None" rightBorder="None"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{allocated}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>

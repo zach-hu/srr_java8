@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="requisitionCancel" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="requisitionCancel">
+			<task synchronous="true" continue-on-failure="false" name="requisitionCancelSetup">
+				<rule-filename>is-requisition-cancelling.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.requisition.tasks.RequisitionCancelSetup</task-object-name>
+				<post-action>exitActivity</post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="requisitionCloseSetup">
+				<rule-filename>is-requisition-closing.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.requisition.tasks.RequisitionCloseSetup</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="requisitionCancel">
+			<task synchronous="true" continue-on-failure="false" name="requisitionHeader">
+				<rule-filename></rule-filename>
+				<task-object-name>com.tsa.puridiom.requisitionheader.tasks.RequisitionHeaderRetrieveById</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="requisitionLineList">
+				<task-object-name>com.tsa.puridiom.requisitionline.tasks.RequisitionLineRetrieveByHeader</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="requisitionHeaderLinesCancelUpdate">
+			<rule-filename check-for-false="true">is-requisitionlinelist-empty.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="requisitionLineUpdate">
+				<task-object-name>com.tsa.puridiom.requisitionline.tasks.RequisitionLineUpdateStatusList</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="requisitionHeaderUpdate">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>requisitionheader-update-status.xml</process-filename>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="requisitionHeaderCancelUpdate">
+			<rule-filename>is-requisitionlinelist-empty.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="requisitionHeaderUpdateStatus">
+				<task-object-name>com.tsa.puridiom.requisition.tasks.RequisitionSetStatus</task-object-name>
+			</task>
+		</activity>
+	    <activity synchronous="true" continue-on-failure="false" name="requisitionBudgetUpdate">
+	      <rule-filename>is-budget-request;is-account-budget-module-active</rule-filename>
+	      <task synchronous="true" continue-on-failure="false" name="budgetCheck">
+			<rule-filename check-for-false="true">is-account-budget-service-active.xml</rule-filename>
+	        <task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+	        <process-filename>budget-requisition-cancel.xml</process-filename>
+    	    <post-action>exitActivity</post-action>
+	      </task>
+	      <task synchronous="true" continue-on-failure="false" name="budgetSetup">
+	        <rule-filename>is-requisition-cancelling.xml</rule-filename>
+        	<task-object-name>com.tsa.puridiom.requisition.tasks.RequisitionCancelBudgetServiceSetup</task-object-name>
+        	<post-action></post-action>
+      	  </task>
+	      <task synchronous="true" continue-on-failure="false" name="budgetSetup">
+	        <rule-filename>is-requisition-closing.xml</rule-filename>
+        	<task-object-name>com.tsa.puridiom.requisition.tasks.RequisitionCloseBudgetServiceSetup</task-object-name>
+        	<post-action></post-action>
+      	  </task>
+	      <task synchronous="true" continue-on-failure="false" name="budgetCheck">
+        	<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+        	<process-filename>budgetservice-update.xml</process-filename>
+        	<post-action></post-action>
+      	  </task>
+	    </activity>
+		<activity synchronous="true" continue-on-failure="false" name="requisitionHistoryUpdate">
+			<task synchronous="true" continue-on-failure="false" name="requisitionHeaderHistory">
+		    	<task-object-name>com.tsa.puridiom.requisitionheader.history.tasks.RequisitionHeaderHistory</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="emailNotification">
+			<task synchronous="true" continue-on-failure="false" name="sendQueueRegister">
+		    	<rule-filename>is-requisition-cancelling.xml;is-not-organization-hoy.xml</rule-filename>
+		    	<task-object-name>com.tsa.puridiom.requisition.notifications.tasks.QueueCancelRequisitionEmail</task-object-name>
+		    	<post-action>exitActivity</post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="sendQueueRegister">
+		    	<rule-filename>is-requisition-closing.xml</rule-filename>
+		    	<task-object-name>com.tsa.puridiom.requisition.notifications.tasks.QueueCloseRequisitionEmail</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

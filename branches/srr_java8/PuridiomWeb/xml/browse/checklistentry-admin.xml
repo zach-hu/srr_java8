@@ -1,0 +1,31 @@
+<browse_checklistentry-admin>
+	<columns>
+		<ChecklistEntry_icQuestion>
+			<hidden-input>Y</hidden-input>
+			<hidden>Y</hidden>
+		</ChecklistEntry_icQuestion>
+		<ChecklistEntry_referenceType>
+			<label>poType</label>
+			<size>10</size>
+		</ChecklistEntry_referenceType>
+		<ChecklistEntry_sequence>
+			<label>routingSequence</label>
+			<size>10</size>
+		</ChecklistEntry_sequence>
+		<ChecklistEntry_questionText>
+			<label>brw-text</label>
+			<link><![CDATA[javascript: returnChecklistEntry('#ChecklistEntry_icQuestion^'); void(0);]]></link>
+			<size>60</size>
+		</ChecklistEntry_questionText>
+		<ChecklistEntry_responseType>
+			<label>brw-responseType</label>
+			<size>20</size>
+			<type>CHECKLISTENTRY-RESPONSE-TYPE</type>
+		</ChecklistEntry_responseType>
+	</columns>
+<sqlfrom>ChecklistEntry as ChecklistEntry</sqlfrom>
+<sqlwhere><![CDATA[  ]]></sqlwhere>
+<sqlorderby>ChecklistEntry.referenceType ASC, ChecklistEntry.sequence</sqlorderby>
+<pagesize>10</pagesize>
+<title>Checklist Entries</title>
+</browse_checklistentry-admin>

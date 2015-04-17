@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="securityGroupUpdate" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="securityGroupRetrieve">
+			<task synchronous="true" continue-on-failure="false" name="securityGroup">
+				<task-object-name>com.tsa.puridiom.securitygroup.tasks.SecurityGroupRetrieveById</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="securityGroupUpdate">
+				<rule-filename>is-securitygroup-empty</rule-filename>
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>securitygroup-add.xml</process-filename>
+				<post-action>exitActivity</post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="securityGroup">
+				<task-object-name>com.tsa.puridiom.securitygroup.tasks.SecurityGroupSetValues</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="securityGroup">
+				<task-object-name>com.tsa.puridiom.securitygroup.tasks.SecurityGroupUpdate</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="securityGroupUpdateCache">
+			<task synchronous="true" continue-on-failure="false" name="securityGroupSetInCache">
+				<task-object-name>com.tsa.puridiom.usermanager.tasks.GroupManagerSetSecurityGroupInCache</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

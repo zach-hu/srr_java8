@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="checklistEntryRetrieveById" connection-type="Connection-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="checklistEntryRetrieveById">
+			<task synchronous="true" continue-on-failure="false" name="checklistEntry">			
+				<task-object-name>com.tsa.puridiom.checklistentry.tasks.ChecklistEntryRetrieveById</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="checklistEntrySetup">			
+				<task-object-name>com.tsa.puridiom.checklistentry.tasks.ChecklistEntryRetrieveSetup</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="responseValueList">			
+				<task-object-name>com.tsa.puridiom.responsevalue.tasks.ResponseValueRetrieveByQuestion</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="checklistEntry">			
+				<task-object-name>com.tsa.puridiom.checklistentry.tasks.ChecklistEntryDataSet</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

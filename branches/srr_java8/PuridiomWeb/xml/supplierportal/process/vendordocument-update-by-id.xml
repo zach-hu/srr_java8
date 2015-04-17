@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="vendorDocumentRetrieveByVendor" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="vendorDocumentRetrieveById">
+			<task synchronous="true" continue-on-failure="false" name="vendorDocument">
+				<task-object-name>com.tsa.puridiom.vendordocument.tasks.VendorDocumentRetrieveById</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="vendorDocument">
+				<task-object-name>com.tsa.puridiom.vendordocument.tasks.VendorDocumentSetValues</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="vendorDocument">
+				<task-object-name>com.tsa.puridiom.vendordocument.tasks.VendorDocumentUpdate</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

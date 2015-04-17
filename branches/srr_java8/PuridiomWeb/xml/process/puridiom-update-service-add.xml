@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="puridiomUpdateServiceAdd" connection-type="New-Transaction">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="loadData">
+		    <task synchronous="true" continue-on-failure="false" name="entityLookingFor">
+				<task-object-name>com.tsa.puridiom.updateservice.tasks.CheckTableId</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="entitySetup">
+				<task-object-name>com.tsa.puridiom.updateservice.tasks.PuridiomUpdateServiceSetup</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="entityObjectList">
+				<task-object-name>com.tsa.puridiom.updateservice.tasks.PuridiomUpdateServiceSetValues</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="entityUpdate">
+				<rule-filename>is-puridiomupdateservice-update.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.updateservice.tasks.PuridiomUpdateServiceUpdate</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="entityAdd">
+				<task-object-name>com.tsa.puridiom.updateservice.tasks.PuridiomUpdateServiceAdd</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+	</activities>
+</process>
+
+
+

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+<class name="com.tsa.puridiom.entity.sungard.KeyId" table="KEY_ID">
+    <composite-id name="comp_id" class="com.tsa.puridiom.entity.sungard.KeyIdPK">
+        <key-property name="tableName" column="TABLE_NAME"  type="java.lang.String" length="18" />
+        <key-property name="keyRangeLow" column="KEY_RANGE_LOW" type="java.math.BigDecimal" length="10" />
+    </composite-id> 
+	<property name="keyRangeHigh" column="KEY_RANGE_HIGH" type="java.math.BigDecimal" length="10" not-null="true"/>
+	<property name="lastCheckedTo" column="LAST_CHECKED_TO" type="java.math.BigDecimal" length="10" not-null="true"/>
+</class>
+</hibernate-mapping>

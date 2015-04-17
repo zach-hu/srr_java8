@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="browseRetrieve" connection-type="None">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="browseRetrieve">
+			<rule-filename check-for-false="true">is-browseidcomesfromcache-empty</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="browseId">
+				<task-object-name>com.tsa.puridiom.browse.tasks.SetBrowseIdComesFromCache</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="browseObject">
+				<task-object-name>com.tsa.puridiom.browse.tasks.BrowseRetrieveByIdCache</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="databaseCfgSetup">
+				<task-object-name>com.tsa.puridiom.browse.tasks.BrowseForeignDatabaseSetup</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="verifyAuthentication">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>browse-retrieve-execute.xml</process-filename>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="originalDatabaseCfgSetup">
+				<task-object-name>com.tsa.puridiom.browse.tasks.BrowseOriginalDatabaseSetup</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="browse">
+				<task-object-name>com.tsa.puridiom.browse.tasks.BrowseSetupByPage</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="setBrowseInCache">
+				<task-object-name>com.tsa.puridiom.browse.tasks.SetBrowseInCache</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="browseRetrieve">
+			<rule-filename>is-browseidcomesfromcache-empty</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="browseObject">
+				<task-object-name>com.tsa.puridiom.browse.tasks.GenerateBrowseObject</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="browseObject">
+				<task-object-name>com.tsa.puridiom.browse.tasks.GenerateBrowseFilter</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="databaseCfgSetup">
+				<task-object-name>com.tsa.puridiom.browse.tasks.BrowseForeignDatabaseSetup</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="verifyAuthentication">
+				 <rule-filename>is-catalogsecurity-active;is-catalogitem</rule-filename>
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>browse-filter-setup.xml</process-filename>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="verifyAuthentication">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>browse-retrieve-execute.xml</process-filename>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="originalDatabaseCfgSetup">
+				<task-object-name>com.tsa.puridiom.browse.tasks.BrowseOriginalDatabaseSetup</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="browse">
+				<task-object-name>com.tsa.puridiom.browse.tasks.BrowseSetupByPage</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="setBrowseInCache">
+				<task-object-name>com.tsa.puridiom.browse.tasks.SetBrowseInCache</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

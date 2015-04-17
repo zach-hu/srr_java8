@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="rfqForward" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="rfqSetup">
+			<task synchronous="true" continue-on-failure="false" name="rfqRetrieve">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>rfq-retrieve.xml</process-filename>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="rfqForwardSetup">
+				<task-object-name>com.tsa.puridiom.rfq.tasks.RfqForwardSetup</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="rfqForward">
+			<rule-filename>is-rfq-forward-available.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="rfqForwardToOpenSolicitation">
+				<rule-filename>is-rfq-inprogress-open-amendment.xml;is-rfq-forward-to-open-solicitation.xml</rule-filename>
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>rfq-forward-to-open-solicitation.xml</process-filename>
+				<post-action>exitActivity</post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="requisitionUpdatePricing">
+				<rule-filename>is-pricing-rfq.xml;is-rfq-status-less-than-purchasing.xml</rule-filename>
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>rfq-forward-update-pricing-requisition.xml</process-filename>
+				<post-action>exitActivity</post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="rfqForwardToPurchasing">
+				<rule-filename>is-rfq-status-less-than-purchasing.xml</rule-filename>
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>rfq-forward-to-purchasing.xml</process-filename>
+				<post-action>exitActivity</post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="rfqUpdate">
+			<task synchronous="true" continue-on-failure="false" name="rfqHeader">
+				<task-object-name>com.tsa.puridiom.rfqheader.tasks.RfqHeaderSetValues</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="rfqHeaderUpdate">
+				<task-object-name>com.tsa.puridiom.rfqheader.tasks.RfqHeaderUpdate</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="rfqLineUpdateStatus">
+				<task-object-name>com.tsa.puridiom.rfqline.tasks.RfqLineUpdateEntityListStatus</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="requisitionLineStatusUpdate">
+				<task-object-name>com.tsa.puridiom.rfqline.tasks.RfqLineUpdateReqLineStatusByList</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

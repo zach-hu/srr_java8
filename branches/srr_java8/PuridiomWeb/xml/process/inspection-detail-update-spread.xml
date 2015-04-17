@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="inspectionHeaderUpdate" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="inspectionHeaderListRetrieve">
+			<task synchronous="true" continue-on-failure="false" name="inspectionHeaderList">
+				<task-object-name>com.tsa.puridiom.inspectionheader.tasks.InspectionHeaderListRetrieveByIcMsrLine</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="inspectionHeaderListUpdate">
+			<rule check-for-false="true">is-inspectionheaderlist-empty.xml</rule>
+			<task synchronous="true" continue-on-failure="false" name="inspectionHeaderListUpdate">
+				<task-object-name>com.tsa.puridiom.inspectionheader.tasks.InspectionHeaderListUpdateSpread</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+	</activities>
+</process>

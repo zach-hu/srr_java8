@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="saleHeaderUpdate" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="saleHeaderUpdate">
+			<task synchronous="true" continue-on-failure="false" name="saleHeader">			
+				<task-object-name>com.tsa.puridiom.saleheader.tasks.SaleHeaderRetrieveById</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="saleHeader">
+				<task-object-name>com.tsa.puridiom.saleheader.tasks.SaleHeaderSetValues</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="saleHeader">
+				<task-object-name>com.tsa.puridiom.saleheader.tasks.SaleHeaderUpdate</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

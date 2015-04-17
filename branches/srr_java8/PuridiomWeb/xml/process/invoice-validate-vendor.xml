@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="validateVendor" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="validateVendor">
+			<task synchronous="true" continue-on-failure="false" name="validateVendor">
+				<task-object-name>com.tsa.puridiom.invoice.tasks.InvoiceValidateVendor</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="setInvoiceVendor">
+			<rule-filename check-for-false="true">is-valid-vendor.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="true" name="setVendorId">
+				<task-object-name>com.tsa.puridiom.invoiceheader.tasks.InvoiceHeaderSetVendorId</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="setErrorMsg">
+				<task-object-name>com.tsa.puridiom.invoiceerrormsg.tasks.ErrorMsgSetDuplicateVendor</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="invoiceHeaderVendorRetrieve">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>invoiceheader-vendor-retrieve-by-id.xml</process-filename>
+			</task>
+			<post-action>exitProcess</post-action>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="invoiceVendorUpdate">
+			<task synchronous="true" continue-on-failure="false" name="invoiceVendorUpdate">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>invoicevendor-update.xml</process-filename>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="invoiceHeaderUpdate">
+			<task synchronous="true" continue-on-failure="false" name="invoiceHeaderUpdate">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>invoiceheader-update.xml</process-filename>
+			</task>
+		</activity>
+	</activities>
+</process>

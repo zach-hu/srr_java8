@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process connection-type="Transaction-Required" name="poForward">
+  <rule-filename>is-there-poheaderic.xml</rule-filename>
+  <activities>
+    <activity continue-on-failure="false" name="RetrieveData" synchronous="true">
+      <task continue-on-failure="false" name="poHeader" synchronous="true">
+        <rule-filename check-for-false="true">is-auto-release.xml</rule-filename>
+        <task-object-name>com.tsa.puridiom.poheader.tasks.PoHeaderRetrieveById</task-object-name>
+      </task>
+      <task continue-on-failure="false" name="poForwardSetup" synchronous="true">
+        <task-object-name>com.tsa.puridiom.po.tasks.PoForwardSetup</task-object-name>
+      </task>
+      <task continue-on-failure="false" name="poLineList" synchronous="true">
+        <task-object-name>com.tsa.puridiom.poline.tasks.PoLineRetrieveByHeader</task-object-name>
+      </task>
+      <task continue-on-failure="false" name="forwardAvailable" synchronous="true">
+        <!-- if the po number or vendor id is not set the post-action will be set to exitProcess -->
+        <task-object-name>com.tsa.puridiom.po.tasks.PoForwardAvailabilityCheck</task-object-name>
+      </task>
+    </activity>
+    <activity continue-on-failure="false" name="forward" synchronous="true">
+      <task continue-on-failure="false" name="checkLimits" synchronous="true">
+        <rule-filename>is-po-checkrellimits;is-po-blanket-order</rule-filename>
+        <!-- if blanket or release limits were not set the post-action will be set to exitProcess -->
+        <task-object-name>com.tsa.puridiom.po.tasks.PoCheckBlanketLimits</task-object-name>
+        <post-action></post-action>
+      </task>
+    </activity>
+    <activity continue-on-failure="false" name="checkReleaseLimits" synchronous="true">
+      <rule-filename check-for-false="true">is-po-goforward.xml</rule-filename>
+      <task synchronous="true" continue-on-failure="false" name="keepforwading">
+        <rule-filename>is-po-release-order.xml</rule-filename>
+        <task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+        <process-filename>po-check-release-limits.xml</process-filename>
+      </task>
+      <task continue-on-failure="false" name="checkForErrors" synchronous="true">
+        <rule-filename>is-poerrors-check-required.xml</rule-filename>
+        <!-- if critical errors were set or input is required from the user the post-action will be set to exitProcess -->
+        <task-object-name>com.tsa.puridiom.po.tasks.PoCheckForErrors</task-object-name>
+      </task>
+    </activity>
+    <activity continue-on-failure="false" name="checkPoApprovals" synchronous="true">
+      <rule-filename>is-po-approvals-module-active.xml</rule-filename>
+      <task continue-on-failure="false" name="poAmount" synchronous="true">
+        <task-object-name>com.tsa.puridiom.po.tasks.PoForwardGetPoAmount</task-object-name>
+      </task>
+      <task continue-on-failure="false" name="poForwardOption" synchronous="true">
+        <task-object-name>com.tsa.puridiom.po.tasks.PoForwardGetUserWarrantAmount</task-object-name>
+      </task>
+      <task continue-on-failure="false" name="poAmount" synchronous="true">
+        <rule-filename>is-poforward-forward.xml</rule-filename>
+        <task-object-name>com.tsa.puridiom.po.tasks.PoForwardOptionForward</task-object-name>
+      </task>
+	<task continue-on-failure="false" name="PoForwardSetRevisionLineStatus" synchronous="true">
+	  <rule-filename>is-po-not-awarded.xml;is-po-forward-revision.xml</rule-filename>
+	   <task-object-name>com.tsa.puridiom.poline.tasks.PoLineForwardSetRevisionLineStatus</task-object-name>
+	</task>
+      <task continue-on-failure="false" name="PoForwardSetLineStatus" synchronous="true">
+        <rule-filename>is-po-pending-approval.xml</rule-filename>
+          <task-object-name>com.tsa.puridiom.poline.tasks.PoLineForwardSetLineStatus</task-object-name>
+        </task>
+    </activity>
+    <activity continue-on-failure="false" synchronous="true" name="setPoHeaderShipToInv">
+		<task synchronous="true" continue-on-failure="false" name="shipToAddressSetup">
+			<task-object-name>com.tsa.puridiom.poheader.tasks.PoHeaderRetrieveShipToAddressSetup</task-object-name>
+		</task>
+		<task synchronous="true" continue-on-failure="false" name="shipToAddress">
+			<rule-filename>is-address-code-not-empty</rule-filename>
+			<task-object-name>com.tsa.puridiom.address.tasks.AddressRetrieveShipTo</task-object-name>
+		</task>
+		<task synchronous="true" continue-on-failure="false" name="poHeader">
+			<task-object-name>com.tsa.puridiom.poheader.tasks.PoHeaderSetShipToInvFromAddress</task-object-name>
+		</task>
+	</activity>
+    <activity continue-on-failure="false" name="checkNotPoApprovals" synchronous="true">
+      <rule-filename>is-po-forward-no-approvals-autorelease.xml</rule-filename>
+      <task continue-on-failure="false" name="po" synchronous="true">
+        <task-object-name>com.tsa.puridiom.poheader.tasks.PoHeaderSetAwarded</task-object-name>
+      </task>
+      <task continue-on-failure="false" name="poLineList" synchronous="true">
+        <task-object-name>com.tsa.puridiom.poline.tasks.PoLineSetAwardedByList</task-object-name>
+      </task>
+      <task continue-on-failure="false" name="poLineListUpdateInventoryAward" synchronous="true">
+		<rule-filename>is-poheader-shiptoinv.xml;is-poheader-potype-order.xml</rule-filename>
+        <task-object-name>com.tsa.puridiom.poline.tasks.PoLineListUpdateInventoryAward</task-object-name>
+      </task>
+      <!-- The processes for this task obviously is not yet complete
+      <task continue-on-failure="false" name="PoLineUpdateAwardedStatus" synchronous="true">
+        <task-object-name>com.tsa.puridiom.poline.tasks.PoLineUpdateAwardedStatus</task-object-name>
+      </task>
+      -->
+      <task synchronous="true" continue-on-failure="false" name="requisitionLineStatusUpdate">
+        <task-object-name>com.tsa.puridiom.poline.tasks.PoLineUpdateReqLineStatusByList</task-object-name>
+        <post-action></post-action>
+      </task>
+    </activity>
+
+    <activity synchronous="true" continue-on-failure="false" name="poBudgetUpdate">
+    	<rule-filename>is-account-budget-module-active</rule-filename>
+      	<task synchronous="true" continue-on-failure="false" name="poBudgetForward">
+        	<rule-filename check-for-false="true">is-account-budget-service-active.xml</rule-filename>
+        	<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+        	<process-filename>budget-po-forward.xml</process-filename>
+        	<post-action>exitActivity</post-action>
+      	</task>
+      	<task synchronous="true" continue-on-failure="false" name="poForwardBudgetSetup">
+        	<task-object-name>com.tsa.puridiom.po.tasks.PoForwardBudgetServiceSetup</task-object-name>
+        	<post-action></post-action>
+      	</task>
+      	<task synchronous="true" continue-on-failure="false" name="poBudgetForward">
+       		<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+       		<process-filename>budgetservice-update.xml</process-filename>
+       		<post-action></post-action>
+      	</task>
+    </activity>
+    <activity continue-on-failure="false" synchronous="true" name="updatePriorLink">
+      <rule-filename>is-po-blanket-order.xml</rule-filename>
+      <task continue-on-failure="false" name="priorOrder" synchronous="true">
+        <rule-filename>is-there-prior-order.xml</rule-filename>
+        <task-object-name>com.tsa.puridiom.poheader.tasks.PoHeaderRetrievePrior</task-object-name>
+      </task>
+      <task continue-on-failure="false" name="PoUpdatePriorNumber" synchronous="true">
+        <rule-filename>is-there-prior-order.xml</rule-filename>
+        <task-object-name>com.tsa.puridiom.poheader.tasks.PoHeaderUpdatePriorOrderSetup</task-object-name>
+      </task>
+      <task continue-on-failure="false" name="PoUpdatePriorNumber" synchronous="true">
+        <rule-filename>is-there-prior-order.xml</rule-filename>
+        <task-object-name>com.tsa.puridiom.poheader.tasks.PoHeaderUpdatePriorOrder</task-object-name>
+      </task>
+    </activity>
+    <activity continue-on-failure="false" synchronous="true" name="updatePoHeader">
+      <task continue-on-failure="false" name="poHeader" synchronous="true">
+        <task-object-name>com.tsa.puridiom.poheader.tasks.PoHeaderSetStatusByLineList</task-object-name>
+      </task>
+      <task continue-on-failure="false" name="updateStatus" synchronous="true">
+        <task-object-name>com.tsa.puridiom.poheader.tasks.PoHeaderSetReqStatusByLineList</task-object-name>
+      </task>
+      <task continue-on-failure="false" name="poHeader" synchronous="true">
+        <task-object-name>com.tsa.puridiom.poheader.tasks.PoHeaderUpdate</task-object-name>
+      </task>
+    </activity>
+    <activity synchronous="true" continue-on-failure="false" name="recentOrderItemActivity">
+      <task synchronous="true" continue-on-failure="false" name="recentOrderItemAdd">
+        <!-- this should not add items that were added from a prior revision -->
+        <task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+        <process-filename>recentorderitem-add-list.xml</process-filename>
+      </task>
+    </activity>
+    <activity continue-on-failure="false" name="forward" synchronous="true">
+      <task continue-on-failure="false" name="xmlOrder" synchronous="true">
+        <task-object-name>com.tsa.puridiom.poline.tasks.PoLineSetXmlFlag</task-object-name>
+      </task>
+      <task continue-on-failure="false" name="queueAddOrderRequest" synchronous="true">
+		 <!-- <rule-filename>is-po-awarded-entity.xml</rule-filename>-->
+        <task-object-name>com.tsa.puridiom.po.tasks.QueueAddOrderReleaseRequest</task-object-name>
+      </task>
+    </activity>
+    <!-- <activity continue-on-failure="false" name="notifyBuyer" synchronous="true">
+      <task continue-on-failure="false" name="queueAddOrderRequest" synchronous="true">
+        <task-object-name>com.tsa.puridiom.po.tasks.NotifyBuyerPoApproved</task-object-name>
+      </task>
+    </activity> -->
+    <activity synchronous="true" continue-on-failure="false" name="history">
+        <task synchronous="true" continue-on-failure="false" name="poHeaderHistory">
+        <task-object-name>com.tsa.puridiom.poheader.history.tasks.PoHeaderHistory</task-object-name>
+      </task>
+      <task synchronous="true" continue-on-failure="false" name="poLineListHistory">
+        <task-object-name>com.tsa.puridiom.poline.history.tasks.PoLineListHistory</task-object-name>
+      </task>
+    </activity>
+  </activities>
+</process>

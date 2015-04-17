@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="PurchaseCardAdd" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="checkDupPurchaseCard">
+			<task synchronous="true" continue-on-failure="false" name="existingPurchaseCard">
+				<task-object-name>com.tsa.puridiom.purchasecard.tasks.PurchaseCardRetrieveById</task-object-name>
+				<post-action />
+			 </task>
+			<task synchronous="true" continue-on-failure="false" name="purchaseCard">
+				<task-object-name>com.tsa.puridiom.purchasecard.tasks.PurchaseCardSetValues</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="purchaseCardValidation">
+			<rule-filename check-for-false="true">is-existing-purchasecard-empty.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="setErrorMsg">
+				<task-object-name>com.tsa.puridiom.purchasecarderrormsg.tasks.ErrorMsgSetDuplicatePurchaseCard</task-object-name>
+			</task>
+			<post-action>exitProcess</post-action>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="PurchaseCardAdd">
+			<task synchronous="true" continue-on-failure="false" name="purchaseCard">
+				<task-object-name>com.tsa.puridiom.purchasecard.tasks.PurchaseCardAdd</task-object-name>
+				<post-action />
+			</task>
+		  </activity>
+	 </activities>
+</process>

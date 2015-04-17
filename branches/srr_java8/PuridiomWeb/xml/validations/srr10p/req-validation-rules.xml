@@ -1,0 +1,561 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<validation-rules>
+	<validations>
+		<save enabled="yes">
+			<rule>
+				<filename>has-items.xml</filename>
+				<alias>Has Lines</alias>
+				<msg>You must enter or select at least one item!</msg>
+				<severity>E</severity>
+				<order>10</order>
+				<enabled>Y</enabled>
+				<link><![CDATA[javascript: doSubmit('requests/req_items.jsp', 'RequisitionLineRetrieveByHeader'); void(0);]]></link>
+			</rule>
+			<rule>
+				<filename>description.xml</filename>
+				<alias>description</alias>
+				<msg>You must enter a Description for each item!</msg>
+				<severity>E</severity>
+				<order>100</order>
+				<enabled>N</enabled>
+				<fieldname>RequisitionLine_description</fieldname>
+				<link><![CDATA[javascript: doSubmit('requests/req_items.jsp', 'RequisitionLineRetrieveByHeader'); void(0);]]></link>
+			</rule>
+			<rule>
+				<filename>quantity.xml</filename>
+				<alias>Quantity</alias>
+				<msg>The Quantity for each item must be greater than zero!</msg>
+				<severity>E</severity>
+				<order>110</order>
+				<enabled>N</enabled>
+				<fieldname>RequisitionLine_quantity</fieldname>
+				<link><![CDATA[javascript: doSubmit('requests/req_items.jsp', 'RequisitionLineRetrieveByHeader'); void(0);]]></link>
+			</rule>
+			<rule>
+				<filename>line-unit-of-measure.xml</filename>
+				<alias>Unit of Measure</alias>
+				<msg>You must enter or select a valid UOM code for each item!</msg>
+				<severity>E</severity>
+				<order>120</order>
+				<enabled>N</enabled>
+				<fieldname>RequisitionLine_uomCode</fieldname>
+				<link><![CDATA[javascript: doSubmit('requests/req_items.jsp', 'RequisitionLineRetrieveByHeader'); void(0);]]></link>
+			</rule>
+			<rule>
+				<filename>commodity-new.xml</filename>
+				<alias>commodity</alias>
+				<msg>You must enter or select a valid Commodity code for each item!
+				</msg>
+				<severity>E</severity>
+				<order>130</order>
+				<enabled>N</enabled>
+				<new>true</new>
+				<fieldname>RequisitionLine_commodity</fieldname>
+				<link><![CDATA[javascript: doSubmit('requests/req_items.jsp', 'RequisitionLineRetrieveByHeader'); void(0);]]></link>
+			</rule>
+			<rule>
+				<filename>department.xml</filename>
+				<alias>department</alias>
+				<msg>You must enter or select a valid Department code!</msg>
+				<severity>E</severity>
+				<order>200</order>
+				<enabled>N</enabled>
+				<fieldname>RequisitionHeader_departmentCode</fieldname>
+				<link><![CDATA[javascript: doSubmit('requests/req_general_info.jsp', 'RequisitionHeaderRetrieveById'); void(0);]]></link>
+			</rule>
+			<rule>
+				<filename>requisitioner.xml</filename>
+				<alias>requisitioner</alias>
+				<msg>You must enter or select a valid Requisitioner code!</msg>
+				<severity>E</severity>
+				<order>210</order>
+				<enabled>N</enabled>
+				<process>HEADER_GENERAL_INFO</process>
+				<fieldname>RequisitionHeader_requisitionerCode</fieldname>
+				<link><![CDATA[javascript: doSubmit('requests/req_general_info.jsp', 'RequisitionHeaderRetrieveById'); void(0);]]></link>
+			</rule>
+			<rule>
+				<filename>has-accounts.xml</filename>
+				<alias>Has Accounts</alias>
+				<msg>You must enter accounts on the Account Information!</msg>
+				<severity>E</severity>
+				<order>300</order>
+				<enabled>Y</enabled>
+				<link><![CDATA[javascript: doSubmit('requests/req_review.jsp', 'RequisitionRetrieve'); void(0);]]></link>
+			</rule>
+			<rule>
+				<filename>srr-account-valid.xml</filename>
+				<alias>Valid Account</alias>
+				<msg>Invalid organization account project combination.</msg>
+				<severity>W</severity>
+				<order>325</order>
+				<enabled>N</enabled>
+				<link><![CDATA[javascript: doSubmit('requests/req_accounts.jsp', 'AccountRetrieveByLine'); void(0);]]></link>
+			</rule>
+			<rule>
+				<filename>srr-account-valid-sp.xml</filename>
+				<alias>Valid Account</alias>
+				<msg>Invalid organization account project combination.</msg>
+				<severity>E</severity>
+				<order>325</order>
+				<enabled>Y</enabled>
+				<link><![CDATA[javascript: doSubmit('requests/req_accounts.jsp', 'AccountRetrieveByLine'); void(0);]]></link>
+			</rule>
+			<rule>
+				<filename>req-subtotal.xml</filename>
+				<alias>req_subtotal</alias>
+				<msg>The Subtotal of the request must be greater than zero!</msg>
+				<severity>E</severity>
+				<order>350</order>
+				<enabled>N</enabled>
+				<fieldname>RequisitionHeader_subtotal</fieldname>
+				<link><![CDATA[javascript: doSubmit('requests/req_totals.jsp', 'RequisitionHeaderRetrieveById'); void(0);]]></link>
+			</rule>
+			<rule>
+				<filename>req-line-vendor-equals.xml</filename>
+				<alias>Requisition line VendorId</alias>
+				<msg>All Items must be requested from the same Vendor.</msg>
+				<severity>E</severity>
+				<order>400</order>
+				<enabled>N</enabled>
+				<link><![CDATA[javascript: doSubmit('requests/req_items.jsp', 'RequisitionLineRetrieveByHeader'); void(0);]]></link>
+			</rule>
+			<rule>
+				<filename>req-line-check-vinimaya-itemcloned.xml</filename>
+				<alias>Vinimaya Items Cloned</alias>
+				<msg><![CDATA[Please delete the old VINIMAYA items and add them by punching out to VINIMAYA again.]]></msg>
+				<severity>E</severity>
+				<order>650</order>
+				<enabled>Y</enabled>
+				<link><![CDATA[javascript: doSubmit('requests/req_items.jsp', 'RequisitionLineRetrieveByHeader'); void(0);]]></link>
+			</rule>
+			<rule>
+				<filename>req-line-check-inventory-itemcloned.xml</filename>
+				<alias>Validate Inventory Item Cloned</alias>
+				<msg>The inventory item is inactive. Please delete this item and select a new inventory item.</msg>
+				<severity>E</severity>
+				<order>650</order>
+				<enabled>Y</enabled>
+				<link><![CDATA[javascript: doSubmit('requests/req_items.jsp', 'RequisitionLineRetrieveByHeader'); void(0);]]></link>
+			</rule>
+			<rule>
+				<filename>req-line-check-catalog-itemcloned.xml</filename>
+				<alias>Validate Catalog Item Cloned</alias>
+				<msg>The catalog item is inactive. Please delete this item and select a new catalog item.</msg>
+				<severity>E</severity>
+				<order>650</order>
+				<enabled>Y</enabled>
+				<link><![CDATA[javascript: doSubmit('requests/req_items.jsp', 'RequisitionLineRetrieveByHeader'); void(0);]]></link>
+			</rule>
+			<rule>
+				<filename>inspection-std-valid-permanent.xml</filename>
+				<alias>Inspection Std Validation</alias>
+				<msg>Please enter a valid Standard Inspection Code.</msg>
+				<severity>E</severity>
+				<order>650</order>
+				<enabled>Y</enabled>
+				<link><![CDATA[javascript: doSubmit('requests/req_items.jsp', 'RequisitionLineRetrieveByHeader'); void(0);]]></link>
+			</rule>
+			<rule>
+				<filename>req-line-procurement-equals.xml</filename>
+				<alias>Requisition line Procurement Level</alias>
+				<msg>The procurement level must be the same on the head and lines.</msg>
+				<severity>E</severity>
+				<order>450</order>
+				<enabled>Y</enabled>
+				<link><![CDATA[javascript: doSubmit('requests/req_items.jsp', 'RequisitionLineRetrieveByHeader'); void(0);]]></link>
+			</rule>
+			<rule>
+				<filename>req-amount-validations.xml</filename>
+				<alias>Requisition Amount validation</alias>
+				<msg>Please ensure that you have selected the right commodity / account number.</msg>
+				<severity>W</severity>
+				<order>500</order>
+				<enabled>N</enabled>
+				<link><![CDATA[javascript: doSubmit('requests/req_items.jsp', 'RequisitionLineRetrieveByHeader'); void(0);]]></link>
+			</rule>
+			<rule>
+				<filename>service-request-check.xml</filename>
+				<alias>Requisition STR/End User</alias>
+				<msg>You must enter a valid STR/End User for service type requests</msg>
+				<severity>E</severity>
+				<order>550</order>
+				<enabled>Y</enabled>
+				<link><![CDATA[javascript: doSubmit('requests/req_general_info.jsp', 'RequisitionHeaderRetrieveById'); void(0);]]></link>
+			</rule>
+			<rule>
+				<filename>inspection-criteria-msr.xml</filename>
+				<alias>Inspection Criteria</alias>
+				<msg>You must enter an Inspection Criteria for each line if Procurement Level is 1 or 2.</msg>
+				<severity>E</severity>
+				<order>650</order>
+				<enabled>Y</enabled>
+				<link><![CDATA[javascript: doSubmit('requests/req_items.jsp', 'RequisitionLineRetrieveByHeader'); void(0);]]></link>
+			</rule>
+			<rule>
+				<filename>inspection-criteria-req.xml</filename>
+				<alias>Inspection CriteriaReq</alias>
+				<msg>You must enter an Inspection Criteria for each line if Procurement Level is 1 or 2.</msg>
+				<severity>W</severity>
+				<order>653</order>
+				<enabled>Y</enabled>
+				<link><![CDATA[javascript: doSubmit('requests/req_items.jsp', 'RequisitionLineRetrieveByHeader'); void(0);]]></link>
+			</rule>
+			<rule>
+				<filename>procurement-level-3-item.xml</filename>
+				<alias>validProcurementLevel3Item</alias>
+				<msg>Procurement Level 3 items can not have Inspection details attached to them.</msg>
+				<severity>E</severity>
+				<order>655</order>
+				<enabled>Y</enabled>
+				<link><![CDATA[javascript: doSubmit('requests/req_items.jsp', 'RequisitionLineRetrieveByHeader'); void(0);]]></link>
+			</rule>
+			<rule>
+				<filename>chemical-item-attachment-msr.xml</filename>
+				<alias>Chemical Number</alias>
+				<msg>You must attach a document OSR_1_180 to the item that contains a chemical item number.</msg>
+				<severity>E</severity>
+				<order>650</order>
+				<enabled>Y</enabled>
+				<link><![CDATA[javascript: doSubmit('requests/req_items.jsp', 'RequisitionLineRetrieveByHeader'); void(0);]]></link>
+			</rule>
+			<rule>
+				<filename>kit-location-msr.xml</filename>
+				<alias>Kit Location</alias>
+				<msg>If the KIT indicator is selected, the KIT/INVENTORY location must begin with KIT.</msg>
+				<severity>E</severity>
+				<order>700</order>
+				<enabled>Y</enabled>
+				<fieldname>RequisitionHeader_itemLocation</fieldname>
+				<link><![CDATA[javascript: doSubmit('requests/req_general_info.jsp', 'RequisitionHeaderRetrieveById'); void(0);]]></link>
+			</rule>
+			<rule>
+				<filename>is-catalog-chemical.xml</filename>
+				<alias>SRNS Chemical or Chem-No-Stock</alias>
+				<msg>You must enter a MSDS # and a Chemical Item #.</msg>
+				<severity>E</severity>
+				<order>750</order>
+				<enabled>Y</enabled>
+				<link><![CDATA[javascript: doSubmit('requests/req_items.jsp', 'RequisitionLineRetrieveByHeader'); void(0);]]></link>
+			</rule>
+			<rule>
+				<filename>procurement-level-ER.xml</filename>
+				<alias>Procurement Level</alias>
+				<msg>You must enter an Engineer.</msg>
+				<severity>E</severity>
+				<order>800</order>
+				<enabled>Y</enabled>
+				<fieldname>RequisitionHeader_buyer</fieldname>
+				<link><![CDATA[javascript: doSubmit('requests/req_general_info.jsp', 'RequisitionHeaderRetrieveById'); void(0);]]></link>
+			</rule>
+			<rule>
+				<filename>procurement-spec-warning.xml</filename>
+				<alias>Procurement Spec</alias>
+				<msg>You left Procurement Spec empty on Procurement Level 1 item(s).</msg>
+				<severity>W</severity>
+				<order>850</order>
+				<enabled>Y</enabled>
+				<link><![CDATA[javascript: doSubmit('requests/req_items.jsp', 'RequisitionLineRetrieveByHeader'); void(0);]]></link>
+			</rule>
+			<rule>
+				<filename>traceability-A-or-B.xml</filename>
+				<alias>Traceability</alias>
+				<msg>You must make Traceability either A or B for Procurement Level 1 or 2 items.</msg>
+				<severity>E</severity>
+				<order>900</order>
+				<enabled>Y</enabled>
+				<link><![CDATA[javascript: doSubmit('requests/req_items.jsp', 'RequisitionLineRetrieveByHeader'); void(0);]]></link>
+			</rule>
+			<rule>
+				<filename>traceability-A-or-B-msr.xml</filename>
+				<alias>TraceabilityMSR</alias>
+				<msg>You must make Traceability either A or B for Procurement Level 1 items.</msg>
+				<severity>E</severity>
+				<order>925</order>
+				<enabled>Y</enabled>
+				<link><![CDATA[javascript: doSubmit('requests/req_items.jsp', 'RequisitionLineRetrieveByHeader'); void(0);]]></link>
+			</rule>
+			<rule>
+				<filename>procurement-type-RI.xml</filename>
+				<alias>Procurement Type</alias>
+				<msg>You must make Inspection Type RI, RIPDT, RISI, or RISIPDT for Procurement Level 1 or 2 items.</msg>
+				<severity>E</severity>
+				<order>950</order>
+				<enabled>Y</enabled>
+				<link><![CDATA[javascript: doSubmit('requests/req_items.jsp', 'RequisitionLineRetrieveByHeader'); void(0);]]></link>
+			</rule>
+			<rule>
+				<filename>procurement-type-RI-msr.xml</filename>
+				<alias>Procurement TypeMSR</alias>
+				<msg>You must make Inspection Type RI, RIPDT, RISI, or RISIPDT for Procurement Level 1 items.</msg>
+				<severity>E</severity>
+				<order>955</order>
+				<enabled>Y</enabled>
+				<link><![CDATA[javascript: doSubmit('requests/req_items.jsp', 'RequisitionLineRetrieveByHeader'); void(0);]]></link>
+			</rule>
+			<rule>
+				<filename>material-location.xml</filename>
+				<alias>Material Location</alias>
+				<msg>You must have a material location for all non NA Mark/Tag items.</msg>
+				<severity>E</severity>
+				<order>960</order>
+				<enabled>Y</enabled>
+				<link><![CDATA[javascript: doSubmit('requests/req_items.jsp', 'RequisitionLineRetrieveByHeader'); void(0);]]></link>
+			</rule>
+			<rule>
+				<filename>mark-comment.xml</filename>
+				<alias>Mark Comment</alias>
+				<msg>You must attach a comment starting with PMT_MARK for Marked items.</msg>
+				<severity>E</severity>
+				<order>970</order>
+				<enabled>Y</enabled>
+				<link><![CDATA[javascript: doSubmit('requests/req_items.jsp', 'RequisitionLineRetrieveByHeader'); void(0);]]></link>
+			</rule>
+			<rule>
+				<filename>tag-comment.xml</filename>
+				<alias>Tag Comment</alias>
+				<msg>You must attach a comment starting with RMT_TAG for all Tagged items.</msg>
+				<severity>E</severity>
+				<order>980</order>
+				<enabled>Y</enabled>
+				<link><![CDATA[javascript: doSubmit('requests/req_items.jsp', 'RequisitionLineRetrieveByHeader'); void(0);]]></link>
+			</rule>
+			<rule>
+				<filename>htag-comment.xml</filename>
+				<alias>Tag HR Comment</alias>
+				<msg>You must attach a comment starting with RMT_HIGHRISK for all Tag HR items.</msg>
+				<severity>E</severity>
+				<order>990</order>
+				<enabled>Y</enabled>
+				<link><![CDATA[javascript: doSubmit('requests/req_items.jsp', 'RequisitionLineRetrieveByHeader'); void(0);]]></link>
+			</rule>
+			<rule>
+				<filename>valid-AMS.xml</filename>
+				<alias>Valid AMS</alias>
+				<msg>You must not leave AMS or AMS # empty for any account line on Tag/Tag HR items, otherwise the MSR Level account lines must not be left empty.</msg>
+				<severity>E</severity>
+				<order>1000</order>
+				<enabled>Y</enabled>
+				<link><![CDATA[javascript: doSubmit('requests/req_items.jsp', 'RequisitionLineRetrieveByHeader'); void(0);]]></link>
+			</rule>
+			<rule>
+				<filename>traceability-comment.xml</filename>
+				<alias>Traceability Comment</alias>
+				<msg>You must attach a comment starting with R_T for Traceability A or B items.</msg>
+				<severity>E</severity>
+				<order>1010</order>
+				<enabled>Y</enabled>
+				<link><![CDATA[javascript: doSubmit('requests/req_items.jsp', 'RequisitionLineRetrieveByHeader'); void(0);]]></link>
+			</rule>
+			<rule>
+				<filename>shelf-life-comment.xml</filename>
+				<alias>Shelf Life Comment</alias>
+				<msg>You must attach a comment starting with RSL_ for shelflife items.</msg>
+				<severity>E</severity>
+				<order>1020</order>
+				<enabled>Y</enabled>
+				<link><![CDATA[javascript: doSubmit('requests/req_items.jsp', 'RequisitionLineRetrieveByHeader'); void(0);]]></link>
+			</rule>
+			<rule>
+				<filename>procurement-level-not-ER-after-530.xml</filename>
+				<alias>Procurement Level not ER</alias>
+				<msg>Procurement Level cannot be ER on General Info or items if there is no engineer or status after Planning Approved.</msg>
+				<severity>E</severity>
+				<order>1030</order>
+				<enabled>Y</enabled>
+				<link><![CDATA[javascript: doSubmit('requests/req_items.jsp', 'RequisitionLineRetrieveByHeader'); void(0);]]></link>
+			</rule>
+			<rule>
+				<filename>valid-functional-class.xml</filename>
+				<alias>Valid Functional Class</alias>
+				<msg>Functional Class cannot be ER on General Info or items if there is no engineer or status after Planning Approved.</msg>
+				<severity>E</severity>
+				<order>1040</order>
+				<enabled>Y</enabled>
+				<link><![CDATA[javascript: doSubmit('requests/req_items.jsp', 'RequisitionLineRetrieveByHeader'); void(0);]]></link>
+			</rule>
+			<rule>
+				<filename>affliate-no.xml</filename>
+				<alias>SRR Affiliate No</alias>
+				<msg>One or more of the vendors are SRR Affiliates.</msg>
+				<severity>E</severity>
+				<order>1050</order>
+				<enabled>Y</enabled>
+				<link><![CDATA[javascript: doSubmit('requests/req_items.jsp', 'RequisitionLineRetrieveByHeader'); void(0);]]></link>
+			</rule>
+			<rule>
+				<filename>affliate-yes.xml</filename>
+				<alias>SRR Affiliate Yes</alias>
+				<msg>One or more of the vendors are not SRR Affiliates.</msg>
+				<severity>E</severity>
+				<order>1060</order>
+				<enabled>Y</enabled>
+				<link><![CDATA[javascript: doSubmit('requests/req_items.jsp', 'RequisitionLineRetrieveByHeader'); void(0);]]></link>
+			</rule>
+			<rule>
+				<filename>valid-request-cat-attachment.xml</filename>
+				<alias>Request Cat attachment</alias>
+				<msg>You must attach a document starting with OSR_ when Request Category is Staff Augmentation.</msg>
+				<severity>E</severity>
+				<order>1070</order>
+				<enabled>Y</enabled>
+				<link><![CDATA[javascript: doSubmit('requests/req_attachments.jsp', 'DocAttachmentRetrieveByHeader'); void(0);]]></link>
+			</rule>
+			<rule>
+				<filename>udf4-valid-attachment.xml</filename>
+				<alias>UDF 4 validate attachment title</alias>
+				<msg>If On Site Visit Requires is On Site Manual, then you must attach the documents that begins with SRID_ and SAFETY_</msg>
+				<severity>E</severity>
+				<order>1080</order>
+				<enabled>Y</enabled>
+				<link><![CDATA[javascript: doSubmit('requests/req_attachments.jsp', 'DocAttachmentRetrieveByHeader'); void(0);]]></link>
+			</rule>
+			<rule>
+				<filename>kit-valid-location.xml</filename>
+				<alias>Kit Valid Location</alias>
+				<msg>If set as a kit, then the Kit/Inventory Location value must start with KIT.</msg>
+				<severity>E</severity>
+				<order>1090</order>
+				<enabled>N</enabled>
+				<link><![CDATA[javascript: doSubmit('requests/req_general_info.jsp', 'RequisitionHeaderRetrieveById'); void(0);]]></link>
+			</rule>
+			<rule>
+				<filename>budget-ceiling-p.xml</filename>
+				<alias>Budget Ceiling</alias>
+				<msg>The Budget Ceiling must be greater than or equal to Requisition total</msg>
+				<severity>E</severity>
+				<order>1100</order>
+				<enabled>Y</enabled>
+				<link><![CDATA[javascript: doSubmit('requests/req_totals.jsp', 'RequisitionHeaderRetrieveById'); void(0);]]></link>
+			</rule>
+			<rule>
+				<filename>valid-vendor-check-req.xml</filename>
+				<alias>Check Req Only Supplier</alias>
+				<msg>Suppliers must not be Check Req Only Supplier and cannot start with an E.</msg>
+				<severity>E</severity>
+				<order>1110</order>
+				<enabled>Y</enabled>
+				<link><![CDATA[javascript: doSubmit('requests/req_items.jsp', 'RequisitionLineRetrieveByHeader'); void(0);]]></link>
+			</rule>
+			<rule>
+				<filename>valid-security-clearance.xml</filename>
+				<fieldsToValidate>RQ05</fieldsToValidate>
+				<alias>Security Clearance</alias>
+				<msg>If Security Clearance is required, then you must attach a document titled DOE_F470.1</msg>
+				<severity>E</severity>
+				<order>1120</order>
+				<enabled>Y</enabled>
+				<link><![CDATA[javascript: doSubmit('requests/req_attachments.jsp', 'DocAttachmentRetrieveByHeader'); void(0);]]></link>
+			</rule>
+			<rule>
+				<filename>valid-engineerid.xml</filename>
+				<alias>Engineer ID</alias>
+				<msg>If Functional Class is Safety Significant, Safety Class, or Engineering Review and MSR Type does not being with CONST, there must be an Engineer.</msg>
+				<severity>E</severity>
+				<order>1130</order>
+				<enabled>Y</enabled>
+				<link><![CDATA[javascript: doSubmit('requests/req_general_info.jsp', 'RequisitionHeaderRetrieveById'); void(0);]]></link>
+			</rule>
+			<rule>
+				<filename>valid-before-sourcing.xml</filename>
+				<alias>Sourcing Values</alias>
+				<msg>Before Sourcing an MSR, Procurement Level and Functional Class can not equal Engineer Review.</msg>
+				<severity>E</severity>
+				<order>1135</order>
+				<enabled>Y</enabled>
+				<link><![CDATA[javascript: doSubmit('requests/req_general_info.jsp', 'RequisitionHeaderRetrieveById'); void(0);]]></link>
+			</rule>
+			<rule>
+				<filename>ac-04-check.xml</filename>
+				<alias>AMS #</alias>
+				<msg>If AMS# is not null, AMS Name cannot be null.</msg>
+				<severity>E</severity>
+				<order>1140</order>
+				<enabled>Y</enabled>
+				<link><![CDATA[javascript: doSubmit('requests/req_accounts.jsp', 'AccountRetrieveByLine'); void(0);]]></link>
+			</rule>
+			<rule>
+				<filename>ac-04ln-check.xml</filename>
+				<alias>AMS #</alias>
+				<msg>If AMS# is not null, AMS Name cannot be null for the account on the line item.</msg>
+				<severity>E</severity>
+				<order>1145</order>
+				<enabled>Y</enabled>
+				<link><![CDATA[javascript: doSubmit('requests/req_items.jsp', 'RequisitionLineRetrieveByHeader'); void(0);]]></link>
+			</rule>
+			<rule>
+				<filename>ac-05-check.xml</filename>
+				<alias>AMS Name</alias>
+				<msg>If AMS Name is not null, AMS # cannot be null.</msg>
+				<severity>E</severity>
+				<order>1150</order>
+				<enabled>Y</enabled>
+				<link><![CDATA[javascript: doSubmit('requests/req_accounts.jsp', 'AccountRetrieveByLine'); void(0);]]></link>
+			</rule>
+			<rule>
+				<filename>ac-05ln-check.xml</filename>
+				<alias>AMS Name</alias>
+				<msg>If AMS Name is not null, AMS # cannot be null for the account on the line item.</msg>
+				<severity>E</severity>
+				<order>1155</order>
+				<enabled>Y</enabled>
+				<link><![CDATA[javascript: doSubmit('requests/req_items.jsp', 'RequisitionLineRetrieveByHeader'); void(0);]]></link>
+			</rule>
+			<rule>
+				<filename>req-ac01ln-mv.xml</filename>
+				<alias>Org ID</alias>
+				<msg>You must enter/select a valid Org ID for every line item.</msg>
+				<severity>E</severity>
+				<order>160</order>
+				<enabled>Y</enabled>
+				<link><![CDATA[javascript: doSubmit('requests/req_items.jsp', 'RequisitionLineRetrieveByHeader'); void(0);]]></link>
+			</rule>
+			<rule>
+				<filename>req-ac02ln-mv.xml</filename>
+				<alias>Account ID</alias>
+				<msg>You must enter/select a valid Account ID for every line item.</msg>
+				<severity>E</severity>
+				<order>170</order>
+				<enabled>Y</enabled>
+				<link><![CDATA[javascript: doSubmit('requests/req_items.jsp', 'RequisitionLineRetrieveByHeader'); void(0);]]></link>
+			</rule>
+			<rule>
+				<filename>req-ac03ln-mv.xml</filename>
+				<alias>Project ID</alias>
+				<msg>You must enter/select a valid Project ID for every line item.</msg>
+				<severity>E</severity>
+				<order>180</order>
+				<enabled>Y</enabled>
+				<link><![CDATA[javascript: doSubmit('requests/req_items.jsp', 'RequisitionLineRetrieveByHeader'); void(0);]]></link>
+			</rule>
+			<rule>
+				<filename>req-ac04ln-v.xml</filename>
+				<alias>AMS Name</alias>
+				<msg>You must enter/select a valid AMS Name for every line item.</msg>
+				<severity>E</severity>
+				<order>190</order>
+				<enabled>Y</enabled>
+				<link><![CDATA[javascript: doSubmit('requests/req_items.jsp', 'RequisitionLineRetrieveByHeader'); void(0);]]></link>
+			</rule>
+			<rule>
+				<filename>req-ac05ln-v.xml</filename>
+				<alias>AMS No</alias>
+				<msg>You must enter/select a valid AMS # for every line item.</msg>
+				<severity>E</severity>
+				<order>200</order>
+				<enabled>Y</enabled>
+				<link><![CDATA[javascript: doSubmit('requests/req_items.jsp', 'RequisitionLineRetrieveByHeader'); void(0);]]></link>
+			</rule>
+			<rule>
+				<filename>is-valid-fpe-or-admin-check-request.xml</filename>
+				<alias>FPE</alias>
+				<msg>That is not a valid FPE</msg>
+				<severity>E</severity>
+				<order>200</order>
+				<enabled>Y</enabled>
+				<link><![CDATA[javascript: doSubmit('requests/req_general_info.jsp', 'RequisitionHeaderRetrieveById'); void(0);]]></link>
+			</rule>
+		</save>
+	</validations>
+</validation-rules>
+

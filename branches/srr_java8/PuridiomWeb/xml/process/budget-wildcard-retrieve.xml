@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="BudgetWildCard" connection-type="Connection-Required">
+  <activities>
+    <activity synchronous="true" continue-on-failure="false" name="budgetWildCardRetrieve">
+		<rule-filename>is-account-budget-module-active</rule-filename>
+		<task synchronous="true" continue-on-failure="false" name="wildcardList">
+			<task-object-name>com.tsa.puridiom.budgetcenter.tasks.BudgetCenterRetrieveWildCards</task-object-name>
+			<post-action></post-action>
+		</task>
+    </activity>
+  </activities>
+</process>

@@ -1,0 +1,161 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping>
+
+<!--
+    Created by Middlegen Hibernate plugin
+
+    http://boss.bekk.no/boss/middlegen/
+    http://hibernate.sourceforge.net/
+-->
+
+<class
+    name="com.tsa.puridiom.entity.ShieldAdvancedView"
+    table="SHIELD_ADVANCED_VIEW"
+>
+    <id
+        name="requisitionNumber"
+        type="java.lang.String"
+        column="REQUISITION_NUMBER"
+        length="20"
+    >
+        <generator class="assigned" />
+    </id>
+    <property
+        name="requisitionDate"
+        type="java.sql.Timestamp"
+        column="REQUISITION_DATE"
+        length="7"
+    />
+    <property
+        name="poNumber"
+        type="java.lang.String"
+        column="PO_NUMBER"
+        unique="true"
+        length="20"
+    />
+    <property
+        name="releaseNumber"
+        type="java.math.BigDecimal"
+        column="RELEASE_NUMBER"
+        unique="true"
+        length="15"
+    />
+    <property
+        name="revisionNumber"
+        type="java.math.BigDecimal"
+        column="REVISION_NUMBER"
+        unique="true"
+        length="4"
+    />
+    <property
+        name="poDate"
+        type="java.util.Date"
+        column="PO_DATE"
+        length="7"
+    />
+    <property
+        name="requisitionerCode"
+        type="java.lang.String"
+        column="REQUISITIONER_CODE"
+        length="15"
+    />
+    <property
+        name="vendorName"
+        type="java.lang.String"
+        column="VENDOR_NAME"
+        length="40"
+    />
+    <property
+        name="buyerCode"
+        type="java.lang.String"
+        column="BUYER_CODE"
+        length="15"
+    />
+    <property
+        name="status"
+        type="java.lang.String"
+        column="STATUS"
+        length="4"
+    />
+    <property
+        name="fld1"
+        type="java.lang.String"
+        column="FLD_1"
+        length="50"
+    />
+    <property
+        name="fld2"
+        type="java.lang.String"
+        column="FLD_2"
+        length="50"
+    />
+    <property
+        name="fld3"
+        type="java.lang.String"
+        column="FLD_3"
+        length="50"
+    />
+    <property
+        name="fld4"
+        type="java.lang.String"
+        column="FLD_4"
+        length="50"
+    />
+    <property
+        name="total"
+        type="java.math.BigDecimal"
+        column="TOTAL"
+        length="15"
+    />
+    <property
+        name="icHistory"
+        type="java.math.BigDecimal"
+        column="IC_HISTORY"
+        not-null="true"
+        length="22"
+    />
+    <property
+        name="internalComments"
+        type="java.lang.String"
+        column="INTERNAL_COMMENTS"
+        length="255"
+    />
+    <property
+        name="buyerRemarks"
+        type="java.lang.String"
+        column="BUYER_REMARKS"
+        length="90"
+    />
+    <property
+        name="currencyCode"
+        type="java.lang.String"
+        column="CURRENCY_CODE"
+        length="15"
+    />
+    <property
+        name="currencyFactor"
+        type="java.math.BigDecimal"
+        column="CURRENCY_FACTOR"
+        length="15"
+    />
+    <property
+        name="fiscalYear"
+        type="java.lang.String"
+        column="FISCAL_YEAR"
+        length="4"
+    />
+    <property
+        name="remark"
+        type="java.lang.String"
+        column="REMARK"
+        length="255"
+    />
+
+    <!-- associations -->
+
+</class>
+</hibernate-mapping>

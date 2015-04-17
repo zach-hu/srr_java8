@@ -1,0 +1,39 @@
+<browse_stdcomment>
+	<columns>
+		<c_checkbox>
+			<label>brw-select</label>
+			<type>Checkbox</type>
+			<size>8</size>
+			<selectsql>N</selectsql>
+			<store-request-value>Y</store-request-value>
+		</c_checkbox>
+		<StdComment_commentId>
+			<label>commentid</label>
+			<sort>A</sort>
+			<size>15</size>
+			<hidden-input>Y</hidden-input>
+			<key>Y</key>
+		</StdComment_commentId>
+		<StdComment_commentTitle>
+			<label>brw-title</label>
+			<size>20</size>
+		</StdComment_commentTitle>
+		<StdComment_commentPrint>
+			<label>print</label>
+			<size>6</size>
+		</StdComment_commentPrint>
+		<StdComment_commentBold>
+			<label>bold</label>
+			<size>6</size>
+		</StdComment_commentBold>
+		<DocText_stdText>
+			<label>brw-comment</label>
+			<size>45</size>
+		</DocText_stdText>
+	</columns>
+<sqlfrom>StdComment as StdComment, DocText as DocText</sqlfrom>
+<sqlwhere><![CDATA[ (StdComment.icText = DocText.icText) and (StdComment.status <> '03') ]]></sqlwhere>
+<sqlorderby>StdComment.commentId ASC</sqlorderby>
+<pagesize>10</pagesize>
+<title>Standard Comments</title>
+</browse_stdcomment>

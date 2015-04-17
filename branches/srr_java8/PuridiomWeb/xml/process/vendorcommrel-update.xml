@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="vendorcommrel-update" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="vendorCommRelUpdate">
+			<task synchronous="true" continue-on-failure="false" name="vendorCommRelDelete">
+				<task-object-name>com.tsa.puridiom.vendorcommrel.tasks.VendorCommRelDeleteByVendor</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="vendorCommRelList">
+				<task-object-name>com.tsa.puridiom.vendorcommrel.tasks.VendorCommRelAddList</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="updateVendorActivity">
+			<rule-filename>is-inscategorylevel-active.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="vendor">
+				<task-object-name>com.tsa.puridiom.vendor.tasks.VendorRetrieveById</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="vendor">
+				<task-object-name>com.tsa.puridiom.vendor.tasks.VendorSetValues</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="vendorUpdate">
+				<task-object-name>com.tsa.puridiom.vendor.tasks.VendorUpdate</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

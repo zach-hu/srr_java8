@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="BuyerData" connection-type="Connection-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="requisitioner">
+			<rule-filename>is-user-requisitioner.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="requisitionActions">
+				<task-object-name>com.tsa.puridiom.graphs.tasks.RequisitionerReqCountDataByDate</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="spendByCommodity">
+				<rule-filename check-for-false="true">is-user-buyer.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.graphs.tasks.RequestsByCommodity</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="buyer">
+			<rule-filename>is-user-buyer.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="rfqsbystatus">
+				<task-object-name>com.tsa.puridiom.graphs.tasks.BuyerRfqCountDataByDate</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="spendBySupplier">
+				<task-object-name>com.tsa.puridiom.graphs.tasks.SpendBySupplier</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="spendByCommodity">
+				<task-object-name>com.tsa.puridiom.graphs.tasks.SpendByCommodity</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="spendByDepartment">
+				<task-object-name>com.tsa.puridiom.graphs.tasks.SpendByDepartment</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

@@ -1,0 +1,27 @@
+<r-app-extrul>
+	<columns>
+		<ApprovalLog_id_userId>
+			<label>user Id</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</ApprovalLog_id_userId>
+		<ApprovalLog_callForward>
+			<label>Call Forward</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</ApprovalLog_callForward>
+		<AppRulesExt_ruleAction>
+			<label>Rule Action</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</AppRulesExt_ruleAction>
+		<AppRulesExt_routto>
+			<label>Rout To</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</AppRulesExt_routto>
+	</columns>
+<sqlfrom> ApprovalLog as ApprovalLog ,AppRulesExt as AppRulesExt </sqlfrom>
+<sqlwhere><![CDATA[(ApprovalLog.ruleAction = AppRulesExt.ruleAction )]]></sqlwhere>
+<title>Approval Extended Rules</title>
+</r-app-extrul>

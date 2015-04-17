@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="ExecutAlert" connection-type="Connection-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="executeAlert">
+			<task synchronous="true" continue-on-failure="false" name="processName">
+				<task-object-name>com.tsa.puridiom.alerts.tasks.AlertGetProcessFromType</task-object-name>
+				<post-action />
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="processfromtype">
+				<task-object-name>com.tsa.puridiom.alerts.tasks.AlertsExecuteProcessMessage</task-object-name>
+				<post-action />
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="SendQueue_messagetext">
+				<task-object-name>com.tsa.puridiom.alerts.tasks.AlertsGetMessage</task-object-name>
+				<post-action />
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="SendQueue_subject">
+				<task-object-name>com.tsa.puridiom.alerts.tasks.AlertsGetSubject</task-object-name>
+				<post-action />
+	 	    </task>
+			<task synchronous="true" continue-on-failure="false" name="SendQueue_sendto">
+				<task-object-name>com.tsa.puridiom.alerts.tasks.AlertsGetSendTo</task-object-name>
+				<post-action />
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="sendQueue">
+				<task-object-name>com.tsa.puridiom.alerts.tasks.AlertsSetSendQueue</task-object-name>
+				<post-action />
+			</task>
+<!--			<task synchronous="true" continue-on-failure="false" name="exectueAction">
+				<task-object-name>com.tsa.puridiom.alerts.tasks.AlertsExecuteAction</task-object-name>
+				<post-action />
+			</task>-->
+		  </activity>
+	 </activities>
+</process>

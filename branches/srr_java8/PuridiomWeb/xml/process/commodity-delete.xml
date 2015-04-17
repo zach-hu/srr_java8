@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="commodityDelete" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="deleteCommodity">
+			<task synchronous="true" continue-on-failure="false" name="commodity">
+				<task-object-name>com.tsa.puridiom.commodity.tasks.CommodityDeleteById</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="removeCommodityFromCache">
+				<task-object-name>com.tsa.puridiom.commodity.tasks.CommodityRemoveFromCache</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+	</activities>
+</process>

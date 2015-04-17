@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="CommodityRetrieveTree" connection-type="Connection-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="CommodityRetrieveTree">
+			<task synchronous="true" continue-on-failure="false" name="commodityList">
+				<rule-filename>is-commoditytype-nigp.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.commodity.tasks.CommodityRetrieveNIGPTree</task-object-name>
+				<post-action>exitActivity</post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="commodityList">
+				<rule-filename>is-commoditytype-nigp-6.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.commodity.tasks.CommodityRetrieve6DigitNIGPTree</task-object-name>
+				<post-action>exitActivity</post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="commodityList">
+				<rule-filename>is-commoditytype-nigp-11.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.commodity.tasks.CommodityRetrieve11DigitNIGPTree</task-object-name>
+				<post-action>exitActivity</post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="commodityList">
+				<rule-filename>is-commoditytype-unspsc.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.commodity.tasks.CommodityRetrieveUNSPSCTree</task-object-name>
+				<post-action>exitActivity</post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="commodityList">
+				<task-object-name>com.tsa.puridiom.commodity.tasks.CommodityRetrieveTree</task-object-name>
+				<post-action>exitActivity</post-action>
+			</task>
+		</activity>  
+	 </activities> 
+</process>

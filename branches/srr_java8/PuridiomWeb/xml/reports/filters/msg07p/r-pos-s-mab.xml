@@ -1,0 +1,83 @@
+<r-pos-s-mab>
+  <columns>
+		<PoHeader_poNumber>
+			<label>Po Number</label>
+			<type>STRING</type>
+		</PoHeader_poNumber>
+		<PoHeader_poDate>
+			<label>Po Date</label>
+			<type>DATE</type>
+		</PoHeader_poDate>
+		<PoHeader_buyerCode>
+			<label>Buyer Code</label>
+			<type>STRING</type>
+		</PoHeader_buyerCode>
+		<UserProfile_firstName>
+			<label>First Name</label>
+			<type>STRING</type>
+		</UserProfile_firstName>
+		<UserProfile_lastName>
+			<label>Last Name</label>
+			<type>STRING</type>
+		</UserProfile_lastName>
+		<PoHeader_vendorId>
+			<label>Supplier Code</label>
+			<type>STRING</type>
+		</PoHeader_vendorId>
+		<PoHeader_udf1Code>
+            <label>CAP</label>
+            <type>STRING</type>
+            <visible>1</visible>
+        </PoHeader_udf1Code>
+		<Vendor_vendorName>
+			<label>Supplier Name</label>
+			<type>STRING</type>
+		</Vendor_vendorName>
+		<PoHeader_poType>
+			<label>Po Type</label>
+			<type>STRING</type>
+		</PoHeader_poType>
+		<PoHeader_status>
+			<label>Status</label>
+			<type>STATUS</type>
+		</PoHeader_status>
+		<PoHeader_total>
+			<label>Total</label>
+			<type>STRING</type>
+		</PoHeader_total>
+		<PoHeader_releaseNumber>
+			<label>Status</label>
+			<type>STATUS</type>
+		</PoHeader_releaseNumber>
+		<PoHeader_revisionNumber>
+			<label>Status</label>
+			<type>STATUS</type>
+		</PoHeader_revisionNumber>
+		<PoHeader_departmentCode>
+			<label>Department Code</label>
+			<type>STRING</type>
+		</PoHeader_departmentCode>
+		<PoHeader_udf1Code>
+			<label>CAP</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</PoHeader_udf1Code>
+		<!-- <PoHeader_totalNumber>
+			<label>Total Number</label>
+			<type>STRING</type>
+		</PoHeader_totalNumber>
+		<PoHeader_grandTotal>
+			<label>Status</label>
+			<type>STRING</type>
+		</PoHeader_grandTotal> -->
+	</columns>
+  <sqlfrom> PoHeader as PoHeader , UserProfile as UserProfile , Vendor as Vendor </sqlfrom>
+  <sqlwhere><![CDATA[
+  			( PoHeader.status > '3020' ) and
+  			( PoHeader.status < '9020' ) and ( PoHeader.poDate >= :as_baseReportDate ) and
+  			( PoHeader.buyerCode = UserProfile.userId) and
+  			( PoHeader.vendorId = Vendor.vendorId ) and ( PoHeader.lastRevision = 'C' )
+  			]]></sqlwhere>
+  			<sqlorderby>PoHeader.buyerCode, PoHeader.poDate</sqlorderby>
+  <title>Order Activity by Buyer Report</title>
+</r-pos-s-mab>

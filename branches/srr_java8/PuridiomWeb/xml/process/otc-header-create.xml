@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="otc-create" connection-type="New-Transaction">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="createotc">
+			<task synchronous="true" continue-on-failure="false" name="setup">
+				<task-object-name>com.tsa.puridiom.disbheader.tasks.DisbHeaderSetup</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="setup">
+				<task-object-name>com.tsa.puridiom.otcheader.tasks.OtcSetup</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="disbHeader">			
+				<task-object-name>com.tsa.puridiom.disbheader.tasks.DisbHeaderSetValues</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="disbHeader">
+				<task-object-name>com.tsa.puridiom.disbheader.tasks.DisbHeaderAdd</task-object-name>
+			</task>
+		</activity>
+		<!--activity synchronous="true" continue-on-failure="false" name="history">
+		    <task synchronous="true" continue-on-failure="false" name="disbHeaderHistory">			
+				<task-object-name>com.tsa.puridiom.disbheader.history.tasks.DisbHeaderHistory</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="disbLineListHistory">			
+				<task-object-name>com.tsa.puridiom.disbline.history.tasks.DisbursementLineListHistory</task-object-name>
+			</task>
+		</activity-->
+	</activities>
+</process>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="rfqLineDataRetrieve" connection-type="Connection-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="rfqLineRetrieve">
+			<rule-filename>is-rfqline-list-empty</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="rfqLineList">			
+				<task-object-name>com.tsa.puridiom.rfqline.tasks.RfqLineRetrieveByHeader</task-object-name>
+			</task>
+		</activity>	
+		<activity synchronous="true" continue-on-failure="false" name="rfqLineDataRetrieveList">
+			<task synchronous="true" continue-on-failure="false" name="rfqLineList">			
+				<task-object-name>com.tsa.puridiom.rfqline.tasks.RfqLineDataRetrieveList</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="docAttachmentList">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>docattachment-retrieve-by-line.xml</process-filename>
+			</task>
+		</activity>
+	</activities>
+</process>

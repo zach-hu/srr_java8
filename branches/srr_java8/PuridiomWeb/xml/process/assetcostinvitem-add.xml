@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="invItemAdd" connection-type="New-Transaction">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="addAssetCost">
+			<task synchronous="true" continue-on-failure="false" name="assetCost">
+        		<task-object-name>com.tsa.puridiom.assetcost.serv.tasks.AssetCostInventoryCreateSetup</task-object-name>
+      		</task>
+			<task synchronous="true" continue-on-failure="false" name="assetCost">
+        		<task-object-name>com.tsa.puridiom.assetcost.tasks.AssetCostAdd</task-object-name>
+      		</task>
+		</activity>
+	</activities>
+</process>

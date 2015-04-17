@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<r_redco>
+	
+  <columns>
+		<ReceiptHeader_receiptDate>
+			<label>Receipt Date</label>
+			<type>DATE</type>
+		</ReceiptHeader_receiptDate>
+		<ReceiptHeader_receivedBy>
+			<label>Received By</label>
+			<type>STRING</type>
+		</ReceiptHeader_receivedBy>
+		<ReceiptHeader_refNumber>
+			<label>Ref Number</label>
+			<type>STRING</type>
+		</ReceiptHeader_refNumber>
+		<ReceiptHeader_udf1Code>
+			<label>Udf 1 Code</label>
+			<type>STRING</type>
+		</ReceiptHeader_udf1Code>
+		<ReceiptHeader_udf2Code>
+			<label>Udf 2 Code</label>
+			<type>STRING</type>
+		</ReceiptHeader_udf2Code>
+		<ReceiptHeader_quantityReceived>
+			<label>Quantity Received</label>
+			<type>STRING</type>
+		</ReceiptHeader_quantityReceived>
+		<ReceiptHeader_quantityReturned>
+			<label>Quantity Returned</label>
+			<type>STRING</type>
+		</ReceiptHeader_quantityReturned>
+		<ReceiptHeader_inspectionCode>
+			<label>Inspection Code</label>
+			<type>STRING</type>
+		</ReceiptHeader_inspectionCode>
+		<PoLine_quantity>
+			<label>Quantity</label>
+			<type>STRING</type>
+		</PoLine_quantity>
+		<ReceiptHeader_udf4Code>
+			<label>Udf 4 Code</label>
+			<type>STRING</type>
+		</ReceiptHeader_udf4Code>
+		<ReceiptHeader_refRelease>
+			<label>Ref Release</label>
+			<type>STRING</type>
+		</ReceiptHeader_refRelease>
+		<PoLine_departmentCode>
+			<label>Department Code</label>
+			<type>STRING</type>
+		</PoLine_departmentCode>
+		<ReceiptHeader_carrierCode>
+			<label>Carrier Code</label>
+			<type>STRING</type>
+		</ReceiptHeader_carrierCode>
+		<ReceiptHeader_udf3Code>
+			<label>Udf 3 Code</label>
+			<type>STRING</type>
+		</ReceiptHeader_udf3Code>
+	</columns>
+<sqlfrom>ReceiptHeader as ReceiptHeader , PoLine as PoLine</sqlfrom>
+<sqlwhere><![CDATA[( ReceiptHeader.icPoHeader = PoLine.icPoHeader )]]></sqlwhere>
+<title>REC3</title>
+</r_redco>
+

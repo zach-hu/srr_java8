@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="VendorUpdateIclLevel" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="vendorUpdateIclLevelActivity">
+			<task synchronous="true" continue-on-failure="false" name="vendorCommRelList">
+				<task-object-name>com.tsa.puridiom.vendorcommrel.tasks.VendorCommRelRetrieveBy</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="vendorCommRelList">
+				<task-object-name>com.tsa.puridiom.vendor.tasks.VendorUpdateIclLevel</task-object-name>
+			</task>
+		</activity>
+	 </activities>
+</process>

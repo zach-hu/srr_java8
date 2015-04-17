@@ -1,0 +1,67 @@
+<browse_budgettran>
+	<columns>
+		<BudgetTran_tranId>
+			<label>brw-tranId</label>
+			<visible>0</visible>
+			<type>BIGDECIMAL</type>
+			<hidden-input>Y</hidden-input>
+		</BudgetTran_tranId>
+		<BudgetTran_budgetId>
+			<label>budget-id</label>
+			<visible>0</visible>
+			<hidden-input>Y</hidden-input>
+			<type>BIGDECIMAL</type>
+		</BudgetTran_budgetId>
+		<BudgetTran_tranDate>
+			<label>brw-date</label>
+			<type>DATE</type>
+			<visible>1</visible>
+			<size>12</size>
+		</BudgetTran_tranDate>
+		<BudgetTran_owner>
+			<label>brw-lastChangedBy</label>
+			<visible>1</visible>
+		</BudgetTran_owner>
+		<BudgetCenter_budget1>
+			<label>brw-product</label>
+			<visible>1</visible>
+		</BudgetCenter_budget1>
+		<BudgetCenter_budget2>
+			<label>department</label>
+			<visible>1</visible>
+		</BudgetCenter_budget2>
+		<BudgetCenter_budget3>
+			<label>brw-budget-budget3</label>
+			<visible>1</visible>
+		</BudgetCenter_budget3>
+		<BudgetCenter_budget4>
+			<label>commodity</label>
+			<visible>1</visible>
+		</BudgetCenter_budget4>
+		<BudgetTran_preEncumbered>
+			<label>budget-preencumbered</label>
+			<type>DOLLARDECIMAL</type>
+			<visible>1</visible>
+		</BudgetTran_preEncumbered>
+		<BudgetTran_encumbered>
+			<label>budget-encumbered</label>
+			<type>DOLLARDECIMAL</type>
+			<visible>1</visible>
+		</BudgetTran_encumbered>
+		<BudgetTran_expensed>
+			<label>budget-expensed</label>
+			<type>DOLLARDECIMAL</type>
+			<visible>1</visible>
+		</BudgetTran_expensed>
+		<BudgetTran_balance>
+			<label>balance</label>
+			<type>DollarDecimal</type>
+			<visible>1</visible>
+		</BudgetTran_balance>
+	</columns>
+<sqlfrom>BudgetTran as BudgetTran, BudgetCenter as BudgetCenter</sqlfrom>
+<sqlwhere>BudgetTran.budgetId = BudgetCenter.budgetId</sqlwhere>
+<sqlorderby>BudgetTran.tranId DESC</sqlorderby>
+<pagesize>15</pagesize>
+<title>Budget Transaction Log</title>
+</browse_budgettran>

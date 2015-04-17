@@ -1,0 +1,53 @@
+<r_poprj_trck>
+  <columns>
+    <ProjectTrackingView_fld4>
+      <label>Project #</label>
+      <type>STRING</type>
+    </ProjectTrackingView_fld4>
+    <ProjectTrackingView_poNumber>
+      <label>PO Number</label>
+      <type>STRING</type>
+    </ProjectTrackingView_poNumber>
+    <ProjectTrackingView_vendorName>
+      <label>Supplier</label>
+      <type>STRING</type>
+    </ProjectTrackingView_vendorName>
+    <ProjectTrackingView_fld2>
+      <label>Cost Center</label>
+      <type>STRING</type>
+    </ProjectTrackingView_fld2>
+    <ProjectTrackingView_fld1>
+      <label>Account</label>
+      <type>STRING</type>
+    </ProjectTrackingView_fld1>
+    <ProjectTrackingView_awarded>
+      <label>Committed</label>
+      <type>BIGDECIMAL</type>
+    </ProjectTrackingView_awarded>
+    <ProjectTrackingView_spentTodate>
+      <label>Spent To Date</label>
+      <type>BIGDECIMAL</type>
+    </ProjectTrackingView_spentTodate>
+    <ProjectTrackingView_status>
+      <label>PO Status</label>
+      <type>STATUS</type>
+    </ProjectTrackingView_status>
+    <ProjectTrackingView_poDate>
+      <label>PO Date</label>
+      <type>DATE</type>
+    </ProjectTrackingView_poDate>
+    <ProjectTrackingView_appDate>
+      <label>Awarded</label>
+      <type>DATE</type>
+    </ProjectTrackingView_appDate>
+    <PoHeader_currencyCode>
+		<label>Currency Code</label>
+		<type>STRING</type>
+	</PoHeader_currencyCode>
+  </columns>
+<sqlfrom>ProjectTrackingView as ProjectTrackingView, PoHeader as PoHeader</sqlfrom>
+<sqlwhere><![CDATA[(ProjectTrackingView.poNumber = PoHeader.poNumber) and ( ( PoHeader.status = '3030' ) or ( PoHeader.status = '4005' ) or ( PoHeader.status = '4010' ) or ( PoHeader.status = '9010' ) )]]></sqlwhere>
+<sqlorderby></sqlorderby>
+<title>Project Tracking Report</title>
+</r_poprj_trck>
+

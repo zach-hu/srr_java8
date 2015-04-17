@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="accountAddToItem" connection-type="Transaction-Required">
+	<rule-filename check-for-false="true">is-item-accountic-empty.xml</rule-filename>
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="itemAccountUpdate">
+			<task synchronous="true" continue-on-failure="false" name="accountSetup">
+				<task-object-name>com.tsa.puridiom.account.tasks.ItemAccountRetrieveSetup</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="accountList">
+				<task-object-name>com.tsa.puridiom.account.tasks.AccountRetrieveByHeader</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="accountList">
+				<task-object-name>com.tsa.puridiom.requisitionline.tasks.RequisitionLineAccountSetDefaultValues</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="account">
+				<task-object-name>com.tsa.puridiom.account.tasks.ItemAccountSetup</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+	    <activity synchronous="true" continue-on-failure="false" name="itemAccountUpdateProccesNormal">
+			<rule-filename check-for-false="true">is-account-list-empty.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="account">
+				<task-object-name>com.tsa.puridiom.account.tasks.ItemAccountAdd</task-object-name>
+				<post-action>exitProcess</post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="accountAddFromXrefCombo">
+			<rule-filename>is-organization-bly.xml</rule-filename>		
+			<task synchronous="true" continue-on-failure="false" name="itemAccountSetIcAccount">
+				<task-object-name>com.tsa.puridiom.account.tasks.ItemAccountSetIcAccount</task-object-name>
+				<post-action></post-action>
+			</task>
+        	<task synchronous="true" continue-on-failure="false" name="accountAddXrefCombo">
+        		<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+        		<process-filename>account-add-from-xrefcombo.xml</process-filename>
+      		</task>
+		</activity>
+	</activities>
+</process>

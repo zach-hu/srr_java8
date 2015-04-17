@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="retrieveTrackingNumber" connection-type="Connection-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="retrieveTrackingByNumber">
+			<task synchronous="true" continue-on-failure="false" name="retrieveTracking">
+				<task-object-name>com.tsa.puridiom.trackingnumber.tasks.RetrieveTrackingNumber</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="receiptHeader">
+				<rule-filename>is-formtype-rec.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.receiptheader.tasks.ReceiptHeaderRetrieveById</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

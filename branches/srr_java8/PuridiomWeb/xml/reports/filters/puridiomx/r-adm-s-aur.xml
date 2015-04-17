@@ -1,0 +1,50 @@
+<r-adm-s-aur>
+	<columns>
+		<AppRule_id_udf1Code>
+			<label>Entity</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</AppRule_id_udf1Code>
+		
+		<UserProfile_userId>
+			<label>User ID</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</UserProfile_userId>
+		
+		<UserProfile_firstName>
+			<label>First Name</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</UserProfile_firstName>
+		
+		<UserProfile_lastName>
+			<label>Last Name</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</UserProfile_lastName>
+		
+		<AppRule_id_udf2Code>
+			<label>Dept</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</AppRule_id_udf2Code>
+		
+		<AppRule_id_udf3Code>
+			<label>Capital</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</AppRule_id_udf3Code>
+		
+		<AppRule_amount>
+			<label>Rule Amount</label>
+			<type>BIGDECIMAL</type>
+			<visible>1</visible>
+		</AppRule_amount>
+	</columns>
+	
+<sqlfrom>UserProfile as UserProfile, AppRule as AppRule</sqlfrom>
+<sqlwhere><![CDATA[UserProfile.userId = AppRule.id.userId]]></sqlwhere>
+<sqlorderby>AppRule.id.udf1Code</sqlorderby>
+<title>Approval User Rules</title>
+</r-adm-s-aur>

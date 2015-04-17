@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="corpExpEmailProcess" connection-type="Connection-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="corpExpEmailParser">
+			<task synchronous="true" continue-on-failure="false" name="poHeader">
+				<task-object-name>com.tsa.puridiom.emails.tasks.DellEmailParser</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="dellEmailParser">
+			<rule-filename check-for-false="true">is-poheader-empty.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="dellEmailBuildMessage">
+				<task-object-name>com.tsa.puridiom.emails.tasks.DellEmailBuildMessage</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="dellEmailSendQueue">
+				<task-object-name>com.tsa.puridiom.emails.tasks.EmailSendQueueAdd</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+	</activities>
+</process>

@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+    
+<hibernate-mapping>
+
+<!-- 
+    Created by Middlegen Hibernate plugin
+
+    http://boss.bekk.no/boss/middlegen/
+    http://hibernate.sourceforge.net/
+-->
+
+<class 
+    name="com.tsa.puridiom.entity.AppPool" 
+    table="APP_POOL"
+>
+    <id
+        name="poolid"
+        type="java.lang.String"
+        column="POOLID"
+    >
+        <generator class="assigned" />
+    </id>
+    <property
+        name="pooldesc"
+        type="java.lang.String"
+        column="POOLDESC"
+        length="60"
+    />
+    <property
+        name="poolflag1"
+        type="java.lang.String"
+        column="POOLFLAG1"
+        length="1"
+    />
+    <property
+        name="poolflag2"
+        type="java.lang.String"
+        column="POOLFLAG2"
+        length="1"
+    />
+    <property
+        name="poolType"
+        type="java.lang.String"
+        column="POOL_TYPE"
+        length="1"
+    />
+
+    <!-- associations -->
+    <!-- bi-directional one-to-many association to AppPooluser -->
+
+</class>
+</hibernate-mapping>

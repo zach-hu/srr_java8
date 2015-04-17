@@ -1,0 +1,110 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping>
+
+<class
+    name="com.tsa.puridiom.entity.InspectionStd"
+    table="INSPECTION_STD"
+>
+    <id
+        name="icInspStd"
+        type="java.math.BigDecimal"
+        column="IC_INSP_STD"
+    >
+        <generator class="assigned" />
+    </id>
+
+    <property
+        name="standardCode"
+        type="java.lang.String"
+        column="STANDARD_CODE"
+        length="15"
+    />
+    <property
+        name="inspectType"
+        type="java.lang.String"
+        column="INSPECT_TYPE"
+        length="15"
+    />
+
+    <property
+        name="inspectCode"
+        type="java.lang.String"
+        column="INSPECT_CODE"
+        length="15"
+    />
+    <property
+        name="critNo"
+        type="java.lang.String"
+        column="CRIT_NO"
+        length="15"
+    />
+
+    <property
+        name="description"
+        type="java.lang.String"
+        column="DESCRIPTION"
+        length="2000"
+    />
+    <property
+        name="critText"
+        type="java.lang.String"
+        column="CRIT_TEXT"
+        length="2000"
+    />
+    <property
+        name="defaultFlag"
+        type="java.lang.String"
+        column="DEFAULT_FLAG"
+        length="1"
+    />
+    <property
+        name="dateEntered"
+        type="java.sql.Timestamp"
+        column="DATE_ENTERED"
+        length="7"
+    />
+    <property
+        name="status"
+        type="java.lang.String"
+        column="STATUS"
+        length="4"
+    />
+    <property
+        name="owner"
+        type="java.lang.String"
+        column="OWNER"
+        length="15"
+    />
+    <property
+        name="lastChange"
+        type="java.sql.Timestamp"
+        column="LAST_CHANGE"
+        length="7"
+    />
+    <property
+        name="lastChangeBy"
+        type="java.lang.String"
+        column="LAST_CHANGE_BY"
+        length="15"
+    />
+    <property
+        name="cgdNo"
+        type="java.lang.String"
+        column="CGD_NO"
+        length="20"
+    />
+    <property
+        name="cgdRev"
+        type="java.math.BigDecimal"
+        column="CGD_REV"
+        length="5"
+    />
+
+    <!-- associations -->
+
+</class>
+</hibernate-mapping>

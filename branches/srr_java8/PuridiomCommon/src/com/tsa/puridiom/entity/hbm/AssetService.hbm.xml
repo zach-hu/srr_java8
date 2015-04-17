@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 2.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+<class name="com.tsa.puridiom.entity.AssetService" table="ASSET_SERVICE">
+<composite-id name="comp_id" class="com.tsa.puridiom.entity.AssetServicePK">
+<key-property name="sequenceNo" column="SEQUENCE_NO" type="java.math.BigDecimal" length="5"/>
+<key-property name="tagNumber" column="TAG_NUMBER" type="java.lang.String" length="20"/>
+</composite-id>
+<property name="serviceCallDate" column="SERVICE_CALL_DATE" type="java.sql.Timestamp" length="7"/>
+<property name="callInitiatedBy" column="CALL_INITIATED_BY" type="java.lang.String" length="25"/>
+<property name="dateInitiated" column="DATE_INITIATED" type="java.sql.Timestamp" length="7"/>
+<property name="responseDate" column="RESPONSE_DATE" type="java.sql.Timestamp" length="7"/>
+<property name="completionDate" column="COMPLETION_DATE" type="java.sql.Timestamp" length="7"/>
+<property name="serviceAction" column="SERVICE_ACTION" type="java.lang.String" length="80"/>
+<property name="serviceCost" column="SERVICE_COST" type="java.math.BigDecimal" length="15"/>
+<property name="lastChgBy" column="LAST_CHG_BY" type="java.lang.String" length="25"/>
+<property name="dateChanged" column="DATE_CHANGED" type="java.sql.Timestamp" length="7"/>
+</class>
+</hibernate-mapping>

@@ -1,0 +1,32 @@
+<browse_catalog>
+	<columns>
+		<Catalog_catalogId>
+			<label>brw-catalogId</label>
+			<sort>A</sort>
+			<link><![CDATA[javascript: returnMe('#Catalog_catalogId^'); void(0);]]></link>
+			<size>20</size>
+		</Catalog_catalogId>
+		<Catalog_title>
+			<label>title</label>
+			<size>40</size>
+		</Catalog_title>
+		<Catalog_vendorId>
+			<label>brw-vendorId</label>
+			<size>15</size>
+		</Catalog_vendorId>
+		<Catalog_webCatalog>
+			<label>brw-webCatalog</label>
+			<size>10</size>
+		</Catalog_webCatalog>
+		<Catalog_owner>
+			<label>owner</label>
+			<type>USER-ID</type>
+			<size>15</size>
+		</Catalog_owner>
+	</columns>
+<sqlfrom>Catalog as Catalog</sqlfrom>
+<sqlwhere><![CDATA[ (Catalog.externalCatalog <> 'Y' AND Catalog.webCatalog <> 'N')]]></sqlwhere>
+<sqlorderby>Catalog.catalogId ASC</sqlorderby>
+<pagesize>15</pagesize>
+<title>Catalog Browse</title>
+</browse_catalog>

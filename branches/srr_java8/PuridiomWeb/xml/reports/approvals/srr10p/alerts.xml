@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<alerts enabled="yes">
+	<alert enabled="yes">
+		<description>Invoice Pending Approval</description>
+		<name>ivc_pending_approval</name>
+		<type>IVC</type>
+		<retrieve>
+			<process>reset_sendqueue_ivc_hten.xml</process>
+		</retrieve>
+		<where>
+			<![CDATA[SELECT DISTINCT InvoiceHeader.icIvcHeader from InvoiceHeader as InvoiceHeader, ApprovalLog as ApprovalLog where InvoiceHeader.icIvcHeader = ApprovalLog.id.icHeader AND InvoiceHeader.status = '6005' AND ApprovalLog.approved = 'A' AND ApprovalLog.dateAssigned < getdate() - 2]]>			
+		</where>
+		<subject><![CDATA[Puridiom Alert. Invoice Pending Approval $F{invoiceHeader_invoiceNumber}]]></subject>
+		<last-run><![CDATA[2012/05/15]]></last-run>
+	</alert>
+	<alert enabled="yes">
+		<name>order_expired_30</name>
+		<type>PO</type>
+		<every-day>1</every-day>
+		<where>
+			<![CDATA[SELECT PoHeader.icPoHeader from PoHeader as PoHeader where PoHeader.poNumber <> 'N/A'  AND PoHeader.status = '3030' AND PoHeader.status < '9000' AND (PoHeader.poType = 'PO' OR PoHeader.poType = 'BO' OR PoHeader.poType = 'SO' OR PoHeader.poType = 'DO' OR PoHeader.poType = 'CT') AND PoHeader.expirationDate <= getdate() -30]]>
+		</where>
+		<description>Purchase Order Expire</description>
+		<retrieve>
+			<process>order-alerts-job.xml</process>
+			<argumentName>PoHeader_icPoHeader</argumentName>
+		</retrieve>
+		<last-run><![CDATA[2011/06/24]]></last-run>
+	</alert>
+	<alert enabled="yes">
+		<name>approval_escalation</name>
+		<type>RAE</type>
+		<every-day>1</every-day>
+		<where>
+			<![CDATA[SELECT DISTINCT RequisitionHeader.icReqHeader from RequisitionHeader as RequisitionHeader, ApprovalLog as ApprovalLog where RequisitionHeader.icReqHeader = ApprovalLog.id.icHeader AND RequisitionHeader.status = '1030' AND ApprovalLog.approved = 'A' AND ApprovalLog.dateAssigned <= getdate() - 3]]>
+		</where>
+		<description>Approval Escalation</description>
+		<retrieve>
+			<process>requisition-escalate-to-backup.xml</process>
+			<argumentName>RequisitionHeader_icReqHeader</argumentName>
+		</retrieve>
+		<process></process>
+		<last-run><![CDATA[2011/06/24]]></last-run>
+	</alert>
+	<alert enabled="yes">
+		<name>insurance_coverage_1</name>
+		<type>VEND</type>
+		<every-day>1</every-day>
+		<where>
+			<![CDATA[SELECT VendorInsurance.vendorId from VendorInsuranceDefault as VendorInsurance where VendorInsurance.expires1 <= getdate() -30]]>
+		</where>
+		<description>Workers Comp Liability</description>
+		<subject><![CDATA[Workers Compensation Liability Expiration Alert for]]></subject>
+		<retrieve>
+			<process>vendorinsurance-alert.xml</process>
+			<argumentName>Vendor_vendorId</argumentName>
+		</retrieve>
+		<last-run><![CDATA[2011/06/24]]></last-run>
+	</alert>
+	<alert enabled="yes">
+		<name>insurance_coverage_2</name>
+		<type>VEND</type>
+		<every-day>1</every-day>
+		<where>
+			<![CDATA[SELECT VendorInsurance.vendorId from VendorInsuranceDefault as VendorInsurance where VendorInsurance.expires2 <= getdate() -30]]>
+		</where>
+		<description>General Liability</description>
+		<subject><![CDATA[General Liability Expiration Alert for]]></subject>
+		<retrieve>
+			<process>vendorinsurance-alert.xml</process>
+			<argumentName>Vendor_vendorId</argumentName>
+		</retrieve>
+		<process></process>
+		<last-run><![CDATA[2011/06/24]]></last-run>
+	</alert>
+	<alert enabled="yes">
+		<name>insurance_coverage_3</name>
+		<type>VEND</type>
+		<every-day>1</every-day>
+		<where>
+			<![CDATA[SELECT VendorInsurance.vendorId from VendorInsuranceDefault as VendorInsurance where VendorInsurance.expires3 <= getdate() -30]]>
+		</where>
+		<description>Automobile Liability</description>
+		<subject><![CDATA[Automobile Liability Expiration Alert for]]></subject>
+		<retrieve>
+			<process>vendorinsurance-alert.xml</process>
+			<argumentName>Vendor_vendorId</argumentName>
+		</retrieve>
+		<last-run><![CDATA[2011/06/24]]></last-run>
+	</alert>
+	<alert enabled="yes">
+		<name>insurance_coverage_4</name>
+		<type>VEND</type>
+		<every-day>1</every-day>
+		<where>
+			<![CDATA[SELECT VendorInsurance.vendorId from VendorInsuranceDefault as VendorInsurance where VendorInsurance.expires4 <= getdate() -30]]>
+		</where>
+		<description>Excess Liability</description>
+		<subject><![CDATA[Excess Liability Expiration Alert for]]></subject>
+		<retrieve>
+			<process>vendorinsurance-alert.xml</process>
+			<argumentName>Vendor_vendorId</argumentName>
+		</retrieve>
+		<last-run><![CDATA[2011/06/24]]></last-run>
+	</alert>
+	<alert enabled="yes">
+		<name>insurance_coverage_5</name>
+		<type>VEND</type>
+		<every-day>1</every-day>
+		<where>
+			<![CDATA[SELECT VendorInsurance.vendorId from VendorInsuranceDefault as VendorInsurance where VendorInsurance.expires5 <= getdate() -30]]>
+		</where>
+		<description>Pollution Liability</description>
+		<subject><![CDATA[Pollution Liability Expiration Alert for]]></subject>
+		<retrieve>
+			<process>vendorinsurance-alert.xml</process>
+			<argumentName>Vendor_vendorId</argumentName>
+		</retrieve>
+		<last-run><![CDATA[2011/06/24]]></last-run>
+	</alert>
+	<alert enabled="yes">
+		<name>insurance_coverage_6</name>
+		<type>VEND</type>
+		<every-day>1</every-day>
+		<where>
+			<![CDATA[SELECT VendorInsurance.vendorId from VendorInsuranceDefault as VendorInsurance where VendorInsurance.expires6 <= getdate() -30]]>
+		</where>
+		<description>Professional Liability</description>
+		<subject><![CDATA[Professional Liability Expiration Alert for]]></subject>
+		<retrieve>
+			<process>vendorinsurance-alert.xml</process>
+			<argumentName>Vendor_vendorId</argumentName>
+		</retrieve>
+		<last-run><![CDATA[2011/06/24]]></last-run>
+	</alert>
+</alerts>

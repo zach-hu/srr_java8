@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="altTextUpdateByItem" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="altTextUpdateByItem">
+			<task synchronous="true" continue-on-failure="false" name="altTextListSetup">
+				<rule-filename>is-req.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.alttext.tasks.AltTextRequisitionLineSetup</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="altTextListSetup">
+				<rule-filename>is-po.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.alttext.tasks.AltTextPoLineSetup</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="altTextDeleteByItem">
+				<task-object-name>com.tsa.puridiom.alttext.tasks.AltTextDeleteByItem</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="altTextDeleteByItem">
+				<task-object-name>com.tsa.puridiom.alttext.tasks.AltTextDeleteDocTextByItem</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="altTextUpdateList">
+				<task-object-name>com.tsa.puridiom.alttext.tasks.AltTextUpdateList</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+	</activities>
+</process>

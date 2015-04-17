@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="userProfileValidateRetrieve" connection-type="Transaction-Required" ldap-connection-type="None">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="userProfileValidateRetrieve">
+			<task synchronous="true" continue-on-failure="false" name="department">
+				<task-object-name>com.tsa.puridiom.department.tasks.DepartmentRetrieveValidateByCode</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="address">
+				<task-object-name>com.tsa.puridiom.address.tasks.AddressRetrieveValidateByCode</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="stdtable">
+				<task-object-name>com.tsa.puridiom.stdtable.tasks.StdTableRetrieve</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="baddress">
+				<task-object-name>com.tsa.puridiom.address.tasks.AddressRetrieveValidateByBillToCode</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="poFormat">
+				<task-object-name>com.tsa.puridiom.stdtable.tasks.PoFormatRetrieve</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

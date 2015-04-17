@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="invoiceAddressAdd" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="invoiceAddressAdd">
+			<task synchronous="true" continue-on-failure="false" name="invoiceAddress">
+				<task-object-name>com.tsa.puridiom.invoiceaddress.tasks.InvoiceAddressSetValues</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="invoiceAddressAdd">
+				<task-object-name>com.tsa.puridiom.invoiceaddress.tasks.InvoiceAddressAdd</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+	</activities>
+</process>

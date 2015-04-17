@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="requisition-recalculate" connection-type="Transaction-Required">
+	<activities>
+			<activity synchronous="true" continue-on-failure="false" name="requisitionRecalculateSetupActivity">
+			<task synchronous="true" continue-on-failure="false" name="requisitionHeader">			
+				<task-object-name>com.tsa.puridiom.requisitionheader.tasks.RequisitionHeaderRetrieveById</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="requisitionHeaderUpdateSetup">			
+				<task-object-name>com.tsa.puridiom.requisitionheader.tasks.RequisitionHeaderUpdateSetup</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="requisitionLineList">			
+				<rule-filename>is-requisitionlinelist-empty</rule-filename>
+				<task-object-name>com.tsa.puridiom.requisitionline.tasks.RequisitionLineRetrieveByHeader</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="requisitionCalculateTotalsActivity">
+			<task synchronous="true" continue-on-failure="false" name="requisitionLineList">			
+				<task-object-name>com.tsa.puridiom.requisitionline.tasks.RequisitionLineSetShippingTaxFromHeader</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="requisitionLineList">			
+				<task-object-name>com.tsa.puridiom.requisitionline.tasks.RequisitionLineSetOtherTaxFromHeader</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="requisitionCalculateTotals">
+				<task-object-name>com.tsa.puridiom.requisition.tasks.RequisitionCalculateTotals</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="accountLineUpdate">
+				<task-object-name>com.tsa.puridiom.requisitionline.tasks.RequisitionLinesAccountUpateAll</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="accountReallocationActivity">
+			<task synchronous="true" continue-on-failure="false" name="allocatedTotal">			
+				<task-object-name>com.tsa.puridiom.account.tasks.AccountAllocatedForLines</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="dummy">
+				<task-object-name>com.tsa.puridiom.account.tasks.ResetAccountIcLine</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="accountList">			
+				<task-object-name>com.tsa.puridiom.account.tasks.AccountRetrieveByLine</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="accountRecalculate">			
+				<task-object-name>com.tsa.puridiom.account.tasks.AccountRecalculate</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+	</activities>
+</process>

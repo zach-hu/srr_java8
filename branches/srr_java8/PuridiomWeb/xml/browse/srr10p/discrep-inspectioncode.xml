@@ -1,0 +1,37 @@
+<browse_stdtable>
+	<columns>
+		<StdTable_id_tableType>
+			<label>Type</label>
+			<visible>0</visible>
+			<distinct>Y</distinct>
+		</StdTable_id_tableType>
+		<StdTable_id_tableKey>
+			<label>Code</label>
+			<link><![CDATA[javascript: returnMe('#StdTable_id_tableKey^'); void(0);]]></link>
+			<size>15</size>
+		</StdTable_id_tableKey>
+			<InspectionLine_critNo>
+			<label>Criteria No</label>
+			<size>25</size>
+			<detail>N</detail>
+		</InspectionLine_critNo>
+		<StdTable_description>
+			<label>description</label>
+			<hidden-input>Y</hidden-input>
+			<size>45</size>
+			<sort>A</sort>
+			<filter-default>Y</filter-default>
+		</StdTable_description>
+		<InspectionLine_critDescription>
+			<label>Criteria Description</label>
+			<size>30</size>
+			<detail>Y</detail>
+		</InspectionLine_critDescription>
+	</columns>
+<sqlfrom>InspectionHeader as  InspectionHeader, InspectionLine as InspectionLine, StdTable as StdTable</sqlfrom>
+<sqlwhere><![CDATA[ InspectionHeader.id.icMsrLine = @InspectionHeader_icMsrLine# and (InspectionHeader.id.icInspNo = InspectionLine.icInspNo) and  (InspectionLine.inspectCode = StdTable.id.tableKey and StdTable.id.tableType = 'INSP') ]]></sqlwhere>
+<sqlorderby>StdTable.id.tableKey ASC</sqlorderby>
+<pagesize>15</pagesize>
+<title>Inspection Code Browse</title>
+</browse_stdtable>
+

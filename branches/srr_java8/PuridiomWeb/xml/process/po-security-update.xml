@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="poSecurityUpdate" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="updatePoSecurity">
+			<task synchronous="true" continue-on-failure="false" name="poSecurity">
+				<task-object-name>com.tsa.puridiom.posecurity.tasks.PoSecurityRetrieveById</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="poSecurity">
+				<task-object-name>com.tsa.puridiom.posecurity.tasks.PoSecuritySetValues</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="poSecurity">
+				<task-object-name>com.tsa.puridiom.posecurity.tasks.PoSecurityAdd</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+	</activities>
+</process>

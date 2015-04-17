@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="assetAdd" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="assetAdd">
+			<task synchronous="true" continue-on-failure="false" name="assetCreateSetup">
+				<rule-filename></rule-filename>
+				<task-object-name>com.tsa.puridiom.asset.serv.tasks.AssetCreateSetup</task-object-name>
+				<post-action></post-action>
+			  </task>
+			<task synchronous="true" continue-on-failure="false" name="asset">
+				<task-object-name>com.tsa.puridiom.asset.tasks.AssetSetValues</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="asset">
+				<task-object-name>com.tsa.puridiom.asset.tasks.AssetAdd</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+	</activities>
+</process>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+<class name="com.tsa.puridiom.entity.sungard.Company" table="COMPANY">
+<id name="companyCode" type="java.lang.String" column="COMPANY_CODE">
+	<generator class="assigned" />
+</id>
+<!--property name="companyCode" column="COMPANY_CODE" type="java.lang.String" length="15"/-->
+<property name="coShortDesc" column="CO_SHORT_DESC" type="java.lang.String" length="20"/>
+<property name="companyName" column="COMPANY_NAME" type="java.lang.String" length="50"/>
+<property name="naicCompanyCode" column="NAIC_COMPANY_CODE" type="java.lang.String" length="5"/>
+<property name="dfltFunctCrncy" column="DFLT_FUNCT_CRNCY" type="java.lang.String" length="5"/>
+<property name="companyType" column="COMPANY_TYPE" type="java.lang.String" length="1"/>
+<property name="coAddrs1" column="CO_ADDRS_1" type="java.lang.String" length="50"/>
+<property name="coAddrs2" column="CO_ADDRS_2" type="java.lang.String" length="50"/>
+<property name="coAddrs3" column="CO_ADDRS_3" type="java.lang.String" length="50"/>
+<property name="coAddrs4" column="CO_ADDRS_4" type="java.lang.String" length="50"/>
+<property name="cashBasis" column="CASH_BASIS" type="java.lang.String" length="5"/>
+<property name="accrualBasis" column="ACCRUAL_BASIS" type="java.lang.String" length="5"/>
+<property name="fisProcInd" column="FIS_PROC_IND" type="java.lang.String" length="1"/>
+<property name="fisStartMm" column="FIS_START_MM" type="java.lang.String" length="2"/>
+<property name="postIntrvl" column="POST_INTRVL" type="java.lang.String" length="15"/>
+<property name="detailDescFlag" column="DETAIL_DESC_FLAG" type="java.lang.String" length="1"/>
+<property name="nonZeroAmtFlag" column="NON_ZERO_AMT_FLAG" type="java.lang.String" length="1"/>
+<property name="autoClearingFlag" column="AUTO_CLEARING_FLAG" type="java.lang.String" length="1"/>
+<property name="calIntPlusNum" column="CAL_INT_PLUS_NUM" type="java.math.BigDecimal" length="5"/>
+<property name="calIntMinusNum" column="CAL_INT_MINUS_NUM" type="java.math.BigDecimal" length="5"/>
+<property name="tranDtPlusNum" column="TRAN_DT_PLUS_NUM" type="java.math.BigDecimal" length="5"/>
+<property name="tranDtMinusNum" column="TRAN_DT_MINUS_NUM" type="java.math.BigDecimal" length="5"/>
+<property name="dfltCashAcct" column="DFLT_CASH_ACCT" type="java.lang.String" length="15"/>
+<property name="dfltAccrualAcct" column="DFLT_ACCRUAL_ACCT" type="java.lang.String" length="15"/>
+<property name="dfltDiscountAcct" column="DFLT_DISCOUNT_ACCT" type="java.lang.String" length="15"/>
+<property name="dfltSalestaxAcct" column="DFLT_SALESTAX_ACCT" type="java.lang.String" length="15"/>
+<property name="dfltShippingAcct" column="DFLT_SHIPPING_ACCT" type="java.lang.String" length="15"/>
+<property name="dfltWithholdAcct" column="DFLT_WITHHOLD_ACCT" type="java.lang.String" length="15"/>
+</class>
+</hibernate-mapping>

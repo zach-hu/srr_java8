@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="ExecuteReport" connection-type="Connection-Required">
+  <activities>
+	  <activity synchronous="true" continue-on-failure="false" name="setup">
+		  <task synchronous="true" continue-on-failure="false" name="datasource">
+	        <task-object-name>com.tsa.puridiom.report.tasks.ReportGetHibernateDataSetup</task-object-name>
+		  </task>
+	 </activity>
+    <activity synchronous="true" continue-on-failure="false" name="getBrowseObject">
+      <task synchronous="true" continue-on-failure="false" name="browseObject">
+        <task-object-name>com.tsa.puridiom.browse.tasks.GenerateReportObject</task-object-name>
+      </task>
+	</activity>
+	<activity synchronous="true" continue-on-failure="false" name="reportExtensive">
+		<rule-filename>is-report-queue-job.xml;is-not-window-time.xml;is-active-sendmailreportextensive.xml;is-report-extensive.xml</rule-filename>
+      	<task synchronous="true" continue-on-failure="false" name="reportExtensive">
+        	<task-object-name>com.tsa.puridiom.report.tasks.ReportExtensive</task-object-name>
+      	</task>
+	</activity>
+
+	<activity synchronous="true" continue-on-failure="false" name="reportExtensiveMail">
+	  	<rule-filename>is-active-sendmailreportextensive.xml;is-schedulemaxrows-not-zero.xml;is-report-extensive.xml;is-report-queue-job.xml</rule-filename>
+      	<task synchronous="true" continue-on-failure="false" name="reportExtensiveMail">
+        	<task-object-name>com.tsa.puridiom.report.tasks.ReportExtensiveMail</task-object-name>
+      	</task>
+	</activity>
+	<activity synchronous="true" continue-on-failure="false" name="getDatasources">
+    	<task synchronous="true" continue-on-failure="false" name="datasource">
+			<task-object-name>com.tsa.puridiom.report.tasks.ReportGetHibernateData</task-object-name>
+		</task>
+	</activity>
+  </activities>
+</process>

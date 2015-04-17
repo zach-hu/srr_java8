@@ -1,0 +1,82 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping>
+
+<class
+    name="com.tsa.puridiom.entity.InspectionDiscrep"
+    table="INSPECTION_DISCREP"
+>
+    <composite-id name="comp_id" class="com.tsa.puridiom.entity.InspectionDiscrepPK">
+        <key-property name="icRecHeader" column="IC_REC_HEADER" type="java.math.BigDecimal"/>
+        <key-property name="icRecLine" column="IC_REC_LINE" type="java.math.BigDecimal"/>
+        <key-property name="icInspNo" column="IC_INSP_NO" type="java.math.BigDecimal"/>
+        <key-property name="keySequence" column="KEY_SEQUENCE" type="java.math.BigDecimal"/>
+    </composite-id>
+    <property
+        name="icMsrLine"
+        type="java.math.BigDecimal"
+        column="IC_MSR_LINE"
+        length="22"
+    />
+    <property
+        name="inspectCode"
+        type="java.lang.String"
+        column="INSPECT_CODE"
+        length="15"
+    />
+    <property
+        name="inspRequirements"
+        type="java.lang.String"
+        column="INSP_REQUIREMENTS"
+        length="255"
+    />
+    <property
+        name="inspDescription"
+        type="java.lang.String"
+        column="INSP_DESCRIPTION"
+        length="255"
+    />
+    <property
+        name="inspQuantity"
+        type="java.math.BigDecimal"
+        column="INSP_QUANTITY"
+        length="15"
+    />
+    <property
+        name="status"
+        type="java.lang.String"
+        column="STATUS"
+        length="15"
+    />
+    <property
+        name="inspStartDate"
+        type="java.sql.Timestamp"
+        column="INSP_START_DATE"
+        length="7"
+    />
+    <property
+        name="lastChange"
+        type="java.sql.Timestamp"
+        column="LAST_CHANGE"
+        length="7"
+    />
+    <property
+        name="lastChangeBy"
+        type="java.lang.String"
+        column="LAST_CHANGE_BY"
+        length="15"
+    />
+    <property
+        name="icInspDiscrep"
+        type="java.math.BigDecimal"
+        column="IC_INSP_DISCREP"
+        length="22"
+    />
+
+    <!-- associations -->
+
+</class>
+</hibernate-mapping>

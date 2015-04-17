@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="Print-po-Pdf" connection-type="Connection-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="print-po-pdf">
+			<task synchronous="true" continue-on-failure="false" name="datasource">
+				<task-object-name>com.tsa.puridiom.supplierportal.InvokeSupplierPortalProcessTask</task-object-name>
+				<process-filename>po-retrieve.xml</process-filename>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="rddSeeBelow">
+				<task-object-name>com.tsa.puridiom.report.rdd.tasks.PoRdd</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="report">
+				<task-object-name>com.tsa.puridiom.formpdf.tasks.PrintPoPdf</task-object-name>
+			</task>
+			<task name="messageText" synchronous="true" continue-on-failure="false">
+				<rule-filename check-for-false="true">is-view-now.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.formpdf.tasks.PoPdfMessageText</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

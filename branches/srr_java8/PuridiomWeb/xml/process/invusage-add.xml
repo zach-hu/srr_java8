@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="invUsageAdd" connection-type="New-Transaction">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="addInvUsage">
+			<task synchronous="true" continue-on-failure="false" name="invUsage">
+				<task-object-name>com.tsa.puridiom.reports.itemusage.tasks.InvUsageSetValues</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="addUsage">
+				<task-object-name>com.tsa.puridiom.reports.itemusage.tasks.InvUsageAdd</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

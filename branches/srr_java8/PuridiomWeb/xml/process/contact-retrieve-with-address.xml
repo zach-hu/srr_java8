@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="ContactRetrieveWithAddress" connection-type="Connection-Required">
+	<!--Retrieve Contact and Address for the contact -->
+	<activities>  
+		<activity synchronous="true" continue-on-failure="false" name="contactRetrieveWithAddress">
+			<task synchronous="true" continue-on-failure="false" name="contact">    			
+				<task-object-name>com.tsa.puridiom.contact.tasks.ContactRetrieveByCode</task-object-name>    
+				<post-action />    
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="contactAddressSetup">
+				<task-object-name>com.tsa.puridiom.contact.tasks.ContactAddressRetrieveSetup</task-object-name>    
+				<post-action />    
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="address">    			
+				<task-object-name>com.tsa.puridiom.address.tasks.AddressRetrieveById</task-object-name>    
+				<post-action />    
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="address">
+				<rule-filename>is-address-empty</rule-filename>
+				<task-object-name>com.tsa.puridiom.address.tasks.AddressRetrievePrimary</task-object-name>    
+				<post-action />    
+			</task>
+		  </activity>  
+	 </activities> 
+</process>

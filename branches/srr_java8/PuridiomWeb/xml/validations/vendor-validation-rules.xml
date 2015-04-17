@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<validation-rules>
+	<validations>
+		<save enabled="yes">
+			<rule>
+				<filename>vendor-vendorinsurancedefault.xml</filename>
+				<alias>vendor_vendorinsurancedefault</alias>
+				<msg>The supplier's insurance levels are NOT satisfactory based on the Insurance Category Level requirements!</msg>
+				<severity>E</severity>
+				<order>10</order>
+				<enabled>Y</enabled>
+				<link><![CDATA[javascript: doSubmit('/admin/supplier/supplier_insurance.jsp', 'VendorRetrieveById;VendorInsuranceDefaultRetrieveById;ContactInsuranceRetrieveByVendorId;VendorInsuranceDefaultInsCategoryLevelValidateVendor'); void(0);]]></link>
+			</rule>
+			<rule>
+				<filename>vendor-match-reference.xml</filename>
+				<alias>vendor-match</alias>
+				<msg>AP Reference # does not match.  Please check and correct the fields.</msg>
+				<severity>E</severity>
+				<order>15</order>
+				<enabled>Y</enabled>
+				<link><![CDATA[javascript: doSubmit('/admin/supplier/supplier_info.jsp', 'VendorRetrieveById'); void(0);]]></link>
+			</rule>
+		</save>
+	</validations>
+</validation-rules>

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="invoiceVendorUpdate" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="invoiceVendorRetrieve">
+			<task synchronous="true" continue-on-failure="false" name="invoiceVendor">
+				<task-object-name>com.tsa.puridiom.invoicevendor.tasks.InvoiceVendorRetrieveById</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="invoiceAddress">
+				<task-object-name>com.tsa.puridiom.invoiceaddress.tasks.InvoiceAddressRetrieveById</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="generateVendorId">
+			<rule-filename>is-invoiceheader-vendorid-empty.xml;is-invoice-vendorname-notempty.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="InvoiceVendor_vendorId">
+				<task-object-name>com.tsa.puridiom.invoicevendor.tasks.GenerateVendorIdFromName</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="InvoiceVendor_vendorId">
+				<task-object-name>com.tsa.puridiom.invoicevendor.tasks.InvoiceVendorSetup</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="invoiceVendorUpdate">
+			<task synchronous="true" continue-on-failure="false" name="loadSupplier">
+				<rule-filename>is-invoicevendor-empty.xml;is-invoice-vendorname-notempty.xml</rule-filename>
+    			<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+    			<process-filename>invoice-load-supplier.xml</process-filename>
+				<post-action>exitActivity</post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="newAddress">
+				<rule-filename>is-invoiceaddress-changed.xml</rule-filename>
+    			<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+    			<process-filename>invoiceaddress-create.xml</process-filename>
+				<post-action>exitActivity</post-action>
+			</task>
+			<!--  -->
+			<task synchronous="true" continue-on-failure="false" name="invoiceVendor">
+				<task-object-name>com.tsa.puridiom.invoicevendor.tasks.InvoiceVendorSetValues</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="invoiceVendor">
+				<task-object-name>com.tsa.puridiom.invoicevendor.tasks.InvoiceVendorUpdate</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="invoiceAddress">
+				<task-object-name>com.tsa.puridiom.invoiceaddress.tasks.InvoiceAddressSetValues</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="invoiceAddress">
+				<task-object-name>com.tsa.puridiom.invoiceaddress.tasks.InvoiceAddressUpdate</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="invoiceHeaderUpdateSetup">
+			<task synchronous="true" continue-on-failure="false" name="invoiceHeaderSetValues">
+				<task-object-name>com.tsa.puridiom.invoiceheader.tasks.InvoiceHeaderSetValuesFromInvoiceVendor</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="loadSupplier">
+    			<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+    			<process-filename>invoiceheader-update.xml</process-filename>
+			</task>
+		</activity>
+	</activities>
+</process>

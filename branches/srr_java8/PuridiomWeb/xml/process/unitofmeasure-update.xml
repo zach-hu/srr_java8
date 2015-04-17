@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="unitOfMeasureUpdate" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="updateUnitOfMeasure">
+			<task synchronous="true" continue-on-failure="false" name="unitOfMeasure">
+				<task-object-name>com.tsa.puridiom.unitofmeasure.tasks.UnitOfMeasureRetrieveById</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="unitOfMeasure">
+				<task-object-name>com.tsa.puridiom.unitofmeasure.tasks.UnitOfMeasureSetValues</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="unitOfMeasure">
+				<task-object-name>com.tsa.puridiom.unitofmeasure.tasks.UnitOfMeasureUpdate</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+	</activities>
+</process>

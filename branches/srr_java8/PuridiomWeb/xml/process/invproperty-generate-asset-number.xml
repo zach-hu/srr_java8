@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="invPropertyGenerateAssetNumber" connection-type="New-Connection">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="generateAssetNumber">
+			<task synchronous="true" continue-on-failure="false" name="assetNumberSetup">
+				<task-object-name>com.tsa.puridiom.invproperty.tasks.InvPropertyAssetNumberSetup</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="AssetGenerateNumber">
+			<task synchronous="true" continue-on-failure="false" name="InvProperty_assetNumber">
+				<task-object-name>com.tsa.puridiom.common.tasks.AutoGenDocNumber</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="assetNumberSetup">
+				<task-object-name>com.tsa.puridiom.invproperty.tasks.InvPropertyAssetNumberFormatSetup</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="InvProperty_assetNumber">
+				<task-object-name>com.tsa.puridiom.common.tasks.FormatDocNumber</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

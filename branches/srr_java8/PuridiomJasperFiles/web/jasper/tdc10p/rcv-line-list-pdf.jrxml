@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created using an evaluation version of JasperAssistant (http://www.jasperassistant.com) -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="rcv_line_list" pageWidth="595" pageHeight="400" whenNoDataType="BlankPage" columnWidth="595" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+	<property name="com.jasperassistant.designer.Rulers" value="true"/>
+	<property name="com.jasperassistant.designer.GridWidth" value="24"/>
+	<property name="com.jasperassistant.designer.GridHeight" value="24"/>
+	<property name="com.jasperassistant.designer.DataSource" value="hilton1p"/>
+	<property name="com.jasperassistant.designer.SnapToGrid" value="false"/>
+	<property name="com.jasperassistant.designer.Margins" value="true"/>
+	<property name="com.jasperassistant.designer.Grid" value="true"/>
+	<property name="com.jasperassistant.designer.SnapToGuides" value="true"/>
+	<import value="com.tsa.puridiom.reports.datasource.*"/>
+	<import value="com.tsa.puridiom.stdtable.tasks.StdTableManager"/>
+	<import value="com.tsa.puridiom.jasperreports.*"/>
+	<import value="com.tsa.puridiom.entity.PoLine"/>
+	<import value="com.tsa.puridiom.common.documents.DocumentStatus"/>
+	<reportFont name="Arial_Normal" isDefault="true" fontName="Arial" size="8" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Bold" isDefault="false" fontName="Arial Black" size="8" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica-Bold" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<parameter name="oid" class="java.lang.String">
+		<defaultValueExpression><![CDATA["legion"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="reportTitle" class="java.lang.String"/>
+	<parameter name="userId" class="java.lang.String">
+		<defaultValueExpression><![CDATA["RRAMOS"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="requisitionerCode" class="java.lang.String"/>
+	<parameter name="shipToCode" class="java.lang.String"/>
+	<parameter name="requiredDate" class="java.util.Date"/>
+	<parameter name="rejectionCode" class="java.lang.String"/>
+	<parameter name="ReceiptHeader_receiptType" class="java.lang.String">
+		<defaultValueExpression><![CDATA["Z"]]></defaultValueExpression>
+	</parameter>
+	<field name="ReceiptLine_poLine" class="java.lang.Object"/>
+	<field name="ReceiptLine_qtyReceived" class="java.math.BigDecimal"/>
+	<field name="ReceiptLine_status" class="java.lang.String"/>
+	<field name="ReceiptLine_inspectionCode" class="java.lang.String"/>
+	<field name="ReceiptLine_receiptNotes" class="java.lang.String"/>
+	<field name="ReceiptLine_rejectionCode" class="java.lang.String"/>
+	<field name="ReceiptLine_qtyRejected" class="java.math.BigDecimal"/>
+	<field name="ReceiptLine_qtyReturned" class="java.math.BigDecimal"/>
+	<variable name="today" class="java.util.Date">
+		<variableExpression><![CDATA[new java.util.Date()]]></variableExpression>
+		<initialValueExpression><![CDATA[new java.util.Date()]]></initialValueExpression>
+	</variable>
+	<variable name="reportTitle_var" class="java.lang.String">
+		<variableExpression><![CDATA["Requisition Line"]]></variableExpression>
+	</variable>
+	<group name="shipto">
+		<groupHeader>
+			<band height="1"/>
+		</groupHeader>
+	</group>
+	<detail>
+		<band height="81">
+			<textField pattern="###0." isBlankWhenNull="true" hyperlinkType="None">
+				<reportElement positionType="Float" x="3" y="3" width="46" height="14"/>
+				<textElement verticalAlignment="Middle">
+					<font reportFont="Arial_Normal" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[((PoLine)$F{ReceiptLine_poLine}).getLineNumber()]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true" hyperlinkType="None">
+				<reportElement positionType="Float" x="339" y="3" width="44" height="14"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font reportFont="Arial_Normal"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[((PoLine)$F{ReceiptLine_poLine}).getUmCode()]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.###" isBlankWhenNull="true" hyperlinkType="None">
+				<reportElement positionType="Float" x="422" y="3" width="32" height="14"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font reportFont="Arial_Normal"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[((PoLine)$F{ReceiptLine_poLine}).getQuantity()]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true" hyperlinkType="None">
+				<reportElement positionType="Float" x="54" y="3" width="186" height="14"/>
+				<textElement verticalAlignment="Middle">
+					<font reportFont="Arial_Normal"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[((PoLine)$F{ReceiptLine_poLine}).getItemNumber()]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true" hyperlinkType="None">
+				<reportElement positionType="Float" x="54" y="16" width="307" height="14" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[((PoLine)$F{ReceiptLine_poLine}).getDescription()]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true" hyperlinkType="None">
+				<reportElement positionType="Float" x="365" y="16" width="200" height="14" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true" forecolor="#FF0000">
+					<printWhenExpression><![CDATA[new Boolean($F{ReceiptLine_status}.equalsIgnoreCase(DocumentStatus.CANCELLED))]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font reportFont="Arial_Bold" size="11"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["*** Line Item Cancelled ***"]]></textFieldExpression>
+			</textField>
+			<textField hyperlinkType="None">
+				<reportElement positionType="Float" x="146" y="50" width="217" height="13"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{ReceiptLine_receiptNotes}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" hyperlinkType="None">
+				<reportElement positionType="Float" x="53" y="38" width="93" height="13"/>
+				<textElement verticalAlignment="Middle">
+					<font reportFont="Arial_Bold"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Qty Rejected:"]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" hyperlinkType="None">
+				<reportElement positionType="Float" x="53" y="51" width="93" height="13"/>
+				<textElement verticalAlignment="Middle">
+					<font reportFont="Arial_Bold"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Notes:"]]></textFieldExpression>
+			</textField>
+			<subreport>
+				<reportElement positionType="Float" x="14" y="71" width="554" height="1" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true"/>
+				<parametersMapExpression><![CDATA[$P{REPORT_PARAMETERS_MAP}]]></parametersMapExpression>
+				<subreportParameter name="oid">
+					<subreportParameterExpression><![CDATA[$P{oid}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="rddSeeBelow"/>
+				<dataSourceExpression><![CDATA[new HibernateQueryResultDataSource(((PoLine) $F{ReceiptLine_poLine}).getShipToList())]]></dataSourceExpression>
+				<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[JasperReportsHelper.loadSubReport("rcv-lineshipto-pdf.jasper", $P{oid})]]></subreportExpression>
+			</subreport>
+			<textField pattern="#,##0.###" isBlankWhenNull="true" hyperlinkType="None">
+				<reportElement positionType="Float" x="146" y="36" width="117" height="14"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle" markup="none"/>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{ReceiptLine_qtyRejected}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.###" isBlankWhenNull="true" hyperlinkType="None">
+				<reportElement positionType="Float" x="480" y="2" width="48" height="15">
+					<printWhenExpression><![CDATA[$P{ReceiptHeader_receiptType}.equals("R")?Boolean.TRUE:Boolean.FALSE]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font reportFont="Arial_Normal"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{ReceiptLine_qtyReturned}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.###" isBlankWhenNull="true" hyperlinkType="None">
+				<reportElement positionType="Float" x="480" y="2" width="48" height="15">
+					<printWhenExpression><![CDATA[$P{ReceiptHeader_receiptType}.equals("R")?Boolean.FALSE:Boolean.TRUE]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
+					<font reportFont="Arial_Normal"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{ReceiptLine_qtyReceived}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true" hyperlinkType="None">
+				<reportElement positionType="Float" x="262" y="36" width="217" height="14"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle" markup="none"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[StdTableManager.getInstance($P{oid}).getStdTableDescription($P{oid}, "REJ", $F{ReceiptLine_rejectionCode})]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

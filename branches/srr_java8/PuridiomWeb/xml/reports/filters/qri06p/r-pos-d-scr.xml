@@ -1,0 +1,86 @@
+<r-pos-d-scr>
+  <columns>
+		<Vendor_vendorId>
+			<label>Supplier ID</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</Vendor_vendorId>
+		<Vendor_vendorName>
+			<label>Supplier Name</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</Vendor_vendorName>
+		<Vendor_iclLevel>
+			<label>Insurance Category</label>
+			<type>BIGDECIMAL</type>
+			<visible>1</visible>
+		</Vendor_iclLevel>
+		<VendorAffiliate_id_vendorId>
+			<label>Supplier Affiliate ID</label>
+			<type>STRING</type>
+			<visible>0</visible>
+		</VendorAffiliate_id_vendorId>
+		<VendorAffiliate_id_affiliateId>
+			<label>Affiliate ID</label>
+			<type>STRING</type>
+			<visible>0</visible>
+		</VendorAffiliate_id_affiliateId>
+		<Address_addressLine1>
+			<label>Affiliate Company Name</label>
+			<type>STRING</type>
+			<visible>0</visible>
+		</Address_addressLine1>
+		<Address_city>
+			<label>City</label>
+			<type>STRING</type>
+			<visible>0</visible>
+		</Address_city>
+		<Address_state>
+			<label>State</label>
+			<type>STRING</type>
+			<visible>0</visible>
+		</Address_state>
+		<PoHeader_contractNo>
+			<label>Contract #</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</PoHeader_contractNo>
+		<PoHeader_internalComments>
+			<label>Purpose</label>
+			<type>STRING</type>
+			<visible>0</visible>
+		</PoHeader_internalComments>
+		<PoHeader_buyerCode>
+			<label>Contract Admin</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</PoHeader_buyerCode>
+		<PoHeader_effectiveDate>
+			<label>Contract Begins</label>
+			<type>DATE</type>
+			<size>10</size>
+		</PoHeader_effectiveDate>
+		<PoHeader_expirationDate>
+			<label>Contract Ends</label>
+			<type>DATE</type>
+			<size>10</size>
+		</PoHeader_expirationDate>
+		<Contact_firstName>
+	      	<label>First Name</label>
+	      	<type>STRING</type>
+			<visible>1</visible>
+	    </Contact_firstName>
+	    <Contact_lastName>
+	      	<label>Last Name</label>
+	      	<type>STRING</type>
+			<visible>1</visible>
+	    </Contact_lastName>
+	</columns>
+  	<sqlfrom> Vendor as Vendor, Address as Address , VendorAffiliate as VendorAffiliate, PoHeader as PoHeader, Contact as Contact</sqlfrom>
+  	<sqlwhere><![CDATA[Vendor.vendorId = VendorAffiliate.id.vendorId and VendorAffiliate.id.vendorId = Address.id.addressType
+  			and VendorAffiliate.id.vendorId = Contact.id.vendorId and Vendor.vendorId = PoHeader.vendorId and Contact.id.contactType = 'DEFAULT' 
+  			and Contact.status <> '03' and PoHeader.poType='CT' and PoHeader.contractNo is not null ]]></sqlwhere>
+  	<sqlorderby>Vendor.vendorId,PoHeader.contractNo,Address.addressLine1</sqlorderby>
+  	<title>Supplier Contract Affiliations</title>
+</r-pos-d-scr>
+

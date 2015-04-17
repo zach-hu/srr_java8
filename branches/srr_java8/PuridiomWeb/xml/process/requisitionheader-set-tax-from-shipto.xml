@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="requisitionHeaderSetTaxFromShipTo" connection-type="New-Connection">
+	<rule-filename>is-requisitionheader-shiptocode-not-empty.xml</rule-filename>
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="requisitionHeaderShipToSetupActivity">
+			<task synchronous="true" continue-on-failure="false" name="addressSetup">
+				<!-- reset address parameters -->
+				<task-object-name>com.tsa.puridiom.address.tasks.AddressSetup</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="Address_addressCode">
+				<task-object-name>com.tsa.puridiom.requisitionheader.tasks.RequisitionHeaderGetShipToCode</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="shipToAddress">
+				<task-object-name>com.tsa.puridiom.address.tasks.AddressRetrieveShipTo</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="requisitionHeaderTaxSetupActivity">
+			<rule-filename>is-shiptoaddress-taxcode-not-empty.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="TaxCode_taxCode">
+				<task-object-name>com.tsa.puridiom.shipto.tasks.ShipToAddressGetTaxCode</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="taxCode">
+				<task-object-name>com.tsa.puridiom.taxcode.tasks.TaxCodeRetrieveById</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="requisitionHeaderTaxSetupActivity">
+			<rule-filename check-for-false="true">is-taxcode-empty.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="RequisitionHeader_taxCode">
+				<task-object-name>com.tsa.puridiom.taxcode.tasks.TaxCodeGetTaxCode</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="RequisitionHeader_taxPercent">
+				<task-object-name>com.tsa.puridiom.taxcode.tasks.TaxCodeGetTaxRate</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+	</activities>
+</process>

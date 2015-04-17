@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="userGroupRelUpdateByUserId" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="userGroupRelRetrieve">
+			<task synchronous="true" continue-on-failure="false" name="userGroupRelDelete">
+				<task-object-name>com.tsa.puridiom.usergrouprel.tasks.UserGroupRelDeleteByUserId</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="userGroupRelList">
+				<task-object-name>com.tsa.puridiom.usergrouprel.tasks.UserGroupRelUpdateByUserId</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

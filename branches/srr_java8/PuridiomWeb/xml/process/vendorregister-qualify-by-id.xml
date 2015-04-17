@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="vendorregisterQualifyById" connection-type="Transaction-Required" ldap-connection-type="None">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="retrieveVendorRegister">
+			<task synchronous="true" continue-on-failure="false" name="vendorQualificationSetup">
+				<task-object-name>com.tsa.puridiom.vendorqualification.tasks.VendorQualificationSetup</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="vendor">
+				<task-object-name>com.tsa.puridiom.vendor.tasks.VendorRetrieveById</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="errorMsg">
+				<rule-filename check-for-false="true">is-vendor-empty.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.vendorerrormsg.tasks.ErrorMsgSetQualifiedVendorAlreadyExists</task-object-name>
+				<post-action>exitProcess</post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="vendorRegister">
+				<task-object-name>com.tsa.puridiom.vendorregister.tasks.VendorRegisterRetrieveMainByVendorId</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="vendorRegisterAltContactList">
+				<task-object-name>com.tsa.puridiom.vendorregister.tasks.VendorRegisterRetrieveAltByVendorId</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="vendorRegCommRelList">
+				<task-object-name>com.tsa.puridiom.vendorregcommrel.tasks.VendorRegCommRelRetrieveByVendor</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="addQualifiedVendor">
+			<task synchronous="true" continue-on-failure="false" name="vendor">
+				<task-object-name>com.tsa.puridiom.vendorqualification.tasks.VendorSetup</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="vendor">
+				<task-object-name>com.tsa.puridiom.vendor.tasks.VendorSetValues</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="vendor">
+				<task-object-name>com.tsa.puridiom.vendor.tasks.VendorAdd</task-object-name>
+			</task>
+		    <task synchronous="true" continue-on-failure="false" name="contactAddressAdd">
+    			<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+    			<process-filename>vendorregister-qualify-contact.xml</process-filename>
+    		</task>
+			<task synchronous="true" continue-on-failure="false" name="altContactList">
+				<task-object-name>com.tsa.puridiom.vendorqualification.tasks.VendorAltContactQualifyList</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="vendorCommoditySetup">
+				<task-object-name>com.tsa.puridiom.vendorqualification.tasks.VendorCommRelQualificationSetup</task-object-name>
+			</task>
+		    <task synchronous="true" continue-on-failure="false" name="vendorCommodityAdd">
+    			<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+    			<process-filename>vendorcommrel-update.xml</process-filename>
+    		</task>
+			<task synchronous="true" continue-on-failure="false" name="vendorRegisterDelete">
+				<task-object-name>com.tsa.puridiom.vendorregister.tasks.VendorRegisterDeleteByVendorId</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="vendorRegCommRelDelete">
+				<task-object-name>com.tsa.puridiom.vendorregcommrel.tasks.VendorRegCommRelDeleteByVendor</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="sendNotification">
+			<task synchronous="true" continue-on-failure="false" name="vendorQualificationNotification">
+				<task-object-name>com.tsa.puridiom.vendorqualification.tasks.VendorQualificationNotification</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

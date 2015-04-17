@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="docCommentUpdateByLine" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="docCommentUpdateByLine">
+			<task synchronous="true" continue-on-failure="false" name="requisitionLineRefTypeSetup">			
+				<task-object-name>com.tsa.puridiom.requisitionline.tasks.RequisitionLineRefTypeSetup</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="docCommentList">			
+				<rule-filename></rule-filename>
+				<task-object-name>com.tsa.puridiom.doccomment.tasks.DocCommentRetrieveByLine</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="docTextList">			
+				<rule-filename></rule-filename>
+				<task-object-name>com.tsa.puridiom.doccomment.tasks.DocCommentTextRetrieveByLine</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="docCommentDeleteByLine">			
+				<task-object-name>com.tsa.puridiom.doccomment.tasks.DocCommentDeleteByLine</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="docCommentUpdateByLine">			
+				<task-object-name>com.tsa.puridiom.doccomment.tasks.DocCommentUpdateByLine</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="docCommentRetrieveByLine">			
+				<task-object-name>com.tsa.puridiom.doccomment.tasks.DocCommentRetrieveByLine</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+	</activities>
+</process>

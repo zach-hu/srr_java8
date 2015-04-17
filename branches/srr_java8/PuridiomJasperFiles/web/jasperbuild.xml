@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<project>
+	<property name="jrc.home" value="C:\JavaProjects\puridiom4\workspace"/>
+	<property name="jrc.ireports" value="C:\Program Files (x86)\Jaspersoft\iReport-3.7.0"/>
+	<property name="src" value="{$jrc.home}"/>
+	<property name="jrc.oid" value=""/>
+	<!-- Define the classpath used for report compilation -->
+	<path id="jrc.classpath">
+		<fileset dir="${jrc.home}/PuridiomReports"
+                 includes="PuridiomReports.jar"/>
+		<fileset dir="${jrc.home}/PuridiomFoundation"
+                 includes="PuridiomFoundation.jar"/>
+		<fileset dir="${jrc.home}/PuridiomCommon"
+                 includes="PuridiomCommon.jar"/>
+		<fileset dir="${jrc.home}/PuridiomProperties"
+                 includes="PuridiomProperties.jar"/>
+		<fileset dir="${jrc.home}/PuridiomUser"
+                 includes="PuridiomUser.jar"/>
+		<fileset dir="${jrc.home}/PuridiomVendors"
+                 includes="PuridiomVendors.jar"/>
+		<fileset dir="${jrc.home}/PuridiomPurchaseOrders"
+                 includes="PuridiomPurchaseOrders.jar"/>
+		<fileset dir="${jrc.ireports}\ide10\modules\ext"
+            includes="xerces-2.8.0.jar"/>
+		<fileset dir="${jrc.ireports}\ireport\modules\ext"
+                 includes="*.jar"/>
+	</path>
+	<echo>HOME=${jrc.home}</echo>
+	<!-- Define the custom Ant task that compiles report definitions -->
+	<taskdef name="jrc"
+         classname="net.sf.jasperreports.ant.JRAntCompileTask">
+		<classpath refid="jrc.classpath"/>
+	</taskdef>
+
+	<!-- Default Reports -->
+	<target name="CompileAll" description="Compile all Report/Form Definitions">
+		<delete>
+			<fileset dir="${jrc.home}/PuridiomJasperFiles/web/jasper"
+                 includes="**/*.jasper"/>
+		</delete>
+		<!-- Compile report definition -->
+		<jrc srcdir="${jrc.home}/PuridiomJasperFiles/web/jasper"
+              destdir="${jrc.home}/PuridiomJasperFiles/web/jasper">
+			<classpath
+            refid="jrc.classpath"/>
+			<include
+            name="**/*.jrxml"/>
+		</jrc>
+		<!-- Omit the report definition sources from the webapp -->
+	</target>
+
+	<!-- Default Reports -->
+	<target name="CompileAllModified" description="Compile all Modified Report/Form Definitions">
+		<!-- Compile report definition -->
+		<jrc srcdir="${jrc.home}/PuridiomJasperFiles/web/jasper"
+              destdir="${jrc.home}/PuridiomJasperFiles/web/jasper">
+			<classpath
+            refid="jrc.classpath"/>
+			<include
+            name="**/*.jrxml"/>
+		</jrc>
+		<!-- Omit the report definition sources from the webapp -->
+	</target>
+
+	<!-- Default Reports -->
+	<target name="CompileAllReports" description="Compile all Report Definitions">
+		<delete>
+			<fileset dir="${jrc.home}/PuridiomJasperFiles/web/jasper/reports"
+        	                 includes="**/*.jasper"/>
+		</delete>
+		<!-- Compile report definition -->
+		<jrc srcdir="${jrc.home}/PuridiomJasperFiles/web/jasper/reports"
+        	              destdir="${jrc.home}/PuridiomJasperFiles/web/jasper/reports">
+			<classpath
+        	            refid="jrc.classpath"/>
+			<include
+        	            name="**/*.jrxml"/>
+		</jrc>
+	</target>
+
+	<!-- Default Reports -->
+	<target name="CompileDefaultReports" description="Compile Default Definitions">
+		<delete>
+			<fileset dir="${jrc.home}/PuridiomJasperFiles/web/jasper/reports"
+        	                 includes="*.jasper"/>
+		</delete>
+		<!-- Compile report definition -->
+		<jrc srcdir="${jrc.home}/PuridiomJasperFiles/web/jasper/reports"
+        	              destdir="${jrc.home}/PuridiomJasperFiles/web/jasper/reports">
+			<classpath
+        	            refid="jrc.classpath"/>
+			<include
+        	            name="*.jrxml"/>
+		</jrc>
+	</target>
+
+</project>

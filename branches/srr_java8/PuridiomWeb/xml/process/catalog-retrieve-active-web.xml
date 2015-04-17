@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="catalogRetrieveActiveWeb" connection-type="Connection-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="retrieveAllActiveCatalogsWeb">
+			<task synchronous="true" continue-on-failure="false" name="catalogList">			
+				<task-object-name>com.tsa.puridiom.catalog.tasks.CatalogRetrieveActiveWeb</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+	</activities>
+</process>

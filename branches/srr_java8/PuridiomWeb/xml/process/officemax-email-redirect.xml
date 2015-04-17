@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="OfficeMaxEmailRedirect" connection-type="Connection-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="OfficeMaxEmailRedirect">
+			<task synchronous="true" continue-on-failure="false" name="OfficeMaxEmailRedirect">
+				<task-object-name>com.tsa.puridiom.emails.tasks.OfficeMaxParser</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="OfficeMaxEmailRedirect">
+				<rule-filename check-for-false="true">is-poheader-empty.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.emails.tasks.OfficeMaxEmailSendQueue</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+	</activities>
+</process>

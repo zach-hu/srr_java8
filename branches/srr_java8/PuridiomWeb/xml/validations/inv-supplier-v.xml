@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rule>
+	<clause type="NotEmpty">
+		<left-side>
+			<source>incomingRequestObjectMethod</source>
+			<object>invBinLocation</object>
+			<name>getVendorId</name>
+		</left-side>
+	</clause>
+	<logical-operator>IFTHEN</logical-operator>
+	<clause type="lookup">
+		<sql>from Vendor vendor where vendor.id = '@vendorid@' AND (vendor.status = '02' OR (vendor.status = '01' AND vendor.dateExpires >= @today@))</sql>
+		<source>invBinLocation</source>
+		<arguments>
+			<name>vendorid</name>
+			<source>invBinLocation</source>
+			<colName>getVendorId</colName>
+		</arguments>
+	</clause>
+</rule>

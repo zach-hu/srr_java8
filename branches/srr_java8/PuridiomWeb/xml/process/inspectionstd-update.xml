@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="inspectionStdUpdate" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="inspectionStdGenerateStandardCode">
+			<rule-filename>is-standardcode-empty.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="inspectionStdGenerateNumber">
+				<task-object-name>com.tsa.puridiom.inspectionstd.tasks.InspectionStdGenerateNumber</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="inspectionStdDeleteByStdCriteria">
+			<task synchronous="true" continue-on-failure="false" name="inspectionStdDeleteByStdCriteria">
+				<task-object-name>com.tsa.puridiom.inspectionstd.tasks.InspectionStdDeleteByStdCriteria</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="inspectionStdUpdateByStdCriteria">
+			<task synchronous="true" continue-on-failure="false" name="inspectionStdUpdateByStdCriteria">
+				<task-object-name>com.tsa.puridiom.inspectionstd.tasks.InspectionStdUpdateByStdCriteria</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+	</activities>
+</process>

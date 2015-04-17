@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="AccountAllocAmountRetrieve" connection-type="New-Connection">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="accountAllocAmountRetrieve">
+			<task synchronous="true" continue-on-failure="false" name="accountAllocAmountList">
+				<task-object-name>com.tsa.puridiom.account.tasks.AccountAllocAmountRetrieve</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="accountAllocAmountList">
+				<rule-filename></rule-filename>
+				<task-object-name>com.tsa.puridiom.account.tasks.AccountPopulateAllocationDescriptionByAllocList</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+	</activities>
+</process>

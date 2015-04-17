@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="SupplierAdd" connection-type="New-Transaction">
+	<!--Adds a new Supplier with a detault contact and address-->
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="CheckDupVendor">
+			<task synchronous="true" continue-on-failure="false" name="existingVendor">
+				<task-object-name>com.tsa.puridiom.vendor.tasks.VendorRetrieveById</task-object-name>
+				<post-action />
+			 </task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="vendorIdValidation">
+			<rule-filename check-for-false="true">is-existing-vendor-empty.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="true" name="vendor">
+				<task-object-name>com.tsa.puridiom.vendor.tasks.VendorSetValues</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="setErrorMsg">
+				<task-object-name>com.tsa.puridiom.vendorerrormsg.tasks.ErrorMsgSetDuplicateVendorId</task-object-name>
+			</task>
+			<post-action>exitProcess</post-action>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="CheckDupVendorName">
+			<task synchronous="true" continue-on-failure="false" name="Vendor_vendorName">
+				<task-object-name>com.tsa.puridiom.vendor.tasks.VendorNameStrip</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="vendorList">
+				<task-object-name>com.tsa.puridiom.vendor.tasks.VendorRetrieveByName</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="vendorNameValidation">
+			<rule-filename check-for-false="true">is-vendor-list-empty.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="true" name="vendor">
+				<task-object-name>com.tsa.puridiom.vendor.tasks.VendorSetValues</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="setErrorMsg">
+				<task-object-name>com.tsa.puridiom.vendorerrormsg.tasks.ErrorMsgSetDuplicateVendorName</task-object-name>
+			</task>
+			<post-action>exitProcess</post-action>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="CheckDupVendorEin">
+			<task synchronous="true" continue-on-failure="false" name="Vendor_vendorEin">
+				<task-object-name>com.tsa.puridiom.vendor.tasks.VendorEinStrip</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="vendorList">
+				<rule-filename>is-vendor-ein-not-empty.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.vendor.tasks.VendorRetrieveByEin</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="vendorEinValidation">
+			<rule-filename check-for-false="true">is-vendor-list-empty.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="true" name="vendor">
+				<task-object-name>com.tsa.puridiom.vendor.tasks.VendorSetValues</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="setErrorMsg">
+				<task-object-name>com.tsa.puridiom.vendorerrormsg.tasks.ErrorMsgSetDuplicateVendorEin</task-object-name>
+			</task>
+			<post-action>exitProcess</post-action>
+		</activity>
+<!--		<activity synchronous="true" continue-on-failure="false" name="setSystemDefaults">-->
+<!--			<rule-filename check-for-false="true"></rule-filename>-->
+<!--			<task synchronous="true" continue-on-failure="true" name="vendor">-->
+<!--				<task-object-name>com.tsa.puridiom.vendor.tasks.SetSystemDefaults</task-object-name>-->
+<!--			</task>-->
+<!--		</activity>-->
+		<activity synchronous="true" continue-on-failure="false" name="vendorAdd">
+			  <task synchronous="true" continue-on-failure="false" name="vendorsetup">
+				<task-object-name>com.tsa.puridiom.vendor.tasks.VendorAddSetup</task-object-name>
+				<post-action />
+			  </task>
+			  <task synchronous="true" continue-on-failure="false" name="vendor">
+				<task-object-name>com.tsa.puridiom.vendor.tasks.VendorSetValues</task-object-name>
+				<post-action />
+			  </task>
+			  <task synchronous="true" continue-on-failure="false" name="vendor">
+				<task-object-name>com.tsa.puridiom.vendor.tasks.VendorAdd</task-object-name>
+				<post-action />
+			  </task>
+		</activity>
+		<!--  the following activity is for VSE ONLY, they have the ability to add a TEMP vendor from a Purchase Order  -->
+		<activity synchronous="true" continue-on-failure="false" name="contactAddressCreateFromOrder">
+			<rule-filename>is-organization-vse.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="contactAddressCreateFromOrder">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>contact-address-create-from-order.xml</process-filename>
+			</task>
+		</activity>
+
+		<activity synchronous="true" continue-on-failure="false" name="contactAddressAdd">
+			 		 <task synchronous="true" continue-on-failure="false" name="contact">
+						<task-object-name>com.tsa.puridiom.contact.tasks.ContactAdd</task-object-name>
+						<post-action />
+					  </task>
+			  <task synchronous="true" continue-on-failure="false" name="address">
+				<task-object-name>com.tsa.puridiom.address.tasks.AddressAdd</task-object-name>
+				<post-action />
+			  </task>
+		  </activity>
+	 </activities>
+</process>

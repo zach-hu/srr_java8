@@ -1,0 +1,75 @@
+<browse_assetservice>
+	<columns>
+
+		<Asset_tagNumber>
+			<label>brw-tagNumber</label>
+			<link><![CDATA[javascript: viewassetservice('#AssetService_id_tagNumber^', '#AssetService_id_sequenceNo^', assetINum+assetDesc+assetTNum); void(0);]]></link>
+			<visible>1</visible>
+		</Asset_tagNumber>
+
+		<Asset_trackingNumber>
+			<visible>0</visible>
+		</Asset_trackingNumber>
+
+		<AssetService_id_tagNumber>
+			<visible>0</visible>
+		</AssetService_id_tagNumber>
+
+		<AssetService_id_sequenceNo>
+			<label>routingSequence</label>
+			<visible>1</visible>
+		</AssetService_id_sequenceNo>
+
+		<AssetService_serviceCallDate>
+			<label>assetservice-servicecalldate</label>
+			<visible>1</visible>
+		</AssetService_serviceCallDate>
+
+		<AssetService_callInitiatedBy>
+			<label>brw-callInitiatedBy</label>
+			<visible>1</visible>
+		</AssetService_callInitiatedBy>
+
+		<AssetService_dateInitiated>
+			<label>brw-dateInitiated</label>
+			<visible>0</visible>
+		</AssetService_dateInitiated>
+
+		<AssetService_responseDate>
+			<label>assetservice-responsedate</label>
+			<visible>0</visible>
+		</AssetService_responseDate>
+
+
+		<AssetService_completionDate>
+			<label>assetservice-completiondate</label>
+			<visible>0</visible>
+		</AssetService_completionDate>
+
+		<AssetService_serviceAction>
+			<label>assetservice-serviceaction</label>
+			<visible>0</visible>
+		</AssetService_serviceAction>
+
+		<AssetService_serviceCost>
+			<label>assetservice-servicecost</label>
+			<visible>0</visible>
+		</AssetService_serviceCost>
+
+		<AssetService_lastChgBy>
+			<label>lastChangedBy</label>
+			<visible>0</visible>
+		</AssetService_lastChgBy>
+
+		<AssetService_dateChanged>
+			<label>auditRecord-dateCreated</label>
+			<visible>0</visible>
+		</AssetService_dateChanged>
+
+	</columns>
+<sqlfrom>Asset as Asset, AssetService AssetService</sqlfrom>
+<sqlwhere><![CDATA[ Asset.tagNumber = AssetService.id.tagNumber ]]></sqlwhere>
+<sqlorderby>AssetService.id.sequenceNo DESC</sqlorderby>
+<pagesize>15</pagesize>
+<title>Asset Service Browse</title>
+</browse_assetservice>

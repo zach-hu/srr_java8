@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="trackingDataUpdate" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="trackingDataUpdate">
+			<task synchronous="true" continue-on-failure="false" name="trackingData">			
+				<task-object-name>com.tsa.puridiom.trackingnumber.tasks.TrackingDataSetValues</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="trackingDataAdd">			
+				<task-object-name>com.tsa.puridiom.trackingnumber.tasks.TrackingDataAdd</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+	</activities>
+</process>

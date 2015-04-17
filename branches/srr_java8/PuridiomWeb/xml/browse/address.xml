@@ -1,0 +1,66 @@
+<browse_address>
+	<columns>
+		<Address_id_addressCode>
+			<label>brw-addressCode</label>
+			<sort>A</sort>
+			<link><![CDATA[javascript: returnAddress('#Address_id_addressCode^'); void(0);]]></link>
+			<size>20</size>
+		</Address_id_addressCode>
+		<Address_addressLine1>
+			<label>brw-addressLine1</label>
+			<size>30</size>
+		</Address_addressLine1>
+		<dummy_space>
+			<selectsql>N</selectsql>
+			<size>20</size>
+			<detail>Y</detail>
+		</dummy_space>
+		<Address_addressLine2>
+			<size>80</size>
+			<detail>Y</detail>
+		</Address_addressLine2>
+		<dummy_space>
+			<selectsql>N</selectsql>
+			<size>20</size>
+			<detail>Y</detail>
+		</dummy_space>
+		<Address_addressLine3>
+			<size>80</size>
+			<detail>Y</detail>
+		</Address_addressLine3>
+		<dummy_space>
+			<selectsql>N</selectsql>
+			<size>20</size>
+			<detail>Y</detail>
+		</dummy_space>
+		<Address_addressLine4>
+			<size>80</size>
+			<detail>Y</detail>
+		</Address_addressLine4>
+		<Address_city>
+			<label>city</label>
+			<size>15</size>
+		</Address_city>
+		<Address_state>
+			<label>state</label>
+			<size>5</size>
+		</Address_state>
+		<Address_postalCode>
+			<label>zip</label>
+			<size>10</size>
+		</Address_postalCode>
+		<Address_taxCode>
+			<label>taxCode</label>
+			<size>10</size>
+		</Address_taxCode>
+		<Address_country>
+			<label>country</label>
+			<size>5</size>
+		</Address_country>
+	</columns>
+<sqlfrom>Address as Address</sqlfrom>
+<sqlwhere><![CDATA[ (Address.id.addressType = 'ADDR') ]]></sqlwhere>
+<sqlorderby>Address.id.addressCode ASC</sqlorderby>
+<pagesize>15</pagesize>
+<title>Address Browse</title>
+</browse_address>

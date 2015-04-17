@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="PaymentAccountRetrieveSumByPoNumber" connection-type="Connection-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="retrievePaymentTotal">
+			<task synchronous="true" continue-on-failure="false" name="paymentTotal">
+				<rule-filename>is-organization-bsc.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.paymentaccount.tasks.PaymentAccountRetrieveSumAllocAmountByPoNumber</task-object-name>
+				<post-action>exitActivity</post-action>
+			</task>
+			<!-- task synchronous="true" continue-on-failure="false" name="paymentTotal">
+				<task-object-name>com.tsa.puridiom.paymentaccount.tasks.PaymentAccountRetrieveSumByPoNumber</task-object-name>
+				<post-action></post-action>
+			</task-->
+			<task synchronous="true" continue-on-failure="false" name="paymentAccountList">
+				<task-object-name>com.tsa.puridiom.paymentaccount.tasks.PaymentAccountRetrieveBy</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="paymentTotal">
+				<task-object-name>com.tsa.puridiom.paymentaccount.tasks.PaymentAccountRetrieveSumByPoNumberCheckNumber</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+	 </activities>
+</process>

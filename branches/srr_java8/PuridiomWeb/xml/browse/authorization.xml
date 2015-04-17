@@ -1,0 +1,30 @@
+<browse_authorizationCode>
+	<columns>
+		<UserProfile_userId>
+			<label>user-userId</label>
+			<sort>A</sort>
+			<link><![CDATA[javascript: returnMe('#UserProfile_userId^'); void(0);]]></link>
+		</UserProfile_userId>
+		<UserProfile_firstName>
+			<label>firstName</label>
+		</UserProfile_firstName>
+		<UserProfile_middleInit>
+			<label>middleInitial</label>
+		</UserProfile_middleInit>
+		<UserProfile_lastName>
+			<label>lastName</label>
+		</UserProfile_lastName>
+		<UserProfile_displayName>
+			<userName>
+				<col>UserProfile_userId</col>
+			</userName>
+			<hidden>Y</hidden>
+			<hidden-input>Y</hidden-input>
+			<selectsql>N</selectsql>
+		</UserProfile_displayName>
+	</columns>
+<sqlfrom>UserProfile as UserProfile</sqlfrom>
+<sqlwhere><![CDATA[ (UserProfile.authorizedBy = 'Y') AND (UserProfile.status <> '03') AND (UserProfile.userId <> 'SYSADM') ]]></sqlwhere>
+<pagesize>15</pagesize>
+<title>Authorization Code Browse</title>
+</browse_authorizationCode>

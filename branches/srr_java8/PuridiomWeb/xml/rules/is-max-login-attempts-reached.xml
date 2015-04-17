@@ -1,0 +1,17 @@
+<rule>
+	<clause type="IntegerCompare">
+		<left-side>
+			<source>incomingRequest</source>
+			<name>loginCounter</name>
+		</left-side>
+		<operator>GREATEREQUAL</operator>
+		<right-side>
+			<source>Singleton</source>
+			<object>com.tsa.puridiom.property.PropertiesManager</object>
+			<name>getProperty</name>
+			<argument-value>MISC</argument-value>
+			<argument-value>MaxAttempts</argument-value>
+			<argument-value>3</argument-value>
+		</right-side>
+	</clause>
+</rule>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="disbLineAllocateAmount" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="disbLineAllocateAmount">
+			<task synchronous="true" continue-on-failure="false" name="disbAllocAmountSetup">			
+				<task-object-name>com.tsa.puridiom.disbline.tasks.DisbLineAllocateAmountSetup</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="disbLine">			
+				<task-object-name>com.tsa.puridiom.disbline.tasks.DisbLineRetrieveById</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="amountToAllocate">			
+				<task-object-name>com.tsa.puridiom.disbline.tasks.DisbLineAllocateAmount</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+	</activities>
+</process>

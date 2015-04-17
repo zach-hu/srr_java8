@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="rfqHeaderUpdate" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="rfqHeaderUpdate">
+			<task synchronous="true" continue-on-failure="false" name="rfqHeader">
+				<task-object-name>com.tsa.puridiom.rfqheader.tasks.RfqHeaderRetrieveById</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="RfqHeader_currencyFactor">
+				<rule-filename>is-rfqheader-currency-check-required.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.rfqheader.tasks.RfqHeaderGetCurrentCurrencyFactor</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="rfqHeader">
+				<rule-filename></rule-filename>
+				<task-object-name>com.tsa.puridiom.rfqheader.tasks.RfqHeaderSetValues</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="rfqHeader">
+				<task-object-name>com.tsa.puridiom.rfqheader.tasks.RfqHeaderUpdate</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="udf2CodeUpdate">
+			<rule-filename>is-reset-values-from-header.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="udf2CodeUpdate">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>rfqline-retrieve-by-header.xml</process-filename>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="udf2CodeUpdate">
+				<task-object-name>com.tsa.puridiom.rfqline.tasks.RfqLineResetValuesFromHeader</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+	</activities>
+</process>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="vendorResponseRetrieveByRfqQuestion" connection-type="Connection-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="vendorResponseRetrieveByRfqQuestion">
+			<task synchronous="true" continue-on-failure="false" name="rfqQuestionSetup">			
+				<task-object-name>com.tsa.puridiom.rfqquestion.tasks.RfqQuestionRetrieveSetup</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="vendorResponseList">			
+				<task-object-name>com.tsa.puridiom.vendorresponse.tasks.VendorResponseRetrieveByQuestion</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="rfqQuestion">			
+				<task-object-name>com.tsa.puridiom.rfqquestion.tasks.RfqQuestionDataSet</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="poLineInvItemLookup" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="poLineItemLookup">
+			<task synchronous="true" continue-on-failure="false" name="poLineItemLookup">			
+				<task-object-name>com.tsa.puridiom.poline.tasks.PoLineItemLookup</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="invItemLookup">
+			<task synchronous="true" continue-on-failure="false" name="invItemList">
+				<rule-filename>is-invlocation-itemlocation-empty</rule-filename>	
+				<!-- this task sets List InvLocation invLocationList in incomingRequest -->
+				<task-object-name>com.tsa.puridiom.invitem.tasks.InvItemRetrieveWithLocationsBy</task-object-name>
+				<post-action>exitActivity</post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="invItem">
+				<!-- this task sets InvLocation invLocation in incomingRequest -->
+				<task-object-name>com.tsa.puridiom.invitem.tasks.InvItemRetrieveByLocation</task-object-name>
+				<post-action>exitActivity</post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="invItemLookupSetValues">
+			<task synchronous="true" continue-on-failure="false" name="itemLookup">			
+				<task-object-name>com.tsa.puridiom.invitem.tasks.InvItemLookupSetValues</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="catalogItemLookupActivity">
+		    <rule-filename>is-item-not-found.xml</rule-filename>			
+			<task synchronous="true" continue-on-failure="false" name="catalogItemLookup">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>catalogitem-lookup-by-id.xml</process-filename>
+			</task>
+			<post-action>exitProcess</post-action>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="poLineUpdate">
+			<task synchronous="true" continue-on-failure="false" name="poLineUpdate">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>poline-update-from-lookup.xml</process-filename>
+			</task>
+		</activity>
+	</activities>
+</process>

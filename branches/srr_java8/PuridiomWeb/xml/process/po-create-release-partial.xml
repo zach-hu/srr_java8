@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- when creating the release order, use the blanket order as the default. then load data from the req.
+	just copy po_header! not for RO or SR
+the following information should NOT be loaded from the requisition: supplier, buyer, bill to and currency and any related fields (i.e. terms, fob, etc.)
+all other information including schedules, documents, comments and accounts should be loaded from the requisition.
+-->
+
+<process name="poCreateRelease" connection-type="Transaction-Required">
+  <activities>
+    <activity synchronous="true" continue-on-failure="false" name="createReleaseInitialSetup">
+      <task synchronous="true" continue-on-failure="false" name="setup">
+      <task-object-name>com.tsa.puridiom.po.tasks.AutoReleaseOrderFromReq</task-object-name>
+      <post-action></post-action>
+      </task>
+    </activity>
+    <activity synchronous="true" continue-on-failure="false" name="createReleaseHeader">
+    <task synchronous="true" continue-on-failure="false" name="nextRelease">
+      <task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+      <process-filename>po-next-release.xml</process-filename>
+    </task>
+    <task synchronous="true" continue-on-failure="false" name="poHeader">
+        <task-object-name>com.tsa.puridiom.poheader.tasks.PoHeaderSaveas</task-object-name>
+      </task>
+    <task synchronous="true" continue-on-failure="false" name="setup">
+      <task-object-name>com.tsa.puridiom.po.tasks.PoAutoReleaseFromReqSetup</task-object-name>
+      <post-action></post-action>
+    </task>
+  <!-- save as comments and accounts from requisition-->
+  <task synchronous="true" continue-on-failure="false" name="poHeaderCommentSaveas">
+    <task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+    <process-filename>poheader-saveas-from-req.xml</process-filename>
+  </task>
+
+    <task synchronous="true" continue-on-failure="false" name="poHeader">
+      <task-object-name>com.tsa.puridiom.po.tasks.PoAutoRelMapUdfs</task-object-name>
+      <post-action></post-action>
+    </task>
+	<task synchronous="true" continue-on-failure="false" name="getCurrencyFactor">
+	  <task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+	    <process-filename>get-currency-factor.xml</process-filename>
+	</task>
+    <task synchronous="true" continue-on-failure="false" name="setBlanketTaxCode">
+      <task-object-name>com.tsa.puridiom.po.tasks.SetBlanketTaxCode</task-object-name>
+      <post-action></post-action>
+    </task>
+    <task synchronous="true" continue-on-failure="false" name="poHeader">
+      <task-object-name>com.tsa.puridiom.po.tasks.PoSetCurrencyFactor</task-object-name>
+      <post-action></post-action>
+    </task>
+    <task synchronous="true" continue-on-failure="false" name="loadSupplier">
+      <task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+      <process-filename>po-load-supplier-for-releases.xml</process-filename>
+  	</task>
+  </activity>
+  <activity synchronous="true" continue-on-failure="false" name="poHeaderRetrieveShipToAddressSetupActivity">
+    <rule-filename>is-po-taxcode-from-shipto.xml</rule-filename>
+    <task synchronous="true" continue-on-failure="false" name="shipToAddressSetup">
+		<task-object-name>com.tsa.puridiom.poheader.tasks.PoHeaderRetrieveShipToAddressSetup</task-object-name>
+  	</task>
+  	<task synchronous="true" continue-on-failure="false" name="shipToAddress">
+		<rule-filename>is-address-code-not-empty</rule-filename>
+		<task-object-name>com.tsa.puridiom.address.tasks.AddressRetrieveShipTo</task-object-name>
+	</task>
+  </activity>
+  <activity synchronous="true" continue-on-failure="false" name="shipToAddressGetTaxCodeActivity">
+  	<rule-filename>is-shiptoaddress-taxcode-not-empty.xml</rule-filename>
+    <task synchronous="true" continue-on-failure="false" name="TaxCode_taxCode">
+		<task-object-name>com.tsa.puridiom.shipto.tasks.ShipToAddressGetTaxCode</task-object-name>
+    </task>
+  	<task synchronous="true" continue-on-failure="false" name="taxCode">
+		<task-object-name>com.tsa.puridiom.taxcode.tasks.TaxCodeRetrieveById</task-object-name>
+ 	</task>
+  </activity>
+  <activity synchronous="true" continue-on-failure="false" name="poHeaderTaxSetupActivity">
+	  <rule-filename>is-taxcode-not-empty.xml</rule-filename>
+	  <task synchronous="true" continue-on-failure="false" name="poHeader">
+        <task-object-name>com.tsa.puridiom.poheader.tasks.PoHeaderSetTax</task-object-name>
+      </task>
+  </activity>
+  <activity synchronous="true" continue-on-failure="false" name="createReleasePoHeader">
+    <task synchronous="true" continue-on-failure="false" name="poHeader">
+      <task-object-name>com.tsa.puridiom.poheader.tasks.PoHeaderUpdate</task-object-name>
+      <post-action></post-action>
+    </task>
+  </activity>
+  <activity synchronous="true" continue-on-failure="false" name="createReleaseLine">
+    <task synchronous="true" continue-on-failure="false" name="poLineCreateFromReq">
+      <task-object-name>com.tsa.puridiom.poline.tasks.PoLineLoadReqLines</task-object-name>
+    </task>
+    <task synchronous="true" continue-on-failure="false" name="poLineList">
+      <task-object-name>com.tsa.puridiom.poline.tasks.PoLineUpdateList</task-object-name>
+    </task>
+    </activity>
+    <activity synchronous="true" continue-on-failure="false" name="totals">
+    <task synchronous="true" continue-on-failure="false" name="totals">
+      <rule-filename>is-recalculate-required.xml</rule-filename>
+      <task-object-name>com.tsa.puridiom.po.tasks.AutoReleaseRecalculate</task-object-name>
+    </task>
+  </activity>
+    <activity synchronous="true" continue-on-failure="false" name="forwardPo">
+      <rule-filename>is-create-release-from-req.xml;is-forward-autorelease-active.xml</rule-filename>
+      <task synchronous="true" continue-on-failure="false" name="poForwardSetup">
+        <task-object-name>com.tsa.puridiom.po.tasks.PoForwardSetupFromAutoRelease</task-object-name>
+      </task>
+      <task synchronous="true" continue-on-failure="false" name="poForward">
+        <rule-filename>is-forward-allow.xml</rule-filename>
+        <task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+        <process-filename>po-forward.xml</process-filename>
+      </task>
+    </activity>
+  </activities>
+</process>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="PaymentAccountRetrieveById" connection-type="New-Connection">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="PaymentAccountRetrieveById">
+			  <task synchronous="true" continue-on-failure="false" name="paymentAccount">
+				<task-object-name>com.tsa.puridiom.paymentaccount.tasks.PaymentAccountRetrieveById</task-object-name>
+				<post-action></post-action>
+			  </task>
+		  </activity>
+	 </activities>
+</process>

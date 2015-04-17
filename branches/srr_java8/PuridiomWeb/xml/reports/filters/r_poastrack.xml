@@ -1,0 +1,53 @@
+<r_poastrack>
+  <columns>
+		<PoLine_poNumber>
+			<label>Po Number</label>
+			<type>STRING</type>
+		</PoLine_poNumber>
+		<PoLine_lineNumber>
+			<label>Line Number</label>
+			<type>BIGDECIMAL</type>
+		</PoLine_lineNumber>
+		<PoLine_description>
+			<label>Description</label>
+			<type>STRING</type>
+		</PoLine_description>
+		<InvoiceHeader_invoiceDate>
+			<label>Invoice Date</label>
+			<type>DATE</type>
+		</InvoiceHeader_invoiceDate>
+		<ReceiptLine_receiptDate>
+			<label>Receipt Date</label>
+			<type>DATE</type>
+		</ReceiptLine_receiptDate>
+		<ReceiptLine_udf1Code>
+			<label>Udf 1 Code</label>
+			<type>STRING</type>
+		</ReceiptLine_udf1Code>
+		<ReceiptLine_qtyReceived>
+			<label>Quantity Received</label>
+			<type>BIGDECIMAL</type>
+		</ReceiptLine_qtyReceived>
+		<ReceiptLine_receiptNumber>
+			<label>Receipt Number</label>
+			<type>STRING</type>
+		</ReceiptLine_receiptNumber>
+		<PoLine_quantity>
+			<label>Quantity</label>
+			<type>BIGDECIMAL</type>
+		</PoLine_quantity>
+		<PoLine_itemNumber>
+			<label>Item Number</label>
+			<type>STRING</type>
+		</PoLine_itemNumber>
+		<Asset_tagNumber>
+			<label>Tag Number</label>
+			<type>STRING</type>
+		</Asset_tagNumber>
+	</columns>
+  <sqlfrom> PoLine as PoLine , ReceiptLine as ReceiptLine , Asset as Asset , InvoiceHeader as InvoiceHeader , PoHeader as PoHeader </sqlfrom>
+  <sqlwhere>( PoLine.icPoHeader = InvoiceHeader.icPoHeader) and  ( PoLine.icPoLine = ReceiptLine.icPoLine ) and ( ReceiptLine.icRecLine = Asset.icReceipt ) and ( PoLine.asset = 'Y' ) and ( PoHeader.lastRevision = 'C' ) and (PoHeader.icPoHeader = PoLine.icPoHeader) </sqlwhere>
+
+  <title>Purchase Order Asset Tracking Report</title>
+</r_poastrack>
+

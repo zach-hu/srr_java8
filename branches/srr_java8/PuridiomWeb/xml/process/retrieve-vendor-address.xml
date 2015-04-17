@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="retrieveVendorAddress" connection-type="Connection-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="retrieveVendorAddress">
+			<task synchronous="true" continue-on-failure="false" name="vendorToAwardAddressSetup">
+				<task-object-name>com.tsa.puridiom.rfqheader.tasks.RfqVendorToAwardRetrieveAddressSetup</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="vendorToAwardAddress">
+				<rule-filename>is-address-type-not-empty;is-address-code-not-empty</rule-filename>
+				<task-object-name>com.tsa.puridiom.address.tasks.AddressRetrieveById</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="reportQueueUpdate" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="setNextRunDate">
+			<task synchronous="true" continue-on-failure="false" name="retrievedata">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>reportqueue-update-nextrun.xml</process-filename>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="updarteReportQueue">
+			<task synchronous="true" continue-on-failure="false" name="reportQueue">
+				<task-object-name>com.tsa.puridiom.reportqueue.tasks.ReportQueueUpdate</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+	</activities>
+</process>

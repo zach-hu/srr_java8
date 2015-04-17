@@ -1,0 +1,32 @@
+<rule>
+	<clause type="StringCompare">
+		<left-side>
+			<source>incomingRequest</source>
+			<name>responseValue</name>
+		</left-side>
+		<operator>NOTEQUAL</operator>
+		<right-side>
+			<source>constant</source>
+		</right-side>
+	</clause>
+	<logical-operator>AND</logical-operator>
+	<clause type="NotEmpty">
+		<left-side>
+			<source>incomingRequestObjectMethod</source>
+			<object>responseValue</object>
+			<name>getComp_id</name>
+			<argument-value>getIcQuestion</argument-value>
+			<argument-value>fromObject</argument-value>
+		</left-side>
+	</clause>	
+	<logical-operator>AND</logical-operator>
+	<clause type="NotEmpty">
+		<left-side>
+			<source>incomingRequestObjectMethod</source>
+			<object>responseValue</object>
+			<name>getComp_id</name>
+			<argument-value>getResponseValue</argument-value>
+			<argument-value>fromObject</argument-value>
+		</left-side>
+	</clause>
+</rule>

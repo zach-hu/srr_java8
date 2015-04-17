@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="quickReceiptCreateFromOrder" connection-type="New-Transaction">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="receiptHeaderCreate">
+			<task synchronous="true" continue-on-failure="false" name="receiptHeaderCreate">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>receipt-create-from-order.xml</process-filename>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="receiptLinesCreate">
+			<task synchronous="true" continue-on-failure="false" name="receiptLinesCreate">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>receiptline-create-from-poline-list.xml</process-filename>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="receiptGetFormNumber">
+			<task synchronous="true" continue-on-failure="false" name="receiptGetFormNumber">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>receipt-get-form-number.xml</process-filename>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="quickReceive">
+			<task synchronous="true" continue-on-failure="false" name="receiptGetFormNumber">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>receiptheader-quick-receive.xml</process-filename>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="quickReceiveEmail">
+			<task synchronous="true" continue-on-failure="false" name="quickReceiveEmail">
+				<task-object-name>com.tsa.puridiom.receipt.tasks.QueueAddQuickReceive</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+	</activities>
+</process>

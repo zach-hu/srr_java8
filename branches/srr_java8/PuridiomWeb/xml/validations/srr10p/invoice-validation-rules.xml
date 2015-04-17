@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<validation-rules>
+	<validations>
+		<save enabled="yes">
+			<rule>
+				<filename>amount-compare-total.xml</filename>
+				<alias>Compare Total</alias>
+				<msg>Invoice Amount must equal Allocated Amount!</msg>
+				<severity>E</severity>
+				<order>10</order>
+				<enabled>Y</enabled>
+				<link><![CDATA[javascript: doSubmit('invoice/iv_review.jsp', 'InvoiceRetrieve'); void(0);]]></link>
+			</rule>
+			<rule>
+				<filename>ivc-subtotal.xml</filename>
+				<alias>Total</alias>
+				<msg>Invoice Total must be greater than zero!</msg>
+				<severity>E</severity>
+				<order>20</order>
+				<enabled>N</enabled>
+				<link><![CDATA[javascript: doSubmit('invoice/iv_items.jsp', 'InvoiceHeaderRetrieveById;InvoiceLineRetrieveByHeader'); void(0);]]></link>
+			</rule>
+			<rule>
+				<filename>srr-account-valid.xml</filename>
+				<alias>Valid Account</alias>
+				<msg>Invalid organization account project combination.</msg>
+				<severity>E</severity>
+				<order>325</order>
+				<enabled>N</enabled>
+				<link><![CDATA[javascript: doSubmit('invoice/iv_accounts.jsp', 'AccountRetrieveByLine'); void(0);]]></link>
+			</rule>
+			<rule>
+				<filename>srr-account-valid-sp.xml</filename>
+				<alias>Valid Account</alias>
+				<msg>Invalid Org/Account/Project combination!</msg>
+				<severity>E</severity>
+				<order>325</order>
+				<enabled>Y</enabled>
+				<link><![CDATA[javascript: doSubmit('invoice/iv_accounts.jsp', 'AccountRetrieveByLine'); void(0);]]></link>
+			</rule>
+			<rule>
+				<filename>ac-04-check.xml</filename>
+				<alias>AMS #</alias>
+				<msg>If AMS# is not null, AMS Name cannot be null.</msg>
+				<severity>E</severity>
+				<order>1140</order>
+				<enabled>Y</enabled>
+				<link><![CDATA[javascript: doSubmit('invoice/iv_accounts.jsp', 'AccountRetrieveByLine'); void(0);]]></link>
+			</rule>
+			<rule>
+				<filename>ac-04ln-check.xml</filename>
+				<alias>AMS #</alias>
+				<msg>If AMS# is not null, AMS Name cannot be null for the account on
+					the line item.</msg>
+				<severity>E</severity>
+				<order>1145</order>
+				<enabled>Y</enabled>
+				<link><![CDATA[javascript: doSubmit('invoice/iv_items.jsp', 'InvoiceLineRetrieveByHeader'); void(0);]]></link>
+			</rule>
+			<rule>
+				<filename>ac-05-check.xml</filename>
+				<alias>AMS Name</alias>
+				<msg>If AMS Name is not null, AMS # cannot be null.</msg>
+				<severity>E</severity>
+				<order>1150</order>
+				<enabled>Y</enabled>
+				<link><![CDATA[javascript: doSubmit('invoice/iv_accounts.jsp', 'AccountRetrieveByLine'); void(0);]]></link>
+			</rule>
+			<rule>
+				<filename>ac-05ln-check.xml</filename>
+				<alias>AMS Name</alias>
+				<msg>If AMS Name is not null, AMS # cannot be null for the account
+					on the line item.</msg>
+				<severity>E</severity>
+				<order>1155</order>
+				<enabled>Y</enabled>
+				<link><![CDATA[javascript: doSubmit('invoice/iv_items.jsp', 'InvoiceLineRetrieveByHeader'); void(0);]]></link>
+			</rule>
+			<rule>
+				<filename>ivc-ac01ln-mv.xml</filename>
+				<alias>Org ID</alias>
+				<msg>You must enter/select a valid Org ID for every line item.</msg>
+				<severity>E</severity>
+				<order>160</order>
+				<enabled>Y</enabled>
+				<link><![CDATA[javascript: doSubmit('invoice/iv_items.jsp', 'InvoiceHeaderRetrieveById;InvoiceLineRetrieveByHeader'); void(0);]]></link>
+			</rule>
+			<rule>
+				<filename>ivc-ac02ln-mv.xml</filename>
+				<alias>Account ID</alias>
+				<msg>You must enter/select a valid Account ID for every line item.</msg>
+				<severity>E</severity>
+				<order>170</order>
+				<enabled>Y</enabled>
+				<link><![CDATA[javascript: doSubmit('invoice/iv_items.jsp', 'InvoiceHeaderRetrieveById;InvoiceLineRetrieveByHeader'); void(0);]]></link>
+			</rule>
+			<rule>
+				<filename>ivc-ac03ln-mv.xml</filename>
+				<alias>Project ID</alias>
+				<msg>You must enter/select a valid Project ID for every line item.</msg>
+				<severity>E</severity>
+				<order>180</order>
+				<enabled>N</enabled>
+				<link><![CDATA[javascript: doSubmit('invoice/iv_items.jsp', 'InvoiceHeaderRetrieveById;InvoiceLineRetrieveByHeader'); void(0);]]></link>
+			</rule>
+			<rule>
+				<filename>ivc-ac03ln-v.xml</filename>
+				<alias>Project ID</alias>
+				<msg>You must select a valid Project ID for every line item.</msg>
+				<severity>E</severity>
+				<order>180</order>
+				<enabled>N</enabled>
+				<link><![CDATA[javascript: doSubmit('invoice/iv_items.jsp', 'InvoiceHeaderRetrieveById;InvoiceLineRetrieveByHeader'); void(0);]]></link>
+			</rule>
+			<rule>
+				<filename>ivc-ac04ln-v.xml</filename>
+				<alias>AMS Name</alias>
+				<msg>You must enter/select a valid AMS Name for every line item.</msg>
+				<severity>E</severity>
+				<order>190</order>
+				<enabled>Y</enabled>
+				<link><![CDATA[javascript: doSubmit('invoice/iv_items.jsp', 'InvoiceHeaderRetrieveById;InvoiceLineRetrieveByHeader'); void(0);]]></link>
+			</rule>
+			<rule>
+				<filename>ivc-ac05ln-v.xml</filename>
+				<alias>AMS No</alias>
+				<msg>You must enter/select a valid AMS # for every line item.</msg>
+				<severity>E</severity>
+				<order>200</order>
+				<enabled>Y</enabled>
+				<link><![CDATA[javascript: doSubmit('invoice/iv_items.jsp', 'InvoiceHeaderRetrieveById;InvoiceLineRetrieveByHeader'); void(0);]]></link>
+			</rule>
+			<rule>
+				<filename>ivc-i312.xml</filename>
+				<alias>SC I-312</alias>
+				<msg>Invoice may be subject to I 312 withholding</msg>
+				<severity>W</severity>
+				<order>210</order>
+				<enabled>Y</enabled>
+				<link><![CDATA[javascript: doSubmit('invoice/iv_general_info.jsp', 'InvoiceHeaderRetrieveById'); void(0);]]></link>
+			</rule>
+		</save>
+	</validations>
+</validation-rules>

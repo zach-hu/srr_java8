@@ -1,0 +1,75 @@
+<browse_inv_receipt_history>
+	<columns>
+		<PoHeader_poNumber>
+			<label>brw-poNumber</label>
+			<size>10</size>
+		</PoHeader_poNumber>
+		<PoHeader_releaseNumber>
+			<label>brw-releaseNumber</label>
+			<size>5</size>
+		</PoHeader_releaseNumber>
+		<PoHeader_revisionNumber>
+			<label>brw-revisionNumber</label>
+			<size>5</size>
+		</PoHeader_revisionNumber>
+		<PoHeader_poDate>
+			<label>poDate</label>
+			<size>12</size>
+		</PoHeader_poDate>
+		<PoHeader_vendorId>
+			<label>brw-vendorId</label>
+			<size>15</size>
+		</PoHeader_vendorId>
+		<PoHeader_buyerCode>
+			<label>brw-buyer</label>
+			<hidden>Y</hidden>
+		</PoHeader_buyerCode>
+		<PoLine_lineNumber>
+			<label>hdg-lineNumber</label>
+			<size>5</size>
+		</PoLine_lineNumber>
+		<PoLine_quantity>
+			<label>quantity</label>
+			<size>9</size>
+			<type>QtyDecimal</type>
+		</PoLine_quantity>
+		<PoLine_umCode>
+			<label>U/M</label>
+			<size>3</size>
+		</PoLine_umCode>
+		<PoLine_unitPrice>
+			<label>brw-unitPrice</label>
+			<type>DollarDecimal</type>
+			<hidden>Y</hidden>
+		</PoLine_unitPrice>
+		<ReceiptLine_receiptDate>
+			<label>receiptDate</label>
+			<type>DATE</type>
+			<size>12</size>
+		</ReceiptLine_receiptDate>
+		<ReceiptLine_receivedBy>
+			<label>brw-receivedBy</label>
+			<type>USER-ID</type>
+			<visible>0</visible>
+		</ReceiptLine_receivedBy>
+		<ReceiptLine_qtyReceived>
+			<label>brw-received</label>
+			<type>QtyDecimal</type>
+			<size>8</size>
+		</ReceiptLine_qtyReceived>
+		<ReceiptLine_qtyReturned>
+			<label>returnQuantity</label>
+			<type>QtyDecimal</type>
+			<size>8</size>
+		</ReceiptLine_qtyReturned>
+		<ReceiptLine_qtyRejected>
+			<label>brw-rejected</label>
+			<type>QtyDecimal</type>
+			<size>8</size>
+		</ReceiptLine_qtyRejected>
+	</columns>
+<sqlfrom>PoHeader as PoHeader, PoLine as PoLine, ReceiptLine as ReceiptLine</sqlfrom>
+<sqlwhere><![CDATA[ (PoHeader.icPoHeader = PoLine.icPoHeader) and (ReceiptLine.icPoLine = PoLine.icPoLine) ]]></sqlwhere>
+<pagesize>15</pagesize>
+<title>Order Receipt History</title>
+</browse_inv_receipt_history>

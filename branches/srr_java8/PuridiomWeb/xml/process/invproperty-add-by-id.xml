@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="InvPropertyAddById" connection-type="New-Transaction">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="retrieveByRecHeaderPoLIne">
+			<task synchronous="true" continue-on-failure="false" name="receiptLine">
+				<task-object-name>com.tsa.puridiom.receiptline.tasks.ReceiptLineRetrieveByHeaderPoLine</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="invPropertyGenerateAssetNumberActivity">
+			<task synchronous="true" continue-on-failure="false" name="invPropertyGenerateAssetNumber">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>invproperty-generate-asset-number.xml</process-filename>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="addInvPropertyActivity">
+			<task synchronous="true" continue-on-failure="false" name="invPropertyIc">
+				<task-object-name>com.tsa.puridiom.invproperty.tasks.InvPropertyAddSetup</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="invProperty">
+				<task-object-name>com.tsa.puridiom.invproperty.tasks.InvPropertySetValues</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="invProperty">
+				<task-object-name>com.tsa.puridiom.invproperty.tasks.InvPropertyAdd</task-object-name>
+				<post-action />
+			   </task>
+		  </activity>
+	 </activities>
+</process>

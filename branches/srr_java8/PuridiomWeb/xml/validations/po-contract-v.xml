@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rule>
+	<clause type="Empty">
+		<left-side>
+			<source>incomingRequestObjectMethod</source>
+			<object>header</object>
+			<name>getContractNo</name>
+		</left-side>
+	</clause>
+	<logical-operator>OR</logical-operator>
+	<clause type="lookup">
+		<sql><![CDATA[from PoHeader poHeader where poHeader.icPoHeader <> '@icPoHeader@' AND poHeader.contractNo = '@contractNo@' AND poHeader.poType = 'CT']]></sql>
+		<source>header</source>
+		<arguments>
+			<name>contractNo</name>
+			<source>header</source>
+			<colName>getContractNo</colName>
+		</arguments>
+		<arguments>
+			<name>icPoHeader</name>
+			<source>header</source>
+			<colName>getIcPoHeader</colName>
+		</arguments>
+	</clause>
+</rule>

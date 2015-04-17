@@ -1,0 +1,54 @@
+<browse_requisition_header>
+	<columns>
+		<RequisitionHeader_icReqHeader>
+	        <hidden>Y</hidden>
+	        <hidden-input>Y</hidden-input>
+	        <distinct>Y</distinct>
+		</RequisitionHeader_icReqHeader>
+		<RequisitionHeader_requisitionNumber>
+			<label><![CDATA[brw-requisitionNumber]]></label>
+			<sort>D</sort>
+			<link><![CDATA[javascript: returnMe('#RequisitionHeader_requisitionNumber^'); void(0);]]></link>
+			<size>12</size>
+		</RequisitionHeader_requisitionNumber>
+		<RequisitionHeader_requisitionType>
+			<label>MSR Type</label>
+            <size>10</size>
+		</RequisitionHeader_requisitionType>
+		<RequisitionHeader_requisitionDate>
+			<label><![CDATA[brw-requisitionDate]]></label>
+			<size>10</size>
+			<type>DATE</type>
+		</RequisitionHeader_requisitionDate>
+		<RequisitionHeader_dateEntered>
+			<label><![CDATA[brw-dateentered]]></label>
+			<hidden>Y</hidden>
+			<type>DATE</type>
+		</RequisitionHeader_dateEntered>
+		<RequisitionHeader_requiredDate>
+			<label><![CDATA[brw-requiredDate]]></label>
+			<size>10</size>
+			<type>DATE</type>
+			<hidden>Y</hidden>
+		</RequisitionHeader_requiredDate>
+		<RequisitionHeader_requisitionerCode>
+			<label>Requestor Name</label>
+            <size>20</size>
+            <type>USER-ID</type>
+		</RequisitionHeader_requisitionerCode>
+		<RequisitionHeader_priorityCode>
+			<label>Proc Level</label>
+            <size>10</size>
+		</RequisitionHeader_priorityCode>
+		<RequisitionHeader_status>
+			<label><![CDATA[brw-status]]></label>
+			<type>STATUS</type>
+			<size>15</size>
+		</RequisitionHeader_status>
+	</columns>
+<sqlfrom>RequisitionHeader as RequisitionHeader</sqlfrom>
+<sqlwhere><![CDATA[RequisitionHeader.requisitionType = 'M' AND RequisitionHeader.requisitionNumber <> 'N/A' AND RequisitionHeader.requisitionNumber <> 'N&#x2f;A']]></sqlwhere>
+<sqlorderby>RequisitionHeader.requisitionNumber DESC</sqlorderby>
+<pagesize>15</pagesize>
+<title>MSR Browse</title>
+</browse_requisition_header>

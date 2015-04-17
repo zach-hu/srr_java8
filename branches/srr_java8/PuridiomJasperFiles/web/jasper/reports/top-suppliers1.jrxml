@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created using JasperAssistant (http://www.jasperassistant.com) -->
+<!DOCTYPE jasperReport PUBLIC "-//JasperReports//DTD Report Design//EN" "http://jasperreports.sourceforge.net/dtds/jasperreport.dtd">
+
+<jasperReport name="TopSuppliers" language="java" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="30" bottomMargin="30">
+	<property name="com.jasperassistant.designer.GridWidth" value="12"/>
+	<property name="com.jasperassistant.designer.GridHeight" value="12"/>
+	<property name="com.jasperassistant.designer.DataSource" value="testora"/>
+	<property name="com.jasperassistant.designer.SnapToGrid" value="false"/>
+	<property name="com.jasperassistant.designer.Grid" value="false"/>
+	<queryString><![CDATA[select PoHeader_vendorId, PoHeader_total
+from (SELECT  p.vendor_name PoHeader_vendorId, sum(p.total) PoHeader_total 
+from Po_Header p
+where p.status >= '3030' and p.status < '9000' and p.vendor_name is not null
+group by p.vendor_name order by PoHeader_total desc)
+where rownum<=10 ]]></queryString>
+	<field name="PoHeader_total" class="java.math.BigDecimal">
+	</field>
+	<field name="PoHeader_vendorId" class="java.lang.String">
+	</field>
+	<summary>
+		<band height="325">
+			<barChart>
+				<chart customizerClass="com.tsa.puridiom.graphs.design.customizer.BarChartCustomizer">
+				<reportElement positionType="Float" x="18" y="9" width="511" height="304"/>
+					<chartTitle>
+						<titleExpression><![CDATA["Chart Title"]]></titleExpression>
+					</chartTitle>
+					<chartSubtitle>
+						<subtitleExpression><![CDATA["Top 10 Suppliers By Amount"]]></subtitleExpression>
+					</chartSubtitle>
+				</chart>
+				<categoryDataset>
+					<dataset resetType="None"/>
+					<categorySeries>
+						<seriesExpression><![CDATA[$F{PoHeader_vendorId}]]></seriesExpression>
+						<categoryExpression><![CDATA["Vendor"]]></categoryExpression>
+						<valueExpression><![CDATA[$F{PoHeader_total}]]></valueExpression>
+						<labelExpression><![CDATA[$F{PoHeader_total}.toString()]]></labelExpression>
+					</categorySeries>
+				</categoryDataset>
+				<barPlot isShowTickMarks="false">
+					<plot/>
+				</barPlot>
+			</barChart>
+		</band>
+	</summary>
+</jasperReport>

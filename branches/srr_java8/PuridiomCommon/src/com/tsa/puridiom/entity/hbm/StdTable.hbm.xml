@@ -1,0 +1,92 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping>
+
+<class
+    name="com.tsa.puridiom.entity.StdTable"
+    table="STD_TABLE"
+>
+    <composite-id name="comp_id" class="com.tsa.puridiom.entity.StdTablePK">
+        <key-property name="tableType" column="TABLE_TYPE" type="java.lang.String"/>
+        <key-property name="tableKey" column="TABLE_KEY" type="java.lang.String"/>
+    </composite-id>
+    <property
+        name="description"
+        type="java.lang.String"
+        column="DESCRIPTION"
+        length="255"
+    />
+    <property
+        name="dateEntered"
+        type="java.sql.Timestamp"
+        column="DATE_ENTERED"
+        length="7"
+    />
+    <property
+        name="dateExpires"
+        type="java.sql.Timestamp"
+        column="DATE_EXPIRES"
+        length="7"
+    />
+    <property
+        name="status"
+        type="java.lang.String"
+        column="STATUS"
+        length="4"
+    />
+    <property
+        name="owner"
+        type="java.lang.String"
+        column="OWNER"
+        length="15"
+    />
+    <property
+        name="dateChanged"
+        type="java.sql.Timestamp"
+        column="DATE_CHANGED"
+        length="7"
+    />
+    <property
+        name="tableInd"
+        type="java.lang.String"
+        column="TABLE_IND"
+        length="2"
+    />
+    <property
+        name="tableNum"
+        type="java.math.BigDecimal"
+        column="TABLE_NUM"
+        length="15"
+    />
+    <property
+        name="tableOther"
+        type="java.lang.String"
+        column="TABLE_OTHER"
+        length="255"
+    />
+    <property
+        name="udf1Code"
+        type="java.lang.String"
+        column="UDF_1_CODE"
+        length="30"
+    />
+    <property
+        name="udf2Code"
+        type="java.lang.String"
+        column="UDF_2_CODE"
+        length="30"
+    />
+    <property
+        name="udf3Code"
+        type="java.lang.String"
+        column="UDF_3_CODE"
+        length="30"
+    />
+
+    <!-- associations -->
+
+</class>
+</hibernate-mapping>

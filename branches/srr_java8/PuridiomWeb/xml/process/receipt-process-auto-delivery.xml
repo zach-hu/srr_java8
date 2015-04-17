@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="receiptProcessAutoDelivery" connection-type="Connection-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="receiptHeaderRetrieveForAutoDeliver">
+			<task synchronous="true" continue-on-failure="false" name="receiptHeaderList">
+				<task-object-name>com.tsa.puridiom.receiptheader.tasks.ReceiptHeaderRetrieveForAutoDelivery</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="receiptProcessAutoDelivery">
+	      	<task synchronous="true" continue-on-failure="false" name="processAutoDelivery">
+		        <task-object-name>com.tsa.puridiom.receiptheader.tasks.ReceiptHeaderProcessAutoDelivery</task-object-name>
+	      	</task>
+		</activity>
+	</activities>
+</process>

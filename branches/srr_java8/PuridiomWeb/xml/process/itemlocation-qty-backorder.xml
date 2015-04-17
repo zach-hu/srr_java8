@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="BackorderQty" connection-type="Connection-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="QtyBackorder">
+			<task synchronous="true" continue-on-failure="false" name="Setup">
+				<task-object-name>com.tsa.puridiom.invlocation.tasks.QuantityBackorderSetup</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="Backorder">	
+				<task-object-name>com.tsa.puridiom.requisitionline.tasks.RequisitionLineQtyOnBackorder</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

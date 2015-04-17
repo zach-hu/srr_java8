@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="catalogitem-lookup-by-id" connection-type="None">
+	<rule-filename>is-catalogitem-itemnumber-not-empty</rule-filename>
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="catalogItemLookupActivity">
+			<task synchronous="true" continue-on-failure="false" name="catalogInfoRetrieve">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>catalogitem-lookup-retrieve.xml</process-filename>
+			</task>
+			<!-- 
+			<task synchronous="true" continue-on-failure="false" name="explodeKit">
+				<rule-filename>is-itemlookup-kit</rule-filename>
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>catalogitem-explode-kit.xml</process-filename>
+				<post-action>exitProcess</post-action>
+			</task>
+			 -->
+			 <task synchronous="true" continue-on-failure="false" name="requisitionLineUpdateWithNoSave">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>requisitionline-reupdate-from-itemlookup.xml</process-filename>
+			</task>
+		</activity>
+	</activities>
+</process>

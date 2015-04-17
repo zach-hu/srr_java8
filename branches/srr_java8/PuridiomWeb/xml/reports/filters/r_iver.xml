@@ -1,0 +1,81 @@
+<r_iver>
+  <columns>
+		<DisbLine_commodityCode>
+			<label>Commodity Code</label>
+			<type>STRING</type>
+		</DisbLine_commodityCode>
+		<DisbLine_description>
+			<label>Description</label>
+			<type>STRING</type>
+		</DisbLine_description>
+		<DisbHeader_disbDate>
+			<label>Disb Date</label>
+			<type>DATE</type>
+		</DisbHeader_disbDate>
+		<DisbLine_quantity>
+			<label>Quantity</label>
+			<type>BIGDECIMAL</type>
+		</DisbLine_quantity>
+		<DisbLine_aisle>
+			<label>Aisle</label>
+			<type>STRING</type>
+		</DisbLine_aisle>
+		<DisbLine_locrow>
+			<label>Locrow</label>
+			<type>STRING</type>
+		</DisbLine_locrow>
+		<DisbLine_tier>
+			<label>Tier</label>
+			<type>STRING</type>
+		</DisbLine_tier>
+		<DisbLine_bin>
+			<label>Bin</label>
+			<type>STRING</type>
+		</DisbLine_bin>
+		<DisbHeader_itemLocation>
+			<label>Location</label>
+			<type>STRING</type>
+		</DisbHeader_itemLocation>
+		<DisbHeader_requisitionNumber>
+			<label>Requisition Number</label>
+			<type>STRING</type>
+		</DisbHeader_requisitionNumber>
+		<DisbLine_itemNumber>
+			<label>Item Number</label>
+			<type>STRING</type>
+		</DisbLine_itemNumber>
+		<DisbHeader_appDate>
+			<label>App Date</label>
+			<type>DATE</type>
+		</DisbHeader_appDate>
+		<DisbLine_itemLocation>
+			<label>Location</label>
+			<type>STRING</type>
+		</DisbLine_itemLocation>
+		<DisbHeader_shipToCode>
+			<label>Ship To Code</label>
+			<type>STRING</type>
+		</DisbHeader_shipToCode>
+		<DisbHeader_disbNumber>
+			<label>Disb Number</label>
+			<type>STRING</type>
+		</DisbHeader_disbNumber>
+		<DisbLine_unitPrice>
+			<label>Unit Price</label>
+			<type>BIGDECIMAL</type>
+		</DisbLine_unitPrice>
+		<DisbHeader_requisitionerCode>
+			<label>Requisitioner Code</label>
+			<type>STRING</type>
+		</DisbHeader_requisitionerCode>
+		<DisbLine_departmentCode>
+			<label>Department Code</label>
+			<type>STRING</type>
+		</DisbLine_departmentCode>
+	</columns>
+  <sqlfrom>DisbLine as DisbLine, DisbHeader as DisbHeader</sqlfrom>
+  <sqlwhere><![CDATA[(DisbHeader.icDsbHeader = DisbLine.icDsbHeader) and ((DisbHeader.status = '30') or (DisbHeader.status = '55')) and(DisbLine.quantity > 0 )]]></sqlwhere>
+  <title>Inventory Disbursement Report (Extended Inventory)</title>
+
+</r_iver>
+

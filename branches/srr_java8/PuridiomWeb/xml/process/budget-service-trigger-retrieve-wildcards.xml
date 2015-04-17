@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="retrieveBudgetWildcards" connection-type="New-Connection">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="budgetCheckSetup">
+			<task synchronous="true" continue-on-failure="false" name="budgetCheckSetup">
+				<task-object-name>com.puridiom.service.budget.tasks.BudgetServiceSetup</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="BudgetCenter_budgetId">
+				<task-object-name>com.puridiom.service.budget.tasks.BudgetServiceWildcardRetrieveFromTrigger</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="wilcardBudget">
+				<task-object-name>com.tsa.puridiom.budgetcenter.tasks.BudgetCenterRetrieveById</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+	</activities>
+</process>

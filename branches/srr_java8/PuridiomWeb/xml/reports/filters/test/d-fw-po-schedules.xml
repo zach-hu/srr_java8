@@ -1,0 +1,138 @@
+<d-fw-po-schedules>
+  <columns>
+		<PoHeader_poType>
+			<label>PO Type</label>
+			<type>STRING</type>
+		</PoHeader_poType>
+		<PoHeader_poNumber>
+			<label>PO Number</label>
+			<type>STRING</type>
+		</PoHeader_poNumber>
+		<PoHeader_releaseNumber>
+			<label>Release Number</label>
+			<type>BIGDECIMAL</type>
+		</PoHeader_releaseNumber>
+		<PoHeader_revisionNumber>
+			<label>Revision Number</label>
+			<type>BIGDECIMAL</type>
+		</PoHeader_revisionNumber>
+		<PoHeader_rfqNumber>
+			<label>RFQ Number</label>
+			<type>STRING</type>
+		</PoHeader_rfqNumber>
+		<PoHeader_requisitionNumber>
+			<label>Requisition Number</label>
+			<type>STRING</type>
+		</PoHeader_requisitionNumber>
+		<PoHeader_vendorId>
+			<label>Vendor Id</label>
+			<type>STRING</type>
+		</PoHeader_vendorId>
+		<PoHeader_appDate>
+			<label>App Date</label>
+			<type>DATE</type>
+		</PoHeader_appDate>
+		<PoHeader_poDate>
+			<label>PO Date</label>
+			<type>DATE</type>
+		</PoHeader_poDate>
+		<PoHeader_revisionDate>
+			<label>Revision Date</label>
+			<type>DATE</type>
+		</PoHeader_revisionDate>
+		<PoHeader_buyerCode>
+			<label>Buyer Code</label>
+			<type>STRING</type>
+		</PoHeader_buyerCode>
+		<PoHeader_subtotal>
+			<label>Sub Total</label>
+			<type>BIGDECIMAL</type>
+		</PoHeader_subtotal>
+		<PoHeader_discountAmount>
+			<label>Discount Amount</label>
+			<type>BIGDECIMAL</type>
+		</PoHeader_discountAmount>
+		<PoHeader_shippingCharges>
+			<label>Shipping Charges</label>
+			<type>BIGDECIMAL</type>
+		</PoHeader_shippingCharges>
+		<PoHeader_otherCharges>
+			<label>Other Charges</label>
+			<type>BIGDECIMAL</type>
+		</PoHeader_otherCharges>
+		<PoHeader_taxAmount>
+			<label>Tax Amount</label>
+			<type>BIGDECIMAL</type>
+		</PoHeader_taxAmount>
+		<PoHeader_shippingTax>
+			<label>Shipping Tax</label>
+			<type>BIGDECIMAL</type>
+		</PoHeader_shippingTax>
+		<PoHeader_otherTax>
+			<label>Other Tax</label>
+			<type>BIGDECIMAL</type>
+		</PoHeader_otherTax>
+		<PoHeader_total>
+			<label>total</label>
+			<type>BIGDECIMAL</type>
+		</PoHeader_total>
+		<PoHeader_status>
+			<label>PO Status</label>
+			<type>STRING</type>
+		</PoHeader_status>
+		<PoHeader_vendorName>
+			<label>Vendor Name</label>
+			<type>STRING</type>
+		</PoHeader_vendorName>
+		<PoHeader_shipToCode>
+			<label>Ship To Code</label>
+			<type>STRING</type>
+		</PoHeader_shipToCode>
+		<PoHeader_currencyFactor>
+			<label>Currency Factor</label>
+			<type>BIGDECIMAL</type>
+		</PoHeader_currencyFactor>
+		<Schedule_id_scheduleType>
+			<label>Schedule Type</label>
+			<type>STRING</type>
+		</Schedule_id_scheduleType>
+		<Schedule_id_lineNumber>
+			<label>Line Number</label>
+			<type>BIGDECIMAL</type>
+		</Schedule_id_lineNumber>
+		<Schedule_description>
+			<label>Description</label>
+			<type>STRING</type>
+		</Schedule_description>
+		<Schedule_scheduleDate>
+			<label>Schedule Date</label>
+			<type>DATE</type>
+		</Schedule_scheduleDate>
+		<Schedule_completionDate>
+			<label>Completion Date</label>
+			<type>DATE</type>
+		</Schedule_completionDate>
+		<Schedule_revisedDate>
+			<label>Revised Date</label>
+			<type>DATE</type>
+		</Schedule_revisedDate>
+
+		<PoHeader_currencyCode>
+			<label>Currency Code</label>
+			<type>STRING</type>
+			<visible>0</visible>
+		</PoHeader_currencyCode>
+
+  </columns>
+  <sqlfrom> PoHeader as PoHeader , Schedule as Schedule </sqlfrom>
+  <sqlwhere><![CDATA[
+  	( Schedule.id.icHeader = PoHeader.icPoHeader ) and
+  	( PoHeader.poDate >= :as_baseReportDate ) and
+  	( PoHeader.status >'3020' ) and
+  	( PoHeader.status <'9020' ) and
+  	( PoHeader.lastRevision = 'C' )
+  ]]></sqlwhere>
+  <sqlorderby> PoHeader.poNumber , Schedule.id.scheduleType, Schedule.id.lineNumber </sqlorderby>
+  <title>Purchase Order Schedules Report</title>
+</d-fw-po-schedules>
+

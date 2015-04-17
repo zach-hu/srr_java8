@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="loadsupplier" connection-type="Connection-Required">
+    <!--rule-filename>is-po-release-order.xml</rule-filename-->
+  <activities>
+    <activity synchronous="true" continue-on-failure="false" name="LoadReqSupplier">
+      <rule-filename>is-po-created-from-req.xml</rule-filename>
+      <task synchronous="true" continue-on-failure="false" name="vendor">
+        <task-object-name>com.tsa.puridiom.vendor.tasks.VendorRetrieveById</task-object-name>
+        <post-action />
+      </task>
+    </activity>
+    <activity synchronous="true" continue-on-failure="false" name="LoadRfqSupplier">
+      <rule-filename>is-po-created-from-rfq.xml</rule-filename>
+      <task synchronous="true" continue-on-failure="false" name="rfqVendor">
+        <task-object-name>com.tsa.puridiom.rfqvendor.tasks.RfqVendorRetrieveById</task-object-name>
+        <post-action />
+      </task>
+	  <task synchronous="true" continue-on-failure="false" name="vendor">
+        <task-object-name>com.tsa.puridiom.vendor.tasks.VendorRetrieveById</task-object-name>
+        <post-action />
+      </task>
+	  <!-- No need to do this anymore, we are now getting the Currency Factor from the CurrencyManager -->
+	  <!--task synchronous="true" continue-on-failure="false" name="getCurrencyFactor">
+        <task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+        <process-filename>get-currency-factor.xml</process-filename>
+      </task-->
+    </activity>
+    <activity synchronous="true" continue-on-failure="false" name="LoadSupplierFromReq">
+      <task synchronous="true" continue-on-failure="false" name="loadReqSupplierInfo">
+        <rule-filename>is-po-created-from-req.xml</rule-filename>
+        <task-object-name>com.tsa.puridiom.poheader.tasks.PoHeaderLoadReqSupplier</task-object-name>
+      </task>
+    </activity>
+    <activity synchronous="true" continue-on-failure="false" name="LoadSupplierFromRfq">
+      <task synchronous="true" continue-on-failure="false" name="loadRfqSupplierInfo">
+        <rule-filename>is-po-created-from-rfq.xml</rule-filename>
+        <task-object-name>com.tsa.puridiom.poheader.tasks.PoHeaderLoadRfqSupplier</task-object-name>
+      </task>
+    </activity>
+    <activity synchronous="true" continue-on-failure="false" name="PoSetContactName">
+      <task synchronous="true" continue-on-failure="false" name="setContactName">
+		  <rule-filename>is-poheader-contactname-empty.xml</rule-filename>
+        <task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+        <process-filename>po-set-contact-name.xml</process-filename>
+      </task>
+     </activity>
+   </activities>
+</process>

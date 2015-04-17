@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="invoiceScheduleRun" connection-type="Connection-Required">
+  <activities>
+    <activity synchronous="true" continue-on-failure="false" name="invoiceSendQueueSetup">
+      <task synchronous="true" continue-on-failure="false" name="invoiceScheduleRun">
+        <task-object-name>com.tsa.puridiom.invoice.tasks.QueueAddInvoiceScheduleRun</task-object-name>
+      </task>
+    </activity>
+  </activities>
+</process>

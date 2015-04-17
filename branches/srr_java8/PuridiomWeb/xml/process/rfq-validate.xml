@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="RfqValidate" connection-type="Connection-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="setUpRfqData">
+			<task synchronous="true" continue-on-failure="false" name="setup">
+				<task-object-name>com.tsa.puridiom.validationrules.tasks.RfqRulesSetup</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="rfqHeaderDataRetrieve">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>rfqheaderdata-retrieve.xml</process-filename>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="lineitems">			
+				<task-object-name>com.tsa.puridiom.rfqline.tasks.RfqLineDataRetrieveList</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="rfqDataSetup">
+				<task-object-name>com.tsa.puridiom.rfq.tasks.RfqValidationRulesData</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="rfqBidUnitPriceValidate">
+				<task-object-name>com.tsa.puridiom.rfqbid.tasks.RfqBidUnitPriceValidate</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="validateRules">
+			<task synchronous="true" continue-on-failure="false" name="labelsList">
+				<task-object-name>com.tsa.puridiom.labels.tasks.LabelsRetrieveBy</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="rules">
+				<task-object-name>com.tsa.puridiom.validationrules.tasks.DatabaseValidationRulesTask</task-object-name>
+				<!--process-filename>req-validation-rules.xml</process-filename-->
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="rules">
+				<rule-filename>is-rfq-forward-to-open-solicitation.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.validationrules.tasks.ValidationRulesTask</task-object-name>
+				<process-filename>rfq-post-validation-rules.xml</process-filename>
+				<post-action>exitActivity</post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="rules">
+				<task-object-name>com.tsa.puridiom.validationrules.tasks.ValidationRulesTask</task-object-name>
+				<process-filename>rfq-validation-rules.xml</process-filename>
+			</task>
+		</activity>
+	</activities>
+</process>

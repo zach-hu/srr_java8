@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="AltTextAdd" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="addAltTextActivity">
+			<task synchronous="true" continue-on-failure="false" name="altText">
+				<task-object-name>com.tsa.puridiom.alttext.tasks.AltTextSetValues</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="altText">
+				<task-object-name>com.tsa.puridiom.alttext.tasks.AltTextAdd</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="updateDocTextActivity">
+			<task synchronous="true" continue-on-failure="false" name="docTextCreateSetup">
+				<task-object-name>com.tsa.puridiom.alttext.tasks.AltTextCreateDocTextSetup</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="addDocText">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>doctext-add.xml</process-filename>
+			</task>
+		</activity>
+	 </activities>
+</process>

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="requisitionLineAllocateAmount" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="requisitionHeaderRetrieveById">
+			<task synchronous="true" continue-on-failure="false" name="requisitionHeader">
+				<task-object-name>com.tsa.puridiom.requisitionheader.tasks.RequisitionHeaderRetrieveById</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="requisitionLineAccountDefaults">
+			<rule-filename>is-account-default-by-header.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="requisitionHeaderAccountSetup">
+				<task-object-name>com.tsa.puridiom.requisitionheader.tasks.RequisitionHeaderAccountRetrieveSetup</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="requisitionHeaderAccountList">
+				<task-object-name>com.tsa.puridiom.account.tasks.AccountRetrieveByLine</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="accountDefaultByHeader">
+				<task-object-name>com.tsa.puridiom.requisitionline.tasks.RequisitionLineDefaultAccount</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="requisitionLineRetrieveById">
+			<task synchronous="true" continue-on-failure="false" name="requisitionLine">
+				<task-object-name>com.tsa.puridiom.requisitionline.tasks.RequisitionLineRetrieveById</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="requisitionAllocAmountSetup">
+				<task-object-name>com.tsa.puridiom.requisitionline.tasks.RequisitionLineAccountRetrieveSetup</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="amountToAllocate">
+				<task-object-name>com.tsa.puridiom.requisitionline.tasks.RequisitionLineAllocateAmount</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="accountList">
+				<task-object-name>com.tsa.puridiom.account.tasks.AccountRetrieveByLine</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="autoAccounting">
+			<task synchronous="true" continue-on-failure="false" name="autoAccounting">
+				<task-object-name>com.tsa.puridiom.xrefcombo.tasks.AutoAccountingSetup</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="recentAccountRetrieve">
+			<task synchronous="true" continue-on-failure="false" name="recentAccountList">
+				<rule-filename>is-autoaccounting-and-capital</rule-filename>
+				<task-object-name>com.tsa.puridiom.recentaccount.tasks.RecentCapitalAccountRetrieveByUserId</task-object-name>
+				<post-action>exitProcess</post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="recentAccountRetrieve">
+			<task synchronous="true" continue-on-failure="false" name="recentAccountList">
+				<rule-filename>is-autoaccounting-and-non-capital</rule-filename>
+				<task-object-name>com.tsa.puridiom.recentaccount.tasks.RecentNonCapitalAccountRetrieveByUserId</task-object-name>
+				<post-action>exitProcess</post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="recentAccountRetrieve">
+			<task synchronous="true" continue-on-failure="false" name="recentAccountList">
+				<task-object-name>com.tsa.puridiom.recentaccount.tasks.RecentAccountRetrieveByUserId</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+	</activities>
+</process>

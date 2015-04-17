@@ -1,0 +1,106 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping>
+
+<class
+    name="com.tsa.puridiom.entity.HistoryLog"
+    table="HISTORY_LOG"
+>
+    <id
+        name="icHistory"
+        type="java.math.BigDecimal"
+        column="IC_HISTORY"
+    >
+        <generator class="assigned" />
+    </id>
+    <property
+        name="icHeaderHistory"
+        type="java.math.BigDecimal"
+        column="IC_HEADER_HISTORY"
+        not-null="true"
+        length="22"
+    />
+    <property
+        name="icLineHistory"
+        type="java.math.BigDecimal"
+        column="IC_LINE_HISTORY"
+        not-null="true"
+        length="22"
+    />
+    <property
+        name="icHeader"
+        type="java.math.BigDecimal"
+        column="IC_HEADER"
+        not-null="true"
+        length="22"
+    />
+    <property
+        name="icLine"
+        type="java.math.BigDecimal"
+        column="IC_LINE"
+        not-null="true"
+        length="22"
+    />
+    <property
+        name="doctype"
+        type="java.lang.String"
+        column="DOCTYPE"
+        length="3"
+    />
+    <property
+        name="description"
+        type="java.lang.String"
+        column="DESCRIPTION"
+        length="255"
+    />
+    <property
+        name="status"
+        type="java.lang.String"
+        column="STATUS"
+        length="4"
+    />
+    <property
+        name="logDate"
+        type="java.lang.String"
+        column="LOG_DATE"
+        length="10"
+    />
+    <property
+        name="logTime"
+        type="java.lang.String"
+        column="LOG_TIME"
+        length="15"
+    />
+    <property
+        name="userid"
+        type="java.lang.String"
+        column="USERID"
+        length="15"
+    />
+    <property
+        name="logMills"
+        type="java.math.BigDecimal"
+        column="LOG_MILLS"
+        length="22"
+    />
+
+    <property
+        name="ipAddress"
+        type="java.lang.String"
+        column="IP_ADDRESS"
+        length="60"
+    />
+    <property
+        name="timeZone"
+        type="java.lang.String"
+        column="TIME_ZONE"
+        length="30"
+    />
+
+    <!-- associations -->
+
+</class>
+</hibernate-mapping>

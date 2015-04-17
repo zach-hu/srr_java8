@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="requisitionLineDataRetrieveAutoRelease" connection-type="Connection-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="requisitionLineDataRetrieve">
+			<task synchronous="true" continue-on-failure="false" name="requisitionLineRetrieveSetup">
+				<task-object-name>com.tsa.puridiom.requisitionline.tasks.RequisitionLineAutoReleaseByLineSetup</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="billToListRetrieve">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>billtodata-retrieve-by-line-header.xml</process-filename>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="shipToListRetrieve">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>shiptodata-retrieve-by-line-header-auto.xml</process-filename>
+			</task>
+			<!-- ShipTo is passed to the RequisitionAutoReleaseObject. This Lines have no ShipTo they are at the header level.-->
+			<!-- <task synchronous="true" continue-on-failure="false" name="shipToListRetrieve">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>shiptodata-retrieve-by-line.xml</process-filename>
+			</task>-->
+			<task synchronous="true" continue-on-failure="false" name="accountList">
+				<rule-filename></rule-filename>
+				<task-object-name>com.tsa.puridiom.account.tasks.AccountRetrieveByLine</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="requisitionLineCommentsRetrieve">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>doccomment-retrieve-by-line.xml</process-filename>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="requisitionLineDataSet">
+				<task-object-name>com.tsa.puridiom.requisitionline.tasks.RequisitionLineDataSet</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+	</activities>
+</process>

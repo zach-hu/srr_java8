@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="docAttachmentSaveasById" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="docAttachmentSaveasById">
+			<task synchronous="true" continue-on-failure="false" name="docAttachmentSaveasSetup">
+				<task-object-name>com.tsa.puridiom.docattachment.tasks.DocAttachmentSaveasSetup</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="newDocAttachment_docFilename">
+				<task-object-name>com.tsa.puridiom.documentfile.tasks.DocumentFileCopy</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="docAttachment">
+				<rule-filename check-for-false="true">is-new-docfilename-empty.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.docattachment.tasks.DocAttachmentSaveas</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

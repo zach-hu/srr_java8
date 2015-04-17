@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="poSecurityUpdate" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="poSecurityDeleteByPoNumber">
+			<task synchronous="true" continue-on-failure="false" name="poSecurityDeleteByPoNumber">
+				<task-object-name>com.tsa.puridiom.posecurity.tasks.PoSecurityDeleteByPoNumber</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="poSecurityUpdateByPoNumber">
+			<rule-filename>is-not-delete-all</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="poSecurityUpdateByPoNumber">
+				<task-object-name>com.tsa.puridiom.posecurity.tasks.PoSecurityUpdateByPoNumber</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<!--activity synchronous="true" continue-on-failure="false" name="poSecurityRetrieveBy">
+			<task synchronous="true" continue-on-failure="false" name="poSecurityRetrieveBy">
+				<task-object-name>com.tsa.puridiom.posecurity.tasks.PoSecurityRetrieveById</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity-->
+	</activities>
+</process>

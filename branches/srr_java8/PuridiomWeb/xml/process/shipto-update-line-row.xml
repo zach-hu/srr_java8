@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="shipToUpdateLineRow" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="shipToUpdateLineRow">
+			<task synchronous="true" continue-on-failure="false" name="shipTo">			
+				<task-object-name>com.tsa.puridiom.shipto.tasks.ShipToSetValues</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="shipToAdd">			
+				<task-object-name>com.tsa.puridiom.shipto.tasks.ShipToAdd</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="requisitionHeaderTaxCodeUpdateActivity">
+			<rule-filename>is-shiptocode-not-empty.xml;is-shiptotaxcode-not-set.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="addressSetup">
+				<!-- reset address parameters -->
+				<task-object-name>com.tsa.puridiom.address.tasks.AddressSetup</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="Address_addressCode">
+				<task-object-name>com.tsa.puridiom.shipto.tasks.ShipToGetShipToCode</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="shipToAddress">
+				<task-object-name>com.tsa.puridiom.address.tasks.AddressRetrieveShipTo</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="setTaxCodeFlag">
+				<rule-filename>is-shiptoaddress-taxcode-not-empty.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.shipto.tasks.ShipToTaxCodeSet</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+	</activities>
+</process>

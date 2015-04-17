@@ -1,0 +1,51 @@
+<browse_assetnote>
+	<columns>
+
+		<Asset_tagNumber>
+			<label>brw-tagNumber</label>
+			<link><![CDATA[javascript: viewassetnote('#AssetNote_id_tagNumber^', '#AssetNote_id_sequenceNo^', assetINum+assetDesc+assetTNum); void(0);]]></link>
+			<visible>1</visible>
+		</Asset_tagNumber>
+
+		<Asset_trackingNumber>
+			<visible>0</visible>
+		</Asset_trackingNumber>
+
+		<AssetNote_id_tagNumber>
+			<visible>0</visible>
+		</AssetNote_id_tagNumber>
+
+		<AssetNote_id_sequenceNo>
+			<label>routingSequence</label>
+			<visible>1</visible>
+		</AssetNote_id_sequenceNo>
+
+		<AssetNote_dateEntered>
+			<label>dateentered</label>
+			<visible>1</visible>
+		</AssetNote_dateEntered>
+
+		<AssetNote_dateChanged>
+			<label>assetnote-datechanged</label>
+			<visible>1</visible>
+		</AssetNote_dateChanged>
+
+		<AssetNote_userId>
+			<label>user-userId</label>
+			<visible>0</visible>
+		</AssetNote_userId>
+
+		<AssetNote_stdText>
+			<label>brw-stdText</label>
+			<detail>Y</detail>
+		</AssetNote_stdText>
+
+
+	</columns>
+
+<sqlfrom>Asset as Asset, AssetNote AssetNote</sqlfrom>
+<sqlwhere><![CDATA[ Asset.tagNumber = AssetNote.id.tagNumber ]]></sqlwhere>
+<sqlorderby>AssetNote.id.sequenceNo DESC</sqlorderby>
+<pagesize>15</pagesize>
+<title>Asset Note Browse</title>
+</browse_assetnote>

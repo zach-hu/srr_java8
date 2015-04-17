@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="forwardRequisition" connection-type="none">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="retrieveRequisition">
+			<task synchronous="true" continue-on-failure="false" name="retrieveRequisition">
+				<rule-filename></rule-filename>
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>requisition-retrieve</process-filename>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="doFormForward">
+			<task synchronous="true" continue-on-failure="false" name="estimatedCostCheck">			
+				<rule-filename>estimated-cost-check</rule-filename>
+				<task-object-name>com.tsagate.foundation.processengine.SampleTask</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="budgetCheck">
+			<rule-filename>budget-module-active</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="retrieveRequisition">
+				<rule-filename></rule-filename>
+				<task-object-name>com.tsagate.foundation.processengine.SampleTask</task-object-name>
+				<process-filename>budget-check</process-filename>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="inventoryCheck">
+			<rule-filename>inventory-module-active</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="checkAvailableQuantity">
+				<rule-filename>inventory-requisition</rule-filename>
+				<task-object-name>com.tsagate.foundation.processengine.SampleTask</task-object-name>
+				<post-action>exitActivity</post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="UpdateRequisitionQty">
+				<rule-filename>not-inventory-req</rule-filename>
+				<task-object-name>com.tsagate.foundation.processengine.SampleTask</task-object-name>
+				<post-action>exitActivity</post-action>
+			</task>
+		</activity>
+	</activities>
+</process>

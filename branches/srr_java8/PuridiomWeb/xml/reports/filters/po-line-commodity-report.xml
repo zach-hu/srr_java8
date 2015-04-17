@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PoLineCommodity>
+	<columns>
+		<PoLine_itemNumber>
+			<label>Item Number</label>
+			<type>STRING</type>
+		</PoLine_itemNumber>
+		<PoLine_poNumber>
+			<label>Order Number</label>
+			<type>STRING</type>
+		</PoLine_poNumber>
+		<PoHeader_poDate>
+			<label>Order Date</label>
+			<type>STRING</type>
+		</PoHeader_poDate>
+		<PoLine_departmentCode>
+			<label>Department Code</label>
+			<type>STRING</type>
+		</PoLine_departmentCode>
+		<PoLine_quantity>
+			<label>Quantity</label>
+			<type>STRING</type>
+		</PoLine_quantity>
+		<PoLine_umCode>
+			<label>Unit of Measer</label>
+			<type>STRING</type>
+		</PoLine_umCode>
+		<PoHeader_currencyFactor>
+			<label>Currency Factor</label>
+			<type>STRING</type>
+		</PoHeader_currencyFactor>
+		<PoLine_commodity>
+			<label>Commodity</label>
+			<type>STRING</type>
+		</PoLine_commodity>
+		<PoLine_unitPrice>
+			<label>Unit Price</label>
+			<type>STRING</type>
+		</PoLine_unitPrice>
+		<Commodity_description>
+			<label>Commodity Description</label>
+			<type>STRING</type>
+		</Commodity_description>
+		<PoLine_description>
+			<label>Item Description</label>
+			<type>STRING</type>
+		</PoLine_description>
+		<PoHeader_status>
+			<label>Order Status</label>
+			<type>STRING</type>
+		</PoHeader_status>
+		<PoHeader_buyerCode>
+			<label>Buyer Code</label>
+			<type>STRING</type>
+		</PoHeader_buyerCode>
+	</columns>
+	<sqlfrom>PoHeader as PoHeader, PoLine as PoLine, Commodity as Commodity</sqlfrom>
+	<sqlwhere>(PoHeader.icPoHeader = PoLine.icPoHeader) and (PoLine.commodity = Commodity.commodity) and (( PoHeader.lastRevision = 'C' ) and  ( PoLine.commodity &gt; '0' ) and   ( PoLine.status &lt;&gt; '9010' ))</sqlwhere>
+	<pagesize>15</pagesize>
+	<title>Purchase Order Commodity Report</title>
+</PoLineCommodity>
+

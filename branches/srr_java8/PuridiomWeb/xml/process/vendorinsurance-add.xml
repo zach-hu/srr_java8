@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="VendorInsuranceAdd" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="addVendorInsuranceActivity">
+			<task synchronous="true" continue-on-failure="false" name="VendorInsurance_contNumber">
+				<rule-filename check-for-false="true">is-vendorinsurance-empty.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.vendorinsurance.tasks.VendorInsuranceGetNewContNumber</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="vendorInsurance">
+				<task-object-name>com.tsa.puridiom.vendorinsurance.tasks.VendorInsuranceSetValues</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="vendorInsuranceAdd">
+				<task-object-name>com.tsa.puridiom.vendorinsurance.tasks.VendorInsuranceAdd</task-object-name>
+				<post-action></post-action>
+			 </task>
+		  </activity>
+	 </activities>
+</process>

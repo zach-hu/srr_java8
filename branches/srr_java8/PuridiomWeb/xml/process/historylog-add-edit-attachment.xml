@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="historyLogAddEditAttachment" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="HistoryLogAddEditAttachment">
+			<task synchronous="true" continue-on-failure="false" name="docAttachment">
+				<task-object-name>com.tsa.puridiom.docattachment.tasks.DocAttachmentRetrieveById</task-object-name>
+			</task>
+
+			<task synchronous="true" continue-on-failure="false" name="historyLogSetupEditAttachment">
+				<task-object-name>com.tsa.puridiom.historylog.tasks.HistoryLogSetupEditAttachment</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="historyLog">
+				<task-object-name>com.tsa.puridiom.historylog.tasks.HistoryLogSetValues</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="historyLogAdd">
+				<task-object-name>com.tsa.puridiom.historylog.tasks.HistoryLogAdd</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+	</activities>
+</process>

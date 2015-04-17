@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="poSaveas" connection-type="transaction-required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="requisitionHeaderSaveas">
+			<task synchronous="true" continue-on-failure="false" name="requisitionHeaderSaveasSetup">
+				<task-object-name>com.tsa.puridiom.poheader.tasks.PoHeaderSaveasFromReqSetup</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="poHeaderAccountSaveas">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>account-saveas.xml</process-filename>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="poHeaderCommentSaveas">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>doccomment-saveas.xml</process-filename>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="poHeaderAttachmentSaveas">
+				<rule-filename>is-documents-module-active.xml</rule-filename>
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>docattachment-saveas.xml</process-filename>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="poHeaderScheduleSaveas">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>schedule-saveas.xml</process-filename>
+			</task>
+		</activity>
+	</activities>
+</process>

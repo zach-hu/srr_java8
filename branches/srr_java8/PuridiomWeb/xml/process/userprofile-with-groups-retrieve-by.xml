@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="userProfileRetrieveBy" connection-type="Connection-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="userProfileRetrieveByUserId">
+			<task synchronous="true" continue-on-failure="false" name="userProfile">
+				<task-object-name>com.tsa.puridiom.userprofile.tasks.UserProfileRetrieveById</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="userGroupRelList">
+				<task-object-name>com.tsa.puridiom.usergrouprel.tasks.UserGroupRelRetrieveByUserId</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="userProfile">
+				<task-object-name>com.tsa.puridiom.userprofile.tasks.UserProfileSetUserRoles</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

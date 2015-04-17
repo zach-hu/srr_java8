@@ -1,0 +1,30 @@
+<rule>
+	<clause type="StringCompare">
+		<left-side>
+			<source>Singleton</source>
+			<object>com.tsa.puridiom.property.PropertiesManager</object>
+			<name>getProperty</name>
+			<argument-value>Po Defaults</argument-value>
+			<argument-value>TaxCode</argument-value>
+			<argument-value></argument-value>
+		</left-side>
+		<operator>NOTEQUAL</operator>
+		<right-side>
+			<source>constant</source>
+		</right-side>
+		<logicop>OR</logicop>
+		<left-side>
+			<source>Singleton</source>
+			<object>com.tsa.puridiom.property.PropertiesManager</object>
+			<name>getProperty</name>
+			<argument-value>Po Defaults</argument-value>
+			<argument-value>TaxCode</argument-value>
+			<argument-value></argument-value>
+		</left-side>
+		<operator>NOTEQUAL</operator>
+		<right-side>
+			<source>constant</source>
+			<value></value>
+		</right-side>
+	</clause>
+</rule>

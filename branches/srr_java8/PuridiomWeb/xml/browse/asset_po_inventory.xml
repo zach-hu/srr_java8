@@ -1,0 +1,38 @@
+<browse_asset>
+	<columns>
+		<Asset_trackingNumber>
+			<label>brw-trackingNumber</label>
+			<link><![CDATA[javascript: viewAsset1('#Asset_tagNumber^'); void(0);]]></link>
+			<visible>0</visible>
+		</Asset_trackingNumber>
+		<Asset_tagNumber>
+			<label>brw-tagNumber</label>
+			<link><![CDATA[javascript: viewAsset1('#Asset_tagNumber^'); void(0);]]></link>
+			<visible>1</visible>
+		</Asset_tagNumber>
+		<Asset_itemNumber>
+			<label>asset-itemNumber</label>
+			<visible>0</visible>
+		</Asset_itemNumber>
+		<Asset_assetStatus>
+			<label>brw-assetStatus</label>
+			<visible>1</visible>
+		</Asset_assetStatus>
+		<Asset_serialNumber>
+			<label>asset-serialnumber</label>
+			<visible>1</visible>
+		</Asset_serialNumber>
+		<Asset_description>
+			<label>description</label>
+			<detail>Y</detail>
+		</Asset_description>
+		<Asset_icLineKey>
+			<label>brw-assetIcLineKey</label>
+			<visible>0</visible>
+		</Asset_icLineKey>
+	</columns>
+<sqlfrom>Asset as Asset, InvItem as InvItem</sqlfrom>
+<sqlwhere><![CDATA[ Asset.itemNumber = InvItem.itemNumber ]]></sqlwhere>
+<pagesize>15</pagesize>
+<title>Asset Browse</title>
+</browse_asset>

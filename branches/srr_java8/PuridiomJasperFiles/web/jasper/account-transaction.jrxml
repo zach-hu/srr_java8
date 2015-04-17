@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created using an evaluation version of JasperAssistant (http://www.jasperassistant.com) -->
+<!DOCTYPE jasperReport PUBLIC "-//JasperReports//DTD Report Design//EN" "http://jasperreports.sourceforge.net/dtds/jasperreport.dtd">
+
+<jasperReport name="accounttransaction" language="java" pageWidth="791" pageHeight="612" orientation="Landscape" columnWidth="741" leftMargin="25" rightMargin="25" topMargin="25" bottomMargin="25">
+	<property name="com.jasperassistant.designer.GridWidth" value="12"/>
+	<property name="com.jasperassistant.designer.GridHeight" value="12"/>
+	<property name="com.jasperassistant.designer.HGuides" value="7,72,76,133,137,192,196,242,246,269,292,295,309,313,337,340,365,369,428,432,494,498,523,557,665,731"/>
+	<property name="com.jasperassistant.designer.Rulers" value="true"/>
+	<property name="com.jasperassistant.designer.DataSource" value="one"/>
+	<property name="com.jasperassistant.designer.SnapToGrid" value="true"/>
+	<property name="com.jasperassistant.designer.VGuides.Page Footer" value="0"/>
+	<property name="com.jasperassistant.designer.Margins" value="true"/>
+	<property name="com.jasperassistant.designer.Grid" value="true"/>
+	<property name="com.jasperassistant.designer.VGuides.Detail" value="1,15"/>
+	<property name="com.jasperassistant.designer.VGuides.Column Header" value="83"/>
+	<property name="com.jasperassistant.designer.SnapToGuides" value="true"/>
+	<import value="com.tsa.puridiom.property.PropertiesManager"/>
+	<import value="java.util.*"/>
+	<import value="com.tsa.puridiom.common.documents.*"/>
+	<import value="com.tsa.puridiom.entity.*"/>
+	<import value="net.sf.jasperreports.engine.JRDataSource"/>
+	<import value="com.tsagate.foundation.utility.Utility"/>
+	<import value="com.tsagate.properties.*"/>
+	<import value="com.tsa.puridiom.jasperreports.*"/>
+	<import value="java.net.*"/>
+	<reportFont name="Arial_Normal" isDefault="true" fontName="Arial" size="8" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Bold" isDefault="false" fontName="Arial Black" size="9" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica-Bold" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Bold_Big" isDefault="false" fontName="Arial Black" size="12" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica-Bold" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Big" isDefault="false" fontName="Arial" size="12" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<parameter name="oid" class="java.lang.String">
+		<defaultValueExpression><![CDATA["HILTON"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="reportTitle" class="java.lang.String">
+		<defaultValueExpression><![CDATA["Account Transaction Report"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="reportCriteria" class="java.lang.String">
+	</parameter>
+	<parameter name="userId" class="java.lang.String">
+		<defaultValueExpression><![CDATA["Puridiom"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="footerText" class="java.lang.String">
+		<defaultValueExpression><![CDATA["Puridiom.com"]]></defaultValueExpression>
+	</parameter>
+	<field name="RequisitionHeader_requisitionNumber" class="java.lang.String">
+	</field>
+	<field name="RequisitionHeader_requisitionDate" class="java.util.Date">
+		<fieldDescription><![CDATA[RequisitionHeader_requisitionDate]]></fieldDescription>
+	</field>
+	<field name="RequisitionHeader_status" class="java.math.BigDecimal">
+	</field>
+	<field name="RequisitionHeader_assignedBuyer" class="java.lang.String">
+	</field>
+	<field name="RequisitionHeader_total" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[RequisitionHeader_total]]></fieldDescription>
+	</field>
+	<field name="Account_fld1" class="java.lang.String">
+	</field>
+	<field name="Account_fld2" class="java.lang.String">
+	</field>
+	<field name="Account_fld3" class="java.lang.String">
+	</field>
+	<field name="Account_fld4" class="java.lang.String">
+	</field>
+	<field name="Account_fld5" class="java.lang.String">
+	</field>
+	<field name="Account_fld6" class="java.lang.String">
+	</field>
+	<field name="Account_fld7" class="java.lang.String">
+	</field>
+	<field name="Account_fld8" class="java.lang.String">
+	</field>
+	<field name="Account_fld9" class="java.lang.String">
+	</field>
+	<field name="Account_fld10" class="java.lang.String">
+	</field>
+	<field name="Account_fld11" class="java.lang.String">
+	</field>
+	<field name="Account_fld12" class="java.lang.String">
+	</field>
+	<field name="Account_fld13" class="java.lang.String">
+	</field>
+	<field name="Account_fld14" class="java.lang.String">
+	</field>
+	<field name="Account_fld15" class="java.lang.String">
+	</field>
+	<field name="Vendor_vendorName" class="java.lang.String">
+	</field>
+	<field name="Account_allocAmount" class="java.math.BigDecimal">
+	</field>
+	<variable name="today" class="java.util.Date">
+		<variableExpression><![CDATA[new Date()]]></variableExpression>
+	</variable>
+	<title>
+		<band height="18">
+		</band>
+	</title>
+	<columnHeader>
+		<band height="89">
+			<staticText>
+				<reportElement positionType="Float" x="7" y="72" width="65" height="12"/>
+				<box topBorder="None" leftBorder="None" bottomBorder="1Point" rightBorder="None"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Req Number]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="204" y="72" width="61" height="12"/>
+				<box topBorder="None" leftBorder="None" bottomBorder="1Point" rightBorder="None"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Status]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="76" y="72" width="58" height="12"/>
+				<box topBorder="None" leftBorder="None" bottomBorder="1Point" rightBorder="None"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Req Date]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="137" y="72" width="63" height="12"/>
+				<box topBorder="None" leftBorder="None" bottomBorder="1Point" rightBorder="None"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Buyer]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="665" y="72" width="67" height="12"/>
+				<box topBorder="None" leftBorder="None" bottomBorder="1Point" rightBorder="None"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<text><![CDATA[Allocated Amount]]></text>
+			</staticText>
+			<textField>
+				<reportElement positionType="Float" x="7" y="36" width="550" height="22"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{reportCriteria}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement positionType="Float" x="7" y="0" width="551" height="28"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{reportTitle}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement positionType="Float" x="449" y="0" width="50" height="22"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression class="java.lang.String"><![CDATA["Page " + String.valueOf($V{PAGE_NUMBER}) + " of" + " "]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement positionType="Float" x="498" y="0" width="33" height="22"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[" " + String.valueOf($V{PAGE_NUMBER})]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement positionType="Float" x="269" y="72" width="97" height="12"/>
+				<box topBorder="None" leftBorder="None" bottomBorder="1Point" rightBorder="None"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Supplier]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="369" y="72" width="297" height="12"/>
+				<textElement/>
+				<text><![CDATA[Account]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="31">
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" x="7" y="1" width="66" height="10"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{RequisitionHeader_requisitionNumber}]]></textFieldExpression>
+			</textField>
+			<textField pattern="MM/dd/yyyy" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="76" y="1" width="58" height="10"/>
+				<textElement/>
+				<textFieldExpression class="java.util.Date"><![CDATA[$F{RequisitionHeader_requisitionDate}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" x="204" y="1" width="61" height="10"/>
+				<textElement/>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{RequisitionHeader_status}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" x="672" y="15" width="60" height="10"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{RequisitionHeader_total}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" x="137" y="1" width="64" height="10"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[ReportUtils.getUserName($F{RequisitionHeader_assignedBuyer}, $P{oid})]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" x="612" y="15" width="61" height="10"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{RequisitionHeader_requisitionNumber}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement positionType="Float" x="523" y="15" width="90" height="10"/>
+				<textElement textAlignment="Right"/>
+				<text><![CDATA[Total for Req Number : ]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" mode="Opaque" x="369" y="1" width="304" height="11"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[ReportUtils.getAcctString($F{Account_fld1}, $F{Account_fld2}, $F{Account_fld3}, $F{Account_fld4}, $F{Account_fld5}, $F{Account_fld6}, $F{Account_fld7}, $F{Account_fld8}, $F{Account_fld9}, $F{Account_fld10}, $F{Account_fld11}, $F{Account_fld12},$F{Account_fld13}, $F{Account_fld14}, $F{Account_fld15}, $P{oid})]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" x="268" y="1" width="98" height="10"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{Vendor_vendorName}]]></textFieldExpression>
+			</textField>
+			<textField pattern="¤#,##0.00;(¤#,##0.00)" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="674" y="1" width="58" height="10"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{Account_allocAmount}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="44">
+			<line>
+				<reportElement positionType="Float" x="15" y="0" width="717" height="1"/>
+				<graphicElement/>
+			</line>
+			<textField>
+				<reportElement positionType="Float" x="648" y="12" width="78" height="13"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{footerText}]]></textFieldExpression>
+			</textField>
+			<textField pattern="MMM d, yyyy h:mm a">
+				<reportElement positionType="Float" x="15" y="12" width="465" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA["Created " + Utility.getDateFormat($V{today}.toString(), "MMM d, yyyy h:mm a") + " by " + $P{userId}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="50">
+			<staticText>
+				<reportElement positionType="Float" x="498" y="0" width="166" height="13"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom">
+					<font size="9" isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Account Transaction SummaryTotal:]]></text>
+			</staticText>
+		</band>
+	</summary>
+</jasperReport>

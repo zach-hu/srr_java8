@@ -1,0 +1,225 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping>
+
+<!--
+    Created by Middlegen Hibernate plugin
+
+    http://boss.bekk.no/boss/middlegen/
+    http://hibernate.sourceforge.net/
+-->
+
+<class
+    name="com.tsa.puridiom.entity.Address"
+    table="ADDRESS"
+>
+    <composite-id name="comp_id" class="com.tsa.puridiom.entity.AddressPK">
+        <key-property name="addressType" column="ADDRESS_TYPE" type="java.lang.String"/>
+        <key-property name="addressCode" column="ADDRESS_CODE" type="java.lang.String"/>
+    </composite-id>
+    <property
+        name="addressLine1"
+        type="java.lang.String"
+        column="ADDRESS_LINE_1"
+        length="40"
+    />
+    <property
+        name="addressLine2"
+        type="java.lang.String"
+        column="ADDRESS_LINE_2"
+        length="40"
+    />
+    <property
+        name="addressLine3"
+        type="java.lang.String"
+        column="ADDRESS_LINE_3"
+        length="40"
+    />
+    <property
+        name="addressLine4"
+        type="java.lang.String"
+        column="ADDRESS_LINE_4"
+        length="40"
+    />
+    <property
+        name="city"
+        type="java.lang.String"
+        column="CITY"
+        length="30"
+    />
+    <property
+        name="state"
+        type="java.lang.String"
+        column="STATE"
+        length="15"
+    />
+    <property
+        name="postalCode"
+        type="java.lang.String"
+        column="POSTAL_CODE"
+        length="15"
+    />
+    <property
+        name="country"
+        type="java.lang.String"
+        column="COUNTRY"
+        length="25"
+    />
+    <property
+        name="dateEntered"
+        type="java.sql.Timestamp"
+        column="DATE_ENTERED"
+        length="7"
+    />
+    <property
+        name="dateExpires"
+        type="java.sql.Timestamp"
+        column="DATE_EXPIRES"
+        length="7"
+    />
+    <property
+        name="status"
+        type="java.lang.String"
+        column="STATUS"
+        length="4"
+    />
+    <property
+        name="owner"
+        type="java.lang.String"
+        column="OWNER"
+        length="15"
+    />
+    <property
+        name="inventory"
+        type="java.lang.String"
+        column="INVENTORY"
+        length="1"
+    />
+    <property
+        name="shipTo"
+        type="java.lang.String"
+        column="SHIP_TO"
+        length="1"
+    />
+    <property
+        name="billTo"
+        type="java.lang.String"
+        column="BILL_TO"
+        length="1"
+    />
+    <property
+        name="invoiceTo"
+        type="java.lang.String"
+        column="INVOICE_TO"
+        length="1"
+    />
+    <property
+        name="issuedBy"
+        type="java.lang.String"
+        column="ISSUED_BY"
+        length="1"
+    />
+    <property
+        name="offerTo"
+        type="java.lang.String"
+        column="OFFER_TO"
+        length="1"
+    />
+    <property
+        name="administeredBy"
+        type="java.lang.String"
+        column="ADMINISTERED_BY"
+        length="1"
+    />
+    <property
+        name="paymentBy"
+        type="java.lang.String"
+        column="PAYMENT_BY"
+        length="1"
+    />
+    <property
+        name="purchaseFor"
+        type="java.lang.String"
+        column="PURCHASE_FOR"
+        length="1"
+    />
+    <property
+        name="addrFld10"
+        type="java.lang.String"
+        column="ADDR_FLD_10"
+        length="15"
+    />
+    <property
+        name="addrFld11"
+        type="java.lang.String"
+        column="ADDR_FLD_11"
+        length="15"
+    />
+    <property
+        name="addrFld12"
+        type="java.lang.String"
+        column="ADDR_FLD_12"
+        length="15"
+    />
+    <property
+        name="addrFld13"
+        type="java.lang.String"
+        column="ADDR_FLD_13"
+        length="15"
+    />
+    <property
+        name="addrFld14"
+        type="java.lang.String"
+        column="ADDR_FLD_14"
+        length="15"
+    />
+    <property
+        name="addrFld15"
+        type="java.lang.String"
+        column="ADDR_FLD_15"
+        length="15"
+    />
+    <property
+        name="addrFld16"
+        type="java.lang.String"
+        column="ADDR_FLD_16"
+        length="1"
+    />
+    <property
+        name="addrFld17"
+        type="java.lang.String"
+        column="ADDR_FLD_17"
+        length="1"
+    />
+    <property
+        name="addrFld18"
+        type="java.lang.String"
+        column="ADDR_FLD_18"
+        length="1"
+    />
+    <property
+        name="addrFld19"
+        type="java.lang.String"
+        column="ADDR_FLD_19"
+        length="1"
+    />
+    <property
+        name="addrFld20"
+        type="java.lang.String"
+        column="ADDR_FLD_20"
+        length="1"
+    />
+    <property
+        name="taxCode"
+        type="java.lang.String"
+        column="TAX_CODE"
+        length="15"
+    />
+
+    <!-- associations -->
+
+</class>
+</hibernate-mapping>

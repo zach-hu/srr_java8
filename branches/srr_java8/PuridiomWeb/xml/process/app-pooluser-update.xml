@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="appPooluserUpdate" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="appPooluserUpdate">
+			<task synchronous="true" continue-on-failure="false" name="appPooluser">			
+				<task-object-name>com.tsa.puridiom.apppooluser.tasks.AppPooluserSetValues</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="appPooluserAdd">			
+				<task-object-name>com.tsa.puridiom.apppooluser.tasks.AppPooluserAdd</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+	</activities>
+</process>

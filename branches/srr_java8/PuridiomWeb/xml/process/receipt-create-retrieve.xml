@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="receiptCreateRetrieve" connection-type="Connection-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="receiptCreate">
+			<task synchronous="true" continue-on-failure="false" name="receiptCreate">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>receipt-create.xml</process-filename>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="poLineList">
+				<rule-filename>is-receiptmethod-receivebyorder</rule-filename>
+				<task-object-name>com.tsa.puridiom.receiptline.tasks.ReceiptLineRetrieveListFromPoLineList</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="requisitionLineList">
+				<rule-filename>is-receiptmethod-receivebytransfer.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.receiptline.tasks.ReceiptLineRetrieveListFromReqLineList</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+	</activities>
+</process>

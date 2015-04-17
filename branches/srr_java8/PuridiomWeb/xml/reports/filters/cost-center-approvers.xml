@@ -1,0 +1,40 @@
+<cost-center-approvers>
+	<columns>
+		<UserProfile_userId>
+			<label>User ID</label>
+		</UserProfile_userId>
+		<UserProfile_firstName>
+			<label>First Name</label>
+		</UserProfile_firstName>
+		<UserProfile_lastName>
+			<label>Last Name</label>
+		</UserProfile_lastName>
+		<UserProfile_approvalAmount>
+			<label>Approval Amount</label>
+		</UserProfile_approvalAmount>
+		<UserProfile_owner>
+			<label>Owner</label>
+		</UserProfile_owner>
+		<UserProfile_title>
+			<label>Title</label>
+		</UserProfile_title>
+		<AppRule_udf1Code>
+			<label>Cost Center</label>
+		</AppRule_udf1Code>
+		<AppRule_udf2Code>
+			<label>Budgeted</label>
+		</AppRule_udf2Code>
+		<AppRule_udf3Code>
+			<label>Capital</label>
+		</AppRule_udf3Code>
+		<AppRule_udf4Code>
+			<label>Designated Approver</label>
+		</AppRule_udf4Code>
+		<AprovalLog_callForward>
+			<label>Call Forward</label>
+		</AprovalLog_callForward>
+	</columns>
+<sqlfrom>UserProfile as UserProfile, AppRule as AppRule , ApprovalLog as ApprovalLog </sqlfrom>
+<sqlwhere><![CDATA[UserProfile.userId = AppRule.userId AND ApprovalLog.]]></sqlwhere>
+<title>Cost Center Approvers Report</title>
+</cost-center-approvers>

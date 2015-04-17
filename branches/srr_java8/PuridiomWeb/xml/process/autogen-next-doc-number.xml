@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="GenerateDocNumber" connection-type="New-Transaction">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="generateDocNumber">
+			<task synchronous="true" continue-on-failure="false" name="nextDocNumber">
+				<task-object-name>com.tsa.puridiom.common.tasks.GenerateDocNumber</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

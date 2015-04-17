@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="requisitionLineSaveas" connection-type="transaction-required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="requisitionLineSaveas">
+			<task synchronous="true" continue-on-failure="false" name="requisitionLine">
+				<task-object-name>com.tsa.puridiom.requisitionline.tasks.RequisitionLineCloneMsr</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="requisitionLineSaveasSetup">
+				<task-object-name>com.tsa.puridiom.requisitionline.tasks.RequisitionLineSaveasSetup</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="requisitionLineSaveasDetails">
+			<rule-filename>is-cloneditem-for-save.xml</rule-filename>
+			<!-- 
+			<task synchronous="true" continue-on-failure="false" name="requisitionLineAccountSaveas">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>account-saveas.xml</process-filename>
+			</task>
+			 -->
+			<task synchronous="true" continue-on-failure="false" name="requisitionLineCommentSaveas">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>doccomment-clone.xml</process-filename>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="requisitionHeaderAttachmentSaveas">
+				<rule-filename>is-documents-module-active.xml</rule-filename>
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>docattachment-saveas-by-line.xml</process-filename>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="requisitionLineShipToSaveas">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>shipto-saveas.xml</process-filename>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="requisitionLineBillToSaveas">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>billto-saveas.xml</process-filename>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="inspectionSaveas">
+				<rule-filename>is-msr-request.xml</rule-filename>
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>inspection-saveas.xml</process-filename>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="requisitionHeaderUpdate">
+		<rule-filename>is-organization-srr.xml;is-cloneditem-for-save.xml</rule-filename>
+		<task synchronous="true" continue-on-failure="false" name="requisitionHeaderUpdate">
+			<task-object-name>com.tsa.puridiom.requisitionheader.tasks.RequisitionHeaderUpdate</task-object-name>
+		</task>
+		</activity>
+	</activities>
+</process>

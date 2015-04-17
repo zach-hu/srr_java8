@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="invformdata-update" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="invformdata-update">
+			<task synchronous="true" continue-on-failure="false" name="invFormData">			
+				<task-object-name>com.tsa.puridiom.invformdata.tasks.InvFormDataRetrieveById</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="invFormData">			
+				<task-object-name>com.tsa.puridiom.invformdata.tasks.InvFormDataSetValues</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="invFormData">			
+				<task-object-name>com.tsa.puridiom.invformdata.tasks.InvFormDataUpdate</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+	</activities>
+</process>

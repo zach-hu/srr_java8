@@ -1,0 +1,41 @@
+<endp_table>
+	<columns>
+		<XrefCombo_code1>
+			<label>AC01</label>
+			<link><![CDATA[javascript: returnMe('#XrefCombo_code1^'); void(0);]]></link>
+			<visible>1</visible>
+			<size>4</size>
+			<sort>A</sort>
+			<distinct>Y</distinct>
+		</XrefCombo_code1>
+		<XrefCombo_code2>
+			<label>AC02</label>
+			<hidden-input>Y</hidden-input>
+			<size>4</size>
+		</XrefCombo_code2>
+		<XrefCombo_code3>
+			<label>AC03</label>
+			<hidden-input>Y</hidden-input>
+			<size>4</size>
+		</XrefCombo_code3>
+		<XrefCombo_code4>
+			<label>AC04</label>
+			<hidden-input>Y</hidden-input>
+			<size>4</size>
+		</XrefCombo_code4>
+		<StdTable_description>
+			<label>description</label>
+			<hidden-input>Y</hidden-input>
+			<size>20</size>
+			<filter-default>Y</filter-default>
+		</StdTable_description>
+	</columns>
+<sqlfrom>XrefCombo as XrefCombo, StdTable as StdTable</sqlfrom>
+<sqlwhere><![CDATA[ XrefCombo.status='02' AND
+					XrefCombo.xrefType='CODA' AND
+					XrefCombo.code1 = StdTable.id.tableKey AND
+					StdTable.id.tableType = 'AC01' ]]></sqlwhere>
+<sqlorderby>XrefCombo.code1 ASC</sqlorderby>
+<pagesize>15</pagesize>
+<title>GL Account Browse</title>
+</endp_table>

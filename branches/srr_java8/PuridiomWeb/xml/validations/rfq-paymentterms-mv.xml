@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rule>
+	<clause type="Rule">
+		<rule-filename>rfq-has-vendors.xml</rule-filename>
+	</clause>
+	<logical-operator>IFTHEN</logical-operator>
+	<clause type="lookup" matchAll="true">
+		<sql> from PaymentTerm as pt where pt.id = '@termscode@' AND (pt.status = '02' OR (pt.status = '01' AND pt.dateExpires >= @today@))</sql>
+		<source>rfqVendorList</source>
+		<arguments>
+			<name>termscode</name>
+			<source>rfqVendorList</source>
+			<colName>getPaymentTerms</colName>
+		</arguments>
+	</clause>
+</rule>

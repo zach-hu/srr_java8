@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="rfqApprove" connection-type="Transaction-Required">
+  <activities>
+    <activity synchronous="true" continue-on-failure="false" name="rfqApproveAndForward">
+      <task synchronous="true" continue-on-failure="false" name="rfqSetup">
+        <task-object-name>com.tsa.puridiom.rfq.tasks.RfqApprovalSetup</task-object-name>
+        <post-action></post-action>
+      </task>
+      <task synchronous="true" continue-on-failure="false" name="rfqHeader">
+        <task-object-name>com.tsa.puridiom.rfqheader.tasks.RfqHeaderRetrieveById</task-object-name>
+        <post-action></post-action>
+      </task>
+      <task synchronous="true" continue-on-failure="false" name="rfqForwardSetup">
+        <task-object-name>com.tsa.puridiom.rfqheader.tasks.RfqHeaderUpdateSetup</task-object-name>
+        <post-action></post-action>
+      </task>
+      <task synchronous="true" continue-on-failure="false" name="rfqLineList">
+        <task-object-name>com.tsa.puridiom.rfqline.tasks.RfqLineRetrieveByHeader</task-object-name>
+        <post-action></post-action>
+      </task>
+      <task synchronous="true" continue-on-failure="false" name="approveForwardToNext">
+        <task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+        <process-filename>rfq-forward-to-next.xml</process-filename>
+        <post-action></post-action>
+      </task>
+      <task synchronous="true" continue-on-failure="false" name="rfqSetStatus">
+        <task-object-name>com.tsa.puridiom.rfq.tasks.RfqSetStatus</task-object-name>
+        <post-action></post-action>
+      </task>
+      <task synchronous="true" continue-on-failure="false" name="rfqHeaderUpdate">
+        <task-object-name>com.tsa.puridiom.rfqheader.tasks.RfqHeaderUpdate</task-object-name>
+        <post-action></post-action>
+      </task>
+      <task synchronous="true" continue-on-failure="false" name="rfqLineUpdate">
+        <task-object-name>com.tsa.puridiom.rfqline.tasks.RfqLineUpdateList</task-object-name>
+        <post-action></post-action>
+      </task>
+    </activity>
+	<activity synchronous="true" continue-on-failure="false" name="autorelease">
+      <!--<rule-filename check-for-false="true">is-rfq-approved.xml</rule-filename>-->
+      <task synchronous="true" continue-on-failure="false" name="autorelease">
+        <task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+        <process-filename>rfq-is-approved.xml</process-filename>
+        <post-action></post-action>
+      </task>
+    </activity>
+    <activity synchronous="true" continue-on-failure="false" name="rfqListRetreieve">
+      <task synchronous="true" continue-on-failure="false" name="rfqListRetreieve">
+        <task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+        <process-filename>rfq-retrieve-by-status-for-approver.xml</process-filename>
+        <post-action></post-action>
+      </task>
+    </activity>
+  </activities>
+</process>

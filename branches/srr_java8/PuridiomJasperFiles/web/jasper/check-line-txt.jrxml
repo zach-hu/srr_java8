@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created using an evaluation version of JasperAssistant (http://www.jasperassistant.com) -->
+<!DOCTYPE jasperReport PUBLIC "-//JasperReports//DTD Report Design//EN" "http://jasperreports.sourceforge.net/dtds/jasperreport.dtd">
+
+<jasperReport name="checklinetxt" pageWidth="800" pageHeight="210" whenNoDataType="AllSectionsNoDetail" columnWidth="800" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" whenResourceMissingType="Empty">
+	<property name="com.jasperassistant.designer.Grid" value="true"/>
+	<property name="com.jasperassistant.designer.SnapToGrid" value="false"/>
+	<property name="com.jasperassistant.designer.GridWidth" value="10"/>
+	<property name="com.jasperassistant.designer.GridHeight" value="10"/>
+	<property name="com.jasperassistant.designer.Margins" value="true"/>
+	<property name="com.jasperassistant.designer.Rulers" value="true"/>
+	<property name="com.jasperassistant.designer.SnapToGuides" value="true"/>
+	<property name="com.jasperassistant.designer.HGuides" value="564"/>
+	<import value="com.tsa.puridiom.common.documents.*"/>
+	<import value="com.tsa.puridiom.common.utility.HiltonUtility"/>
+	<import value="com.tsagate.properties.*"/>
+	<import value="com.tsa.puridiom.reports.datasource.HibernateQueryResultDataSource"/>
+	<import value="com.tsa.puridiom.jasperreports.*"/>
+	<reportFont name="Arial_Normal" isDefault="true" fontName="Arial" size="9" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Bold" isDefault="false" fontName="Arial Black" size="8" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica-Bold" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Bold_Big" isDefault="false" fontName="Arial Black" size="9" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica-Bold" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<parameter name="oid" class="java.lang.String">
+		<defaultValueExpression><![CDATA["hilton"]]></defaultValueExpression>
+	</parameter>
+	<field name="CheckInvoice_invoiceCheckNumber" class="java.lang.String"/>
+	<field name="CheckInvoice_vendorName" class="java.lang.String"/>
+	<field name="CheckInvoice_checkDate" class="java.util.Date"/>
+	<field name="CheckInvoice_city" class="java.lang.String"/>
+	<field name="CheckInvoice_invoiceAmountTotal" class="java.math.BigDecimal"/>
+	<field name="CheckInvoice_discountAmountTotal" class="java.math.BigDecimal"/>
+	<field name="CheckInvoice_netAmountTotal" class="java.math.BigDecimal"/>
+	<field name="CheckInvoice_addressLine2" class="java.lang.String"/>
+	<field name="CheckInvoice_state" class="java.lang.String"/>
+	<field name="CheckInvoice_postalCode" class="java.lang.String"/>
+	<field name="CheckInvoice_country" class="java.lang.String"/>
+	<group name="Group_1">
+		<groupExpression><![CDATA[$V{REPORT_COUNT}]]></groupExpression>
+		<groupHeader>
+			<band height="210">
+				<textField isBlankWhenNull="true">
+					<reportElement x="580" y="40" width="60" height="12"/>
+					<box topBorder="None" leftBorder="1Point" bottomBorder="1Point" rightBorder="1Point"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="Courier New" size="8" pdfFontName="Courier"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{CheckInvoice_invoiceCheckNumber}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="430" y="40" width="100" height="12" isPrintWhenDetailOverflows="true"/>
+					<textElement>
+						<font fontName="Courier New" size="8"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[HiltonUtility.getFormattedDate($F{CheckInvoice_checkDate}, $P{oid},"dd-MMM-yy").toUpperCase()]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="60" y="40" width="170" height="12" isPrintWhenDetailOverflows="true"/>
+					<textElement>
+						<font fontName="Courier New" size="8"/>
+					</textElement>
+					<text><![CDATA[WDP Chase Bank of]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="60" y="60" width="660" height="12"/>
+					<textElement>
+						<font fontName="Courier New" size="8"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[HiltonUtility.completeCharacters(HiltonUtility.convertToDollarText($F{CheckInvoice_netAmountTotal}), "*", 66,  1)]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="90" y="90" width="330" height="120" isPrintWhenDetailOverflows="true"/>
+					<textElement>
+						<font fontName="Courier New" size="8"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{CheckInvoice_vendorName} + "\n" + $F{CheckInvoice_addressLine2} +"\n" + $F{CheckInvoice_city} + ", "+ $F{CheckInvoice_state} + "  " + $F{CheckInvoice_postalCode} + "\n"+ $F{CheckInvoice_country}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="660" y="40" width="140" height="12"/>
+					<textElement textAlignment="Right">
+						<font fontName="Courier New" size="8"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[HiltonUtility.completeCharacters(HiltonUtility.getFormattedCurrency($F{CheckInvoice_netAmountTotal}, "USD", $P{oid}, false), "*", 14,  0)]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+	</group>
+</jasperReport>

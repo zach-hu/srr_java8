@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="rfqLineSaveasFromReq" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="rfqLineSaveas">
+			<task synchronous="true" continue-on-failure="false" name="rfqLineSaveasSetup">
+				<task-object-name>com.tsa.puridiom.rfqline.tasks.RfqLineSaveasFromReqSetup</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="rfqLineCommentSaveas">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>doccomment-saveas.xml</process-filename>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="poLineAttachmentSaveas">
+				<rule-filename>is-documents-module-active.xml</rule-filename>
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>docattachment-saveas-by-line.xml</process-filename>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="rfqLineShipToSaveas">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>shipto-saveas.xml</process-filename>
+			</task>
+		</activity>
+	</activities>
+</process>

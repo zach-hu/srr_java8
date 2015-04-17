@@ -1,0 +1,150 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping>
+
+
+<class
+    name="com.tsa.puridiom.entity.InvProperty"
+    table="INV_PROPERTY"
+>
+    <id
+        name="icProperty"
+        type="java.math.BigDecimal"
+        column="IC_PROPERTY"
+    >
+        <generator class="assigned" />
+    </id>
+    <property
+        name="propertyType"
+        type="java.lang.String"
+        column="PROPERTY_TYPE"
+        length="5"
+    />
+    <property
+        name="tagNumber"
+        type="java.lang.String"
+        column="TAG_NUMBER"
+        length="30"
+    />
+    <property
+        name="icRc"
+        type="java.math.BigDecimal"
+        column="IC_RC"
+        length="22"
+    />
+    <property
+        name="itemNumber"
+        type="java.lang.String"
+        column="ITEM_NUMBER"
+        length="30"
+    />
+    <property
+        name="serialNumber"
+        type="java.lang.String"
+        column="SERIAL_NUMBER"
+        length="255"
+    />
+    <property
+        name="poNumber"
+        type="java.lang.String"
+        column="PO_NUMBER"
+        length="20"
+    />
+    <property
+        name="contract"
+        type="java.lang.String"
+        column="CONTRACT"
+        length="20"
+    />
+    <property
+        name="receiptNumber"
+        type="java.lang.String"
+        column="RECEIPT_NUMBER"
+        length="20"
+    />
+    <property
+        name="shipNumber"
+        type="java.lang.String"
+        column="SHIP_NUMBER"
+        length="20"
+    />
+    <property
+        name="remarks"
+        type="java.lang.String"
+        column="REMARKS"
+        length="50"
+    />
+    <property
+        name="dateIn"
+        type="java.sql.Timestamp"
+        column="DATE_IN"
+        length="7"
+    />
+    <property
+        name="dateOut"
+        type="java.sql.Timestamp"
+        column="DATE_OUT"
+        length="7"
+    />
+    <property
+        name="status"
+        type="java.lang.String"
+        column="STATUS"
+        length="4"
+    />
+    <property
+        name="owner"
+        type="java.lang.String"
+        column="OWNER"
+        length="15"
+    />
+    <property
+        name="cblOutNumber"
+        type="java.lang.String"
+        column="CBL_OUT_NUMBER"
+        length="20"
+    />
+    <property
+        name="armyNumber"
+        type="java.lang.String"
+        column="ARMY_NUMBER"
+        length="20"
+    />
+    <property
+        name="icRecLine"
+        type="java.math.BigDecimal"
+        column="IC_REC_LINE"
+        length="22"
+    />
+    <property
+        name="icPoLine"
+        type="java.math.BigDecimal"
+        column="IC_PO_LINE"
+        length="22"
+    />
+    <property
+        name="assetNumber"
+        type="java.lang.String"
+        column="ASSET_NUMBER"
+        length="30"
+    />
+    <property
+        name="source"
+        type="java.lang.String"
+        column="SOURCE"
+        length="3"
+    />
+    <property
+        name="icDsbLine"
+        type="java.math.BigDecimal"
+        column="IC_DSB_LINE"
+        length="22"
+    />
+
+    <!-- associations -->
+
+</class>
+</hibernate-mapping>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rule>
+  <clause type="Empty">
+    <left-side>
+      <source>incomingRequestObjectMethod</source>
+      <object>vendor</object>
+      <name>getVendUdf2</name>
+    </left-side>
+  </clause>
+  <logical-operator>OR</logical-operator>
+  <clause type="lookup">
+    <sql>from StdTable stdTable where stdTable.id.tableType = 'VN02' AND stdTable.id.tableKey = '@udf1@' AND (stdTable.status = '02' OR (stdTable.status = '01' AND stdTable.dateExpires >= @today@))</sql>
+    <source>vendor</source>
+    <arguments>
+      <name>udf</name>
+      <source>vendor</source>
+      <colName>getVendUdf2</colName>
+    </arguments>
+  </clause>
+</rule>
+

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="req-documents-retrieve" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="requisitionHeaderRetrieve">
+			<task synchronous="true" continue-on-failure="false" name="requisitionHeader">
+				<rule-filename>is-requisitionheader-empty.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.requisitionheader.tasks.RequisitionHeaderRetrieveByIcReqHeader</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="requisitionLineListRetrieve">
+			<rule-filename check-for-false="true">is-requisitionheader-empty.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="requisitionDocumentsRetrieveSetup">
+				<task-object-name>com.tsa.puridiom.requisitionheader.tasks.RequisitionHeaderDocumentsRetrieveSetup</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="requisitionLineList">
+				<rule-filename>is-requisitionlinelist-empty.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.requisitionline.tasks.RequisitionLineRetrieveByHeader</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="msrHeaderRetrieve">
+			<task synchronous="true" continue-on-failure="false" name="msrHeader">
+				<rule-filename>is-msrheader-empty.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.requisitionheader.tasks.MsrHeaderRetrieveById</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="msrLineListRetrieve">
+			<rule-filename check-for-false="true">is-msrheader-empty.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="msrDocumentsRetrieveSetup">
+				<task-object-name>com.tsa.puridiom.requisitionheader.tasks.MsrHeaderDocumentsRetrieveSetup</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="msrLineList">
+				<rule-filename>is-msrlinelist-empty.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.requisitionline.tasks.MsrLineRetrieveByHeader</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+	</activities>
+</process>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="rfqLineUpdateReceiptOptions" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="rfqLineUpdateReceiptOptions">
+			<task synchronous="true" continue-on-failure="false" name="rfqLineUpdateReceiptOptions">
+				<task-object-name>com.tsa.puridiom.rfqline.tasks.RfqLineSetValues</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="rfqLineUpdate">
+				<task-object-name>com.tsa.puridiom.rfqline.tasks.RfqLineUpdate</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+	</activities>
+</process>

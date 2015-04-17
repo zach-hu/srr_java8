@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="BudgetServiceUpdate" connection-type="Transaction-Required" once-execution="true">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="budgetServiceSetup">
+			<rule-filename check-for-false="true">is-lineitems-empty.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="budgetServiceType">
+				<task-object-name>com.tsa.puridiom.budget.tasks.BudgetSetupType</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="budgetServiceActions">
+				<task-object-name>com.tsa.puridiom.budget.tasks.BudgetSetupActions</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="budgetSetupEntityList">
+			<rule-filename check-for-false="true">is-lineitems-empty.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="budgetEntityList">
+				<rule-filename>is-req-budget.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.budget.tasks.BudgetSetupReqEntities</task-object-name>
+				<post-action>exitActivity</post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="budgetEntityList">
+				<rule-filename>is-po-budget.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.budget.tasks.BudgetSetupPoEntities</task-object-name>
+				<post-action>exitActivity</post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="budgetEntityList">
+				<rule-filename>is-invoice-budget.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.budget.tasks.BudgetSetupInvoiceEntities</task-object-name>
+				<post-action>exitActivity</post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="budgetServiceCheck">
+			<rule-filename check-for-false="true">is-lineitems-empty.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="budgetSetup">
+				<task-object-name>com.tsa.puridiom.budget.tasks.BudgetSetupFromEntityList</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="budgetReturn">
+				<task-object-name>com.tsa.puridiom.budget.tasks.BudgetServiceGet</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="errorList">
+				<task-object-name>com.tsa.puridiom.budget.tasks.BudgetServiceGetException</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="errorList">
+				<task-object-name>com.tsa.puridiom.budget.tasks.BudgetServiceCheck</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="budgetCheckStatus">
+				<task-object-name>com.tsa.puridiom.budget.tasks.BudgetServiceSetCheckStatus</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="checkExceptions">
+				<rule-filename>is-budget-check-status-failed.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.budget.tasks.BudgetServiceThrowsException</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="budgetServiceUpdate">
+			<rule-filename check-for-false="true">is-budget-check-status-failed.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="budgetUpdated">
+				<task-object-name>com.tsa.puridiom.budget.tasks.BudgetServiceUpdate</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="budgetServiceUnlock">
+			<task synchronous="true" continue-on-failure="false" name="budgetUnlock">
+				<task-object-name>com.tsa.puridiom.budget.tasks.BudgetServiceUnlock</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="budgetServiceUpdatePoLineFromInvoice">
+			<rule-filename check-for-false="true">is-budget-check-status-failed.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="budgetServiceUpdatePoLineFromInvoice">
+				<rule-filename>is-invoice.xml;is-budget-updated.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.budget.tasks.BudgetServiceUpdatePoLinesFromIvLines</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+	</activities>
+</process>

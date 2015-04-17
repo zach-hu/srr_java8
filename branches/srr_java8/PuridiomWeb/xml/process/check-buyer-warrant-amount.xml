@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="checkBuyerWarrantAmount" connection-type="Connection-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="checkBuyerWarrantAmount">
+			<task synchronous="true" continue-on-failure="false" name="isWarrantAmountEnough">
+				<rule-filename>is-po-contract-order.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.po.tasks.CheckBuyerContractAmount</task-object-name>
+				<post-action>exitActivity</post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="isWarrantAmountEnough">
+				<rule-filename>is-po-blanket-order.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.po.tasks.CheckBuyerContractAmountBlanket</task-object-name>
+				<post-action>exitActivity</post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="isWarrantAmountEnough">
+				<task-object-name>com.tsa.puridiom.po.tasks.CheckBuyerWarrantAmount</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="disbursementline-extended-check-cancel" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="CancelAllitems">
+			<rule-filename>is-disbline-cancel-all-items-null.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="disbLines">
+				<task-object-name>com.tsa.puridiom.disbline.tasks.DisbLineRetrieveByHeader</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="cancelAll">
+				<task-object-name>com.tsa.puridiom.disbline.tasks.DisbLineCheckCancelAll</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="updateBins">
+			<rule-filename>is-disbline-cancel-all-items.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="cancelDisbLine">
+				<task-object-name>com.tsa.puridiom.disbline.tasks.DisbLineExtendedCancel</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="updateBins">
+			<rule-filename>is-disbline-cancel-all-items.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="invBinLocation">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>disbursementline-extended-cancel-all.xml</process-filename>
+			</task>
+		</activity>
+	</activities>
+</process>

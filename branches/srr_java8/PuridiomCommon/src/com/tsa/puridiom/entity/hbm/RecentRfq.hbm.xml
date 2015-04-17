@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+    
+<hibernate-mapping>
+
+<class 
+    name="com.tsa.puridiom.entity.RecentRfq" 
+    table="RECENT_RFQ"
+>
+    <composite-id name="comp_id" class="com.tsa.puridiom.entity.RecentRfqPK">
+        <key-property name="buyerCode" column="BUYER_CODE" type="java.lang.String"/>
+        <key-property name="icRfqHeader" column="IC_RFQ_HEADER" type="java.math.BigDecimal"/>
+    </composite-id>    
+    <property
+        name="dateEntered"
+        type="java.sql.Timestamp"
+        column="DATE_ENTERED"
+        length="7"
+    />
+
+    <!-- associations -->
+
+</class>
+</hibernate-mapping>

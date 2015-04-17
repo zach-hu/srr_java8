@@ -1,0 +1,130 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping>
+
+<class
+    name="com.tsa.puridiom.entity.Department"
+    table="DEPARTMENT"
+>
+    <id
+        name="departmentCode"
+        type="java.lang.String"
+        column="DEPARTMENT_CODE"
+    >
+        <generator class="assigned" />
+    </id>
+    <property
+        name="departmentName"
+        type="java.lang.String"
+        column="DEPARTMENT_NAME"
+        length="60"
+    />
+    <property
+        name="deptManager"
+        type="java.lang.String"
+        column="DEPT_MANAGER"
+        length="15"
+    />
+    <property
+        name="division"
+        type="java.lang.String"
+        column="DIVISION"
+        length="15"
+    />
+    <property
+        name="dateEntered"
+        type="java.sql.Timestamp"
+        column="DATE_ENTERED"
+        length="7"
+    />
+    <property
+        name="dateExpires"
+        type="java.sql.Timestamp"
+        column="DATE_EXPIRES"
+        length="7"
+    />
+    <property
+        name="owner"
+        type="java.lang.String"
+        column="OWNER"
+        length="15"
+    />
+    <property
+        name="status"
+        type="java.lang.String"
+        column="STATUS"
+        length="4"
+    />
+    <property
+        name="deptApprv1"
+        type="java.lang.String"
+        column="DEPT_APPRV1"
+        length="15"
+    />
+    <property
+        name="deptApprv2"
+        type="java.lang.String"
+        column="DEPT_APPRV2"
+        length="15"
+    />
+    <property
+        name="deptApprv3"
+        type="java.lang.String"
+        column="DEPT_APPRV3"
+        length="15"
+    />
+    <property
+        name="deptApprv4"
+        type="java.lang.String"
+        column="DEPT_APPRV4"
+        length="15"
+    />
+    <property
+        name="deptApprv5"
+        type="java.lang.String"
+        column="DEPT_APPRV5"
+        length="15"
+    />
+    <property
+        name="managerAmount"
+        type="java.math.BigDecimal"
+        column="MANAGER_AMOUNT"
+        length="15"
+    />
+    <property
+        name="apprv1Amount"
+        type="java.math.BigDecimal"
+        column="APPRV1_AMOUNT"
+        length="15"
+    />
+    <property
+        name="apprv2Amount"
+        type="java.math.BigDecimal"
+        column="APPRV2_AMOUNT"
+        length="15"
+    />
+    <property
+        name="apprv3Amount"
+        type="java.math.BigDecimal"
+        column="APPRV3_AMOUNT"
+        length="15"
+    />
+    <property
+        name="apprv4Amount"
+        type="java.math.BigDecimal"
+        column="APPRV4_AMOUNT"
+        length="15"
+    />
+    <property
+        name="apprv5Amount"
+        type="java.math.BigDecimal"
+        column="APPRV5_AMOUNT"
+        length="15"
+    />
+    <!-- associations -->
+
+</class>
+</hibernate-mapping>

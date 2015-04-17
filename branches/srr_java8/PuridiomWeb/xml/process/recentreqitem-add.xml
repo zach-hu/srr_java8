@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="recentreqitem-add" connection-type="New-Transaction">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="recentReqItemSetup">
+		    <task synchronous="true" continue-on-failure="false" name="recentReqItemSetup">
+				<task-object-name>com.tsa.puridiom.recentreqitem.tasks.RecentReqItemSetupFromRequisition</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="recentReqItem">
+				<task-object-name>com.tsa.puridiom.recentreqitem.tasks.RecentReqItemRetrieveById</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="recentReqItemAdd">
+			<rule-filename>is-recentreqitem-empty.xml;is-recentreqitem-valid.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="recentReqItem">
+				<task-object-name>com.tsa.puridiom.recentreqitem.tasks.RecentReqItemSetValues</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="recentReqItem">
+				<task-object-name>com.tsa.puridiom.recentreqitem.tasks.RecentReqItemIncrementCount</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="recentReqItem">
+				<task-object-name>com.tsa.puridiom.recentreqitem.tasks.RecentReqItemAdd</task-object-name>
+			</task>
+			<post-action>exitProcess</post-action>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="recentReqItemUpdate">
+			<rule-filename>is-recentreqitem-valid.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="recentReqItem">
+				<task-object-name>com.tsa.puridiom.recentreqitem.tasks.RecentReqItemSetValues</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="recentReqItem">
+				<task-object-name>com.tsa.puridiom.recentreqitem.tasks.RecentReqItemIncrementCount</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="recentReqItem">
+				<task-object-name>com.tsa.puridiom.recentreqitem.tasks.RecentReqItemUpdate</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

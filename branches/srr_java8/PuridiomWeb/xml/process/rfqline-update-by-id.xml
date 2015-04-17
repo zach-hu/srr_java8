@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="rfqLineUpdate" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="rfqLineUpdate">
+			<task synchronous="true" continue-on-failure="false" name="rfqLineUpdateSetup">
+				<task-object-name>com.tsa.puridiom.rfqline.tasks.RfqLineUpdateSetup</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="rfqLine">			
+				<task-object-name>com.tsa.puridiom.rfqline.tasks.RfqLineRetrieveById</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="rfqLine">
+				<task-object-name>com.tsa.puridiom.rfqline.tasks.RfqLineSetValues</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="rfqLine">			
+				<task-object-name>com.tsa.puridiom.rfqline.tasks.RfqLineUpdateById</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="rfqBidUpdate">
+			<task synchronous="true" continue-on-failure="false" name="rfqBidList">			
+				<task-object-name>com.tsa.puridiom.rfqbid.tasks.RfqBidRetrieveByLine</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="rfqBidList">			
+				<task-object-name>com.tsa.puridiom.rfqbid.tasks.RfqBidSetValuesFromLine</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="rfqBidList">			
+				<task-object-name>com.tsa.puridiom.rfqbid.tasks.RfqBidListSetCurrentCurrencyFactor</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="rfqBidList">			
+				<task-object-name>com.tsa.puridiom.rfqbid.tasks.RfqBidListUpdate</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

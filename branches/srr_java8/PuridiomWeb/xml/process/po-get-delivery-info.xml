@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="getServiceInfo" connection-type="Connection-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="summary">
+			<task synchronous="true" continue-on-failure="false" name="totalReleased">
+				<task-object-name>com.tsa.puridiom.po.tasks.PoTotalQtyReleased</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="orderQty">
+				<task-object-name>com.tsa.puridiom.po.tasks.PoDeliveryOrderQty</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="infoSummary">
+				<rule-filename>is-potype-dr.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.po.tasks.PoDeliveryInfoSummary</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="detail">
+			<task synchronous="true" continue-on-failure="false" name="lineDetail">
+				<task-object-name>com.tsa.puridiom.po.tasks.PoLinedeliveryInfo</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+	</activities>
+</process>

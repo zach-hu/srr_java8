@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="ContactUpdate" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="updateContactActivity">
+			<task synchronous="true" continue-on-failure="false" name="contact">
+				<task-object-name>com.tsa.puridiom.contact.tasks.ContactRetrieveById</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="contactSetup">
+				<task-object-name>com.tsa.puridiom.contact.tasks.ContactAdminUpdateSetup</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="contact">
+				<task-object-name>com.tsa.puridiom.contact.tasks.ContactSetValues</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="contact">
+				<task-object-name>com.tsa.puridiom.contact.tasks.ContactUpdate</task-object-name>
+				<post-action></post-action>
+			   </task>
+		  </activity>
+		  <activity synchronous="true" continue-on-failure="false" name="updateVendorActivity">
+			<rule-filename>is-change-fields.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="updateVendor">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>vendor-update.xml</process-filename>
+			</task>
+		  </activity>
+		  <activity synchronous="true" continue-on-failure="false" name="auditTrail">
+			<rule-filename>is-audit-save-add.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="SaveAuditFields">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>audit-save-add.xml</process-filename>
+			</task>
+		</activity>
+	 </activities>
+</process>

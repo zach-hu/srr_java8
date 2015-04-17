@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="reviewFinalizeRetrieveById" connection-type="Connection-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="reviewFinalizeRetrieveById">
+			<task synchronous="true" continue-on-failure="false" name="poHeader">
+				<task-object-name>com.tsa.puridiom.poheader.tasks.PoHeaderRetrieveById</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="reviewFinalizeList">
+				<task-object-name>com.tsa.puridiom.reviewfinalize.tasks.PoReviewFinalizeRetrieveById</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

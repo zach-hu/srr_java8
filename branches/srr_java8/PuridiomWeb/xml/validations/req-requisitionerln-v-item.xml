@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rule>
+	<clause type="Empty">
+		<left-side elementSource="true">
+			<source>incomingRequestObjectMethod</source>
+			<object>lineItem</object>
+			<name>getRequisitionerCode</name>
+		</left-side>
+	</clause>
+	<logical-operator>OR</logical-operator>
+	<clause type="lookup" elementSource="true">
+		<sql> from UserProfile as userProfile where userProfile.userId = '@userid@' AND userProfile.requisitioner = 'Y' AND (userProfile.status = '02' OR (userProfile.status = '01' AND userProfile.dateExpires >= @today@))</sql>
+		<source>lineItem</source>
+		<arguments>
+			<name>userid</name>
+			<source>lineItem</source>
+			<colName>getRequisitionerCode</colName>
+		</arguments>
+	</clause>
+</rule>

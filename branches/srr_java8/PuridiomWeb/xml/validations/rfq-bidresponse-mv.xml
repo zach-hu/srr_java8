@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rule>
+	<clause type="Rule">
+		<rule-filename>rfq-has-vendors.xml</rule-filename>
+	</clause>
+	<logical-operator>IFTHEN</logical-operator>
+	<clause type="lookup" matchAll="true">
+		<sql>from StdTable stdTable where stdTable.id.tableType = 'RESP' AND stdTable.id.tableKey = '@bidresponse@' AND (stdTable.status = '02' OR (stdTable.status = '01' AND stdTable.dateExpires >= @today@))</sql>
+		<source>rfqVendorList</source>
+		<arguments>
+			<name>bidresponse</name>
+			<source>rfqVendorList</source>
+			<colName>getBidResponseCode</colName>
+		</arguments>
+	</clause>
+</rule>

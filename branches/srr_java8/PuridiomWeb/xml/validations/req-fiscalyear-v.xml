@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rule>
+	<clause type="Empty">
+		<left-side>
+			<source>incomingRequestObjectMethod</source>
+			<object>header</object>
+			<name>getFiscalYear</name>
+		</left-side>
+	</clause>
+  	<logical-operator>OR</logical-operator>
+  	<clause type="lookup">
+    	<sql>from AutoGen as AutoGen where AutoGen.id.documentType = 'REQ' and AutoGen.id.genYear = '@fiscalYear@' and AutoGen.activeYear = 'Y'</sql>
+    	<source>header</source>
+    	<arguments>
+      		<name>fiscalYear</name>
+      		<source>header</source>
+      		<colName>getFiscalYear</colName>
+    	</arguments>
+  	</clause>
+</rule>
+

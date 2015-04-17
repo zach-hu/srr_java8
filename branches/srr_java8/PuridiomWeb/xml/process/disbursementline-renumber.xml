@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="idisblineRetrieveAll" connection-type="Connection-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="retrieveAlldisbline">
+			<task synchronous="true" continue-on-failure="false" name="disbLines">			
+				<task-object-name>com.tsa.puridiom.disbline.tasks.DisbLineRetrieveByHeaderOrder</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="disbLines">			
+				<task-object-name>com.tsa.puridiom.disbline.tasks.DisbLineRenumber</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="disbLines">
+				<task-object-name>com.tsa.puridiom.disbline.tasks.DisbLineListUpdate</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+	</activities>
+</process>

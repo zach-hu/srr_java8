@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="KitItemRetrieveByParent" connection-type="Connection-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="kitItemRetrieveByParent">
+			<task synchronous="true" continue-on-failure="false" name="kitItemList">
+				<task-object-name>com.tsa.puridiom.kititem.tasks.KitItemRetrieveByParent</task-object-name>
+				<post-action />
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="kitItemList">
+				<task-object-name>com.tsa.puridiom.kititem.tasks.KitItemRetrieveChildDescription</task-object-name>
+				<post-action />
+			</task>
+		</activity>
+	 </activities>
+</process>

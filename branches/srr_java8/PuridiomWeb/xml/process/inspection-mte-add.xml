@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="InspectionMteUpdateLineRow" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="InspectionMteUpdateLineRow">
+			<task synchronous="true" continue-on-failure="false" name="inspectionMte">
+				<task-object-name>com.tsa.puridiom.inspectionmte.tasks.InspectionMteSetValues</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="inspectionMte">
+				<task-object-name>com.tsa.puridiom.inspectionmte.tasks.InspectionMteAdd</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+	</activities>
+</process>

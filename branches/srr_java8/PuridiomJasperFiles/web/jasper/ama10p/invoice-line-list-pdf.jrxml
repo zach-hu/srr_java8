@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created using an evaluation version of JasperAssistant (http://www.jasperassistant.com) -->
+<!DOCTYPE jasperReport PUBLIC "-//JasperReports//DTD Report Design//EN" "http://jasperreports.sourceforge.net/dtds/jasperreport.dtd">
+
+<jasperReport name="InvoiceLineList" pageWidth="582" pageHeight="70" whenNoDataType="BlankPage" columnWidth="582" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+	<property name="com.jasperassistant.designer.GridHeight" value="24"/>
+	<property name="com.jasperassistant.designer.GridWidth" value="24"/>
+	<property name="com.jasperassistant.designer.Rulers" value="true"/>
+	<property name="com.jasperassistant.designer.DataSource" value="hilton1p"/>
+	<property name="com.jasperassistant.designer.SnapToGrid" value="false"/>
+	<property name="com.jasperassistant.designer.Margins" value="true"/>
+	<property name="com.jasperassistant.designer.Grid" value="true"/>
+	<property name="com.jasperassistant.designer.SnapToGuides" value="true"/>
+	<import value="com.tsa.puridiom.reports.datasource.*"/>
+	<import value="com.tsa.puridiom.common.documents.DocumentStatus"/>
+	<import value="com.tsa.puridiom.common.utility.HiltonUtility"/>
+	<import value="com.tsa.puridiom.jasperreports.*"/>
+	<reportFont name="Arial_Normal" isDefault="true" fontName="Arial" size="8" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Bold" isDefault="false" fontName="Arial Black" size="8" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica-Bold" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<parameter name="oid" class="java.lang.String">
+		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+	</parameter>
+	<parameter name="currencyCode" class="java.lang.String"/>
+	<parameter name="accountsSR" class="net.sf.jasperreports.engine.JasperReport">
+		<defaultValueExpression><![CDATA[JasperReportsHelper.loadSubReport("lineitem-account-pdf.jasper", $P{oid})]]></defaultValueExpression>
+	</parameter>
+	<parameter name="lines" class="java.util.List"/>
+	<field name="InvoiceLine_lineNumber" class="java.math.BigDecimal"/>
+	<field name="InvoiceLine_description" class="java.lang.String"/>
+	<field name="InvoiceLine_umCode" class="java.lang.String"/>
+	<field name="InvoiceLine_quantity" class="java.math.BigDecimal"/>
+	<field name="InvoiceLine_accountList" class="java.util.List"/>
+	<field name="InvoiceLine_qtyReceived" class="java.math.BigDecimal"/>
+	<field name="InvoiceLine_qtyOrdered" class="java.math.BigDecimal"/>
+	<field name="InvoiceLine_itemNumber" class="java.lang.String"/>
+	<field name="InvoiceLine_unitPrice" class="java.math.BigDecimal"/>
+	<field name="InvoiceLine_lineTotal" class="java.math.BigDecimal"/>
+	<field name="InvoiceLine_receiptLineList" class="java.util.List"/>
+	<field name="InvoiceLine_orderUnitCost" class="java.math.BigDecimal"/>
+	<field name="InvoiceLine_amountOrdered" class="java.math.BigDecimal"/>
+	<field name="InvoiceLine_orderUmFactor" class="java.math.BigDecimal"/>
+	<variable name="today" class="java.util.Date">
+		<variableExpression><![CDATA[new java.util.Date()]]></variableExpression>
+		<initialValueExpression><![CDATA[new java.util.Date()]]></initialValueExpression>
+	</variable>
+	<variable name="reportTitle_var" class="java.lang.String">
+		<variableExpression><![CDATA["Requisition Line"]]></variableExpression>
+	</variable>
+	<group name="lines">
+		<groupExpression><![CDATA[$V{REPORT_COUNT}]]></groupExpression>
+		<groupHeader>
+			<band height="29">
+				<textField pattern="###0." isBlankWhenNull="true">
+					<reportElement positionType="Float" x="3" y="0" width="40" height="14"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font reportFont="Arial_Normal"/>
+					</textElement>
+					<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{InvoiceLine_lineNumber}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement positionType="Float" x="45" y="0" width="255" height="14" isPrintWhenDetailOverflows="true"/>
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font reportFont="Arial_Normal"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{InvoiceLine_itemNumber}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement positionType="Float" x="300" y="0" width="48" height="14"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font reportFont="Arial_Normal"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{InvoiceLine_umCode}]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0.00#" isBlankWhenNull="true">
+					<reportElement positionType="Float" x="348" y="0" width="70" height="14"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font reportFont="Arial_Normal"/>
+					</textElement>
+					<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{InvoiceLine_quantity}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement positionType="Float" mode="Transparent" x="45" y="14" width="255" height="14" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true"/>
+					<textElement verticalAlignment="Middle"/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{InvoiceLine_description}]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0.00#" isBlankWhenNull="true">
+					<reportElement positionType="Float" x="417" y="0" width="70" height="14"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font reportFont="Arial_Normal"/>
+					</textElement>
+					<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{InvoiceLine_unitPrice}]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0.00#" isBlankWhenNull="true">
+					<reportElement positionType="Float" x="489" y="0" width="75" height="14"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font reportFont="Arial_Normal"/>
+					</textElement>
+					<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{InvoiceLine_quantity}.multiply($F{InvoiceLine_unitPrice})]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+	</group>
+	<group name="receipts">
+		<groupHeader>
+			<band height="6">
+				<subreport isUsingCache="false">
+					<reportElement positionType="Float" x="0" y="0" width="562" height="1" isRemoveLineWhenBlank="true"/>
+					<subreportParameter name="umFactor">
+						<subreportParameterExpression><![CDATA[$F{InvoiceLine_orderUmFactor}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="orderUnitCost">
+						<subreportParameterExpression><![CDATA[$F{InvoiceLine_orderUnitCost}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="oid">
+						<subreportParameterExpression><![CDATA[$P{oid}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="amountOrdered">
+						<subreportParameterExpression><![CDATA[$F{InvoiceLine_amountOrdered}]]></subreportParameterExpression>
+					</subreportParameter>
+					<dataSourceExpression><![CDATA[new HibernateQueryResultDataSource($F{InvoiceLine_receiptLineList})]]></dataSourceExpression>
+					<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[JasperReportsHelper.loadSubReport("invoice-line-receipt-pdf.jasper", $P{oid})]]></subreportExpression>
+				</subreport>
+			</band>
+		</groupHeader>
+	</group>
+	<detail>
+		<band height="8">
+			<subreport>
+				<reportElement positionType="Float" x="-18" y="-6" width="98" height="8" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true"/>
+				<parametersMapExpression><![CDATA[$P{REPORT_PARAMETERS_MAP}]]></parametersMapExpression>
+				<subreportParameter name="oid">
+					<subreportParameterExpression><![CDATA[$P{oid}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[ReportUtils.getAccountsDS($P{lines},$V{REPORT_COUNT}.intValue())]]></dataSourceExpression>
+				<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[$P{accountsSR}]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+</jasperReport>

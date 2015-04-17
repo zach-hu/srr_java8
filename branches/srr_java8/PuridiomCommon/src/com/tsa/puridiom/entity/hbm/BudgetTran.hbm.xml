@@ -1,0 +1,85 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+    
+<hibernate-mapping>
+
+
+<class 
+    name="com.tsa.puridiom.entity.BudgetTran" 
+    table="BUDGET_TRAN"
+>
+    <id
+        name="tranId"
+        type="java.math.BigDecimal"
+        column="TRAN_ID"
+    >
+        <generator class="assigned" />
+    </id>
+    <property
+        name="auditId"
+        type="java.math.BigDecimal"
+        column="AUDIT_ID"
+        not-null="true"
+        length="22"
+    />
+    <property
+        name="budgetId"
+        type="java.math.BigDecimal"
+        column="BUDGET_ID"
+        length="22"
+    />
+    <property
+        name="tranType"
+        type="java.lang.String"
+        column="TRAN_TYPE"
+        length="3"
+    />
+    <property
+        name="tranDate"
+        type="java.sql.Timestamp"
+        column="TRAN_DATE"
+        length="7"
+    />
+    <property
+        name="tranTime"
+        type="java.lang.String"
+        column="TRAN_TIME"
+        length="12"
+    />
+    <property
+        name="preEncumbered"
+        type="java.math.BigDecimal"
+        column="PRE_ENCUMBERED"
+        length="16"
+    />
+    <property
+        name="encumbered"
+        type="java.math.BigDecimal"
+        column="ENCUMBERED"
+        length="16"
+    />
+    <property
+        name="expensed"
+        type="java.math.BigDecimal"
+        column="EXPENSED"
+        length="16"
+    />
+    <property
+        name="balance"
+        type="java.math.BigDecimal"
+        column="BALANCE"
+        length="16"
+    />
+    <property
+        name="owner"
+        type="java.lang.String"
+        column="OWNER"
+        length="15"
+    />
+
+    <!-- associations -->
+
+</class>
+</hibernate-mapping>

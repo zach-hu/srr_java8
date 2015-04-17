@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="rfqVendorSaveasById" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="rfqVendorSaveAsSetup">
+			<task synchronous="true" continue-on-failure="false" name="rfqVendor">
+				<rule-filename>is-amendment-saveas.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.rfqvendor.tasks.RfqVendorSaveasForAmendment</task-object-name>
+				<post-action>exitActivity</post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="rfqVendor">			
+				<task-object-name>com.tsa.puridiom.rfqvendor.tasks.RfqVendorSaveas</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="rfqVendorAdd">
+			<task synchronous="true" continue-on-failure="false" name="rfqVendor">			
+				<task-object-name>com.tsa.puridiom.rfqvendor.tasks.RfqVendorAdd</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

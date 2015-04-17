@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="scheduleSaveasById" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="scheduleSaveasById">
+			<task synchronous="true" continue-on-failure="false" name="schedule">
+				<task-object-name>com.tsa.puridiom.schedule.tasks.ScheduleSaveas</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

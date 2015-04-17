@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="AuditTrailSetup" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="auditTrail">
+			<rule-filename>is-audit-save-add.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="SaveAuditFields">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>audit-save-add.xml</process-filename>
+			</task>
+		</activity>
+	</activities>
+</process>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="billToRetrieveByLine" connection-type="Connection-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="billToRetrieveByLine">
+			<task synchronous="true" continue-on-failure="false" name="billToList">			
+				<task-object-name>com.tsa.puridiom.billto.tasks.BillToRetrieveByLine</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="billToDataRetrieve">			
+				<task-object-name>com.tsa.puridiom.billto.tasks.BillToDataRetrieve</task-object-name>
+			</task>			
+		</activity>
+	</activities>
+</process>

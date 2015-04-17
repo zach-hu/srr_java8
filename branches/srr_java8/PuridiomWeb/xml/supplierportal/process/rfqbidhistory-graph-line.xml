@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="rfqRetrieve" connection-type="Connection-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="rfqBidHistoryRetrieveByLine">
+			<task synchronous="true" continue-on-failure="false" name="rfqBidHistoryList">
+				<task-object-name>com.tsa.puridiom.rfqbidhistory.tasks.RfqBidHistoryRetrieveByLine</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="graphName">
+				<task-object-name>com.tsa.puridiom.supplierportal.tasks.VendorItemBidHistory</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

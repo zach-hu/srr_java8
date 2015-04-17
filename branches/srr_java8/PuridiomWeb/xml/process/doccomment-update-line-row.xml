@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="docCommentAdd" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="docCommentAdd">
+			<task synchronous="true" continue-on-failure="false" name="docCommentUpdateSetup">			
+				<task-object-name>com.tsa.puridiom.doccomment.tasks.DocCommentUpdateSetup</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="docComment">			
+				<task-object-name>com.tsa.puridiom.doccomment.tasks.DocCommentSetValues</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="docComment">			
+				<task-object-name>com.tsa.puridiom.doccomment.tasks.DocCommentAdd</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="docTextAdd">
+ 				<rule-filename>is-not-standard-comment.xml</rule-filename>
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>doctext-add.xml</process-filename>
+			</task>
+		</activity>
+	</activities>
+</process>

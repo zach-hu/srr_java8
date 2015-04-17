@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="rfqLineWorksheetDataRetrieve" connection-type="Connection-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="rfqLineDataRetrieve">
+			<task synchronous="true" continue-on-failure="false" name="rfqLineRetrieveSetup">			
+				<task-object-name>com.tsa.puridiom.rfqline.tasks.RfqLineRetrieveSetup</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="rfqBidList">
+				<task-object-name>com.tsa.puridiom.rfqbid.tasks.RfqBidRetrieveByLine</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="rfqLine">			
+				<task-object-name>com.tsa.puridiom.rfqline.tasks.RfqLineDataSet</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

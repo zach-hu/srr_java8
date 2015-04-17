@@ -1,0 +1,83 @@
+<r-ivar>
+   <columns>
+		<InvItem_description>
+			<label>inv-description</label>
+			<type>STRING</type>
+		</InvItem_description>
+		<InvItem_commodity>
+			<label>inv-commodity</label>
+			<type>STRING</type>
+		</InvItem_commodity>
+		<InvItem_unitOfOrder>
+			<label>inv-unitOfOrder</label>
+			<type>STRING</type>
+		</InvItem_unitOfOrder>
+		<PoLine_poNumber>
+			<label>PO Number</label>
+			<type>STRING</type>
+		</PoLine_poNumber>
+		<PoHeader_poDate>
+			<label>orderDate</label>
+			<type>DATE</type>
+		</PoHeader_poDate>
+		<PoHeader_currencyCode>
+			<label>Currency Code</label>
+			<type>STRING</type>
+		</PoHeader_currencyCode>
+		<PoLine_umCode>
+			<label>um Code</label>
+			<type>STRING</type>
+		</PoLine_umCode>
+		<UnitOfMeasure_description>
+			<label>uom</label>
+			<type>STRING</type>
+		</UnitOfMeasure_description>
+		<PoLine_quantity>
+			<label>quantity</label>
+			<type>BIGDECIMAL</type>
+		</PoLine_quantity>
+		<PoLine_unitPrice>
+			<label>inv-unitCost</label>
+			<type>BIGDECIMAL</type>
+		</PoLine_unitPrice>
+		<PoHeader_vendorId>
+			<label>vendorId</label>
+			<type>STRING</type>
+		</PoHeader_vendorId>
+		<InvItem_cost>
+			<label>inv-cost</label>
+			<type>BIGDECIMAL</type>
+		</InvItem_cost>
+		<InvItem_itemNumber>
+			<label>inv-itemNumber</label>
+			<type>STRING</type>
+		</InvItem_itemNumber>
+		<InvItem_udf1Code>
+			<label>inv-Udf1Code</label>
+			<type>STRING</type>
+		</InvItem_udf1Code>
+		<InvItem_udf2Code>
+			<label>inv-Udf2Code</label>
+			<type>STRING</type>
+		</InvItem_udf2Code>
+		<InvItem_udf3Code>
+			<label>inv-Udf3Code</label>
+			<type>STRING</type>
+		</InvItem_udf3Code>
+		<InvItem_udf4Code>
+			<label>inv-Udf4Code</label>
+			<type>STRING</type>
+		</InvItem_udf4Code>
+		<InvItem_udf5Code>
+			<label>inv-Udf5Code</label>
+			<type>STRING</type>
+		</InvItem_udf5Code>
+		<PoHeader_shipToCode>
+			<label>Ship To Code</label>
+			<type>STRING</type>
+		</PoHeader_shipToCode>
+	</columns>
+  <sqlfrom> PoHeader as PoHeader , PoLine as PoLine , InvItem as InvItem , UnitOfMeasure as UnitOfMeasure </sqlfrom>
+  <sqlwhere><![CDATA[ (PoHeader.icPoHeader = PoLine.icPoHeader) and (PoLine.itemNumber = InvItem.itemNumber ) and (PoHeader.status <> '1D') and (PoHeader.lastRevision = 'C') and (UnitOfMeasure.umCode = PoLine.umCode) ]]></sqlwhere>
+  <title>Inventory Activity Report</title>
+</r-ivar>

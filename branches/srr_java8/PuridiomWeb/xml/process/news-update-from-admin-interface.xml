@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="newsRetrieveAll" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="newsRetrieveAll">
+			<task synchronous="true" continue-on-failure="false" name="newsList">
+				<task-object-name>com.tsa.puridiom.news.tasks.NewsRetrieveAll</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="newsSequenceList">
+				<task-object-name>com.tsa.puridiom.news.tasks.NewsSequenceList</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="news">
+				<task-object-name>com.tsa.puridiom.news.tasks.NewsUpdateFromAdminInterface</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+	</activities>
+</process>

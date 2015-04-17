@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="responseValueUpdateList" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="responseValueSaveas">
+			<task synchronous="true" continue-on-failure="false" name="rfqQuestionSetup">			
+				<task-object-name>com.tsa.puridiom.rfqquestion.tasks.RfqQuestionRetrieveSetup</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="responseValueList">			
+				<task-object-name>com.tsa.puridiom.responsevalue.tasks.ResponseValueRetrieveByQuestion</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="responseValueList">
+				<task-object-name>com.tsa.puridiom.responsevalue.tasks.ResponseValueSaveasList</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+	</activities>
+</process>

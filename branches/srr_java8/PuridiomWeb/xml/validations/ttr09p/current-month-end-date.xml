@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rule>
+	<clause type="DateCompare">
+		<left-side>
+			<source>incomingRequestObjectMethod</source>
+			<object>invoiceHeader</object>
+			<name>getDateEntered</name>
+		</left-side>
+		<operator>GREATEREQUAL</operator>
+		<right-side>
+			<source>Singleton</source>
+		    <object>com.tsa.puridiom.property.PropertiesManager</object>
+		    <name>getProperty</name>
+		    <argument-value>VOUCHER OPTIONS</argument-value>
+		    <argument-value>CURRENT MONTH BEGIN DATE</argument-value>
+		    <argument-value></argument-value>
+		</right-side>
+	</clause>
+</rule>

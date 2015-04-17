@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="puridiomUpdateServiceRead" connection-type="None">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="PuridiomUpdateServiceXml">
+			<task synchronous="true" continue-on-failure="false" name="xmlDocument">
+				<task-object-name>com.tsa.puridiom.updateservice.tasks.ReadXml</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="processDataSetup">
+				<task-object-name>com.tsa.puridiom.updateservice.tasks.ProcessDataSetup</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="deleteXml">
+				<rule-filename>is-puridiomupdateservice-full.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.updateservice.tasks.DeleteRecords</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="processXml">
+				<task-object-name>com.tsa.puridiom.updateservice.tasks.ProcessXML</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+	</activities>
+</process>

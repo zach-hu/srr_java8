@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="rfqLineCancel" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="rfqLineCancel">
+			<task synchronous="true" continue-on-failure="false" name="rfqLineCancelSetup">
+				<task-object-name>com.tsa.puridiom.rfqline.tasks.RfqLineCancelSetup</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="rfqLine">
+				<task-object-name>com.tsa.puridiom.rfqline.tasks.RfqLineSetValues</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="rfqLine">
+				<task-object-name>com.tsa.puridiom.rfqline.tasks.RfqLineUpdateById</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

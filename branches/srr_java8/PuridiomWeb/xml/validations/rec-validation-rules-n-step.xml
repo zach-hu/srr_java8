@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<validation-rules>
+  <validations>
+	<save enabled="yes">
+
+      	<rule>
+	        <filename>rec-at-least-one-quantityreceived-step0.xml</filename>
+	        <alias>atLeastOneQuantiyReceivedStep0</alias>
+	        <msg>You must receive a quantity greater than zero for at least one line!</msg>
+	        <severity>E</severity>
+	        <order>15</order>
+	        <enabled>Y</enabled>
+			<link><![CDATA[javascript: doSubmit('receipts/rec_items_to_step_0.jsp', 'ReceiptHeaderRetrieveById;ReceiptLineRetrieveByHeader'); void(0);]]></link>
+      	</rule>
+
+      	<rule>
+	        <filename>rec-at-least-one-quantityreceived-step1.xml</filename>
+	        <alias>atLeastOneQuantiyReceivedStep1</alias>
+	        <msg>You must receive a quantity greater than zero for at least one line in Inspection!</msg>
+	        <severity>E</severity>
+	        <order>15</order>
+	        <enabled>N</enabled>
+			<link><![CDATA[javascript: doSubmit('receipts/rec_items_to_step_1.jsp', 'ReceiptHeaderRetrieveById;ReceiptLineRetrieveByHeader'); void(0);]]></link>
+      	</rule>
+
+      	<rule>
+	        <filename>rec-at-least-one-quantityreceived-step2.xml</filename>
+	        <alias>atLeastOneQuantiyReceivedStep2</alias>
+	        <msg>You must receive a quantity greater than zero for at least one line in Mark/Tag!</msg>
+	        <severity>E</severity>
+	        <order>15</order>
+	        <enabled>N</enabled>
+			<link><![CDATA[javascript: doSubmit('receipts/rec_items_to_step_2.jsp', 'ReceiptHeaderRetrieveById;ReceiptLineRetrieveByHeader'); void(0);]]></link>
+      	</rule>
+
+      	<rule>
+	        <filename>rec-at-least-one-quantityreceived-step3.xml</filename>
+	        <alias>atLeastOneQuantiyReceivedStep3</alias>
+	        <msg>You must receive a quantity greater than zero for at least one line in Delivery!</msg>
+	        <severity>E</severity>
+	        <order>15</order>
+	        <enabled>N</enabled>
+			<link><![CDATA[javascript: doSubmit('receipts/rec_items_to_step_3.jsp', 'ReceiptHeaderRetrieveById;ReceiptLineRetrieveByHeader'); void(0);]]></link>
+      	</rule>
+
+      	<rule>
+	        <filename>rec-qtyaccepted-by-ordersubtype.xml</filename>
+	        <alias>qtyOrderedByOrderSubType</alias>
+	        <msg>Received quantity is more than ordered quantity</msg>
+	        <severity>E</severity>
+	        <order>15</order>
+	        <enabled>Y</enabled>
+			<link><![CDATA[javascript: doSubmit('receipts/rec_items_to_step_0.jsp', 'ReceiptHeaderRetrieveById;ReceiptLineRetrieveByHeader'); void(0);]]></link>
+      	</rule>
+
+      	<rule>
+      		<filename>rec-amount-wthin-tolerance.xml</filename>
+      		<alias>receiptAmtWithinTolerance</alias>
+      		<msg>This receipt will cause the total received quantity to exceed the ordered quantity or the 10% tolerance of the ordered quantity.</msg>
+      		<severity>W</severity>
+      		<order>20</order>
+      		<enabled>Y</enabled>
+      		<link><![CDATA[javascript: doSubmit('receipts/rec_items_to_step_0.jsp','ReceiptHeaderRetrieveById;ReceiptLineRetrieveByHeader'); void(0);]]></link>
+      	</rule>
+    </save>
+  </validations>
+</validation-rules>

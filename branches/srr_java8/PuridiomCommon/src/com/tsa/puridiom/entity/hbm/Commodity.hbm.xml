@@ -1,0 +1,185 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping>
+
+<!--
+    Created by Middlegen Hibernate plugin
+
+    http://boss.bekk.no/boss/middlegen/
+    http://hibernate.sourceforge.net/
+-->
+
+<class
+    name="com.tsa.puridiom.entity.Commodity"
+    table="COMMODITY"
+>
+    <id
+        name="commodity"
+        type="java.lang.String"
+        column="COMMODITY"
+    >
+        <generator class="assigned" />
+    </id>
+    <property
+        name="variance"
+        type="java.math.BigDecimal"
+        column="VARIANCE"
+        length="5"
+    />
+    <property
+        name="failsafe"
+        type="java.lang.String"
+        column="FAILSAFE"
+        length="1"
+    />
+    <property
+        name="description"
+        type="java.lang.String"
+        column="DESCRIPTION"
+        length="255"
+    />
+    <property
+        name="buyerCode"
+        type="java.lang.String"
+        column="BUYER_CODE"
+        length="15"
+    />
+    <property
+        name="status"
+        type="java.lang.String"
+        column="STATUS"
+        length="4"
+    />
+    <property
+        name="dateEntered"
+        type="java.sql.Timestamp"
+        column="DATE_ENTERED"
+        length="7"
+    />
+    <property
+        name="dateExpires"
+        type="java.sql.Timestamp"
+        column="DATE_EXPIRES"
+        length="7"
+    />
+    <property
+        name="owner"
+        type="java.lang.String"
+        column="OWNER"
+        length="15"
+    />
+    <property
+        name="lastChgBy"
+        type="java.lang.String"
+        column="LAST_CHG_BY"
+        length="15"
+    />
+    <property
+        name="lastChgDate"
+        type="java.sql.Timestamp"
+        column="LAST_CHG_DATE"
+        length="7"
+    />
+    <property
+        name="vchVariance"
+        type="java.math.BigDecimal"
+        column="VCH_VARIANCE"
+        length="5"
+    />
+    <property
+        name="vchFailsafe"
+        type="java.lang.String"
+        column="VCH_FAILSAFE"
+        length="1"
+    />
+    <property
+        name="asset"
+        type="java.lang.String"
+        column="ASSET"
+        length="1"
+    />
+    <property
+        name="depreciationTerm"
+        type="java.math.BigDecimal"
+        column="DEPRECIATION_TERM"
+        length="5"
+    />
+	<property
+        name="icAccount"
+        type="java.math.BigDecimal"
+        column="IC_ACCOUNT"
+        length="22"
+    />
+    <property
+        name="nigplevel"
+        type="java.lang.String"
+        column="NIGPLEVEL"
+        length="1"
+    />
+    <property
+        name="level1"
+        type="java.lang.String"
+        column="LEVEL_1"
+        length="15"
+    />
+    <property
+        name="level2"
+        type="java.lang.String"
+        column="LEVEL_2"
+        length="15"
+    />
+    <property
+        name="level3"
+        type="java.lang.String"
+        column="LEVEL_3"
+        length="15"
+    />
+    <property
+        name="taxCode"
+        type="java.lang.String"
+        column="TAX_CODE"
+        length="15"
+    />
+    <property
+        name="commodityType"
+        type="java.lang.String"
+        column="COMMODITY_TYPE"
+        length="2"
+    />
+    <property
+        name="duomRequired"
+        type="java.lang.String"
+        column="DUOM_REQUIRED"
+        length="1"
+    />
+    <property
+        name="iclLevel"
+        type="java.math.BigDecimal"
+        column="ICL_LEVEL"
+        length="4"
+    />
+	<property
+        name="serialNumbersRequired"
+        type="java.lang.String"
+        column="SERIAL_NUMBERS_REQUIRED"
+        length="1"
+    />
+    <property
+        name="receiptRequired"
+        type="java.lang.String"
+        column="RECEIPT_REQUIRED"
+        length="1"
+    />
+    <property
+        name="taxable"
+        type="java.lang.String"
+        column="TAXABLE"
+        length="1"
+    />
+    <!-- associations -->
+
+</class>
+</hibernate-mapping>

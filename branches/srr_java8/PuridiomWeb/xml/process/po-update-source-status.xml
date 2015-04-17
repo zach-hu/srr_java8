@@ -1,0 +1,15 @@
+<process name="po-update-source-status" connection-type="Transaction-Required">
+	<rule-filename>is-poheader-ponumber-set.xml</rule-filename>
+    <!--Update Requisition Status. -->
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="UpdateReqLineStatus">
+			<task synchronous="true" continue-on-failure="false" name="poLineList">
+				<task-object-name>com.tsa.puridiom.poline.tasks.PoLineRetrieveByHeader</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="requisitionLineStausUpdate">			
+				<task-object-name>com.tsa.puridiom.poline.tasks.PoLineUpdateReqLineStatusByList</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+	</activities>
+</process>

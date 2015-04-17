@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping>
+
+<class
+    name="com.tsa.puridiom.entity.News"
+    table="NEWS"
+>
+    <id
+        name="icNews"
+        type="java.math.BigDecimal"
+        column="IC_NEWS"
+    >
+        <generator class="assigned" />
+    </id>
+    <property
+        name="sequence"
+        type="java.math.BigDecimal"
+        column="SEQUENCE"
+        length="15"
+    />
+    <property
+        name="newsText"
+        type="java.lang.String"
+        column="NEWS_TEXT"
+        length="2000"
+    />
+	<property
+        name="newsFont"
+        type="java.lang.String"
+        column="NEWS_FONT"
+        length="40"
+    />
+	<property
+        name="newsLink"
+        type="java.lang.String"
+        column="NEWS_LINK"
+        length="255"
+    />
+	<property
+        name="newsImage"
+        type="java.lang.String"
+        column="NEWS_IMAGE"
+        length="40"
+    />
+	<property
+        name="newsAltTag"
+        type="java.lang.String"
+        column="NEWS_ALT_TAG"
+        length="255"
+    />
+
+    <!-- associations -->
+
+</class>
+</hibernate-mapping>

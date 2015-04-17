@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="assetLocationAdd" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="assetLocationAdd">
+			<task synchronous="true" continue-on-failure="false" name="assetLocationLastSequence">
+				<task-object-name>com.tsa.puridiom.assetlocation.serv.tasks.AssetLocationLastSequence</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="AssetLocation_sequenceNo">
+				<task-object-name>com.tsa.puridiom.assetlocation.serv.tasks.AssetLocationNewSequence</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+	</activities>
+</process>

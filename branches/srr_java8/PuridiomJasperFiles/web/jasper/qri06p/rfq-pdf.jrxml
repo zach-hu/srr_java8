@@ -1,0 +1,744 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created using an evaluation version of JasperAssistant (http://www.jasperassistant.com) -->
+<!DOCTYPE jasperReport PUBLIC "-//JasperReports//DTD Report Design//EN" "http://jasperreports.sourceforge.net/dtds/jasperreport.dtd">
+
+<jasperReport name="RfqQri" pageWidth="612" pageHeight="791" whenNoDataType="AllSectionsNoDetail" columnWidth="582" leftMargin="15" rightMargin="15" topMargin="15" bottomMargin="15">
+	<property name="com.jasperassistant.designer.Rulers" value="true"/>
+	<property name="com.jasperassistant.designer.GridHeight" value="8"/>
+	<property name="com.jasperassistant.designer.GridWidth" value="2"/>
+	<property name="com.jasperassistant.designer.SnapToGrid" value="false"/>
+	<property name="com.jasperassistant.designer.Margins" value="true"/>
+	<property name="com.jasperassistant.designer.Grid" value="true"/>
+	<property name="com.jasperassistant.designer.SnapToGuides" value="true"/>
+	<import value="com.tsa.puridiom.common.documents.*"/>
+	<import value="com.tsa.puridiom.entity.*"/>
+	<import value="net.sf.jasperreports.engine.JRDataSource"/>
+	<import value="com.tsagate.properties.*"/>
+	<import value="com.tsa.puridiom.jasperreports.*"/>
+	<import value="java.net.*"/>
+	<import value="com.tsa.puridiom.reports.datasource.*"/>
+	<reportFont name="Arial_Normal" isDefault="true" fontName="Arial" size="8" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Bold" isDefault="false" fontName="Arial Black" size="8" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica-Bold" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Bold_Big" isDefault="false" fontName="Arial Black" size="9" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica-Bold" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Big" isDefault="false" fontName="Arial" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<parameter name="oid" class="java.lang.String">
+		<defaultValueExpression><![CDATA["qri06p"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="linesSR" class="net.sf.jasperreports.engine.JasperReport">
+		<defaultValueExpression><![CDATA[JasperReportsHelper.loadSubReport("po-line-list-pdf.jasper", $P{oid})]]></defaultValueExpression>
+	</parameter>
+	<parameter name="linesDS" class="com.tsa.puridiom.reports.datasource.HibernateQueryResultDataSource"/>
+	<parameter name="shipToSR" class="net.sf.jasperreports.engine.JasperReport">
+		<defaultValueExpression><![CDATA[JasperReportsHelper.loadSubReport("shipto-pdf.jasper", $P{oid})]]></defaultValueExpression>
+	</parameter>
+	<parameter name="shipToDS" class="com.tsa.puridiom.reports.datasource.EntityDataSource"/>
+	<parameter name="vendorSR" class="net.sf.jasperreports.engine.JasperReport">
+		<defaultValueExpression><![CDATA[JasperReportsHelper.loadSubReport("vendor-req-pdf.jasper", $P{oid})]]></defaultValueExpression>
+	</parameter>
+	<parameter name="vendorDS" class="com.tsa.puridiom.reports.datasource.EntityDataSource"/>
+	<parameter name="commentsBeforeSR" class="net.sf.jasperreports.engine.JasperReport">
+		<defaultValueExpression><![CDATA[JasperReportsHelper.loadSubReport("comment-pdf.jasper", $P{oid})]]></defaultValueExpression>
+	</parameter>
+	<parameter name="commentsBeforeDS" class="com.tsa.puridiom.reports.datasource.HibernateQueryResultDataSource"/>
+	<parameter name="commentsAfterSR" class="net.sf.jasperreports.engine.JasperReport">
+		<defaultValueExpression><![CDATA[JasperReportsHelper.loadSubReport("comment-pdf.jasper", $P{oid})]]></defaultValueExpression>
+	</parameter>
+	<parameter name="commentsAfterDS" class="com.tsa.puridiom.reports.datasource.HibernateQueryResultDataSource"/>
+	<parameter name="lines" class="java.util.List"/>
+	<parameter name="billToSR" class="net.sf.jasperreports.engine.JasperReport">
+		<defaultValueExpression><![CDATA[JasperReportsHelper.loadSubReport("shipto-pdf.jasper", $P{oid})]]></defaultValueExpression>
+	</parameter>
+	<parameter name="billToDS" class="com.tsa.puridiom.reports.datasource.EntityDataSource"/>
+	<parameter name="imgUrl" class="java.lang.String">
+		<defaultValueExpression><![CDATA["http://localhost:8085/hilton/images/"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="attachmentsDS" class="com.tsa.puridiom.reports.datasource.HibernateQueryResultDataSource"/>
+	<parameter name="PdfRfq_vendorId" class="java.lang.String"/>
+	<parameter name="PdfRfq_vendContactCode" class="java.lang.String">
+		<defaultValueExpression><![CDATA["001"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="rddSeeBelow" class="java.lang.Boolean">
+		<defaultValueExpression><![CDATA[Boolean.FALSE]]></defaultValueExpression>
+	</parameter>
+	<field name="RfqHeader_rfqNumber" class="java.lang.String"/>
+	<field name="RfqHeader_shipToCode" class="java.lang.String"/>
+	<field name="RfqHeader_billToCode" class="java.lang.String"/>
+	<field name="RfqHeader_vendorAwarded" class="java.lang.String"/>
+	<field name="RfqHeader_requiredDate" class="java.util.Date"/>
+	<field name="RfqHeader_dueDate" class="java.util.Date"/>
+	<field name="RfqHeader_shippingCode" class="java.lang.String"/>
+	<field name="RfqHeader_requisitionNumber" class="java.lang.String"/>
+	<field name="RfqHeader_routing" class="java.lang.String"/>
+	<field name="RfqHeader_rfqType" class="java.lang.String"/>
+	<field name="RfqHeader_buyer" class="java.lang.String"/>
+	<field name="RfqHeader_status" class="java.lang.String"/>
+	<field name="RfqHeader_rfqDate" class="java.util.Date"/>
+	<field name="RfqHeader_shipToContact" class="java.lang.String"/>
+	<field name="RfqHeader_bidDueTime" class="java.lang.String"/>
+	<field name="RfqHeader_timeZone" class="java.lang.String"/>
+	<field name="RfqHeader_docCommentList" class="java.util.List"/>
+	<field name="RfqHeader_rfqAmendment" class="java.lang.String"/>
+	<field name="RfqHeader_currencyCode" class="java.lang.String"/>
+	<variable name="title1" class="java.lang.String">
+		<initialValueExpression><![CDATA["Puridiom Purchasing Center Home"]]></initialValueExpression>
+	</variable>
+	<variable name="siteName" class="java.lang.String">
+		<initialValueExpression><![CDATA["Puridiom"]]></initialValueExpression>
+	</variable>
+	<variable name="siteUrl" class="java.lang.String">
+		<initialValueExpression><![CDATA["http://localhost:8085/hilton/"]]></initialValueExpression>
+	</variable>
+	<group name="commentsBefore">
+		<groupHeader>
+			<band height="1">
+				<subreport>
+					<reportElement positionType="Float" mode="Opaque" x="5" y="0" width="547" height="1" isRemoveLineWhenBlank="true"/>
+					<subreportParameter name="oid">
+						<subreportParameterExpression><![CDATA[$P{oid}]]></subreportParameterExpression>
+					</subreportParameter>
+					<dataSourceExpression><![CDATA[new HibernateQueryResultDataSource($F{RfqHeader_docCommentList})]]></dataSourceExpression>
+					<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[JasperReportsHelper.loadSubReport("comment-before-pdf.jasper", $P{oid})]]></subreportExpression>
+				</subreport>
+			</band>
+		</groupHeader>
+	</group>
+	<group name="lines">
+		<groupHeader>
+			<band height="1">
+				<subreport>
+					<reportElement positionType="Float" x="3" y="0" width="563" height="1"/>
+					<subreportParameter name="lines">
+						<subreportParameterExpression><![CDATA[$P{lines}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="shipToCode">
+						<subreportParameterExpression><![CDATA[$F{RfqHeader_shipToCode}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="requiredDate">
+						<subreportParameterExpression><![CDATA[$F{RfqHeader_requiredDate}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="PoHeader_currencyCode">
+						<subreportParameterExpression><![CDATA[$F{RfqHeader_currencyCode}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="oid">
+						<subreportParameterExpression><![CDATA[$P{oid}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="rddSeeBelow">
+						<subreportParameterExpression><![CDATA[$P{rddSeeBelow}]]></subreportParameterExpression>
+					</subreportParameter>
+					<dataSourceExpression><![CDATA[$P{linesDS}]]></dataSourceExpression>
+					<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[JasperReportsHelper.loadSubReport("rfq-line-list-pdf.jasper", $P{oid})]]></subreportExpression>
+				</subreport>
+			</band>
+		</groupHeader>
+	</group>
+	<group name="commentsAfter">
+		<groupHeader>
+			<band height="1">
+				<subreport>
+					<reportElement positionType="Float" mode="Opaque" x="4" y="0" width="547" height="1" forecolor="#FFFFFF"/>
+					<subreportParameter name="oid">
+						<subreportParameterExpression><![CDATA[$P{oid}]]></subreportParameterExpression>
+					</subreportParameter>
+					<dataSourceExpression><![CDATA[new HibernateQueryResultDataSource($F{RfqHeader_docCommentList})]]></dataSourceExpression>
+					<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[JasperReportsHelper.loadSubReport("comment-after-pdf-new.jasper", $P{oid})]]></subreportExpression>
+				</subreport>
+			</band>
+		</groupHeader>
+	</group>
+	<background>
+		<band height="761">
+			<rectangle>
+				<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="3" y="0" width="563" height="752" isPrintWhenDetailOverflows="true"/>
+				<graphicElement/>
+			</rectangle>
+			<staticText>
+				<reportElement positionType="Float" x="3" y="0" width="563" height="752" forecolor="#FF0000">
+					<printWhenExpression><![CDATA[new Boolean($F{RfqHeader_status}.equalsIgnoreCase("9020"))]]></printWhenExpression>
+				</reportElement>
+				<box border="1Point" borderColor="#000000"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="24"/>
+				</textElement>
+				<text><![CDATA[CANCELLED]]></text>
+			</staticText>
+		</band>
+	</background>
+	<title>
+		<band height="333">
+			<staticText>
+				<reportElement positionType="Float" mode="Opaque" x="280" y="1" width="92" height="20" forecolor="#FFFFFF" backcolor="#000000"/>
+				<box topBorder="None" topBorderColor="#000000" leftBorder="1Point" leftBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000" rightBorder="None" rightBorderColor="#000000"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" isStyledText="true">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[RFQ Number]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="438" y="1" width="62" height="20"/>
+				<box padding="0" topBorder="None" leftBorder="1Point" bottomBorder="None" rightBorder="None"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" isStyledText="true">
+					<font reportFont="Arial_Bold" fontName="Arial" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[RFQ Date]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" x="280" y="20" width="92" height="20"/>
+				<box topBorder="1Point" leftBorder="1Point" bottomBorder="1Point" rightBorder="None"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{RfqHeader_rfqNumber}]]></textFieldExpression>
+			</textField>
+			<textField pattern="MM/dd/yyyy" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="438" y="20" width="62" height="20"/>
+				<box padding="0" topBorder="1Point" leftBorder="1Point" bottomBorder="1Point" rightBorder="None"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.util.Date"><![CDATA[$F{RfqHeader_rfqDate}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement positionType="Float" mode="Opaque" x="3" y="128" width="10" height="115" forecolor="#FFFFFF" backcolor="#000000"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[S
+U
+P
+P
+L
+I
+E
+R]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" x="15" y="115" width="260" height="14"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{RfqHeader_vendorAwarded}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" x="293" y="61" width="273" height="14" forecolor="#FFFFFF"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{RfqHeader_shipToCode}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement positionType="Float" mode="Opaque" x="499" y="1" width="67" height="20"/>
+				<box topBorder="None" leftBorder="1Point" bottomBorder="None" rightBorder="1Point"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Page]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" x="282" y="44" width="284" height="15"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[" "]]></textFieldExpression>
+			</textField>
+			<subreport>
+				<reportElement positionType="Float" x="293" y="75" width="273" height="20"/>
+				<dataSourceExpression><![CDATA[$P{shipToDS}]]></dataSourceExpression>
+				<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[JasperReportsHelper.loadSubReport("address.jasper", $P{oid})]]></subreportExpression>
+			</subreport>
+			<image isLazy="true" onErrorType="Blank">
+				<reportElement positionType="Float" x="6" y="3" width="262" height="68"/>
+				<graphicElement/>
+				<imageExpression class="java.lang.String"><![CDATA[JasperReportsHelper.getImgUrl($P{oid}, "logo.gif")]]></imageExpression>
+			</image>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" x="4" y="79" width="272" height="35"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="15" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[RfqType.toString($F{RfqHeader_rfqType}, $P{oid} )]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" x="15" y="150" width="260" height="14"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[ReportUtils.getVendContactDetails("name", $P{PdfRfq_vendorId}, $P{PdfRfq_vendContactCode} , $P{oid})]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement positionType="Float" mode="Opaque" x="281" y="75" width="10" height="83" forecolor="#FFFFFF" backcolor="#000000"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[S
+H
+I
+P
+
+T
+O]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" mode="Opaque" x="3" y="290" width="60" height="15" forecolor="#FFFFFF" backcolor="#000000"/>
+				<box topBorder="None" leftBorder="None" bottomBorder="None" rightBorder="1Point"/>
+				<textElement verticalAlignment="Middle">
+					<font reportFont="Arial_Bold" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Due Date]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" mode="Opaque" x="134" y="290" width="112" height="15" forecolor="#FFFFFF" backcolor="#000000"/>
+				<box topBorder="None" leftBorder="None" bottomBorder="None" rightBorder="1Point"/>
+				<textElement verticalAlignment="Middle">
+					<font reportFont="Arial_Bold" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Return Quote To]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" mode="Opaque" x="246" y="290" width="95" height="15" forecolor="#FFFFFF" backcolor="#000000"/>
+				<box topBorder="None" leftBorder="None" bottomBorder="None" rightBorder="1Point"/>
+				<textElement verticalAlignment="Middle">
+					<font reportFont="Arial_Bold" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Telephone]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" mode="Opaque" x="431" y="290" width="134" height="15" forecolor="#FFFFFF" backcolor="#000000"/>
+				<textElement verticalAlignment="Middle">
+					<font reportFont="Arial_Bold" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Email ]]></text>
+			</staticText>
+			<textField pattern="MM/dd/yyyy" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="3" y="304" width="60" height="14"/>
+				<box topBorder="None" leftBorder="None" bottomBorder="None" rightBorder="1Point"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.util.Date"><![CDATA[$F{RfqHeader_dueDate}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" x="134" y="304" width="112" height="14"/>
+				<box topBorder="None" leftBorder="None" bottomBorder="None" rightBorder="1Point"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[ReportUtils.getUserName($F{RfqHeader_buyer}, $P{oid})]]></textFieldExpression>
+			</textField>
+			<textField pattern="MMM d, yyyy" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="246" y="304" width="95" height="14"/>
+				<box topBorder="None" leftBorder="None" bottomBorder="None" rightBorder="1Point"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[ReportUtils.getUserPhone($F{RfqHeader_buyer}, $P{oid})]]></textFieldExpression>
+			</textField>
+			<textField pattern="MMM d, yyyy" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="431" y="304" width="134" height="14"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[ReportUtils.getUserData($F{RfqHeader_buyer}, "email", $P{oid})]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement positionType="Float" mode="Opaque" x="3" y="319" width="46" height="14" forecolor="#FFFFFF" backcolor="#000000"/>
+				<box topBorder="None" leftBorder="None" bottomBorder="None" rightBorder="1Point"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font reportFont="Arial_Bold" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Item #]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" mode="Opaque" x="49" y="319" width="51" height="14" forecolor="#FFFFFF" backcolor="#000000"/>
+				<box topBorder="None" leftBorder="None" bottomBorder="None" rightBorder="1Point"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font reportFont="Arial_Bold" size="8" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Quantity]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" mode="Opaque" x="100" y="319" width="34" height="14" forecolor="#FFFFFF" backcolor="#000000"/>
+				<box topBorder="None" leftBorder="None" bottomBorder="None" rightBorder="1Point"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font reportFont="Arial_Bold" isBold="true"/>
+				</textElement>
+				<text><![CDATA[U/M]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" mode="Opaque" x="134" y="319" width="297" height="14" forecolor="#FFFFFF" backcolor="#000000"/>
+				<box topBorder="None" leftBorder="None" bottomBorder="None" rightBorder="1Point"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font reportFont="Arial_Bold" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Description]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" mode="Opaque" x="431" y="319" width="61" height="14" forecolor="#FFFFFF" backcolor="#000000"/>
+				<box topBorder="None" leftBorder="None" bottomBorder="None" rightBorder="1Point"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font reportFont="Arial_Bold" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Unit Price]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" mode="Opaque" x="492" y="319" width="74" height="14" forecolor="#FFFFFF" backcolor="#000000"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font reportFont="Arial_Bold" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Extended Price]]></text>
+			</staticText>
+			<textField>
+				<reportElement positionType="Float" x="499" y="20" width="41" height="20"/>
+				<box topBorder="1Point" leftBorder="1Point" bottomBorder="1Point" rightBorder="None"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[String.valueOf($V{PAGE_NUMBER}) + " of "]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement positionType="Float" x="539" y="20" width="27" height="20"/>
+				<box topBorder="1Point" leftBorder="None" bottomBorder="1Point" rightBorder="1Point"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA["   " + String.valueOf($V{PAGE_NUMBER})]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement positionType="Float" x="5" y="284" width="555" height="3" forecolor="#FFFFFF"/>
+				<graphicElement/>
+			</rectangle>
+			<staticText>
+				<reportElement positionType="Float" x="281" y="159" width="284" height="13"/>
+				<textElement verticalAlignment="Middle">
+					<font reportFont="Arial_Bold"/>
+				</textElement>
+				<text><![CDATA[Instructions]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement positionType="Float" x="15" y="164" width="35" height="14"/>
+				<textElement verticalAlignment="Middle">
+					<font reportFont="Arial_Bold" isItalic="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Tel:"]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement positionType="Float" x="15" y="178" width="35" height="14"/>
+				<textElement verticalAlignment="Middle">
+					<font reportFont="Arial_Bold" isItalic="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Email:"]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement positionType="Float" x="52" y="164" width="98" height="14" isPrintWhenDetailOverflows="true"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[ReportUtils.getVendContactDetails("phone", $P{PdfRfq_vendorId},$P{PdfRfq_vendContactCode}, $P{oid})]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement positionType="Float" x="52" y="178" width="223" height="14" isPrintWhenDetailOverflows="true"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[ReportUtils.getVendContactDetails("email", $P{PdfRfq_vendorId},$P{PdfRfq_vendContactCode}, $P{oid})]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement positionType="Float" x="176" y="164" width="99" height="14"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[ReportUtils.getVendContactDetails("fax", $P{PdfRfq_vendorId}, $P{PdfRfq_vendContactCode}, $P{oid})]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="150" y="164" width="26" height="14"/>
+				<textElement verticalAlignment="Middle">
+					<font reportFont="Arial_Bold"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Fax:"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement positionType="Float" x="293" y="95" width="35" height="14"/>
+				<textElement verticalAlignment="Middle">
+					<font reportFont="Arial_Bold" isItalic="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Attn:"]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" x="331" y="95" width="235" height="14"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{RfqHeader_shipToContact}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement positionType="Float" mode="Opaque" x="63" y="290" width="71" height="15" forecolor="#FFFFFF" backcolor="#000000"/>
+				<box topBorder="None" leftBorder="None" bottomBorder="None" rightBorder="1Point"/>
+				<textElement verticalAlignment="Middle">
+					<font reportFont="Arial_Bold" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Due Time]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" mode="Opaque" x="341" y="290" width="90" height="15" forecolor="#FFFFFF" backcolor="#000000"/>
+				<box topBorder="None" leftBorder="None" bottomBorder="None" rightBorder="1Point"/>
+				<textElement verticalAlignment="Middle">
+					<font reportFont="Arial_Bold" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fax]]></text>
+			</staticText>
+			<textField pattern="MMM d, yyyy" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="341" y="304" width="90" height="14"/>
+				<box topBorder="None" leftBorder="None" bottomBorder="None" rightBorder="1Point"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[ReportUtils.getUserData($F{RfqHeader_buyer}, "fax", $P{oid})]]></textFieldExpression>
+			</textField>
+			<subreport isUsingCache="false">
+				<reportElement positionType="Float" x="15" y="130" width="260" height="20"/>
+				<dataSourceExpression><![CDATA[$P{vendorDS}]]></dataSourceExpression>
+				<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[JasperReportsHelper.loadSubReport("address.jasper", $P{oid})]]></subreportExpression>
+			</subreport>
+			<line>
+				<reportElement positionType="Float" x="281" y="158" width="284" height="1" forecolor="#FFFFFF"/>
+				<graphicElement/>
+			</line>
+			<textField>
+				<reportElement positionType="Float" x="293" y="109" width="71" height="14"/>
+				<textElement verticalAlignment="Middle">
+					<font reportFont="Arial_Bold" isItalic="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Required By:"]]></textFieldExpression>
+			</textField>
+			<textField pattern="MM/dd/yyyy" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="368" y="109" width="198" height="14">
+					<printWhenExpression><![CDATA[new Boolean($P{rddSeeBelow}.equals(new Boolean(false)))]]></printWhenExpression>
+				</reportElement>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression class="java.util.Date"><![CDATA[$F{RfqHeader_requiredDate}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement positionType="Float" x="281" y="169" width="284" height="116"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Please quote your best price, best delivery, F.O.B. point and payment discount terms for the item(s) listed below.
+
+Should you be unable to furnish item(s) according to our description or specifications and wish to offer a substitution, please describe the substitution in detail.
+
+Quotations not received by the deadline noted in the “due date” field may be excluded from consideration.
+
+Quicksilver Resources reserves the right to accept or reject all or part of your quotation.]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" x="63" y="304" width="71" height="14"/>
+				<box topBorder="None" leftBorder="None" bottomBorder="None" rightBorder="1Point"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[(new SimpleDateFormat("hh:mm aa")).format(((new SimpleDateFormat("hh:mm")).parse($F{RfqHeader_bidDueTime})))]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement positionType="Float" x="372" y="1" width="66" height="20"/>
+				<box topBorder="None" leftBorder="1Point" bottomBorder="None" rightBorder="None"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font reportFont="Arial_Bold" fontName="Arial" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Amendment]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" x="372" y="20" width="66" height="20"/>
+				<box topBorder="1Point" leftBorder="1Point" bottomBorder="1Point" rightBorder="None"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{RfqHeader_rfqAmendment}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="80">
+			<printWhenExpression><![CDATA[new Boolean($V{PAGE_NUMBER}.compareTo(new Integer(1)) > 0)]]></printWhenExpression>
+			<image isLazy="true" onErrorType="Blank">
+				<reportElement positionType="Float" x="6" y="3" width="270" height="57">
+					<printWhenExpression><![CDATA[new Boolean($V{PAGE_NUMBER}.compareTo(new Integer(1)) > 0)]]></printWhenExpression>
+				</reportElement>
+				<graphicElement/>
+				<imageExpression class="java.lang.String"><![CDATA[JasperReportsHelper.getImgUrl($P{oid}, "logo.gif")]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement positionType="Float" x="499" y="1" width="67" height="20">
+					<printWhenExpression><![CDATA[new Boolean($V{PAGE_NUMBER}.compareTo(new Integer(1)) > 0)]]></printWhenExpression>
+				</reportElement>
+				<box topBorder="None" leftBorder="1Point" bottomBorder="None" rightBorder="1Point"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Page]]></text>
+			</staticText>
+			<textField>
+				<reportElement positionType="Float" x="499" y="21" width="41" height="20"/>
+				<box topBorder="1Point" leftBorder="1Point" bottomBorder="1Point" rightBorder="None"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[String.valueOf($V{PAGE_NUMBER}) + " of "]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement positionType="Float" x="539" y="21" width="27" height="20"/>
+				<box topBorder="1Point" leftBorder="None" bottomBorder="1Point" rightBorder="1Point"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA["   " + String.valueOf($V{PAGE_NUMBER})]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement positionType="Float" mode="Opaque" x="3" y="64" width="46" height="14" forecolor="#FFFFFF" backcolor="#000000"/>
+				<box topBorder="None" leftBorder="None" bottomBorder="None" rightBorder="1Point"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font reportFont="Arial_Bold" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Item #]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" mode="Opaque" x="49" y="64" width="51" height="14" forecolor="#FFFFFF" backcolor="#000000"/>
+				<box topBorder="None" leftBorder="None" bottomBorder="None" rightBorder="1Point"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font reportFont="Arial_Bold" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Quantity]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" mode="Opaque" x="100" y="64" width="34" height="14" forecolor="#FFFFFF" backcolor="#000000"/>
+				<box topBorder="None" leftBorder="None" bottomBorder="None" rightBorder="1Point"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font reportFont="Arial_Bold" isBold="true"/>
+				</textElement>
+				<text><![CDATA[U/M]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" mode="Opaque" x="134" y="64" width="297" height="14" forecolor="#FFFFFF" backcolor="#000000"/>
+				<box topBorder="None" leftBorder="None" bottomBorder="None" rightBorder="1Point"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font reportFont="Arial_Bold" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Description]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" mode="Opaque" x="431" y="64" width="61" height="14" forecolor="#FFFFFF" backcolor="#000000"/>
+				<box topBorder="None" leftBorder="None" bottomBorder="None" rightBorder="1Point"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font reportFont="Arial_Bold" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Unit Price]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" mode="Opaque" x="492" y="64" width="74" height="14" forecolor="#FFFFFF" backcolor="#000000"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font reportFont="Arial_Bold" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Extended Price]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" mode="Opaque" x="280" y="1" width="92" height="20" forecolor="#FFFFFF" backcolor="#000000"/>
+				<box topBorder="None" topBorderColor="#000000" leftBorder="1Point" leftBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000" rightBorder="None" rightBorderColor="#000000"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[RFQ Number]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" x="280" y="21" width="92" height="20"/>
+				<box topBorder="1Point" leftBorder="1Point" bottomBorder="1Point" rightBorder="None"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{RfqHeader_rfqNumber}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" x="372" y="21" width="66" height="20"/>
+				<box topBorder="1Point" leftBorder="1Point" bottomBorder="1Point" rightBorder="None"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{RfqHeader_rfqAmendment}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement positionType="Float" x="372" y="1" width="66" height="20"/>
+				<box topBorder="None" leftBorder="None" bottomBorder="None" rightBorder="1Point"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font reportFont="Arial_Bold" fontName="Arial" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Ammendment]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="438" y="1" width="60" height="20"/>
+				<box topBorder="None" leftBorder="None" bottomBorder="None" rightBorder="1Point"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font reportFont="Arial_Bold" fontName="Arial" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[RFQ Date]]></text>
+			</staticText>
+			<textField pattern="MM/dd/yyyy" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="438" y="21" width="60" height="20"/>
+				<box border="1Point"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.util.Date"><![CDATA[$F{RfqHeader_rfqDate}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<pageFooter>
+		<band height="68">
+			<printWhenExpression><![CDATA[new Boolean($V{PAGE_NUMBER}.equals(new Integer(1)))]]></printWhenExpression>
+			<staticText>
+				<reportElement positionType="Float" mode="Opaque" x="3" y="3" width="189" height="14" forecolor="#FFFFFF" backcolor="#000000">
+					<printWhenExpression><![CDATA[new Boolean($V{PAGE_NUMBER}.equals(new Integer(1)))]]></printWhenExpression>
+				</reportElement>
+				<box topBorder="None" leftBorder="None" bottomBorder="None" rightBorder="1Point"/>
+				<textElement verticalAlignment="Middle">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Supplier Quote No]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" mode="Opaque" x="192" y="3" width="132" height="14" forecolor="#FFFFFF" backcolor="#000000">
+					<printWhenExpression><![CDATA[new Boolean($V{PAGE_NUMBER}.equals(new Integer(1)))]]></printWhenExpression>
+				</reportElement>
+				<box topBorder="None" leftBorder="None" bottomBorder="None" rightBorder="1Point"/>
+				<textElement verticalAlignment="Middle">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Quote Valid Until]]></text>
+			</staticText>
+			<textField>
+				<reportElement positionType="Float" x="3" y="17" width="189" height="14">
+					<printWhenExpression><![CDATA[new Boolean($V{PAGE_NUMBER}.equals(new Integer(1)))]]></printWhenExpression>
+				</reportElement>
+				<box topBorder="None" leftBorder="1Point" bottomBorder="1Point" rightBorder="1Point"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[" "]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement positionType="Float" x="192" y="17" width="132" height="14">
+					<printWhenExpression><![CDATA[new Boolean($V{PAGE_NUMBER}.equals(new Integer(1)))]]></printWhenExpression>
+				</reportElement>
+				<box topBorder="None" leftBorder="None" bottomBorder="1Point" rightBorder="1Point"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[" "]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement positionType="Float" mode="Opaque" x="324" y="3" width="137" height="14" forecolor="#FFFFFF" backcolor="#000000">
+					<printWhenExpression><![CDATA[new Boolean($V{PAGE_NUMBER}.equals(new Integer(1)))]]></printWhenExpression>
+				</reportElement>
+				<box topBorder="None" leftBorder="None" bottomBorder="None" rightBorder="1Point"/>
+				<textElement verticalAlignment="Middle">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Payment Terms]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" mode="Opaque" x="461" y="3" width="105" height="14" forecolor="#FFFFFF" backcolor="#000000">
+					<printWhenExpression><![CDATA[new Boolean($V{PAGE_NUMBER}.equals(new Integer(1)))]]></printWhenExpression>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Grand Total]]></text>
+			</staticText>
+			<textField>
+				<reportElement positionType="Float" x="324" y="17" width="137" height="14">
+					<printWhenExpression><![CDATA[new Boolean($V{PAGE_NUMBER}.equals(new Integer(1)))]]></printWhenExpression>
+				</reportElement>
+				<box topBorder="None" leftBorder="None" bottomBorder="1Point" rightBorder="1Point"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[" "]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement positionType="Float" x="461" y="17" width="105" height="14">
+					<printWhenExpression><![CDATA[new Boolean($V{PAGE_NUMBER}.equals(new Integer(1)))]]></printWhenExpression>
+				</reportElement>
+				<box topBorder="None" leftBorder="None" bottomBorder="1Point" rightBorder="1Point"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[" "]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement positionType="Float" mode="Opaque" x="3" y="30" width="563" height="14" forecolor="#FFFFFF" backcolor="#000000">
+					<printWhenExpression><![CDATA[new Boolean($V{PAGE_NUMBER}.equals(new Integer(1)))]]></printWhenExpression>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Signature and Title]]></text>
+			</staticText>
+			<textField>
+				<reportElement positionType="Float" x="3" y="44" width="563" height="14">
+					<printWhenExpression><![CDATA[new Boolean($V{PAGE_NUMBER}.equals(new Integer(1)))]]></printWhenExpression>
+				</reportElement>
+				<box topBorder="None" leftBorder="1Point" bottomBorder="1Point" rightBorder="1Point"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[" "]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>

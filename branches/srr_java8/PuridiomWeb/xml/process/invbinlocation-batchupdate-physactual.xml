@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="InvBinLocationUpdate" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="updateInvBinLocationActivity">
+			<task synchronous="true" continue-on-failure="false" name="invBinLocation">
+				<rule-filename></rule-filename>
+				<task-object-name>com.tsa.puridiom.invbinlocation.tasks.InvBinLocationBatchUpdatePhysActual</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+	 </activities>
+</process>

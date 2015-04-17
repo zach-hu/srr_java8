@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="assetLocationRetrieveById" connection-type="Connection-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="assetLocationRetrieveById">
+			<task synchronous="true" continue-on-failure="false" name="check">
+				<task-object-name>com.tsa.puridiom.assetlocation.tasks.AssetLocationIdCheck</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="assetLocation">
+				<task-object-name>com.tsa.puridiom.assetlocation.tasks.AssetLocationRetrieveById</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

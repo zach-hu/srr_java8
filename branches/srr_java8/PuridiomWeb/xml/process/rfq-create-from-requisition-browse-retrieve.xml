@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="rfqCreateFromRequisitionBrowseRetrieve" connection-type="Connection-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="requisitionRetrieveSetup">
+			<task synchronous="true" continue-on-failure="false" name="browseName">
+				<rule-filename>is-create-from-assigned-only-set</rule-filename>
+				<task-object-name>com.tsa.puridiom.rfq.tasks.RfqGetAssignedOnlyRequisitionBrowse</task-object-name>
+				<post-action>exitActivity</post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="browseName">
+				<task-object-name>com.tsa.puridiom.rfq.tasks.RfqGetRequisitionBrowse</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="browseRetrieve">
+			<task synchronous="true" continue-on-failure="false" name="browseRetrieve">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>browse-retrieve.xml</process-filename>
+			</task>
+		</activity>
+	</activities>
+</process>

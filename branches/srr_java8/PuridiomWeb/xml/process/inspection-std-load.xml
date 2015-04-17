@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="inspectionHeaderUpdate" connection-type="Transaction-Required">
+
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="inspectionHeaderRetrieve">
+			<task synchronous="true" continue-on-failure="false" name="inspectionHeader">
+				<task-object-name>com.tsa.puridiom.inspectionheader.tasks.InspectionHeaderRetrieveById</task-object-name>
+				<post-action></post-action>
+			</task>
+
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="inspectionHeaderUpdateActivity">
+			<rule check-for-false="true">is-inspectionheader-empty.xml</rule>
+			<task synchronous="true" continue-on-failure="false" name="inspectionHeader">
+				<task-object-name>com.tsa.puridiom.inspectionheader.tasks.InspectionHeaderSetValues</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="inspectionHeader">
+				<task-object-name>com.tsa.puridiom.inspectionheader.tasks.InspectionHeaderUpdate</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="inspectionLineSetup">
+				<task-object-name>com.tsa.puridiom.inspection.tasks.InspectionDetailRetrieveSetup</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="inspectionLineList">
+				<task-object-name>com.tsa.puridiom.inspectionline.tasks.InspectionLineRetrieveByIcInspNo</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="inspectionDeleteLineList">
+				<task-object-name>com.tsa.puridiom.inspectionline.tasks.InspectionLineDeleteLineList</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="inspectionStdList">
+				<task-object-name>com.tsa.puridiom.inspectionstd.tasks.InspectionStdRetrieveByCode</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="inspectionLineCreateFromStdList">
+				<task-object-name>com.tsa.puridiom.inspectionline.tasks.InspectionLineCreateFromStdList</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+	</activities>
+</process>

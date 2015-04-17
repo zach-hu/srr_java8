@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="paymentTermDelete" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="deletePaymentTerm">
+			<task synchronous="true" continue-on-failure="false" name="paymentTerm">
+				<task-object-name>com.tsa.puridiom.paymentterm.tasks.PaymentTermDeleteById</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+	</activities>
+</process>

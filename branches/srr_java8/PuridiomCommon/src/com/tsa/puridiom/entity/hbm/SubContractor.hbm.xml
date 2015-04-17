@@ -1,0 +1,142 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+    
+<hibernate-mapping>
+
+<!-- 
+    Created by Middlegen Hibernate plugin
+
+    http://boss.bekk.no/boss/middlegen/
+    http://hibernate.sourceforge.net/
+-->
+
+<class 
+    name="com.tsa.puridiom.entity.SubContractor" 
+    table="SUB_CONTRACTOR"
+>
+    <composite-id name="comp_id" class="com.tsa.puridiom.entity.SubContractorPK">
+        <key-property name="poNumber" column="PO_NUMBER" type="java.lang.String" />
+        <key-property name="releaseNumber" column="RELEASE_NUMBER" type="java.math.BigDecimal" />
+        <key-property name="subName" column="SUB_NAME" type="java.lang.String" />
+    </composite-id>    
+    <property
+        name="contractno"
+        type="java.lang.String"
+        column="CONTRACTNO"
+        length="20"
+    />
+    <property
+        name="addressLine1"
+        type="java.lang.String"
+        column="ADDRESS_LINE_1"
+        length="40"
+    />
+    <property
+        name="addressLine2"
+        type="java.lang.String"
+        column="ADDRESS_LINE_2"
+        length="40"
+    />
+    <property
+        name="addressLine3"
+        type="java.lang.String"
+        column="ADDRESS_LINE_3"
+        length="40"
+    />
+    <property
+        name="addressLine4"
+        type="java.lang.String"
+        column="ADDRESS_LINE_4"
+        length="40"
+    />
+    <property
+        name="city"
+        type="java.lang.String"
+        column="CITY"
+        length="30"
+    />
+    <property
+        name="state"
+        type="java.lang.String"
+        column="STATE"
+        length="15"
+    />
+    <property
+        name="postalCode"
+        type="java.lang.String"
+        column="POSTAL_CODE"
+        length="15"
+    />
+    <property
+        name="country"
+        type="java.lang.String"
+        column="COUNTRY"
+        length="25"
+    />
+    <property
+        name="contactName"
+        type="java.lang.String"
+        column="CONTACT_NAME"
+        length="40"
+    />
+    <property
+        name="contactEmail"
+        type="java.lang.String"
+        column="CONTACT_EMAIL"
+        length="50"
+    />
+    <property
+        name="contactPhone"
+        type="java.lang.String"
+        column="CONTACT_PHONE"
+        length="30"
+    />
+    <property
+        name="contactFax"
+        type="java.lang.String"
+        column="CONTACT_FAX"
+        length="20"
+    />
+    <property
+        name="dateEntered"
+        type="java.sql.Timestamp"
+        column="DATE_ENTERED"
+        length="7"
+    />
+    <property
+        name="dateExpires"
+        type="java.sql.Timestamp"
+        column="DATE_EXPIRES"
+        length="7"
+    />
+    <property
+        name="status"
+        type="java.lang.String"
+        column="STATUS"
+        length="4"
+    />
+    <property
+        name="continfo"
+        type="java.lang.String"
+        column="CONTINFO"
+        length="2000"
+    />
+    <property
+        name="owner"
+        type="java.lang.String"
+        column="OWNER"
+        length="15"
+    />
+    <property
+        name="affiliateId"
+        type="java.lang.String"
+        column="AFFILIATE_ID"
+        length="15"
+    />
+
+    <!-- associations -->
+
+</class>
+</hibernate-mapping>

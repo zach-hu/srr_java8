@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="requisitionForward" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="requisitionForwardSetup">
+			<task synchronous="true" continue-on-failure="false" name="requisitionHeader">			
+				<task-object-name>com.tsa.puridiom.requisitionheader.tasks.RequisitionHeaderRetrieveById</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="requisitionForwardSetup">			
+				<task-object-name>com.tsa.puridiom.requisitionheader.tasks.RequisitionHeaderUpdateSetup</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="requisitionLineList">			
+				<task-object-name>com.tsa.puridiom.requisitionline.tasks.RequisitionLineRetrieveByHeader</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="requisitionPricingReqCheck">
+			<task synchronous="true" continue-on-failure="false" name="requisitionForwardPricingCheck">			
+				<rule-filename>is-pricing-requisition.xml</rule-filename>			
+				<task-object-name>com.tsa.puridiom.requisition.tasks.RequisitionForwardPricingCheck</task-object-name>
+				<post-action>exitactivity</post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="requisitionForwardNotPricing">			
+				<rule-filename>is-pricing-requisition.xml</rule-filename>			
+				<task-object-name>com.tsa.puridiom.requisition.tasks.RequisitionForwardNotPricing</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="requisitionForwardBudgetCheck">
+			<rule-filename>is-budget-request;is-account-budget-module-active</rule-filename>			
+			<task synchronous="true" continue-on-failure="false" name="requisitionForwardBudgetCheck">			
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>requisition-forward-budget-update</process-filename>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="requisitionInventoryUpdate">
+			<rule-filename>is-inventory-module-active;is-inventory-request</rule-filename>			
+			<task synchronous="true" continue-on-failure="false" name="requisitionInventoryUpdate">			
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>requisition-forward-inventory-update.xml</process-filename>
+				<post-action>exitactivity</post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="requisitionForwardSplit">
+			<rule-filename>is-intelligent-request-enabled.xml;is-supply-request.xml</rule-filename>			
+			<task synchronous="true" continue-on-failure="false" name="requisitionForwardSplit">			
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>requisition-forward-split.xml</process-filename>
+				<post-action></post-action>
+			</task>
+		</activity>
+		
+		<activity synchronous="true" continue-on-failure="false" name="requisitionForwardApprovals">
+			<rule-filename>is-extended-approvals-module-active;is-not-requisition-split</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="recentReqItemAdd">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>requisition-forward-to-next.xml</process-filename>
+			</task>
+		</activity>
+		
+		<activity synchronous="true" continue-on-failure="false" name="requisitionForward">
+			<task synchronous="true" continue-on-failure="false" name="requisitionApproveAndForward">
+				<task-object-name>com.tsa.puridiom.requisition.tasks.RequisitionApproveAndForward</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		
+		<activity synchronous="true" continue-on-failure="false" name="requisitionForward">
+			<task synchronous="true" continue-on-failure="false" name="requisitionSetStatus">			
+				<task-object-name>com.tsa.puridiom.requisition.tasks.RequisitionSetStatus</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="requisitionForwardUpdate">
+		    <task synchronous="true" continue-on-failure="false" name="buyerAssignment">
+		        <task-object-name>com.tsa.puridiom.requisition.tasks.RequisitionAssignBuyer</task-object-name>
+		    </task>
+			<task synchronous="true" continue-on-failure="false" name="requisitionHeaderUpdate">			
+				<task-object-name>com.tsa.puridiom.requisitionheader.tasks.RequisitionHeaderUpdate</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="requisitionLineUpdate">			
+				<task-object-name>com.tsa.puridiom.requisitionline.tasks.RequisitionLineUpdateList</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="history">
+		    <task synchronous="true" continue-on-failure="false" name="requisitionHeaderHistory">			
+				<task-object-name>com.tsa.puridiom.requisitionheader.history.tasks.RequisitionHeaderHistory</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="requisitionLineListHistory">			
+				<task-object-name>com.tsa.puridiom.requisitionline.history.tasks.RequisitionLineListHistory</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="recentReqItemActivity">
+			<task synchronous="true" continue-on-failure="false" name="recentReqItemAdd">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>recentreqitem-add-list.xml</process-filename>
+			</task>
+		</activity>
+	</activities>
+</process>

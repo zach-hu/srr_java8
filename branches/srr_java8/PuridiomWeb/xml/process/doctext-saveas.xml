@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="docTextSaveas" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="docTextRetrieveSaveas">
+			<task synchronous="true" continue-on-failure="false" name="docText">			
+				<task-object-name>com.tsa.puridiom.doctext.tasks.DocTextRetrieveById</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="docText">			
+				<task-object-name>com.tsa.puridiom.doctext.tasks.DocTextSaveas</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

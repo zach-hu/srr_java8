@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="itemAccountUpdate" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="accountCreateSetup">
+			<rule-filename>is-new-account</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="accountCreateSetup">			
+				<task-object-name>com.tsa.puridiom.account.tasks.StdAccountCreateSetup</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="accountDeleteByLine">
+			<task synchronous="true" continue-on-failure="false" name="accountDeleteByLine">			
+				<task-object-name>com.tsa.puridiom.account.tasks.AccountDeleteByLine</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="accountUpdateByLine">
+			<rule-filename>is-not-delete-all.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="accountUpdateByLine">			
+				<task-object-name>com.tsa.puridiom.account.tasks.StdAccountUpdateByLine</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="itemSetAccountIc">
+			<rule-filename>is-inv-item</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="invLocation">
+				<task-object-name>com.tsa.puridiom.invlocation.tasks.InvLocationAccountSetup</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="invLocation">
+				<task-object-name>com.tsa.puridiom.invlocation.tasks.InvLocationRetrieveById</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="invItemSetAccountIc">
+				<task-object-name>com.tsa.puridiom.invlocation.tasks.InvLocationSetValues</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="itemSetAccountIc">
+			<rule-filename>is-cat-item.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="catalogItem">
+				<task-object-name>com.tsa.puridiom.catalog.tasks.CatalogItemAccountSetup</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="catalogItem">
+				<task-object-name>com.tsa.puridiom.catalog.tasks.CatalogItemRetrieveById</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="catItemSetAccountIc">
+				<task-object-name>com.tsa.puridiom.catalog.tasks.CatalogItemSetValues</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="itemSetAccountIc">
+			<rule-filename>is-catalog.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="catalog">
+				<task-object-name>com.tsa.puridiom.catalog.tasks.CatalogAccountSetup</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="catalog">
+				<task-object-name>com.tsa.puridiom.catalog.tasks.CatalogRetrieveById</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="catalogSetAccountIc">
+				<task-object-name>com.tsa.puridiom.catalog.tasks.CatalogSetValues</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="itemSetAccountIc">
+			<rule-filename>is-commodity.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="commodity">
+				<task-object-name>com.tsa.puridiom.commodity.tasks.CommodityAccountSetup</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="commodity">
+				<task-object-name>com.tsa.puridiom.commodity.tasks.CommodityRetrieveById</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="commoditySetAccountIc">
+				<task-object-name>com.tsa.puridiom.commodity.tasks.CommoditySetValues</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+	</activities>
+</process>

@@ -1,0 +1,102 @@
+<r-adm-s-uga>
+  <columns>
+     	<SecurityGroup_groupId>
+			<label>Group Id</label>
+			<type>STRING</type>
+		</SecurityGroup_groupId>
+		
+   		<SecurityGroup_groupDescription>
+			<label>Group Description</label>
+			<type>STRING</type>
+		</SecurityGroup_groupDescription>
+		
+		<UserProfile_userId>
+			<label>User Id</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</UserProfile_userId>
+		
+		<UserProfile_firstName>
+			<label>First Name</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</UserProfile_firstName>
+		
+		<UserProfile_lastName>
+			<label>Last Name</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</UserProfile_lastName>
+		
+		<UserProfile_phoneNumber>
+			<label>Phone Number</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</UserProfile_phoneNumber>
+		
+		<UserProfile_mailId>
+			<label>Mail Id</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</UserProfile_mailId>
+		
+		<UserProfile_title>
+			<label>Title</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</UserProfile_title>
+		
+		<UserProfile_status>
+			<label>Status</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</UserProfile_status>
+		
+		<UserProfile_department>
+			<label>Department</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</UserProfile_department>
+		
+		<UserProfile_approver>
+			<label>Approver</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</UserProfile_approver>
+		
+		<UserProfile_buyer>
+			<label>Buyer</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</UserProfile_buyer>
+		
+		<UserProfile_adminBuyer>
+			<label>AdminBuyer</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</UserProfile_adminBuyer>
+			
+		<UserProfile_requisitioner>
+			<label>Requisitioner</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</UserProfile_requisitioner>
+		
+		<UserProfile_receiver>
+			<label>Receiver</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</UserProfile_receiver>
+		
+		<UserProfile_vchApp>
+			<label>Invoice Approver</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</UserProfile_vchApp>
+	</columns>
+  <sqlfrom>UserProfile as UserProfile, SecurityGroup as SecurityGroup, UserGroupRel as UserGroupRel</sqlfrom>
+  <sqlwhere><![CDATA[(UserProfile.userId = UserGroupRel.id.userId) and (SecurityGroup.groupId = UserGroupRel.id.groupId) ]]></sqlwhere>  
+  <sqlorderby>SecurityGroup.groupDescription</sqlorderby>
+  <title>User Group Security Access</title>
+</r-adm-s-uga>
+

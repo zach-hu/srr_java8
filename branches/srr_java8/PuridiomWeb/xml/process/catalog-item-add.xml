@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="catalogItemAdd" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="CheckCatalogItem">
+			<task synchronous="true" continue-on-failure="false" name="catalogItem">
+				<task-object-name>com.tsa.puridiom.catalog.tasks.CatalogItemRetrieveById</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="catalogItemIdValidation">
+			<rule-filename check-for-false="true">is-existing-catalogItem-empty.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="catalogItem">
+				<task-object-name>com.tsa.puridiom.catalog.tasks.CatalogItemSetValues</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="setErrorMsg">
+				<task-object-name>com.tsa.puridiom.catalog.tasks.CatalogItemErrorMsgSetDuplicateItemNumber</task-object-name>
+			</task>
+			<post-action>exitProcess</post-action>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="catalogItemAdd">
+			<task synchronous="true" continue-on-failure="false" name="catalogItem">
+				<task-object-name>com.tsa.puridiom.catalog.tasks.CatalogItemSetValues</task-object-name>
+				<post-action></post-action>
+			</task>
+			 <task synchronous="true" continue-on-failure="false" name="catalogItem">
+				<task-object-name>com.tsa.puridiom.catalog.tasks.CatalogItemAdd</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+	</activities>
+</process>

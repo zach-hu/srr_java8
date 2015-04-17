@@ -1,0 +1,21 @@
+<browse_taxcode>
+	<columns>
+		<TaxCode_taxCode>
+			<label>taxCode</label>
+			<sort>A</sort>
+			<link><![CDATA[javascript: returnMe('#TaxCode_taxCode^'); void(0);]]></link>
+		</TaxCode_taxCode>
+		<TaxCode_description>
+			<label>brw-description</label>
+		</TaxCode_description>
+		<TaxCode_taxRate>
+			<label>brw-taxRate</label>
+			<hidden-input>Y</hidden-input>
+		</TaxCode_taxRate>
+	</columns>
+<sqlfrom>TaxCode as TaxCode</sqlfrom>
+<sqlwhere><![CDATA[ (TaxCode.status = '02' OR (TaxCode.status = '01' AND TaxCode.dateExpires >= :as_today)) ]]></sqlwhere>
+<sqlorderby>TaxCode.taxCode ASC</sqlorderby>
+<pagesize>15</pagesize>
+<title>Tax Code Browse</title>
+</browse_taxcode>

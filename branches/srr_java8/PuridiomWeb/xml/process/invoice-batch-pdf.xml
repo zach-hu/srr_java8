@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="InvoicePdf" connection-type="Connection-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="invoicePdf">
+			<task synchronous="true" continue-on-failure="false" name="invoiceDataRetrieve">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>invoice-retrieve.xml</process-filename>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="invoiceLineList">
+					<task-object-name>com.tsa.puridiom.invoiceline.tasks.InvoiceLineRetrieveQuantities</task-object-name>
+					<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="invoiceLineList">
+					<task-object-name>com.tsa.puridiom.receiptline.tasks.ReceiptLineRetrieveListFromInvoiceLineList</task-object-name>
+					<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="retrieveRoutingList">
+			<task synchronous="true" continue-on-failure="false" name="routingListSetup">
+				<task-object-name>com.tsa.puridiom.invoice.tasks.InvoiceRoutingDisplaySetup</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="routingList">
+				<task-object-name>com.tsa.puridiom.approvals.tasks.ApprovalLogRetrieveByHeader</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="printInvoicePdf">
+			<task synchronous="true" continue-on-failure="false" name="pdfParameters">
+				<task-object-name>com.tsa.puridiom.formpdf.tasks.InvoicePrintApprovedPdf</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

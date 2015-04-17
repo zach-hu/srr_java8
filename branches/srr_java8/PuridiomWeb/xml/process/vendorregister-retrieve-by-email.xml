@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="bidboardUserLogin" connection-type="Connection-Required" ldap-connection-type="None">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="retrieveSupplierRegisterUser">
+			<task synchronous="true" continue-on-failure="false" name="vendorRegister">
+				<task-object-name>com.tsa.puridiom.vendorregister.tasks.VendorRegisterRetrieveByContactEmailAddr</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="VendorRegCommRel_vendorId">
+				<task-object-name>com.tsa.puridiom.vendorregister.tasks.VendorRegisterGetVendorId</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="vendorRegCommRelList">
+				<task-object-name>com.tsa.puridiom.vendorregcommrel.tasks.VendorRegCommRelRetrieveByVendor</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+	</activities>
+</process>

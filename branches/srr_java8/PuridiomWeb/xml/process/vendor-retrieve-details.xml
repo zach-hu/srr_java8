@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="VendorRetrieveDetails" connection-type="Connection-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="vendorRetrieveDetails">
+			<task synchronous="true" continue-on-failure="false" name="vendorRetrieveSetup">
+				<task-object-name>com.tsa.puridiom.vendor.tasks.VendorRetrieveSetup</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="vendor">
+				<task-object-name>com.tsa.puridiom.vendor.tasks.VendorRetrieveById</task-object-name>
+				<post-action />
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="contact">
+				<task-object-name>com.tsa.puridiom.contact.tasks.ContactRetrievePrimary</task-object-name>
+				<post-action />
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="addressRetrieve">
+			<task synchronous="true" continue-on-failure="false" name="addressList">
+				<rule-filename>is-currentpage-supplierinfo.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.address.tasks.AddressRetrieveBySupplier</task-object-name>
+				<post-action>exitActivity</post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="address">
+				<task-object-name>com.tsa.puridiom.address.tasks.AddressRetrievePrimary</task-object-name>
+				<post-action />
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="ContactAddress1099RetrieveBySupplier">
+			<task synchronous="true" continue-on-failure="false" name="contactAddress1099List">
+				<task-object-name>com.tsa.puridiom.contact.tasks.ContactAddress1099RetrieveBySupplier</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="AddressRetrieveValidateCountry">
+				<rule-filename>is-currentpage-supplierinfo.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.address.tasks.AddressRetrieveValidateCountry</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="AddressRetrieveValidateState">
+				<rule-filename>is-currentpage-supplierinfo.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.address.tasks.AddressRetrieveValidateState</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

@@ -1,0 +1,150 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping>
+
+<!--
+    Created by Middlegen Hibernate plugin
+
+    http://boss.bekk.no/boss/middlegen/
+    http://hibernate.sourceforge.net/
+-->
+
+<class
+    name="com.tsa.puridiom.entity.SendAlert"
+    table="SEND_ALERT"
+>
+    <id
+        name="queueid"
+        type="java.math.BigDecimal"
+        column="QUEUEID"
+    >
+        <generator class="assigned" />
+    </id>
+    <property
+        name="doctype"
+        type="java.lang.String"
+        column="DOCTYPE"
+        length="3"
+    />
+    <property
+        name="docic"
+        type="java.math.BigDecimal"
+        column="DOCIC"
+        length="22"
+    />
+    <property
+        name="subject"
+        type="java.lang.String"
+        column="SUBJECT"
+        length="4000"
+    />
+    <property
+        name="messagetext"
+        type="java.lang.String"
+        column="MESSAGETEXT"
+        length="4000"
+    />
+    <property
+        name="owner"
+        type="java.lang.String"
+        column="OWNER"
+        length="15"
+    />
+    <property
+        name="sendfromtype"
+        type="java.lang.String"
+        column="SENDFROMTYPE"
+        length="10"
+    />
+    <property
+        name="sendfrom"
+        type="java.lang.String"
+        column="SENDFROM"
+        length="255"
+    />
+    <property
+        name="sendtotype"
+        type="java.lang.String"
+        column="SENDTOTYPE"
+        length="10"
+    />
+    <property
+        name="sendto"
+        type="java.lang.String"
+        column="SENDTO"
+        length="2000"
+    />
+    <property
+        name="status"
+        type="java.lang.String"
+        column="STATUS"
+        length="4"
+    />
+    <property
+        name="dateadded"
+        type="java.lang.String"
+        column="DATEADDED"
+        length="10"
+    />
+    <property
+        name="timeadded"
+        type="java.lang.String"
+        column="TIMEADDED"
+        length="10"
+    />
+    <property
+        name="action"
+        type="java.lang.String"
+        column="ACTION"
+        length="10"
+    />
+    <property
+        name="datesent"
+        type="java.lang.String"
+        column="DATESENT"
+        length="10"
+    />
+    <property
+        name="timesent"
+        type="java.lang.String"
+        column="TIMESENT"
+        length="10"
+    />
+    <property
+        name="attachment"
+        type="java.lang.String"
+        column="ATTACHMENT"
+        length="255"
+    />
+    <property
+        name="vendorId"
+        type="java.lang.String"
+        column="VENDOR_ID"
+        length="15"
+    />
+    <property
+        name="attempts"
+        type="java.math.BigDecimal"
+        column="ATTEMPTS"
+        length="10"
+    />
+    <property
+        name="errorText"
+        type="java.lang.String"
+        column="ERROR_TEXT"
+        length="2000"
+    />
+    <property
+        name="args"
+        type="java.lang.String"
+        column="ARGS"
+        length="2000"
+    />
+
+    <!-- associations -->
+
+</class>
+</hibernate-mapping>

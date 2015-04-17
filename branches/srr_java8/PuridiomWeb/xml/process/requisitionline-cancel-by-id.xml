@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="CancelPoLine" connection-type="New-Transaction">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="cancelLineSetup">
+			<task synchronous="true" continue-on-failure="false" name="cancelLineSetup">
+				<task-object-name>com.tsa.puridiom.requisitionline.tasks.RequisitionLineCancelSetup</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="requisitionHeader">
+				<task-object-name>com.tsa.puridiom.requisitionheader.tasks.RequisitionHeaderRetrieveById</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="requisitionLine">
+				<task-object-name>com.tsa.puridiom.requisitionline.tasks.RequisitionLineRetrieveById</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="accounts">
+				<task-object-name>com.tsa.puridiom.account.tasks.AccountRetrieveByLine</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="cancelLineChecks">
+			<task synchronous="true" continue-on-failure="false" name="CancelLineCheck">
+				<task-object-name>com.tsa.puridiom.requisitionline.tasks.RequisitionLineCancelCheck</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+	    <activity synchronous="true" continue-on-failure="false" name="reqLineBudgetSetup">
+	      <rule-filename>is-account-budget-module-active.xml;is-account-budget-service-active.xml</rule-filename>
+	      <task synchronous="true" continue-on-failure="false" name="reqLineCancelBudgetSetup">
+	        <task-object-name>com.tsa.puridiom.requisitionline.tasks.RequisitionLineCancelBudgetServiceSetup</task-object-name>
+	        <post-action></post-action>
+	      </task>
+	      <task synchronous="true" continue-on-failure="false" name="reqLineBudgetUpdate">
+	       	<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+	       	<process-filename>budgetservice-update.xml</process-filename>
+	       	<post-action></post-action>
+	      </task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="cancelLine">
+			<task synchronous="true" continue-on-failure="false" name="requisitionLine">
+				<task-object-name>com.tsa.puridiom.requisitionline.tasks.RequisitionLineCancelSetValues</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="accountList">
+				<task-object-name>com.tsa.puridiom.account.tasks.AccountResetAmounts</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="UpdateLine">
+			<task synchronous="true" continue-on-failure="false" name="account">
+				<task-object-name>com.tsa.puridiom.account.tasks.AccountListUpdate</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="updateRequisitionLine">
+				<task-object-name>com.tsa.puridiom.requisitionline.tasks.RequisitionLineUpdate</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="totals">
+			<task synchronous="true" continue-on-failure="false" name="recalculate">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>recalculate.xml</process-filename>
+			</task>
+		</activity>
+	</activities>
+</process>

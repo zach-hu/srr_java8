@@ -1,0 +1,105 @@
+<r-pohs-cc>
+  <columns>
+		<PoHeader_poType>
+			<aggregate>
+				<function>max</function>
+			</aggregate>
+			<label>PO Type</label>
+			<type>ORDER-TYPE</type>
+		</PoHeader_poType>
+		<PoHeader_poNumber>
+			<label>PO Number</label>
+			<type>STRING</type>
+		</PoHeader_poNumber>
+		<PoHeader_releaseNumber>
+			<label>Release Number</label>
+			<type>BIGDECIMAL</type>
+		</PoHeader_releaseNumber>
+		<PoHeader_revisionNumber>
+			<aggregate>
+				<function>max</function>
+			</aggregate>
+			<label>Revision Number</label>
+			<type>BIGDECIMAL</type>
+		</PoHeader_revisionNumber>
+		<PoHeader_poDate>
+			<label>orderDate</label>
+			<type>DATE</type>
+			<visible>1</visible>
+		</PoHeader_poDate>
+		<PoHeader_vendorName>
+			<aggregate>
+				<function>max</function>
+			</aggregate>
+			<label>Vendor Name</label>
+			<type>STRING</type>
+		</PoHeader_vendorName>
+		<PoHeader_requisitionNumber>
+			<aggregate>
+				<function>max</function>
+			</aggregate>
+			<label>Requisition Number</label>
+			<type>STRING</type>
+		</PoHeader_requisitionNumber>
+		<PoHeader_internalComments>
+			<aggregate>
+				<function>max</function>
+			</aggregate>
+			<label>Purpose</label>
+			<type>STRING</type>
+		</PoHeader_internalComments>
+		<Account_fld2>
+			<aggregate>
+				<function>max</function>
+			</aggregate>
+			<label>AC02</label>
+			<type>STRING</type>
+		</Account_fld2>
+		<Account_fld1>
+			<aggregate>
+				<function>max</function>
+			</aggregate>
+			<label>AC01</label>
+			<type>STRING</type>
+		</Account_fld1>
+		<PoHeader_total>
+			<aggregate>
+				<function>max</function>
+			</aggregate>
+			<label>Total</label>
+			<type>BIGDECIMAL</type>
+		</PoHeader_total>
+		<PoHeader_currencyCode>
+			<aggregate>
+				<function>max</function>
+			</aggregate>
+			<label>Currency Code</label>
+			<type>STRING</type>
+			<visible>0</visible>
+		</PoHeader_currencyCode>
+		<PoHeader_currencyFactor>
+			<aggregate>
+				<function>max</function>
+			</aggregate>
+			<label>Currency Factor</label>
+			<type>BIGDECIMAL</type>
+			<visible>0</visible>
+		</PoHeader_currencyFactor>
+		<PoHeader_icPoHeader>
+			<label>PO ID</label>
+			<type>BIGDECIMAL</type>
+			<visible>0</visible>
+		</PoHeader_icPoHeader>
+		<PoHeader_udf1Code>
+             <label>CAP</label>
+             <type>STRING</type>
+             <visible>1</visible>
+         </PoHeader_udf1Code>
+		
+	</columns>
+  <sqlfrom> PoHeader as PoHeader , Account as Account </sqlfrom>
+  <sqlwhere> <![CDATA[( PoHeader.icPoHeader = Account.id.icHeader ) and ( PoHeader.lastRevision = 'C' ) and ( PoHeader.poDate >= :as_baseReportDate ) and ( PoHeader.status > '3020' ) and ( PoHeader.status < '9020' )]]> </sqlwhere>
+  <sqlgroupby>PoHeader.icPoHeader, PoHeader.poNumber, PoHeader.releaseNumber, PoHeader.poDate ,PoHeader.udf1Code</sqlgroupby>
+  <sqlorderby>max(fld_2), max(vendor_name)</sqlorderby>
+  <title>PO Summary By Cost Center Report</title>
+</r-pohs-cc>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="userProfileUpdate" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="userProfileUpdate">
+			<task synchronous="true" continue-on-failure="false" name="userProfile">
+				<rule-filename>is-userprofile-empty</rule-filename>
+				<task-object-name>com.tsa.puridiom.userprofile.tasks.UserProfileRetrieveById</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="userProfile">
+				<rule-filename></rule-filename>
+				<task-object-name>com.tsa.puridiom.userprofile.tasks.UserProfileSetValues</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="userProfile">			
+				<task-object-name>com.tsa.puridiom.userprofile.tasks.UserProfileUpdate</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+	</activities>
+</process>

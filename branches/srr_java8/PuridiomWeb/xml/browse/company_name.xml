@@ -1,0 +1,47 @@
+<browse_companyName>
+	<columns>
+		<Vendor_vendorId>
+			<label>brw-vendorId</label>
+		</Vendor_vendorId>
+		<Vendor_vendorName>
+			<label>brw-vendorname</label>
+		</Vendor_vendorName>
+		<Address_addressCode>
+			<label>brw-addressCode</label>
+			<sort>A</sort>
+			<link><![CDATA[javascript: returnMe('#Address_addressCode^'); void(0);]]></link>
+		</Address_addressCode>
+		<Address_addressType>
+			<label>brw-addressType</label>
+			<visible>0</visible>
+		</Address_addressType>
+		<Address_addressLine1>
+			<label>brw-addressLine1</label>
+		</Address_addressLine1>
+		<Address_addressLine2>
+			<label>brw-addressLine2</label>
+		</Address_addressLine2>
+		<Address_addressLine3>
+			<label>brw-addressLine3</label>
+		</Address_addressLine3>
+		<Address_addressLine4>
+			<label>brw-addressLine4</label>
+		</Address_addressLine4>
+		<Address_city>
+			<label>city</label>
+		</Address_city>
+		<Address_state>
+			<label>state</label>
+		</Address_state>
+		<Address_postalCode>
+			<label>zip</label>
+		</Address_postalCode>
+		<Address_country>
+			<label>country</label>
+		</Address_country>
+	</columns>
+<sqlfrom>Address as Address, Vendor as Vendor</sqlfrom>
+<sqlwhere><![CDATA[ (Address.status <> '03' and Address.shipTo = 'Y') ]]></sqlwhere>
+<pagesize>15</pagesize>
+<title>Company Name Browse</title>
+</browse_companyName>

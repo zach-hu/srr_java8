@@ -1,0 +1,188 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping>
+
+<!--
+    Created by Middlegen Hibernate plugin
+
+    http://boss.bekk.no/boss/middlegen/
+    http://hibernate.sourceforge.net/
+-->
+
+<class
+    name="com.tsa.puridiom.entity.InvLocation"
+    table="INV_LOCATION"
+>
+    <composite-id name="comp_id" class="com.tsa.puridiom.entity.InvLocationPK">
+        <key-property name="itemNumber" column="ITEM_NUMBER" type="java.lang.String"/>
+        <key-property name="itemLocation" column="ITEM_LOCATION" type="java.lang.String"/>
+    </composite-id>
+    <property
+        name="qtyOnHand"
+        type="java.math.BigDecimal"
+        column="QTY_ON_HAND"
+        length="15"
+    />
+    <property
+        name="qtyOnOrder"
+        type="java.math.BigDecimal"
+        column="QTY_ON_ORDER"
+        length="15"
+    />
+    <property
+        name="minOnHand"
+        type="java.math.BigDecimal"
+        column="MIN_ON_HAND"
+        length="15"
+    />
+    <property
+        name="maxOnHand"
+        type="java.math.BigDecimal"
+        column="MAX_ON_HAND"
+        length="15"
+    />
+    <property
+        name="qtyEoq"
+        type="java.math.BigDecimal"
+        column="QTY_EOQ"
+        length="15"
+    />
+    <property
+        name="qtyEsq"
+        type="java.math.BigDecimal"
+        column="QTY_ESQ"
+        length="15"
+    />
+    <property
+        name="averageCost"
+        type="java.math.BigDecimal"
+        column="AVERAGE_COST"
+        length="15"
+    />
+    <property
+        name="udf1Code"
+        type="java.lang.String"
+        column="UDF_1_CODE"
+        length="15"
+    />
+    <property
+        name="udf2Code"
+        type="java.lang.String"
+        column="UDF_2_CODE"
+        length="15"
+    />
+    <property
+        name="udf3Code"
+        type="java.lang.String"
+        column="UDF_3_CODE"
+        length="15"
+    />
+    <property
+        name="udf4Code"
+        type="java.lang.String"
+        column="UDF_4_CODE"
+        length="15"
+    />
+    <property
+        name="udf5Code"
+        type="java.lang.String"
+        column="UDF_5_CODE"
+        length="15"
+    />
+    <property
+        name="qtyAlloc"
+        type="java.math.BigDecimal"
+        column="QTY_ALLOC"
+        length="15"
+    />
+    <property
+        name="icInvAccount"
+        type="java.math.BigDecimal"
+        column="IC_INV_ACCOUNT"
+        length="22"
+    />
+    <property
+        name="icInvHeader"
+        type="java.math.BigDecimal"
+        column="IC_INV_HEADER"
+        length="22"
+    />
+    <property
+        name="qtyRequested"
+        type="java.math.BigDecimal"
+        column="QTY_REQUESTED"
+        length="15"
+    />
+    <property
+        name="autoReplenish"
+        type="java.lang.String"
+        column="AUTO_REPLENISH"
+        length="1"
+    />
+    <property
+        name="physActual"
+        type="java.math.BigDecimal"
+        column="PHYS_ACTUAL"
+        length="15"
+    />
+    <property
+        name="physOriginal"
+        type="java.math.BigDecimal"
+        column="PHYS_ORIGINAL"
+        length="15"
+    />
+    <property
+        name="primeLocation"
+        type="java.lang.String"
+        column="PRIME_LOCATION"
+        length="1"
+    />
+    <property
+        name="physAlloc"
+        type="java.math.BigDecimal"
+        column="PHYS_ALLOC"
+        length="15"
+    />
+    <property
+        name="originalAlloc"
+        type="java.math.BigDecimal"
+        column="ORIGINAL_ALLOC"
+        length="15"
+    />
+    <property
+        name="qtyPendOrder"
+        type="java.math.BigDecimal"
+        column="QTY_PEND_ORDER"
+        length="15"
+    />
+    <property
+        name="duomQtyOnHand"
+        type="java.math.BigDecimal"
+        column="DUOM_QTY_ON_HAND"
+        length="15"
+    />
+    <property
+        name="duomQtyAlloc"
+        type="java.math.BigDecimal"
+        column="DUOM_QTY_ALLOC"
+        length="15"
+    />
+    <property
+        name="duomPhysActual"
+        type="java.math.BigDecimal"
+        column="DUOM_PHYS_ACTUAL"
+        length="15"
+    />
+    <property
+        name="duomPhysOriginal"
+        type="java.math.BigDecimal"
+        column="DUOM_PHYS_ORIGINAL"
+        length="15"
+    />
+
+
+</class>
+</hibernate-mapping>

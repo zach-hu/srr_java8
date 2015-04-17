@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<order>
+	<step process="ASSET" visible="1">
+        <link><![CDATA[asset/asset_general.jsp]]></link>
+        <label>general_information</label>
+		<method>AssetRetrieveById</method>
+    </step>
+    <step process="ASSETLOCATION" visible="1">
+        <link><![CDATA[asset/location/assetlocation_review.jsp]]></link>
+        <label>Location</label>
+        <method>AssetLocationLastRetrieveById</method>
+    </step>
+    <step process="ASSETCOST" visible="1">
+        <link><![CDATA[asset/cost/assetcost_review.jsp]]></link>
+        <label>Cost</label>
+        <method>assetcost</method>
+    </step>
+    <step process="ASSETSERVICE" visible="1">
+        <link><![CDATA[asset/service/assetservice_review.jsp]]></link>
+        <label>Service</label>
+        <method>assetservice</method>
+    </step>
+    <step process="ASSETNOTE" visible="1">
+        <link><![CDATA[asset/note/assetnote_review.jsp]]></link>
+        <label>Notes</label>
+		<method>assetnote</method>
+    </step>
+<!--	<step process="ASSETATTACHMENTS" visible="1">
+        <link><![CDATA[attach]]></link>
+        <label>Attachments</label>
+        <method>AssetRetrieveById</method>
+    </step> -->
+    <step process="ASSETREVIEW" visible="1">
+        <link><![CDATA[asset/asset_review.jsp]]></link>
+        <label>Review</label>
+        <method>AssetRetrieve</method>
+    </step>
+    <!--<step process="ASSETTOTALS" visible="1">
+        <link><![CDATA[asset/asset_totals.jsp]]></link>
+        <label>Asset Review</label>
+        <method>AssetTotalsRetrieve</method>
+    </step>
+    <step process="INVENTORYITEM" visible="1">
+        <link><![CDATA[inventory/inv_item.jsp]]></link>
+        <label>Inventory Item</label>
+        <method>InvItemRetrieveById</method>
+    </step>
+    <step process="ASSETSEARCH" visible="1">
+        <link><![CDATA[browse/asset-search.jsp]]></link>
+        <label>Advanced Search</label>
+        <method>DoNothing</method>
+    </step>-->
+</order>

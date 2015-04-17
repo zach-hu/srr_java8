@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<validation-rules>
+  <validations>
+    <save enabled="yes">
+      <rule>
+<!-- Make sure there are accounts at the header. Using the same rule in requisitions.
+-->
+        <filename>has-accounts.xml</filename>
+        <alias>Has Accounts</alias>
+        <msg>You must enter accounts on the Account Information page!</msg>
+        <severity>E</severity>
+        <order>10</order>
+        <status></status>
+        <enabled>Y</enabled>
+		<link><![CDATA[javascript: doSubmit('orders/po_accounts.jsp', 'AccountRetrieveByLine'); void(0);]]></link>
+      </rule>
+      <rule>
+        <filename>has-items-check-or-is-po-blanket-order.xml</filename>
+        <alias>Has Lines</alias>
+        <msg>You must enter or select at least one item!</msg>
+        <severity>E</severity>
+        <order>20</order>
+        <enabled>N</enabled>
+		<link><![CDATA[javascript: doSubmit('orders/po_items.jsp', 'PoLineRetrieveByHeader'); void(0);]]></link>
+      </rule>
+      <rule>
+<!-- the quantity for each item must be greater than zero -->
+        <filename>quantity.xml</filename>
+        <alias>Quantity</alias>
+        <msg><![CDATA[ The Quantity for each item must be greater than zero! ]]></msg>
+        <severity>E</severity>
+        <order>40</order>
+        <status></status>
+        <enabled>N</enabled>
+		<fieldname>PoLine_quantity</fieldname>
+		<link><![CDATA[javascript: doSubmit('orders/po_items.jsp', 'PoLineRetrieveByHeader'); void(0);]]></link>
+      </rule>
+      <rule>
+<!-- every item must have a valid unit of measure code. Using the same rule in requisitions.
+-->
+        <filename>po-unit-of-measure.xml</filename>
+        <alias>um</alias>
+        <msg><![CDATA[ You must enter a valid UOM code for each item. ]]></msg>
+        <severity>E</severity>
+        <status></status>
+        <order>50</order>
+        <enabled>N</enabled>
+		<fieldname>PoLine_uomCode</fieldname>
+		<link><![CDATA[javascript: doSubmit('orders/po_items.jsp', 'PoLineRetrieveByHeader'); void(0);]]></link>
+      </rule>
+      <rule>
+        <filename>po-vendorinsurancedefault-contracts.xml</filename>
+        <alias>validate_vendorinsurancedafault_contracts</alias>
+        <msg>The supplier's insurance levels are NOT satisfactory based on the Contract's Insurance Category Level requirements!</msg>
+        <severity>W</severity>
+        <order>60</order>
+        <enabled>Y</enabled>
+		<link><![CDATA[javascript: doSubmit('orders/po_supplier.jsp', 'PoHeaderRetrieveById'); void(0);]]></link>
+      </rule>
+      <rule>
+        <filename>po-vendorinsurancedefault-orders.xml</filename>
+        <alias>validate_vendorinsurancedafault_orders</alias>
+        <msg>Insurance levels for supplier are NOT satisfactory for the services being ordered!</msg>
+        <severity>W</severity>
+        <order>70</order>
+        <enabled>Y</enabled>
+		<link><![CDATA[javascript: doSubmit('orders/po_supplier.jsp', 'PoHeaderRetrieveById'); void(0);]]></link>
+      </rule>
+      <rule>
+        <filename>po-daily-release-limit.xml</filename>
+        <alias>daily_release_limit</alias>
+        <msg>Daily Release Limit has exceeded. [@dailyReleaseLimitMessage]</msg>
+        <severity>E</severity>
+        <order>80</order>
+        <enabled>Y</enabled>
+		<link><![CDATA[javascript: doSubmit('orders/po_review.jsp', 'PoRetrieve'); void(0);]]></link>
+      </rule>
+		<rule>
+			<filename>po-check-blanket-dates.xml</filename>
+			<alias>pocheckblanketdates</alias>
+			<msg><![CDATA[Service Start Date and Service End Date cannot be the same on Blanket Information page.]]></msg>
+			<severity>E</severity>
+			<order>80</order>
+			<enabled>Y</enabled>
+			<link><![CDATA[javascript: doSubmit('orders/po_blanket.jsp', 'PoGetBlanketInfo'); void(0);]]></link>
+		</rule>
+		<rule>
+			<filename>releaselimit-v.xml</filename>
+			<alias>releaselimitvalid</alias>
+			<msg><![CDATA[ Release Limit must be greater zero on Blanket Information page. ]]></msg>
+			<severity>E</severity>
+			<order>90</order>
+			<enabled>N</enabled>
+			<link><![CDATA[javascript: doSubmit('orders/po_blanket.jsp', 'PoGetBlanketInfo'); void(0);]]></link>
+		</rule>
+		<rule>
+			<filename>blanketlimit-v.xml</filename>
+			<alias>blanketlimitvalid</alias>
+			<msg><![CDATA[ Blanket Limit must be greater zero on Blanket Information page. ]]></msg>
+			<severity>E</severity>
+			<order>100</order>
+			<enabled>N</enabled>
+			<link><![CDATA[javascript: doSubmit('orders/po_blanket.jsp', 'PoGetBlanketInfo'); void(0);]]></link>
+		</rule>
+		<rule>
+			<filename>po-security-valid.xml</filename>
+        	<alias>posecurityvalid</alias>
+        	<msg><![CDATA[ You must provide at least one Blanket Security Access on Blanket Security page. ]]></msg>
+        	<severity>W</severity>
+        	<order>110</order>
+        	<enabled>Y</enabled>
+			<link><![CDATA[javascript: doSubmit('orders/po_security.jsp', 'PoSecurityRetrieveBy'); void(0);]]></link>
+		</rule>
+		<rule>
+			<filename>srr-account-valid.xml</filename>
+			<alias>Valid Account</alias>
+			<msg>Invalid organization account project combination.</msg>
+			<severity>E</severity>
+			<order>325</order>
+			<enabled>N</enabled>
+			<link><![CDATA[javascript: doSubmit('orders/po_accounts.jsp', 'AccountRetrieveByLine'); void(0);]]></link>
+		</rule>
+		<rule>
+			<filename>srr-account-valid-sp.xml</filename>
+			<alias>Valid Account</alias>
+			<msg>Invalid organization account project combination.</msg>
+			<severity>E</severity>
+			<order>325</order>
+			<enabled>Y</enabled>
+			<link><![CDATA[javascript: doSubmit('orders/po_accounts.jsp', 'AccountRetrieveByLine'); void(0);]]></link>
+		</rule>
+		<rule>
+			<filename>budget-ceiling-validation.xml</filename>
+			<alias>Budget Ceiling Validation</alias>
+			<msg>You must enter a Budget Ceiling greater than equal to the total of the order.</msg>
+			<severity>W</severity>
+			<order>120</order>
+			<enabled>Y</enabled>
+			<link><![CDATA[javascript: doSubmit('orders/po_totals.jsp', 'PoHeaderRetrieveById'); void(0);]]></link>
+		</rule>
+		<rule>
+			<filename>posubtype-bidwaiver-check.xml</filename>
+			<alias>Po Sub Type validation</alias>
+			<msg>If Procurement Type equals CC, then the type order must be Credit Card.</msg>
+			<severity>E</severity>
+			<order>120</order>
+			<enabled>Y</enabled>
+			<link><![CDATA[javascript: doSubmit('orders/po_general_info.jsp', 'PoHeaderRetrieveById'); void(0);]]></link>
+		</rule>
+		<rule>
+			<filename>bidwaiver-posubtype-check.xml</filename>
+			<alias>Bid Waiver validation</alias>
+			<msg>If Type Order is Credit Card, then Procurement Type must be CC.</msg>
+			<severity>E</severity>
+			<order>120</order>
+			<enabled>Y</enabled>
+			<link><![CDATA[javascript: doSubmit('orders/po_general_info.jsp', 'PoHeaderRetrieveById'); void(0);]]></link>
+		</rule>
+			<rule>
+				<filename>ac-04-check.xml</filename>
+				<alias>AMS #</alias>
+				<msg>If AMS# is not null, AMS Name cannot be null.</msg>
+				<severity>E</severity>
+				<order>130</order>
+				<enabled>Y</enabled>
+				<link><![CDATA[javascript: doSubmit('orders/po_accounts.jsp', 'AccountRetrieveByLine'); void(0);]]></link>
+			</rule>
+			<rule>
+				<filename>ac-04ln-check.xml</filename>
+				<alias>AMS #</alias>
+				<msg>If AMS# is not null, AMS Name cannot be null for the account on the line item.</msg>
+				<severity>E</severity>
+				<order>140</order>
+				<enabled>Y</enabled>
+				<link><![CDATA[javascript: doSubmit('orders/po_items.jsp', 'PoLineRetrieveByHeader'); void(0);]]></link>
+			</rule>
+			<rule>
+				<filename>ac-05-check.xml</filename>
+				<alias>AMS Name</alias>
+				<msg>If AMS Name is not null, AMS # cannot be null.</msg>
+				<severity>E</severity>
+				<order>150</order>
+				<enabled>Y</enabled>
+				<link><![CDATA[javascript: doSubmit('orders/po_accounts.jsp', 'AccountRetrieveByLine'); void(0);]]></link>
+			</rule>
+			<rule>
+				<filename>ac-05ln-check.xml</filename>
+				<alias>AMS Name</alias>
+				<msg>If AMS Name is not null, AMS # cannot be null for the account on the line item.</msg>
+				<severity>E</severity>
+				<order>155</order>
+				<enabled>Y</enabled>
+				<link><![CDATA[javascript: doSubmit('orders/po_items.jsp', 'PoLineRetrieveByHeader'); void(0);]]></link>
+			</rule>
+			<rule>
+				<filename>po-ac01ln-mv.xml</filename>
+				<alias>Org ID</alias>
+				<msg>You must enter/select a valid Org ID for every line item.</msg>
+				<severity>E</severity>
+				<order>160</order>
+				<enabled>Y</enabled>
+				<link><![CDATA[javascript: doSubmit('orders/po_items.jsp', 'PoHeaderRetrieveById;PoLineRetrieveByHeader'); void(0);]]></link>
+			</rule>
+			<rule>
+				<filename>po-ac02ln-mv.xml</filename>
+				<alias>Account ID</alias>
+				<msg>You must enter/select a valid Account ID for every line item.</msg>
+				<severity>E</severity>
+				<order>170</order>
+				<enabled>Y</enabled>
+				<link><![CDATA[javascript: doSubmit('orders/po_items.jsp', 'PoHeaderRetrieveById;PoLineRetrieveByHeader'); void(0);]]></link>
+			</rule>
+			<rule>
+				<filename>po-ac03ln-mv.xml</filename>
+				<alias>Project ID</alias>
+				<msg>You must enter/select a valid Project ID for every line item.</msg>
+				<severity>E</severity>
+				<order>180</order>
+				<enabled>Y</enabled>
+				<link><![CDATA[javascript: doSubmit('orders/po_items.jsp', 'PoHeaderRetrieveById;PoLineRetrieveByHeader'); void(0);]]></link>
+			</rule>
+			<rule>
+				<filename>po-ac04ln-v.xml</filename>
+				<alias>AMS Name</alias>
+				<msg>You must enter/select a valid AMS Name for every line item.</msg>
+				<severity>E</severity>
+				<order>190</order>
+				<enabled>Y</enabled>
+				<link><![CDATA[javascript: doSubmit('orders/po_items.jsp', 'PoHeaderRetrieveById;PoLineRetrieveByHeader'); void(0);]]></link>
+			</rule>
+			<rule>
+				<filename>po-ac05ln-v.xml</filename>
+				<alias>AMS No</alias>
+				<msg>You must enter/select a valid AMS # for every line item.</msg>
+				<severity>E</severity>
+				<order>200</order>
+				<enabled>Y</enabled>
+				<link><![CDATA[javascript: doSubmit('orders/po_items.jsp', 'PoHeaderRetrieveById;PoLineRetrieveByHeader'); void(0);]]></link>
+			</rule>
+			<rule>
+				<filename>inspection-criteria-req.xml</filename>
+				<alias>Inspection Criteria</alias>
+				<msg>You can not have any Procurement Level 1 or 2 items without Inspection Criteria for material orders.</msg>
+				<severity>W</severity>
+				<order>210</order>
+				<enabled>Y</enabled>
+				<link><![CDATA[javascript: doSubmit('orders/po_items.jsp', 'PoHeaderRetrieveById;PoLineRetrieveByHeader'); void(0);]]></link>
+			</rule>
+			<rule>
+				<filename>procurement-level-3-item.xml</filename>
+				<alias>validProcurementLevel3Item</alias>
+				<msg>Procurement Level 3 items can not have Inspection details attached to them.</msg>
+				<severity>E</severity>
+				<order>220</order>
+				<enabled>Y</enabled>
+				<link><![CDATA[javascript: doSubmit('orders/po_items.jsp', 'PoHeaderRetrieveById;PoLineRetrieveByHeader'); void(0);]]></link>
+			</rule>
+    </save>
+  </validations>
+</validation-rules>

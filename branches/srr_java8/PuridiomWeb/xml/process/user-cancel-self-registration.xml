@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="userSelfRegistration" connection-type="None" ldap-connection-type="None">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="userRegistrationCancel">
+			<task synchronous="true" continue-on-failure="false" name="notifyPuridiom">
+				<task-object-name>com.tsa.puridiom.userregistration.tasks.QueueAddRegistrationCancelledEmail</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="deleteUserRecords">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>userprofile-delete.xml</process-filename>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="deleteOrganizationRecord">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>organization-delete-by-id.xml</process-filename>
+			</task>
+		</activity>
+	</activities>
+</process>

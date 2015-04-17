@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="rfqLineAdd" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="rfqVendorListSetup">
+			<task synchronous="true" continue-on-failure="false" name="rfqVendorList">
+				<task-object-name>com.tsa.puridiom.rfqvendor.tasks.RfqVendorRetrieveBy</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="rfqBidsAddForLine">
+			<task synchronous="true" continue-on-failure="false" name="rfqBidList">	
+				<task-object-name>com.tsa.puridiom.rfqbid.tasks.RfqBidListSetup</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="rfqBidList">
+				<task-object-name>com.tsa.puridiom.rfqline.tasks.RfqBidListSetValues</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="rfqBidList">
+				<task-object-name>com.tsa.puridiom.rfqline.tasks.RfqBidAddList</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

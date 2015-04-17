@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="rfqLineCancel" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="rfqLineCancel">
+			<task synchronous="true" continue-on-failure="false" name="rfqLineList">
+				<task-object-name>com.tsa.puridiom.rfqline.tasks.RfqLineRetrieveByReqLine</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="rfqLineCancel">
+				<task-object-name>com.tsa.puridiom.rfqline.tasks.RfqLineCancelFromReqLine</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="history">
+			<task synchronous="true" continue-on-failure="false" name="rfqLineListHistory">
+				<task-object-name>com.tsa.puridiom.rfqline.history.tasks.RfqLineListHistory</task-object-name>
+			</task>
+		</activity>
+		<!-- EMAIL SET -->
+		<activity synchronous="true" continue-on-failure="false" name="sendQueueSettings">
+			<task synchronous="true" continue-on-failure="false" name="SendQueue_messagetext">
+				<task-object-name>com.tsa.puridiom.rfq.notifications.tasks.SetMessageTextToRfqLineCancel</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

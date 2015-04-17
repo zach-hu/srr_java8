@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="receiptCreate" connection-type="Connection-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="receiptSetup">
+			<task synchronous="true" continue-on-failure="false" name="receiptCreateSetup">
+				<task-object-name>com.tsa.puridiom.receipt.tasks.ReceiptCreateSetup</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="receiptCreateForwardSetup">
+				<rule-filename>is-receiptmethod-receivebypackage</rule-filename>
+				<task-object-name>com.tsa.puridiom.receipt.tasks.ReceiptCreateForwardSetup</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="receiptCreateSetup">
+				<rule-filename>is-receiptmethod-return.xml;is-create-save.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.receipt.tasks.ReceiptCreateReturnSetup</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="retrieveOrder">
+				<rule-filename>is-receiptmethod-receivebypackage;is-poheader-empty.xml</rule-filename>
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>receipt-order-retrieve.xml</process-filename>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="retrieveOrder">
+				<rule-filename>is-receiptmethod-receivebyorder.xml;is-poheader-empty.xml</rule-filename>
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>receipt-order-retrieve.xml</process-filename>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="retrieveOrder">
+				<rule-filename>is-receiptmethod-return.xml;is-poheader-empty.xml</rule-filename>
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>receipt-order-retrieve.xml</process-filename>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="retrieveTransfer">
+				<rule-filename>is-receiptmethod-receivebytransfer.xml;is-requisitionheader-empty.xml</rule-filename>
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>receipt-transfer-retrieve.xml</process-filename>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="receiptCreate">
+			<task synchronous="true" continue-on-failure="false" name="generateNumber">
+				<rule-filename>is-create-save;is-receiptheader-receiptnumber-empty</rule-filename>
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>receipt-generate-form-number.xml</process-filename>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="receiptHeader">
+				<rule-filename>is-receiptmethod-receivebypackage</rule-filename>
+				<task-object-name>com.tsa.puridiom.receiptheader.tasks.ReceiptHeaderSetValuesFromPoHeader</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="receiptHeader">
+				<rule-filename>is-receiptmethod-receivebyorder.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.receiptheader.tasks.ReceiptHeaderSetValuesFromPoHeader</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="receiptHeader">
+				<rule-filename>is-receiptmethod-receivebytransfer.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.receiptheader.tasks.ReceiptHeaderSetValuesFromReqTransfer</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="receiptHeaderSetReceived">
+				<rule-filename>is-receiptmethod-receivebyorder.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.receiptheader.tasks.ReceiptHeaderSetReceived</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="receiptHeaderSetReceived">
+				<rule-filename>is-receiptmethod-receivebytransfer.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.receiptheader.tasks.ReceiptHeaderSetReceived</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="receiptHeader">
+				<task-object-name>com.tsa.puridiom.receiptheader.tasks.ReceiptHeaderSetValues</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="receiptHeaderAdd">
+				<rule-filename>is-create-save.xml</rule-filename>
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>receiptheader-add.xml</process-filename>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="receiptLineByRMA">
+			<rule-filename check-for-false="true">is-receiptmethod-return.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="receiptLineCreate">
+				<rule-filename>is-create-save.xml</rule-filename>
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>receiptline-create.xml</process-filename>
+			</task>
+		</activity>
+	</activities>
+</process>

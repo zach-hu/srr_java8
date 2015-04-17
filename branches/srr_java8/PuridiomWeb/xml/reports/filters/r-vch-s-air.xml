@@ -1,0 +1,108 @@
+<r-vch-s-air>
+  <columns>
+		<InvoiceHeader_invoiceNumber>
+			<label>Invoice Number</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</InvoiceHeader_invoiceNumber>
+		<InvoiceHeader_poNumber>
+			<label>Order Number</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</InvoiceHeader_poNumber>
+		<InvoiceHeader_invoiceDate>
+			<label>Invoice Date</label>
+			<type>DATE</type>
+			<visible>1</visible>
+		</InvoiceHeader_invoiceDate>
+		<InvoiceHeader_dateEntered>
+			<label>Date Entered</label>
+			<type>DATE</type>
+			<visible>1</visible>
+		</InvoiceHeader_dateEntered>
+		<InvoiceHeader_paymentDueDate>
+			<label>Due Date</label>
+			<type>DATE</type>
+			<visible>1</visible>
+		</InvoiceHeader_paymentDueDate>
+		<InvoiceHeader_vendorName>
+			<label>Supplier Name</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</InvoiceHeader_vendorName>
+		<InvoiceHeader_vendorId>
+			<label>Supplier Code</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</InvoiceHeader_vendorId>
+		<InvoiceHeader_departmentCode>
+			<label>Dept</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</InvoiceHeader_departmentCode>
+		<InvoiceHeader_invoiceDesc>
+			<label>General Description</label>
+			<type>STRING</type>
+			<visible>0</visible>
+		</InvoiceHeader_invoiceDesc>
+		
+		<PaymentAccount_poNumber>
+			<label>poNumber</label>
+			<type>STRING</type>
+			<visible>0</visible>
+		</PaymentAccount_poNumber>
+		
+		<PaymentAccount_checkNumber>
+			<label>Check #</label>
+			<type>STRING</type>
+			<visible>0</visible>
+		</PaymentAccount_checkNumber>
+		<PaymentAccount_checkAmount>
+			<label>Check Amount</label>
+			<type>BIGDECIMAL</type>
+			<visible>0</visible>
+		</PaymentAccount_checkAmount>
+		<PaymentAccount_checkDate>
+			<label>Check Date</label>
+			<type>DATE</type>
+			<visible>0</visible>
+		</PaymentAccount_checkDate>
+		
+		
+		
+		<InvoiceHeader_poRelease>
+			<label>Po Release</label>
+			<type>BIGDECIMAL</type>
+			<visible>0</visible>
+		</InvoiceHeader_poRelease>
+		<InvoiceHeader_enteredBy>
+			<label>Entered By</label>
+			<type>STRING</type>
+			<visible>0</visible>
+		</InvoiceHeader_enteredBy>
+		<InvoiceHeader_vendorId>
+			<label>Vendor Id</label>
+			<type>STRING</type>
+			<visible>0</visible>
+		</InvoiceHeader_vendorId>
+		<InvoiceHeader_invoiceTotal>
+			<label>Invoice Total</label>
+			<type>BIGDECIMAL</type>
+			<visible>0</visible>
+		</InvoiceHeader_invoiceTotal>
+		<InvoiceHeader_currencyCode>
+			<label>Currency Code</label>
+			<type>STRING</type>
+			<visible>0</visible>
+		</InvoiceHeader_currencyCode>
+		<InvoiceHeader_currencyFactor>
+			<label>Currency Factor</label>
+			<type>BIGDECIMAL</type>
+			<visible>0</visible>
+		</InvoiceHeader_currencyFactor>
+	</columns>
+  <sqlfrom>InvoiceHeader as InvoiceHeader, PaymentAccount as PaymentAccount</sqlfrom>
+  <sqlwhere><![CDATA[(InvoiceHeader.status = '6010' ) and ( PaymentAccount.invoiceNumber =  InvoiceHeader.invoiceNumber) ]]></sqlwhere>
+  <title>Approved Invoices Report</title>
+</r-vch-s-air>
+

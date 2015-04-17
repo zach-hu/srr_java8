@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="rfqLineCancel" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="poLineCancel">
+			<task synchronous="true" continue-on-failure="false" name="poLineList">
+				<task-object-name>com.tsa.puridiom.poline.tasks.PoLineRetrieveByReqLine</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="poLineCancel">
+				<task-object-name>com.tsa.puridiom.poline.tasks.PoLineCancelFromReqLine</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="history">
+			<task synchronous="true" continue-on-failure="false" name="poLineListHistory">
+				<task-object-name>com.tsa.puridiom.poline.history.tasks.PoLineListHistory</task-object-name>
+			</task>
+	    </activity>
+	    <!-- EMAIL SET -->
+		<activity synchronous="true" continue-on-failure="false" name="sendQueueSettings">
+			<task synchronous="true" continue-on-failure="false" name="SendQueue_messagetext">
+				<task-object-name>com.tsa.puridiom.po.notifications.tasks.SetMessageTextToPoLineCancel</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

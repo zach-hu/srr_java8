@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="poHeaderBillToRetrieveById" connection-type="Connection-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="poHeaderRetrieveById">
+			<task synchronous="true" continue-on-failure="false" name="poHeader">			
+				<task-object-name>com.tsa.puridiom.poheader.tasks.PoHeaderRetrieveById</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="billToAddressSetup">
+				<task-object-name>com.tsa.puridiom.poheader.tasks.PoHeaderRetrieveBillToAddressSetup</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="billToAddress">
+				<rule-filename>is-address-code-not-empty</rule-filename>
+				<task-object-name>com.tsa.puridiom.address.tasks.AddressRetrieveBillTo</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="poHeaderDataSet">			
+				<task-object-name>com.tsa.puridiom.poheader.tasks.PoHeaderDataSet</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

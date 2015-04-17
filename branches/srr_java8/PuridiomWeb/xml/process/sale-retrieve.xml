@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="saleRetrieve" connection-type="Connection-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="saleHeaderDataRetrieve">
+			<task synchronous="true" continue-on-failure="false" name="saleHeader">
+				<rule-filename>is-saleheader-empty</rule-filename>
+				<task-object-name>com.tsa.puridiom.saleheader.tasks.SaleHeaderRetrieveById</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="saleHeaderRetrieveSetup">			
+				<task-object-name>com.tsa.puridiom.saleheader.tasks.SaleHeaderRetrieveSetup</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="docAttachmentList">			
+				<task-object-name>com.tsa.puridiom.docattachment.tasks.DocAttachmentRetrieveByHeader</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="saleCommentsRetrieve">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>doccomment-retrieve-by-line.xml</process-filename>
+			</task>
+			<!--task synchronous="true" continue-on-failure="false" name="saleBidList">			
+				<task-object-name>com.tsa.puridiom.salebid.tasks.SaleBidRetrieveByHeader</task-object-name>
+			</task-->
+			<task synchronous="true" continue-on-failure="false" name="saleLine">			
+				<task-object-name>com.tsa.puridiom.saleline.tasks.SaleLineRetrieveByHeader</task-object-name>
+			</task>
+			<!--task synchronous="true" continue-on-failure="false" name="saleBuyerRetrieveByHeader">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>salebuyer-retrieve-by-header.xml</process-filename>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="buyerResponseList">			
+				<task-object-name>com.tsa.puridiom.buyerresponse.tasks.BuyerResponseRetrieveByHeader</task-object-name>
+			</task-->
+			<task synchronous="true" continue-on-failure="false" name="saleHeader">
+				<task-object-name>com.tsa.puridiom.saleheader.tasks.SaleHeaderDataSet</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

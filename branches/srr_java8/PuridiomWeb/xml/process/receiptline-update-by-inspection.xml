@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="receiptLineUpdate" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="receiptLineUpdate">
+			<task synchronous="true" continue-on-failure="false" name="receiptLineListByInspection">
+				<task-object-name>com.tsa.puridiom.receiptline.tasks.ReceiptLineRetrieveByInspection</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="receiptLineListByInspection">
+				<task-object-name>com.tsa.puridiom.receiptline.tasks.ReceiptLineUpdateListByInspection</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

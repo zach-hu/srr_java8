@@ -1,0 +1,156 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+   
+<hibernate-mapping>
+
+<!-- 
+    Created by Middlegen Hibernate plugin
+
+    http://boss.bekk.no/boss/middlegen/
+    http://hibernate.sourceforge.net/
+-->
+
+<class 
+    name="com.tsa.puridiom.entity.Alert" 
+    table="ALERT"
+>
+    <id
+        name="icAction"
+        type="java.math.BigDecimal"
+        column="IC_ACTION"
+    >
+        <generator class="assigned" />
+    </id>
+    <property
+        name="actionDate"
+        type="java.sql.Timestamp"
+        column="ACTION_DATE"
+        length="7"
+    />
+    <property
+        name="actionCode"
+        type="java.lang.String"
+        column="ACTION_CODE"
+        length="15"
+    />
+    <property
+        name="actionDesc"
+        type="java.lang.String"
+        column="ACTION_DESC"
+        length="250"
+    />
+    <property
+        name="icNotes"
+        type="java.math.BigDecimal"
+        column="IC_NOTES"
+        length="22"
+    />
+    <property
+        name="userId"
+        type="java.lang.String"
+        column="USER_ID"
+        length="15"
+    />
+    <property
+        name="refType"
+        type="java.lang.String"
+        column="REF_TYPE"
+        length="3"
+    />
+    <property
+        name="dateEntered"
+        type="java.sql.Timestamp"
+        column="DATE_ENTERED"
+        length="7"
+    />
+    <property
+        name="dateChanged"
+        type="java.sql.Timestamp"
+        column="DATE_CHANGED"
+        length="7"
+    />
+    <property
+        name="repeats"
+        type="java.math.BigDecimal"
+        column="REPEATS"
+        length="5"
+    />
+    <property
+        name="untilDate"
+        type="java.sql.Timestamp"
+        column="UNTIL_DATE"
+        length="7"
+    />
+    <property
+        name="relativeDays"
+        type="java.math.BigDecimal"
+        column="RELATIVE_DAYS"
+        length="5"
+    />
+    <property
+        name="systemMessage"
+        type="java.lang.String"
+        column="SYSTEM_MESSAGE"
+        length="1"
+    />
+    <property
+        name="emailMessage"
+        type="java.lang.String"
+        column="EMAIL_MESSAGE"
+        length="1"
+    />
+    <property
+        name="owner"
+        type="java.lang.String"
+        column="OWNER"
+        length="15"
+    />
+    <property
+        name="alertStatus"
+        type="java.lang.String"
+        column="ALERT_STATUS"
+        length="2"
+    />
+    <property
+        name="alertSent"
+        type="java.lang.String"
+        column="ALERT_SENT"
+        length="1"
+    />
+    <property
+        name="buyer"
+        type="java.lang.String"
+        column="BUYER"
+        length="1"
+    />
+    <property
+        name="requisitioner"
+        type="java.lang.String"
+        column="REQUISITIONER"
+        length="1"
+    />
+    <property
+        name="approver"
+        type="java.lang.String"
+        column="APPROVER"
+        length="1"
+    />
+    <property
+        name="manager"
+        type="java.lang.String"
+        column="MANAGER"
+        length="1"
+    />
+    <property
+        name="extraNames"
+        type="java.lang.String"
+        column="EXTRA_NAMES"
+        length="255"
+    />
+
+    <!-- associations -->
+
+</class>
+</hibernate-mapping>

@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="invoiceForward" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="invoiceForwardSetup">
+			<task synchronous="true" continue-on-failure="false" name="invoiceForwardSetup">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>invoice-retrieve.xml</process-filename>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="BudgetUpdate">
+			<rule-filename>is-account-budget-module-active</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="budgetSetup">
+				<rule-filename check-for-false="true">is-account-budget-service-active.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.invoice.tasks.InvoiceBudgetSetup</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="budgetExpense">
+				<rule-filename check-for-false="true">is-account-budget-service-active.xml</rule-filename>
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>budget-invoice-forward.xml</process-filename>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="budgetCenterUpdate">
+				<rule-filename check-for-false="true">is-account-budget-service-active.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.budgetcenter.tasks.BudgetCenterUpdateList</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="budgetAuditUpdate">
+				<rule-filename check-for-false="true">is-account-budget-service-active.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.budgetaudit.tasks.BudgetAuditUpdateList</task-object-name>
+				<post-action>exitActivity</post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="budgetSetup">
+				<task-object-name>com.tsa.puridiom.invoice.tasks.InvoiceForwardBudgetServiceSetup</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="budgetUpdate">
+	        	<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+	        	<process-filename>budgetservice-update.xml</process-filename>
+	        	<post-action></post-action>
+	      	</task>
+		</activity>
+		<!-- APPROVAL INCLUDE -->
+		<activity synchronous="true" continue-on-failure="false" name="invoiceApprovals">
+			<task synchronous="true" continue-on-failure="false" name="routingListDeleteByHeader">
+				<task-object-name>com.tsa.puridiom.approvals.tasks.ApprovalLogDeleteByHeader</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="routingList">
+				<task-object-name>com.tsa.puridiom.invoice.approvals.tasks.InvoiceApproverLogSetup</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="setRoutingList">
+				<task-object-name>com.tsa.puridiom.invoice.approvals.tasks.InvoiceSetApproved</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="approvalInvoiceStatus">
+				<task-object-name>com.tsa.puridiom.approvals.tasks.ApprovalLogListSetApproved</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="routingListUpdate">
+				<task-object-name>com.tsa.puridiom.approvals.tasks.ApprovalLogListUpdate</task-object-name>
+			</task>
+		</activity>
+		<!-- FINAL APPROVAL INCLUDE -->
+		<activity synchronous="true" continue-on-failure="false" name="invoiceForward">
+			<task continue-on-failure="false" name="postInvoice" synchronous="true">
+		        <rule-filename>is-coda-enabled.xml</rule-filename>
+		        <task-object-name>com.tsa.puridiom.coda.tasks.CodaPostInvoice</task-object-name>
+      		</task>
+      		<task synchronous="true" continue-on-failure="false" name="costpoint">
+				<task-object-name>com.tsa.puridiom.invoice.tasks.InvoiceSendToCostpoint</task-object-name>
+				<process-filename></process-filename>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="invoiceSetStatus">
+				<task-object-name>com.tsa.puridiom.invoice.tasks.InvoiceSetStatus</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="invoiceSetDateExported">
+				<task-object-name>com.tsa.puridiom.invoice.tasks.InvoiceSetDateExported</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="invoiceHeaderUpdate">
+				<task-object-name>com.tsa.puridiom.invoiceheader.tasks.InvoiceHeaderUpdate</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="invoiceLineUpdate">
+				<task-object-name>com.tsa.puridiom.invoiceline.tasks.InvoiceLineUpdateList</task-object-name>
+				<post-action></post-action>
+			</task>
+
+			<task continue-on-failure="false" name="queueAddMXPInvoice" synchronous="true">
+		        <rule-filename>is-organization-bly.xml</rule-filename>
+		        <task-object-name>com.tsa.puridiom.invoice.tasks.QueueAddMXPInvoice</task-object-name>
+      		</task>
+
+			<task synchronous="true" continue-on-failure="false" name="extractByAccount">
+				<rule-filename>is-sungard-add-invoice-vendor-active.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.sungard.tasks.SungardInvoiceVendorUpdate</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="extractByAccount">
+				<rule-filename>is-sungard-invoice-extract-active.xml</rule-filename>
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>sungard-invoice-extract-start.xml</process-filename>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="history">
+			<task synchronous="true" continue-on-failure="false" name="invoiceHeaderHistory">
+				<task-object-name>com.tsa.puridiom.invoiceheader.history.tasks.InvoiceHeaderHistory</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="invoiceLineListHistory">
+				<task-object-name>com.tsa.puridiom.invoiceline.history.tasks.InvoiceLineListHistory</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="poHeaderSetPyStatus">
+			<task synchronous="true" continue-on-failure="false" name="poHeaderRetrieveFromInvoiceSetup">
+				<task-object-name>com.tsa.puridiom.poheader.tasks.PoHeaderRetrieveFromInvoiceSetup</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="setLinePyStatus">
+				<rule-filename check-for-false="true">is-poheader-icpoheader-empty.xml</rule-filename>
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>poline-set-pystatus.xml</process-filename>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="setPyStatus">
+				<rule-filename check-for-false="true">is-poheader-icpoheader-empty.xml</rule-filename>
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>poheader-set-pystatus.xml</process-filename>
+			</task>
+		</activity>
+
+		<activity synchronous="true" continue-on-failure="false" name="updateVendorApReference">
+			<rule-filename>is-allow-apreference-edit.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="updateVendorApReference">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>vendor-update-apreference.xml</process-filename>
+			</task>
+		</activity>
+
+		<activity synchronous="true" continue-on-failure="false" name="invoiceRetrieve">
+			<task synchronous="true" continue-on-failure="false" name="invoiceRetrieve">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>invoice-retrieve.xml</process-filename>
+			</task>
+		</activity>
+	</activities>
+</process>

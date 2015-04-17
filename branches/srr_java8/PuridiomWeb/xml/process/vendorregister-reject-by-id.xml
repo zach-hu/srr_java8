@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="vendorregisterRejectById" connection-type="Transaction-Required" ldap-connection-type="None">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="vendorregisterRejectById">
+			<task synchronous="true" continue-on-failure="false" name="vendorRegister">
+				<task-object-name>com.tsa.puridiom.vendorregister.tasks.VendorRegisterRetrieveMainByVendorId</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="vendorRegisterReject">
+				<task-object-name>com.tsa.puridiom.vendorregister.tasks.VendorRegisterReject</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="vendorRegisterUpdate">
+				<task-object-name>com.tsa.puridiom.vendorregister.tasks.VendorRegisterUpdate</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="sendNotification">
+			<task synchronous="true" continue-on-failure="false" name="vendorRejectionNotification">
+				<task-object-name>com.tsa.puridiom.vendorqualification.tasks.VendorRejectionNotification</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

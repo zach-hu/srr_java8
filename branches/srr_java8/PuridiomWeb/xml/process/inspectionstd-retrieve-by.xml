@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="InspectionStdRetrieveBy" connection-type="Connection-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="InspectionStdRetrieveBy">
+			  <task synchronous="true" continue-on-failure="false" name="inspectionStdList">
+				<task-object-name>com.tsa.puridiom.inspectionstd.tasks.InspectionStdRetrieveBy</task-object-name>
+				<post-action></post-action>
+			  </task>
+<!--
+			  <task synchronous="true" continue-on-failure="false" name="inspectionStdList">
+				<task-object-name>com.tsa.puridiom.inspectionstd.tasks.InspectionStdListSetDescriptions</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="inspectionMap">
+				<task-object-name>com.tsa.puridiom.inspectionstd.tasks.InspectionStdListParse</task-object-name>
+				<post-action></post-action>
+			</task>
+-->
+		  </activity>
+	 </activities>
+</process>

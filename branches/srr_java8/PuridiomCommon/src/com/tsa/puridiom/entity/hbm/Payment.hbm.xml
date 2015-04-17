@@ -1,0 +1,74 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+    
+<hibernate-mapping>
+
+<class 
+    name="com.tsa.puridiom.entity.Payment" 
+    table="PAYMENT"
+>
+    <composite-id name="comp_id" class="com.tsa.puridiom.entity.PaymentPK">
+        <key-property name="icPoHeader" column="IC_PO_HEADER" type="java.math.BigDecimal"/>
+        <key-property name="sequence" column="SEQUENCE" type="java.math.BigDecimal"/>
+    </composite-id>    
+    <property
+        name="icPoLine"
+        type="java.math.BigDecimal"
+        column="IC_PO_LINE"
+        length="22"
+    />
+    <property
+        name="poNumber"
+        type="java.lang.String"
+        column="PO_NUMBER"
+        length="20"
+    />
+    <property
+        name="revisionNumber"
+        type="java.math.BigDecimal"
+        column="REVISION_NUMBER"
+        length="4"
+    />
+    <property
+        name="releaseNumber"
+        type="java.math.BigDecimal"
+        column="RELEASE_NUMBER"
+        length="15"
+    />
+    <property
+        name="paymentDate"
+        type="java.sql.Timestamp"
+        column="PAYMENT_DATE"
+        length="7"
+    />
+    <property
+        name="invoiceNumber"
+        type="java.lang.String"
+        column="INVOICE_NUMBER"
+        length="20"
+    />
+    <property
+        name="paymentAmount"
+        type="java.math.BigDecimal"
+        column="PAYMENT_AMOUNT"
+        length="15"
+    />
+    <property
+        name="checkNumber"
+        type="java.lang.String"
+        column="CHECK_NUMBER"
+        length="15"
+    />
+    <property
+        name="voucherNumber"
+        type="java.lang.String"
+        column="VOUCHER_NUMBER"
+        length="20"
+    />
+
+    <!-- associations -->
+
+</class>
+</hibernate-mapping>

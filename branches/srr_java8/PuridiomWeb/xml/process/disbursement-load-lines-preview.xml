@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="disbextendedLoadLines" connection-type="Connection-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="DisbursementCreateBackorder">
+			<rule-filename>is-backorder-rql.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="DisbursementLineCreateCheck">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>disbursement-extended-backorder-load-lines-preview.xml</process-filename>
+				<post-action>exitActivity</post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="DisbursementCreate">
+			<task synchronous="true" continue-on-failure="false" name="DisbursementLineCreateCheck">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>disbursement-extended-load-lines-preview.xml</process-filename>
+				<post-action>exitActivity</post-action>
+			</task>
+		</activity>
+	</activities>
+</process>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="InvItemRetrieveAll" connection-type="Connection-Required">
+	<rule-filename check-for-false="false">is-item-found</rule-filename>			
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="InvItemRetrieveAll">			
+			<task synchronous="true" continue-on-failure="false" name="invItemList">
+					<task-object-name>com.tsa.puridiom.invitem.tasks.InvItemRetrieveAll</task-object-name>
+					<post-action></post-action>
+			</task>
+		</activity>
+	</activities>
+</process>

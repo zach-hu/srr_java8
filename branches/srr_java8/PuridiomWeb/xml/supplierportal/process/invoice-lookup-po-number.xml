@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="invoiceLookupPoNumber" connection-type="Connection-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="poRetrieveByNumber">
+			<task synchronous="true" continue-on-failure="false" name="PoHeader_icPoHeader">
+				<task-object-name>com.tsa.puridiom.supplierportal.orders.tasks.PoRetrieveByNumber</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="validatePoNumber">
+			<rule-filename check-for-false="true">is-there-poheaderic.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="setErrorMsg">
+				<task-object-name>com.tsa.puridiom.invoiceerrormsg.tasks.ErrorMsgSetInvalidPoNumber</task-object-name>
+			</task>
+			<post-action>exitProcess</post-action>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="createInvoiceFromOrder">
+			<task synchronous="true" continue-on-failure="false" name="createInvoiceFromOrder">
+				<task-object-name>com.tsa.puridiom.supplierportal.InvokeSupplierPortalProcessTask</task-object-name>
+				<process-filename>invoice-create-from-order.xml</process-filename>
+			</task>
+		</activity>
+	</activities>
+</process>

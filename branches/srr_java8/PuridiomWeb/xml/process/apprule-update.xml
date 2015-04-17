@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="appRuleUpdate" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="appRuleUpdate">
+			<task synchronous="true" continue-on-failure="false" name="appRule">			
+				<task-object-name>com.tsa.puridiom.apprule.tasks.AppRuleSetValues</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="appRuleAdd">			
+				<task-object-name>com.tsa.puridiom.apprule.tasks.AppRuleAdd</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+	</activities>
+</process>

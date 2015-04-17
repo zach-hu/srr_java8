@@ -1,0 +1,27 @@
+<rule>
+	<clause type="IntegerCompare">
+		<left-side>
+			<source>Singleton</source>
+			<object>com.tsa.puridiom.property.PropertiesManager</object>
+			<name>getLicensedUsers</name>
+		</left-side>
+		<operator>GREATER</operator>
+		<right-side>
+			<source>constant</source>
+			<value>0</value>
+		</right-side>
+	</clause>
+	<logical-operator>AND</logical-operator>
+	<clause type="IntegerCompare">
+		<left-side>
+			<source>incomingRequest</source>
+			<name>userLogCount</name>
+		</left-side>
+		<operator>GREATEREQUAL</operator>
+		<right-side>
+			<source>Singleton</source>
+			<object>com.tsa.puridiom.property.PropertiesManager</object>
+			<name>getLicensedUsers</name>
+		</right-side>
+	</clause>
+</rule>

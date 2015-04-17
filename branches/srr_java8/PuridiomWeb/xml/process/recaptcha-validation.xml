@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="recaptchaValidation" connection-type="None" ldap-connection-type="None">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="securityCheck">
+			<task synchronous="true" continue-on-failure="false" name="recaptchaValidation">
+				<task-object-name>com.tsagate.foundation.security.tasks.ReCaptchaValidation</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

@@ -1,0 +1,97 @@
+<requistionline>
+	<columns>
+		<RequisitionLine_icReqLine>
+			<visible>0</visible>
+		</RequisitionLine_icReqLine>
+		<RequisitionLine_icReqHeader>
+			<visible>0</visible>
+		</RequisitionLine_icReqHeader>
+		<RequisitionLine_requisitionNumber>
+			<label>brw-requisitionNumber</label>
+			<link><![CDATA[javascript: viewReq('#RequisitionLine_icReqHeader^','#RequisitionHeader_requisitionType^'); void(0);]]></link>
+			<size>12</size>
+		</RequisitionLine_requisitionNumber>
+		<RequisitionLine_itemNumber>
+			<label>brw-itemNumber</label>
+			<size>8</size>
+		</RequisitionLine_itemNumber>
+		<RequisitionLine_description>
+			<label>brw-description</label>
+			<size>40</size>
+			<trim>250</trim>
+		</RequisitionLine_description>
+		<Account_fld1>
+			<label>brw-AC01</label>
+			<size>8</size>
+		</Account_fld1>
+		<Account_fld2>
+			<label>brw-AC02</label>
+			<size>8</size>
+		</Account_fld2>
+		<Account_fld3>
+			<label>brw-AC03</label>
+			<size>20</size>
+		</Account_fld3>
+		<Account_fld4>
+			<label>brw-AC04</label>
+			<size>8</size>
+		</Account_fld4>
+		<Account_fld5>
+			<label>brw-AC05</label>
+			<size>8</size>
+		</Account_fld5>
+		<RequisitionLine_quantity>
+			<hidden>Y</hidden>
+			<type>QtyDecimal</type>
+		</RequisitionLine_quantity>
+		<RequisitionLine_umCode>
+			<hidden>Y</hidden>
+		</RequisitionLine_umCode>
+		<RequisitionLine_quantity>
+			<concatenate>
+				<col type="QtyDecimal">RequisitionLine_quantity</col>
+				<col type="constant"><![CDATA[&nbsp;]]></col>
+				<col type="constant">(</col>
+				<col>RequisitionLine_umCode</col>
+				<col type="constant">)</col>
+			</concatenate>
+			<label>brw-quantity</label>
+			<type>Decimal</type>
+			<size>20</size>
+			<detail>Y</detail>
+			<selectsql>N</selectsql>
+		</RequisitionLine_quantity>
+		<RequisitionLine_unitPrice>
+			<label>brw-unitPrice</label>
+			<type>DollarDecimal</type>
+			<size>20</size>
+			<detail>Y</detail>
+		</RequisitionLine_unitPrice>
+		<RequisitionLine_commodityCode>
+			<label>brw-commodity</label>
+			<size>30</size>
+			<detail>Y</detail>
+			<type>COMMODITY</type>
+		</RequisitionLine_commodityCode>
+		<RequisitionLine_status>
+			<label>brw-status</label>
+			<type>STATUS</type>
+			<size>30</size>
+			<detail>Y</detail>
+		</RequisitionLine_status>
+		<RequisitionLine_requisitionerCode>
+			<label>brw-requisitioner</label>
+			<size>15</size>
+			<type>USER-ID</type>
+		</RequisitionLine_requisitionerCode>
+	</columns>
+<sqlfrom>RequisitionLine as RequisitionLine, RequisitionHeader as RequisitionHeader, Account as Account</sqlfrom>
+<sqlwhere>
+	<![CDATA[ RequisitionLine.requisitionNumber <> 'N/A' AND RequisitionLine.icReqHeader = Account.id.icHeader
+					AND RequisitionLine.icReqHeader = RequisitionHeader.icReqHeader]]>
+</sqlwhere>
+<sqlorderby>RequisitionLine.requisitionNumber DESC</sqlorderby>
+<pagesize>15</pagesize>
+<title>Requisition Item Account Browse</title>
+</requistionline>
+

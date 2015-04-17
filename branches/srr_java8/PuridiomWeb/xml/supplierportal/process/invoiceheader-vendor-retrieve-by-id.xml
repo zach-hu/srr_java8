@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="invoiceHeaderVendorRetrieveById" connection-type="Connection-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="invoiceHeaderRetrieveById">
+			<task synchronous="true" continue-on-failure="false" name="invoiceHeader">
+				<task-object-name>com.tsa.puridiom.invoiceheader.tasks.InvoiceHeaderRetrieveById</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="invoiceVendorRetrieve">
+			<task synchronous="true" continue-on-failure="false" name="invoiceVendor">
+				<task-object-name>com.tsa.puridiom.invoicevendor.tasks.InvoiceVendorRetrieveSetup</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="invoiceVendor">
+				<task-object-name>com.tsa.puridiom.invoicevendor.tasks.InvoiceVendorRetrieveById</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="invoiceAddress">
+				<task-object-name>com.tsa.puridiom.invoiceaddress.tasks.InvoiceAddressRetrieveById</task-object-name>
+			</task>
+		</activity>
+		<activity continue-on-failure="false" synchronous="true" name="retrieveVendorNames">
+		    <task synchronous="true" continue-on-failure="false" name="retrieveVendorNames">
+    			<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+    			<process-filename>invoicevendor-retrieve-all-vendor-names.xml</process-filename>
+			</task>
+		</activity>
+	</activities>
+</process>

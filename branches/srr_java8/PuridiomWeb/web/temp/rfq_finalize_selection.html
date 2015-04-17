@@ -1,0 +1,984 @@
+
+
+
+<script language='Javascript1.2' type="text/javascript">
+<!--
+	var contextPath = "/hilton";
+//-->
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<HTML>
+<HEAD>
+	<meta http-equiv="content-type" content="text/html;charset=UTF-8">
+	<META HTTP-EQUIV="Cache-Control" content="no-cache">
+	<META HTTP-EQUIV="Expires" CONTENT="Sat, 11 Sep 1971 12:00:00 GMT">
+	<META NAME="Description" Content="/hilton/system/header.jsp">
+	<SCRIPT LANGUAGE="JavaScript1.2" SRC="/hilton/scripts/hilton.js"></SCRIPT>
+	<script language='Javascript1.2' src="/hilton/scripts/filter.js"></script>
+	<TITLE>Puridiom, Enabling Self-Service Procurement</TITLE>
+
+
+
+	<LINK REL=STYLESHEET TYPE="text/css" HREF="/hilton/system/styles/hilton_demo.css">
+
+</HEAD>
+
+<script language='Javascript1.2' type="text/javascript">
+<!--
+	   DOM = (document.getElementById) ? true : false;
+	   NS4 = (document.layers) ? true : false;
+	NS4old = (NS4 && (parseFloat(navigator.appVersion) < 4.02));
+	    IE = (document.all) ? true : false;
+	   IE4 = IE && !DOM;
+	   Mac = (navigator.appVersion.indexOf("Mac") != -1);
+	  IE4M = IE4 && Mac;
+	IsMenu = (DOM || (NS4 && !NS4old) || (IE && !IE4M));
+
+	if(window.event + "" == "undefined") event = null;
+	function f_PopUp(){return};
+	function f_PopDown(){return};
+	popUp = f_PopUp;
+	popDown = f_PopDown;
+	var browseTxt = "Browse";
+	var newTxt = "Create New";
+	var menuLocation = 72;
+	var printPdfLabel = "Print/Email";
+
+	if(IsMenu) {
+		document.write("<scr" + "ipt language='Javascript1.2' src='/hilton/menu/menubar_arrays.js' type='text/javascript'><\/scr" + "ipt>");
+		document.write("<scr" + "ipt language='Javascript1.2' src='/hilton/menu/hierMainMenu.js' type='text/javascript'><\/scr" + "ipt>");
+	}
+//-->
+</SCRIPT>
+<body marginwidth=0 marginheight=0 topmargin=0 leftmargin=0 width=680px onload="thisLoad();loadNavMenu();onLoadComplete();">
+<form name="purchaseform" target="_parent" action="/hilton/HiltonServletController" method="POST">
+<div id="filterFields" style="display:none;"></div>
+<div id="hiddenFields" style="display:none;"></div>
+<input type="hidden" name="requestId" value="11841602600086">
+<input type="hidden" name="sessionId" value="9C587FC102C308E72CC6DBCF1D775117">
+<input type="hidden" name="ipAddress" value="null">
+
+<script language='Javascript1.2' type="text/javascript">
+<!--
+	var browser = browserCheck();
+	var assetAccess = 0;
+	var reqAccess = 0;
+	var rfqAccess = 0;
+	var poAccess = 0;
+	var questAccess = 0;
+	var rcvByPkgAccess = 0;
+	var rcvByEndUserAccess = 0;
+	var rcvFromNothingAccess = 0;
+	var rcvByItemAccess = 0;
+	var rcvFinalizeAccess = 0;
+	var rcvAdjAccess = 0;
+	var rcvReturnAccess = 0;
+	var rcvHistoryAccess = 0;
+	var invAccess = 0;
+	var invoiceAccess = 0;
+	var salesAccess = 0;
+	var repReqAccess = 0;
+	var repRfqAccess = 0;
+	var repPoAccess = 0;
+	var repInvAccess = 0;
+	var repAdminAccess = 0;
+	var repRecAccess = 0;
+	var repVchAccess = 0;
+	var approver = false;
+	var buyer = false;
+	var assetsActive = true;
+	var reqsActive = true;
+	var rfqsActive = true;
+	var extRfqsActive = true;
+	var posActive = true;
+	var receivingActive = true;
+	var extInvActive = true;
+	var stdInvActive = false;
+	var vouchersActive = true;
+	var salesActive = true;
+	var dashboardAccess = 0;
+
+	if (assetsActive) {
+		assetAccess = 99;
+	}
+	if (reqsActive) {
+		reqAccess = 99;
+		approver = true;
+	}
+	if (rfqsActive) {
+		rfqAccess = 99;
+		questAccess = 99;
+		bbdocsAccess = 99;
+		bbsupAccess = 99;
+	}
+	if (posActive) {
+		poAccess = 99;
+		buyerAssignAccess = 99;
+		buyer = true;
+	}
+	if (receivingActive) {
+		rcvByPkgAccess = 99;
+		rcvByEndUserAccess = 99;
+		rcvFromNothingAccess = 99;
+		rcvByItemAccess = 99;
+		rcvFinalizeAccess = 99;
+		rcvAdjAccess = 99;
+		rcvReturnAccess = 99;
+		rcvHistoryAccess = 99;
+	}
+	if (salesActive) {
+		salesAccess = 99;
+	}
+	if (vouchersActive) {
+		invoiceAccess = 99;
+	}
+	if (extInvActive || stdInvActive) {
+		invAccess = 99;
+	}
+	adminAccess  = 99;
+	bbsupAccess =  99;
+
+	// ********* reports access *******************
+	repReqAccess = 99;
+	repRfqAccess = 99;
+	repPoAccess = 99;
+	repInvAccess = 99;
+	repAdminAccess = 99;
+	repRecAccess = 99;
+	repVchAccess = 0;
+	repVndAccess = 0;
+	// ********* end reports access *******************
+
+	//procurement dashboard access
+	dashboardAccess = 0;
+
+	//These options must be populated in this order!
+	Array50 = createRequisitionOptions();
+	Array51 = createSolicitationOptions();
+	Array58 = createSaleOptions();
+	Array52 = createOrderOptions();
+	var receiptOptions = new Array();
+	receiptOptions[1] = "Receive Packages";
+	receiptOptions[2] = "Finalize Receipts";
+	receiptOptions[3] = "Receive From Nothing";
+	receiptOptions[4] = "Receive Items";
+	receiptOptions[5] = "Adjust Receipt";
+	receiptOptions[6] = "Return Received Items";
+	receiptOptions[7] = "View Receipt History";
+
+	Array60 = createReceiptMenu(receiptOptions);
+	Array61 = createInvoiceOptions();
+
+	var inventoryOptions = new Array();
+	inventoryOptions[1] = "New Item";
+	inventoryOptions[2] = "Browse Items";
+	inventoryOptions[3] = "Backorder";
+	inventoryOptions[4] = "Form Approval";
+	inventoryOptions[5] = "Administrative";
+	inventoryOptions[6] = "New Return";
+	inventoryOptions[7] = "Browse Return";
+	inventoryOptions[8] = "New Disbursement";
+	inventoryOptions[9] = "Browse Disbursements";
+	Array55 = createInventoryOptions(inventoryOptions);
+
+	var reportOptions = new Array();
+	reportOptions[1] = "Administrative";
+	reportOptions[2] = "Requests";
+	reportOptions[3] = "Solicitation";
+	reportOptions[4] = "Order";
+	reportOptions[5] = "Receipt";
+	reportOptions[6] = "Invoice";
+	reportOptions[7] = "Inventory";
+	reportOptions[8] = "Sytem Tables";
+	reportOptions[9] = "Supplier";
+	//Array57 = createReportOptions(reportOptions);
+
+	Array57 = createReportQueueOptions(reportOptions);
+
+	Array62 = createAssetOptions();
+
+//-->
+</SCRIPT>
+
+<script language='Javascript1.2' src="/hilton/scripts/dynamicTables.js"></script>
+
+<input type="HIDDEN" name="handler" value="">
+<input type="HIDDEN" name="successPage" value="">
+<input type="HIDDEN" name="failurePage" value="/system/error.jsp">
+<input type="HIDDEN" name="userId" value="KELLI">
+<input type="HIDDEN" name="organizationId" value="HILTON">
+<input type="HIDDEN" name="mailId" value="kelli@tsagate.com">
+<input type="HIDDEN" name="browseName" value="">
+<input type="HIDDEN" name="viewType" value="WIZARD">
+
+
+<div id=pageLoading style="display:block;visibility:visible;">
+<table border=0 cellspacing=0 cellpadding=0 width=680px>
+<tr><td width=100% align=center valign=top><br><b>Loading Page... Please wait.</b><br><br><br><img src="/hilton/images/processing.gif" border=1 width=200px height=15px></td></tr>
+</table>
+</div>
+
+<div id=pageForm style="display:none;visibility:hidden;">
+
+<table border="0" cellpadding="0" cellspacing="0" width="680px">
+<tr>
+
+	<td width=250px><a href="http://www.puridiom.com" target="_top"><img src="http://localhost:8085/hilton/images\hilton\logo.gif"	align="bottom" alt="Purchasing Center Home" border=0 height=50px></a></td>
+
+	<td valign="bottom">
+
+		<table border="0" cellpadding="0" cellspacing="0" width="100%">
+		<tr><td align=right>Welcome Kelli Knisely!&nbsp;</td></tr>
+		</table>
+		<br>
+
+		<table border="0" cellpadding="0" cellspacing="0" width="100%">
+			<tr class="mrow">
+				<th height="16px">&nbsp;</th>
+
+				<th align="center" width="50px" height="16px"><a href="javascript: doSubmit('menu/main_menu.jsp', 'DoNothing'); void(0);" onClick="closeOpenWindows();" target="_parent">Menu</a></th>
+
+				<th align="center" valign="middle" width="1px" height="16px" class=separator>|</th>
+				<th align="center" width="50px" height="16px"><a href="javascript: doSubmit('admin/admin_menu.jsp', 'DoNothing'); void(0);" onClick="closeOpenWindows();" target="_parent" >Admin</a></th>
+
+				<th align="center" valign="middle" width="1px" height="16px" class=separator>|</th>
+				<th align="center" width="75px" height="16px"><a href="javascript: viewMyProfile(); void(0);" onClick="closeOpenWindows();" target="_parent">My Profile</a><div id="profileFields" style="visibility: hidden; display:none;"></div></th>
+				<th align="center" valign="middle" width="1px" height="16px" class=separator>|</th>
+
+				<th align="center" width="40px" height="16px" nowrap><a href="javascript:window.open('http://www.puridiom.com/procurement/help/helpmenu.html'); void(0);">Help</a>&nbsp;</th>
+
+				<th align="center" valign="middle" width="1px" height="16px" class=separator>|</th>
+				<th align="center" width=60px height="16px" nowrap><a href="javascript: logOff(); void(0);">Log Off</a>&nbsp;</th>
+
+			</tr>
+		</table>
+	</td>
+</tr>
+</table>
+
+<table border="0" cellpadding="0" cellspacing="0"width="680px">
+<tr><td class="mnav"><img src="/hilton/images/none.gif" border="0" height="1px" width="100%" class="mnav"></td></tr>
+</table>
+
+
+<table border="0" cellspacing="0" cellpadding="0" width="680px" height="22px">
+	<tr class="mnav">
+
+		<td nowrap align="center" width=85px><a href="javascript: void(0);" onMouseOut="popDown('Menu50')" onMouseOver="popUp('Menu50',event)" class="mnav">Requisition</a></td>
+
+		<td nowrap align="center" width=85px><a href="javascript: void(0);" onMouseOut="popDown('Menu51')" onMouseOver="popUp('Menu51',event)" class="mnav">Solicitations</a></td>
+
+		<td nowrap align=center width=85px><a href="javascript: void(0);" onMouseOut="popDown('Menu58')" onMouseOver="popUp('Menu58',event)" class=mnav>Surplus</a></td>
+
+		<td nowrap align="center" width=85px><a href="javascript: void(0);" onMouseOut="popDown('Menu52')" onMouseOver="popUp('Menu52',event)" class="mnav">Orders</a></td>
+
+		<td nowrap align="center" width=85px><a href="javascript: void(0);" onMouseOut="popDown('Menu60')" onMouseOver="popUp('Menu60',event)" class="mnav">Receipts</a></td>
+
+		<td nowrap align="center" width=85px><a href="javascript: void(0);" onMouseOut="popDown('Menu61')" onMouseOver="popUp('Menu61',event)" class="mnav">Invoices</a></td>
+
+		<td nowrap align="center" width=85px><a href="javascript: void(0);" onMouseOut="popDown('Menu55')" onMouseOver="popUp('Menu55',event)" class="mnav">Inventory</a></td>
+
+		<td nowrap align="center" width=85px><a href="javascript: void(0);" onMouseOut="popDown('Menu57')" onMouseOver="popUp('Menu57',event)" class="mnav">Reports</a></td>
+		<!-- <td nowrap align="center" width=85px><a href="javascript: void(0);" onMouseOut="popDown('Menu57')" onMouseOver="popUp('Menu57',event)" class="mnav">Reports</a></td> -->
+
+		<td nowrap align="center" width=85px><a href="javascript: void(0);" onMouseOut="popDown('Menu62')" onMouseOver="popUp('Menu62',event)" class="mnav">Assets</a></td>
+
+		<td width=*>&nbsp;</td>
+	</tr>
+</table>
+
+
+<div id="menuBarSpacer"><img src="/hilton/images/none.gif" border="0" height="20px"></div>
+
+<table id="navTable" border="0" height=28px>
+
+</table>
+
+<SCRIPT value=JavaScript>
+<!-- Hide script
+
+	var myPage = "/hilton/rfq/rfq_finalize_selection.jsp";
+
+	function checkHiddenMenu()
+	{
+		if ((myPage.indexOf("/user/") > 0 && myPage.indexOf("/admin/") < 0) || myPage.indexOf("/receipts/") > 0 || myPage.indexOf("/inventory/") > 0 || myPage.indexOf("/catalog/") > 0)
+		{
+			hideArea("navTable");
+			displayArea("menuBarSpacer");
+		}
+	}
+
+	function displayNavMenu ()
+	{
+		var myTable = document.getElementById("navTable");
+		deleteRow(myTable, 0);
+
+		var myRow = createRow(myTable);
+		myRow.height = "25px";
+		var myCell;
+
+		var navArray = getNavCookie("navArray");
+
+		if (navArray != undefined)
+		{
+			var tempArray = navArray.split(",");
+			for (var i = 0; i < tempArray.length; i++)
+			{
+				if (i > 0)
+				{
+					myCell = createCell(myRow);
+					myCell.innerHTML = "<font class='raquo'>&raquo;</font>";
+				}
+				myCell = createCell(myRow);
+				if (i == (tempArray.length-3))	//if this is the last in the array do not display a link
+				{
+					myCell.innerHTML = tempArray[i+2];
+				}
+				else
+				{
+					myCell.innerHTML = "<a href=\"javascript: setBrowseName(); resetNavCookie(" + i + "); doSubmit('" + tempArray[i] + "', '" + tempArray[i+1] + "');\"> " + tempArray[i+2] + " </a>";
+				}
+				i+=2;
+			}
+			hideArea("menuBarSpacer");
+		}
+	}
+
+	function setNavCookie(page, method, label, bReset)
+	{
+		var count = -1;
+		var navArray = new Array();
+		var origNavArray = getNavCookie("navArray");
+		var myPage = "/hilton/rfq/rfq_finalize_selectionjsp";
+		var itembrowse = 0;
+
+		if (bReset == null)
+		{
+			bReset = false;
+		}
+
+		if (bReset)
+		{
+			navArray[0] = "/menu/main_menu.jsp";
+			navArray[1] = "DoNothing";
+			navArray[2] = "Menu";
+			count = 2;
+		}
+		else if (origNavArray != undefined)
+		{
+			var tempArray = origNavArray.split(",");
+			for (var i = 0; i < tempArray.length; i++)
+			{
+				if (myPage.indexOf(tempArray[i]) >= 0)
+				{
+					var browseName = "";
+					/*
+						this browseName and itembrowse count are used in the catalog administration -
+						the first time one is browsing items for a particular catalog, the navigation menu not reset
+						however, if one returns to the catalog items browse, it should not keeping adding to the navigation menu,
+						it should reset
+					*/
+					if (browseName != "catalogitem-admin" || itembrowse > 0)
+					{
+						resetNavCookie(i);
+						break;
+					}
+					else
+					{
+						itembrowse++;
+					}
+				}
+				navArray[i] = tempArray[i];
+				count++;
+			}
+		}
+
+		navArray[count + 1] = page;
+		navArray[count + 2] = method;
+		navArray[count + 3] = label;
+
+		document.cookie = "navArray=" + navArray;
+
+		displayNavMenu();
+	}
+
+	function getNavCookie( cookieName )
+	{
+		var cookieJar = document.cookie.split( "; " );
+		for( var i = 0; i < cookieJar.length; i++ )
+		{
+			var myCookie = cookieJar[i].split( "=" );
+			if( myCookie[0] == escape( cookieName ) )
+			{
+				return unescape( myCookie[1] );
+			}
+		}
+		return null;
+	}
+
+	function deleteNavCookie( cookieName )
+	{
+		var cookieDate = new Date ( );
+		cookieDate.setTime ( cookieDate.getTime() - 1 );
+		document.cookie = cookieName += "=; expires=" + cookieDate.toGMTString();
+	}
+
+	function setBrowseCookie( browseName )
+	{
+		document.cookie = "browseName=" + browseName;
+		document.cookie = "browseId=" + browseId;
+	}
+
+	function setBrowseName()
+	{
+		var browseName = getNavCookie("browseName");
+		if (browseName != undefined)
+		{
+			frm.browseName.value = browseName;
+
+			if (!frm.allowBrowse)
+			{
+				var myTable = document.getElementById("navTable");
+				var myRow = createRow(myTable);
+				var myCell = createCell(myRow);
+				myCell.innerHTML = "<input type=\"hidden\" name=\"allowBrowse\" value=\"\"'>";
+			}
+			frm.allowBrowse.value = "true";
+		}
+		var browseId = getNavCookie("browseId");
+		if (browseName != undefined)
+		{
+			if (!frm.browseId)
+			{
+				var myTable = document.getElementById("navTable");
+				var myRow = createRow(myTable);
+				var myCell = createCell(myRow);
+				myCell.innerHTML = "<input type=\"hidden\" name=\"browseId\" value=\"\"'>";
+			}
+			frm.browseId.value = browseId;
+		}
+	}
+
+	/*
+		if a user clicks on one of the links, this will reset the navigation menu
+	*/
+	function resetNavCookie(index)
+	{
+		if (index == 0)
+		{
+			// if the user clicked on the very first navigation link, it should delete the menu links
+			deleteNavCookie("navArray");
+		}
+		else
+		{
+			var navArray = new Array();
+			var origNavArray = getNavCookie("navArray");
+
+			if (origNavArray != undefined)
+			{
+				var tempArray = origNavArray.split(",");
+				for (var i = 0; i < index; i++)
+				{
+					navArray[i] = tempArray[i];
+				}
+			}
+
+			document.cookie = "navArray=" + navArray;
+		}
+	}
+
+// End Hide script -->
+</SCRIPT>
+
+
+
+
+
+
+<script language='Javascript1.2' src="/hilton/scripts/dynamicTables.js"></script>
+
+
+
+<input type=hidden name="RfqHeader_icRfqHeader" value="11840347200066">
+<input type=hidden name="RfqLine_icRfqHeader" value="11840347200066">
+<input type=hidden name="RfqBid_icRfqHeader" value="11840347200066">
+<input type=hidden name="RfqHeader_rfqNumber" value="000015.2007">
+<input type=hidden name="RfqHeader_rfqAmendment" value="0001">
+<input type=hidden name="RfqHeader_status" value="2005">
+<input type=hidden name="allowBrowse" value="true">
+
+<table width=680px cellpadding=0 cellspacing=0 border=0>
+<tr>
+	<td valign=top width=135px height=30px>
+		<table cellpadding=0 cellspacing=0 border=0 height=100% width=100%>
+		<tr>
+			<td height=1px class=darkShadow><img src="/hilton/images/none.gif" width="1" height="1px" /></td>
+		</tr>
+		<tr>
+			<td nowrap class=hdr12 valign=middle>
+				<div style="margin-left:10px; margin-right:10px" class=hdr12>Supplier Selection</div>
+			</td>
+		</tr>
+		</table>
+	</td>
+	<td valign=bottom><img class=hdr12 src="/hilton/images/angle.gif" height="31" /></td>
+	<td valign=bottom align=right height=30px>
+
+		<table border=0 cellspacing=0 cellpadding=1>
+		<tr>
+
+			<td nowrap align=right><b>Solicitation #:</b></td>
+			<td>000015.2007</td>
+
+			<td>&nbsp;</td>
+			<td nowrap align=right><b>Amendment #:</b></td>
+			<td nowrap>0001</td>
+
+		</tr>
+		<tr>
+			<td align=right colspan=4><b>Status:</b></td>
+			<td nowrap>Bids Pending</td>
+		</tr>
+		</table>
+		<table cellpadding="0" cellspacing="0" border=0>
+		<tr>
+			<td width=1000px height=1px class=lightShadow><img src="/hilton/images/none.gif" width="1" height="1" /></td>
+		</tr>
+		<tr>
+			<td height=2px class=darkShadow><img src="/hilton/images/none.gif" width="1" height="2" /></td>
+		</tr>
+		</table>
+	</td>
+</tr>
+</table>
+
+<br>
+<br>
+
+<table border=0 cellpadding=0 cellspacing=0 width=680px>
+<tr>
+	<td align=center width=680px>
+		<table id=questions border=1 cellspacing=0 cellpadding=0 width=665px class=browseHdr>
+		<tr>
+			<td width=100% align=center valign=top>
+				<table border=0 cellspacing=0 cellpadding=4 width=100% class=browseRow>
+				<tr>
+					<td width=5% class=browseHdr nowrap>&nbsp;Supplier Questions</td>
+				</tr>
+				</table>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<table id=itemRow border=0 cellspacing=0 cellpadding=0 width=100% class=browseRow>
+
+				<tr height=18px>
+					<td width="5px">&nbsp;</td>
+					<td colspan=3><b>Do you have internal backup procedures in place? Are they followed to the letter?</b></td>
+				</tr>
+
+				<tr height=18px>
+					<td width="5px">&nbsp;</td>
+					<td width="20%" nowrap>STAPLES</td>
+
+					<td align="left" nowrap>sometimes</td>
+
+					<td colspan="1"></td>
+				</tr>
+
+				<tr height=18px>
+					<td width="5px">&nbsp;</td>
+					<td width="20%" nowrap>TSA</td>
+
+					<td align="left" nowrap>often</td>
+
+					<td colspan="1"></td>
+				</tr>
+
+				<tr><td colspan=3><br></td></tr>
+
+				<tr height=18px>
+					<td width="5px">&nbsp;</td>
+					<td colspan=3><b>Have you been involved in any previous contracts with TSA in the last 5 years?</b></td>
+				</tr>
+
+				<tr height=18px>
+					<td width="5px">&nbsp;</td>
+					<td width="20%" nowrap>STAPLES</td>
+
+					<td align="left" nowrap>Yes</td>
+
+					<td colspan="1"></td>
+				</tr>
+
+				<tr height=18px>
+					<td width="5px">&nbsp;</td>
+					<td width="20%" nowrap>TSA</td>
+
+					<td align="left" nowrap>No</td>
+
+					<td colspan="1"></td>
+				</tr>
+
+				<tr><td colspan=3><br></td></tr>
+
+				</table>
+			</td>
+		</tr>
+		</table>
+	</td>
+</tr>
+</table>
+
+
+<br>
+<br>
+
+<table border=0 cellpadding=0 cellspacing=0 width=680px>
+<tr>
+	<td align=center valign=top>
+		<table border=0 cellspacing=0 cellpadding=2 width=98%>
+		<tr>
+			<td width="53%">
+			<td align=right>
+				<select name="awardSelectionType" size="1" onchange="setAwardSelection();">
+					<option selected="selected" value="byItem"><b>Award by item</b></option>
+					<option value="SUPPLIERA">Award all items to SUPPLIER A(ORIG Bid)</option>
+					<option value="SUPPLIERB">Award all items to SUPPLIERA (ORIG Bid)</option>
+				</select>
+			</td>
+		</tr>
+		</table>
+	</td>
+</tr>
+<tr>
+	<td align=center width=680px>
+		<table id=itemTable border=1 cellspacing=0 cellpadding=0 width=665px class=browseHdr>
+		<tr>
+			<td width=100% align=center valign=top class=browseRow>
+				<table border=0 cellspacing=0 cellpadding=0 width=100% class=browseRow>
+				<tr>
+					<td width=50% align=center valign=top class=browseRow>
+						<table border=0 cellspacing=0 cellpadding=2 width=100% class=browseRow>
+						<tr>
+						<td  width=5% class=browseHdr nowrap>&nbsp;Line #</td>
+							<td  width=8% class=browseHdr nowrap>&nbsp;Bid Type</td>
+							<td  width=21% class=browseHdr nowrap>&nbsp;Item/Part #</td>
+							<td  width=10% class=browseHdr nowrap align=right>Promise Date</td>
+							<td  width=10% class=browseHdr nowrap align=right>Quantity</td>
+							<td  width=4% class=browseHdr nowrap>UOM</td>
+							<td  width=12% class=browseHdr nowrap align=right>Unit Cost</td>
+							<td  width=15% class=browseHdr nowrap>Supplier</td>
+							<td  width=5% class=browseHdr nowrap>Award</td>
+						</tr>
+						</table>
+					</td>
+				</tr>
+				</table>
+			</td>
+		</tr>
+		<tr>
+			<td colspan=2 align=center valign=top>
+				<input type=hidden name="RfqBid_icRfqLine" value="">
+				<input type=hidden name="RfqLine_icRfqLine" value="">
+				<table id=itemRow border=0 cellspacing=0 cellpadding=0 width=100% class=browseRow>
+				<tr>
+					<td>
+
+						<table border=0 cellspacing=0 cellpadding=2 width=100% class=browseRow>
+						<tr>
+							<td valign=top width=100%>
+								<table border=0 cellspacing=0 cellpadding=2 width=100% class=browseRow valign=top>
+								<tr>
+									<td  width=5% class=browseRow nowrap align=right>1.00&nbsp;</td>
+									<td  width=8% class=browseRow nowrap>ORIG</td>
+									<td  width=21% class=browseRow nowrap>Grade B Pipe</td>
+									<td width=10% class=browseRow valign=middle align=center>01-01-2008</td>
+									<td  width=10% class=browseRow nowrap align=right>100</td>
+									<td  width=4% class=browseRow nowrap>FT</td>
+									<td  width=12% class=browseRow align=right>
+										<input type="text" name="bd_unitPrice" value="78.00" style="text-align: right; border: none" size=10 readonly/>
+									</td>
+									<td width=15% class=browseRow valign=middle>SUPPLIER A</td>
+									<td width=5% class=browseRow valign=middle><input type=radio name=awardTo0 value="A"></input></td>
+								</tr>
+								<tr>
+									<td class=browseRow nowrap align=right id="origCopy0">1.00&nbsp;</td>
+									<td class=browseRow nowrap id="origCopy0">ORIG</td>
+									<td class=browseRow nowrap id="origCopy0">Grade B Pipe</td>
+									<td class=browseRow valign=middle align=center id="origCopy0">01-01-2008</td>
+									<td class=browseRow nowrap align=right id="origCopy0">100</td>
+									<td class=browseRow nowrap id="origCopy0">FT</td>
+									<td class=browseRow align=right>
+										<input type="text" name="bd_unitPrice" value="70.00" style="text-align: right; border: none" size=10 readonly/>
+									</td>
+									<td class=browseRow valign=middle>SUPPLIER B</td>
+									<td class=browseRow valign=middle><input type=radio name=awardTo0 value="B"></input></td>
+								</tr>
+								<tr id="alt0">
+									<td class=browseRow nowrap align=right>1.01&nbsp;</td>
+									<td  class=browseRow nowrap>ALT</td>
+									<td class=browseRow nowrap>Grade B Pipe</td>
+									<td class=browseRow valign=middle align=center>01-01-2008</td>
+									<td class=browseRow nowrap align=right><font class=highlight>300</font></td>
+									<td class=browseRow nowrap>FT</td>
+									<td class=browseRow align=right>
+										<input type="text" name="bd_unitPrice" value="67.00" style="text-align: right; border: none" size=10 readonly/>
+									</td>
+									<td class=browseRow valign=middle>SUPPLIER A</td>
+									<td class=browseRow valign=middle><input type=radio name=awardTo0 value="A.01"></input></td>
+								</tr>
+								<tr id="alt0">
+									<td class=browseRow nowrap align=right>1.02&nbsp;</td>
+									<td  class=browseRow nowrap>ALT</td>
+									<td class=browseRow nowrap>Grade B Pipe</td>
+									<td class=browseRow valign=middle align=center>01-01-2008</td>
+									<td class=browseRow nowrap align=right><font class=highlight>500</font></td>
+									<td class=browseRow nowrap>FT</td>
+									<td class=browseRow align=right>
+										<input type="text" name="bd_unitPrice" value="58.00" style="text-align: right; border: none" size=10 readonly/>
+									</td>
+									<td class=browseRow valign=middle>SUPPLIER A</td>
+									<td class=browseRow valign=middle><input type=radio name=awardTo0 value="A.02"></input></td>
+								</tr>
+								<tr id="alt0">
+									<td class=browseRow nowrap align=right>1.03&nbsp;</td>
+									<td  class=browseRow nowrap>ALT</td>
+									<td class=browseRow nowrap><font class=highlight>Grade A Pipe</font></td>
+									<td class=browseRow valign=middle align=center>01-01-2008</td>
+									<td  class=browseRow nowrap align=right>100</td>
+									<td  class=browseRow nowrap>FT</td>
+									<td  class=browseRow align=right>
+										<input type="text" name="bd_unitPrice" value="67.50" style="text-align: right; border: none" size=10 readonly/>
+									</td>
+									<td class=browseRow valign=middle>SUPPLIER B</td>
+									<td class=browseRow valign=middle><input type=radio name=awardTo0 value="B"></input></td>
+								</tr>
+								<tr><td colspan=9 id="altOption0">&nbsp;&nbsp;<a href="javascript: hideAlternates(0); void(0);">Hide Alternates</a></td></tr>
+								</table>
+							</td>
+						</tr>
+						</table>
+
+						<hr size=0 width=98%>
+						<table border=0 cellspacing=0 cellpadding=2 width=100% class=browseRow>
+						<tr>
+							<td valign=top width=100%>
+								<table border=0 cellspacing=0 cellpadding=2 width=100% class=browseRow valign=top>
+								<tr>
+									<td  width=5% class=browseRow nowrap align=right>2.00&nbsp;</td>
+									<td  width=8% class=browseRow nowrap>ORIG</td>
+									<td  width=21% class=browseRow nowrap>Large Grade B Pipe</td>
+									<td width=10% class=browseRow valign=middle align=center>01-01-2008</td>
+									<td  width=10% class=browseRow nowrap align=right>50</td>
+									<td  width=4% class=browseRow nowrap>FT</td>
+									<td  width=12% class=browseRow align=right>
+										<input type="text" name="bd_unitPrice" value="95.00" style="text-align: right; border: none" size=10 readonly/>
+									</td>
+									<td width=15% class=browseRow valign=middle>SUPPLIER A</td>
+									<td width=5% class=browseRow valign=middle><input type=radio name=awardTo1 value="A"></input></td>
+								</tr>
+								<tr>
+									<td class=browseRow nowrap align=right id="origCopy1">&nbsp;</td>
+									<td  class=browseRow nowrap id="origCopy1">&nbsp;</td>
+									<td class=browseRow nowrap id="origCopy1">&nbsp;</td>
+									<td class=browseRow valign=middle align=center id="origCopy1">&nbsp;</td>
+									<td  class=browseRow nowrap align=right id="origCopy1">&nbsp;</td>
+									<td  class=browseRow nowrap id="origCopy1">&nbsp;</td>
+									<td  class=browseRow align=right>
+										<input type="text" name="bd_unitPrice" value="92.00" style="text-align: right; border: none" size=10 readonly/>
+									</td>
+									<td class=browseRow valign=middle>SUPPLIER B</td>
+									<td class=browseRow valign=middle><input type=radio name=awardTo1 value="B"></input></td>
+								</tr>
+								<tr><td colspan=9>&nbsp;&nbsp;<a href="javascript: viewAlternates(0); void(0);">View Alternates</a></td></tr>
+								</table>
+							</td>
+						</tr>
+						</table>
+
+						<hr size=0 width=98%>
+						<table border=0 cellspacing=0 cellpadding=2 width=100% class=browseRow>
+						<tr>
+							<td valign=top width=100%>
+								<table border=0 cellspacing=0 cellpadding=2 width=100% class=browseRow valign=top>
+								<tr>
+									<td  width=5% class=browseRow nowrap align=right>3.00&nbsp;</td>
+									<td  width=8% class=browseRow nowrap>ORIG</td>
+									<td  width=21% class=browseRow nowrap>Pipe Connectors</td>
+									<td width=10% class=browseRow valign=middle align=center>01-01-2008</td>
+									<td  width=10% class=browseRow nowrap align=right>10</td>
+									<td  width=4% class=browseRow nowrap>BX</td>
+									<td  width=12% class=browseRow align=right>
+										<input type="text" name="bd_unitPrice" value="5.00" style="text-align: right; border: none" size=10 readonly/>
+									</td>
+									<td width=15% class=browseRow valign=middle>SUPPLIER A</td>
+									<td width=5% class=browseRow valign=middle><input type=radio name=awardTo2 value="A"></input></td>
+								</tr>
+								<tr>
+									<td class=browseRow nowrap align=right>&nbsp;</td>
+									<td  class=browseRow nowrap>&nbsp;</td>
+									<td class=browseRow nowrap>&nbsp;</td>
+									<td class=browseRow valign=middle align=center>&nbsp;</td>
+									<td  class=browseRow nowrap align=right>&nbsp;</td>
+									<td  class=browseRow nowrap>&nbsp;</td>
+									<td  class=browseRow align=right>
+										<input type="text" name="bd_unitPrice" value="7.00" style="text-align: right; border: none" size=10 readonly/>
+									</td>
+									<td class=browseRow valign=middle>SUPPLIER B</td>
+									<td class=browseRow valign=middle><input type=radio name=awardTo2 value="B"></input></td>
+								</tr>
+								<tr><td colspan=9>&nbsp;&nbsp;No Alternates</td></tr>
+								</table>
+							</td>
+						</tr>
+						</table>
+
+						<hr size=0 width=98%>
+
+					</td>
+				</tr>
+				</table>
+			</td>
+		</tr>
+		</table>
+	</td>
+</tr>
+</table>
+
+<br>
+
+<table border=0 cellpadding=0 cellspacing=0 width=680px>
+<tr>
+	<td width=20% align=center id="buttons"><a href="javascript: closeRfq(); void(0);"><img class=button src="/hilton/images/button_close.gif" border=0 alt="Close / Cancel Solicitation"></a></td>
+	<td width=20% align=center id="buttons"><a href="javascript: forward(); void(0);"><img class=button src="/hilton/images/button_forward.gif" border=0 alt="Forward for Approval"></a></td>
+	<td width=20% align=center id="buttons"><a href="javascript: createPo(); void(0);"><img class=button src="/hilton/images/button_create_po.gif" border=0 alt="Create Purchase Order"></a></td>
+	<td width=20% align=center id="buttons"><a href="javascript: printWorksheet(); void(0);"><img class=button src="/hilton/images/button_print.gif" border=0 alt="Print / Email Worksheet"></a></td>
+	<td width=20% align=center id="buttons"><a href="javascript: doSubmit('/rfq/rfq_review.jsp', 'RfqRetrieve'); void(0);"><img class=button src="/hilton/images/button_return.gif" border=0 alt="Return"></a></td>
+</tr>
+</table>
+
+<br>
+
+<table border=0 cellspacing=0 cellpadding=0 width=680px vAlign=bottom id="copyright">
+<hr size=0 color=black width=680px align=left>
+<tr>
+	<td class=copyright width=33% align=left>&nbsp;Copyright &copy; 2007&nbsp;<a href="http://www.puridiom.com" target="_blank">Puridiom.com</a></td>
+	<td class=copyright width=34% align=center><a href="http://www.puridiom.com/procurement/legal/index.html" target="_blank">Legal Notices</a></td>
+	<td class=copyright width=33% align=right>Release 3.0.-datetime-</td>
+</tr>
+</table>
+
+</form>
+</body>
+</html>
+
+<SCRIPT value=JavaScript>
+<!-- Hide script
+
+	frm = document.purchaseform;
+
+	 var lineCount = 2;
+
+	function submitAward() {
+		doSubmit("/rfq/rfq_award_options.jsp", "RfqLineListUpdateVendor;RfqRetrieve");
+	}
+
+	function setAwardSelection() {
+		var awardSelection = frm.awardSelectionType[frm.awardSelectionType.selectedIndex].value;
+		var options = frm.awardSelectionType.length;
+		var award = "byItem";
+		var ind = 0;
+
+		if (options > 1) {
+			for (var i = 0; i < options; i++) {
+				if (frm.awardSelectionType.options[i].selected) {
+					ind = i;
+					break;
+				}
+			}
+			if (ind==0) {
+
+				frm.awardTo0.selectedIndex = 0;
+
+				frm.awardTo1.selectedIndex = 0;
+
+
+			}
+			else {
+
+				frm.awardTo0.selectedIndex = ind-1;
+
+				frm.awardTo1.selectedIndex = ind-1;
+
+			}
+	    }
+
+		changePrices(0,frm.awardTo0);
+
+		changePrices(1,frm.awardTo1);
+
+	}
+
+	function changePrices(ind,supplier) {
+
+		if (supplier.value == "OFFICEMAX" && ind == 0) {
+			frm.bd_unitPrice[ind].value = "95.00";
+			frm.bd_extendedPrice[ind].value = "28500.00";
+		}
+
+		if (supplier.value == "STAPLES" && ind == 0) {
+			frm.bd_unitPrice[ind].value = "0.00";
+			frm.bd_extendedPrice[ind].value = "0.00";
+		}
+
+		if (supplier.value == "TSA" && ind == 0) {
+			frm.bd_unitPrice[ind].value = "0.00";
+			frm.bd_extendedPrice[ind].value = "0.00";
+		}
+
+		if (supplier.value == "OFFICEMAX" && ind == 1) {
+			frm.bd_unitPrice[ind].value = "0.05";
+			frm.bd_extendedPrice[ind].value = "4003.85";
+		}
+
+		if (supplier.value == "STAPLES" && ind == 1) {
+			frm.bd_unitPrice[ind].value = "0.00";
+			frm.bd_extendedPrice[ind].value = "0.00";
+		}
+
+		if (supplier.value == "TSA" && ind == 1) {
+			frm.bd_unitPrice[ind].value = "0.00";
+			frm.bd_extendedPrice[ind].value = "0.00";
+		}
+
+
+	}
+
+	function viewAlternates(row) {
+		displayArea("alt" + row);
+		displayArea("origCopy" + row);
+		setInnerHTML("altOption" + row, "&nbsp;&nbsp;<a href=\"javascript: hideAlternates(" + row + "); void(0);\">Hide Alternates</a>");
+	}
+
+	function hideAlternates(row) {
+		hideArea("alt" + row);
+		hideAreaWithBlock("origCopy" + row);
+		setInnerHTML("altOption" + row, "&nbsp;&nbsp;<a href=\"javascript: viewAlternates(" + row + "); void(0);\">View Alternates</a>");
+	}
+
+// End Hide script -->
+</SCRIPT>

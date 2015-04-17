@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created using an evaluation version of JasperAssistant (http://www.jasperassistant.com) -->
+<!DOCTYPE jasperReport PUBLIC "-//JasperReports//DTD Report Design//EN" "http://jasperreports.sourceforge.net/dtds/jasperreport.dtd">
+
+<jasperReport name="appbuttons" pageWidth="563" pageHeight="70" whenNoDataType="BlankPage" columnWidth="563" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+	<property name="com.jasperassistant.designer.GridHeight" value="12"/>
+	<property name="com.jasperassistant.designer.GridWidth" value="12"/>
+	<property name="com.jasperassistant.designer.SnapToGrid" value="false"/>
+	<property name="com.jasperassistant.designer.Grid" value="false"/>
+	<import value="com.tsa.puridiom.jasperreports.*"/>
+	<reportFont name="Verdana" isDefault="false" fontName="Verdana" size="9" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Verdana_big" isDefault="true" fontName="Verdana" size="11" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Verdana_bold" isDefault="false" fontName="Verdana" size="9" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<parameter name="oid" class="java.lang.String">
+		<defaultValueExpression><![CDATA["hilton"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="uid" class="java.lang.String"/>
+	<parameter name="mid" class="java.lang.String"/>
+	<parameter name="PoHeader_icPoHeader" class="java.lang.String"/>
+	<parameter name="GCS_SITE_URL" class="java.lang.String">
+		<defaultValueExpression><![CDATA["http://localhost:8080/hilton"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="type" class="java.lang.String">
+		<defaultValueExpression><![CDATA["REQ"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="PoHeader_poNumber" class="java.lang.String"/>
+	<detail>
+		<band height="68">
+			<textField hyperlinkType="Reference">
+				<reportElement positionType="Float" mode="Opaque" x="205" y="18" width="97" height="25" forecolor="#FFFFFF" backcolor="#CE0000"/>
+				<box topBorder="1Point" topBorderColor="#E4E4E4" topPadding="1" leftBorder="1Point" leftBorderColor="#E4E4E4" leftPadding="1" bottomBorder="2Point" bottomBorderColor="#C3C3C3" bottomPadding="1" rightBorder="2Point" rightBorderColor="#C3C3C3" rightPadding="3"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isUnderline="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Continue"]]></textFieldExpression>
+				<hyperlinkReferenceExpression><![CDATA[$P{GCS_SITE_URL} + ReportUtils.getEvaluationLink($P{uid}, $P{oid}, $P{mid},"evaluate", $P{PoHeader_poNumber}, null, $P{PoHeader_icPoHeader}, $P{type}, "/orders/mail_eval.jsp")]]></hyperlinkReferenceExpression>
+			</textField>
+			<rectangle>
+				<reportElement positionType="Float" x="10" y="6" width="543" height="12" forecolor="#FFFFFF"/>
+				<graphicElement/>
+			</rectangle>
+			<rectangle>
+				<reportElement positionType="Float" x="5" y="43" width="543" height="12" forecolor="#FFFFFF"/>
+				<graphicElement/>
+			</rectangle>
+		</band>
+	</detail>
+</jasperReport>

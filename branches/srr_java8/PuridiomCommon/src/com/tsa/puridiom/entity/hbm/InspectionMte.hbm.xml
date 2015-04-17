@@ -1,0 +1,65 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping>
+
+<class
+    name="com.tsa.puridiom.entity.InspectionMte"
+    table="INSPECTION_MTE"
+>
+    <composite-id name="comp_id" class="com.tsa.puridiom.entity.InspectionMtePK">
+        <key-property name="icRecHeader" column="IC_REC_HEADER" type="java.math.BigDecimal"/>
+        <key-property name="icRecLine" column="IC_REC_LINE" type="java.math.BigDecimal"/>
+        <key-property name="keySequence" column="KEY_SEQUENCE" type="java.math.BigDecimal"/>
+        <key-property name="icInspNo" column="IC_INSP_NO" type="java.math.BigDecimal"/>
+    </composite-id>
+
+    <property
+        name="icMsrLine"
+        type="java.math.BigDecimal"
+        column="IC_MSR_LINE"
+        length="22"
+    />
+    <property
+        name="mteNo"
+        type="java.lang.String"
+        column="MTE_NO"
+        length="25"
+    />
+    <property
+        name="dateUsed"
+        type="java.sql.Timestamp"
+        column="DATE_USED"
+        length="7"
+    />
+    <property
+        name="description"
+        type="java.lang.String"
+        column="DESCRIPTION"
+        length="255"
+    />
+    <property
+        name="lastChange"
+        type="java.sql.Timestamp"
+        column="LAST_CHANGE"
+        length="7"
+    />
+    <property
+        name="lastChangeBy"
+        type="java.lang.String"
+        column="LAST_CHANGE_BY"
+        length="15"
+    />
+    <property
+        name="calDate"
+        type="java.sql.Timestamp"
+        column="CAL_DATE"
+        length="7"
+    />
+
+    <!-- associations -->
+
+</class>
+</hibernate-mapping>

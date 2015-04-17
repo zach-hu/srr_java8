@@ -1,0 +1,459 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created using an evaluation version of JasperAssistant (http://www.jasperassistant.com) -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="rec_inspection_email" pageWidth="595" pageHeight="842" columnWidth="595" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+	<property name="com.jasperassistant.designer.Grid" value="false"/>
+	<property name="com.jasperassistant.designer.SnapToGrid" value="false"/>
+	<property name="com.jasperassistant.designer.GridWidth" value="12"/>
+	<property name="com.jasperassistant.designer.GridHeight" value="12"/>
+	<import value="com.tsa.puridiom.reports.datasource.*"/>
+	<import value="com.tsa.puridiom.jasperreports.*"/>
+	<parameter name="poLine" class="com.tsa.puridiom.entity.PoLine"/>
+	<parameter name="oid" class="java.lang.String">
+		<defaultValueExpression><![CDATA["HILTON"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="dbs" class="com.tsagate.foundation.database.DBSession"/>
+	<parameter name="receiptHeader" class="com.tsa.puridiom.entity.ReceiptHeader"/>
+	<parameter name="receiptLine" class="com.tsa.puridiom.entity.ReceiptLine"/>
+	<parameter name="poHeader" class="com.tsa.puridiom.entity.PoHeader"/>
+	<field name="InspectionHeader_udf04" class="java.lang.String"/>
+	<field name="InspectionHeader_inspectionMfrList" class="java.util.List"/>
+	<field name="InspectionHeader_inspectionLineList" class="java.util.List"/>
+	<field name="InspectionHeader_inspectionDiscrepList" class="java.util.List"/>
+	<field name="InspectionHeader_inspectType" class="java.lang.String"/>
+	<field name="InspectionHeader_inspectionHistoryList" class="java.util.List"/>
+	<field name="InspectionHeader_qtySignoff" class="java.math.BigDecimal"/>
+	<field name="InspectionHeader_qtyAccepted" class="java.math.BigDecimal"/>
+	<field name="InspectionHeader_qtyRejected" class="java.math.BigDecimal"/>
+	<field name="InspectionHeader_internalComments" class="java.lang.String"/>
+	<field name="InspectionHeader_cgdNo" class="java.lang.String"/>
+	<field name="InspectionHeader_inspectionDisposList" class="java.util.List"/>
+	<field name="InspectionHeader_purchaseSpecs" class="java.lang.String"/>
+	<field name="InspectionHeader_standardCode" class="java.lang.String"/>
+	<group name="Group_1">
+		<groupHeader>
+			<band height="70">
+				<textField isBlankWhenNull="true" hyperlinkType="None">
+					<reportElement positionType="Float" x="400" y="14" width="60" height="14"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+						<font size="8"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$P{receiptHeader}.getCorrosionEval()]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true" hyperlinkType="None">
+					<reportElement x="520" y="14" width="60" height="14"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+						<font size="8"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{InspectionHeader_inspectType}.equals("RI") ? $F{InspectionHeader_standardCode} : $F{InspectionHeader_inspectType}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement mode="Opaque" x="400" y="0" width="60" height="14" backcolor="#C0C0C0"/>
+					<box padding="0">
+						<pen lineWidth="1.0" lineStyle="Solid"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+					<text><![CDATA[Corr. Eval]]></text>
+				</staticText>
+				<textField isBlankWhenNull="true" hyperlinkType="None">
+					<reportElement x="460" y="14" width="60" height="14"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+						<font size="8"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$P{receiptLine}.getUdf2Code().equals("yes") ? "Y" : "N"]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement positionType="Float" mode="Opaque" x="20" y="40" width="80" height="14" backcolor="#C0C0C0"/>
+					<textElement textAlignment="Right" verticalAlignment="Top">
+						<font size="8"/>
+					</textElement>
+					<text><![CDATA[Description : ]]></text>
+				</staticText>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true" hyperlinkType="None">
+					<reportElement positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="103" y="40" width="480" height="30" isRemoveLineWhenBlank="true"/>
+					<textElement verticalAlignment="Top" markup="none">
+						<font size="8"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$P{poLine}.getDescription()]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement mode="Opaque" x="340" y="0" width="60" height="14" backcolor="#C0C0C0"/>
+					<box padding="0">
+						<pen lineWidth="1.0" lineStyle="Solid"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+					<text><![CDATA[Stor. Lvl]]></text>
+				</staticText>
+				<textField isBlankWhenNull="true" hyperlinkType="None">
+					<reportElement positionType="Float" mode="Opaque" x="220" y="14" width="60" height="14"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+						<font size="8"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$P{poLine}.getUdf2Code()]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement mode="Opaque" x="220" y="0" width="60" height="14" backcolor="#C0C0C0"/>
+					<box padding="0">
+						<pen lineWidth="1.0" lineStyle="Solid"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+					<text><![CDATA[Proc. Lvl]]></text>
+				</staticText>
+				<textField isBlankWhenNull="true" hyperlinkType="None">
+					<reportElement positionType="Float" mode="Opaque" x="280" y="14" width="60" height="14"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+						<font size="8"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$P{poLine}.getItemNumber()]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0.00#" isBlankWhenNull="true" hyperlinkType="None">
+					<reportElement positionType="Float" mode="Opaque" x="40" y="14" width="60" height="14"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+						<font size="8"/>
+					</textElement>
+					<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{InspectionHeader_qtySignoff}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement mode="Opaque" x="520" y="0" width="60" height="14" backcolor="#C0C0C0"/>
+					<box padding="0">
+						<pen lineWidth="1.0" lineStyle="Solid"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+					<text><![CDATA[RICP No.]]></text>
+				</staticText>
+				<textField pattern="#,##0.00#" isBlankWhenNull="true" hyperlinkType="None">
+					<reportElement positionType="Float" mode="Opaque" x="160" y="14" width="60" height="14"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+						<font size="8"/>
+					</textElement>
+					<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{InspectionHeader_qtyRejected}]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0.###" isBlankWhenNull="true" hyperlinkType="None">
+					<reportElement positionType="Float" mode="Opaque" x="0" y="14" width="40" height="14"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+						<font size="8"/>
+					</textElement>
+					<textFieldExpression class="java.math.BigDecimal"><![CDATA[$P{poLine}.getLineNumber()]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement mode="Opaque" x="0" y="0" width="40" height="14" backcolor="#C0C0C0"/>
+					<box padding="0">
+						<pen lineWidth="1.0" lineStyle="Solid"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+					<text><![CDATA[Item No.]]></text>
+				</staticText>
+				<textField pattern="#,##0.00#" isBlankWhenNull="true" hyperlinkType="None">
+					<reportElement positionType="Float" mode="Opaque" x="100" y="14" width="60" height="14"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+						<font size="8"/>
+					</textElement>
+					<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{InspectionHeader_qtyAccepted}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement mode="Opaque" x="460" y="0" width="60" height="14" backcolor="#C0C0C0"/>
+					<box padding="0">
+						<pen lineWidth="1.0" lineStyle="Solid"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+					<text><![CDATA[Source Insp.]]></text>
+				</staticText>
+				<textField isBlankWhenNull="true" hyperlinkType="None">
+					<reportElement x="340" y="14" width="60" height="14"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+						<font size="8"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$P{poLine}.getUdf7Code()]]></textFieldExpression>
+				</textField>
+				<rectangle>
+					<reportElement stretchType="RelativeToTallestObject" mode="Transparent" x="19" y="39" width="82" height="17" forecolor="#FFFFFF"/>
+				</rectangle>
+				<staticText>
+					<reportElement mode="Opaque" x="40" y="0" width="60" height="14" backcolor="#C0C0C0"/>
+					<box padding="0">
+						<pen lineWidth="1.0" lineStyle="Solid"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+					<text><![CDATA[Qty For SignOff]]></text>
+				</staticText>
+				<staticText>
+					<reportElement mode="Opaque" x="100" y="0" width="60" height="14" backcolor="#C0C0C0"/>
+					<box padding="0">
+						<pen lineWidth="1.0" lineStyle="Solid"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+					<text><![CDATA[Qty Accept]]></text>
+				</staticText>
+				<staticText>
+					<reportElement mode="Opaque" x="160" y="0" width="60" height="14" backcolor="#C0C0C0"/>
+					<box padding="0">
+						<pen lineWidth="1.0" lineStyle="Solid"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+					<text><![CDATA[Qty Reject]]></text>
+				</staticText>
+				<staticText>
+					<reportElement mode="Opaque" x="280" y="0" width="60" height="14" backcolor="#C0C0C0"/>
+					<box padding="0">
+						<pen lineWidth="1.0" lineStyle="Solid"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+					<text><![CDATA[Material ID]]></text>
+				</staticText>
+			</band>
+		</groupHeader>
+	</group>
+	<group name="Group_2">
+		<groupHeader>
+			<band height="336">
+				<subreport>
+					<reportElement positionType="Float" x="102" y="59" width="200" height="14">
+						<printWhenExpression><![CDATA[new Boolean($F{InspectionHeader_inspectType}.equals("RI"))]]></printWhenExpression>
+					</reportElement>
+					<dataSourceExpression><![CDATA[new HibernateQueryResultDataSource($F{InspectionHeader_inspectionLineList})]]></dataSourceExpression>
+					<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[JasperReportsHelper.loadSubReport("rec-attributes-email.jasper", $P{oid})]]></subreportExpression>
+				</subreport>
+				<staticText>
+					<reportElement positionType="Float" mode="Opaque" x="20" y="223" width="60" height="14" backcolor="#C0C0C0"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+					<text><![CDATA[Disp Type]]></text>
+				</staticText>
+				<subreport>
+					<reportElement positionType="Float" mode="Opaque" x="102" y="83" width="200" height="14"/>
+					<dataSourceExpression><![CDATA[new HibernateQueryResultDataSource($F{InspectionHeader_inspectionMfrList})]]></dataSourceExpression>
+					<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[JasperReportsHelper.loadSubReport("rec-documentation-email.jasper", $P{oid})]]></subreportExpression>
+				</subreport>
+				<subreport>
+					<reportElement positionType="Float" mode="Opaque" x="102" y="99" width="200" height="14"/>
+					<dataSourceExpression><![CDATA[new HibernateQueryResultDataSource($F{InspectionHeader_inspectionMfrList})]]></dataSourceExpression>
+					<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[JasperReportsHelper.loadSubReport("rec-heat-email.jasper", $P{oid})]]></subreportExpression>
+				</subreport>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true" hyperlinkType="None">
+					<reportElement positionType="Float" mode="Opaque" x="102" y="3" width="200" height="14" isRemoveLineWhenBlank="true"/>
+					<textElement verticalAlignment="Middle" markup="none">
+						<font size="8"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{InspectionHeader_purchaseSpecs}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement positionType="Float" mode="Opaque" x="150" y="267" width="320" height="16" backcolor="#C0C0C0"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+					<text><![CDATA[Electronic Signature Information]]></text>
+				</staticText>
+				<staticText>
+					<reportElement positionType="Float" mode="Opaque" x="20" y="43" width="80" height="14" backcolor="#C0C0C0"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+					<text><![CDATA[CGD No. : ]]></text>
+				</staticText>
+				<staticText>
+					<reportElement positionType="Float" mode="Opaque" x="20" y="123" width="80" height="14" backcolor="#C0C0C0"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+					<text><![CDATA[Comments :]]></text>
+				</staticText>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true" hyperlinkType="None">
+					<reportElement positionType="Float" mode="Opaque" x="102" y="123" width="480" height="30" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true"/>
+					<textElement verticalAlignment="Middle" markup="none">
+						<font size="8"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{InspectionHeader_internalComments}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement positionType="Float" mode="Opaque" x="80" y="223" width="160" height="14" backcolor="#C0C0C0"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+					<text><![CDATA[D/C Disposition]]></text>
+				</staticText>
+				<staticText>
+					<reportElement positionType="Float" mode="Opaque" x="240" y="223" width="200" height="14" backcolor="#C0C0C0"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+					<text><![CDATA[D/C Disposition Description ]]></text>
+				</staticText>
+				<staticText>
+					<reportElement positionType="Float" mode="Opaque" x="100" y="183" width="150" height="14" backcolor="#C0C0C0"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+					<text><![CDATA[Requirement]]></text>
+				</staticText>
+				<staticText>
+					<reportElement positionType="Float" mode="Opaque" x="330" y="283" width="240" height="16" backcolor="#C0C0C0"/>
+					<box padding="0">
+						<pen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+					<text><![CDATA[Comments]]></text>
+				</staticText>
+				<staticText>
+					<reportElement positionType="Float" mode="Opaque" x="20" y="19" width="80" height="14" backcolor="#C0C0C0"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+					<text><![CDATA[Dw gs/Spec's/Std : ]]></text>
+				</staticText>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true" hyperlinkType="None">
+					<reportElement positionType="Float" mode="Opaque" x="102" y="19" width="200" height="14" isRemoveLineWhenBlank="true"/>
+					<textElement verticalAlignment="Middle" markup="none">
+						<font size="8"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{InspectionHeader_udf04}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement positionType="Float" mode="Opaque" x="20" y="99" width="80" height="14" backcolor="#C0C0C0"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+					<text><![CDATA[Heat No.(s) : ]]></text>
+				</staticText>
+				<staticText>
+					<reportElement positionType="Float" mode="Opaque" x="20" y="283" width="150" height="16" backcolor="#C0C0C0"/>
+					<box padding="0">
+						<pen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+					<text><![CDATA[Approver]]></text>
+				</staticText>
+				<staticText>
+					<reportElement positionType="Float" mode="Opaque" x="20" y="153" width="80" height="16" backcolor="#C0C0C0"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+					<text><![CDATA[Discrpt. Cond. : ]]></text>
+				</staticText>
+				<staticText>
+					<reportElement positionType="Float" mode="Opaque" x="20" y="59" width="80" height="14" backcolor="#C0C0C0"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+					<text><![CDATA[RICP Attributes : ]]></text>
+				</staticText>
+				<staticText>
+					<reportElement positionType="Float" mode="Opaque" x="440" y="223" width="60" height="14" backcolor="#C0C0C0"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+					<text><![CDATA[Quantity]]></text>
+				</staticText>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true" hyperlinkType="None">
+					<reportElement positionType="Float" mode="Opaque" x="102" y="43" width="200" height="14" isRemoveLineWhenBlank="true"/>
+					<textElement verticalAlignment="Middle" markup="none">
+						<font size="8"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{InspectionHeader_cgdNo}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement positionType="Float" mode="Opaque" x="500" y="223" width="70" height="14" backcolor="#C0C0C0"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+					<text><![CDATA[Disp Closed]]></text>
+				</staticText>
+				<staticText>
+					<reportElement positionType="Float" mode="Opaque" x="250" y="283" width="80" height="16" backcolor="#C0C0C0"/>
+					<box padding="0">
+						<pen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+					<text><![CDATA[Status]]></text>
+				</staticText>
+				<staticText>
+					<reportElement positionType="Float" mode="Opaque" x="20" y="3" width="80" height="14" backcolor="#C0C0C0"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+					<text><![CDATA[Purchase Spec's : ]]></text>
+				</staticText>
+				<staticText>
+					<reportElement positionType="Float" mode="Opaque" x="20" y="83" width="80" height="14" backcolor="#C0C0C0"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+					<text><![CDATA[Documentation : ]]></text>
+				</staticText>
+				<staticText>
+					<reportElement positionType="Float" mode="Opaque" x="250" y="183" width="320" height="14" backcolor="#C0C0C0"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+					<text><![CDATA[Discrepant Condition]]></text>
+				</staticText>
+				<staticText>
+					<reportElement positionType="Float" mode="Opaque" x="20" y="183" width="80" height="14" backcolor="#C0C0C0"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+					<text><![CDATA[Attribute]]></text>
+				</staticText>
+				<subreport>
+					<reportElement positionType="Float" x="0" y="197" width="596" height="20"/>
+					<dataSourceExpression><![CDATA[new HibernateQueryResultDataSource($F{InspectionHeader_inspectionDiscrepList})]]></dataSourceExpression>
+					<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[JasperReportsHelper.loadSubReport("rec-inspectiondiscrep-email.jasper", $P{oid})]]></subreportExpression>
+				</subreport>
+				<subreport>
+					<reportElement positionType="Float" x="0" y="237" width="596" height="20"/>
+					<dataSourceExpression><![CDATA[new HibernateQueryResultDataSource($F{InspectionHeader_inspectionDisposList})]]></dataSourceExpression>
+					<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[JasperReportsHelper.loadSubReport("rec-inspectiondispos-email.jasper", $P{oid})]]></subreportExpression>
+				</subreport>
+				<subreport>
+					<reportElement positionType="Float" mode="Transparent" x="0" y="297" width="596" height="22"/>
+					<subreportParameter name="dbs">
+						<subreportParameterExpression><![CDATA[$P{dbs}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="oid">
+						<subreportParameterExpression><![CDATA[$P{oid}]]></subreportParameterExpression>
+					</subreportParameter>
+					<dataSourceExpression><![CDATA[new HibernateQueryResultDataSource($F{InspectionHeader_inspectionHistoryList})]]></dataSourceExpression>
+					<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[JasperReportsHelper.loadSubReport("rec-electronic-signature-information.jasper", $P{oid})]]></subreportExpression>
+				</subreport>
+				<staticText>
+					<reportElement positionType="Float" mode="Opaque" x="170" y="283" width="80" height="16" backcolor="#C0C0C0"/>
+					<box padding="0">
+						<pen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+					<text><![CDATA[Date]]></text>
+				</staticText>
+			</band>
+		</groupHeader>
+	</group>
+	<detail>
+		<band/>
+	</detail>
+</jasperReport>

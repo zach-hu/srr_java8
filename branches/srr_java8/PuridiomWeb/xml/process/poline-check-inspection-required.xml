@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="checkPoLineInspection" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="poLineInspection">
+			<task synchronous="true" continue-on-failure="false" name="poLineInspection">
+				<task-object-name>com.tsa.puridiom.poline.tasks.PoLineCheckInspection</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+	</activities>
+</process>

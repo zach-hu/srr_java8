@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="poDelete" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="poDelete">
+			<task synchronous="true" continue-on-failure="false" name="poHeader">
+				<rule-filename></rule-filename>
+				<task-object-name>com.tsa.puridiom.poheader.tasks.PoHeaderRetrieveById</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="poDeleteSetup">
+				<rule-filename></rule-filename>
+				<task-object-name>com.tsa.puridiom.po.tasks.PoDeleteSetup</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="scheduleDeleteByHeader">
+				<rule-filename></rule-filename>
+				<task-object-name>com.tsa.puridiom.schedule.tasks.ScheduleDeleteByHeader</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="billToDeleteByHeader">
+				<task-object-name>com.tsa.puridiom.billto.tasks.BillToDeleteByHeader</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="shipToDeleteByHeader">
+				<task-object-name>com.tsa.puridiom.shipto.tasks.ShipToDeleteByHeader</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="accountDeleteByHeader">
+				<rule-filename></rule-filename>
+				<task-object-name>com.tsa.puridiom.account.tasks.AccountDeleteByHeader</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="docCommentDeleteByHeader">
+				<rule-filename></rule-filename>
+				<task-object-name>com.tsa.puridiom.doccomment.tasks.DocCommentDeleteByHeader</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="checklistResponseDeleteByHeader">
+				<rule-filename></rule-filename>
+				<task-object-name>com.tsa.puridiom.checklistresponse.tasks.ChecklistResponseDeleteByHeader</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="docAttachmentDeleteByHeader">
+				<rule-filename>is-documents-module-active.xml</rule-filename>
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>docattachment-delete-by-header.xml</process-filename>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="poLineDeleteByHeader">
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>poline-delete-by-header.xml</process-filename>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="poHeaderDeleteById">
+				<rule-filename></rule-filename>
+				<task-object-name>com.tsa.puridiom.poheader.tasks.PoHeaderDeleteById</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+	</activities>
+</process>

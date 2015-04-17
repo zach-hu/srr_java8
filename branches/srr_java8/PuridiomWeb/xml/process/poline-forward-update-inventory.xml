@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="" connection-type="None">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="UpdateInventory">
+			<rule-filename>is-poforward-order-type.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="">
+				<rule-filename>is-poline-receipt-required.xml</rule-filename>
+				<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+				<process-filename>po-inventory-update.xml</process-filename>
+			</task>
+		</activity>
+	</activities>
+</process>

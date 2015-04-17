@@ -1,0 +1,487 @@
+<HTML>
+<HEAD>
+	<meta http-equiv="content-type" content="text/html;charset=UTF-8">
+	<META HTTP-EQUIV="Cache-Control" content="no-cache">
+	<META HTTP-EQUIV="Expires" CONTENT="Sat, 11 Sep 1971 12:00:00 GMT">
+	<META NAME="Description" Content="/demo/hilton-bidboard/menu/menu_pg.jsp">
+	<SCRIPT LANGUAGE="JavaScript1.2" SRC="/demo/hilton-bidboard/scripts/hilton.js"></SCRIPT>
+	<SCRIPT LANGUAGE="JavaScript1.2" SRC="/demo/hilton-bidboard/scripts/filter.js"></SCRIPT>
+	<TITLE>Puridiom Supplier Portal</TITLE>
+		<LINK REL=STYLESHEET TYPE="text/css" HREF="/demo/hilton-bidboard/system/hilton_default.css">
+</HEAD>
+<SCRIPT language="JavaScript1.2">
+<!--  hide script from old browsers
+
+	contextPath = "/demo/hilton-bidboard";
+
+//-->
+</SCRIPT>
+
+<body marginwidth=0 marginheight=0 topmargin=0 leftmargin=0 width=680px onload="thisLoad();" onunload="closeOpenWindows();">
+<form name="purchaseform" target="_parent" action="/demo/hilton-bidboard/HiltonBidBoardServletController" method="POST">
+<div id="filterFields" style="display:none;"></div>
+<div id="hiddenFields" style="display:none;"></div>
+
+<input type=HIDDEN name=handler value="">
+<input type=HIDDEN name=successPage value="">
+<input type=HIDDEN name=failurePage value="system/error.jsp">
+<input type=HIDDEN name=userId value="tacme@acme.com">
+<input type=HIDDEN name=organizationId value="HILTON">
+<input type=HIDDEN name=browseName value="">
+<input type=HIDDEN name=VendorRegister_contactEmailAddr value="tacme@acme.com">
+<input type=HIDDEN name=Contact_emailAddr value="tacme@acme.com">
+<input type=HIDDEN name=vendorId value="ACME">
+
+
+<table border=0 cellpadding=0 cellspacing=0 width=680px>
+<tr>
+	<td><a href="http://www.puridiom.com" target="_top"><img src="/demo/hilton-bidboard/images/gcsclock.gif"	align="bottom" alt="Purchasing Center Home" border=0></a></td>
+	<td valign=bottom>
+		<table border=0 cellpadding=0 cellspacing=0 width=430px>
+			<tr class=mrow>
+				<th height=16px>&nbsp;</th>
+
+				<th align=center width=40px height=16px nowrap><a href="javascript: doSubmit('/menu/main_menu.jsp', 'DoNothing'); void(0);">Menu</a></th>
+				<th align=center valign=middle width=1px height=16px class=separator>|</th>
+				<!--th align=center width=40px height=16px nowrap><a href="javascript: helpMe(); void(0);">Help</a>&nbsp;</th-->
+				<!--th align=center valign=middle width=1px height=16px class=separator>|</th-->
+				<th align=center width=60px height=16px nowrap><a href="javascript: logOff(); void(0);">Log&nbsp;Off</a>&nbsp;</th>
+
+			</tr>
+		</table>
+	</td>
+</tr>
+</table>
+
+<table border=0 cellpadding=0 cellspacing=0 width=680px>
+<tr><td class=mnav><img src="/demo/hilton-bidboard/images/none.gif" border=0 height=1px width=100% class=mnav></td></tr>
+</table>
+
+
+<table border=0 cellspacing=0 cellpadding=0 width=680px height=22px>
+	<tr class=mnav>
+		<td nowrap align=center width=120px><a href="javascript: searchSales(); void(0);" class=mnav>Surplus Items</a></td>
+		<td nowrap align=center width=120px><a href="javascript: doSubmit('/browse/rfq_browse_filter_options.jsp', 'DoNothing'); void(0);" class=mnav>Solicitations</a></td>
+
+		<td nowrap align=center width=70px><a href="javascript: doSubmit('/browse/po_browse_filter_options.jsp', 'DoNothing'); void(0);" class=mnav>Orders</a></td>
+		<td nowrap align=center width=90px><a href="javascript: searchInvoices(); void(0);" class=mnav>Invoices</a></td>
+		<td nowrap align=center width=140px><a href="javascript: doSubmit('/user/bsc_supplier_profile.jsp', 'VendorContactRetrieveByEmail;VendorOptionsRetrieve');; void(0);" class=mnav>Profile Information</a></td>
+
+		<td nowrap align=center width=140px><a href="javascript: doSubmit('/documents/std_documents_menu.jsp', 'DoNothing'); void(0);" class=mnav>Download Documents</a></td>
+
+	</tr>
+</table>
+
+<table border=0 cellspacing=0 cellpadding=0 width=680px>
+<tr valign=top>
+
+	<td nowrap align=left><font color=black size=1><b>&nbsp;Hello Tom L Acme!<br></b></font></td>
+
+	<td nowrap align=right><font SIZE=-2><i>Sun, Mar 18, 2007 08:36:35 EST</i></font></td>
+</tr>
+</table>
+
+<hr size=0 color=black width=680px align=left>
+
+
+<!--
+Guest - false<br>
+Qualified - true<br>
+Authenticated - true
+-->
+
+
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="/demo/hilton-bidboard/scripts/dynamicTables.js"></SCRIPT>
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="/demo/hilton-bidboard/scripts/timer.js"></SCRIPT>
+
+
+
+<!-- RFQ EVENT HEADER -->
+<table border=0 width=680px cellpadding=0 cellspacing=0 valign=top>
+<tr>
+	<td align=center colspan=4>
+		<table border=0 cellspacing=0 cellpadding=1 height=100%>
+		<tr><td align=center class=hdr12>Reverse Auction Event</td></tr>
+		</table>
+		<table border=0 cellspacing=0 cellpadding=2 height=100%>
+		<tr><td class=formType>Closes on 10-29-2007 at 12:00 P.M. EST</td></tr>
+		</table>
+	</td>
+</tr>
+<tr><td></td><td colspan=2><hr size=0 width=100% class=browseHR></td><td></td></tr>
+<tr>
+	<td width=15px>&nbsp;</td>
+	<td valign=top>
+		<table border=0 cellspacing=0 cellpadding=1 height=100%>
+		<tr>
+			<td valign=middle class=menuSubTitle height=20px align=right>Request For Quotation #</td>
+			<td class=formType>000007.2007</td>
+		</tr>
+
+		<tr>
+			<td valign=middle class=menuSubTitle height=20px align=right>Amendment #</td>
+			<td class=formType>0001</td>
+		</tr>
+
+		</table>
+	</td>
+	<td align=right valign=top>
+		<table border=0 cellspacing=0 cellpadding=2>
+		<tr>
+			<td class=formType id="auctionCountdownText" align=right>Event Time Remaining:</td>
+			<td>
+
+
+
+
+
+<input type=text name="time" size=20 value=" " onFocus="this.blur();" style="border:0; color:red; text-align:right;" class=formType>
+<input type=hidden name="due_date" VALUE="10-29-2007">
+<input type=hidden name="due_time" value="12:00">
+<input type=hidden name="time2" value="10-29-2007">
+<input type=hidden name="today" value="03-18-2007  20:36:35">
+<input type=hidden name="required_date" value="03-18-2007">
+<input type=hidden name="default_validto" value="2007-03-18"></td>
+		</tr>
+		</table>
+	</td>
+	<td width=15px>&nbsp;</td>
+</tr>
+<tr><td></td><td colspan=2><hr size=0 width=100% class=browseHR></td><td></td></tr>
+</table>
+<!-- RFQ EVENT HEADER END -->
+
+
+<input type=hidden name="RfqHeader_icRfqHeader" value="11840347200066">
+<input type=hidden name="RfqHeader_rfqNumber" value="000015.2007">
+<input type=hidden name="RfqHeader_rfqAmendment" value="0001">
+<input type=hidden name="RfqHeader_status" value="2005">
+<input type=hidden name="RfqHeader_rfqType" value="RQ">
+<input type=hidden name="RfqHeader_fiscalYear" value="2007">
+<input type=hidden name="RfqLine_icRfqHeader" value="11840347200066">
+<input type=hidden name="RfqBid_icRfqHeader" value="11840347200066">
+<input type=hidden name="RfqBid_icRfqLine" value="11840347400069">
+<input type=hidden name="ShipTo_icHeader" value="11840347200066">
+<input type=hidden name="ShipTo_icLine" value="11840347400069">
+<input type=hidden name="DocComment_icHeader" value="11840347200066">
+<input type=hidden name="DocComment_icLine" value="11840347400069">
+<input type=hidden name="RfqLine_icRfqLine" value="11840347400069">
+<input type=hidden name="RfqLine_rfqLine" value="1">
+<input type=hidden name="lineCount" value="2">
+<input type=hidden name="previousPage" value="i">
+<input type=hidden name="stdTable_tableType" value="">
+<input type=hidden name="allowBrowse" value="true">
+<input type=hidden name="as_action" value="true">
+<input type=hidden name="as_redirect" value="true">
+<input type=hidden name=formtype value="RFQ">
+<input type=hidden name=frompage value="review">
+<input type=hidden name=lineUpdated value="false">
+<input type=hidden name=lineToRetrieve value="">
+<input type=hidden name="currentVendorId" value="">
+<input type=hidden name="returnPage" value="/rfq/rfq_item.jsp">
+<input type=hidden name="returnMethod" value="RfqLineRetrieveById">
+
+
+<br>
+
+<table border=0 cellpadding=0 cellspacing=0 width=680px>
+<tr>
+	<td align=center valign=top>
+		<table border=0 cellpadding=0 cellspacing=0 height=100%>
+		<tr>
+			<td>
+				<table border=1 width=520px>
+				<tr>
+					<td class=browseHdrDk colspan=2>
+						<table border=0 cellpadding=0 cellspacing=0 width=100% class=browseHdrDk>
+						<tr><td class=browseHdrDk>1.0&nbsp;Original Item Information</td></tr>
+						</table>
+					</td>
+				</tr>
+				<tr class=itemSummary>
+					<td width=100% valign=top class=itemSummary>
+						<table border=0 class=itemSummary width=100% cellpadding=2 cellspacing=0>
+						<tr>
+							<td class=itemSummary align=right><b>ITEM #</b></td>
+							<td class=itemSummary>11-22-8989</td>
+						</tr>
+						<tr>
+							<td class=itemSummary vAlign=top width=75px align=right><b>Description:</b></td>
+							<td class=itemSummary vAlign=top>17 inch Flat monitor - high quality&nbsp;</td>
+						</tr>
+						<tr>
+							<td class=itemSummary align=right><b>Quantity:</b></td>
+							<td class=itemSummary>2&nbsp;(EA)</td>
+						</tr>
+						</table>
+					</td>
+				</tr>
+				</table>
+
+				<br>
+
+				<table border=0 cellpadding=1 cellspacing=0>
+				<tr><td><b>Alternate Item Information</b></td></tr>
+				</table>
+
+				<br>
+
+				<table border=0 cellpadding=2s cellspacing=0>
+				<tr>
+					<td  nowrap align=right>Item/Part #:&nbsp;</td>
+					<td><input type=text name="RfqLine_itemNumber" tabindex=1 size=20 maxlength=30 value="11-22-8989" onchange="upperCase(this); getItemInfo(); updated(); void(0);"></td>
+				</tr>
+				<tr >
+					<td nowrap align=right valign=top>Description:&nbsp;</td>
+					<td colspan=4><textarea wrap="virtual" name="RfqLine_description" tabindex=2 rows=5 cols=60 onKeyDown="textCounter(this, 2000);" onKeyUp="textCounter(this,2000);" onchange="textCounter(this,2000);">17 inch Flat monitor - high quality</textarea></td>
+				</tr>
+				<tr>
+					<td  align=right nowrap>Quantity:&nbsp;</td>
+					<td ><input type=text name="RfqLine_quantity" tabindex=5 size=15 maxlength=15 value="300" style="text-align:right" onchange="setQty(); updated();"></td>
+					<td  align=right nowrap><a href="javascript: browseLookup('RfqLine_umCode','unitofmeasure'); void(0);" title="Click here to choose the UOM for this item or enter the UOM in the box on the right.">UOM</a>:&nbsp;</td>
+					<td >
+						<input type=text name="RfqLine_umCode" tabindex=7 size=15 maxlength=15 value="HOUR" onchange="upperCase(this); updateUMFactor(); updated();">
+						<input type=hidden name="RfqLine_umFactor" value="1">
+					</td>
+				</tr>
+				<tr>
+					<td  align=right nowrap>My Bid:&nbsp;</td>
+					<td><input type=text name="unit_price" value="235.00" size=20 tabIndex=1 onChange="updateBids(0);" onFocus="stopMonitor();" style="text-align:right"></td>
+				</tr>
+				<tr>
+					<td  align=right>Promise Date:&nbsp;</td>
+					<td >
+						<input type=text name="RfqVendor_datePromised" size=15 maxlength=15 tabindex=22 value="06-29-2007" onchange="checkDate(this);">
+						<a href="javascript: show_calendar('RfqVendor_datePromised', 'MM-dd-yyyy');"><img src="/hilton/images/calendar.gif" alt="Click here to find a Date or enter a Date in the box on the left." valign=bottom border=0></a>
+					</td>
+				</tr>
+				</table>
+			</td>
+		</tr>
+		</table>
+	</td>
+</tr>
+</table>
+
+<br>
+
+<br>
+<br>
+
+<input type=hidden name="RfqHeader_icRfqHeader" value="11153227200001">
+<input type=hidden name="RfqHeader_rfqNumber" value="000007.2007">
+<input type=hidden name="RfqHeader_rfqAmendment" value="0001">
+<input type=hidden name="RfqHeader_rfqType" value="RQ">
+<input type=hidden name="RfqHeader_auctionType" value="S">
+<input type=hidden name="originalDueTime" value="1193677200000">
+<input type=hidden name="auctionExtended" value="false">
+<input type=hidden name="openAuctionPage" value="/rfq/rfq_auction.jsp">
+<input type=hidden name="closedAuctionPage" value="/rfq/rfq_summary_postauction.jsp">
+<input type=hidden name="RfqVendor_icRfqHeader" value="11153227200001">
+
+<br>
+
+<table border=0 cellpadding=0 cellspacing=0 width=680px>
+<tr>
+	<td width=50% align=center><a href="bb_auction.html"><img class=button src="/hilton/images/button_save.gif" border=0 alt="Save"></a></td>
+	<td width=50% align=center><a href="bb_auction.html"><img class=button src="/hilton/images/button_return.gif" border=0 alt="Return"></a></td>
+
+</tr>
+</table>
+
+<br>
+
+<table border="0" cellspacing="0" cellpadding="0" width="680px" vAlign="bottom" id="copyright">
+<hr size="0" color="black" width="680px" align="left">
+<tr>
+	<td class="copyright" width="33%" align="left">&nbsp;Copyright &copy; 2007&nbsp;<a href="http://www.puridiom.com" target="_blank">Puridiom.com</a></td>
+	<td class="copyright" width="34%" align="center"><a href="http://www.puridiom.com/procurement/legal/index.html" target="_blank">Legal Notices</a></td>
+	<td class="copyright" width="33%" align="right">Release 3.1.-datetime-</td>
+</tr>
+</table>
+
+</div><!--  end pageForm div  -->
+
+</form>
+</body>
+</html>
+
+<SCRIPT value=JavaScript>
+<!-- Hide script
+
+	frm = document.purchaseform;
+	var info_window = null;
+	var populated = false;
+	var uomArray = new Array();
+	var itemLocation = "CENTRAL";
+	var lookupStatus = "";
+
+	function setFieldFocus() {
+		if (lookupStatus == "NOTFOUND" && frm.RfqLine_description) {
+			frm.RfqLine_description.focus();
+		} else if (lookupStatus == "FOUND" && frm.RfqLine_quantity) {
+			frm.RfqLine_quantity.focus();
+		} else {
+			setFirstFocus();
+		}
+	}
+
+	function populateUOM(uoma)
+	{
+		var e = 0;
+
+		for (var i = 0; i < uoma.length; i++) {
+			uomArray[e] = new Array(uoma[i][0], uoma[i][1]);
+			e++;
+		}
+
+		populated = true;
+	}
+
+	function updateUMFactor()
+	{
+		var open = true;
+		var browser = browserTest();
+		var factor = "";
+		var code = "";
+
+		frm.RfqLine_umCode.value = trim(frm.RfqLine_umCode);
+
+		if (info_window != null) {
+			if (browser == "Netscape") {
+				if (info_window.closed == false) {
+					info_window.setUomCode("RfqLine_");
+					open = false;
+				}
+			}
+			else {
+				info_window.setUomCode("RfqLine_");
+				open = false;
+			}
+		}
+
+		if (open == true)
+		{
+			if (uomArray.length > 0 || populated)
+			{
+				code = frm.RfqLine_umCode.value;
+				for (var i = 0; i < uomArray.length; i++)
+				{
+					if (code == (uomArray[i][0]).toString())
+					{
+						factor = uomArray[i][1];
+						break;
+					}
+				}
+
+				setUmFactor(factor)
+			}
+			else
+			{
+				popupParameters = "as_prefix=RfqLine_";
+				doSubmitToLookup('/base/get_uom_info.jsp', 'UnitOfMeasureRetrieveAll', 'WIDTH=1', 'HEIGHT=1');
+				self.focus();
+			}
+		}
+	}
+
+	function setUmFactor(factor) {
+		frm.RfqLine_umFactor.value = factor;
+//		addUp();
+	}
+
+	function retrieveLine(linenumber)
+	{
+		frm.RfqLine_rfqLine.value = linenumber;
+		doSubmit('/rfq/rfq_item.jsp', 'RfqLineRetrieveByLineNumber');
+	}
+
+	function setQty()
+	{
+		var qty_dec = 0;
+		var qty = nformat(eval(nfilter(frm.RfqLine_quantity)),qty_dec);
+		frm.RfqLine_quantity.value = qty;
+	}
+
+	function getItemInfo() {
+		// No need to call the server
+	}
+
+	function validateItem() {
+		if (isEmpty(frm.RfqLine_itemNumber.value) && isEmpty(frm.RfqLine_description.value)) {
+			alert("You must enter either an item number or description for this item.");
+			return false;
+		}
+		return true;
+	}
+
+	function validateForm() {
+		var deleteItem = false;
+		var handlers = frm.handler.value;
+
+		if (isEmpty(frm.RfqLine_itemNumber.value) && isEmpty(frm.RfqLine_description.value) && handlers.indexOf("RfqLineDelete") < 0) {
+			// no need to do this check if we are already deleting the line item or if changes are going to be discarded and an item number or description was previously entered
+			if (frm.lineUpdated.value == "true") {
+				if (handlers == "RfqLineRetrieveByHeaderHandler;") {
+
+						// no need to delete item if changes are going to be discarded and an item number or description was previously entered
+						return true;
+
+				}
+				if (!deleteItem) {
+					if (confirm("This is not a valid item because it has no item number and no description!  Would you like to discard changes?")) {
+						deleteItem = true;
+					} else {
+						if (handlers.indexOf("RfqLineCreate") >= 0) {
+							frm.lineCount.value = frm.lineCount.value - 1;
+						}
+						return false;
+					}
+				}
+			} else {
+				deleteItem = true;
+			}
+
+			if (deleteItem) {
+				var ind = handlers.indexOf("RfqLineUpdateByIdHandler;");
+				if (ind >= 0) {
+					handlers = handlers.substring(0, ind) + handlers.substring(ind + 25, handlers.length);
+				} else {
+					ind = handlers.indexOf("RfqLineUpdateByIdHandler");
+					if (ind >= 0) {
+						handlers = handlers.substring(0, ind) + handlers.substring(ind + 24, handlers.length);
+					} else {
+						ind = handlers.indexOf("RfqLineUpdateById;");
+						if (ind >= 0) {
+							handlers = handlers.substring(0, ind) + handlers.substring(ind + 18, handlers.length);
+						} else {
+							ind = handlers.indexOf("RfqLineUpdateById");
+							if (ind >= 0) {
+								handlers = handlers.substring(0, ind) + handlers.substring(ind + 17, handlers.length);
+							}
+						}
+					}
+				}
+				frm.lineCount.value = frm.lineCount.value - 1;
+
+				if (frm.lineToRetrieve.value > frm.RfqLine_rfqLine.value) {
+					frm.lineToRetrieve.value = frm.lineToRetrieve.value - 1;
+				}
+
+				frm.handler.value = "RfqLineDeleteHandler;" + handlers;
+				return true;
+			}
+			else {
+				if (frm.handlers.indexOf("RfqLineCreate") >= 0) {
+					frm.lineCount.value = frm.lineCount.value - 1;
+				}
+				return false;
+			}
+		} else {
+			return true;
+		}
+	}
+
+// End Hide script -->
+</SCRIPT>

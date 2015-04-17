@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="recentorder-add" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="recentOrderAdd">
+		    <task synchronous="true" continue-on-failure="false" name="recentOrderSetup">
+				<task-object-name>com.tsa.puridiom.recentorder.tasks.RecentOrderSetupFromPoHeader</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="recentOrder">
+				<task-object-name>com.tsa.puridiom.recentorder.tasks.RecentOrderRetrieveById</task-object-name>
+			</task>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="recentOrderAdd">
+			<rule-filename>is-recentorder-empty.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="recentOrder">
+				<task-object-name>com.tsa.puridiom.recentorder.tasks.RecentOrderSetValues</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="recentOrder">
+				<task-object-name>com.tsa.puridiom.recentorder.tasks.RecentOrderAdd</task-object-name>
+			</task>
+			<post-action>exitProcess</post-action>
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="recentOrderUpdate">
+			<task synchronous="true" continue-on-failure="false" name="recentOrder">
+				<task-object-name>com.tsa.puridiom.recentorder.tasks.RecentOrderSetValues</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="recentOrder">
+				<task-object-name>com.tsa.puridiom.recentorder.tasks.RecentOrderUpdate</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

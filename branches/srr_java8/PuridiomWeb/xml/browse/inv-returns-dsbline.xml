@@ -1,0 +1,33 @@
+<browse_req_header>
+	<columns>
+		<DisbLine_disbNumber>
+			<label>brw-disbNumber</label>
+			<size>15</size>
+		</DisbLine_disbNumber>
+		<DisbLine_lineNumber>
+			<label>hdg-lineNumber</label>
+		</DisbLine_lineNumber>
+		<DisbLine_itemNumber>
+			<link><![CDATA[javascript: createInvReturnDsb('#DisbLine_icDsbLine^'); void(0);]]></link>
+			<label>brw-itemNumber</label>
+			<size>15</size>
+		</DisbLine_itemNumber>
+		<DisbLine_description>
+			<label>description</label>
+			<size>15</size>
+		</DisbLine_description>
+		<DisbLine_quantity>
+			<label>brw-quantity</label>
+			<size>15</size>
+		</DisbLine_quantity>
+		<DisbLine_icDsbLine>
+			<visible>0</visible>
+		</DisbLine_icDsbLine>
+	</columns>
+	<sqlfrom>DisbLine as DisbLine, DisbHeader as DisbHeader</sqlfrom>
+	<sqlwhere><![CDATA[(DisbLine.status = '5010') AND (DisbHeader.icDsbHeader = DisbLine.icDsbHeader) AND (DisbHeader.disbType = 'O')]]></sqlwhere>
+	<sqlorderby default="Y">DisbLine.disbNumber ASC, DisbLine.lineNumber ASC</sqlorderby>
+	<pagesize>15</pagesize>
+	<title>New Return to Inventory Browse</title>
+</browse_req_header>
+

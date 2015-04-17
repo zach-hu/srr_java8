@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="ValidateRules" connection-type="Connection-Required">
+  <activities>
+    <activity synchronous="true" continue-on-failure="false" name="setUpRequisitionData">
+      <task synchronous="true" continue-on-failure="false" name="setup">
+        <task-object-name>com.tsa.puridiom.validationrules.tasks.PoRulesSetup</task-object-name>
+      </task>
+      <task synchronous="true" continue-on-failure="false" name="poHeaderData">
+        <task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+        <process-filename>po-retrieve.xml</process-filename>
+      </task>
+      <task synchronous="true" continue-on-failure="false" name="poLineListwithoutXML">
+      		<rule-filename>is-organization-bsc.xml</rule-filename>
+			<task-object-name>com.tsa.puridiom.poline.tasks.PoLineRetrieveCatByHeader</task-object-name>
+			<post-action></post-action>
+	  </task>
+      <task synchronous="true" continue-on-failure="false" name="lineitemsCA">
+      		<rule-filename>is-organization-bsc.xml</rule-filename>
+	        <task-object-name>com.tsa.puridiom.poline.tasks.PoLineDataRetrieveCat</task-object-name>
+	        <post-action></post-action>
+      </task>
+      <task synchronous="true" continue-on-failure="false" name="poLineListwithoutCancel">
+      		<rule-filename>is-organization-wpc.xml</rule-filename>
+			<task-object-name>com.tsa.puridiom.poline.tasks.PoLineRetrieveCancelByHeader</task-object-name>
+			<post-action></post-action>
+	  </task>
+      <task synchronous="true" continue-on-failure="false" name="lineitemswithoutCancel">
+      		<rule-filename>is-organization-wpc.xml</rule-filename>
+	        <task-object-name>com.tsa.puridiom.poline.tasks.PoLineDataRetrieveCancel</task-object-name>
+	        <post-action></post-action>
+      </task>
+      <task synchronous="true" continue-on-failure="false" name="lineitems">
+        <task-object-name>com.tsa.puridiom.poline.tasks.PoLineDataRetrieve</task-object-name>
+        <post-action></post-action>
+      </task>
+      <task synchronous="true" continue-on-failure="false" name="lineitems">
+		<task-object-name>com.tsa.puridiom.validationrules.tasks.RemoveCancelledLineItems</task-object-name>
+	  </task>
+      <task synchronous="true" continue-on-failure="false" name="accounts">
+        <task-object-name>com.tsa.puridiom.account.tasks.AccountRetrieveHeader</task-object-name>
+      </task>
+      <!-- task synchronous="true" continue-on-failure="false" name="accountListByHeader">
+		<rule-filename>is-delete-zero-dollar-accounts.xml</rule-filename>
+		<task-object-name>com.tsa.puridiom.account.tasks.AccountRetrieveByHeader</task-object-name>
+	  </task>
+	  <task synchronous="true" continue-on-failure="false" name="accounts">
+		<rule-filename>is-delete-zero-dollar-accounts.xml</rule-filename>
+		<task-object-name>com.tsa.puridiom.account.tasks.AccountDeleteZeroDollars</task-object-name>
+	  </task-->
+      <task synchronous="true" continue-on-failure="false" name="vendorInsurance">
+		  <task-object-name>com.tsa.puridiom.vendorinsurance.tasks.VendorInsuranceRetrieveById</task-object-name>
+	  </task>
+      <task synchronous="true" continue-on-failure="false" name="FinalDataSetup">
+        <task-object-name>com.tsa.puridiom.po.tasks.PoValidationRulesData</task-object-name>
+      </task>
+    </activity>
+    <activity synchronous="true" continue-on-failure="false" name="retrieveBlanketInfo">
+    	<task synchronous="true" continue-on-failure="false" name="retrieveBlanketInfo">
+    		<rule-filename>is-blanket-or-release-order.xml</rule-filename>
+    		<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+    		<process-filename>po-get-blanket-info.xml</process-filename>
+    		<post-action></post-action>
+    	</task>
+    	<task synchronous="true" continue-on-failure="false" name="poSecurityList">
+    		<rule-filename>is-po-blanket-order.xml</rule-filename>
+    		<task-object-name>com.tsa.puridiom.posecurity.tasks.PoSecurityRetrieveBy</task-object-name>
+    	</task>
+    </activity>
+    <activity synchronous="true" continue-on-failure="false" name="ReqTolerance">
+    	<rule-filename>is-po-from-req.xml;is-order-price-tolerance.xml</rule-filename>
+    	<task synchronous="true" continue-on-failure="false" name="requisitionHeader">
+    		<task-object-name>com.tsa.puridiom.requisitionheader.tasks.RequisitionHeaderRetrieveByPoSetup</task-object-name>
+    	</task>
+    	<task synchronous="true" continue-on-failure="false" name="requisitionTotal">
+    		<task-object-name>com.tsa.puridiom.requisitionheader.tasks.RequisitionHeaderRetrieveTotal</task-object-name>
+    	</task>
+    	<task synchronous="true" continue-on-failure="false" name="poCheckPriceTolerance">
+    		<task-object-name>com.tsa.puridiom.po.tasks.PoCheckPriceTolerance</task-object-name>
+    	</task>
+    </activity>
+    <activity synchronous="true" continue-on-failure="false" name="accountGLJBCrossValidationFailed">
+		<task synchronous="true" continue-on-failure="false" name="accountGLJBCrossValidationFailed">
+			<rule-filename>is-organization-bly.xml</rule-filename>
+			<task-object-name>com.tsa.puridiom.xrefcombo.tasks.AccountGljbCrossFromPoRules</task-object-name>
+		</task>
+	</activity>
+	<activity synchronous="true" continue-on-failure="false" name="otherRules">
+		<task synchronous="true" continue-on-failure="false" name="otherRule">
+				<task-object-name>com.tsa.puridiom.rules.CommodityLineXMLNotEmptyRule</task-object-name>
+			</task>
+		<task synchronous="true" continue-on-failure="false" name="wareHousePoLineRules">
+			<rule-filename>is-organization-bly.xml</rule-filename>
+			<task-object-name>com.tsa.puridiom.xrefcombo.tasks.WareHousePoLineRules</task-object-name>
+		</task>
+		<task synchronous="true" continue-on-failure="false" name="otherRule">
+			<rule-filename>is-organization-hoy.xml</rule-filename>
+			<task-object-name>com.tsa.puridiom.rules.AccountOrderHoyaRules</task-object-name>
+		</task>
+		<task synchronous="true" continue-on-failure="false" name="inspecitionDetailsAttached">
+			<rule-filename>is-organization-srr.xml</rule-filename>
+			<task-object-name>com.tsa.puridiom.po.rules.ValidInspectionCriteria</task-object-name>
+		</task>
+		<task synchronous="true" continue-on-failure="false" name="validAccount">
+		<rule-filename>is-storedprocedure-call-for-account-validation.xml</rule-filename>
+			<task-object-name>com.tsa.puridiom.validationrules.tasks.ValidAccountSPCall</task-object-name>
+		</task>
+		<task synchronous="true" continue-on-failure="false" name="otherRule">
+				<rule-filename>is-organization-msg.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.rules.ValidNotRequiredCommodityRule</task-object-name>
+		</task>
+		<task synchronous="true" continue-on-failure="false" name="poValidateSupplierSpend">
+			<rule-filename>is-organization-msg.xml</rule-filename>
+			<task-object-name>com.tsa.puridiom.po.tasks.PoValidateSupplierSpend</task-object-name>
+		</task>
+		<task synchronous="true" continue-on-failure="false" name="otherRule">
+			<rule-filename>is-coda-enabled.xml</rule-filename>
+			<task-object-name>com.tsa.puridiom.rules.ValidPoAccountsRules</task-object-name>
+		</task>
+		<task synchronous="true" continue-on-failure="false" name="otherRule">
+			<rule-filename>is-coda-enabled.xml</rule-filename>
+			<task-object-name>com.tsa.puridiom.coda.tasks.CodaAccountsValidate</task-object-name>
+		</task>
+		<task synchronous="true" continue-on-failure="false" name="otherRule">
+			<rule-filename>is-fdcs-enabled.xml</rule-filename>
+			<task-object-name>com.tsa.puridiom.fdcs.tasks.FdcsGetWorkOrderValidation</task-object-name>
+		</task>
+		<task synchronous="true" continue-on-failure="false" name="otherRule">
+			<rule-filename>is-fdcs-enabled.xml</rule-filename>
+			<task-object-name>com.tsa.puridiom.fdcs.tasks.FdcsGetWorkOrderLineValidation</task-object-name>
+		</task>
+		<task synchronous="true" continue-on-failure="false" name="poLineExistAccount">
+			<task-object-name>com.tsa.puridiom.po.rules.PoLineExistAccount</task-object-name>
+		</task>
+		<task synchronous="true" continue-on-failure="false" name="otherRule">
+			<task-object-name>com.tsa.puridiom.account.tasks.AccValidateCCADFWellFacility</task-object-name>
+		</task>
+		<task synchronous="true" continue-on-failure="false" name="poValidateSupplierSpend">
+			<rule-filename>is-daily-release-limit-active.xml</rule-filename>
+			<task-object-name>com.tsa.puridiom.po.tasks.PoValidateDailyReleaseLimit</task-object-name>
+		</task>
+	</activity>
+	<activity synchronous="true" continue-on-failure="false" name="otherRules">
+		<task synchronous="true" continue-on-failure="false" name="otherRule">
+			<rule-filename>is-inscategorylevel-active.xml;is-potype-ct.xml</rule-filename>
+			<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+			<process-filename>vendorinsurancedefault-validate-contracts.xml</process-filename>
+			<post-action>exitActivity</post-action>
+		</task>
+		<task synchronous="true" continue-on-failure="false" name="otherRule">
+			<rule-filename>is-inscategorylevel-active.xml</rule-filename>
+			<task-object-name>com.tsagate.foundation.processengine.InvokePuridiomProcessTask</task-object-name>
+			<process-filename>vendorinsurancedefault-validate-orders.xml</process-filename>
+		</task>
+	</activity>
+		<activity synchronous="true" continue-on-failure="false" name="validateRules">
+			<task synchronous="true" continue-on-failure="false" name="labelsList">
+				<task-object-name>com.tsa.puridiom.labels.tasks.LabelsRetrieveBy</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="rules">
+				<task-object-name>com.tsa.puridiom.validationrules.tasks.DatabaseValidationRulesTask</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="rules">
+				<task-object-name>com.tsa.puridiom.validationrules.tasks.ValidationRulesTask</task-object-name>
+				<process-filename>po-validation-rules.xml</process-filename>
+			</task>
+		</activity>
+  </activities>
+</process>

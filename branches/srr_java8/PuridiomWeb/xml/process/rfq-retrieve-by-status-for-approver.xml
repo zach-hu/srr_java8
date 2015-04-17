@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="rfqRetrieve" connection-type="Connection-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="rfqHeaderDataRetrieveById">
+			<task synchronous="true" continue-on-failure="false" name="lines">
+				<task-object-name>com.tsa.puridiom.rfq.tasks.RfqRetrieveByStatusForApprover</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="routingList">
+				<task-object-name>com.tsa.puridiom.rfq.tasks.ApproverListSetting</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="rfqHeaderList">
+				<task-object-name>com.tsa.puridiom.rfq.tasks.RfqListSetting</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="poLineSetPyStatus" connection-type="Connection-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="setLineQtyInvoiced">
+			<task synchronous="true" continue-on-failure="false" name="poLineList">
+				<task-object-name>com.tsa.puridiom.poline.tasks.PoLineRetrieveQuantities</task-object-name>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="poLines">
+				<task-object-name>com.tsa.puridiom.poline.tasks.PoLineUpdateList</task-object-name>
+			</task>	
+		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="setLinePyStatus">>	
+			<task synchronous="true" continue-on-failure="false" name="poLines">
+				<task-object-name>com.tsa.puridiom.poline.tasks.PoLineRetrieveByHeader</task-object-name>
+			</task>					
+			<task synchronous="true" continue-on-failure="false" name="poHeaderSetPyStatus">
+				<task-object-name>com.tsa.puridiom.poline.tasks.PoLineSetPyStatus</task-object-name>
+			</task>						
+		</activity>
+	</activities>
+</process>

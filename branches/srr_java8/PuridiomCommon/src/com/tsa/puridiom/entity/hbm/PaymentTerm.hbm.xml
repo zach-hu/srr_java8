@@ -1,0 +1,90 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+    
+<hibernate-mapping>
+
+<!-- 
+    Created by Middlegen Hibernate plugin
+
+    http://boss.bekk.no/boss/middlegen/
+    http://hibernate.sourceforge.net/
+-->
+
+<class 
+    name="com.tsa.puridiom.entity.PaymentTerm" 
+    table="PAYMENT_TERM"
+>
+    <id
+        name="termsCode"
+        type="java.lang.String"
+        column="TERMS_CODE"
+    >
+        <generator class="assigned" />
+    </id>
+    <property
+        name="termDescription"
+        type="java.lang.String"
+        column="TERM_DESCRIPTION"
+        length="60"
+    />
+    <property
+        name="termTypeFlag"
+        type="java.math.BigDecimal"
+        column="TERM_TYPE_FLAG"
+        length="5"
+    />
+    <property
+        name="termDays"
+        type="java.math.BigDecimal"
+        column="TERM_DAYS"
+        length="5"
+    />
+    <property
+        name="discount"
+        type="java.math.BigDecimal"
+        column="DISCOUNT"
+        length="10"
+    />
+    <property
+        name="discountDays"
+        type="java.math.BigDecimal"
+        column="DISCOUNT_DAYS"
+        length="5"
+    />
+    <property
+        name="dateEntered"
+        type="java.sql.Timestamp"
+        column="DATE_ENTERED"
+        length="7"
+    />
+    <property
+        name="dateExpires"
+        type="java.sql.Timestamp"
+        column="DATE_EXPIRES"
+        length="7"
+    />
+    <property
+        name="owner"
+        type="java.lang.String"
+        column="OWNER"
+        length="15"
+    />
+    <property
+        name="status"
+        type="java.lang.String"
+        column="STATUS"
+        length="4"
+    />
+    <property
+        name="calcMethod"
+        type="java.lang.String"
+        column="CALC_METHOD"
+        length="1"
+    />
+
+    <!-- associations -->
+
+</class>
+</hibernate-mapping>

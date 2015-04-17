@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="InvBinLocationFinalize" connection-type="Transaction-Required"> 
+	<activities>  
+		<activity synchronous="true" continue-on-failure="false" name="invBinLocationFinalizeActivity">
+			<task synchronous="true" continue-on-failure="false" name="invBinLocationFinalizeSetup">
+				<task-object-name>com.tsa.puridiom.invbinlocation.tasks.InvBinLocationFinalizeSetup</task-object-name>    
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="invBinLocation">
+				<task-object-name>com.tsa.puridiom.invbinlocation.tasks.InvBinLocationSetValues</task-object-name>    
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="invBinLocation">		
+				<task-object-name>com.tsa.puridiom.invbinlocation.tasks.InvBinLocationUpdate</task-object-name>
+			</task>   
+		</activity>
+	 </activities> 
+</process>

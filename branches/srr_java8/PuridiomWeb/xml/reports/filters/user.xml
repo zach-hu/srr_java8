@@ -1,0 +1,25 @@
+<user_by_group>
+	<columns>
+		<UserProfile_userId>
+			<label>User ID</label>
+		</UserProfile_userId>
+		<UserProfile_firstName>
+			<label>First Name</label>
+		</UserProfile_firstName>
+		<UserProfile_lastName>
+			<label>Last Name</label>
+		</UserProfile_lastName>
+		<UserProfile_mailId>
+			<label>E-mail Address</label>
+		</UserProfile_mailId>
+		<UserProfile_department>
+			<label>Department</label>
+		</UserProfile_department>
+		<UserGroupRel_groupId>
+			<label>Group Id</label>
+		</UserGroupRel_groupId>
+	</columns>
+<sqlfrom>UserProfile as UserProfile, UserGroupRel as UserGroupRel</sqlfrom>
+<sqlwhere><![CDATA[UserProfile.userId = UserGroupRel.userId AND UserProfile.status <> '03']]></sqlwhere>
+<title>Users By Group Report</title>
+</user_by_group>

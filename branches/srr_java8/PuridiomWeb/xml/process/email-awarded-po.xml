@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process connection-type="None" name="poawardemail">
+	<activities>
+		<activity continue-on-failure="false" name="emails" synchronous="true">
+			<task continue-on-failure="false" name="QueueAddBuyerSupplier" synchronous="true">
+				<task-object-name>com.tsa.puridiom.po.tasks.QueueAddBuyerSupplier</task-object-name>
+			</task>
+			<task continue-on-failure="false" name="QueueAddRequisitioners" synchronous="true">
+				<rule-filename>is-po-contract-order.xml;is-organization-bsc.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.po.tasks.QueueAddOrderBuyer</task-object-name>
+				<post-action>exitActivity</post-action>
+			</task>
+			<task continue-on-failure="false" name="QueueAddRequisitioners" synchronous="true">
+				<task-object-name>com.tsa.puridiom.po.tasks.QueueAddRequisitioners</task-object-name>
+			</task>
+			<task continue-on-failure="false" name="QueueAddBuyer" synchronous="true">
+				<rule-filename>is-not-po-contract-order.xml;is-organization-bly.xml;is-applicationtype-ps.xml</rule-filename>
+				<task-object-name>com.tsa.puridiom.po.tasks.QueueAddOrderBuyer</task-object-name>
+			</task>
+		</activity>
+	</activities>
+</process>

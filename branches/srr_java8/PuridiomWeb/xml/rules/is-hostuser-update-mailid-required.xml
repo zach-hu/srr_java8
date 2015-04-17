@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rule>
+	<clause type="NotEmpty">
+		<left-side>
+			<source>incomingRequest</source>
+			<name>newHostUser_mailId</name>
+		</left-side>
+	</clause>
+	<logical-operator>AND</logical-operator>
+	<clause type="NotEmpty">
+		<left-side>
+			<source>incomingRequest</source>
+			<name>HostUser_mailId</name>
+		</left-side>
+	</clause>
+	<logical-operator>AND</logical-operator>
+	<clause type="String">
+		<left-side>
+			<source>incomingRequest</source>
+			<name>newHostUser_mailId</name>
+		</left-side>
+		<operator>NOTEQUAL</operator>
+		<left-side>
+			<source>incomingRequest</source>
+			<name>HostUser_mailId</name>
+		</left-side>
+	</clause>
+</rule>

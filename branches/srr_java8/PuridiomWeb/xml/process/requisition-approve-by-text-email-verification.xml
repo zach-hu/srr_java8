@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="requisitionApproveByTextEmailVerification" connection-type="Transaction-Required">
+  <activities>
+     <activity synchronous="true" continue-on-failure="false" name="retrieveEntitiesById">
+    <!--<task synchronous="true" continue-on-failure="false" name="approvalAbleCheck">
+        <task-object-name>com.tsa.puridiom.approvals.tasks.ApprovalAbleCheck</task-object-name>
+        <post-action></post-action>
+      </task>-->
+      <task synchronous="true" continue-on-failure="false" name="requisitionHeader">
+        <task-object-name>com.tsa.puridiom.requisitionheader.tasks.RequisitionHeaderRetrieveById</task-object-name>
+        <post-action></post-action>
+      </task>
+      <task synchronous="true" continue-on-failure="false" name="approvalLogList">
+        <task-object-name>com.tsa.puridiom.approvals.tasks.ApprovalLogRetrieveByHeader</task-object-name>
+        <post-action></post-action>
+      </task>
+      </activity>
+     <activity synchronous="true" continue-on-failure="false" name="alreadyApprovedRequisition">
+      <rule-filename check-for-false="true">is-reqstatus-pending-approval-from-entity.xml</rule-filename>
+      <task synchronous="true" continue-on-failure="false" name="alreadyApproved">
+        <task-object-name>com.tsa.puridiom.requisitionheader.tasks.RequisitionHeaderAlreadyApproved</task-object-name>
+        <post-action></post-action>
+      </task>
+    </activity>
+    <activity synchronous="true" continue-on-failure="false" name="requisitionCheckForRecalled">
+      <rule-filename>is-reqstatus-recalled-from-entity.xml</rule-filename>
+      <task synchronous="true" continue-on-failure="false" name="requisitionWasRecalled">
+        <task-object-name>com.tsa.puridiom.requisitionheader.tasks.RequisitionHeaderWasRecalled</task-object-name>
+        <post-action></post-action>
+      </task>
+    </activity>
+    <activity synchronous="true" continue-on-failure="false" name="documentCheckForCancelled">
+      <rule-filename>is-reqstatus-cancelled-from-entity.xml</rule-filename>
+      <task synchronous="true" continue-on-failure="false" name="documentWasCancelled">
+        <task-object-name>com.tsa.puridiom.requisitionheader.tasks.DocumentWasCancelled</task-object-name>
+        <post-action></post-action>
+      </task>
+    </activity>
+    <activity synchronous="true" continue-on-failure="false" name="invalidApprover">
+      <rule-filename>is-reqstatus-pending-approval-from-entity.xml</rule-filename>
+      <task synchronous="true" continue-on-failure="false" name="invalidApprover">
+        <task-object-name>com.tsa.puridiom.requisition.tasks.InvalidApprover</task-object-name>
+        <post-action></post-action>
+      </task>
+    </activity>
+    <activity synchronous="true" continue-on-failure="false" name="approvalAbleVerification">
+     <task synchronous="true" continue-on-failure="false" name="approvalAbleVerification">
+        <task-object-name>com.tsa.puridiom.approvals.tasks.ApprovalAbleVerification</task-object-name>
+        <post-action></post-action>
+      </task>
+    </activity>
+  </activities>
+</process>

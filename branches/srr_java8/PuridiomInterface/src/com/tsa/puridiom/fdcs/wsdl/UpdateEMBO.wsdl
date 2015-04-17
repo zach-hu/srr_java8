@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:axis2="http://updateembo.wsbeans.iseries" xmlns:ns1="http://org.apache.axis2/xsd" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:ns0="http://updateembo.wsbeans.iseries/xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://updateembo.wsbeans.iseries">
+    <wsdl:documentation>UpdateEMBO</wsdl:documentation>
+    <wsdl:types>
+        <xs:schema xmlns:ns="http://updateembo.wsbeans.iseries/xsd" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://updateembo.wsbeans.iseries/xsd">
+            <xs:element name="poi960">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="param0" nillable="true" type="ns:POI960Input"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:complexType name="POI960Input">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="_PI_DBSKEY" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="_PI_PANO" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="_PI_PONUMB" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="_PI_POSEQN" nillable="true" type="xs:decimal"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:element name="poi960Response">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" nillable="true" type="ns:POI960Result"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:complexType name="POI960Result">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="_PO_ERRORCODE" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="_PO_ERRORDESC" nillable="true" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:element name="poi960_XML">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="param0" nillable="true" type="ns:POI960Input"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="poi960_XMLResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:schema>
+    </wsdl:types>
+    <wsdl:message name="poi960Request">
+        <wsdl:part name="parameters" element="ns0:poi960"/>
+    </wsdl:message>
+    <wsdl:message name="poi960Response">
+        <wsdl:part name="parameters" element="ns0:poi960Response"/>
+    </wsdl:message>
+    <wsdl:message name="poi960_XMLRequest">
+        <wsdl:part name="parameters" element="ns0:poi960_XML"/>
+    </wsdl:message>
+    <wsdl:message name="poi960_XMLResponse">
+        <wsdl:part name="parameters" element="ns0:poi960_XMLResponse"/>
+    </wsdl:message>
+    <wsdl:portType name="UpdateEMBOPortType">
+        <wsdl:operation name="poi960">
+            <wsdl:input message="axis2:poi960Request" wsaw:Action="urn:poi960"/>
+            <wsdl:output message="axis2:poi960Response" wsaw:Action="urn:poi960Response"/>
+        </wsdl:operation>
+        <wsdl:operation name="poi960_XML">
+            <wsdl:input message="axis2:poi960_XMLRequest" wsaw:Action="urn:poi960_XML"/>
+            <wsdl:output message="axis2:poi960_XMLResponse" wsaw:Action="urn:poi960_XMLResponse"/>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="UpdateEMBOSOAP11Binding" type="axis2:UpdateEMBOPortType">
+        <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+        <wsdl:operation name="poi960">
+            <soap:operation soapAction="urn:poi960" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="poi960_XML">
+            <soap:operation soapAction="urn:poi960_XML" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="UpdateEMBO">
+        <wsdl:port name="UpdateEMBOSOAP11port_http" binding="axis2:UpdateEMBOSOAP11Binding">
+            <soap:address location="http://10.172.4.11:10021/web/services/UpdateEMBO"/>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="printCheckInvoices" connection-type="Transaction-Required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="printCheckInvoices">
+			<task synchronous="true" continue-on-failure="false" name="checkList">
+				<task-object-name>com.tsa.puridiom.invoice.tasks.PrintCheckInvoices</task-object-name>
+			</task>
+<!--			<task synchronous="true" continue-on-failure="false" name="checkList">-->
+<!--				<task-object-name>com.tsa.puridiom.invoice.tasks.PrintCheckInvoicesBatch</task-object-name>-->
+<!--			</task>-->
+		</activity>
+	</activities>
+</process>

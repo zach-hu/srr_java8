@@ -1,0 +1,832 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions targetNamespace="http://www.coda.com/efinance/schemas/elementmaster/elementmaster-6.0/webservice" xmlns:elmws="http://www.coda.com/efinance/schemas/elementmaster/elementmaster-6.0/webservice" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns="http://schemas.xmlsoap.org/wsdl/">
+  <types>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    xmlns:com="http://www.coda.com/efinance/schemas/common"
+    xmlns:udf="http://www.coda.com/common/schemas/udfmaster"
+    xmlns:efm="http://www.coda.com/efinance/schemas/elementfiltermaster"
+    xmlns:elm="http://www.coda.com/efinance/schemas/elementmaster"
+    targetNamespace="http://www.coda.com/efinance/schemas/elementmaster/elementmaster-6.0/webservice"
+    attributeFormDefault="unqualified" elementFormDefault="qualified">
+    <xsd:import namespace="http://www.coda.com/efinance/schemas/common" schemaLocation="http://10.172.7.238/D43PRD/wsdl/finance/common/common.xsd"/>
+    <xsd:import
+        namespace="http://www.coda.com/efinance/schemas/elementmaster" schemaLocation="http://10.172.7.238/D43PRD/wsdl/finance/elementmaster/elementmaster.xsd"/>
+    <xsd:import
+        namespace="http://www.coda.com/efinance/schemas/elementfiltermaster" schemaLocation="http://10.172.7.238/D43PRD/wsdl/finance/elementfiltermaster/elementfiltermaster.xsd"/>
+    <xsd:import namespace="http://www.coda.com/common/schemas/udfmaster" schemaLocation="http://10.172.7.238/D43PRD/wsdl/common/udfmaster/udfmaster.xsd"/>
+    <xsd:element name="UpdateResponse">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="MultiCompany" minOccurs="0">
+                    <xsd:complexType>
+                        <xsd:sequence>
+                            <xsd:element name="Companies" type="com:Companies"/>
+                            <xsd:element name="Warning" type="com:Reason"/>
+                        </xsd:sequence>
+                    </xsd:complexType>
+                </xsd:element>
+                <xsd:element name="CmpCode" type="com:typeGeneralCode">
+                    <xsd:annotation>
+                        <xsd:documentation>The code for the company in
+                            which you attempted to update the element master.</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:element>
+                <xsd:element name="Level" type="com:typeElmLevel">
+                    <xsd:annotation>
+                        <xsd:documentation>The level of the element
+                            master that you attempted to update.</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:element>
+                <xsd:element name="Code" type="com:typeElmCode">
+                    <xsd:annotation>
+                        <xsd:documentation>The code for the element
+                            master that you attempted to update.</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:element>
+                <xsd:element name="TimeStamp" minOccurs="0" type="com:typeWord">
+                    <xsd:annotation>
+                        <xsd:documentation>The TimeStamp value for this
+                            element master in the database.</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:element>
+                <xsd:element name="TaxesTimeStamp" minOccurs="0" type="com:typeWord">
+                    <xsd:annotation>
+                        <xsd:documentation>The TimeStamp value for this
+                            element master in the oas_elmtaxes table.</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="OptionsResponse">
+        <xsd:complexType>
+            <xsd:attribute name="transactioncoordinator" type="xsd:string"/>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="DeleteResponse">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="CmpCode" type="com:typeGeneralCode">
+                    <xsd:annotation>
+                        <xsd:documentation>The code for the company in
+                            which you attempted to delete the element master.</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:element>
+                <xsd:element name="Level" type="com:typeElmLevel">
+                    <xsd:annotation>
+                        <xsd:documentation>The level of the element
+                            master that you attempted to delete.</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:element>
+                <xsd:element name="Code" type="com:typeElmCode">
+                    <xsd:annotation>
+                        <xsd:documentation>The code for the element
+                            master that you attempted to delete.</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="SetRequest">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="Companies" minOccurs="0" type="com:Companies"/>
+                <xsd:element name="SetOptions" minOccurs="0" nillable="true">
+                    <xsd:complexType>
+                        <xsd:attribute name="candeleteretailinfo" type="xsd:boolean">
+                            <xsd:annotation>
+                                <xsd:documentation>If set, Retail
+                                    information can be deleted.</xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:attribute>
+                    </xsd:complexType>
+                </xsd:element>
+                <xsd:element name="Element" type="elm:Element">
+                    <xsd:annotation>
+                        <xsd:documentation>Identifies the element master
+                            you want to update and the new values for
+                            the fields you want to set. Include optional
+                            elements only for those fields you want to
+                            set. Lists, if specified, are replaced in
+                            their entirety.</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="GetAddressesRequest">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="Key" type="elm:elmFullKeyWithTemporaryElmFilter">
+                    <xsd:annotation>
+                        <xsd:documentation>Contains the key identifying
+                            the element address you want to retrieve
+                            from the database.</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="ListPunchoutItemCodesResponse">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="Filter" type="com:ReqKeys">
+                    <xsd:annotation>
+                        <xsd:documentation>A filter that selects the
+                            punchout item codes to be listed.</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:element>
+                <xsd:element name="FoundDb" type="xsd:boolean">
+                    <xsd:annotation>
+                        <xsd:documentation>If set to FALSE, it indicates
+                            that the Procurement database, in which the
+                            punchout items are held, cannot be accessed.
+                            If set to TRUE, the Procurement database has
+                            been accessed; this means that if nothing is
+                            returned, the element does not contain a
+                            list of punchout items.</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:element>
+                <xsd:element name="Keys" minOccurs="0" type="com:KeyData">
+                    <xsd:annotation>
+                        <xsd:documentation>Contains the keys for the
+                            punchout item codes listed.</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="ListRequest">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="Filter" type="elm:elmReqFullKeys">
+                    <xsd:annotation>
+                        <xsd:documentation>A filter that selects the
+                            elements to be listed.</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="FetchResponse">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="CmpCode" type="com:typeGeneralCode">
+                    <xsd:annotation>
+                        <xsd:documentation>The code for the company from
+                            which you attempted to fetch element information.</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:element>
+                <xsd:element name="Level" type="com:typeElmLevel">
+                    <xsd:annotation>
+                        <xsd:documentation>The level of the element
+                            whose information you attempted to fetch.</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:element>
+                <xsd:element name="Code" type="com:typeElmCode">
+                    <xsd:annotation>
+                        <xsd:documentation>The code for the element
+                            master whose information you attempted to fetch.</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:element>
+                <xsd:element name="Element" minOccurs="0" type="elm:Element">
+                    <xsd:annotation>
+                        <xsd:documentation>Contains the element
+                            information fetched from the database.</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="GetResponse">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="CmpCode" type="com:typeGeneralCode">
+                    <xsd:annotation>
+                        <xsd:documentation>The code for the company from
+                            which you attempted to retrieve the
+                            specified element master.</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:element>
+                <xsd:element name="Level" type="com:typeElmLevel">
+                    <xsd:annotation>
+                        <xsd:documentation>The level of the element
+                            master that you attempted to retrieve.</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:element>
+                <xsd:element name="Code" type="com:typeElmCode">
+                    <xsd:annotation>
+                        <xsd:documentation>The code for the element
+                            master that you attempted to retrieve.</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:element>
+                <xsd:element name="Element" minOccurs="0" type="elm:Element">
+                    <xsd:annotation>
+                        <xsd:documentation>Contains the element master
+                            you have retrieved from the database.</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="UpdateRequest">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="Companies" minOccurs="0" type="com:Companies"/>
+                <xsd:element name="UpdateOptions" minOccurs="0" nillable="true">
+                    <xsd:complexType>
+                        <xsd:attribute name="candeleteretailinfo" type="xsd:boolean">
+                            <xsd:annotation>
+                                <xsd:documentation>If set, Retail
+                                    information can be deleted.</xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:attribute>
+                    </xsd:complexType>
+                </xsd:element>
+                <xsd:element name="Element" type="elm:Element">
+                    <xsd:annotation>
+                        <xsd:documentation>Contains the information for
+                            the element master you want to update. All
+                            XML elements in the element master and all
+                            lists must be specified.</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="Options">
+        <xsd:complexType>
+            <xsd:attribute name="bulkload" type="xsd:boolean"/>
+            <xsd:attribute name="logtitle" type="com:typeLogTitle"/>
+            <xsd:attribute name="attachments" type="com:typeAttachments" default="none"/>
+            <xsd:attribute name="locale" type="com:typeLocale"/>
+            <xsd:attribute name="user" type="com:typeGeneralCode"/>
+            <xsd:attribute name="company" type="com:typeGeneralCode"/>
+            <xsd:attribute name="session" type="xsd:string"/>
+            <xsd:attribute name="transactionid" type="xsd:string"/>
+            <xsd:attribute name="txtimeout" type="xsd:int"/>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="ListResponse">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="Filter" type="elm:elmReqFullKeys">
+                    <xsd:annotation>
+                        <xsd:documentation>The filter that was used to
+                            select the element masters to be listed.</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:element>
+                <xsd:element name="Keys" minOccurs="0" type="elm:elmKeyData">
+                    <xsd:annotation>
+                        <xsd:documentation>Contains extended key
+                            information for the listed element masters.</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="SetResponse">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="MultiCompany" minOccurs="0">
+                    <xsd:complexType>
+                        <xsd:sequence>
+                            <xsd:element name="Companies" type="com:Companies"/>
+                            <xsd:element name="Warning" type="com:Reason"/>
+                        </xsd:sequence>
+                    </xsd:complexType>
+                </xsd:element>
+                <xsd:element name="CmpCode" type="com:typeGeneralCode">
+                    <xsd:annotation>
+                        <xsd:documentation>The code for the company in
+                            which you attempted to set some of the
+                            element master&apos;s values.</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:element>
+                <xsd:element name="Level" type="com:typeElmLevel">
+                    <xsd:annotation>
+                        <xsd:documentation>The level of the element
+                            master whose values you attempted to set.</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:element>
+                <xsd:element name="Code" type="com:typeElmCode">
+                    <xsd:annotation>
+                        <xsd:documentation>The code for the element
+                            master whose values you attempted to set.</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:element>
+                <xsd:element name="TimeStamp" minOccurs="0" type="com:typeWord">
+                    <xsd:annotation>
+                        <xsd:documentation>The TimeStamp value for this
+                            element master in the database.</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:element>
+                <xsd:element name="TaxesTimeStamp" minOccurs="0" type="com:typeWord">
+                    <xsd:annotation>
+                        <xsd:documentation>The TimeStamp value for this
+                            element master in the oas_elmtaxes table.</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="GetRequest">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="GetOptions" minOccurs="0" nillable="true">
+                    <xsd:complexType>
+                        <xsd:attribute name="getretailinfo" type="xsd:boolean">
+                            <xsd:annotation>
+                                <xsd:documentation>If set, includes
+                                    Retail information.</xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:attribute>
+                    </xsd:complexType>
+                </xsd:element>
+                <xsd:element name="Key" type="elm:elmFullKey">
+                    <xsd:annotation>
+                        <xsd:documentation>Contains the key identifying
+                            the element master you want to retrieve from
+                            the database.</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:element>
+                <xsd:element name="UseMnemonic" minOccurs="0" type="xsd:boolean">
+                    <xsd:annotation>
+                        <xsd:documentation>Indicates that the element
+                            code specified in the Key for this Request,
+                            may (or may not) be a mnemonic.</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:element>
+                <xsd:element name="IncludeLastTransaction" minOccurs="0" type="xsd:boolean">
+                    <xsd:annotation>
+                        <xsd:documentation>Indicates whether details of
+                            the last transaction posted to the specified
+                            element(s) are retrieved.</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:element>
+                <xsd:element name="CheckForPostings" minOccurs="0" type="xsd:boolean">
+                    <xsd:annotation>
+                        <xsd:documentation>If set, checks for postings
+                            to the specified element masters.</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="GetBanksResponse">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="Key" type="elm:elmFullKeyWithTemporaryElmFilter">
+                    <xsd:annotation>
+                        <xsd:documentation>Contains the key identifying
+                            the element bank you attempted to retrieve
+                            from the database.</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:element>
+                <xsd:element name="Banks" minOccurs="0" type="elm:BankData">
+                    <xsd:annotation>
+                        <xsd:documentation>Contains the element bank
+                            information you have retrieved from the database.</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="GetBanksRequest">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="Key" type="elm:elmFullKeyWithTemporaryElmFilter">
+                    <xsd:annotation>
+                        <xsd:documentation>Contains the key identifying
+                            the element bank you want to retrieve from
+                            the database.</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="AddRequest">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="Companies" minOccurs="0" type="com:Companies"/>
+                <xsd:element name="AddOptions" minOccurs="0" nillable="true">
+                    <xsd:complexType>
+                        <xsd:attribute name="templatecmpcode" type="com:typeGeneralCode">
+                            <xsd:annotation>
+                                <xsd:documentation>The code for the
+                                    company in which the selected
+                                    template exists.</xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:attribute>
+                        <xsd:attribute name="templatecode" type="com:typeGeneralCode">
+                            <xsd:annotation>
+                                <xsd:documentation>The code for the
+                                    template on which the current
+                                    element master is being based.</xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:attribute>
+                        <xsd:attribute
+                            name="inhibitinitialisationfromtemplate" type="xsd:boolean">
+                            <xsd:annotation>
+                                <xsd:documentation>If specified,
+                                    prevents initialisation from the template.</xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:attribute>
+                        <xsd:attribute name="autogeneratefromtemplate" type="xsd:boolean">
+                            <xsd:annotation>
+                                <xsd:documentation>If specified, element
+                                    codes are set to be automatically generated.</xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:attribute>
+                    </xsd:complexType>
+                </xsd:element>
+                <xsd:element name="Element" type="elm:Element">
+                    <xsd:annotation>
+                        <xsd:documentation>Contains the information for
+                            the element master you want to create.</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="AddResponse">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="MultiCompany" minOccurs="0">
+                    <xsd:complexType>
+                        <xsd:sequence>
+                            <xsd:element name="Companies" type="com:Companies"/>
+                            <xsd:element name="Warning" type="com:Reason"/>
+                        </xsd:sequence>
+                    </xsd:complexType>
+                </xsd:element>
+                <xsd:element name="CmpCode" type="com:typeGeneralCode">
+                    <xsd:annotation>
+                        <xsd:documentation>The code for the company in
+                            which you attempted to create the element master.</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:element>
+                <xsd:element name="Level" type="com:typeElmLevel">
+                    <xsd:annotation>
+                        <xsd:documentation>The level of the element
+                            master that you attempted to create.</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:element>
+                <xsd:element name="Code" type="com:typeElmCode">
+                    <xsd:annotation>
+                        <xsd:documentation>The code for the element
+                            master that you attempted to create.</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:element>
+                <xsd:element name="TimeStamp" minOccurs="0" type="com:typeWord">
+                    <xsd:annotation>
+                        <xsd:documentation>The TimeStamp value for this
+                            element master in the database.</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:element>
+                <xsd:element name="TaxesTimeStamp" minOccurs="0" type="com:typeWord">
+                    <xsd:annotation>
+                        <xsd:documentation>The TimeStamp value for this
+                            element master in the oas_elmtaxes table.</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:element>
+                <xsd:element name="AutoGenerateRetry" minOccurs="0" type="xsd:boolean">
+                    <xsd:annotation>
+                        <xsd:documentation>If specified, the initial
+                            attempt to generate a code failed.</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:element>
+                <xsd:element name="AutoGeneratedCode" minOccurs="0" type="com:typeElmCode">
+                    <xsd:annotation>
+                        <xsd:documentation>An automatically generated
+                            element code.</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="FetchRequest">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="FetchOptions" minOccurs="0" nillable="true">
+                    <xsd:complexType>
+                        <xsd:attribute name="getretailinfo" type="xsd:boolean">
+                            <xsd:annotation>
+                                <xsd:documentation>If set, includes
+                                    Retail information.</xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:attribute>
+                    </xsd:complexType>
+                </xsd:element>
+                <xsd:element name="Key" type="elm:FetchKey">
+                    <xsd:annotation>
+                        <xsd:documentation>Contains the key identifying
+                            the element information you want to retrieve
+                            from the database.</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="GetAddressesResponse">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="Key" type="elm:elmFullKeyWithTemporaryElmFilter">
+                    <xsd:annotation>
+                        <xsd:documentation>Contains the key identifying
+                            the element address you attempted to
+                            retrieve from the database.</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:element>
+                <xsd:element name="Addresses" minOccurs="0" type="elm:AddressData">
+                    <xsd:annotation>
+                        <xsd:documentation>Contains the element address
+                            information you have retrieved from the database.</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="ListPunchoutItemCodesRequest">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="Filter" type="com:ReqKeys">
+                    <xsd:annotation>
+                        <xsd:documentation>A filter that selects the
+                            punchout item codes to be listed.</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="DeleteRequest">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="Key" type="elm:elmFullKey">
+                    <xsd:annotation>
+                        <xsd:documentation>Contains the key identifying
+                            the element master you want to delete.</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+</xsd:schema>
+  </types>
+  <message name="GetBanksResponse">
+    <part name="GetBanksResponse" element="elmws:GetBanksResponse"/>
+  </message>
+  <message name="OptionsResponse">
+    <part name="OptionsResponse" element="elmws:OptionsResponse"/>
+  </message>
+  <message name="ListResponse">
+    <part name="ListResponse" element="elmws:ListResponse"/>
+  </message>
+  <message name="SetResponse">
+    <part name="SetResponse" element="elmws:SetResponse"/>
+  </message>
+  <message name="GetAddressesResponse">
+    <part name="GetAddressesResponse" element="elmws:GetAddressesResponse"/>
+  </message>
+  <message name="DeleteRequest">
+    <part name="DeleteRequest" element="elmws:DeleteRequest"/>
+  </message>
+  <message name="AddResponse">
+    <part name="AddResponse" element="elmws:AddResponse"/>
+  </message>
+  <message name="UpdateRequest">
+    <part name="UpdateRequest" element="elmws:UpdateRequest"/>
+  </message>
+  <message name="ListPunchoutItemCodesRequest">
+    <part name="ListPunchoutItemCodesRequest" element="elmws:ListPunchoutItemCodesRequest"/>
+  </message>
+  <message name="GetBanksRequest">
+    <part name="GetBanksRequest" element="elmws:GetBanksRequest"/>
+  </message>
+  <message name="FetchResponse">
+    <part name="FetchResponse" element="elmws:FetchResponse"/>
+  </message>
+  <message name="GetRequest">
+    <part name="GetRequest" element="elmws:GetRequest"/>
+  </message>
+  <message name="GetAddressesRequest">
+    <part name="GetAddressesRequest" element="elmws:GetAddressesRequest"/>
+  </message>
+  <message name="SetRequest">
+    <part name="SetRequest" element="elmws:SetRequest"/>
+  </message>
+  <message name="GetResponse">
+    <part name="GetResponse" element="elmws:GetResponse"/>
+  </message>
+  <message name="ListRequest">
+    <part name="ListRequest" element="elmws:ListRequest"/>
+  </message>
+  <message name="AddRequest">
+    <part name="AddRequest" element="elmws:AddRequest"/>
+  </message>
+  <message name="DeleteResponse">
+    <part name="DeleteResponse" element="elmws:DeleteResponse"/>
+  </message>
+  <message name="Options">
+    <part name="Options" element="elmws:Options"/>
+  </message>
+  <message name="FetchRequest">
+    <part name="FetchRequest" element="elmws:FetchRequest"/>
+  </message>
+  <message name="UpdateResponse">
+    <part name="UpdateResponse" element="elmws:UpdateResponse"/>
+  </message>
+  <message name="ListPunchoutItemCodesResponse">
+    <part name="ListPunchoutItemCodesResponse" element="elmws:ListPunchoutItemCodesResponse"/>
+  </message>
+  <portType name="ElementMasterServicePortTypes">
+    <operation name="GetAddresses">
+      <input message="elmws:GetAddressesRequest"/>
+      <output message="elmws:GetAddressesResponse"/>
+    </operation>
+    <operation name="ListPunchoutItemCodes">
+      <input message="elmws:ListPunchoutItemCodesRequest"/>
+      <output message="elmws:ListPunchoutItemCodesResponse"/>
+    </operation>
+    <operation name="List">
+      <input message="elmws:ListRequest"/>
+      <output message="elmws:ListResponse"/>
+    </operation>
+    <operation name="GetBanks">
+      <input message="elmws:GetBanksRequest"/>
+      <output message="elmws:GetBanksResponse"/>
+    </operation>
+    <operation name="Add">
+      <input message="elmws:AddRequest"/>
+      <output message="elmws:AddResponse"/>
+    </operation>
+    <operation name="Get">
+      <input message="elmws:GetRequest"/>
+      <output message="elmws:GetResponse"/>
+    </operation>
+    <operation name="Update">
+      <input message="elmws:UpdateRequest"/>
+      <output message="elmws:UpdateResponse"/>
+    </operation>
+    <operation name="Fetch">
+      <input message="elmws:FetchRequest"/>
+      <output message="elmws:FetchResponse"/>
+    </operation>
+    <operation name="Set">
+      <input message="elmws:SetRequest"/>
+      <output message="elmws:SetResponse"/>
+    </operation>
+    <operation name="Delete">
+      <input message="elmws:DeleteRequest"/>
+      <output message="elmws:DeleteResponse"/>
+    </operation>
+  </portType>
+  <binding name="ElementMasterServiceSOAPBinding" type="elmws:ElementMasterServicePortTypes">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <operation name="GetAddresses">
+<documentation>Retrieves the specified element's address information from the database.</documentation>
+      <soap:operation soapAction="uri-coda-webservice/11.200.0306/finance/ElementMaster/GetAddresses" style="document"/>
+      <input>
+        <soap:header message="elmws:Options" part="Options" use="literal">
+        </soap:header>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:header message="elmws:OptionsResponse" part="OptionsResponse" use="literal">
+        </soap:header>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+    <operation name="ListPunchoutItemCodes">
+<documentation>Produces a list of punchout product item codes associated with the specified element masters. The punchout item is used as a template for items created by punchout.</documentation>
+      <soap:operation soapAction="uri-coda-webservice/11.200.0306/finance/ElementMaster/ListPunchoutItemCodes" style="document"/>
+      <input>
+        <soap:header message="elmws:Options" part="Options" use="literal">
+        </soap:header>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:header message="elmws:OptionsResponse" part="OptionsResponse" use="literal">
+        </soap:header>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+    <operation name="List">
+<documentation>Retrieves extended key information for the specified element masters from the database.</documentation>
+      <soap:operation soapAction="uri-coda-webservice/11.200.0306/finance/ElementMaster/List" style="document"/>
+      <input>
+        <soap:header message="elmws:Options" part="Options" use="literal">
+        </soap:header>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:header message="elmws:OptionsResponse" part="OptionsResponse" use="literal">
+        </soap:header>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+    <operation name="GetBanks">
+<documentation>Retrieves the specified element's bank information from the database.</documentation>
+      <soap:operation soapAction="uri-coda-webservice/11.200.0306/finance/ElementMaster/GetBanks" style="document"/>
+      <input>
+        <soap:header message="elmws:Options" part="Options" use="literal">
+        </soap:header>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:header message="elmws:OptionsResponse" part="OptionsResponse" use="literal">
+        </soap:header>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+    <operation name="Add">
+<documentation>Creates new element masters in the database using the element information you provide.</documentation>
+      <soap:operation soapAction="uri-coda-webservice/11.200.0306/finance/ElementMaster/Add" style="document"/>
+      <input>
+        <soap:header message="elmws:Options" part="Options" use="literal">
+        </soap:header>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:header message="elmws:OptionsResponse" part="OptionsResponse" use="literal">
+        </soap:header>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+    <operation name="Get">
+<documentation>Retrieves the specified element masters from the database.</documentation>
+      <soap:operation soapAction="uri-coda-webservice/11.200.0306/finance/ElementMaster/Get" style="document"/>
+      <input>
+        <soap:header message="elmws:Options" part="Options" use="literal">
+        </soap:header>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:header message="elmws:OptionsResponse" part="OptionsResponse" use="literal">
+        </soap:header>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+    <operation name="Update">
+<documentation>Updates element masters in the database using the element information you provide.</documentation>
+      <soap:operation soapAction="uri-coda-webservice/11.200.0306/finance/ElementMaster/Update" style="document"/>
+      <input>
+        <soap:header message="elmws:Options" part="Options" use="literal">
+        </soap:header>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:header message="elmws:OptionsResponse" part="OptionsResponse" use="literal">
+        </soap:header>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+    <operation name="Fetch">
+<documentation>Fetches the specified element information from the database.</documentation>
+      <soap:operation soapAction="uri-coda-webservice/11.200.0306/finance/ElementMaster/Fetch" style="document"/>
+      <input>
+        <soap:header message="elmws:Options" part="Options" use="literal">
+        </soap:header>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:header message="elmws:OptionsResponse" part="OptionsResponse" use="literal">
+        </soap:header>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+    <operation name="Set">
+<documentation>Sets values for specified fields in specified element masters.</documentation>
+      <soap:operation soapAction="uri-coda-webservice/11.200.0306/finance/ElementMaster/Set" style="document"/>
+      <input>
+        <soap:header message="elmws:Options" part="Options" use="literal">
+        </soap:header>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:header message="elmws:OptionsResponse" part="OptionsResponse" use="literal">
+        </soap:header>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+    <operation name="Delete">
+<documentation>Deletes the specified element masters from the database.</documentation>
+      <soap:operation soapAction="uri-coda-webservice/11.200.0306/finance/ElementMaster/Delete" style="document"/>
+      <input>
+        <soap:header message="elmws:Options" part="Options" use="literal">
+        </soap:header>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:header message="elmws:OptionsResponse" part="OptionsResponse" use="literal">
+        </soap:header>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+  </binding>
+  <service name="ElementMasterService">
+    <port name="ElementMasterServicePort" binding="elmws:ElementMasterServiceSOAPBinding">
+      <soap:address location="http://10.172.7.238/D43PRD/services/finance/elementmaster/elementmaster-6.0"/>
+    </port>
+  </service>
+</definitions>

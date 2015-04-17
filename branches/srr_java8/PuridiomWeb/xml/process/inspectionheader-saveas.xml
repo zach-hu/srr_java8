@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="inspectionHeaderSaveas" connection-type="transaction-required">
+	<activities>
+		<activity synchronous="true" continue-on-failure="false" name="inspectionHeaderSaveas">
+			<task synchronous="true" continue-on-failure="false" name="inspectionLineSetup">
+				<task-object-name>com.tsa.puridiom.inspection.tasks.InspectionDetailRetrieveSetup</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="inspectionLineList">
+				<task-object-name>com.tsa.puridiom.inspectionline.tasks.InspectionLineRetrieveByIcInspNo</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="inspectionHeader">
+				<task-object-name>com.tsa.puridiom.inspectionheader.tasks.InspectionHeaderSaveas</task-object-name>
+				<post-action></post-action>
+			</task>
+			<task synchronous="true" continue-on-failure="false" name="InspectionLineListSaveAs">
+				<task-object-name>com.tsa.puridiom.inspectionline.tasks.InspectionLineListSaveAs</task-object-name>
+				<post-action></post-action>
+			</task>
+		</activity>
+	</activities>
+</process>

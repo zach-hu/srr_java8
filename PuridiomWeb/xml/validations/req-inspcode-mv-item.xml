@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rule>
+	<clause type="lookup" elementSource="true" unique="false">
+	<sql>from InspectionStd InspectionStd where InspectionStd.status = '02' AND InspectionStd.standardCode = '@stdCode@' </sql>
+		<source>stdCode</source>
+		<arguments>
+			<name>stdCode</name>
+			<source>inspectionHeader</source>
+			<colName>getStandardCode</colName>
+		</arguments>
+	</clause>
+</rule>

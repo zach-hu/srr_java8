@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.tsa.puridiom.common.documents.DocumentStatus;
+import com.tsa.puridiom.common.utility.HiltonUtility;
 import com.tsa.puridiom.entity.ReceiptHeader;
 import com.tsa.puridiom.entity.ReceiptLine;
 import com.tsagate.foundation.processengine.Status;
@@ -99,10 +100,19 @@ public class ReceiptAtLeastOneQuantityReceivedNStepRules extends Task
 					break;
 				}
 				if (actionStep.equalsIgnoreCase("step1") && recLine.getStatus().equals(DocumentStatus.RCV_STEP_1)
-						&& (recLine.getQtyStep1Received() != null || recLine.getQtyStep1Accepted() != null) && (recLine.getQtyStep1Received().compareTo(new BigDecimal("0")) > 0 || recLine.getQtyStep1Accepted().compareTo(new BigDecimal("0")) > 0))
+						&& (HiltonUtility.ckNull(recLine.getQtyStep1Received()).compareTo(new BigDecimal("0")) > 0 || HiltonUtility.ckNull(recLine.getQtyStep1Accepted()).compareTo(new BigDecimal("0")) > 0) 
+					)
 				{
-					strAtLeastOneQuantiyReceivedStep1 = "Y";
-					break;
+					if(HiltonUtility.ckNull(recLine.getQtyStep1Accepted()).compareTo(new BigDecimal("0")) > 0)
+					{
+						if(HiltonUtility.ckNull(recLine.getQtyStep1Received()).compareTo(HiltonUtility.ckNull(recLine.getQtyStep1Accepted()).add(HiltonUtility.ckNull(recLine.getQtyStep1Rejected())))==0){
+							strAtLeastOneQuantiyReceivedStep1 = "Y";
+							break;
+						}
+					} else {
+						strAtLeastOneQuantiyReceivedStep1 = "Y";
+						break;
+					}
 				}
 				if (actionStep.equalsIgnoreCase("step2") && recLine.getStatus().equals(DocumentStatus.RCV_STEP_2)
 						&& recLine.getQtyStep2Received() != null && recLine.getQtyStep2Received().compareTo(new BigDecimal("0")) > 0)

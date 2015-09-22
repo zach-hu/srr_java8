@@ -377,7 +377,7 @@ if (inspectionStdList.size() > 0) {
 			</td>
 		</tr>
 		<tr>
-		<% if (! disableEdit) { %>
+		<% if (disableEdit) { %>
 			<tsa:td align="center"><a href="javascript: changeCriteria('(new)'); void(0);"><font class="reset"><b>Add New Inspection Code</b></font></a></tsa:td>
 			<% } %>
 		</tr>

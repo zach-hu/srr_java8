@@ -1226,7 +1226,7 @@
 	function saveas()
 	{
 	    popupParameters = "formtype=INVITEM;action=saveas";
-	    doSubmitToLookup('/base/save_as.jsp', 'DoNothing', 'WIDTH=350', 'HEIGHT=165');
+	    doSubmitToPopup('/base/save_as.jsp', 'DoNothing', 'WIDTH=350', 'HEIGHT=165');
 	}
 
 	function setStatus()

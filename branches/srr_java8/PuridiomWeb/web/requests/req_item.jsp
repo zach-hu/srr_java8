@@ -213,24 +213,24 @@
 	
 	boolean editInspections = false;
 	
-	switch(s_req_status){
-	case DocumentStatus.REQ_PLANNING:
-		if(HiltonUtility.ckNull(requisitionHeader.getOwner()).equals(uid))
-			editInspections = true;	
-		break;
-	case DocumentStatus.REQ_PLANNING_RECALLED:
-		if(HiltonUtility.ckNull(requisitionHeader.getOwner()).equals(uid) || fpeUser || msrEngineer)
-			editInspections = true;
-		break;
-	case DocumentStatus.REQ_PLANNING_REJECTED:
-		if(HiltonUtility.ckNull(requisitionHeader.getOwner()).equals(uid) || fpeUser || msrEngineer)	
-			editInspections = true;
-		break;
-	case DocumentStatus.REQ_PLANNING_APPROVING:
-		if(fpeUser || msrEngineer)
-			editInspections = true;
-		break;
-	} 
+switch(s_req_status){
+case DocumentStatus.REQ_PLANNING:
+	if(HiltonUtility.ckNull(reqLine.getRequisitionerCode()).equals(uid))
+		disableEdit = false;
+	break;
+case DocumentStatus.REQ_PLANNING_RECALLED:
+	if(HiltonUtility.ckNull(reqLine.getRequisitionerCode()).equals(uid) || fpeUser || msrEngineer)
+		disableEdit = false;
+	break;
+case DocumentStatus.REQ_PLANNING_REJECTED:
+	if(HiltonUtility.ckNull(reqLine.getRequisitionerCode()).equals(uid) || fpeUser || msrEngineer)	
+		disableEdit = false;
+	break;
+case DocumentStatus.REQ_PLANNING_APPROVING:
+	if(fpeUser || msrEngineer)
+		disableEdit = false;
+	break;
+}
 %>
 <tsa:hidden name="RequisitionHeader_icReqHeader" value="<%=b_req_ic_header%>"/>
 <tsa:hidden name="RequisitionLine_icReqHeader" value="<%=b_req_ic_header%>"/>

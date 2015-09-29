@@ -140,7 +140,7 @@
 <SCRIPT LANGUAGE="JavaScript1.2">
 <!--  hide script from old browsers
 
-	thisfrm = document.purchaseform;
+	frm = document.purchaseform;
 	self.focus();
 
 	var currentprocessmethod = "<%=headerEncoder.encodeForJavaScript(s_currentprocessmethod)%>";
@@ -150,14 +150,14 @@
 	{
 <%	if (!s_formtype.equalsIgnoreCase("INVITEM")) {%>
 		var todayDate = new Date();
-		var fy = thisfrm.saveas_fiscal_year[thisfrm.saveas_fiscal_year.selectedIndex].value;
+		var fy = frm.saveas_fiscal_year[frm.saveas_fiscal_year.selectedIndex].value;
 		if (fy < todayDate.getYear()) {
 			fy = todayDate.getYear();
 		}
 		var saveasFY = fy;
 <%	}%>
-		var saveasNo = thisfrm.saveas_number.value;
-		var curNo = thisfrm.current_number.value;
+		var saveasNo = frm.saveas_number.value;
+		var curNo = frm.current_number.value;
 		
 <%	if (s_showauto.equals("N"))
 		{
@@ -172,7 +172,7 @@
 		}
 		else
 		{ %>
-			var autoNo = thisfrm.ck_auto_number.checked;
+			var autoNo = frm.ck_auto_number.checked;
 <%	} %>
 
 		if (!autoNo && isEmpty(saveasNo))
@@ -378,10 +378,10 @@
 
 	function resetNumber()
 	{
-		if ( thisfrm.ck_auto_number.checked )
+		if ( frm.ck_auto_number.checked )
 		{
-			thisfrm.saveas_number.value = "";
-			thisfrm.saveas_number.blur();
+			frm.saveas_number.value = "";
+			frm.saveas_number.blur();
 		}
 	}
 
@@ -391,14 +391,14 @@
 		{
 	    	if (s_autonumber.equals("Y"))
 	    	{ %>
-				thisfrm.saveas_number.blur();
+				frm.saveas_number.blur();
 <%	    }
 		}
 		else
 		{ %>
-			if ( thisfrm.ck_auto_number.checked )
+			if ( frm.ck_auto_number.checked )
 			{
-				thisfrm.saveas_number.blur();
+				frm.saveas_number.blur();
 			}
 <%	} %>
 	}

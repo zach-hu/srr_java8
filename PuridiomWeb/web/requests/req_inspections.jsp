@@ -61,25 +61,6 @@
 	
 	boolean disableEdit = true;
 	
-	switch(s_req_status){
-	case DocumentStatus.REQ_PLANNING:
-		if(HiltonUtility.ckNull(requisitionHeader.getOwner()).equals(uid))
-			disableEdit = false;	
-		break;
-	case DocumentStatus.REQ_PLANNING_RECALLED:
-		if(HiltonUtility.ckNull(requisitionHeader.getOwner()).equals(uid) || fpeUser || msrEngineer)
-			disableEdit = false;
-		break;
-	case DocumentStatus.REQ_PLANNING_REJECTED:
-		if(HiltonUtility.ckNull(requisitionHeader.getOwner()).equals(uid) || fpeUser || msrEngineer)	
-			disableEdit = false;
-		break;
-	case DocumentStatus.REQ_PLANNING_APPROVING:
-		if(fpeUser || msrEngineer)
-			disableEdit = false;
-		break;
-		
-	} 
 %>
 
 <script language='Javascript1.2' src='<%=contextPath%>/scripts/browse.js' type='text/javascript'></script>

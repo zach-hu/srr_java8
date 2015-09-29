@@ -16,7 +16,7 @@
 	String	s_ic_rec_header = (String)request.getAttribute("ReceiptHeader_icRecHeader");
 	String	s_rec_number = (String)request.getAttribute("ReceiptHeader_receiptNumber");
 	String	s_rec_type = (String)request.getAttribute("ReceiptHeader_receiptType");
-	String	s_rec_status = (String)request.getAttribute("ReceiptHeader_receiptStatus");
+	String	s_rec_status = (String)request.getAttribute("ReceiptHeader_reicceiptStatus");
 	String	s_rec_fiscal_year = (String)request.getAttribute("ReceiptHeader_fiscalYear");
 	if (HiltonUtility.isEmpty(s_rec_status)) {
 		s_rec_status = DocumentStatus.RCV_INPROGRESS;
@@ -684,10 +684,11 @@
 	function viewItem(row) {
 		var icRecLine = document.getElementById("icRecLine_" + row);
 		var itemNumber = document.getElementById("itemNumber_" + row);
-		var icReqLine = document.getElementById("RequisitionLine_icReqLine_" + row);
+		var icReqLine = document.getElementsByName("RequisitionLine_icReqLine_" + row);
 		
 		frm.ReceiptLine_icRecLine.value = icRecLine.value;
 		frm.InvItem_itemNumber.value = itemNumber.value;
+		//document.getElementById("RequisitionLine_icReqLine_" + row) = icReqLine.value;
 		frm.RequisitionLine_icReqLine.value = icReqLine.value;
 
 		doSubmit('/receipts/rec_item_step_0.jsp','ReceiptHeaderDataRetrieve;ReceiptLineRetrieve;PoHeaderRetrieveById');

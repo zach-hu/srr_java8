@@ -98,20 +98,22 @@ boolean disableEdit = true;
 
 switch(s_req_status){
 case DocumentStatus.REQ_PLANNING:
-	if(HiltonUtility.ckNull(requisitionHeader.getOwner()).equals(uid))
-		disableEdit = false;	
+	if(HiltonUtility.ckNull(reqLine.getRequisitionerCode()).equals(uid))
+		disableEdit = false;
 	break;
 case DocumentStatus.REQ_PLANNING_RECALLED:
-	if(HiltonUtility.ckNull(requisitionHeader.getOwner()).equals(uid) || fpeUser || msrEngineer)
+	if(HiltonUtility.ckNull(reqLine.getRequisitionerCode()).equals(uid) || fpeUser || msrEngineer)
 		disableEdit = false;
 	break;
 case DocumentStatus.REQ_PLANNING_REJECTED:
-	if(HiltonUtility.ckNull(requisitionHeader.getOwner()).equals(uid) || fpeUser || msrEngineer)	
+	if(HiltonUtility.ckNull(reqLine.getRequisitionerCode()).equals(uid) || fpeUser || msrEngineer)	
 		disableEdit = false;
 	break;
 case DocumentStatus.REQ_PLANNING_APPROVING:
 	if(fpeUser || msrEngineer)
 		disableEdit = false;
+	else
+		disableEdit = true;
 	break;
 }
 
@@ -167,7 +169,7 @@ if (inspectionStdList.size() > 0) {
 <tsa:hidden name="RequisitionHeader_icReqHeader" value="<%=b_req_ic_header%>"/>
 <tsa:hidden name="RequisitionLine_icReqHeader" value="<%=b_req_ic_header%>"/>
 <tsa:hidden name="RequisitionHeader_requisitionNumber" value="<%=reqLine.getRequisitionNumber()%>"/>
-<tsa:hidden name="RequisitionHeader_status" value="<%=s_req_status%>"/>
+<tsa:hidden id="status" name="RequisitionHeader_status" value="<%=s_req_status%>"/>
 <tsa:hidden name="RequisitionHeader_fiscalYear" value="<%=s_fiscal_year%>"/>
 <tsa:hidden name="RequisitionHeader_requisitionType" value="<%=s_req_type%>"/>
 <tsa:hidden name="RequisitionHeader_rqSubType" value="<%=s_req_subtype%>"/>
@@ -216,6 +218,23 @@ if (inspectionStdList.size() > 0) {
 <tsa:hidden name="newStandardCode" value="<%=newStandardCode%>"/>
 
 <tsa:hidden name="inspectionAction" value="<%=s_inspection_action %>"/>
+<% if (fpeUser) {%>
+fpeUser is true
+<% } %>
+
+<% if (msrEngineer) { %>
+msrEngineer is true
+<% } %>
+
+<% if (HiltonUtility.ckNull(reqLine.getRequisitionerCode()).equals(uid)) { %>
+owner is true
+<% } %>
+
+<% if (disableEdit == true) { %>
+disableEdit is true
+<% } else { %>
+disableEdit is false
+<% } %>
 
 <table width=<%=formWidth%> cellpadding=0 cellspacing=0 border=0>
 <tsa:tr>
@@ -258,6 +277,7 @@ if (inspectionStdList.size() > 0) {
 <tr>
 	<td>
 		<table id="upperInspectionCodes" border=0 cellpadding=0 cellspacing=0 align=center>
+		<% if (! disableEdit) { %>
 		<tsa:tr>
 			<tsa:td align="left"><a href="javascript: browseStdInspections(); void(0)">Standard Inspection:</a></tsa:td>
 			<tsa:td>&nbsp;&nbsp;&nbsp;&nbsp;Description:</tsa:td>
@@ -278,7 +298,31 @@ if (inspectionStdList.size() > 0) {
 			<tsa:td width="25px">&nbsp;</tsa:td>
 			<tsa:td noWrap="nowrap" align="right"></tsa:td>
 		</tsa:tr>
-
+		
+		<% } else { %>
+		<tsa:tr>
+			<tsa:td align="left">Standard Inspection:</tsa:td>
+			<tsa:td>&nbsp;&nbsp;&nbsp;&nbsp;Description:</tsa:td>
+		</tsa:tr>
+		<tsa:tr>
+			<tsa:td><input type="text" name="InspectionHeader_standardCode" value="<%=std_code%>" size="20" maxlength="15" disabled="disabled">&nbsp;&nbsp;&nbsp;&nbsp;</tsa:td>
+			<tsa:td><input type="text" name="standardCodeDescription" value="<%=stdDescription%>" size="75" maxlength="255" disabled="disabled"/></tsa:td>
+			<tsa:td width="25px">&nbsp;</tsa:td>
+			<tsa:td noWrap="nowrap" align="right"></tsa:td>
+		</tsa:tr>
+		<tsa:tr>
+			<tsa:td align="left">CGD No:</tsa:td>
+			<tsa:td>&nbsp;&nbsp;&nbsp;&nbsp;CGD Rev:</tsa:td>
+		</tsa:tr>
+		<tsa:tr>
+			<tsa:td><input type="text" name="InspectionHeader_cgdNo" value="<%=cgdNo%>" size="20" maxlength="20" disabled="disabled"/>&nbsp;&nbsp;&nbsp;&nbsp;</tsa:td>
+			<tsa:td><input type="text" name="InspectionHeader_cgdRev" value="<%=cgdRev%>" size="20" maxlength="5" disabled="disabled"/></tsa:td>
+			<tsa:td width="25px">&nbsp;</tsa:td>
+			<tsa:td noWrap="nowrap" align="right"></tsa:td>
+		</tsa:tr>
+		
+		<% } %>
+		
 		</table>
 
 		<br>
@@ -377,9 +421,6 @@ if (inspectionStdList.size() > 0) {
 			</td>
 		</tr>
 		<tr>
-		<% if (disableEdit) { %>
-			<tsa:td align="center"><a href="javascript: changeCriteria('(new)'); void(0);"><font class="reset"><b>Add New Inspection Code</b></font></a></tsa:td>
-			<% } %>
 		</tr>
 		<tsa:tr>
 			<tsa:td><hr width="580px" align="center" color="#9999CC"></hr></tsa:td>
@@ -428,33 +469,14 @@ if (inspectionStdList.size() > 0) {
 	var inspTotalRows = inspTable.rows.length;
 	var inspRows = frm.insp_rows.value;
 
+	var statusCode = document.getElementById("status");
+
 	if (inspTotalRows <= 0)
 	{
 		inspTotalRows = 0;
 //		addNewInspectRow();
 	}
 	// setInspectRow(0);
-
-
-	function thisLoad()
-	{
-		f_StartIt();
-		<%
-		if (s_req_type.equals("M")) {
-			if ((s_req_line_status.compareTo(DocumentStatus.REQ_PLANNING_RECALLED ) == 0 || s_req_line_status.compareTo(DocumentStatus.REQ_PLANNING ) == 0) && ((HiltonUtility.ckNull(requisitionHeader.getOwner()).equals(uid)) || (HiltonUtility.ckNull(requisitionHeader.getRequisitionerCode()).equals(uid)))){
-				disableEdit = false;
-			} else if((s_req_line_status.compareTo(DocumentStatus.REQ_PLANNING_REJECTED ) == 0 || s_req_line_status.compareTo(DocumentStatus.REQ_PLANNING_APPROVING ) == 0) && (fpeUser || msrEngineer)){
-				disableEdit = false;
-			} 
-    } else {
-    	disableEdit = (s_req_status.compareTo(DocumentStatus.REQ_FORWARDED) >= 0 && s_req_status.compareTo(DocumentStatus.RFQ_PRICED) != 0 && s_req_status.compareTo(DocumentStatus.TEMPLATE) != 0) ;
-    }
-		if (disableEdit) { %>
-			checkInputSettings();
-//			allowInputEdit(frm.InspectionHeader_inspectType, true);
-		<% }
-		%>
-	}
 
 	function browse(x)
 	{

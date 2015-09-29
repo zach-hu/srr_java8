@@ -3,7 +3,7 @@
 <%@ include file="/system/context_path.jsp" %>
 <%@ include file="/system/header.jsp" %>
 <%@ page import="com.tsa.puridiom.commodity.CommodityManager" %>
-
+hi my name is zach
 <SCRIPT LANGUAGE="JavaScript1.2" SRC="<%=contextPath%>/scripts/calendar.js"></SCRIPT>
 <SCRIPT LANGUAGE="JavaScript1.2" SRC="<%=contextPath%>/scripts/ajaxlookup.js"></SCRIPT>
 
@@ -1018,7 +1018,7 @@
 	function saveas()
 	{
 	    popupParameters = "formtype=INVITEM;action=saveas";
-	    doSubmitToLookup('/base/save_as.jsp', 'DoNothing', 'WIDTH=350', 'HEIGHT=165');
+	    doSubmitToPopup('/base/save_as.jsp', 'DoNothing', 'WIDTH=350', 'HEIGHT=165');
 	}
 
 	function setStatus()

@@ -46,5 +46,11 @@
 				<process-filename>userprofile-verify-authentication.xml</process-filename>
 			</task>
 		</activity>
+		<activity synchronous="true" continue-on-failure="false" name="authenticatedSessionSetupActivity">
+			<rule-filename>is-userprofile-authenticated.xml</rule-filename>
+			<task synchronous="true" continue-on-failure="false" name="authenticatedSessionSetup">
+				<task-object-name>com.tsa.puridiom.authentication.tasks.AuthenticatedSessionSetup</task-object-name>
+			</task>
+		</activity>
 	</activities>
 </process>

@@ -481,6 +481,12 @@
 	    	return false;
 	    }
     }
+	function getFieldsJquery()
+	{
+		var jQuerySelector = ":input:not([type=hidden])[name^='RequisitionHeader_']";
+		var fieldsToAuditJquery = $(jQuerySelector);
+		return fieldsToAuditJquery;
+    }
     function buildAuditIc()
 	{
 		return frm.RequisitionHeader_icReqHeader.value;

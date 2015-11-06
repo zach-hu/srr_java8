@@ -61,6 +61,11 @@
 	
 	boolean disableEdit = true;
 	
+	if ((s_req_status.compareTo(DocumentStatus.REQ_PLANNING_RECALLED ) == 0 || s_req_status.compareTo(DocumentStatus.REQ_PLANNING ) == 0) && ((HiltonUtility.ckNull(requisitionHeader.getOwner()).equals(uid)) || (HiltonUtility.ckNull(requisitionHeader.getRequisitionerCode()).equals(uid)))){
+		disableEdit = false;
+	} else if((s_req_status.compareTo(DocumentStatus.REQ_PLANNING_REJECTED ) == 0 || s_req_status.compareTo(DocumentStatus.REQ_PLANNING_APPROVING ) == 0) && (fpeUser || msrEngineer)){
+		disableEdit = false;
+	} 
 %>
 
 <script language='Javascript1.2' src='<%=contextPath%>/scripts/browse.js' type='text/javascript'></script>

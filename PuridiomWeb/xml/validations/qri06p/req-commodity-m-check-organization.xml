@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rule>
+	<clause type="StringCompare">
+		<left-side>
+			<source>incomingRequestObjectMethod</source>
+			<object>header</object>
+			<name>getUdf1Code</name>
+		</left-side>
+		<operator>EQUALS</operator>
+		<right-side>
+			<source>constant</source>
+			<value>US</value>
+		</right-side>
+	</clause>
+	<logical-operator>IFTHEN</logical-operator>
+	<clause type="Rule">
+		<rule-filename>req-commodity-m-check-prop.xml</rule-filename>
+	</clause>
+</rule>

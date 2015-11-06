@@ -167,7 +167,7 @@
 		</tr>
 		<tr>
 			<tsa:td align="right"><b><tsa:label labelName="req-status" defaultString="Status"></tsa:label>:</b></tsa:td>
-			<tsa:td width="150px"><%=headerEncoder.encodeForHTML(DocumentStatus.toString(requisitionHeader.getStatus()))%></tsa:td>
+			<tsa:td width="150px"><%=DocumentStatus.toString(requisitionHeader.getStatus())%></tsa:td>
 		</tr>
 		</table>
 		<table cellpadding="0" cellspacing="0" border="0" width="100%">
@@ -844,6 +844,12 @@ if (bAllowEdit) { %>
 	    {
 	    	return false;
 	    }
+    }
+	function getFieldsJquery()
+	{
+		var jQuerySelector = ":input:not([type=hidden])[name^='RequisitionHeader_']";
+		var fieldsToAuditJquery = $(jQuerySelector);
+		return fieldsToAuditJquery;
     }
     function buildAuditIc()
 	{

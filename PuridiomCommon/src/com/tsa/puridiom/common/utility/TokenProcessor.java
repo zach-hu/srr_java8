@@ -5,9 +5,13 @@ package com.tsa.puridiom.common.utility;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+
+import com.tsagate.foundation.utility.Log;
 
 /**
  * @author Johnny
@@ -24,12 +28,24 @@ public class TokenProcessor
 	 * if it is used.
 	 */
 	private static final String TRANSACTION_TOKEN_KEY = "TRANSACTION_TOKEN";
+	
+	/**
+	 * The session attributes key under which our request token is stored,
+	 * if it is used.
+	 */
+	public static final String REQUEST_TOKEN_KEY = "REQUEST_TOKEN";
+	
+	/**
+	 * The request attributes key under which our request token is stored,
+	 * if it is used.
+	 */
+	private static final String REQUEST_KEY = "REQUEST_KEY";
 
 	/**
 	 * The property under which a transaction token is reported.
 	 */
 	public static final String TOKEN_KEY = "com.tsa.puridiom.TOKEN";
-
+	
 	/**
 	 * The timestamp used most recently to generate a token value.
 	 */
@@ -127,7 +143,116 @@ public class TokenProcessor
 		
 		return token;
 	}
+	
+	/**
+	 * 
+	 * @param request
+	 * @param value
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	public synchronized String generateToken(HttpServletRequest request, String value)
+	{
+		String uri = request.getRequestURI();
+		HttpSession session = request.getSession();
+		String token = getToken(request);
+		Log.debug(this, "generateToken - Request URI: " + uri);
+		Log.debug(this, "Token generated: " + token);
+		
+		if (token != null && value != null)
+		{
+			Map<String, Integer> generatedTokens = (Map<String, Integer>) session.getAttribute(TokenProcessor.REQUEST_TOKEN_KEY);
+			if (generatedTokens == null) {
+				generatedTokens = new HashMap<String, Integer>();
+				session.setAttribute(TokenProcessor.REQUEST_TOKEN_KEY, generatedTokens);
+			}
+			generatedTokens.put(token, 0);
+			Log.debug(this, "Put token in map: " + token);
+		}		
+		return token;
+	}
+	
+	/**
+	 * 
+	 * @param request
+	 * @param value
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	public synchronized boolean validToken(HttpServletRequest request, String value) {
+		
+		boolean result = false;
+		
+		String uri = request.getRequestURI();
+		Log.debug(this, "validToken - Request URI: " + uri);
+		
+		// Retrieve the current session for this request
+		HttpSession session = request.getSession(false);
 
+		// Check if the session is valid
+		if (session == null) {
+			result = false;
+		}
+		
+		// Retrieve the tokens generated
+		Map<String, Integer> generatedTokens = (Map<String, Integer>)  session.getAttribute(TokenProcessor.REQUEST_TOKEN_KEY);
+		if (generatedTokens.containsKey(value)) {
+			Log.debug(this, "validToken - token valid: " + value);
+			result = true;
+			generatedTokens.remove(value);
+		} else {
+			Log.debug(this, "validToken - token INVALID: " + value);
+			result = false;
+		}
+		
+		/*Integer counter = generatedTokens.get(value);
+		if (counter == 0) {
+			result = true;
+			generatedTokens.put(value, 1);
+		} else if (counter > 0) { 
+			result = false;
+		} else {
+			result = false;
+		}*/
+		
+		return result;
+	}
+
+	/**
+	 * 
+	 * @param token
+	 * @return
+	 */
+	public String generateMD5(String token) {
+		return createMD5(token);
+	}
+	
+	
+	/**
+	 * Create a new transaction token, to be used for enforcing a single
+	 * request for a particular transaction.
+	 * 
+	 * @param id
+	 *            a unique Identifier for the session or other context in which
+	 *            this token is to be used.
+	 */
+	private synchronized String createMD5(String id)
+	{
+		try
+		{
+			MessageDigest md = MessageDigest.getInstance("MD5");
+
+			md.update(id.getBytes());
+
+			return toHex(md.digest());
+		} catch (NoSuchAlgorithmException e)
+		{
+			return null;
+		}
+	}
+	
+	
+	
 	/**
 	 * Get a new transaction token, to be used for enforcing a single
 	 * request for a particular transaction.

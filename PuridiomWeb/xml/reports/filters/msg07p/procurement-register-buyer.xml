@@ -1,0 +1,143 @@
+<procurement-register-buyer>
+  <columns>
+    <PoHeader_contractNo>
+      <label>Contract No.</label>
+      <visible>1</visible>
+    </PoHeader_contractNo>
+    <PoHeader_poNumber>
+      <label>PO #</label>
+      <visible>1</visible>
+    </PoHeader_poNumber>
+    <PoHeader_releaseNumber>
+      <label>Release</label>
+      <type>BIGDECIMAL</type>
+      <visible>1</visible>
+    </PoHeader_releaseNumber>
+    <PoHeader_revisionNumber>
+      <label>Revision</label>
+      <type>BIGDECIMAL</type>
+      <visible>1</visible>
+    </PoHeader_revisionNumber>
+    <PoHeader_requisitionNumber>
+      <label>Req. Number</label>
+      <type>STRING</type>
+      <visible>1</visible>
+    </PoHeader_requisitionNumber>
+    <PoHeader_poType>
+      <label>Type</label>
+      <type>ORDER-TYPE</type>
+      <visible>1</visible>
+    </PoHeader_poType>
+    <PoHeader_poDate>
+      <label>PO Date</label>
+      <type>DATE</type>
+      <visible>1</visible>
+    </PoHeader_poDate>
+    <PoHeader_status>
+      <label>Status</label>
+      <type>STATUS</type>
+      <visible>1</visible>
+    </PoHeader_status>
+    <PoHeader_buyerCode>
+      <label>Buyer</label>
+            <type>USER-ID</type>
+            <visible>1</visible>
+    </PoHeader_buyerCode>
+    <PoHeader_effectiveDate>
+      <label>Effective Date</label>
+      <type>DATE</type>
+      <visible>1</visible>
+    </PoHeader_effectiveDate>
+    <PoHeader_expirationDate>
+      <label>Expiration Date</label>
+      <type>DATE</type>
+      <visible>1</visible>
+    </PoHeader_expirationDate>
+    <PoHeader_vendorId>
+      <label>Supplier</label>
+      <hidden>Y</hidden>
+      <visible>1</visible>
+    </PoHeader_vendorId>
+    <PoHeader_requiredDate>
+      <label>Required Date</label>
+      <type>DATE</type>
+      <visible>1</visible>
+    </PoHeader_requiredDate>
+    <PoHeader_requisitionerCode>
+      <label>Requisitioner Code</label>
+            <type>USER-ID</type>
+            <visible>1</visible>
+    </PoHeader_requisitionerCode>
+    <PoHeader_departmentCode>
+      <label>Division</label>
+            <type>STRING</type>
+            <visible>1</visible>
+    </PoHeader_departmentCode>
+    <PoHeader_icPoHeader>
+      <label>Ic Po Header</label>
+          <hidden>Y</hidden>
+          <visible>0</visible>
+    </PoHeader_icPoHeader>
+    <PoHeader_currencyCode>
+      <label>Currency Code</label>
+      <type>STRING</type>
+      <visible>1</visible>
+    </PoHeader_currencyCode>
+    <PoHeader_total>
+      <label>Total</label>
+      <type>DollarDecimal</type>
+      <visible>1</visible>
+    </PoHeader_total>
+    <PoHeader_currencyFactor>
+      <label>Currency Factor</label>
+      <type>BigDecimal</type>
+      <visible>0</visible>
+    </PoHeader_currencyFactor>
+    <PoHeader_shippingTax>
+      <label>Shipping Tax</label>
+      <type>QtyDecimal</type>
+      <visible>1</visible>
+    </PoHeader_shippingTax>
+    <PoHeader_otherTax>
+      <label>Other Tax</label>
+      <type>QtyDecimal</type>
+      <visible>1</visible>
+    </PoHeader_otherTax>
+    <PoHeader_taxAmount>
+      <label>Tax</label>
+      <type>QtyDecimal</type>
+      <visible>1</visible>
+    </PoHeader_taxAmount>
+    <PoHeader_owner>
+      <label>Owner</label>
+            <size>12</size>
+            <type>USER-ID</type>
+            <visible>1</visible>
+    </PoHeader_owner>
+    <PoHeader_lastChgBy>
+      <label>Last Chg. By</label>
+            <size>12</size>
+            <type>USER-ID</type>
+            <visible>1</visible>
+    </PoHeader_lastChgBy>
+    <PoHeader_appDate>
+      <label>Approval Date</label>
+      <type>DATE</type>
+      <visible>1</visible>
+    </PoHeader_appDate>
+    <PoHeader_vendorName>
+      <label>Supplier Name</label>
+      <visible>1</visible>
+    </PoHeader_vendorName>
+    <RequisitionHeader_assignedDate>
+      <label>Assigned Date</label>
+      <type>DATE</type>
+      <visible>1</visible>
+    </RequisitionHeader_assignedDate>
+  </columns>
+<sqlfrom>PoHeader as PoHeader, RequisitionHeader as RequisitionHeader</sqlfrom>
+<sqlwhere><![CDATA[ ( PoHeader.icReqHeader = RequisitionHeader.icReqHeader (+) ) AND ( PoHeader.lastRevision = 'C' ) AND ( PoHeader.status > '3020' ) AND ( PoHeader.status < '9020' ) AND ( PoHeader.poDate >= :as_baseReportDate ) ]]></sqlwhere>
+<sqlorderby>PoHeader.buyerCode ASC, PoHeader.poNumber, PoHeader.releaseNumber</sqlorderby>
+<title>Procurement Actions Register (Summary by Buyer)</title>
+</procurement-register-buyer>
+

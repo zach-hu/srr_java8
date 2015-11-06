@@ -1,0 +1,113 @@
+<r-pos-d-prs>
+  <columns>
+       <PoHeader_currencyCode>
+			<label>Currency Code</label>
+			<type>STRING</type>
+			<visible>0</visible>
+		</PoHeader_currencyCode>
+       <Account_fld4>
+		    <label>Project #</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</Account_fld4>
+        <PoHeader_poType>
+			<label>Type</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</PoHeader_poType>
+		<PoHeader_poNumber>
+			<label>Order No</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</PoHeader_poNumber>
+    	<PoHeader_releaseNumber>
+		    <label>Release Number</label>
+			<type>BIGDECIMAL</type>
+			<visible>1</visible>
+		</PoHeader_releaseNumber>
+		<PoHeader_poDate>
+		   	<label>PO Date</label>
+			<type>DATE</type>
+			<visible>1</visible>
+		</PoHeader_poDate>
+		<PoHeader_udf8Code>
+			<label>Udf8Code</label>
+			<type>STRING</type>
+		<visible>0</visible>
+		</PoHeader_udf8Code>
+		<PoHeader_udf9Code>
+			<label>Contract Type</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</PoHeader_udf9Code>
+		<PoHeader_udf10Code>
+			<label>PO10</label>
+			<type>STRING</type>
+			<visible>0</visible>
+		</PoHeader_udf10Code>
+		<PoHeader_expirationDate>
+		   	<label>Exp. Date</label>
+			<type>DATE</type>
+			<visible>1</visible>
+		</PoHeader_expirationDate>
+		<PoHeader_vendorName>
+			<label>Vendor Name</label>
+			<type>STRING</type>
+			<visible>1</visible>>
+		</PoHeader_vendorName>
+		<PoHeader_vendorId>
+			<label>Supplier Number</label>
+			<type>STRING</type>
+		</PoHeader_vendorId>
+		<PoHeader_buyerCode>
+		   <label>Buyer</label>
+			<type>STRING</type>
+		</PoHeader_buyerCode>
+		<PoHeader_total>
+		    <label>Total</label>
+			<type>BIGDECIMAL</type>
+			<visible>1</visible>
+		</PoHeader_total>
+		<PoHeader_status>
+		    <label>Status</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</PoHeader_status>
+		<PoHeader_requisitionerCode>
+		    <label>Requisitioner</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</PoHeader_requisitionerCode>
+		<PoHeader_requisitionNumber>
+		    <label>Requisition</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</PoHeader_requisitionNumber>
+		 <Account_fld1>
+		    <label>Account #</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</Account_fld1>
+		<Account_fld2>
+			<label>Cost Center</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</Account_fld2>
+		<PoHeader_internalComments>
+		    <label>Purpose</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</PoHeader_internalComments>
+	 		
+		
+	</columns>
+  <sqlfrom> PoHeader as PoHeader,Account as Account </sqlfrom>
+  <sqlwhere><![CDATA[ 
+  ( PoHeader.icPoHeader = Account.id.icHeader ) and 
+  ( PoHeader.lastRevision = 'C' ) and ( PoHeader.poDate >= :as_baseReportDate )
+  and ( PoHeader.status > '3020' ) and ( PoHeader.status < '9020' )
+   ]]></sqlwhere>
+  <sqlorderby>Account.fld4,PoHeader.expirationDate</sqlorderby>
+  <title>Purchase Order By Project Summary</title>
+</r-pos-d-prs>
+

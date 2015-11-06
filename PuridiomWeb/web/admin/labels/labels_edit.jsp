@@ -257,7 +257,8 @@
 				</tr>
 				<tr>
 					<td>&nbsp;</td>
-					<td><input type="text" title="" name="Labels_validationLink" size="80" maxLegth="255" value="<%=label.getValidationLink() %>"  tabIndex="8"></td>
+					<td><input type="text" title="" name="Labels_validationLink_text" size="80" maxLegth="255" value="<%=label.getValidationLink() %>"  tabIndex="8"></td>
+					<td><input type="hidden" title="" name="Labels_validationLink" size="80" maxLegth="255" value="<%=label.getValidationLink() %>"  tabIndex="8"></td>
 				</tr>
 				<tr>
 					<td align=right><%=DictionaryManager.getLabelsInstance(oid, language).getLabel(oid, "labels-fieldname", "Field Name")%>:</td>
@@ -372,13 +373,20 @@
 		var linkValue = frm.as_validationLink[frm.as_validationLink.selectedIndex].value;
 		if (linkValue == "OTHER") {
 			displayArea("freeFormValidationLink");
+			frm.Labels_validationLink_text.value = '';
+			frm.Labels_validationLink.value = '';			
 		} else {
 			hideArea("freeformValidationLink");
+			//frm.Labels_validationLink.value = linkValue.replace('javascript: doSubmit(','BDC@1');
 			frm.Labels_validationLink.value = linkValue;
+			frm.Labels_validationLink_text.value = linkValue;
 		}
 	}
 
 	function saveMe() {
+		frm.Labels_validationLink_text.value = '';
+		frm.as_validationLink[frm.as_validationLink.selectedIndex].value = '';
+		
 <%	if (role.getAccessRights("LABELS") == 99 ) { %>
 		frm.browseName.value = 'labels-admin';
 <%	} else {%>

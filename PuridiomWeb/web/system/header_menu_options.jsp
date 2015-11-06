@@ -233,11 +233,14 @@
 <tr>
 <%
 	String logoFilename = PropertiesManager.getInstance(oid).getProperty("MISC", "LOGOFILENAME", "logo.gif");
-	String logoImgPath = requestURLPath + "/images/" + colorscheme;
+	String logoImgPath = "/puridiom/images/" + colorscheme;
+	//http://srr.puridiom.com/puridiom/images/logo.jpg
+	
+	
 	boolean colorSchemeLogos = PropertiesManager.getInstance(oid).getProperty("MISC", "COLORSCHEMELOGO", "Y").equals("Y");
 
 	if (!colorSchemeLogos) {
-		logoImgPath = requestURLPath + "/images";
+		logoImgPath = "/puridiom" + "/images";
 	}
 	if (isXpress) {
 		logoFilename = "logox.gif";

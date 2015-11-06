@@ -1,0 +1,169 @@
+<r-ivcb>
+  <columns>
+		<DisbLine_commodityCode>
+			<label>commdityCode</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</DisbLine_commodityCode>
+		<DisbHeader_disbDate>
+			<label>disbDate</label>
+			<type>DATE</type>
+			<visible>1</visible>
+		</DisbHeader_disbDate>
+		<DisbLine_quantity>
+			<label>quantity</label>
+			<type>BIGDECIMAL</type>
+			<visible>1</visible>
+		</DisbLine_quantity>
+		<DisbLine_unitPrice>
+			<label>unitPrice</label>
+			<type>BIGDECIMAL</type>
+			<visible>1</visible>
+		</DisbLine_unitPrice>
+		<DisbLine_umCode>
+			<label>Unit of Measure</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</DisbLine_umCode>
+		<DisbHeader_icAccount>
+			<label>accountCode</label>
+			<type>BIGDECIMAL</type>
+			<visible>1</visible>
+		</DisbHeader_icAccount>
+		<DisbLine_departmentCode>
+			<label>deptcode</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</DisbLine_departmentCode>
+		<DisbHeader_requisitionNumber>
+			<label>requisitionNumber</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</DisbHeader_requisitionNumber>
+		<DisbHeader_disbNumber>
+			<label>disbNumber</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</DisbHeader_disbNumber>
+		<DisbHeader_itemLocation>
+			<label>location</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</DisbHeader_itemLocation>
+		<DisbLine_itemLocation>
+			<label>location</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</DisbLine_itemLocation>
+		<DisbHeader_disbType>
+			<label>Disb Type</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</DisbHeader_disbType>
+		<Account_fld1>
+			<label>Fld 1</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</Account_fld1>
+		<Account_fld2>
+			<label>Fld 2</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</Account_fld2>
+		<Account_fld3>
+			<label>Fld 3</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</Account_fld3>
+		<Account_fld4>
+			<label>Fld 4</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</Account_fld4>
+		<Account_fld5>
+			<label>Fld 5</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</Account_fld5>
+		<Account_fld6>
+			<label>Fld 6</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</Account_fld6>
+		<Account_fld7>
+			<label>Fld 7</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</Account_fld7>
+		<Account_fld8>
+			<label>Fld 8</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</Account_fld8>
+		<Account_fld9>
+			<label>Fld 9</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</Account_fld9>
+		<Account_fld10>
+			<label>Fld 10</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</Account_fld10>
+		<Account_fld11>
+			<label>Fld 11</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</Account_fld11>
+		<Account_fld12>
+			<label>Fld 12</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</Account_fld12>
+		<Account_fld13>
+			<label>Fld 13</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</Account_fld13>
+		<Account_fld14>
+			<label>Fld 14</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</Account_fld14>
+		<Account_fld15>
+			<label>Fld 15</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</Account_fld15>
+		<DisbLine_itemNumber>
+			<label>Item Number</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</DisbLine_itemNumber>
+		<Account_allocPercent>
+			<label>Alloc Percent</label>
+			<type>BIGDECIMAL</type>
+			<visible>1</visible>
+		</Account_allocPercent>
+		<Account_allocAmount>
+			<label>Alloc Amount</label>
+			<type>BIGDECIMAL</type>
+			<visible>1</visible>
+		</Account_allocAmount>
+		<Account_allocMethod>
+			<label>Alloc Method</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</Account_allocMethod>
+	</columns>
+  <sqlfrom> Account as Account , DisbHeader as DisbHeader , DisbLine as DisbLine</sqlfrom>
+  <sqlwhere><![CDATA[
+  (DisbHeader.icDsbHeader = DisbLine.icDsbHeader) and
+  (DisbLine.quantity > 0 ) and
+  (DisbHeader.status <> '99' ) and
+  (Account.allocAmount <> 0 ) and
+  (DisbLine.icReqLine = Account.id.icLine)
+  ]]></sqlwhere>
+  <title>Inventory Charge Back Report</title>
+</r-ivcb>
+

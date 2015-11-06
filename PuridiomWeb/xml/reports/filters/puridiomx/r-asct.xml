@@ -1,0 +1,93 @@
+<r-asct>
+  <columns>
+		<Asset_tagNumber>
+			<label>Tag Number</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</Asset_tagNumber>
+		<Asset_assetClass>
+			<label>Asset Class</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</Asset_assetClass>
+		<Asset_assetStatus>
+			<label>Status</label>
+			<type>STATUS</type>
+			<visible>1</visible>
+		</Asset_assetStatus>
+		<Asset_commodity>
+			<label>Commodity</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</Asset_commodity>
+		<Asset_manufacturer>
+			<label>Manufacturer</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</Asset_manufacturer>
+		<Asset_model>
+			<label>Model</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</Asset_model>
+		<Asset_serialNumber>
+			<label>Serial Number</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</Asset_serialNumber>
+		<Asset_totalCost>
+			<label>Total Cost</label>
+			<type>BIGDECIMAL</type>
+			<visible>1</visible>
+		</Asset_totalCost>
+		<Asset_dateInService>
+			<label>Date In Service</label>
+			<type>DATE</type>
+			<visible>1</visible>
+		</Asset_dateInService>
+		<Asset_securityCode>
+			<label>Security Code</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</Asset_securityCode>
+		<Asset_description>
+			<label>Description</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</Asset_description>
+		<AssetCost_dateEntered>
+			<label>Date Entered</label>
+			<type>DATE</type>
+			<visible>1</visible>
+		</AssetCost_dateEntered>
+		<AssetCost_description>
+			<label>Description</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</AssetCost_description>
+		<AssetCost_amount>
+			<label>Amount</label>
+			<type>BIGDECIMAL</type>
+			<visible>1</visible>
+		</AssetCost_amount>
+		<AssetCost_extendLifeFlag>
+			<label>Extend Life</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</AssetCost_extendLifeFlag>
+		<AssetCost_poNumber>
+			<label>PO Number</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</AssetCost_poNumber>
+		<AssetCost_poVendor>
+			<label>PO Vendor</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</AssetCost_poVendor>
+	</columns>
+  <sqlfrom> Asset as Asset , AssetCost as AssetCost </sqlfrom>
+  <sqlwhere><![CDATA[ (Asset.tagNumber = AssetCost.id.tagNumber) ]]></sqlwhere>
+  <sqlorderby>Asset.tagNumber</sqlorderby>
+  <title>Asset Cost History</title>
+</r-asct>

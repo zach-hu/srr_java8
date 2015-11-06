@@ -22,7 +22,7 @@
 </tr>
 <tr>
 	<td class="copyright" width="18%" align="left" nowrap>&nbsp;Copyright &copy; <%=HiltonUtility.getFormattedDate(d_today, oid, "yyyy")%>&nbsp;&nbsp;<a href="<%=PropertiesManager.getInstance(oid).getProperty("MISC", "PRODUCTURL", "http://www.puridiom.com") %>" target="_blank"><%=PropertiesManager.getInstance(oid).getProperty("MISC", "PRODUCTURL", "http://www.puridiom.com").substring(11) %></a>
-		<br>&nbsp;<%=DictionaryManager.getLabelsInstance(oid, language).getLabel(oid, "release", "Release")%> 4.0.20130718-1246
+		<br>&nbsp;<%=DictionaryManager.getLabelsInstance(oid, language).getLabel(oid, "release", "Release")%> 4.0.20151022-jdk7
 	</td>
 	<td width="59%" align="right" style="font-size: 9px;"><%=PropertiesManager.getInstance(oid).getProperty("MISC", "FOOTERTEXT", "")%></td>
 	<td class="copyright" width="23%" align="right">

@@ -165,24 +165,11 @@
 
 	boolean disableEdit = true;
 	
-switch(s_req_status){
-case DocumentStatus.REQ_PLANNING:
-	if(HiltonUtility.ckNull(reqLine.getRequisitionerCode()).equals(uid))
+	if ((s_req_status.compareTo(DocumentStatus.REQ_PLANNING_RECALLED ) == 0 || s_req_status.compareTo(DocumentStatus.REQ_PLANNING ) == 0) && ((HiltonUtility.ckNull(requisitionHeader.getOwner()).equals(uid)) || (HiltonUtility.ckNull(requisitionHeader.getRequisitionerCode()).equals(uid)))){
 		disableEdit = false;
-	break;
-case DocumentStatus.REQ_PLANNING_RECALLED:
-	if(HiltonUtility.ckNull(reqLine.getRequisitionerCode()).equals(uid) || fpeUser || msrEngineer)
+	} else if((s_req_status.compareTo(DocumentStatus.REQ_PLANNING_REJECTED ) == 0 || s_req_status.compareTo(DocumentStatus.REQ_PLANNING_APPROVING ) == 0) && (fpeUser || msrEngineer)){
 		disableEdit = false;
-	break;
-case DocumentStatus.REQ_PLANNING_REJECTED:
-	if(HiltonUtility.ckNull(reqLine.getRequisitionerCode()).equals(uid) || fpeUser || msrEngineer)	
-		disableEdit = false;
-	break;
-case DocumentStatus.REQ_PLANNING_APPROVING:
-	if(fpeUser || msrEngineer)
-		disableEdit = false;
-	break;
-}
+	} 
 %>
 <tsa:hidden name="InspectionHeader_icInspNo" value="<%=icInspNo%>"/>
 <tsa:hidden name="InspectionHeader_icMsrLine" value="<%=icMsrLine%>"/>

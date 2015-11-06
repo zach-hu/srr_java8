@@ -1,0 +1,44 @@
+<r-adm-s-apm>
+	<columns>
+		<AppPool_poolid>
+			<label>Pool Id</label>
+			<type>STRING</type>
+		</AppPool_poolid>
+		<AppPool_pooldesc>
+			<label>Description</label>
+			<type>STRING</type>
+		</AppPool_pooldesc>
+		<UserProfile_userId>
+			<label>User ID</label>
+			<type>STRING</type>
+		</UserProfile_userId>
+		<UserProfile_firstName>
+			<label>First Name</label>
+			<type>STRING</type>
+		</UserProfile_firstName>
+		<UserProfile_lastName>
+			<label>Last Name</label>
+			<type>STRING</type>
+		</UserProfile_lastName>
+		<UserProfile_middleInit>
+			<label>Middle Initial</label>
+			<type>STRING</type>
+		</UserProfile_middleInit>
+		<UserProfile_title>
+			<label>Title</label>
+			<type>STRING</type>
+		</UserProfile_title>
+		<UserProfile_status>
+			<label>Status</label>
+			<type>STRING</type>
+		</UserProfile_status>
+		<UserProfile_approver>
+			<label>Approver</label>
+			<type>STRING</type>
+		</UserProfile_approver>
+	</columns>
+<sqlfrom> UserProfile as UserProfile, AppPooluser as AppPooluser, AppPool as AppPool </sqlfrom>
+<sqlwhere><![CDATA[(UserProfile.userId = AppPooluser.id.userId) and (AppPooluser.id.poolid = AppPool.poolid)]]></sqlwhere>
+<sqlorderby>AppPool.poolid</sqlorderby>
+<title>Approver Pool Membership Report</title>
+</r-adm-s-apm>

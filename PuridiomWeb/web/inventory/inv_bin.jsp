@@ -589,6 +589,12 @@
 	    	return false;
 	    }
     }
+	function getFieldsJquery()
+	{
+		var jQuerySelector = ":input:not([type=hidden])[name^='InvBinLocation_']";
+		var fieldsToAuditJquery = $(jQuerySelector);
+		return fieldsToAuditJquery;
+    }
     function buildAuditIc()
 	{
 		return frm.InvBinLocation_icRc.value;

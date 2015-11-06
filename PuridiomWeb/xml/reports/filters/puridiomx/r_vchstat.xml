@@ -1,0 +1,28 @@
+<r_vchstat>
+  <columns>
+		<InvoiceHeader_invoiceNumber>
+			<label>Invoice Number</label>
+			<type>STRING</type>
+		</InvoiceHeader_invoiceNumber>
+		<InvoiceHeader_poNumber>
+			<label>Po Number</label>
+			<type>STRING</type>
+		</InvoiceHeader_poNumber>
+		<InvoiceHeader_invoiceDate>
+			<label>Invoice Date</label>
+			<type>DATE</type>
+		</InvoiceHeader_invoiceDate>
+		<InvoiceHeader_invoiceReceivedDate>
+			<label>Date Received</label>
+			<type>DATE</type>
+		</InvoiceHeader_invoiceReceivedDate>
+		<InvoiceHeader_vendorId>
+			<label>Vendor Id</label>
+			<type>STRING</type>
+		</InvoiceHeader_vendorId>
+	</columns>
+  <sqlfrom>InvoiceHeader as InvoiceHeader, PoHeader as PoHeader</sqlfrom>
+  <sqlwhere><![CDATA[ (InvoiceHeader.icPoHeader = PoHeader.icPoHeader) ]]></sqlwhere>
+  <title>Voucher Status Report</title>
+</r_vchstat>
+

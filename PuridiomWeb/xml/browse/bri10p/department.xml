@@ -1,0 +1,31 @@
+<browse_department>
+	<columns>
+		<Department_departmentCode>
+			<label>department</label>
+			<sort>A</sort>
+			<link><![CDATA[javascript: returnMe('#Department_departmentCode^'); void(0);]]></link>
+			<size>20</size>
+			<hidden-input>Y</hidden-input>
+		</Department_departmentCode>
+		<Department_departmentName>
+			<label>departmentCode</label>
+			<size>35</size>
+			<hidden-input>Y</hidden-input>
+		</Department_departmentName>
+		<Department_deptManager>
+			<label>deptmanager</label>
+			<type>USER-ID</type>
+			<size>45</size>
+		</Department_deptManager>
+		<Department_division>
+			<label>brw-division</label>
+			<size>20</size>
+			<hidden>Y</hidden>
+		</Department_division>
+	</columns>
+<sqlfrom>Department as Department</sqlfrom>
+<sqlwhere><![CDATA[ (Department.status <> '03') ]]></sqlwhere>
+<sqlorderby>Department.departmentCode ASC</sqlorderby>
+<pagesize>15</pagesize>
+<title>Department Browse</title>
+</browse_department>

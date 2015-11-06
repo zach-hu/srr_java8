@@ -1,0 +1,55 @@
+<r-sup-s-tss>
+	<columns>
+		<TotalSupplierView_vendorId>
+			<label>Vendor ID</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</TotalSupplierView_vendorId>
+		<TotalSupplierView_vendorName>
+			<aggregate>
+				<function>max</function>
+			</aggregate>
+			<label>Vendor Name</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</TotalSupplierView_vendorName>
+		<TotalSupplierView_poDate>
+			<label>PO Date</label>
+			<selectsql>N</selectsql>
+			<type>DATE</type>
+		</TotalSupplierView_poDate>
+		<TotalSupplierView_poNumber>
+			<aggregate>
+				<function>count</function>
+			</aggregate>
+			<label>PO Number</label>
+			<type>BIGDECIMAL</type>
+			<visible>1</visible>
+		</TotalSupplierView_poNumber>
+		<TotalSupplierView_currencyCode>
+			<label>Currency Code</label>
+			<selectsql>N</selectsql>
+			<type>STRING</type>
+			<visible>1</visible>
+		</TotalSupplierView_currencyCode>
+		<TotalSupplierView_baseTotal>
+			<aggregate>
+				<function>sum</function>
+			</aggregate>
+			<label>Total</label>
+			<type>BIGDECIMAL</type>
+			<visible>1</visible>
+		</TotalSupplierView_baseTotal>
+		<TotalSupplierView_departmentCode>
+			<label>Department</label>
+			<selectsql>N</selectsql>
+			<type>STRING</type>
+		</TotalSupplierView_departmentCode>
+	</columns>
+<sqlfrom>TotalSupplierView as TotalSupplierView</sqlfrom>
+<sqlwhere><![CDATA[]]></sqlwhere>
+<sqlgroupby>TotalSupplierView.vendorId</sqlgroupby>
+<sqlorderby>sum(base_total) DESC</sqlorderby>
+<title>Total Supplier Spend Report</title>
+</r-sup-s-tss>
+

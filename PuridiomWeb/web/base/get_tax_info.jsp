@@ -48,7 +48,7 @@
 
 <BODY ONUNLOAD="setWindowNull();">
 
-<FORM NAME="taxform">
+<FORM NAME="taxform" method="POST">
 <%	if (taxCode != null) { %>
 		<tsa:hidden name="tax_rate" value="<%=Utility.getBigDecimalFormatted(taxCode.getTaxRate(), 2)%>"/>
 <%	} else { %>

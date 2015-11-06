@@ -1,0 +1,98 @@
+<r-adm-s-dst>
+	<columns>
+		<SendQueue_queueid>
+			<label>Transaction ID</label>
+			<type>BIGDECIMAL</type>
+			<visible>1</visible>
+		</SendQueue_queueid>
+		<SendQueue_subject>
+			<label>Subject</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</SendQueue_subject>
+        <SendQueue_sendfrom>
+        	<label>Send From</label>
+        	<type>STRING</type>
+        	<visible>1</visible>
+        </SendQueue_sendfrom>
+        <SendQueue_sendto>
+        	<label>Send To</label>
+        	<type>STRING</type>
+        	<visible>1</visible>
+        </SendQueue_sendto>
+        <SendQueue_status>
+			<label>Status</label>
+        	<type>STRING</type>
+        	<visible>1</visible>
+        </SendQueue_status>
+        <SendQueue_dateadded>
+        	<label>Date Added</label>
+        	<type>STRING</type>
+        	<visible>1</visible>
+        </SendQueue_dateadded>
+        <SendQueue_timeadded>
+        	<label>Time Added</label>
+        	<type>STRING</type>
+			<visible>1</visible>
+        </SendQueue_timeadded>
+        <SendQueue_action>
+        	<label>Action</label>
+        	<type>STRING</type>
+			<visible>1</visible>
+        </SendQueue_action>
+        <SendQueue_datesent>
+        	<label>Date Sent</label>
+            <type>STRING</type>
+        	<visible>1</visible>
+        </SendQueue_datesent>
+        <SendQueue_timesent>
+        	<label>Time Sent</label>
+            <type>STRING</type>
+			<visible>1</visible>
+        </SendQueue_timesent>
+        <SendQueue_attempts>
+        	<label>Attempts</label>
+        	<type>BIGDECIMAL</type>
+			<visible>1</visible>
+        </SendQueue_attempts>
+        <SendQueue_errorText>
+        	<label>Error Text</label>
+        	<type>STRING</type>
+			<visible>1</visible>
+        </SendQueue_errorText>
+        <PoHeader_vendorName>
+			<label>Supplier Name</label>
+			<size>15</size>
+		</PoHeader_vendorName>
+		<PoHeader_shipToContact>
+			<label>Ship to Contact</label>
+        	<type>STRING</type>
+			<visible>1</visible>
+        </PoHeader_shipToContact>
+        <PoHeader_poNumber>
+			<label>PO #</label>
+			<size>10</size>
+		</PoHeader_poNumber>
+		<PoHeader_releaseNumber>
+			<label>Release</label>
+			<type>BIGDECIMAL</type>
+			<size>4</size>
+		</PoHeader_releaseNumber>
+		<PoHeader_vendorId>
+			<label>Supplier</label>
+			<hidden>Y</hidden>
+		</PoHeader_vendorId>
+</columns>
+<sqlfrom>PoHeader as PoHeader, SendQueue as SendQueue</sqlfrom>
+<sqlwhere><![CDATA[
+PoHeader.poNumber <> 'N/A' AND
+SendQueue.docic = PoHeader.icPoHeader AND
+SendQueue.action IN ('XM', 'FX', 'XP', 'MX')
+]]></sqlwhere>
+<!--
+AND SendQueue.dateadded >= to_char(sysdate - 1, 'yyyy/mm/dd')
+Removed to leave the user select an specific date
+-->
+<sqlorderby>PoHeader.vendorId, PoHeader.poNumber, SendQueue.dateadded</sqlorderby>
+<title>Daily Supplier Transmission Report</title>
+</r-adm-s-dst>

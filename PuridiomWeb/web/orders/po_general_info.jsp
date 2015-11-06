@@ -914,7 +914,7 @@
 		popupParameters += 'PoHeader_poType=' + frm.PoHeader_poType.value + ';';
 	}
 
-function setAuditTables()
+	function setAuditTables()
 	{
 		frm.auditTables.value = "PoHeader";
 	}
@@ -928,6 +928,12 @@ function setAuditTables()
 	    {
 	    	return false;
 	    }
+    }
+	function getFieldsJquery()
+	{
+		var jQuerySelector = ":input:not([type=hidden])[name^='PoHeader_']";
+		var fieldsToAuditJquery = $(jQuerySelector);
+		return fieldsToAuditJquery;
     }
     function buildAuditIc()
 	{

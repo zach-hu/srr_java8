@@ -1,0 +1,79 @@
+<browse_inv_item>
+	<columns>
+		<InvItem_itemNumber>
+			<label>brw-itemNumber</label>
+			<size>15</size>
+			<link><![CDATA[javascript: viewInvItem('#InvItem_itemNumber^','#InvItem_source^'); void(0);]]></link>
+			<hidden-input>Y</hidden-input>
+			<!-- type>InvItem</type -->
+		</InvItem_itemNumber>
+		<InvItem_description>
+			<label>description</label>
+			<size>60</size>
+		</InvItem_description>
+		<InvItem_imageFile>
+			<hidden>Y</hidden>
+		</InvItem_imageFile>
+		<InvItem_commodity>
+			<label>commodity</label>
+			<size>15</size>
+			<hidden-input>Y</hidden-input>
+		</InvItem_commodity>
+		<InvItem_status>
+			<label>brw-status</label>
+			<type>STATUS</type>
+			<size>18</size>
+		</InvItem_status>
+		<InvItem_unitOfOrder>
+			<label>Unit of Order</label>
+			<size>4</size>
+		</InvItem_unitOfOrder>
+		<InvItem_cost>
+			<label>Cost</label>
+			<type>BigDecimal</type>
+			<size>6</size>
+		</InvItem_cost>
+		<InvItem_source>
+			<hidden-input>Y</hidden-input>
+		</InvItem_source>
+<!--
+		<InvItem_buyerCode>
+			<label>Buyer Code</label>
+			<size>12</size>
+		</InvItem_buyerCode>
+-->
+	</columns>
+<!--	<group-filters>
+		<CatalogItem_id_catalogId>
+			<label>Catalog</label>
+			<sqlselect>select Catalog.catalogId, count(CatalogItem.id.catalogId)</sqlselect>
+			<sqlfrom>Catalog as Catalog, CatalogItem as CatalogItem</sqlfrom>
+			<sqlwhere><![CDATA[Catalog.catalogId = CatalogItem.id.catalogId]]></sqlwhere>
+			<sqlgroupby>Catalog.catalogId</sqlgroupby>
+		</CatalogItem_id_catalogId>
+		<CatalogItem_commodity>
+			<label>Commodity</label>
+			<sqlselect>select Commodity.commodity, count(CatalogItem.commodity)</sqlselect>
+			<sqlfrom>Commodity as Commodity, CatalogItem as CatalogItem</sqlfrom>
+			<sqlwhere><![CDATA[Commodity.commodity = CatalogItem.commodity]]></sqlwhere>
+			<sqlgroupby>Commodity.commodity</sqlgroupby>
+		</CatalogItem_commodity>
+		<CatalogItem_cost>
+			<label>Cost</label>
+			<type>CostRange</type>
+			<sqlselect>select CostRange.description, count(CatalogItem.cost), CostRange.minimumCost</sqlselect>
+			<sqlfrom>CostRange as CostRange, CatalogItem as CatalogItem</sqlfrom>
+			<sqlwhere><![CDATA[CostRange.minimumCost <= CatalogItem.cost and CostRange.maximumCost >= CatalogItem.cost and CostRange.itemType = 'CAT']]></sqlwhere>
+			<sqlgroupby>CostRange.minimumCost, CostRange.description</sqlgroupby>
+		</CatalogItem_cost>
+		<CatalogItem_description>
+			<label>Keyword(s)</label>
+			<type>Keywords</type>
+		</CatalogItem_description>
+	</group-filters> -->
+	<sqlfrom>InvItem as InvItem</sqlfrom>
+	<sqlorderby>InvItem.itemNumber ASC</sqlorderby>
+	<sqlwhere><![CDATA[ ]]></sqlwhere>
+	<title>Inventory Items</title>
+	<pagesize>10</pagesize>
+</browse_inv_item>

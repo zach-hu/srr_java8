@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rule>
+  <clause type="NotEmpty" matchAll="true">
+    <left-side>
+      <source>incomingRequestList</source>
+      <object>lineitems</object>
+      <name>getUmCode</name>
+    </left-side>
+  </clause>
+  <logical-operator>OR</logical-operator>
+  <clause type="lookup" matchAll="true">
+    <sql> from UnitOfMeasure as um where um.id = '@um@' AND (um.status = '02' OR (um.status = '01' AND um.dateExpires >= @today@))</sql>
+    <source>lineitems</source>
+    <arguments>
+      <name>um</name>
+      <source>lineitems</source>
+      <colName>getUmCode</colName>
+    </arguments>
+  </clause>
+</rule>

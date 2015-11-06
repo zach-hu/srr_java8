@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rule>
+	<clause type="NotEmpty">
+		<left-side>
+			<source>incomingRequestObjectMethod</source>
+			<object>header</object>
+			<name>getUdf12Code</name>
+		</left-side>
+	</clause>
+	<logical-operator>IFTHEN</logical-operator>
+	<clause type="lookup">
+		<sql>from StdTable stdTable where stdTable.id.tableType = 'RQ12' AND stdTable.id.tableKey = '@udf12@' AND (stdTable.status = '02' OR (stdTable.status = '01' AND stdTable.dateExpires >= @today@))</sql>
+		<source>header</source>
+		<arguments>
+			<name>udf12</name>
+			<source>header</source>
+			<colName>getUdf12Code</colName>
+		</arguments>
+	</clause>
+</rule>

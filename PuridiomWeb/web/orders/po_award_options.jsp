@@ -66,15 +66,15 @@ Marian Luoma  108676
 Peter Morabito  115388
 	*/
 	boolean forwardToDennis = false;
-	if(poHeader.getTotal().compareTo(new BigDecimal(500000)) < 1)
-	{
-		String dennisBuyers = "115444 001787 108676 115388";
-		if( (!Utility.isEmpty(poHeader.getBuyerCode()) && dennisBuyers.indexOf(poHeader.getBuyerCode()) > -1) 
-				|| (!Utility.isEmpty(poHeader.getOwner()) && dennisBuyers.indexOf(poHeader.getOwner()) > -1))
-		{
-			forwardToDennis = true;
-		}
-	}
+// 	if(poHeader.getTotal().compareTo(new BigDecimal(500000)) < 1)
+// 	{
+// 		String dennisBuyers = "115444 001787 108676 115388";
+// 		if( (!Utility.isEmpty(poHeader.getBuyerCode()) && dennisBuyers.indexOf(poHeader.getBuyerCode()) > -1) 
+// 				|| (!Utility.isEmpty(poHeader.getOwner()) && dennisBuyers.indexOf(poHeader.getOwner()) > -1))
+// 		{
+// 			forwardToDennis = true;
+// 		}
+// 	}
 
 	boolean requireLastApproverFromReq = false;
 

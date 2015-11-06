@@ -17,6 +17,11 @@ public class UserLoginHandler implements IHandler
 	{
 		try
 		{
+			String password = (String) incomingRequest.get("password");
+			if (Utility.isEmpty(password)) {
+				Exception ex = new Exception();
+				throw ex;
+			}
 			PuridiomProcessLoader processLoader = new PuridiomProcessLoader((String)incomingRequest.get("organizationId"));
 			PuridiomProcess process = processLoader.loadProcess("user-login.xml");
 			process.executeProcess(incomingRequest);

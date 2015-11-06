@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rule>
+	<clause type="NotEmpty">
+		<left-side>
+			<source>incomingRequestObjectMethod</source>
+			<object>header</object>
+			<name>getRequiredDate</name>
+		</left-side>
+	</clause>
+	<logical-operator>IFTHEN</logical-operator>
+	<clause type="DateCompare">
+		<left-side>
+			<source>incomingRequestObjectMethod</source>
+			<object>header</object>
+			<name>getRequiredDate</name>
+		</left-side>
+		<operator>GREATEREQUAL</operator>
+		<right-side>
+			<source>constant</source>
+			<value> </value>
+		</right-side>
+	</clause>
+</rule>
+
+

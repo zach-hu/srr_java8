@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<validation-rules>
+	<validations>
+		<save enabled="yes">
+			<rule>
+				<filename>has-items.xml</filename>
+				<alias>Has Lines</alias>
+				<msg>You must enter or select at least one item!</msg>
+				<severity>E</severity>
+				<order>10</order>
+				<enabled>Y</enabled>
+				<link><![CDATA[javascript: doSubmit('requests/req_items.jsp', 'RequisitionLineRetrieveByHeader'); void(0);]]></link>
+			</rule>
+			<rule>
+				<filename>req-requireddate-compare.xml</filename>
+				<alias>Required Date</alias>
+				<msg>You must enter a Required Date on the Shipping Information page that is equal to or after today!</msg>
+				<severity>E</severity>
+				<order>20</order>
+				<enabled>Y</enabled>
+				<fieldname>RequisitionHeader_requiredDate</fieldname>
+				<link><![CDATA[javascript: doSubmit('requests/req_shipping.jsp', 'RequisitionHeaderShipToRetrieveById'); void(0);]]></link>
+			</rule>
+			<rule>
+				<filename>description.xml</filename>
+				<alias>description</alias>
+				<msg>You must enter a Description for each item!</msg>
+				<severity>E</severity>
+				<order>100</order>
+				<enabled>N</enabled>
+				<fieldname>RequisitionLine_description</fieldname>
+				<link><![CDATA[javascript: doSubmit('requests/req_items.jsp', 'RequisitionLineRetrieveByHeader'); void(0);]]></link>
+			</rule>
+			<rule>
+				<filename>quantity.xml</filename>
+				<alias>Quantity</alias>
+				<msg>The Quantity for each item must be greater than zero!</msg>
+				<severity>E</severity>
+				<order>110</order>
+				<enabled>Y</enabled>
+				<fieldname>RequisitionLine_quantity</fieldname>
+				<link><![CDATA[javascript: doSubmit('requests/req_items.jsp', 'RequisitionLineRetrieveByHeader'); void(0);]]></link>
+			</rule>
+			<rule>
+				<filename>line-unit-of-measure.xml</filename>
+				<alias>Unit of Measure</alias>
+				<msg>You must enter or select a valid UOM code for each item!</msg>
+				<severity>E</severity>
+				<order>120</order>
+				<enabled>N</enabled>
+				<fieldname>RequisitionLine_uomCode</fieldname>
+				<link><![CDATA[javascript: doSubmit('requests/req_items.jsp', 'RequisitionLineRetrieveByHeader'); void(0);]]></link>
+			</rule>
+			<rule>
+				<filename>commodity-new.xml</filename>
+				<alias>commodity</alias>
+				<msg>You must enter or select a valid Commodity code for each item!
+				</msg>
+				<severity>E</severity>
+				<order>130</order>
+				<enabled>N</enabled>
+				<new>true</new>
+				<fieldname>RequisitionLine_commodity</fieldname>
+				<link><![CDATA[javascript: doSubmit('requests/req_items.jsp', 'RequisitionLineRetrieveByHeader'); void(0);]]></link>
+			</rule>
+			<rule>
+				<filename>department.xml</filename>
+				<alias>department</alias>
+				<msg>You must enter or select a valid Department code!</msg>
+				<severity>E</severity>
+				<order>200</order>
+				<enabled>N</enabled>
+				<fieldname>RequisitionHeader_departmentCode</fieldname>
+				<link><![CDATA[javascript: doSubmit('requests/req_general_info.jsp', 'RequisitionHeaderRetrieveById'); void(0);]]></link>
+			</rule>
+			<rule>
+				<filename>requisitioner.xml</filename>
+				<alias>requisitioner</alias>
+				<msg>You must enter or select a valid Requisitioner code!</msg>
+				<severity>E</severity>
+				<order>210</order>
+				<enabled>N</enabled>
+				<process>HEADER_GENERAL_INFO</process>
+				<fieldname>RequisitionHeader_requisitionerCode</fieldname>
+				<link><![CDATA[javascript: doSubmit('requests/req_general_info.jsp', 'RequisitionHeaderRetrieveById'); void(0);]]></link>
+			</rule>
+			<rule>
+				<filename>has-accounts.xml</filename>
+				<alias>Has Accounts</alias>
+				<msg>You must enter accounts on the Account Information page or for every line item!</msg>
+				<severity>E</severity>
+				<order>300</order>
+				<enabled>Y</enabled>
+				<link><![CDATA[javascript: doSubmit('requests/req_review.jsp', 'RequisitionRetrieve'); void(0);]]></link>
+			</rule>
+			<rule>
+				<filename>req-subtotal.xml</filename>
+				<alias>req_subtotal</alias>
+				<msg>The Subtotal of the request must be greater than zero!</msg>
+				<severity>E</severity>
+				<order>350</order>
+				<enabled>Y</enabled>
+				<fieldname>RequisitionHeader_subtotal</fieldname>
+				<link><![CDATA[javascript: doSubmit('requests/req_totals.jsp', 'RequisitionHeaderRetrieveById'); void(0);]]></link>
+			</rule>
+			<rule>
+				<filename>req-rq03.xml</filename>
+				<alias>req_rq03</alias>
+				<msg>If the value for Already Ordered is YES, you must enter a comment explaining why!</msg>
+				<severity>W</severity>
+				<order>360</order>
+				<enabled>Y</enabled>
+				<fieldname>RequisitionHeader_udf3Code</fieldname>
+				<link><![CDATA[javascript: doSubmit('requests/req_notes.jsp', 'DocCommentRetrieveByLine'); void(0);]]></link>
+			</rule>
+			<rule>
+				<filename>req-ac01ln-mv.xml</filename>
+				<alias>Company</alias>
+				<msg>You must enter/select a valid Company for every line item.</msg>
+				<severity>E</severity>
+				<order>400</order>
+				<enabled>Y</enabled>
+				<link><![CDATA[javascript: doSubmit('requests/req_items.jsp', 'RequisitionLineRetrieveByHeader'); void(0);]]></link>
+			</rule>
+			<rule>
+				<filename>req-ac02ln-v.xml</filename>
+				<alias>AFE</alias>
+				<msg>You must enter/select a valid AFE for every line item.</msg>
+				<severity>E</severity>
+				<order>410</order>
+				<enabled>Y</enabled>
+				<link><![CDATA[javascript: doSubmit('requests/req_items.jsp', 'RequisitionLineRetrieveByHeader'); void(0);]]></link>
+			</rule>
+			<rule>
+				<filename>req-ac03ln-mv.xml</filename>
+				<alias>GL Acct</alias>
+				<msg>You must enter/select a valid GL Acct for every line item.</msg>
+				<severity>E</severity>
+				<order>500</order>
+				<enabled>Y</enabled>
+				<link><![CDATA[javascript: doSubmit('requests/req_items.jsp', 'RequisitionLineRetrieveByHeader'); void(0);]]></link>
+			</rule>
+			<rule>
+				<filename>req-ac04ln-v.xml</filename>
+				<alias>Well Facility </alias>
+				<msg>You must enter/select a valid Well/Facility for every line item.</msg>
+				<severity>E</severity>
+				<order>510</order>
+				<enabled>Y</enabled>
+				<link><![CDATA[javascript: doSubmit('requests/req_items.jsp', 'RequisitionLineRetrieveByHeader'); void(0);]]></link>
+			</rule>
+			<rule>
+				<filename>req-ac05ln-v.xml</filename>
+				<alias>Cost Center</alias>
+				<msg>You must enter/select a valid Cost Center for every line item.</msg>
+				<severity>E</severity>
+				<order>520</order>
+				<enabled>Y</enabled>
+				<link><![CDATA[javascript: doSubmit('requests/req_items.jsp', 'RequisitionLineRetrieveByHeader'); void(0);]]></link>
+			</rule>
+			<rule>
+				<filename>req-ac02-04-05-header-empty.xml</filename>
+				<alias>Accounts</alias>
+				<msg>You must enter/select a valid AFE and Well/Facility or a valid Cost Center.</msg>
+				<severity>E</severity>
+				<order>600</order>
+				<enabled>Y</enabled>
+				<link><![CDATA[javascript: doSubmit('requests/req_accounts.jsp', 'AccountRetrieveByLine'); void(0);]]></link>
+			</rule>
+			<rule>
+				<filename>req-ac02-04-05ln-empty.xml</filename>
+				<alias>Accounts line</alias>
+				<msg>You must enter/select a valid AFE and Well/Facility or a valid Cost Center in every line item.</msg>
+				<severity>E</severity>
+				<order>700</order>
+				<enabled>Y</enabled>
+				<link><![CDATA[javascript: doSubmit('requests/req_items.jsp', 'RequisitionLineRetrieveByHeader'); void(0);]]></link>
+			</rule>
+		</save>
+	</validations>
+</validation-rules>
+

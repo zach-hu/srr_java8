@@ -3,11 +3,11 @@
 <%@ include file="/system/context_path.jsp" %>
 <%@ include file="/system/header.jsp" %>
 <%@ page import="com.tsa.puridiom.commodity.CommodityManager" %>
-hi my name is zach
+
 <SCRIPT LANGUAGE="JavaScript1.2" SRC="<%=contextPath%>/scripts/calendar.js"></SCRIPT>
 <SCRIPT LANGUAGE="JavaScript1.2" SRC="<%=contextPath%>/scripts/ajaxlookup.js"></SCRIPT>
 
-<%
+<% 
 	Encoder encoder = DefaultEncoder.getInstance();
 	PropertiesManager propertiesManager = PropertiesManager.getInstance(oid);
 	String s_autoNumber = propertiesManager.getProperty("AUTONUMBER", "AutoInv", "N");

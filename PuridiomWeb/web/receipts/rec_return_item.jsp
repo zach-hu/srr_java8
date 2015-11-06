@@ -421,7 +421,7 @@
 <%	if (allowEdit) { %>
 	<td width=50% align=center><div id="pxbutton"><a href="javascript: doSubmit('<%=s_return_page%>', 'ReceiptLineUpdate;<%=s_return_method%>'); void(0);">Save</a></div></td>
 <%	} %>
-	<td width=50% align=center><div id="pxbutton"><a href="javascript: doSubmit('<%=s_return_page%>', '<%=s_return_method%>'); void(0);">Return</a></div<</td>
+	<td width=50% align=center><div id="pxbutton"><a href="javascript: doSubmit('<%=s_return_page%>', '<%=s_return_method%>'); void(0);">Return</a></div></td>
 </tr>
 </table>
 

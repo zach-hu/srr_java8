@@ -209,28 +209,6 @@
 	{
 		hidden_delete_option = false;
 	}
-	
-	
-	boolean editInspections = false;
-	
-switch(s_req_status){
-case DocumentStatus.REQ_PLANNING:
-	if(HiltonUtility.ckNull(reqLine.getRequisitionerCode()).equals(uid))
-		disableEdit = false;
-	break;
-case DocumentStatus.REQ_PLANNING_RECALLED:
-	if(HiltonUtility.ckNull(reqLine.getRequisitionerCode()).equals(uid) || fpeUser || msrEngineer)
-		disableEdit = false;
-	break;
-case DocumentStatus.REQ_PLANNING_REJECTED:
-	if(HiltonUtility.ckNull(reqLine.getRequisitionerCode()).equals(uid) || fpeUser || msrEngineer)	
-		disableEdit = false;
-	break;
-case DocumentStatus.REQ_PLANNING_APPROVING:
-	if(fpeUser || msrEngineer)
-		disableEdit = false;
-	break;
-}
 %>
 <tsa:hidden name="RequisitionHeader_icReqHeader" value="<%=b_req_ic_header%>"/>
 <tsa:hidden name="RequisitionLine_icReqHeader" value="<%=b_req_ic_header%>"/>
@@ -1334,7 +1312,7 @@ if (oid.equalsIgnoreCase("vse06p"))
 				<td width=20% class=browseRow align=right></td>
 				<td width=20% class=browseRow align=right></td>
 				<td width=20% class=browseRow align=right><%=DocumentStatus.toString(s_req_line_status , oid)%></td>
-				<% if(editInspections) { %>
+				<% if(s_req_line_status.equals(DocumentStatus.REQ_PLANNING) || (s_req_line_status.equals(DocumentStatus.REQ_PLANNING_APPROVING) && (fpeUser || msrEngineer))) { %>
 				<td width=5% align=center height=18px class=browseRow><a href="javascript: if (validateItem()) { deleteInspectionDetail('<%=ih.getComp_id().getIcInspNo() %>','<%=inspTypeDesc %>'); } void(0);"><img id='delete' valign='baseline' src='<%=contextPath%>/images/delete.gif'  border=0 alt="Delete"></a></td>
 				<% } else { %>
 				<td width=5% height=18px class=browseRow>&nbsp;</td>

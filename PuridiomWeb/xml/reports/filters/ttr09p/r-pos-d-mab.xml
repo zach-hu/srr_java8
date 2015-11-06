@@ -1,0 +1,49 @@
+<r-pos-d-mab>
+  <columns>
+		<PoHeader_buyerCode>
+			<label>Buyer Code</label>
+			<type>STRING</type>
+		</PoHeader_buyerCode>
+		<UserProfile_firstName>
+			<label>First Name</label>
+			<type>STRING</type>
+			<visible>0</visible>
+		</UserProfile_firstName>
+		<UserProfile_lastName>
+			<label>Last Name</label>
+			<type>STRING</type>
+			<visible>0</visible>
+		</UserProfile_lastName>
+		<PoHeader_poType>
+			<label>Po Type</label>
+			<type>STRING</type>
+			<visible>0</visible>
+		</PoHeader_poType>
+		<PoHeader_status>
+			<label>Status</label>
+			<type>STATUS</type>
+			<visible>0</visible>
+		</PoHeader_status>
+		<PoHeader_total>
+			<label>Total</label>
+			<type>STRING</type>
+		</PoHeader_total>
+		<PoHeader_poDate>
+			<label>Start Date</label>
+			<type>DATE</type>
+		</PoHeader_poDate>
+		<PoHeader_poDate>
+			<label>End Date</label>
+			<type>DATE</type>
+		</PoHeader_poDate>
+
+	</columns>
+  <sqlfrom> PoHeader as PoHeader , UserProfile as UserProfile </sqlfrom>
+  <sqlwhere><![CDATA[
+  			( PoHeader.status > '3020' ) and
+  			( PoHeader.status < '9020' ) and ( PoHeader.poDate >= :as_baseReportDate ) and
+  			( PoHeader.buyerCode = UserProfile.userId)
+  			]]></sqlwhere>
+  			<sqlgroupby>PoHeader.poDate, PoHeader.buyerCode, PoHeader.total, PoHeader.poType, PoHeader.status, UserProfile.firstName,UserProfile.lastName, PoHeader.departmentCode</sqlgroupby>
+  <title>Quarterly Activity by Buyer Report</title>
+</r-pos-d-mab>

@@ -344,6 +344,12 @@
 			frm.Vendor_apBatchid.value = "";
 		}
 	}
+	
+	function getFieldsJquery()
+	{
+		var fieldsToAuditJquery = $(":input:not([type=hidden])[name^='Address_'],:input:[name='Address_addrFld16'],:input:[name='Address_addrFld17'],:input:[name='Address_addrFld18'],:input:[name='Address_addrFld19'],:input:[name='Address_addrFld20']");
+		return fieldsToAuditJquery;
+    }
 
 	function setAuditTables()
 	{

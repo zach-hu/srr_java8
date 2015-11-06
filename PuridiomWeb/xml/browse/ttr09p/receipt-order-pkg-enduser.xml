@@ -1,0 +1,85 @@
+<browse-receipt-order-pkg>
+	<columns>
+		<PoHeader_poType>
+			<label>poType</label>
+			<type>ORDER-TYPE</type>
+			<size>14</size>
+		</PoHeader_poType>
+		<PoHeader_icPoHeader>
+	        <hidden>Y</hidden>
+	        <visible>0</visible>
+		</PoHeader_icPoHeader>
+		<PoHeader_poNumber>
+			<label>brw-poNumber</label>
+			<link><![CDATA[javascript: receiveByPackage('#PoHeader_icPoHeader^'); void(0);]]></link>
+			<size>12</size>
+		</PoHeader_poNumber>
+		<PoHeader_releaseNumber>
+			<label>brw-releaseNumber</label>
+			<type>STRING</type>
+			<size>5</size>
+		</PoHeader_releaseNumber>
+		<PoHeader_revisionNumber>
+			<label>brw-relvisionNumber</label>
+			<type>STRING</type>
+			<hidden>Y</hidden>
+		</PoHeader_revisionNumber>
+		<PoHeader_status>
+			<label>brw-status</label>
+			<type>STATUS</type>
+			<size>15</size>
+		</PoHeader_status>
+		<PoHeader_poDate>
+			<label>brw-poDate</label>
+			<type>DATE</type>
+			<size>11</size>
+		</PoHeader_poDate>
+		<PoHeader_vendorId>
+			<label>brw-vendorId</label>
+			<hidden>Y</hidden>
+		</PoHeader_vendorId>
+		<PoHeader_vendorName>
+			<label>brw-vendorName</label>
+			<size>19</size>
+		</PoHeader_vendorName>
+		<PoHeader_buyerCode>
+			<label>brw-buyer</label>
+			<size>13</size>
+			<type>USER-ID</type>
+		</PoHeader_buyerCode>
+		<PoHeader_requiredDate>
+			<label>brw-requiredDate</label>
+			<type>DATE</type>
+			<size>11</size>
+		</PoHeader_requiredDate>
+		<PoHeader_internalComments>
+			<label>purpose</label>
+			<detail>Y</detail>
+		</PoHeader_internalComments>
+	</columns>
+<sqlfrom>PoHeader as PoHeader</sqlfrom>
+<sqlwhere><![CDATA[PoHeader.poNumber is not null
+	and PoHeader.poNumber <> 'null'
+	and PoHeader.poNumber <> 'N/A'
+	and PoHeader.status >= '3030'
+	and PoHeader.status < '4010'
+	and PoHeader.status <> '3045'
+	and PoHeader.lastRevision = 'C'
+	and PoHeader.poType <> 'BO'
+	and PoHeader.poType <> 'DO'
+	and PoHeader.poType <> 'SB'
+	and PoHeader.icPoHeader in 
+		(SELECT distinct PoHeader.icPoHeader 
+			FROM PoHeader as PoHeader, PoLine as PoLine
+			WHERE PoHeader.icPoHeader = PoLine.icPoHeader
+				and PoLine.status >= '3030' 
+				and PoLine.status < '4010' 
+				and PoLine.status <> '3045'
+				and (PoLine.requisitionerCode = :as_userid 
+					or ((PoLine.requisitionerCode is null or PoLine.requisitionerCode = '') 
+							and (PoHeader.requisitionerCode = :as_userid or PoHeader.buyerCode = :as_userid))))
+	]]></sqlwhere>
+<sqlorderby>PoHeader.poDate DESC</sqlorderby>
+<pagesize>15</pagesize>
+<title>Order Browse for Receiving</title>
+</browse-receipt-order-pkg>

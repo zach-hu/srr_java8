@@ -1,0 +1,83 @@
+<browse_po_header>
+	<columns>
+		<PoHeader_vendorId>
+			<label>brw-vendorId</label>
+			<size>15</size>
+		</PoHeader_vendorId>
+		<PoHeader_poNumber>
+			<label>invprop-inv-poNumber</label>
+			<sort>D</sort>
+			<link><![CDATA[javascript: createInvoiceFromOrder('#PoHeader_icPoHeader^','#PoHeader_poType^'); void(0);]]></link>
+			<size>10</size>
+		</PoHeader_poNumber>
+		<PoHeader_vendorName>
+			<label>vendorName</label>
+			<size>22</size>
+		</PoHeader_vendorName>
+		<PoHeader_poType>
+			<label>poType</label>
+			<type>ORDER-TYPE</type>
+			<size>15</size>
+		</PoHeader_poType>
+		<PoHeader_icPoHeader>
+	        <hidden>Y</hidden>
+	        <visible>0</visible>
+		</PoHeader_icPoHeader>
+		<PoHeader_releaseNumber>
+			<label>brw-releaseNumber</label>
+			<type>STRING</type>
+			<size>4</size>
+		</PoHeader_releaseNumber>
+		<PoHeader_status>
+			<label>brw-status</label>
+			<type>STATUS</type>
+			<size>15</size>
+		</PoHeader_status>
+		<PoHeader_poDate>
+			<label>poDate</label>
+			<type>DATE</type>
+			<size>10</size>
+		</PoHeader_poDate>
+		<!--PoHeader_buyerCode>
+			<label>brw-buyer</label>
+            <size>12</size>
+            <type>USER-ID</type>
+		</PoHeader_buyerCode-->
+		<PoHeader_total>
+			<label>brw-total</label>
+			<size>8</size>
+			<type>DollarDecimal</type>
+		</PoHeader_total>
+		<PoHeader_requisitionerCode>
+			<label>brw-requisitioner</label>
+			<type>USER-ID</type>
+			<detail>Y</detail>
+			<size>30</size>
+		</PoHeader_requisitionerCode>
+		<PoHeader_contractNo>
+			<label>brw-contract</label>
+			<detail>Y</detail>
+			<size>30</size>
+		</PoHeader_contractNo>
+		<PoHeader_internalComments>
+			<label>brw-purpose</label>
+			<detail>Y</detail>
+			<size>100</size>
+		</PoHeader_internalComments>
+		<PoHeader_expirationDate>
+			<label>brw-dateExpires</label>
+			<type>DATE</type>
+			<size>10</size>
+			<visible>0</visible>
+		</PoHeader_expirationDate>
+	</columns>
+<sqlfrom>PoHeader as PoHeader</sqlfrom>
+<sqlwhere>
+	<![CDATA[PoHeader.status >= '3030' AND PoHeader.status < '4015' AND PoHeader.lastRevision = 'C'
+					AND (PoHeader.pyStatus < '6060' OR PoHeader.pyStatus is null)
+					AND PoHeader.poType <> 'BO' AND PoHeader.poType <> 'DO' AND PoHeader.poType <> 'SB']]>
+</sqlwhere>
+<sqlorderby>PoHeader.poNumber DESC, PoHeader.releaseNumber DESC</sqlorderby>
+<pagesize>15</pagesize>
+<title>Purchasing Browse</title>
+</browse_po_header>

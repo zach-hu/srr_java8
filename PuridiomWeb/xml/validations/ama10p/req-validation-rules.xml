@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<validation-rules>
+	<validations>
+		<save enabled="yes">
+			<rule>
+				<filename>has-items.xml</filename>
+				<alias>Has Lines</alias>
+				<msg>You must enter or select at least one item!</msg>
+				<severity>E</severity>
+				<order>10</order>
+				<enabled>Y</enabled>
+				<link><![CDATA[javascript: doSubmit('requests/req_items.jsp', 'RequisitionLineRetrieveByHeader'); void(0);]]></link>
+			</rule>
+			<rule>
+				<filename>description.xml</filename>
+				<alias>description</alias>
+				<msg>You must enter a Description for each item!</msg>
+				<severity>E</severity>
+				<order>100</order>
+				<enabled>N</enabled>
+				<fieldname>RequisitionLine_description</fieldname>
+				<link><![CDATA[javascript: doSubmit('requests/req_items.jsp', 'RequisitionLineRetrieveByHeader'); void(0);]]></link>
+			</rule>
+			<rule>
+				<filename>quantity.xml</filename>
+				<alias>Quantity</alias>
+				<msg>The Quantity for each item must be greater than zero!</msg>
+				<severity>E</severity>
+				<order>110</order>
+				<enabled>Y</enabled>
+				<fieldname>RequisitionLine_quantity</fieldname>
+				<link><![CDATA[javascript: doSubmit('requests/req_items.jsp', 'RequisitionLineRetrieveByHeader'); void(0);]]></link>
+			</rule>
+			<rule>
+				<filename>line-unit-of-measure.xml</filename>
+				<alias>Unit of Measure</alias>
+				<msg>You must enter or select a valid UOM code for each item!</msg>
+				<severity>E</severity>
+				<order>120</order>
+				<enabled>N</enabled>
+				<fieldname>RequisitionLine_uomCode</fieldname>
+				<link><![CDATA[javascript: doSubmit('requests/req_items.jsp', 'RequisitionLineRetrieveByHeader'); void(0);]]></link>
+			</rule>
+			<rule>
+				<filename>commodity-new.xml</filename>
+				<alias>commodity</alias>
+				<msg>You must enter or select a valid Commodity code for each item!
+				</msg>
+				<severity>E</severity>
+				<order>130</order>
+				<enabled>Y</enabled>
+				<new>true</new>
+				<fieldname>RequisitionLine_commodity</fieldname>
+				<link><![CDATA[javascript: doSubmit('requests/req_items.jsp', 'RequisitionLineRetrieveByHeader'); void(0);]]></link>
+			</rule>
+			<rule>
+				<filename>department.xml</filename>
+				<alias>department</alias>
+				<msg>You must enter or select a valid Department code!</msg>
+				<severity>E</severity>
+				<order>200</order>
+				<enabled>N</enabled>
+				<fieldname>RequisitionHeader_departmentCode</fieldname>
+				<link><![CDATA[javascript: doSubmit('requests/req_general_info.jsp', 'RequisitionHeaderRetrieveById'); void(0);]]></link>
+			</rule>
+			<rule>
+				<filename>requisitioner.xml</filename>
+				<alias>requisitioner</alias>
+				<msg>You must enter or select a valid Requisitioner code!</msg>
+				<severity>E</severity>
+				<order>210</order>
+				<enabled>N</enabled>
+				<process>HEADER_GENERAL_INFO</process>
+				<fieldname>RequisitionHeader_requisitionerCode</fieldname>
+				<link><![CDATA[javascript: doSubmit('requests/req_general_info.jsp', 'RequisitionHeaderRetrieveById'); void(0);]]></link>
+			</rule>d
+			<rule>
+				<filename>has-accounts.xml</filename>
+				<alias>Has Accounts</alias>
+				<msg>You must enter accounts on the Account Information page or for every line item!</msg>
+				<severity>E</severity>
+				<order>300</order>
+				<enabled>Y</enabled>
+				<link><![CDATA[javascript: doSubmit('requests/req_review.jsp', 'RequisitionRetrieve'); void(0);]]></link>
+			</rule>
+			<rule>
+				<filename>req-subtotal.xml</filename>
+				<alias>req_subtotal</alias>
+				<msg>The Subtotal of the request must be greater than zero!</msg>
+				<severity>E</severity>
+				<order>350</order>
+				<enabled>Y</enabled>
+				<fieldname>RequisitionHeader_subtotal</fieldname>
+				<link><![CDATA[javascript: doSubmit('requests/req_totals.jsp', 'RequisitionHeaderRetrieveById'); void(0);]]></link>
+			</rule>
+			<rule>
+				<filename>has-vendor-and-req-line-vendor-equals.xml</filename>
+				<alias>Requisition line VendorId</alias>
+				<msg>All Items must be requested from the same Vendor.</msg>
+				<severity>E</severity>
+				<order>400</order>
+				<enabled>Y</enabled>
+				<link><![CDATA[javascript: doSubmit('requests/req_items.jsp', 'RequisitionLineRetrieveByHeader'); void(0);]]></link>
+			</rule>
+			<rule>
+				<filename>req-amount-validations.xml</filename>
+				<alias>Requisition Amount validation</alias>
+				<msg>Please ensure that you have selected the right commodity / account number.</msg>
+				<severity>W</severity>
+				<order>500</order>
+				<enabled>Y</enabled>
+				<link><![CDATA[javascript: doSubmit('requests/req_items.jsp', 'RequisitionLineRetrieveByHeader'); void(0);]]></link>
+			</rule>
+			<rule>
+				<filename>req-asset-check.xml</filename>
+				<alias>If assest check then check RQ03</alias>
+				<msg>There must be a CFR# if any item is checked as a Capital Asset</msg>
+				<severity>E</severity>
+				<order>600</order>
+				<enabled>Y</enabled>
+				<link><![CDATA[javascript: doSubmit('requests/req_general_info.jsp', 'RequisitionLineRetrieveByHeader'); void(0);]]></link>
+			</rule>
+			<rule>
+				<filename>req-priority.xml</filename>
+				<alias>Priority and Comment validation</alias>
+				<msg>If the priority is 1 then you must enter a comment</msg>
+				<severity>E</severity>
+				<order>650</order>
+				<enabled>Y</enabled>
+				<link><![CDATA[javascript: doSubmit('requests/req_shipping.jsp', 'RequisitionHeaderRetrieveById'); void(0);]]></link>
+			</rule>
+		</save>
+	</validations>
+</validation-rules>

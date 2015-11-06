@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<receipt>
+    <step process="HEADER_GENERAL_INFO" visible="1">
+        <link><![CDATA[receipts/rec_general_info.jsp]]></link>
+        <label>package_information</label>
+		<method>ReceiptHeaderRetrieveById</method>
+    </step>
+    <step process="HEADER_ACCOUNTS" visible="0">
+        <link><![CDATA[receipts/rec_accounts.jsp]]></link>
+        <label>account_information</label>
+        <method>AccountRetrieveByLine</method>
+    </step>
+    <step process="SHOPCART" visible="0">
+        <link><![CDATA[receipts/rec_items.jsp]]></link>
+        <label>shopping_cart</label>
+		<method>ReceiptLineRetrieveByHeader</method>
+    </step>
+    <step process="HEADER_SUPPLIER" visible="0">
+        <link><![CDATA[receipts/rec_supplier.jsp]]></link>
+        <label>supplier_information</label>
+        <method>ReceiptHeaderVendorRetrieveById</method>
+    </step>
+    <step process="HEADER_SHIPPING" visible="0">
+        <link><![CDATA[receipts/rec_shipping.jsp]]></link>
+        <label>shipping_information</label>
+        <method>ReceiptHeaderShipToRetrieveById</method>
+    </step>
+    <step process="HEADER_NOTES" visible="0">
+        <link><![CDATA[receipts/rec_notes.jsp]]></link>
+        <label>comments</label>
+        <method>DocCommentRetrieveByLine</method>
+    </step>
+	<step process="HEADER_ATTACHMENTS" visible="1">
+        <link><![CDATA[receipts/rec_attachment.jsp]]></link>
+        <label>attachments</label>
+        <method>DocAttachmentRetrieveByHeader</method>
+    </step>
+    <step process="HEADER_REVIEW" visible="0">
+        <link><![CDATA[receipts/rec_review.jsp]]></link>
+        <label>review_finalize</label>
+        <method>ReceiptRetrieve</method>
+    </step>
+    <step process="HEADER_VALIDATION" visible="1">
+        <link><![CDATA[receipts/rec_validation.jsp]]></link>
+        <label><![CDATA[validate]]></label>
+        <method>ReceiptValidationRules</method>
+    </step>
+</receipt>

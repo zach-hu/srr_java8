@@ -1,0 +1,36 @@
+<r-sup-d-tser>
+  <columns>
+		<Vendor_vendorId>
+			<label>Vendor Id</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</Vendor_vendorId>
+		<Vendor_vendorName>
+			<label>Vendor Name</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</Vendor_vendorName>
+		<Address_city>
+			<label>City</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</Address_city>
+		<Address_state>
+			<label>State</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</Address_state>
+		<Commodity_description>
+			<label>Commodity</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</Commodity_description>
+
+	</columns>
+  <sqlfrom> Vendor as Vendor, Address as Address , VendorCommRel as VendorCommRel, Commodity as Commodity</sqlfrom>
+  <sqlwhere><![CDATA[( Vendor.vendorId = Address.id.addressType ) and (Address.id.addressCode = 'DEFAULT')
+  and ( Vendor.vendorId = VendorCommRel.id.vendorId ) and ( Commodity.commodity = VendorCommRel.id.commodityCode ) and Vendor.status = '02']]></sqlwhere>
+  <sqlorderby>Vendor.vendorId</sqlorderby>
+  <title>Temporary Exception Suppliers</title>
+</r-sup-d-tser>
+

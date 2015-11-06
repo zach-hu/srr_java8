@@ -1,0 +1,98 @@
+<browse-receipt-item-history>
+<columns>
+	<PoHeader_vendorId>
+		<label>brw-vendorId</label>
+		<detail>Y</detail>
+		<size>25</size>
+	</PoHeader_vendorId>
+	<ReceiptLine_receiptDate>
+		<label>brw-transactionDate</label>
+		<type>DATE</type>
+		<size>12</size>
+	</ReceiptLine_receiptDate>
+	<PoHeader_poNumber>
+		<label>brw-poNumber</label>
+		<size>8</size>
+	</PoHeader_poNumber>
+	<PoLine_itemNumber>
+		<label>hdg-itemNumber</label>
+		<size>10</size>
+	</PoLine_itemNumber>
+	<PoLine_description>
+		<label>brw-itemDescription</label>
+		<detail>Y</detail>
+		<size>100</size>
+	</PoLine_description>
+	<ReceiptLine_receiptNotes>
+		<label>Item Notes</label>
+		<type>STRING</type>
+		<detail>Y</detail>
+		<size>100</size>
+	</ReceiptLine_receiptNotes>
+	
+	<PoHeader_releaseNumber>
+		<label>brw-releaseNumber</label>
+		<type>STRING</type>
+		<size>5</size>
+	</PoHeader_releaseNumber>
+	<PoHeader_revisionNumber>
+		<label>brw-revisionNumber</label>
+		<type>STRING</type>
+		<hidden>Y</hidden>
+	</PoHeader_revisionNumber>
+	<PoLine_status>
+		<label>brw-status</label>
+		<type>STATUS</type>
+		<hidden>Y</hidden>
+	</PoLine_status>
+	<PoHeader_vendorName>
+		<label>brw-vendorName</label>
+		<size>20</size>
+	</PoHeader_vendorName>
+	<PoHeader_departmentCode>
+		<label>departmentCode</label>
+		<size>18</size>
+	</PoHeader_departmentCode>
+	<ReceiptLine_receiptNumber>
+		<label>brw-receiptNumber</label>
+		<size>8</size>
+		<sort>D</sort>
+	</ReceiptLine_receiptNumber>
+	<!--ReceiptLine_receiptType>
+		<label>brw-receiptType</label>
+		<type>RECEIPT-TYPE</type>
+		<size>10</size>
+	</ReceiptLine_receiptType-->
+	<ReceiptLine_qtyReceived>
+		<label>brw-receiptTransQty</label>
+		<type>QtyDecimal</type>
+		<size>8</size>
+	</ReceiptLine_qtyReceived>
+	<ReceiptLine_receivedBy>
+		<label>receivedBy</label>
+		<type>USER-ID</type>
+		<size>16</size>
+	</ReceiptLine_receivedBy>
+	<!--ReceiptLine_icRecHeader>
+		<label>brw-viewReceiptAttachments</label>
+		<link><![CDATA[javascript: viewReceiptAttachments('#ReceiptLine_icRecHeader^', '#ReceiptLine_receiptNumber^', '#ReceiptLine_receiptType^'); void(0);]]></link>
+		<detail>Y</detail>
+		<size>100</size>
+	</ReceiptLine_icRecHeader-->
+</columns>
+<sqlfrom>PoHeader as PoHeader, PoLine as PoLine, ReceiptLine as ReceiptLine</sqlfrom>
+<sqlwhere><![CDATA[PoHeader.poNumber is not null
+	and PoHeader.poNumber <> 'null'
+	and PoHeader.lastRevision = 'C'
+	and PoHeader.poType <> 'BO'
+	and PoHeader.poType <> 'DO'
+	and PoHeader.poType <> 'SB'
+	and PoHeader.icPoHeader = PoLine.icPoHeader
+	and PoLine.icPoLine = ReceiptLine.icPoLine
+	]]></sqlwhere>
+<sqlorderby>ReceiptLine.receiptNumber DESC, ReceiptLine.receiptDate DESC</sqlorderby>
+<pagesize>10</pagesize>
+<title>Receipt Item History</title>
+<detail-visible>Y</detail-visible>
+<date-range-filter>ReceiptLine_receiptDate</date-range-filter>
+</browse-receipt-item-history>

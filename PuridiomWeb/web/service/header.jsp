@@ -68,9 +68,6 @@
 	<META HTTP-EQUIV="Expires" CONTENT="Sat, 11 Sep 1971 12:00:00 GMT">
 	<META NAME="Description" Content="<%=contextPath%>/system/header.jsp">
 	<meta http-equiv=content-type content="text/html; charset=UTF-8">
-	<script type="text/javascript" src="<%=contextPath%>/scripts/yui/yahoo/yahoo.js"></script>
-	<script type="text/javascript" src="<%=contextPath%>/scripts/yui/dom/dom.js"></script>
-	<script type="text/javascript" src="<%=contextPath%>/scripts/yui/event/event.js"></script>
 	<SCRIPT LANGUAGE="JavaScript1.2" SRC="<%=contextPath%>/scripts/puridiom.js"></SCRIPT>
 	<SCRIPT LANGUAGE="JavaScript1.2" SRC="<%=contextPath%>/scripts/spell.js"></SCRIPT>
 	<script language='Javascript1.2' src="<%=contextPath%>/scripts/filter.js"></script>

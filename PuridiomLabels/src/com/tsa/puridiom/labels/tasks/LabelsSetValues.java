@@ -108,6 +108,8 @@ public class LabelsSetValues extends Task
 			if (incomingRequest.containsKey("Labels_validationLink"))
 			{
 				String validationLink = (String) incomingRequest.get("Labels_validationLink");
+				//BDC@1 value was created to sckip the crossFilter Filter 'cause we need to save javascript code in the DB
+				validationLink = validationLink.replaceAll("BDC@1", "javascript: doSubmit(");
 				labels.setValidationLink(validationLink);
 			}
 			if (incomingRequest.containsKey("Labels_fieldname"))

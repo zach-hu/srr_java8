@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rule>
+	<clause type="Rule">
+		<rule-filename check-for-false="true">is-admin-check-request.xml</rule-filename>
+	</clause>
+	<logical-operator>IFTHEN</logical-operator>
+	<clause type="lookup">
+		<sql> from Address as address where address.id.addressType = 'ADDR' AND address.id.addressCode = '@shipto@' AND address.shipTo = 'Y' AND (address.status = '02' OR (address.status = '01' AND address.dateExpires >= @today@))</sql>
+		<source>header</source>
+		<arguments>
+			<name>shipto</name>
+			<source>header</source>
+			<colName>getShipToCode</colName>
+		</arguments>
+	</clause>
+</rule>

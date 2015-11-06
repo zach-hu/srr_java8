@@ -9,33 +9,76 @@ xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns
   <listener>
     <listener-class>com.tsa.puridiom.SessionListener</listener-class>
   </listener>
-  <filter>
-		<filter-name>BadInputFilter</filter-name>
-		<filter-class>com.tsa.puridiom.BadInputFilter</filter-class>
-		<init-param>
-			<param-name>deny</param-name>
-			<param-value>\x00,\x04,\x08</param-value>
-		</init-param>
-		<init-param>
-			<param-name>escapeQuotes</param-name>
-			<param-value>false</param-value>
-		</init-param>
-		<init-param>
-			<param-name>escapeAngleBrackets</param-name>
-			<param-value>false</param-value>
-		</init-param>
-		<init-param>
-			<param-name>escapeJavaScript</param-name>
-			<param-value>false</param-value>
-		</init-param>
+<!--   	<filter> -->
+<!-- 		<filter-name>BadInputFilter</filter-name> -->
+<!-- 		<filter-class>com.tsa.puridiom.BadInputFilter</filter-class> -->
+<!-- 		<init-param> -->
+<!-- 			<param-name>deny</param-name> -->
+<!-- 			<param-value>\x00,\x04,\x08</param-value> -->
+<!-- 		</init-param> -->
+<!-- 		<init-param> -->
+<!-- 			<param-name>escapeQuotes</param-name> -->
+<!-- 			<param-value>false</param-value> -->
+<!-- 		</init-param> -->
+<!-- 		<init-param> -->
+<!-- 			<param-name>escapeAngleBrackets</param-name> -->
+<!-- 			<param-value>false</param-value> -->
+<!-- 		</init-param> -->
+<!-- 		<init-param> -->
+<!-- 			<param-name>escapeJavaScript</param-name> -->
+<!-- 			<param-value>false</param-value> -->
+<!-- 		</init-param> -->
+<!-- 	</filter> -->
+<!-- 	<filter-mapping> -->
+<!-- 		<filter-name>BadInputFilter</filter-name> -->
+<!-- 		<url-pattern>*.jsp</url-pattern> -->
+<!-- 	</filter-mapping> -->
+<!-- 	<filter-mapping> -->
+<!-- 		<filter-name>BadInputFilter</filter-name> -->
+<!-- 		<url-pattern>/procure</url-pattern> -->
+<!-- 	</filter-mapping> -->
+<!-- 	<filter> -->
+<!-- 		<filter-name>PuridiomProcureFilter</filter-name> -->
+<!-- 		<filter-class>com.tsa.puridiom.PuridiomProcureFilter</filter-class> -->
+<!-- 		<init-param> -->
+<!-- 			<param-name>deny</param-name> -->
+<!-- 			<param-value>\x00,\x04,\x08</param-value> -->
+<!-- 		</init-param> -->
+<!-- 	</filter> -->
+<!-- 	<filter-mapping> -->
+<!-- 		<filter-name>PuridiomProcureFilter</filter-name> -->
+<!-- 		<url-pattern>/procure</url-pattern> -->
+<!-- 	</filter-mapping> -->
+<!-- 	<filter> -->
+<!-- 	   	<filter-name>CheckRequestMD5Filter</filter-name> -->
+<!-- 	   	<filter-class>com.tsa.puridiom.CheckRequestMD5Filter</filter-class> -->
+<!-- 	   	<init-param> -->
+<!--             <param-name>error</param-name> -->
+<!--             <param-value>/system/error.jsp</param-value> -->
+<!--         </init-param> -->
+<!-- 	</filter> -->
+<!-- 	<filter-mapping> -->
+<!--       	<filter-name>CheckRequestMD5Filter</filter-name> -->
+<!--       	<url-pattern>/procure</url-pattern> -->
+<!-- 	</filter-mapping> -->
+	<filter>
+	   	<filter-name>CrossScriptingFilter</filter-name>
+	   	<filter-class>com.tsa.puridiom.CrossScriptingFilter</filter-class>
+	   	<init-param>
+            <param-name>allowedPages</param-name>
+            <param-value>index.jsp,error.jsp,errorXss.jsp,processing.jsp,iframe_html.jsp,hide_iframe.jsp,get_uom_info.jsp,popup_html.jsp,punchout_return.jsp,type_options.jsp,mail_approve.jsp,/gwt/MSRRequest/</param-value>
+        </init-param>
+	   	<init-param>
+            <param-name>error</param-name>
+            <param-value>/system/error.jsp</param-value>
+        </init-param>
 	</filter>
 	<filter-mapping>
-		<filter-name>BadInputFilter</filter-name>
-		<url-pattern>*.jsp</url-pattern>
-	</filter-mapping>
-	<filter-mapping>
-		<filter-name>BadInputFilter</filter-name>
-		<url-pattern>/procure</url-pattern>
+      	<filter-name>CrossScriptingFilter</filter-name>
+      	<url-pattern>*.jsp</url-pattern>
+      	<url-pattern>*.html</url-pattern>
+      	<url-pattern>*.htm</url-pattern>
+      	<url-pattern>/procure</url-pattern>
 	</filter-mapping>
   <servlet>
     <servlet-name>procure</servlet-name>

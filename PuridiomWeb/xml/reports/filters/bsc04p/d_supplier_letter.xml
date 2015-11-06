@@ -1,0 +1,77 @@
+<d_supplier_letter>
+<columns>
+		<VendorInsurance_insuranceContact>
+			<label>Insurance Contact</label>
+			<type>STRING</type>
+		</VendorInsurance_insuranceContact>
+		<Address_addressLine1>
+			<label>Address Line 1</label>
+			<type>STRING</type>
+		</Address_addressLine1>
+		<Address_addressLine2>
+			<label>Address Line 2</label>
+			<type>STRING</type>
+		</Address_addressLine2>
+		<Address_addressLine3>
+			<label>Address Line 3</label>
+			<type>STRING</type>
+		</Address_addressLine3>
+		<Address_addressLine4>
+			<label>Address Line 4</label>
+			<type>STRING</type>
+		</Address_addressLine4>
+		<Address_city>
+			<label>city</label>
+			<type>STRING</type>
+		</Address_city>
+		<Address_state>
+			<label>state</label>
+			<type>STRING</type>
+		</Address_state>
+		<Address_postalCode>
+			<label>Postal Code</label>
+			<type>STRING</type>
+		</Address_postalCode>
+		<Address_country>
+			<label>country</label>
+			<type>STRING</type>
+		</Address_country>
+		<VendorInsurance_expires1>
+			<label>Expires 1</label>
+			<type>DATE</type>
+		</VendorInsurance_expires1>
+		<VendorInsurance_expires2>
+			<label>Expires 2</label>
+			<type>DATE</type>
+		</VendorInsurance_expires2>
+		<VendorInsurance_expires3>
+			<label>Expires 3</label>
+			<type>DATE</type>
+		</VendorInsurance_expires3>
+		<VendorInsurance_expires4>
+			<label>Expires 4</label>
+			<type>DATE</type>
+		</VendorInsurance_expires4>
+		<VendorInsurance_expiredLetter>
+			<label>Expired Letter</label>
+			<type>DATE</type>
+		</VendorInsurance_expiredLetter>
+		<VendorInsurance_contNumber>
+			<label>Cont Number</label>
+			<type>STRING</type>
+		</VendorInsurance_contNumber>
+		<VendorInsurance_vendorId>
+			<label>Vendor Id</label>
+			<type>STRING</type>
+		</VendorInsurance_vendorId>
+		<VendorInsurance_contType>
+			<label>Cont Type</label>
+			<type>STRING</type>
+		</VendorInsurance_contType>
+	</columns>
+  <sqlfrom> Address as Address , VendorInsurance as VendorInsurance , Vendor as Vendor</sqlfrom>
+  <!--<sqlwhere><![CDATA[(VendorInsurance.vendorId = Address.id.addressType) and (VendorInsurance.vendorId = Vendor.vendorId ) and ((Address.id.addressCode = 'MSC' ) and (Vendor.status <> '03' ))]]></sqlwhere>-->
+  <sqlwhere><![CDATA[(VendorInsurance.vendorId = Address.id.addressType) and (VendorInsurance.vendorId = Vendor.vendorId ) and (Vendor.status <> '03')]]></sqlwhere>
+  <title>Contractors Expires Letter</title>
+</d_supplier_letter>
+

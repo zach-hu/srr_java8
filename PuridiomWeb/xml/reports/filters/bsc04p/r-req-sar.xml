@@ -1,0 +1,194 @@
+<r-req-sar>
+  <columns>
+  		<RequisitionHeader_requisitionNumber>
+  		     <aggregate>
+				<function>max</function>
+			</aggregate>
+			<label>Requisition #</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</RequisitionHeader_requisitionNumber>
+		
+  		<RequisitionHeader_requisitionDate>
+  		    <aggregate>
+				<function>max</function>
+			</aggregate>
+			<label>Requisition Date</label>
+			<type>DATE</type>
+			<visible>1</visible>
+		</RequisitionHeader_requisitionDate>
+		
+		<PoHeader_poNumber>
+			<label>poNumber</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</PoHeader_poNumber>
+		
+		<PoHeader_poDate>
+		    <aggregate>
+				<function>max</function>
+			</aggregate>
+			<label>PO Date</label>
+			<type>DATE</type>
+			<visible>1</visible>
+		</PoHeader_poDate>
+
+		<PoHeader_requisitionerCode>
+		    <aggregate>
+				<function>max</function>
+			</aggregate>
+			<label>Requisitioner Code</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</PoHeader_requisitionerCode>
+		
+		<PoHeader_vendorName>
+		    <aggregate>
+				<function>max</function>
+			</aggregate>
+			<label>vendorName</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</PoHeader_vendorName>
+		
+		<PoHeader_buyerCode>
+		    <aggregate>
+				<function>max</function>
+			</aggregate>
+			<label>Buyer Code</label>
+			<type>STRING</type>
+		</PoHeader_buyerCode>
+		
+		<PoHeader_status>
+		    <aggregate>
+				<function>max</function>
+			</aggregate> 
+			<label>Status</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</PoHeader_status>
+		
+		<Account_fld1>
+		    <aggregate>
+				<function>max</function>
+			</aggregate> 
+			<label>Account #</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</Account_fld1>
+		
+		<Account_fld2>
+		    <aggregate>
+				<function>max</function>
+			</aggregate> 
+			<label>Cost Center</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</Account_fld2>
+
+		<Account_fld4>
+		    <aggregate>
+				<function>max</function>
+			</aggregate>
+			<label>Project #</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</Account_fld4>
+		
+		<RequisitionHeader_total>
+		    <aggregate>
+				<function>max</function>
+			</aggregate>
+			<label>Amount</label>
+			<type>BIGDECIMAL</type>
+			<visible>1</visible>
+		</RequisitionHeader_total>
+		
+		<HistoryLog_icHistory>
+		    <aggregate>
+				<function>max</function>
+			</aggregate> 
+			<label>Ic History</label>
+			<type>BIGDECIMAL</type>
+			<visible>1</visible>
+		</HistoryLog_icHistory>
+		
+		
+		<RequisitionHeader_internalComments>
+		    <aggregate>
+				<function>max</function>
+			</aggregate>
+			<label>Internal Comments</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</RequisitionHeader_internalComments>	
+		
+		<RequisitionHeader_buyerRemarks>
+		    <aggregate>
+				<function>max</function>
+			</aggregate>
+			<label>Buyer Remarks</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</RequisitionHeader_buyerRemarks>
+	
+		<PoHeader_buyerCode>
+		    <aggregate>
+				<function>max</function>
+			</aggregate>
+			<label>Buyer Code</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</PoHeader_buyerCode>
+		
+		<PoHeader_currencyCode>
+		    <aggregate>
+				<function>max</function>
+			</aggregate>
+			<label>Currency Code</label>
+			<type>STRING</type>
+			<visible>0</visible>
+		</PoHeader_currencyCode>
+		
+		<PoHeader_currencyFactor>
+		    <aggregate>
+				<function>max</function>
+			</aggregate> 
+			<label>Currency Factor</label>
+			<type>BIGDECIMAL</type>
+			<visible>0</visible>
+		</PoHeader_currencyFactor>
+		
+		<PoHeader_fiscalYear>
+		    <aggregate>
+				<function>max</function>
+			</aggregate>
+			<label>Fiscal Year</label>
+			<type>STRING</type>
+			<visible>0</visible>
+		</PoHeader_fiscalYear>
+		
+		<HistoryLog_description>
+		    <aggregate>
+				<function>max</function>
+			</aggregate> 
+			<label>Buyer Remarks</label>
+			<type>STRING</type>
+			<visible>0</visible>
+		</HistoryLog_description>
+		
+	</columns>
+  <sqlfrom> PoHeader as PoHeader, RequisitionHeader as RequisitionHeader, Account as Account,  HistoryLog as HistoryLog</sqlfrom>
+  <sqlwhere><![CDATA[ 
+  ( RequisitionHeader.icReqHeader = HistoryLog.icHeader (+) )  and 
+  ( PoHeader.icReqHeader = RequisitionHeader.icReqHeader) and 
+  ( PoHeader.icPoHeader = Account.id.icHeader ) and 
+  ( PoHeader.lastRevision = 'C' ) and 
+  ( PoHeader.status < '9020' )  and 
+  ( Account.fld2 like '5%Q' )
+   ]]></sqlwhere>
+  <sqlgroupby>PoHeader.poNumber, PoHeader.releaseNumber</sqlgroupby>
+  <sqlorderby>max(ic_history),PoHeader.poNumber, PoHeader.releaseNumber</sqlorderby>
+  <title>Shield Advance Requisitions Report</title>
+</r-req-sar>
+

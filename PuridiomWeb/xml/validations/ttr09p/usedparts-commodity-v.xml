@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rule>
+	<clause type="StringCompare" matchAll="true">
+		<left-side>
+			<source>incomingRequestList</source>
+			<object>lineitems</object>
+			<name>getCommodityCode</name>
+		</left-side>
+		<operator>NOTEQUAL</operator>
+		<right-side>
+			<source>constant</source>
+			<value>718300</value>
+		</right-side>
+	</clause>
+	<logical-operator>IFTHEN</logical-operator>
+	<clause type="StringCompare" matchAll="true">
+    	<left-side>
+      		<source>incomingRequestList</source>
+      		<object>lineitems</object>
+      		<name>getCommodityCode</name>
+    	</left-side>
+    	<operator>EQUAL</operator>
+    	<right-side>
+      		<source>constant</source>
+      		<value>718350</value>
+    	</right-side>
+	</clause>
+</rule>
+

@@ -1,0 +1,73 @@
+<r-bdg-s-bar>
+  <columns>
+		<BudgetCenter_budgetPeriod>
+			<label>Period</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</BudgetCenter_budgetPeriod>
+		<BudgetCenter_budget1>
+			<label>Product</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</BudgetCenter_budget1>
+		<BudgetCenter_budget2>
+			<label>Department</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</BudgetCenter_budget2>
+		<BudgetCenter_budget3>
+			<label>GL Account</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</BudgetCenter_budget3>
+		<BudgetCenter_budget4>
+			<label>Industry Code</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</BudgetCenter_budget4>
+		<BudgetCenter_budget5>
+			<label>Commodity</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</BudgetCenter_budget5>
+		<BudgetCenter_budget6>
+			<label>Budget 6</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</BudgetCenter_budget6>
+		<BudgetCenter_projectId>
+			<label>Project ID</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</BudgetCenter_projectId>
+		<BudgetCenter_budgetId>
+			<label>Budget ID</label>
+			<type>BIGDECIMAL</type>
+			<visible>1</visible>
+		</BudgetCenter_budgetId>
+		<BudgetCenter_budgeted>
+			<label>Budgeted</label>
+			<type>BIGDECIMAL</type>
+			<visible>1</visible>
+		</BudgetCenter_budgeted>
+		<BudgetDrawer_id_authType>
+			<label>Auth Type</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</BudgetDrawer_id_authType>
+		<BudgetDrawer_id_authority>
+			<label>Authority</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</BudgetDrawer_id_authority>
+		<BudgetDrawer_budgetFlag>
+			<label>Budget Flag</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</BudgetDrawer_budgetFlag>
+	</columns>
+	<sqlfrom> BudgetCenter as BudgetCenter, BudgetDrawer as BudgetDrawer </sqlfrom>
+	<sqlwhere><![CDATA[( BudgetCenter.budgetId *= BudgetDrawer.id.budgetId )]]></sqlwhere>
+	<sqlorderby>BudgetCenter.budgetPeriod, BudgetCenter.budget1, BudgetCenter.budget2, BudgetCenter.budget3, BudgetCenter.budget4, BudgetCenter.budget5, BudgetDrawer.id.authType, BudgetDrawer.id.authority </sqlorderby>
+	<title>Budget Authority Register Report</title>
+</r-bdg-s-bar>

@@ -118,6 +118,7 @@
 	<META HTTP-EQUIV="Cache-Control" content="no-cache">
 	<META HTTP-EQUIV="Expires" CONTENT="Sat, 11 Sep 1971 12:00:00 GMT">
 	<META NAME="Description" Content="<%=contextPath%>/system/header.jsp">
+	<script type="text/javascript" src="<%=contextPath%>/scripts/jquery-1.11.0.min.js"></script>
 	<SCRIPT LANGUAGE="JavaScript1.2" SRC="<%=contextPath%>/scripts/puridiom.js"></SCRIPT>
 	<script language='Javascript1.2' src="<%=contextPath%>/scripts/filter.js"></script>
 	<script language='Javascript1.2' src="<%=contextPath%>/scripts/dynamicTables.js"></script>

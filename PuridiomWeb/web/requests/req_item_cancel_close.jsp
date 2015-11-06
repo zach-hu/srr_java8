@@ -120,7 +120,7 @@
 		</tr>
 		<tr>
 			<td align=right><b><tsa:label labelName="status" defaultString="Status" />:</b></td>
-			<td width=125px><%=headerEncoder.encodeForHTML(DocumentStatus.toString(s_req_status))%></td>
+			<td width=125px><%=DocumentStatus.toString(s_req_status)%></td>
 		</tr>
 		</table>
 		<table cellpadding="0" cellspacing="0" border=0>

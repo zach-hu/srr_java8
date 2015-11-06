@@ -866,6 +866,16 @@
 	    	return false;
 	    }
     }
+	function getFieldsJquery()
+	{
+		var jQuerySelector = ":input:not([type=hidden])[name^='Vendor_']";
+		jQuerySelector += ",:input:[name='Vendor_vendor1099']";
+		jQuerySelector += ",:input:[name='Vendor_inspectionReqd']";
+		jQuerySelector += ",:input:[name='Vendor_printPrices']";
+		jQuerySelector += ",:input:[name='Vendor_vendUdf1']";
+		var fieldsToAuditJquery = $(jQuerySelector);
+		return fieldsToAuditJquery;
+    }
     function buildAuditIc()
 	{
 		return frm.Vendor_vendorId.value;

@@ -313,6 +313,12 @@
 	    	return false;
 	    }
     }
+	
+	function getFieldsJquery()
+	{
+		var fieldsToAuditJquery = $(":input:not([type=hidden])[name^='Contact_']");
+		return fieldsToAuditJquery;
+    }
     function buildAuditIc()
 	{
 		return frm.Vendor_vendorId.value;

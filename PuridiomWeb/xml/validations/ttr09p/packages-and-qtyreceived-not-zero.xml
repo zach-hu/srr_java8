@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rule>
+	<clause type="StringCompare">
+	    <left-side>
+	    	<source>Singleton</source>
+	      	<object>com.tsa.puridiom.property.PropertiesManager</object>
+	      	<name>getProperty</name>
+	      	<argument-value>RECEIVING</argument-value>
+	      	<argument-value>VALIDATERECQUANTITY</argument-value>
+	      	<argument-value>N</argument-value>
+	    </left-side>
+	    <operator>EQUALS</operator>
+	    <right-side>
+	    	<source>constant</source>
+	      	<value>Y</value>
+	    </right-side>
+	</clause>
+  	<logical-operator>IFTHEN</logical-operator>
+	<clause type="StringCompare">
+		<left-side>
+			<source>incomingRequest</source>
+			<name>PackageQtyRecivedNotZero</name>
+		</left-side>
+		<operator>EQUALS</operator>
+		<right-side>
+			<source>constant</source>
+			<value>succeeded</value>
+		</right-side>
+	</clause>
+</rule>

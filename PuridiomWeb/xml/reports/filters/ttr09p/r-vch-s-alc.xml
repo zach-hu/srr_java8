@@ -1,0 +1,100 @@
+<r-vch-s-alc>
+  <columns>
+		<InvoiceHeader_invoiceType>
+			<label>Invoice Type</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</InvoiceHeader_invoiceType>
+		<InvoiceHeader_invoiceDate>
+			<label>Invoice Date</label>
+			<type>DATE</type>
+			<visible>1</visible>
+		</InvoiceHeader_invoiceDate>
+		<InvoiceHeader_poNumber>
+			<label>InvoiceHeader Number</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</InvoiceHeader_poNumber>
+		<InvoiceHeader_vendorId>
+			<label>Vendor Id</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</InvoiceHeader_vendorId>
+		<InvoiceHeader_departmentCode>
+			<label>rep-departmentCode</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</InvoiceHeader_departmentCode>
+
+		<!--
+		<InvoiceHeader_controlNumber>
+			<label>Control Number</label>
+			<type>STRING</type>
+		</InvoiceHeader_controlNumber>
+		<InvoiceHeader_voucherNumber>
+			<label>Voucher Number</label>
+			<type>STRING</type>
+		</InvoiceHeader_voucherNumber>
+		-->
+		<InvoiceHeader_invoiceNumber>
+			<label>Invoice Number</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</InvoiceHeader_invoiceNumber>
+		<InvoiceHeader_invoiceTotal>
+			<label>Invoice Total</label>
+			<type>BIGDECIMAL</type>
+			<visible>1</visible>
+		</InvoiceHeader_invoiceTotal>
+		<Account_fld1>
+			<label>rep-account_udf1</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</Account_fld1>
+		<Account_fld2>
+			<label>rep-account_udf2</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</Account_fld2>
+		<Account_fld3>
+			<label>rep-account_udf3</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</Account_fld3>
+		<Account_fld4>
+			<label>rep-account_udf4</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</Account_fld4>
+		<Account_fld5>
+			<label>rep-account_udf5</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</Account_fld5>
+		<Account_fld6>
+			<label>rep-account_udf6</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</Account_fld6>
+		<Account_fld7>
+			<label>AC07</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</Account_fld7>
+		<Account_fld8>
+			<label>AC08</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</Account_fld8>
+		<Account_allocAmount>
+			<label>allocationAmount</label>
+			<type>BIGDECIMAL</type>
+			<visible>1</visible>
+		</Account_allocAmount>
+	</columns>
+  <sqlfrom>InvoiceHeader as InvoiceHeader , Account as Account </sqlfrom>
+  <sqlwhere><![CDATA[(InvoiceHeader.icIvcHeader = Account.id.icHeader) ]]></sqlwhere>
+  <sqlorderby>InvoiceHeader.icIvcHeader</sqlorderby>
+  <title>Voucher GL Allocations Report</title>
+</r-vch-s-alc>
+

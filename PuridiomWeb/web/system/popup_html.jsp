@@ -1,5 +1,6 @@
 <%@ include file="/system/context_path.jsp" %>
 <%@ taglib uri="/WEB-INF/tsa.tld" prefix="tsa"%>
+<%@ page import="com.tsa.puridiom.common.utility.TokenProcessor" %>
 <HTML>
 <HEAD>
 	<meta http-equiv="content-type" content="text/html;charset=UTF-8">
@@ -19,6 +20,7 @@
 <tsa:hidden name="userId" value=""/>
 <tsa:hidden name="mailId" value=""/>
 <tsa:hidden name="organizationId" value=""/>
+<tsa:hidden name="epmc" value='<%= TokenProcessor.getInstance().generateToken(request, "")%>'/>
 
 <table border=0 cellspacing=0 cellpadding=0 width=100%>
 <tr>
@@ -32,9 +34,10 @@
 <!--  hide script from old browsers
 
 	frm = document.purchaseform;
-
+	
 	setParameters();
 	submitPopup();
+
 
 	function setParameters() {
 		var params = window.parent.popupParameters;

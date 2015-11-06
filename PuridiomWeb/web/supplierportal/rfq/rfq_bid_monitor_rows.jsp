@@ -144,7 +144,7 @@
 <%		if (bidderVendorId.equals(user.getVendorId()) && b_show_bid_edit) {%>
 								<td nowrap class=<%=rowClass%>><a href="javascript: editBid(<%=ilr%>); void(0);"><img src="<%=contextPath%>/supplierportal//images/cmd_edit.gif" border=0></a></td>
 <%		} else {%>
-								<td nowrap class=<%=rowClass%>&nbsp;</td>
+								<td nowrap class=<%=rowClass%>>&nbsp;</td>
 <%		}%>
 								<td nowrap class=<%=rowClass%> align=center><%=s_bidder%>&nbsp;</td>
 <%		iBidsDisplayed++;

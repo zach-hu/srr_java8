@@ -719,7 +719,7 @@
     for (int i=0; i < newsCount; i++) {
       News news = (News) whatsNew.get(i);
 %>
-      options[i] = new Array("<span class='<%=news.getNewsFont()%>'><%=news.getNewsText()%></span>","<%=news.getNewsLink()%>", "<img src='/" + context + "/images/<%=news.getNewsImage()%>'>", "", "<%=news.getNewsAltTag()%>", "");
+      options[i] = new Array("<span class='<%=news.getNewsFont()%>'><%=news.getNewsText()%></span>","<%=news.getNewsLink()%>", "<span class='iconNew'>NEW</span>", "", "<%=news.getNewsAltTag()%>", "");
       i++;
 <%	}%>
     return options;

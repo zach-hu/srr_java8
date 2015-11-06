@@ -892,9 +892,7 @@ public class DBSession {
     }
     
     public void lock (Object obj) {
-    	System.out.println("Zach's Session Identifier PRE: " + session);
     	session.lock(obj, LockMode.UPGRADE);
-    	System.out.println("Zach's Session Identifier POST: " + session);
     }
 
     public void refresh (Object obj) {

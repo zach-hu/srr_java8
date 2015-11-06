@@ -1,0 +1,37 @@
+<r-adm-s-ear>
+	<columns>
+		<AppRulesExt_routto>
+			<label>Approver</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</AppRulesExt_routto>
+		<AppRulesExt_ruleText>
+			<label>Description</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</AppRulesExt_ruleText>
+		<AppRulesExt_requiredApprover>
+			<label>Required</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</AppRulesExt_requiredApprover>
+		<AppRulesExt_fyiApprover>
+			<label>FYI</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</AppRulesExt_fyiApprover>
+		<UserProfile_callForward>
+			<label>Call Forward</label>
+			<type>STRING</type>
+			<visible>0</visible>
+		</UserProfile_callForward>
+		<AppRulesExt_ruleFilename>
+			<label>Rule Name</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</AppRulesExt_ruleFilename>
+	</columns>
+<sqlfrom>AppRulesExt as AppRulesExt, UserProfile as UserProfile</sqlfrom>
+<sqlwhere><![CDATA[ AppRulesExt.routto = UserProfile.userId ]]></sqlwhere>
+<title>Special Approval Rules</title>
+</r-adm-s-ear>

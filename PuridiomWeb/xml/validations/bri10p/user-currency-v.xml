@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rule>
+	<clause type="NotEmpty">
+		<left-side>
+			<source>incomingRequestObjectMethod</source>
+			<object>user</object>
+			<name>getCurrencyCode</name>
+		</left-side>
+	</clause>
+	<logical-operator>IFTHEN</logical-operator>
+	<clause type="lookup">
+		<sql><![CDATA[from CurrCode as CurrCode where CurrCode.currencyCode = '@currencycode@']]></sql>
+		<source>user</source>
+		<arguments>
+			<name>currencycode</name>
+			<source>user</source>
+			<colName>getCurrencyCode</colName>
+		</arguments>
+	</clause>
+</rule>

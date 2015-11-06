@@ -1,0 +1,112 @@
+<r_reqporec>
+  <columns>
+		<PoHeader_poNumber>
+			<label>poNumber</label>
+			<type>STRING</type>
+		</PoHeader_poNumber>
+		<PoHeader_releaseNumber>
+			<label>releaseNumber</label>
+			<type>BIGDECIMAL</type>
+		</PoHeader_releaseNumber>
+		<PoHeader_revisionNumber>
+			<label>revisionNumber</label>
+			<type>BIGDECIMAL</type>
+		</PoHeader_revisionNumber>
+		<PoHeader_poType>
+			<label>poType</label>
+			<type>STRING</type>
+		</PoHeader_poType>
+		<PoHeader_buyerCode>
+			<label>buyerCode</label>
+			<type>STRING</type>
+		</PoHeader_buyerCode>
+		<PoHeader_status>
+			<label>Status</label>
+			<type>STRING</type>
+		</PoHeader_status>
+		<PoHeader_vendorId>
+			<label>vendorId</label>
+			<type>STRING</type>
+		</PoHeader_vendorId>
+		<PoHeader_poDate>
+			<label>poDate</label>
+			<type>DATE</type>
+		</PoHeader_poDate>
+		<PoHeader_requisitionerCode>
+			<label>requisitionerCode</label>
+			<type>STRING</type>
+		</PoHeader_requisitionerCode>
+		<PoHeader_departmentCode>
+			<label>departmentCode</label>
+			<type>STRING</type>
+		</PoHeader_departmentCode>
+		<PoHeader_requisitionNumber>
+			<label>requisitionNumber</label>
+			<type>STRING</type>
+		</PoHeader_requisitionNumber>
+		<PoHeader_shipToCode>
+			<label>shipToCode</label>
+			<type>STRING</type>
+		</PoHeader_shipToCode>
+		<PoHeader_total>
+			<label>Total</label>
+			<type>BIGDECIMAL</type>
+		</PoHeader_total>
+		<PoHeader_vendorName>
+			<label>vendorName</label>
+			<type>STRING</type>
+		</PoHeader_vendorName>
+		<PoHeader_requiredDate>
+			<label>requiredDate</label>
+			<type>DATE</type>
+		</PoHeader_requiredDate>
+		<PoHeader_appDate>
+			<label>App Date</label>
+			<type>DATE</type>
+		</PoHeader_appDate>
+		<PoHeader_appBy>
+			<label>po-appBy</label>
+			<type>STRING</type>
+		</PoHeader_appBy>
+		<PoHeader_appDate>
+			<label>App Date</label>
+			<type>DATE</type>
+		</PoHeader_appDate>
+		<UserProfile_firstName>
+			<label>First Name</label>
+			<type>STRING</type>
+		</UserProfile_firstName>
+		<UserProfile_lastName>
+			<label>Last Name</label>
+			<type>STRING</type>
+		</UserProfile_lastName>
+		<RequisitionHeader_authorizationCode>
+			<label>authorizationCode</label>
+			<type>STRING</type>
+		</RequisitionHeader_authorizationCode>
+		<RequisitionHeader_appBy>
+			<label>req-appBy</label>
+			<type>STRING</type>
+		</RequisitionHeader_appBy>
+		<RequisitionHeader_appDate>
+			<label>req-appDate</label>
+			<type>DATE</type>
+		</RequisitionHeader_appDate>
+		<RequisitionHeader_appSigned>
+			<label>req-appSigned</label>
+			<type>STRING</type>
+		</RequisitionHeader_appSigned>
+		<PoHeader_internalComments>
+			<label>internalComments</label>
+			<type>STRING</type>
+		</PoHeader_internalComments>
+	</columns>
+  <sqlfrom> PoHeader as PoHeader, UserProfile as UserProfile, RequisitionHeader as RequisitionHeader</sqlfrom>
+  <sqlwhere><![CDATA[(PoHeader.icReqHeader = RequisitionHeader.icReqHeader(+)) and
+  ( Poheader.requisitionerCode = UserProfile.userId (+)) and
+  ( Poheader.lastRevision = 'C' ) AND
+  ( Poheader.status > '3020' ) AND  ( Poheader.status < '9020' ) AND
+  ]]></sqlwhere>
+  <title>Purchase Order Approver Summary Report</title>
+</r_reqporec>
+

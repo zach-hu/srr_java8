@@ -1,13 +1,18 @@
 package com.tsa.puridiom.receiptline.tasks;
 
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.Map;
+
+import org.hibernate.Hibernate;
+import org.hibernate.type.Type;
+
 import com.tsa.puridiom.common.utility.HiltonUtility;
 import com.tsagate.foundation.database.DBSession;
 import com.tsagate.foundation.processengine.Status;
 import com.tsagate.foundation.processengine.Task;
+import com.tsagate.foundation.utility.Log;
 import com.tsagate.foundation.utility.TsaException;
-
-import java.util.List;
-import java.util.Map;
 
 public class ReceiptLineRetrieveByHeader extends Task
 {
@@ -25,14 +30,27 @@ public class ReceiptLineRetrieveByHeader extends Task
 			else
 				icRecHeader = (String) incomingRequest.get("ReceiptLine_icRecHeader");
 
-			if(HiltonUtility.isEmpty(icRecHeader)){
+			if (HiltonUtility.isEmpty(icRecHeader)) {
 				icRecHeader = (String) incomingRequest.get("ReceiptHeader_icRecHeader");
 			}
-
-			String queryString = "from ReceiptLine as receiptline where receiptline.icRecHeader = " + icRecHeader + " order by receiptline.receiptLine ASC ";
-
-			ret = dbs.query(queryString.toString()) ;
-			this.setStatus(dbs.getStatus()) ;
+			
+			BigDecimal icReceiptHeader = null;
+			try {
+				icReceiptHeader = new BigDecimal(icRecHeader);
+			} catch (Exception e) {
+				Log.error(this, e);
+			}
+			
+			if (icReceiptHeader != null) {
+				String queryString = "from ReceiptLine as receiptline where receiptline.icRecHeader = ? order by receiptline.receiptLine ASC ";
+				ret = dbs.query(queryString.toString(), new Object[] {icReceiptHeader } , new Type[] { Hibernate.BIG_DECIMAL}) ;
+				this.setStatus(dbs.getStatus());
+				
+			} else {
+				ret = new ArrayList();
+				this.setStatus(Status.SUCCEEDED);
+			}
+			
 		}
 		catch (Exception e) {
 			e.printStackTrace();

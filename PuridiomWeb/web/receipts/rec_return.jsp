@@ -373,7 +373,7 @@
 <table border=0 cellpadding=0 cellspacing=0 width=680px>
 <tr>
 	<td width=50% align=center><div id="pxbutton"><a href="javascript: finalizeReceipt(); void(0);">Save</a></div></td>
-	<td width=50% align=center><div id="pxbutton"><a href="javascript: doSubmit('menu/main_menu.jsp', 'DoNothing'); void(0);">Cancel</a></div<</td>
+	<td width=50% align=center><div id="pxbutton"><a href="javascript: doSubmit('menu/main_menu.jsp', 'DoNothing'); void(0);">Cancel</a></div></td>
 		</tr>
 		</table>
 	</td>

@@ -55,7 +55,11 @@ else
 %>
 
 <%
-	String url=request.getRequestURL().toString();
+	if (request.getRequestURL().toString().matches("[;]")) {
+		String	requestURLPath = "";
+	} else {
+		String	url = request.getRequestURL().toString();
+	}
 	List organizationList = OrganizationManager.getInstance().getOrganizationList(true);
 	String expURL = "(http|https)://my.*";
 
@@ -91,7 +95,11 @@ else
 <div style="width: 650px; margin-left: 20px; margin-top: 30px">Welcome to Procurement's Online Ordering System! Here you can create, approve, and check the status of Requisitions. If you are not ready to create a requisition, or have a question about the Procurement process, please visit Procurement's intranet site for additional help and information.</div>
 
 <%
-	String urladdress = request.getRequestURL().toString();
+	if (request.getRequestURL().toString().matches("[;]")) {
+		String	requestURLPath = "";
+	} else {
+		String	urladdress = request.getRequestURL().toString();
+	}
 	Map urlproperty = DictionaryManager.getInstance("oidurl", "HILTON").getPropertyMap();
 	Iterator it = urlproperty.keySet().iterator() ;
 	String coid="HILTON";

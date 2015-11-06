@@ -110,7 +110,7 @@
 	var selectedData;
 	var row = "<%=headerEncoder.encodeForJavaScript(row)%>";
 	var mails = "<%=mails%>";
-
+	
 <%	if (browseObject.getBrowseName().equalsIgnoreCase("vendoraffiliate-subcontractor") && irows > 0) { %>
 	displayArea("selectPrintDisplay");
 <%	}%>
@@ -2954,6 +2954,11 @@
 
 	hideArea("pageLoading");
 	displayArea("pageForm");
+	
+	function getFieldsJquery()
+	{
+		return undefined;
+    }
 
 // End Hide script -->
 </SCRIPT>

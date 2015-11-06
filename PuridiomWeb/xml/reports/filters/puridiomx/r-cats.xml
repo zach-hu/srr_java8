@@ -1,0 +1,101 @@
+<r-cats>
+  <columns>
+		<Catalog_catalogId>
+			<label>Catalog Id</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</Catalog_catalogId>
+		<Catalog_title>
+			<label>Title</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</Catalog_title>
+		<CatalogItem_id_itemNumber>
+			<label>Item Number</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</CatalogItem_id_itemNumber>
+		<CatalogItem_description>
+			<label>Description</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</CatalogItem_description>
+		<CatalogItem_commodity>
+			<label>Commodity</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</CatalogItem_commodity>
+		<CatalogItem_umCode>
+			<label>Unit Of Measure</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</CatalogItem_umCode>
+		<CatalogItem_cost>
+			<label>Cost</label>
+			<type>BIGDECIMAL</type>
+			<visible>1</visible>
+		</CatalogItem_cost>
+		<CatalogItem_taxable>
+			<label>Taxable</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</CatalogItem_taxable>
+		<CatalogItem_mfgName>
+			<label>Manufacturer</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</CatalogItem_mfgName>
+		<CatalogItem_modelNumber>
+			<label>Model#</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</CatalogItem_modelNumber>
+		<CatalogItem_kit>
+			<label>Kit</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</CatalogItem_kit>
+		<CatalogItem_receiptRequired>
+			<label>Receipt Required</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</CatalogItem_receiptRequired>
+		<CatalogItem_itemRestricted>
+			<label>Item Restricted</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</CatalogItem_itemRestricted>
+		<CatalogItem_udf1Code>
+			<label>Udf 1 Code</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</CatalogItem_udf1Code>
+		<CatalogItem_udf2Code>
+			<label>Udf 2 Code</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</CatalogItem_udf2Code>
+		<CatalogItem_udf3Code>
+			<label>Udf 3 Code</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</CatalogItem_udf3Code>
+		<CatalogItem_udf4Code>
+			<label>Udf 4 Code</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</CatalogItem_udf4Code>
+		<CatalogItem_udf5Code>
+			<label>Udf 5 Code</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</CatalogItem_udf5Code>
+
+
+	</columns>
+  <sqlfrom> Catalog as Catalog , CatalogItem as CatalogItem , UnitOfMeasure as UnitOfMeasure </sqlfrom>
+  <sqlwhere><![CDATA[(Catalog.catalogId = CatalogItem.id.catalogId) and (CatalogItem.umCode = UnitOfMeasure.umCode) ]]></sqlwhere>
+  <sqlorderby>CatalogItem.id.catalogId</sqlorderby>
+  <title>Catalog Items Register Report</title>
+</r-cats>
+

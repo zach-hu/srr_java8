@@ -1,0 +1,65 @@
+<browse_supplier_mgt>
+	<columns>
+		<Vendor_vendorId>
+			<label>brw-sup-supplier</label>
+			<sort>A</sort>
+			<size>15</size>
+			<distinct>Y</distinct>
+			<link><![CDATA[javascript: viewSupplier('#Vendor_vendorId^'); void(0);]]></link>
+		</Vendor_vendorId>
+		<Vendor_vendorName>
+			<label>brw-sup-name</label>
+			<size>40</size>
+			<hidden-input>Y</hidden-input>
+		</Vendor_vendorName>
+		<VendorCommRel_id_commodityCode>
+			<label>commodity</label>
+			<selectsql>N</selectsql>
+			<allowfilter>Y</allowfilter>
+			<hidden>Y</hidden>
+		</VendorCommRel_id_commodityCode>
+		<Vendor_vendTerms>
+			<label>brw-terms</label>
+			<size>10</size>
+			<hidden-input>Y</hidden-input>
+		</Vendor_vendTerms>
+		<Vendor_status>
+			<label>brw-status</label>
+			<type>STATUS</type>
+			<size>5</size>
+		</Vendor_status>
+		<Vendor_shipVia>
+			<label>brw-shipVia</label>
+			<size>10</size>
+			<hidden-input>Y</hidden-input>
+		</Vendor_shipVia>
+		<Vendor_faxNumber>
+			<label>faxNumber</label>
+			<size>15</size>
+			<hidden-input>Y</hidden-input>
+		</Vendor_faxNumber>
+		<Vendor_taxCode>
+			<label>taxCode</label>
+			<size>10</size>
+			<hidden-input>Y</hidden-input>
+		</Vendor_taxCode>
+		<Vendor_vendorEin>
+			<label>einNumber</label>
+			<selectsql>N</selectsql>
+			<allowfilter>Y</allowfilter>
+			<hidden>Y</hidden>
+		</Vendor_vendorEin>
+		<Address_country>
+	      	<label>country</label>
+		    <hidden-input>Y</hidden-input>
+		    <hidden>N</hidden>
+	    </Address_country>
+	</columns>
+<sqlfrom>Vendor as Vendor, Contact as Contact, Address as Address</sqlfrom>
+<sqlwhere><![CDATA[ (Vendor.vendorId = Contact.id.vendorId
+	AND Contact.addressCode = Address.id.addressCode AND Address.id.addressType = Vendor.vendorId)  ]]></sqlwhere>
+<sqlorderby>Vendor.vendorId ASC</sqlorderby>
+<pagesize>15</pagesize>
+<title>Supplier Browse</title>
+</browse_supplier_mgt>
+

@@ -290,7 +290,7 @@
 <table cellpadding=0 cellspacing=0 border=0 width=<%=formWidth%> id="browseTab">
 <tr>
 	<td valign=top width=150px height=30px>
-		<table cellpadding=0 cellspacing=0 border=0 height=100% width=100%>
+		<table cellpadding=0 cellspacing=0 border=0 height=100% width="150px">
 		<tr><td height=1px class=darkShadow><img src="<%=contextPath%>/images/none.gif" width="1" height="1px" /></td></tr>
 		<tr>
 			<td nowrap class=hdr12 valign=middle><div style="margin-left:10px; margin-right:10px" class=hdr12><%=headerEncoder.encodeForHTML(browseObject.getTitle(oid, language))%></div></td>
@@ -298,7 +298,7 @@
 		</table>
 	</td>
 	<td valign=bottom width=3px><img class=hdr12 src="<%=contextPath%>/images/angle.gif" height="100%" /></td>
-	<td valign=bottom align=middle width=*>
+	<td valign=bottom align=middle>
 		<div id="viewReportDisplay" style="visibility:hidden; display:none; width:100%">
 		<table border=0 cellspacing=0 cellpadding=0 border=0>
 		<tr>
@@ -326,7 +326,7 @@
 			<tr><td height=2px class=darkShadow><img src="<%=contextPath%>/images/none.gif" width="1" height="2" /></td></tr>
 		</table>
 	</td>
-	<td valign=bottom align=right width=*>
+	<td valign=bottom align=right width="100%">
 		<div id="filterTextDisplay">
 <%	if (isXpress && browseObject.getBrowseName().equals("admin-userprofile")) {%>
 		<%@ include file="/admin/user/user_available_licenses.jsp" %></div>
@@ -555,7 +555,7 @@
 						<font class=selectedRow><%=result != null ? headerEncoder.encodeForHTML(result.toString()) : ""%></font>
 <%						} else {%>
 						<div id="test"></div>
-						<%=result != null ? headerEncoder.encodeForHTML(result.toString()) : ""%>
+						<%=result != null ? result.toString() : ""%>
 <%						}
 					}
 					if (column.getType().equals("ConditionalLink")) {%>

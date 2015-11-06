@@ -1,0 +1,284 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<alerts enabled="yes">
+	<alert enabled="yes">
+		<name>order_expired_90</name>
+		<type>PO</type>
+		<where>
+			<![CDATA[SELECT PoHeader.icPoHeader from PoHeader as PoHeader where PoHeader.poNumber <> 'N/A'  AND PoHeader.status = '3030' AND PoHeader.status < '9000' AND (PoHeader.poType = 'BO' OR PoHeader.poType = 'SO' OR PoHeader.poType = 'DO' OR PoHeader.poType = 'CT') AND PoHeader.expirationDate = ?]]>
+			<arg>
+				<value>today</value>
+				<offset>-90</offset>
+				<type>date</type>
+			</arg>
+		</where>
+		<subject><![CDATA[System Alert, Purchase Order Expiring, $F{poHeader_displayPoNumber}]]></subject>
+		<sendto>
+			<user type="poHeader_buyerCode">Y</user>
+			<!-- <user type="poHeader_owner">Y</user> -->
+			<!-- <user type="manual">renzo@tsagate.com</user>-->
+		</sendto>
+		<message>
+			<line commentid="00009"></line>
+			<line repeat="N"><![CDATA[$F{poHeader_poNumber} Expires in 30 days.]]></line>
+			<line repeat="N"><![CDATA[Order Date: $F{poHeader_poDate}.]]></line>
+			<line repeat="N"><![CDATA[Effective Date: $F{poHeader_expirationDate} -tab- Expiration Date: $F{poHeader_expirationDate}.]]></line>
+			<line repeat="N"><![CDATA[Supplier: $F{poHeader_vendorName}.]]></line>
+			<line repeat="N"><![CDATA[Required Due Date: $F{poHeader_requiredDate}.]]></line>
+			<line repeat="N"><![CDATA[Remarks: $F{poHeader_internalComments}.]]></line>
+			<line repeat="N"><![CDATA[$F{poHeader_poNumber} is pending approval for the past 30 days.]]></line>
+			<line repeat="N"><![CDATA[Item(s) as Follow:]]></line>
+			<line repeat="Y" sizeObject="poLineList"><![CDATA[$F{repeat_lineNumber}. $F{repeat_itemNumber}.-tab-Qty. $F{repeat_quantity}]]></line>
+		</message>
+		<last-run><![CDATA[2010/11/23]]></last-run>
+	</alert>
+	<alert enabled="yes">
+		<description>Requisitions Pending Approval</description>
+		<name>req_pending_approval</name>
+		<type>RSQ</type>
+		<where>
+			<![CDATA[SELECT DISTINCT RequisitionHeader.icReqHeader from RequisitionHeader as RequisitionHeader, ApprovalLog as ApprovalLog where RequisitionHeader.icReqHeader = ApprovalLog.id.icHeader AND RequisitionHeader.status = '1030' AND ApprovalLog.approved = 'A' AND ApprovalLog.dateAssigned <= ?]]>
+			<arg>
+				<value>today</value>
+				<offset>-2</offset>
+				<type>date</type>
+			</arg>
+		</where>
+		<subject><![CDATA[Puridiom Alert. Requistion Pending Approval $F{requisitionHeader_requisitionNumber}]]></subject>
+		<sendto>
+			<user type="requisitionHeader_requisitionerCode">Y</user>
+			<user type="requisitionHeader_owner">Y</user>
+			<user type="approvalLog_callForward">Y</user>
+		</sendto>
+		<message>
+			<line repeat="N"><![CDATA[Requisition $F{requisitionHeader_requisitionNumber} has been Pending Approval by $F{ApprovalLog_callForward} since $F{ApprovalLog_assignedDate}.]]></line>
+			<line repeat="N"><![CDATA[Requisition Date:-tab--tab--tab- $F{requisitionHeader_requisitionDate}.]]></line>
+			<line repeat="N"><![CDATA[Remarks:-tab--tab--tab- $F{requisitionHeader_internalComments}.]]></line>
+			<line repeat="N"><![CDATA[Item(s) as Follow:]]></line>
+			<line repeat="Y" sizeObject="requisitionLineList"><![CDATA[$F{repeat_lineNumber}. $F{repeat_description}.-tab-Qty. $F{repeat_quantity}]]></line>
+		</message>
+		<process>reset_sendqueue_hten.xml</process>
+		<last-run><![CDATA[2010/11/23]]></last-run>
+	</alert>
+	<alert enabled="yes">
+		<description>Requisitions Approved</description>
+		<name>req_approved</name>
+		<type>RSQ</type>
+		<where>
+			<![CDATA[SELECT DISTINCT RequisitionHeader.icReqHeader from RequisitionHeader as RequisitionHeader, ApprovalLog as ApprovalLog, PoHeader as PoHeader where RequisitionHeader.icReqHeader = ApprovalLog.id.icHeader AND RequisitionHeader.status = '1035' AND ApprovalLog.approved = 'A' AND RequisitionHeader.icReqHeader <> PoHeader.icReqHeader AND ApprovalLog.dateAssigned <= ?]]>
+			<arg>
+				<value>today</value>
+				<offset>-2</offset>
+				<type>date</type>
+			</arg>
+		</where>
+		<subject><![CDATA[Puridiom Alert. Requistion Approved $F{requisitionHeader_requisitionNumber} Not Placed On Order.]]></subject>
+		<sendto>
+			<user type="requisitionHeader_buyer">Y</user>
+		</sendto>
+		<message>
+			<line repeat="N"><![CDATA[Requisition $F{requisitionHeader_requisitionNumber} Approved by $F{ApprovalLog_callForward} since $F{ApprovalLog_assignedDate}.]]></line>
+			<line repeat="N"><![CDATA[Requisition Date:-tab--tab--tab- $F{requisitionHeader_requisitionDate}.]]></line>
+			<line repeat="N"><![CDATA[Remarks:-tab--tab--tab- $F{requisitionHeader_internalComments}.]]></line>
+			<line repeat="N"><![CDATA[Item(s) as Follow:]]></line>
+			<line repeat="Y" sizeObject="requisitionLineList"><![CDATA[$F{repeat_lineNumber}. $F{repeat_description}.-tab-Qty. $F{repeat_quantity}]]></line>
+		</message>
+		<process>reset_sendqueue_hten.xml</process>
+		<last-run><![CDATA[2010/11/23]]></last-run>
+	</alert>
+	<alert enabled="yes">
+		<description>Approval Reminder</description>
+		<name>approval_reminder</name>
+		<type>REQ</type>
+		<where>
+			<![CDATA[SELECT DISTINCT RequisitionHeader.icReqHeader from RequisitionHeader as RequisitionHeader, ApprovalLog as ApprovalLog where RequisitionHeader.icReqHeader = ApprovalLog.id.icHeader AND RequisitionHeader.status = '1030' AND ApprovalLog.approved = 'A' AND ApprovalLog.dateAssigned = ?]]>
+			<arg>
+				<value>today</value>
+				<offset>-3</offset>
+				<type>date</type>
+			</arg>
+		</where>
+		<subject><![CDATA[Puridiom System Alert - Requisition Number $F{requisitionHeader_requisitionNumber} Approval Reminder.]]></subject>
+		<sendto>
+			<user type="approvalLog_callForward">Y</user>
+		</sendto>
+		<message>
+			<line repeat="N"><![CDATA[Requisition Number $F{requisitionHeader_requisitionNumber} has not been Approved.]]></line>
+			<line repeat="N"><![CDATA[Requisition Details:]]></line>
+			<line repeat="N"><![CDATA[Requisition Date: $F{requisitionHeader_requisitionDate}]]></line>
+			<line repeat="N"><![CDATA[Remarks: $F{requisitionHeader_internalComments}]]></line>
+			<line repeat="N"><![CDATA[Item(s) as Follow:]]></line>
+			<line repeat="Y" sizeObject="poLineList"><![CDATA[$F{repeat_lineNumber}. $F{repeat_itemNumber}.-tab-Qty. $F{repeat_quantity}]]></line>
+		</message>
+		<last-run><![CDATA[2010/11/23]]></last-run>
+	</alert>
+	<alert enabled="yes">
+		<name>approval_escalation</name>
+		<type>RAE</type>
+		<where>
+			<![CDATA[SELECT DISTINCT RequisitionHeader.icReqHeader from RequisitionHeader as RequisitionHeader, ApprovalLog as ApprovalLog where RequisitionHeader.icReqHeader = ApprovalLog.id.icHeader AND RequisitionHeader.status = '1030' AND ApprovalLog.approved = 'A' AND ApprovalLog.dateAssigned = ?]]>
+			<arg>
+				<value>today</value>
+				<offset>-4</offset>
+				<type>date</type>
+			</arg>
+		</where>
+		<description>Approval Escalation</description>
+		<retrieve>
+			<process>requisition-escalate-to-backup.xml</process>
+			<argumentName>RequisitionHeader_icReqHeader</argumentName>
+		</retrieve>
+		<subject>Puridiom System Alert - Requisition Number $F{requisitionHeader_requisitionNumber} has been escalated to $F{approvalLog_backupApprover}</subject>
+		<sendto>
+			<user type="rule">
+				<rule>is-there-backup-approver.xml</rule>
+				<userid type="I">requisitionHeader_requisitionerCode</userid>
+			</user>
+			<user type="rule">
+				<rule>is-there-no-backup-approver.xml</rule>
+				<userid type="U">SYSADM</userid>
+			</user>
+		</sendto>
+		<message>
+			<line repeat="N"><![CDATA[Requisition Number $F{requisitionHeader_requisitionNumber} was assigned to $F{currentApproverUser_displayName} on $F{approvalLog_dateAssigned}, but has now been escalated to $F{backupApproverUser_displayName}.]]></line>
+			<line repeat="N"><![CDATA[Requisition Details:]]></line>
+			<line repeat="N"><![CDATA[Requisition Date: $F{requisitionHeader_requisitionDate}]]></line>
+			<line repeat="N"><![CDATA[Remarks: $F{requisitionHeader_internalComments}]]></line>
+			<line repeat="N"><![CDATA[Item(s) as follows:]]></line>
+			<line repeat="Y" sizeObject="requisitionLineList"><![CDATA[Line $F{repeat_lineNumber} - $F{repeat_quantity} $F{repeat_umCode} $F{repeat_description} ]]></line>
+			<line repeat="N"><![CDATA[Approval Log Information]]></line>
+			<line repeat="N"><![CDATA[Approver-tab-Date Approved]]></line>
+			<line repeat="Y" sizeObject="routingList"><![CDATA[$F{repeat_userId, user}-tab-$F{repeat_dateApproved}]]></line>
+			<line repeat="N"></line>
+		</message>
+		<process></process>
+		<last-run><![CDATA[2010/11/23]]></last-run>
+	</alert>
+	<alert enabled="yes">
+		<name>expires1</name>
+		<type>VEND</type>
+		<where>	<![CDATA[SELECT VendorInsurance.vendorId from VendorInsurance as VendorInsurance where VendorInsurance.expires1 = ?]]>
+			<arg>
+				<value>today</value>
+				<offset>-30</offset>
+				<type>date</type>
+			</arg>
+		</where>
+		<description>Workers Comp Liability</description>
+		<retrieve>
+			<process>vendorinsurance-alert.xml</process>
+			<argumentName>Vendor_vendorId</argumentName>
+		</retrieve>
+		<subject><![CDATA[$V{companyName} Workers Compensation Liability Expiration Alert for $F{vendor_vendorName}]]></subject>
+		<sendto>
+			<user type="vendor_owner">Y</user>
+		</sendto>
+		<message>
+			<!--<line commentid="00009" />-->
+			<line repeat="N" sizeObject="vendorInsuranceList"><![CDATA[$F{vendor_vendorName} $L{sup-coverage1, Workers Compensation Liability} expires on $F{vendorInsurance_expires1}.]]></line>
+			<line repeat="Y" sizeObject="contractsList"><![CDATA[Order #: $F{repeat_poNumber} -tab-Status: $F{repeat_status}]]></line>
+			<line repeat="Y" sizeObject="contractsList"><![CDATA[Effective Date: $F{repeat_effectiveDate} -tab- Expiration Date: $F{repeat_expirationDate} -tab- Amount: $F{repeat_total, dollar}]]></line>
+			<line repeat="Y" sizeObject="contractsList"><![CDATA[Buyer: $F{repeat_buyerCode}]]></line>
+			<line repeat="Y" sizeObject="contractsList"><![CDATA[Summary: $F{repeat_internalComments}]]></line>
+			<line repeat="N" sizeObject="vendorInsuranceList"><![CDATA[$L{sup-insuranceContact, Insurance Contact}: $F{vendorInsurance_insuranceContact}]]></line>
+			<line repeat="N" sizeObject="vendorInsuranceList"><![CDATA[$L{sup-insuranceComments, Insurance Comments}: $F{vendorInsurance_insuranceNotes}]]></line>
+		</message>
+		<last-run><![CDATA[2010/11/23]]></last-run>
+	</alert>
+	<alert enabled="yes">
+		<name>expires2</name>
+		<type>VEND</type>
+		<where><![CDATA[SELECT VendorInsurance.vendorId from VendorInsurance as VendorInsurance where VendorInsurance.expires2 = ?]]>
+			<arg>
+				<value>today</value>
+				<offset>-30</offset>
+				<type>date</type>
+			</arg>
+		</where>
+		<description>General Liability</description>
+		<retrieve>
+			<process>vendorinsurance-alert.xml</process>
+			<!-- <process>vendor-retrieve-by-id.xml</process>-->
+			<argumentName>Vendor_vendorId</argumentName>
+		</retrieve>
+		<subject><![CDATA[$V{companyName} General Liability Expiration Alert for $F{vendor_vendorName}]]></subject>
+		<sendto>
+			<user type="vendor_owner">Y</user>
+		</sendto>
+		<message>
+			<!--<line commentid="00009" />-->
+			<line repeat="N" sizeObject="vendorInsuranceList"><![CDATA[$F{vendor_vendorName} $L{sup-coverage2, General} expires on $F{vendorInsurance_expires1}.]]></line>
+			<line repeat="Y" sizeObject="contractsList"><![CDATA[Order #: $F{repeat_poNumber} -tab-Status: $F{repeat_status}]]></line>
+			<line repeat="Y" sizeObject="contractsList"><![CDATA[Effective Date: $F{repeat_effectiveDate} -tab- Expiration Date: $F{repeat_expirationDate} -tab- Amount: $F{repeat_total, dollar}]]></line>
+			<line repeat="Y" sizeObject="contractsList"><![CDATA[Buyer: $F{repeat_buyerCode}]]></line>
+			<line repeat="Y" sizeObject="contractsList"><![CDATA[Summary: $F{repeat_internalComments}]]></line>
+			<line repeat="N" sizeObject="vendorInsuranceList"><![CDATA[$L{sup-insuranceContact, Insurance Contact}: $F{vendorInsurance_insuranceContact}]]></line>
+			<line repeat="N" sizeObject="vendorInsuranceList"><![CDATA[$L{sup-insuranceComments, Insurance Comments}: $F{vendorInsurance_insuranceNotes}]]></line>
+		</message>
+		<last-run><![CDATA[2010/11/23]]></last-run>
+	</alert>
+	<alert enabled="yes">
+		<name>expires3</name>
+		<type>VEND</type>
+		<where><![CDATA[SELECT VendorInsurance.vendorId from VendorInsurance as VendorInsurance where VendorInsurance.expires3 = ?]]>																																							<![CDATA[SELECT VendorInsurance.vendorId from VendorInsurance as VendorInsurance where VendorInsurance.expires3 = ?]]>
+			<arg>
+				<value>today</value>
+				<offset>-30</offset>
+				<type>date</type>
+			</arg>
+		</where>
+		<description>Automobile Liability</description>
+		<retrieve>
+			<process>vendorinsurance-alert.xml</process>
+			<!-- <process>vendor-retrieve-by-id.xml</process>-->
+			<argumentName>Vendor_vendorId</argumentName>
+		</retrieve>
+		<subject><![CDATA[$V{companyName} Automobile Expiration Alert for $F{vendor_vendorName}]]></subject>
+		<sendto>
+			<user type="vendor_owner">Y</user>
+		</sendto>
+		<message>
+			<!--<line commentid="00009" />-->
+			<line repeat="N" sizeObject="vendorInsuranceList"><![CDATA[$F{vendor_vendorName} $L{sup-coverage3, Automobile} expires on $F{vendorInsurance_expires1}.]]></line>
+			<line repeat="Y" sizeObject="contractsList"><![CDATA[Order #: $F{repeat_poNumber} -tab-Status: $F{repeat_status}]]></line>
+			<line repeat="Y" sizeObject="contractsList"><![CDATA[Effective Date: $F{repeat_effectiveDate} -tab- Expiration Date: $F{repeat_expirationDate} -tab- Amount: $F{r]]><![CDATA[epeat_total, dollar}]]></line>
+			<line repeat="Y" sizeObject="contractsList"><![CDATA[Buyer: $F{repeat_buyerCode}]]></line>
+			<line repeat="Y" sizeObject="contractsList"><![CDATA[Summary: $F{repeat_internalComments}]]></line>
+			<line repeat="N" sizeObject="vendorInsuranceList"><![CDATA[$L{sup-insuranceContact, Insurance Contact}: $F{vendorInsurance_insuranceContact}]]></line>
+			<line repeat="N" sizeObject="vendorInsuranceList"><![CDATA[$L{sup-insuranceComments, Insurance Comments}: $F{vendorInsurance_insuranceNotes}]]></line>
+		</message>
+		<last-run><![CDATA[2010/11/23]]></last-run>
+	</alert>
+	<alert enabled="yes">
+		<name>expires4</name>
+		<type>VEND</type>
+		<where><![CDATA[SELECT VendorInsurance.vendorId from VendorInsurance as VendorInsurance where VendorInsurance.expires4 = ?]]>																																							<![CDATA[SELECT VendorInsurance.vendorId from VendorInsurance as VendorInsurance where VendorInsurance.expires4 = ?]]>
+			<arg>
+				<value>today</value>
+				<offset>-30</offset>
+				<type>date</type>
+			</arg>
+		</where>
+		<description>Excess</description>
+		<retrieve>
+			<process>vendorinsurance-alert.xml</process>
+			<!-- <process>vendor-retrieve-by-id.xml</process>-->
+			<argumentName>Vendor_vendorId</argumentName>
+		</retrieve>
+		<subject><![CDATA[$V{companyName} Excess Expiration Alert for $F{vendor_vendorName}]]></subject>
+		<sendto>
+			<user type="vendor_owner">Y</user>
+		</sendto>
+		<message>
+			<!--<line commentid="00009" />-->
+			<line repeat="N" sizeObject="vendorInsuranceList"><![CDATA[$F{vendor_vendorName} $L{sup-coverage4, Excess} expires on $F{vendorInsurance_expires1}.]]></line>
+			<line repeat="Y" sizeObject="contractsList"><![CDATA[Order #: $F{repeat_poNumber} -tab-Status: $F{repeat_status}]]></line>
+			<line repeat="Y" sizeObject="contractsList"><![CDATA[Effective Date: $F{repeat_effectiveDa]]><![CDATA[te} -tab- Expiration Date: $F{repeat_expirationDate} -tab- Amount: $F{repeat_total, dollar}]]></line>
+			<line repeat="Y" sizeObject="contractsList"><![CDATA[Buyer: $F{repeat_buyer]]><![CDATA[Code}]]></line>
+			<line repeat="Y" sizeObject="contractsList"><![CDATA[Summary: $F{repeat_internalComments}]]></line>
+			<line repeat="N" sizeObject="vendorInsuranceList"><![CDATA[$L{sup-insuranceContact, Insurance Contact}: $F{vendorInsurance_insuranceContact}]]></line>
+			<line repeat="N" sizeObject="vendorInsuranceList"><![CDATA[$L{sup-insuranceComments, Insurance Comments}: $F{vendorInsurance_insuranceNotes}]]></line>
+		</message>
+		<last-run><![CDATA[2010/11/23]]></last-run>
+	</alert>
+	
+</alerts>

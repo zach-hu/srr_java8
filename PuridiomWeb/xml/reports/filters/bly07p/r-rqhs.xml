@@ -1,0 +1,83 @@
+<r-rqhs>
+  <columns>
+		<RequisitionHeader_requisitionNumber>
+			<label>Requisition Number</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</RequisitionHeader_requisitionNumber>
+		<RequisitionHeader_requisitionDate>
+			<label>Requisition Date</label>
+			<type>DATE</type>
+			<visible>1</visible>
+		</RequisitionHeader_requisitionDate>
+		<RequisitionHeader_requisitionerCode>
+			<label>Requisitioner Code</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</RequisitionHeader_requisitionerCode>
+		<RequisitionHeader_fiscalYear>
+			<label>fiscalYear</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</RequisitionHeader_fiscalYear>
+		<RequisitionHeader_requiredDate>
+			<label>requiredDate</label>
+			<type>DATE</type>
+			<visible>1</visible>
+		</RequisitionHeader_requiredDate>
+		<RequisitionHeader_departmentCode>
+			<label>department</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</RequisitionHeader_departmentCode>
+		<RequisitionHeader_assignedBuyer>
+			<label>Assigned Buyer</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</RequisitionHeader_assignedBuyer>
+		<RequisitionHeader_buyer>
+			<label>Buyer</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</RequisitionHeader_buyer>
+		<RequisitionHeader_authorizationCode>
+			<label>Authorized By</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</RequisitionHeader_authorizationCode>
+		<RequisitionHeader_requisitionType>
+			<label>Requisition Type</label>
+			<type>REQUISITION-TYPE</type>
+			<visible>1</visible>
+		</RequisitionHeader_requisitionType>
+		<RequisitionHeader_status>
+			<label>Status</label>
+			<type>STATUS</type>
+			<visible>1</visible>
+		</RequisitionHeader_status>
+		<RequisitionHeader_total>
+			<label>Total</label>
+			<type>BIGDECIMAL</type>
+			<visible>1</visible>
+		</RequisitionHeader_total>
+		<RequisitionHeader_currencyCode>
+			<label>Currency Code</label>
+			<type>STRING</type>
+			<visible>0</visible>
+		</RequisitionHeader_currencyCode>
+		<RequisitionHeader_currencyFactor>
+			<label>Currency Factor</label>
+			<type>BIGDECIMAL</type>
+			<visible>0</visible>
+		</RequisitionHeader_currencyFactor>
+		<RequisitionHeader_internalComments>
+			<label>Internal Comments</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</RequisitionHeader_internalComments>
+</columns>
+  <sqlfrom> RequisitionHeader as RequisitionHeader </sqlfrom>
+  <sqlwhere><![CDATA[ (RequisitionHeader.requisitionNumber <> 'N/A')]]></sqlwhere>
+  <sqlorderby>RequisitionHeader.departmentCode</sqlorderby>
+  <title>Requisition Summary Report by Cost Center</title>
+</r-rqhs>

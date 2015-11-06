@@ -9,10 +9,8 @@
 
 <SCRIPT LANGUAGE="JavaScript1.2" SRC="<%=contextPath%>/scripts/calendar.js"></SCRIPT>
 
-<%	
+<%
 	PropertiesManager propertiesManager = PropertiesManager.getInstance(oid);
-	Vendor vendor = (Vendor) request.getAttribute("vendor");
-	System.out.println(vendor);
 	String vendorName = (String) request.getAttribute("Vendor_vendorName");
 	String vendor_buyer = HiltonUtility.ckNull((String) request.getAttribute("Vendor_buyer"));
 	List	vendorCommRelList = (List) request.getAttribute("vendorCommRelList");

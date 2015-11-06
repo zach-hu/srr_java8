@@ -1,0 +1,81 @@
+<r-vch-s-vst>
+<columns>
+		<InvoiceHeader_invoiceNumber>
+			<label>Invoice Number</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</InvoiceHeader_invoiceNumber>
+		<InvoiceHeader_poNumber>
+			<label>Po Number</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</InvoiceHeader_poNumber>
+		<InvoiceHeader_invoiceDate>
+			<label>Invoice Date</label>
+			<type>DATE</type>
+			<visible>1</visible>
+		</InvoiceHeader_invoiceDate>
+		<InvoiceHeader_vendorId>
+			<label>Vendor Id</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</InvoiceHeader_vendorId>
+		<InvoiceHeader_udf10Code>
+			<label>IV10</label><!--label>department</label-->
+			<type>STRING</type>
+			<visible>1</visible>
+		</InvoiceHeader_udf10Code>
+		<InvoiceHeader_invoiceSubtotal>
+			<label>Sub Total</label>
+			<type>BIGDECIMAL</type>
+			<visible>1</visible>
+		</InvoiceHeader_invoiceSubtotal>
+		<InvoiceHeader_invoiceShipping>
+			<label>Shipping</label>
+			<type>BIGDECIMAL</type>
+			<visible>1</visible>
+		</InvoiceHeader_invoiceShipping>
+		<InvoiceHeader_invoiceTax>
+			<label>Taxes</label>
+			<type>BIGDECIMAL</type>
+			<visible>1</visible>
+		</InvoiceHeader_invoiceTax>
+		<InvoiceHeader_useTax>
+			<label>Use Tax</label>
+			<type>BIGDECIMAL</type>
+			<visible>1</visible>
+		</InvoiceHeader_useTax>
+		<InvoiceHeader_invoiceOther>
+			<label>Other Chgs</label>
+			<type>BIGDECIMAL</type>
+			<visible>1</visible>
+		</InvoiceHeader_invoiceOther>
+		<InvoiceHeader_invoiceTotal>
+			<label>Invoice Total</label>
+			<type>BIGDECIMAL</type>
+			<visible>1</visible>
+		</InvoiceHeader_invoiceTotal>
+		<InvoiceHeader_currencyCode>
+			<label>Currency Code</label>
+			<type>STRING</type>
+			<visible>0</visible>
+		</InvoiceHeader_currencyCode>
+		<InvoiceHeader_currencyFactor>
+			<label>Currency Factor</label>
+			<type>BIGDECIMAL</type>
+			<visible>0</visible>
+		</InvoiceHeader_currencyFactor>
+		<InvoiceHeader_status>
+			<label>status</label>
+			<type>STATUS</type>
+			<visible>1</visible>
+		</InvoiceHeader_status>
+</columns>
+<sqlfrom> InvoiceHeader as InvoiceHeader</sqlfrom>
+<sqlwhere><![CDATA[ 
+(InvoiceHeader.status >'6005') and
+(InvoiceHeader.status <'9020')
+ ]]></sqlwhere>
+<sqlorderby>InvoiceHeader.poNumber, InvoiceHeader.invoiceNumber</sqlorderby>
+<title>Vouchers Summary Total Report</title>
+</r-vch-s-vst>

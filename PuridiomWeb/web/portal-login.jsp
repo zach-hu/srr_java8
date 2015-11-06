@@ -23,8 +23,6 @@ while (en.hasMoreElements())
 	String paramName = (String) en.nextElement();
 	System.out.println(paramName + "=" + request.getParameter(paramName) );
 };
-System.out.println(request.getRequestURI()) ;
-System.out.println(request.getRequestURL()) ;
 en = request.getAttributeNames() ;
 while (en.hasMoreElements())
 {

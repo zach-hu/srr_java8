@@ -1,0 +1,71 @@
+<r_ivac>
+
+  <columns>
+		<InvItem_description>
+			<label>description</label>
+			<type>STRING</type>
+		</InvItem_description>
+		<InvItem_commodity>
+			<label>commodity</label>
+			<type>STRING</type>
+		</InvItem_commodity>
+		<InvBinLocation_itemLocation>
+			<label>location</label>
+			<type>STRING</type>
+		</InvBinLocation_itemLocation>
+		<InvBinLocation_aisle>
+			<label>aisle</label>
+			<type>STRING</type>
+		</InvBinLocation_aisle>
+		<InvBinLocation_locrow>
+			<label>Locrow</label>
+			<type>STRING</type>
+		</InvBinLocation_locrow>
+		<InvBinLocation_tier>
+			<label>tier</label>
+			<type>STRING</type>
+		</InvBinLocation_tier>
+		<InvBinLocation_bin>
+			<label>bin</label>
+			<type>STRING</type>
+		</InvBinLocation_bin>
+		<InvBinLocation_physActual>
+			<label>Phys Actual</label>
+			<type>BIGDECIMAL</type>
+		</InvBinLocation_physActual>
+		<InvBinLocation_physOriginal>
+			<label>Phys Original</label>
+			<type>BIGDECIMAL</type>
+		</InvBinLocation_physOriginal>
+		<InvItem_averageCost>
+			<label>averageCost</label>
+			<type>BIGDECIMAL</type>
+		</InvItem_averageCost>
+		<InvBinLocation_qtyOnHand>
+			<label>quantityOnHand</label>
+			<type>BIGDECIMAL</type>
+		</InvBinLocation_qtyOnHand>
+		<InvBinLocation_lot>
+			<label>bin-locbrw-inv-lotNumber</label>
+			<type>STRING</type>
+		</InvBinLocation_lot>
+		<InvBinLocation_itemNumber>
+			<label>itemNumber</label>
+			<type>STRING</type>
+		</InvBinLocation_itemNumber>
+		<InvItem_unitOfIssue>
+			<label>Unit Of Issue</label>
+			<type>STRING</type>
+		</InvItem_unitOfIssue>
+		<InvItem_abcCode>
+			<label>Abc Code</label>
+			<type>STRING</type>
+		</InvItem_abcCode>
+	</columns>
+
+  <sqlfrom> InvItem as InvItem , InvBinLocation as InvBinLocation </sqlfrom>
+  <sqlwhere><![CDATA[(InvItem.itemNumber = InvBinLocation.itemNumber)]]></sqlwhere>
+  <title>Inventory Physical Count Worksheet (Extended Inventory)</title>
+
+</r_ivac>
+

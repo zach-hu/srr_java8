@@ -1,0 +1,95 @@
+<r-popd2>
+	<columns>
+		<PaymentAccount_poNumber>
+			<label>poNumber</label>
+			<type>STRING</type>
+		</PaymentAccount_poNumber>
+		<InvoiceHeader_poNumber>
+			<label>poNumber</label>
+			<type>STRING</type>
+		</InvoiceHeader_poNumber>
+
+		<PaymentAccount_releaseNumber>
+			<label>releaseNumber</label>
+			<type>BIGDECIMAL</type>
+		</PaymentAccount_releaseNumber>
+
+		<PaymentAccount_invoiceNumber>
+			<label>Invoice Number</label>
+			<type>STRING</type>
+		</PaymentAccount_invoiceNumber>
+		<InvoiceHeader_invoiceNumber>
+			<label>Invoice Number</label>
+			<type>STRING</type>
+		</InvoiceHeader_invoiceNumber>
+
+		<PaymentAccount_invoiceDate>
+			<label></label>
+			<type>DATE</type>
+		</PaymentAccount_invoiceDate>
+		<InvoiceHeader_invoiceDate>
+			<label></label>
+			<type>DATE</type>
+		</InvoiceHeader_invoiceDate>
+
+		<PaymentAccount_invoiceAmount>
+			<label></label>
+			<type>BIGDECIMAL</type>
+		</PaymentAccount_invoiceAmount>
+		<InvoiceHeader_invoiceTotal>
+			<label></label>
+			<type>BIGDECIMAL</type>
+		</InvoiceHeader_invoiceTotal>
+
+		<PaymentAccount_checkNumber>
+			<label></label>
+			<type>STRING</type>
+		</PaymentAccount_checkNumber>
+		<PaymentAccount_checkAmount>
+			<label></label>
+			<type>BIGDECIMAL</type>
+		</PaymentAccount_checkAmount>
+		<PaymentAccount_checkDate>
+			<label></label>
+			<type>DATE</type>
+		</PaymentAccount_checkDate>
+		<PaymentAccount_tsrYear>
+			<label>Tsr Year</label>
+			<type>STRING</type>
+		</PaymentAccount_tsrYear>
+		<PaymentAccount_tsrMonth>
+			<label>Tsr Month</label>
+			<type>BigDecimal</type>
+		</PaymentAccount_tsrMonth>
+		<PaymentAccount_accountCode>
+			<label>Account code</label>
+			<type>STRING</type>
+		</PaymentAccount_accountCode>
+		<PaymentAccount_costCenter>
+			<label></label>
+			<type>STRING</type>
+		</PaymentAccount_costCenter>
+		<PaymentAccount_cacCode>
+			<label></label>
+			<type>STRING</type>
+		</PaymentAccount_cacCode>
+		<PaymentAccount_utilCode>
+			<label></label>
+			<type>STRING</type>
+		</PaymentAccount_utilCode>
+		<PaymentAccount_allocAmount>
+			<label></label>
+			<type>BIGDECIMAL</type>
+		</PaymentAccount_allocAmount>
+		<PaymentAccount_cancelDate>
+			<label></label>
+			<type>DATE</type>
+		</PaymentAccount_cancelDate>
+	</columns>
+	<sqlfrom>PaymentAccount as PaymentAccount, InvoiceHeader as InvoiceHeader</sqlfrom>
+	<sqlwhere><![CDATA[
+		( PaymentAccount.invoiceNumber *=  InvoiceHeader.invoiceNumber)
+	]]></sqlwhere>
+	<title>Payment Account Report</title>
+</r-popd2>
+

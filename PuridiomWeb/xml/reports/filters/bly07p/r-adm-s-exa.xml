@@ -1,0 +1,47 @@
+<r-extapp-usr>
+	<columns>
+		<ApprovalLog_id_userId>
+			<label>user Id</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</ApprovalLog_id_userId>
+		<ApprovalLog_callForward>
+			<label>Call Forward</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</ApprovalLog_callForward>
+		<AppRulesExt_ruleAction>
+			<label>Rule Action</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</AppRulesExt_ruleAction>
+		<AppRulesExt_routto>
+			<label>Rout To</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</AppRulesExt_routto>
+		<AppRulesExt_id_ruleNumber>
+			<label>Rule Number</label>
+			<type>BIGDECIMAL</type>
+			<visible>1</visible>
+		</AppRulesExt_id_ruleNumber>
+		<ApprovalLog_udfValues>
+			<label>UDF Values</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</ApprovalLog_udfValues>
+		<ApprovalLog_poolid>
+			<label>Pool Id</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</ApprovalLog_poolid>	
+		<ApprovalLog_pooldesc>
+			<label>Pool Description</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</ApprovalLog_pooldesc>
+	</columns>
+<sqlfrom> ApprovalLog as ApprovalLog, AppRulesExt as AppRulesExt </sqlfrom>
+<sqlwhere><![CDATA[(ApprovalLog.ruleAction = AppRulesExt.ruleAction )]]></sqlwhere>
+<title>Extended Approver User Rules Report </title>
+</r-extapp-usr>

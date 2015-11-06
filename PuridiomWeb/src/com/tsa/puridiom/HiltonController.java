@@ -18,6 +18,7 @@ public class HiltonController {
 	public Map handleRequest(Map requestParameters) throws Exception {
 		Map outgoingMap = null;
 		try {
+		    requestParameters.put("handlerNotFound", false) ;
 			String	handlerList = (String) requestParameters.get("handler");
 			int lastIndex = handlerList.lastIndexOf(";");
 			int len = handlerList.length() - 1;
@@ -34,6 +35,7 @@ public class HiltonController {
 				if (handler == null) {
 				    Log.error(this, "The handler [" + handlerName + "] could not be found.");
 				    requestParameters.put("handler", "DoNothingHandler");
+				    requestParameters.put("handlerNotFound", true) ;
 					handler = HandlerFactory.getInstance().getHandler(requestParameters);
 				}
 				outgoingMap = handler.handleRequest(requestParameters);

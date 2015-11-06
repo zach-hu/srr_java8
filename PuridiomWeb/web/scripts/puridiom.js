@@ -50,16 +50,35 @@ function doSubmit(page, handlerList) {
   }
   setupHandlers(handlerList);
   if (validateForm())
-  {
+  { 
 	if(strEnableAuditTrail == "Y"){
 		buildAuditedFields();
 	}
     resetDisabledFlds();
     resetDummyFields();
+//    validateFormPpe($(frm).serialize());
+//    var fieldsA = $(frm).serializeArray();
     document.body.style.cursor = "wait";
     frm.target = "_self"
     frm.submit();
   }
+}
+
+function validateFormPpe(formData) {
+//	 console.log(formData);
+    // initialize
+//	var md = new KJUR.crypto.MessageDigest({"alg": "md5", "prov": "cryptojs"});
+//	//update data
+//	//md.upateString(requestID);
+//	md.updateString(formData);
+//	//SHA1 hash result of string aaa which will be 7e240de74fb1ed08fa08d38063f6a6a91462a815
+//	var hashValueHex = md.digest();
+//	//alert(frm['sfbm'].value);
+//	if (frm['sfbm']){
+//		frm['sfbm'].value = frm['sfbm'].value + 'M' + hashValueHex
+//	}
+//	//alert(frm['sfbm'].value);
+//	console.log(hashValueHex);
 }
 
 function isEmpty(s) {
@@ -136,7 +155,6 @@ function doSubmitToPopup (url, handler, w, h) {
   if (frm && frm.editFieldsApprover) {
 	  popupParameters = popupParameters + ";editFieldsApprover=" + frm.editFieldsApprover.value;
   }
-
   showPopWin('system/popup_html.jsp', w, h, null, true);
 }
 
@@ -150,7 +168,6 @@ function doSubmitToLookup (url, handler, w, h) {
   popupUserId = frm.userId.value;
   popupMailId = frm.mailId.value;
   popupOrganizationId = frm.organizationId.value;
-
   openWindow(url, w, h);
 }
 
@@ -1646,26 +1663,41 @@ function resetDisabledFlds() {
   }
 }
 
-function getStyleSheetAttribute(selector, attribute) {
-  var rules = document.styleSheets[0].rules;
+//function getStyleSheetAttribute(selector, attribute) {
+//  var rules = document.styleSheets[0].rules;
+//
+//  if (selector.indexOf(".") == 0) {
+//    selector  = selector.substring(1);
+//  }
+//  if (rules != undefined) {
+//    for (var i=0; i < rules.length; i++) {
+//      var currentSelector = rules[i].selectorText;
+//      if (currentSelector.indexOf(".") == 0) {
+//        currentSelector  = currentSelector.substring(1);
+//      }
+//      if (currentSelector.indexOf("#") == 0) {
+//        currentSelector  = currentSelector.substring(1);
+//      }
+//      if (currentSelector == selector) {
+//        return rules(i).style.getAttribute(attribute);
+//      }
+//    }
+//  }
+//}
 
-  if (selector.indexOf(".") == 0) {
-    selector  = selector.substring(1);
-  }
-  if (rules != undefined) {
-    for (var i=0; i < rules.length; i++) {
-      var currentSelector = rules(i).selectorText;
-      if (currentSelector.indexOf(".") == 0) {
-        currentSelector  = currentSelector.substring(1);
-      }
-      if (currentSelector.indexOf("#") == 0) {
-        currentSelector  = currentSelector.substring(1);
-      }
-      if (currentSelector == selector) {
-        return rules(i).style.getAttribute(attribute);
-      }
+function getStyleSheetAttribute(selector, style, sheet) {
+    var sheets = typeof sheet !== 'undefined' ? [sheet] : document.styleSheets;
+    for (var i = 0, l = sheets.length; i < l; i++) {
+        var sheet = sheets[i];
+        if( !sheet.cssRules ) { continue; }
+        for (var j = 0, k = sheet.cssRules.length; j < k; j++) {
+            var rule = sheet.cssRules[j];
+            if (rule.selectorText && rule.selectorText.split(',').indexOf(selector) !== -1) {
+                return rule.style[style];
+            }
+        }
     }
-  }
+    return null;
 }
 
 function allowInputEdit(fld, allowEdit) {
@@ -2104,8 +2136,10 @@ function getFields(el)
 function buildAuditFields()
 {
 	setAuditTables();
+	
 	if (typeof YAHOO != "undefined")
 	{
+		
 		var auditFieldsEl = YAHOO.util.Dom.get("auditFields") ;
 		var auditFieldsId = "{ ic: ";
 		auditFieldsId += "'" + buildAuditIc() + "'";
@@ -2115,15 +2149,18 @@ function buildAuditFields()
 		{
 			if (fieldsToAudit[j].type != "password")
 			{
-				auditFieldsId += ",";
-				auditFieldsId += fieldsToAudit[j].name;
-				if(fieldsToAudit[j].value.length > 0)
-				{
-					auditFieldsId += ":" + '"' + fieldsToAudit[j].value + '"';
-				}
-				else
-				{
-					auditFieldsId += ": NONE";
+				if(auditFieldsId.search(fieldsToAudit[j].name) == -1)
+					{
+					auditFieldsId += ",";
+					auditFieldsId += fieldsToAudit[j].name;
+					if(fieldsToAudit[j].value.length > 0)
+					{
+						auditFieldsId += ":" + '"' + fieldsToAudit[j].value + '"';
+					}
+					else
+					{
+						auditFieldsId += ": NONE";
+					}
 				}
 			}
 		}
@@ -2131,31 +2168,68 @@ function buildAuditFields()
 	    fieldsToAudit = YAHOO.util.Dom.getElementsBy(getFields, 'select');
 		for (var j = 0; j < fieldsToAudit.length; j++)
 		{
-			auditFieldsId += ",";
-	        auditFieldsId += fieldsToAudit[j].name;
-	        if(fieldsToAudit[j].value.length > 0)
-	        {
-	        	auditFieldsId += ":" + '"' + fieldsToAudit[j].value + '"';
-	        }
-	        else
-	        {
-	        	auditFieldsId += ": NONE";
-	        }
+			if(auditFieldsId.search(fieldsToAudit[j].name) == -1)
+			{
+				auditFieldsId += ",";
+		        auditFieldsId += fieldsToAudit[j].name;
+		        if(fieldsToAudit[j].value.length > 0)
+		        {
+		        	auditFieldsId += ":" + '"' + fieldsToAudit[j].value + '"';
+		        }
+		        else
+		        {
+		        	auditFieldsId += ": NONE";
+		        }
+			}
 	    }
-
-	    /*
-		 * fieldsToAudit = YAHOO.util.Dom.getElementsBy(getFields, 'textarea');
-		 * for (var j = 0; j < fieldsToAudit.length; j++) { auditFieldsId +=
-		 * ","; auditFieldsId += fieldsToAudit[j].name;
-		 * if(fieldsToAudit[j].value.length > 0) { auditFieldsId += ":" + '"' +
-		 * fieldsToAudit[j].value + '"'; } else { auditFieldsId += ": NONE"; } }
-		 */
 
 	    auditFieldsId += "}";
 		if(typeof(auditFieldsEl) !== 'undefined' && auditFieldsEl != null) {
 			auditFieldsEl.value = auditFieldsId;
 		}
 	}
+	else //jqueryBased
+	{
+		var auditFieldsEl = $(":input[name='auditFields']");
+		var auditFieldsId = "{ ic: ";
+		auditFieldsId += "'" + buildAuditIc() + "'";
+		var fieldsToAuditJquery = getFieldsJquery();
+		
+		if (fieldsToAuditJquery){
+			fieldsToAuditJquery.each(function(index, element) {
+				
+				if ($(element)[0].tagName != "password" && $(element)[0].tagName != "PASSWORD" )
+				{
+					var x = $(element)[0].name;
+					
+					if(auditFieldsId.search($(element)[0].name) == -1)
+					{
+						
+						auditFieldsId += ",";
+						auditFieldsId += $(element)[0].name;
+						
+						if($(element)[0].value.length > 0)
+						{
+							auditFieldsId += ":" + '"' + $(element)[0].value + '"';
+						}
+						else
+						{
+							auditFieldsId += ": NONE";
+						}					
+					}	
+				}
+			});
+		}
+		auditFieldsId += "}";
+		
+		if (auditFieldsId)
+		{
+			if(typeof(auditFieldsEl) !== 'undefined' && auditFieldsEl != null) {
+				auditFieldsEl.val(auditFieldsId);
+			}
+		}
+	}
+	
 }
 function buildAuditedFields()
 {
@@ -2165,53 +2239,99 @@ function buildAuditedFields()
 		var auditFieldsId = "{ ic: ";
 		auditFieldsId += "'" + buildAuditIc() + "'";
 
+		
 		fieldsToAudit = YAHOO.util.Dom.getElementsBy(getFields, 'input');
+
 		for (var j = 0; j < fieldsToAudit.length; j++)
 		{
 			if (fieldsToAudit[j].type != "password")
 			{
-				auditFieldsId += ",";
-				auditFieldsId += fieldsToAudit[j].name;
-				if(fieldsToAudit[j].value.length > 0)
+				if(auditFieldsId.search(fieldsToAudit[j].name) == -1)
 				{
-					auditFieldsId += ":" + '"' + fieldsToAudit[j].value + '"';
-				}
-				else
-				{
-					auditFieldsId += ": NONE";
+					auditFieldsId += ",";
+					auditFieldsId += fieldsToAudit[j].name;
+					if(fieldsToAudit[j].value.length > 0)
+					{
+						auditFieldsId += ":" + '"' + fieldsToAudit[j].value + '"';
+					}
+					else
+					{
+						auditFieldsId += ": NONE";
+					}
 				}
 			}
 		}
-
+		
 	    fieldsToAudit = YAHOO.util.Dom.getElementsBy(getFields, 'select');
+
+	    var auditFieldsElJquery = $(":input[name='auditedFields']");
 		for (var j = 0; j < fieldsToAudit.length; j++)
 		{
-			auditFieldsId += ",";
-	        auditFieldsId += fieldsToAudit[j].name;
-	        if(fieldsToAudit[j].value.length > 0)
-	        {
-	        	auditFieldsId += ":" + '"' + fieldsToAudit[j].value + '"';
-	        }
-	        else
-	        {
-	        	auditFieldsId += ": NONE";
-	        }
+			if(auditFieldsId.search(fieldsToAudit[j].name) == -1)
+			{
+				auditFieldsId += ",";
+		        auditFieldsId += fieldsToAudit[j].name;
+		        if(fieldsToAudit[j].value.length > 0)
+		        {
+		        	auditFieldsId += ":" + '"' + fieldsToAudit[j].value + '"';
+		        }
+		        else
+		        {
+		        	auditFieldsId += ": NONE";
+		        }
+			}
 	    }
-
-	    /*
-		 * fieldsToAudit = YAHOO.util.Dom.getElementsBy(getFields, 'textarea');
-		 * for (var j = 0; j < fieldsToAudit.length; j++) { auditFieldsId +=
-		 * ","; auditFieldsId += fieldsToAudit[j].name;
-		 * if(fieldsToAudit[j].value.length > 0) { auditFieldsId += ":" + '"' +
-		 * fieldsToAudit[j].value + '"'; } else { auditFieldsId += ": NONE"; } }
-		 */
-
 	    auditFieldsId += "}";
 		if(typeof(auditFieldsEl) !== 'undefined' && auditFieldsEl != null) {
 			if (navigator.appName == "Microsoft Internet Explorer" || navigator.appName == "Netscape")
+				
 				auditFieldsEl.value = auditFieldsId;
 			else
 				auditFieldsEl = auditFieldsId;
+		}
+		
+	    
+	}
+	
+	else //jquery based
+	{
+		var auditFieldsEl = $(":input[name='auditedFields']");
+		var auditFieldsId = "{ ic: ";
+		auditFieldsId += "'" + buildAuditIc() + "'";
+		var fieldsToAuditJquery = getFieldsJquery();
+		
+		if (fieldsToAuditJquery){
+			fieldsToAuditJquery.each(function(index, element) {
+				
+				if ($(element)[0].tagName != "password" && $(element)[0].tagName != "PASSWORD" )
+				{
+					var x = $(element)[0].name;
+					
+					if(auditFieldsId.search($(element)[0].name) == -1)
+					{
+						
+						auditFieldsId += ",";
+						auditFieldsId += $(element)[0].name;
+						
+						if($(element)[0].value.length > 0)
+						{
+							auditFieldsId += ":" + '"' + $(element)[0].value + '"';
+						}
+						else
+						{
+							auditFieldsId += ": NONE";
+						}					
+					}	
+				}
+			});
+		}
+		auditFieldsId += "}";
+		
+		if (auditFieldsId)
+		{
+			if(typeof(auditFieldsEl) !== 'undefined' && auditFieldsEl != null) {
+				auditFieldsEl.val(auditFieldsId);
+			}
 		}
 	}
 }
@@ -2447,3 +2567,9 @@ function arrayIndexOf(array, obj) {
 	}
 	return -1;
 }
+
+function getFieldsJquery() {
+	return undefined;
+}
+
+

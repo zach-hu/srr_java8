@@ -1,0 +1,79 @@
+<cost-center-approvers>
+	<columns>
+		<UserProfile_userId>
+			<label>User ID</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</UserProfile_userId>
+		<UserProfile_firstName>
+			<label>First Name</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</UserProfile_firstName>
+		<UserProfile_lastName>
+			<label>Last Name</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</UserProfile_lastName>
+		<AppRule_id_udf1Code>
+			<label>Entity</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</AppRule_id_udf1Code>
+		<AppRule_id_udf2Code>
+			<label>Dept</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</AppRule_id_udf2Code>
+		<UserProfile_approvalAmount>
+			<label>Authority</label>
+			<type>BIGDECIMAL</type>
+			<visible>1</visible>
+		</UserProfile_approvalAmount>
+		<UserProfile_owner>
+			<label>Owner</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</UserProfile_owner>
+		<UserProfile_title>
+			<label>Title</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</UserProfile_title>
+
+		<AppRule_id_udf3Code>
+			<label>Capital</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</AppRule_id_udf3Code>
+		<AppRule_id_udf4Code>
+			<label>Designated Approver</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</AppRule_id_udf4Code>
+		<AppRule_requiredApprover>
+			<label>Required Approver</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</AppRule_requiredApprover>
+		<AppRule_fyiApprover>
+			<label>FYI Approver</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</AppRule_fyiApprover>
+		<AppRule_amount>
+			<label>Rule Amount</label>
+			<type>BIGDECIMAL</type>
+			<visible>1</visible>
+		</AppRule_amount>
+		<UserProfile_callForward>
+			<label>Call Forward</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</UserProfile_callForward>
+	</columns>
+<sqlfrom>UserProfile as UserProfile, AppRule as AppRule </sqlfrom>
+<sqlwhere><![CDATA[UserProfile.userId = AppRule.id.userId]]></sqlwhere>
+<sqlorderby>AppRule.amount ASC, AppRule.id.udf1Code, UserProfile.approvalAmount</sqlorderby>
+<title>Approval Rules Report</title>
+</cost-center-approvers>

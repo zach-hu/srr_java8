@@ -1,0 +1,123 @@
+<r-sup-d-dad>
+  <columns>
+		<Vendor_vendorId>
+			<label>Supplier Id</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</Vendor_vendorId>
+		<Vendor_vendorName>
+			<label>Supplier Name</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</Vendor_vendorName>
+		<Address_addressLine1>
+			<label>Address Line 1</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</Address_addressLine1>
+ 		<Address_addressLine2>
+			<label>Address Line 2</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</Address_addressLine2>
+		<Address_addressLine3>
+			<label>Address Line 3</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</Address_addressLine3>
+		<Address_city>
+			<label>City</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</Address_city>
+		<Address_state>
+			<label>State</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</Address_state>
+		<Address_postalCode>
+			<label>Postal Code</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</Address_postalCode>
+		<Address_country>
+			<label>Country</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</Address_country>
+		<Vendor_vendorSic>
+			<label>SIC</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</Vendor_vendorSic>
+		<Vendor_vendorDuns>
+			<label>DUNS</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</Vendor_vendorDuns>
+		<Vendor_vendorClass>
+			<label>Business Class</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</Vendor_vendorClass>
+		<Vendor_lastActive>
+			<label>Last Active</label>
+			<type>DATE</type>
+			<visible>1</visible>
+		</Vendor_lastActive>
+		<Vendor_dateEntered>
+			<label>Date Entered</label>
+			<type>DATE</type>
+			<visible>1</visible>
+		</Vendor_dateEntered>
+		<Contact_lastName>
+			<label>Last Name</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</Contact_lastName>
+		<Contact_firstName>
+			<label>First Name</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</Contact_firstName>
+		<Contact_middleInit>
+			<label>Middle Initial</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</Contact_middleInit>
+		<Contact_contactTitle>
+			<label>Title</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</Contact_contactTitle>
+		<Contact_phoneNumber>
+			<label>Phone Number</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</Contact_phoneNumber>
+		<Contact_faxNumber>
+			<label>Fax Number</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</Contact_faxNumber>
+		<Contact_emailAddr>
+			<label>Email</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</Contact_emailAddr>
+		<Address_id_addressType>
+			<label>Address Type</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</Address_id_addressType>
+		<Address_id_addressCode>
+			<label>Address Code</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</Address_id_addressCode>
+	</columns>
+  <sqlfrom> Address as Address , Vendor as Vendor , Contact as Contact</sqlfrom>
+  <sqlwhere><![CDATA[( Vendor.vendorId = Address.id.addressType ) and ( Vendor.vendorId = Contact.id.vendorId ) ]]></sqlwhere>
+  <sqlorderby>Address.id.addressType, Address.id.addressCode</sqlorderby>
+  <title>Supplier Detail Report (addresses)</title>
+</r-sup-d-dad>

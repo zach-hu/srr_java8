@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rule>
+	<clause type="StringCompare">
+	    <left-side elementSource="true">
+	     	<source>incomingRequestObjectMethod</source>
+			<object>item</object>
+			<name>getCommodityCode</name>
+	    </left-side>
+	    <operator>EQUAL</operator>
+	    <right-side>
+	      <source>constant</source>
+	      <value>718100</value>
+	    </right-side>
+  	</clause>
+	<logical-operator>OR</logical-operator>
+	<clause type="StringCompare">
+	    <left-side elementSource="true">
+	      	<source>incomingRequestObjectMethod</source>
+			<object>item</object>
+			<name>getCommodityCode</name>
+	    </left-side>
+	    <operator>EQUAL</operator>
+	    <right-side>
+	      	<source>constant</source>
+	      	<value>718150</value>
+	    </right-side>
+  	</clause>
+</rule>		

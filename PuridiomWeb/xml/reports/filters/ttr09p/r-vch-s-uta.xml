@@ -1,0 +1,85 @@
+<r-vch-s-uta>
+  <columns>
+   	<PoHeader_departmentCode>
+		<label>Lab</label>
+		<type>STRING</type>
+		<visible>1</visible>
+	</PoHeader_departmentCode>
+	
+	<PoHeader_poNumber>
+		<label>PO Number</label>
+		<type>STRING</type>
+		<visible>1</visible>
+	</PoHeader_poNumber>
+	
+	<PoHeader_currencyCode>
+		<label>Currency Code</label>
+		<type>STRING</type>
+		<visible>0</visible>
+	</PoHeader_currencyCode>
+	
+	<InvoiceHeader_invoiceNumber>
+		<label>Invoice Number</label>
+		<type>STRING</type>
+		<visible>1</visible>
+	</InvoiceHeader_invoiceNumber>
+		
+	<InvoiceHeader_invoiceDate>
+		<label>Invoice Date</label>
+		<type>DATE</type>
+		<visible>1</visible>
+	</InvoiceHeader_invoiceDate>
+	
+	<PoHeader_vendorId>
+		<label>Vendor Id</label>
+		<type>STRING</type>
+		<visible>1</visible>
+	</PoHeader_vendorId>
+
+	<InvoiceHeader_status>
+		<label>Status</label>
+		<type>STRING</type>
+		<visible>1</visible>
+	</InvoiceHeader_status>
+
+	<Account_fld1>
+		<label>rep-account_udf1</label>
+		<type>STRING</type>
+		<visible>1</visible>
+	</Account_fld1>
+	
+	<Account_fld2>
+		<label>rep-account_udf2</label>
+		<type>STRING</type>
+		<visible>1</visible>
+	</Account_fld2>
+	
+	<Account_fld3>
+		<label>rep-account_udf3</label>
+		<type>STRING</type>
+		<visible>1</visible>
+	</Account_fld3>
+	
+	<Account_fld4>
+		<label>rep-account_udf4</label>
+		<type>STRING</type>
+		<visible>1</visible>
+	</Account_fld4>
+				
+	<Account_allocAmount>
+		<label>Alloc Amount</label>
+		<type>BIGDECIMAL</type>
+		<visible>1</visible>
+	</Account_allocAmount>
+	
+	</columns>
+  <sqlfrom>PoHeader as PoHeader, InvoiceHeader as InvoiceHeader, Account as Account</sqlfrom>
+  <sqlwhere> <![CDATA[
+  ( Account.fld4 = '3550010000' ) and
+  ( Account.id.icHeader = InvoiceHeader.icIvcHeader ) and
+  ( InvoiceHeader.status > '6000' ) and ( InvoiceHeader.status < '9020' ) and
+  ( PoHeader.icPoHeader = InvoiceHeader.icPoHeader )
+  ]]> </sqlwhere>
+   <sqlorderby>PoHeader.poNumber ASC</sqlorderby>
+  <title>Use Tax Allocation Report</title>
+</r-vch-s-uta>

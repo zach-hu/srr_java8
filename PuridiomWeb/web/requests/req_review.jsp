@@ -289,7 +289,7 @@ String buyerId = requisitionHeader.getAssignedBuyer();
 		</tr>
 		<tr>
 			<td align=right><b><tsa:label labelName="status" defaultString="Status" />:</b></td>
-			<td width=150px><%=headerEncoder.encodeForHTML(DocumentStatus.toString(requisitionHeader.getStatus()))%></td>
+			<td width=150px><%=DocumentStatus.toString(requisitionHeader.getStatus())%></td>
 		</tr>
 		</table>
 		<table cellpadding="0" cellspacing="0" border=0 width=100%>

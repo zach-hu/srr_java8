@@ -62,6 +62,7 @@
 	pageContext.setAttribute("module", module);
 	pageContext.setAttribute("moduleType", moduleType);
 	pageContext.setAttribute("language", language);
+// 	String  epmc = HiltonUtility.ckNull((String) request.getAttribute("epmc"));
 %>
 <HTML>
 <HEAD>
@@ -69,9 +70,11 @@
 	<META HTTP-EQUIV="Cache-Control" content="no-cache">
 	<META HTTP-EQUIV="Expires" CONTENT="Sat, 11 Sep 1971 12:00:00 GMT">
 	<META NAME="Description" Content="<%=contextPath%>/system/header_popup.jsp">
+	<script type="text/javascript" src="<%=contextPath%>/scripts/jquery-1.11.0.min.js"></script>
 	<SCRIPT LANGUAGE="JavaScript1.2" SRC="<%=contextPath%>/scripts/puridiom.js"></SCRIPT>
 	<script language='Javascript1.2' src="<%=contextPath%>/scripts/filter.js"></script>
 	<SCRIPT LANGUAGE="JavaScript" SRC="<%=contextPath%>/scripts/dragiframe.js"></SCRIPT>
+	
 	<TITLE>Puridiom, Enabling Self-Service Procurement</TITLE>
 <%@ include file="/system/stylesheet_link.jsp" %>
 </HEAD>
@@ -88,6 +91,7 @@
 <tsa:hidden name="userDateFormat" value="<%=userDateFormat%>"/>
 <tsa:hidden name="<%= TokenProcessor.TOKEN_KEY %>" value="<%= TokenProcessor.getInstance().generateToken(request) %>"/>
 <tsa:hidden name="language" value="${language}"/>
+<tsa:hidden name="epmc" value='<%= TokenProcessor.getInstance().generateToken(request, "")%>'/>
 
 <div id="filterFields" style="display:none;"></div>
 <div id="hiddenFields" style="display:none;"></div>
@@ -96,6 +100,7 @@
 <!-- Hide script
 
 	var myPage = "";
+
 
 function doSubmitToPopup (url, handler, w, h) {
   popupUrl = url;

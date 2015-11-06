@@ -868,6 +868,28 @@
 			return false;
 		}
 	}
+	function getFieldsJquery()
+	{
+		var jQuerySelector = ":input:not([type=hidden])[name^='UserProfile_']";
+		jQuerySelector += ",:input:[name='UserProfile_expandBrowse']";
+		jQuerySelector += ",:input:[name='UserProfile_lockLogin']";		
+		jQuerySelector += ",:input:[name='UserProfile_reviewProfile']";		
+		jQuerySelector += ",:input:[name='UserProfile_overrider']";
+		jQuerySelector += ",:input:[name='UserProfile_adminBuyer']";
+		jQuerySelector += ",:input:[name='UserProfile_buyer']";
+		jQuerySelector += ",:input:[name='UserProfile_requisitioner']";
+		jQuerySelector += ",:input:[name='UserProfile_authorizedBy']";
+		jQuerySelector += ",:input:[name='UserProfile_receiver']";
+		jQuerySelector += ",:input:[name='UserProfile_approver']";
+		jQuerySelector += ",:input:[name='UserProfile_vchApp']";
+		jQuerySelector += ",:input:[name='UserProfile_appointedFlag']";
+		jQuerySelector += ",:input:[name='UserProfile_formValidate']";
+		jQuerySelector += ",:input:[name='UserProfile_administeredBy']";
+		jQuerySelector += ",:input:[name='UserProfile_barChart']";
+		
+		var fieldsToAuditJquery = $(jQuerySelector);
+		return fieldsToAuditJquery;
+    }
 	function buildAuditIc()
 	{
 		return frm.UserProfile_userId.value;

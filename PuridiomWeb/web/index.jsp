@@ -32,6 +32,7 @@
 	String rememberMe = propertiesManger.getProperty("LOGIN", "REMEMBERME", "Y");
 	String edoc = (String) request.getParameter("edoc");
 	String etype = (String) request.getParameter("etype");
+	
 
 	if (srchcatalog == null) srchcatalog = "" ;
 	if (srchcatalog.equalsIgnoreCase("null")) srchcatalog = "" ;
@@ -104,6 +105,7 @@ java.util.Enumeration names = request.getParameterNames();
 %>
 
 <tsa:hidden name="puridiomSessionId" value="<%=puridiomSessionId%>"/>
+<tsa:hidden name="epmc" value='<%= TokenProcessor.getInstance().generateToken(request, "")%>'/>
 <tsa:hidden name="loginFailurePage" value="index.jsp"/>
 <tsa:hidden name="finalAttemptPage" value="user/pswd_help_verification.jsp"/>
 <tsa:hidden name="passwordResetPage" value="user/chg_pswd.jsp"/>
@@ -222,10 +224,13 @@ java.util.Enumeration names = request.getParameterNames();
 	netscape  = "";
 	ver	  = navigator.appVersion;
 	len	  = ver.length;
-
+	if (frm.userTokenId){
+		frm.userTokenId.value = "" ;
+	}
 	frm.userId.value = "";
 	frm.organizationId.value = "";
 	frm.mailId.value = "${esapi:encodeForJavaScript(loginId)}";
+	
 
 	for (iln = 0; iln < len; iln++) {
 		if (ver.charAt(iln) == "(") break;
@@ -542,14 +547,6 @@ java.util.Enumeration names = request.getParameterNames();
 			result = unescape(myCookie.substring(startOfCookie,endOfCookie));
 		}
 		return result;
-	}
-
-	if(typeof(frm.SSO_Code) !== 'undefined' && frm.SSO_Code != null) {
-        if (frm.SSO_Code.value = "0") {
-          autoSignOn = "true" ;
-	      frm.password.value = "109283745A";
-          submitLogin();
-        }
 	}
 
 	function autoPoReview() {

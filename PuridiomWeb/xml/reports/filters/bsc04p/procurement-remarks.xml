@@ -1,0 +1,103 @@
+<procurement-remarks>
+  <columns>
+		<RequisitionHeader_requisitionNumber>
+			<label>Requisition Number</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</RequisitionHeader_requisitionNumber>
+		<RequisitionHeader_requisitionDate>
+			<label>Requisition Date</label>
+			<type>DATE</type>
+			<visible>1</visible>
+		</RequisitionHeader_requisitionDate>
+		<RequisitionHeader_requisitionerCode>
+			<label>Requisitioner Code</label>
+			<type>STRING</type>
+			<visible>0</visible>
+		</RequisitionHeader_requisitionerCode>
+		<RequisitionHeader_fiscalYear>
+			<label>Fiscal Year</label>
+			<type>STRING</type>
+			<visible>0</visible>
+		</RequisitionHeader_fiscalYear>
+		<RequisitionHeader_requiredDate>
+			<label>Required Date</label>
+			<type>DATE</type>
+			<visible>1</visible>
+		</RequisitionHeader_requiredDate>
+		<RequisitionHeader_departmentCode>
+			<label>Department</label>
+			<type>STRING</type>
+			<visible>0</visible>
+		</RequisitionHeader_departmentCode>
+		<RequisitionHeader_assignedBuyer>
+			<label>Assigned Buyer</label>
+			<type>STRING</type>
+			<visible>0</visible>
+		</RequisitionHeader_assignedBuyer>
+		<RequisitionHeader_buyer>
+			<label>Buyer</label>
+			<type>STRING</type>
+			<visible>0</visible>
+		</RequisitionHeader_buyer>
+		<RequisitionHeader_authorizationCode>
+			<label>Authorized By</label>
+			<type>STRING</type>
+			<visible>0</visible>
+		</RequisitionHeader_authorizationCode>
+		<RequisitionHeader_requisitionType>
+			<label>Requisition Type</label>
+			<type>REQUISITION-TYPE</type>
+			<visible>0</visible>
+		</RequisitionHeader_requisitionType>
+		<RequisitionHeader_status>
+			<label>Status</label>
+			<type>STATUS</type>
+			<visible>1</visible>
+		</RequisitionHeader_status>
+		<RequisitionHeader_total>
+			<label>Total</label>
+			<type>BIGDECIMAL</type>
+			<visible>0</visible>
+		</RequisitionHeader_total>
+		<RequisitionHeader_currencyCode>
+			<label>Currency Code</label>
+			<type>STRING</type>
+			<visible>0</visible>
+		</RequisitionHeader_currencyCode>
+		<RequisitionHeader_currencyFactor>
+			<label>Currency Factor</label>
+			<type>BIGDECIMAL</type>
+			<visible>0</visible>
+		</RequisitionHeader_currencyFactor>
+		<HistoryLog_description>
+			<label>Description</label>
+			<type>STRING</type>
+			<visible>0</visible>
+		</HistoryLog_description>
+		<HistoryLog_logDate>
+			<label>Log Date</label>
+			<type>STRING</type>
+			<visible>0</visible>
+		</HistoryLog_logDate>
+		<HistoryLog_logTime>
+			<label>Log Time</label>
+			<type>STRING</type>
+			<visible>0</visible>
+		</HistoryLog_logTime>
+		<HistoryLog_status>
+			<label>Status</label>
+			<type>STRING</type>
+			<visible>0</visible>
+		</HistoryLog_status>
+		<HistoryLog_userid>
+			<label>User Id</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</HistoryLog_userid>
+</columns>
+  <sqlfrom> RequisitionHeader as RequisitionHeader , HistoryLog as HistoryLog </sqlfrom>
+   <sqlorderby>RequisitionHeader.requisitionNumber ASC</sqlorderby>
+  <sqlwhere><![CDATA[  RequisitionHeader.icReqHeader = HistoryLog.icHeader  AND HistoryLog.status = '2800'  ]]></sqlwhere>
+  <title>Procurement Remarks Report</title>
+</procurement-remarks>

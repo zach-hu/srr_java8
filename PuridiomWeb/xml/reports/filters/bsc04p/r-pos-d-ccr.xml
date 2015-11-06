@@ -1,0 +1,92 @@
+<r-pos-d-ccr>
+  <columns>
+  		<PoHeader_poNumber>
+			<label>PO Number</label>
+			<type>STRING</type>
+		</PoHeader_poNumber>
+		<PoHeader_poType>
+			<label>Po Type</label>
+			<type>STRING</type>
+			<visible>0</visible>
+		</PoHeader_poType>
+		<PoHeader_effectiveDate>
+			<label>Effective Date</label>
+			<type>DATE</type>
+		</PoHeader_effectiveDate>
+		<PoHeader_expirationDate>
+			<label>Expiration Date</label>
+			<type>DATE</type>
+		</PoHeader_expirationDate>
+		<PoHeader_internalComments>
+			<label>Description</label>
+			<type>STRING</type>
+		</PoHeader_internalComments>
+		<PoHeader_vendorName>
+			<label>Vendor Name</label>
+			<type>STRING</type>
+			<visible>1</visible>>
+		</PoHeader_vendorName>
+		<PoHeader_vendorId>
+			<label>Supplier Number</label>
+			<type>STRING</type>
+		</PoHeader_vendorId>
+		<PoHeader_contactName>
+			<label>Contact Name</label>
+            <type>STRING</type>
+      	</PoHeader_contactName>
+		<Account_allocAmount>
+			<label>Amount</label>
+			<type>BIGDECIMAL</type>
+		</Account_allocAmount>
+		<VendorCommRel_id_commodityCode>
+			<label>Commodity Code</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</VendorCommRel_id_commodityCode>
+		<Vendor_vendorSic>
+			<label>NAICS Code</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</Vendor_vendorSic>
+		<PoHeader_currencyCode>
+			<label>Currency Code</label>
+			<type>STRING</type>
+			<visible>0</visible>
+		</PoHeader_currencyCode>
+		<PoHeader_udf8Code>
+			<label>Udf8Code</label>
+			<type>STRING</type>
+		<visible>0</visible>
+		</PoHeader_udf8Code>
+		<PoHeader_udf9Code>
+			<label>Contract Type</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</PoHeader_udf9Code>
+		<PoHeader_udf10Code>
+			<label>PO10</label>
+			<type>STRING</type>
+			<visible>0</visible>
+		</PoHeader_udf10Code>
+		<DocAttachment_docTitle>
+			<label>Title</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</DocAttachment_docTitle>
+		<Account_fld2>
+			<label>AC02</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</Account_fld2>
+		<DocAttachment_docFilename>
+			<label>Attachments</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</DocAttachment_docFilename>
+	</columns>
+  <sqlfrom>PoHeader as PoHeader, Account as Account, VendorCommRel as VendorCommRel, Vendor as Vendor, DocAttachment AS DocAttachment</sqlfrom>
+  <sqlwhere> <![CDATA[(PoHeader.icPoHeader = Account.id.icHeader) and (Vendor.vendorId = VendorCommRel.id.vendorId) and ( PoHeader.vendorId = Vendor.vendorId )and (PoHeader.poType='CT')and (PoHeader.poNumber <> 'N/A') and (PoHeader.expirationDate > :as_today) and ( PoHeader.icPoHeader (+) = DocAttachment.id.icHeader)]]> </sqlwhere>
+  <sqlorderby>PoHeader.poNumber</sqlorderby>
+  <title>Corporate Compliance Report</title>
+</r-pos-d-ccr>
+

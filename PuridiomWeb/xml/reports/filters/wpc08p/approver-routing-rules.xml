@@ -1,0 +1,93 @@
+<approver-routing-rules>
+	<columns>
+		<UserProfile_userId>
+			<label>User Id</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</UserProfile_userId>
+		<UserProfile_firstName>
+			<label>First Name</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</UserProfile_firstName>
+		<UserProfile_lastName>
+			<label>Last Name</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</UserProfile_lastName>
+		<UserProfile_title>
+			<label>Title</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</UserProfile_title>
+		<AppRule_id_udf1Code>
+			<label>Department</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</AppRule_id_udf1Code>
+		<AppRule_id_udf2Code>
+			<label>Location</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</AppRule_id_udf2Code>
+		<AppRule_id_udf3Code>
+			<label>Acct</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</AppRule_id_udf3Code>
+		<AppRule_amount>
+			<label>Approval Authority</label>
+			<type>BIGDECIMAL</type>
+			<visible>1</visible>
+		</AppRule_amount>
+		<AppRule_excludeLess>
+			<label>Min Amount</label>
+			<type>BIGDECIMAL</type>
+			<visible>1</visible>
+		</AppRule_excludeLess>
+		<AppRule_fyiApprover>
+			<label>FYI</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</AppRule_fyiApprover>
+		<AppRule_requiredApprover>
+			<label>Req</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</AppRule_requiredApprover>
+		<AppRule_advisor>
+			<label>Advisor</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</AppRule_advisor>
+		<UserProfile_lastChangeDate>
+			<label>Last Changed Date</label>
+			<type>DATE</type>
+			<visible>1</visible>
+		</UserProfile_lastChangeDate>
+		<UserProfile_lastChangeBy>
+			<label>Last Changed By</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</UserProfile_lastChangeBy>
+		<UserProfile_backupApprover>
+			<label>Backup Approver</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</UserProfile_backupApprover>
+		<UserProfile_dateEntered>
+			<label>Date Entered</label>
+			<type>DATE</type>
+			<visible>1</visible>
+		</UserProfile_dateEntered>
+		<AppRule_notes>
+			<label>Notes</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</AppRule_notes>
+	</columns>
+<sqlfrom>UserProfile as UserProfile, AppRule as AppRule</sqlfrom>
+<sqlwhere><![CDATA[(UserProfile.userId = AppRule.id.userId) and (UserProfile.status <> '03' )]]></sqlwhere>
+<sqlorderby>UserProfile.userId ASC</sqlorderby>
+<title>Approver Rules Report</title>
+</approver-routing-rules>

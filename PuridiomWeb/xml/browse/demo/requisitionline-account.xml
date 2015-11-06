@@ -1,0 +1,105 @@
+<requistionline>
+	<columns>
+		<RequisitionLine_icReqLine>
+			<visible>0</visible>
+		</RequisitionLine_icReqLine>
+		<RequisitionLine_icReqHeader>
+			<visible>0</visible>
+		</RequisitionLine_icReqHeader>
+		<RequisitionLine_requisitionNumber>
+			<label>Req. #</label>
+			<link><![CDATA[javascript: viewReq('#RequisitionLine_icReqHeader^','#RequisitionHeader_requisitionType^'); void(0);]]></link>
+			<size>10</size>
+		</RequisitionLine_requisitionNumber>
+		<RequisitionLine_itemNumber>
+			<label>Item Number</label>
+			<size>15</size>
+		</RequisitionLine_itemNumber>
+		<RequisitionLine_description>
+			<label>Description</label>
+			<size>45</size>
+			<trim>250</trim>
+		</RequisitionLine_description>
+		<Account_fld1>
+			<label>Cost Center</label>
+			<size>8</size>
+		</Account_fld1>
+		<Account_fld2>
+			<label>Project</label>
+			<size>8</size>
+		</Account_fld2>
+		<Account_fld3>
+			<label>Task</label>
+			<size>8</size>
+		</Account_fld3>
+		<Account_fld4>
+			<label>Account</label>
+			<size>8</size>
+		</Account_fld4>
+		<RequisitionLine_status>
+			<label>brw-status</label>
+			<type>STATUS</type>
+			<size>15</size>
+		</RequisitionLine_status>
+		<RequisitionLine_quantity>
+			<concatenate>
+				<col type="QtyDecimal">RequisitionLine_quantity</col>
+				<col type="constant"><![CDATA[&nbsp;]]></col>
+				<col type="constant">(</col>
+				<col>RequisitionLine_umCode</col>
+				<col type="constant">)</col>
+			</concatenate>
+			<label>Quantity</label>
+			<type>Decimal</type>
+			<size>25</size>
+			<detail>Y</detail>
+			<selectsql>N</selectsql>
+		</RequisitionLine_quantity>
+		<RequisitionLine_unitPrice>
+			<label>Unit Price</label>
+			<type>DollarDecimal</type>
+			<size>25</size>
+			<detail>Y</detail>
+		</RequisitionLine_unitPrice>
+		<RequisitionLine_commodityCode>
+			<label>Commodity</label>
+			<size>50</size>
+			<detail>Y</detail>
+		</RequisitionLine_commodityCode>
+		<!--
+		<RequisitionLine_requisitionerCode>
+			<label>Requisitioner Code</label>
+			<size>15</size>
+		</RequisitionLine_requisitionerCode>
+		<RequisitionLine_commodityCode>
+			<label>Commodity</label>
+			<size>15</size>
+		</RequisitionLine_commodityCode>
+		<RequisitionLine_umCode>
+			<label>Unit Of Measure</label>
+			<size>15</size>
+		</RequisitionLine_umCode>
+		<RequisitionLine_unitPrice>
+			<label>Unit Price</label>
+			<size>15</size>
+		</RequisitionLine_unitPrice>
+		<RequisitionLine_catalogId>
+			<label>Catalog ID</label>
+			<size>15</size>
+		</RequisitionLine_catalogId>
+		<RequisitionLine_itemLocation>
+			<label>Item Location</label>
+			<size>15</size>
+		</RequisitionLine_itemLocation>
+			-->
+	</columns>
+<sqlfrom>RequisitionLine as RequisitionLine, RequisitionHeader as RequisitionHeader, Account as Account</sqlfrom>
+<sqlwhere>
+	<![CDATA[ RequisitionLine.requisitionNumber <> 'N/A' AND RequisitionLine.icReqHeader = Account.id.icHeader
+						AND RequisitionLine.icReqHeader = RequisitionHeader.icReqHeader AND RequisitionLine.icAccount = Account.id.icLine ]]>
+</sqlwhere>
+<sqlorderby>RequisitionLine.requisitionNumber DESC</sqlorderby>
+<pagesize>15</pagesize>
+<title>Requisition Item Browse</title>
+</requistionline>
+

@@ -1,0 +1,91 @@
+<r_poex>
+	<columns>
+		<RequisitionLine_requisitionNumber>
+			<label>Requisition Number</label>
+			<type>STRING</type>
+		</RequisitionLine_requisitionNumber>
+		<RequisitionLine_lineNumber>
+			<label>Line Number</label>
+			<type>BIGDECIMAL</type>
+		</RequisitionLine_lineNumber>
+		<RequisitionLine_description>
+			<label>Description</label>
+			<type>STRING</type>
+		</RequisitionLine_description>
+		<UnitOfMeasure_description>
+			<label>Unit Of Measure</label>
+			<type>STRING</type>
+		</UnitOfMeasure_description>
+		<RequisitionLine_quantity>
+			<label>Quantity</label>
+			<type>BIGDECIMAL</type>
+		</RequisitionLine_quantity>
+		<RequisitionLine_unitPrice>
+			<label>Unit Price</label>
+			<type>BIGDECIMAL</type>
+		</RequisitionLine_unitPrice>
+		<RequisitionLine_lineTotal>
+			<label>Line Total</label>
+			<type>BIGDECIMAL</type>
+		</RequisitionLine_lineTotal>
+		<PoLine_poNumber>
+			<label>Po Number</label>
+			<type>STRING</type>
+		</PoLine_poNumber>
+		<PoLine_releaseNumber>
+			<label>Release Number</label>
+			<type>BIGDECIMAL</type>
+		</PoLine_releaseNumber>
+		<PoHeader_revisionNumber>
+			<label>Revision Number</label>
+			<type>BIGDECIMAL</type>
+		</PoHeader_revisionNumber>
+		<PoLine_lineNumber>
+			<label>Line Number</label>
+			<type>BIGDECIMAL</type>
+		</PoLine_lineNumber>
+		<PoLine_quantity>
+			<label>Quantity</label>
+			<type>BIGDECIMAL</type>
+		</PoLine_quantity>
+		<PoLine_unitPrice>
+			<label>Unit Price</label>
+			<type>BIGDECIMAL</type>
+		</PoLine_unitPrice>
+		<PoLine_lineTotal>
+			<label>Line Total</label>
+			<type>BIGDECIMAL</type>
+		</PoLine_lineTotal>
+		<PoLine_status>
+			<label>Status</label>
+			<type>STATUS</type>
+		</PoLine_status>
+		<RequisitionLine_itemNumber>
+			<label>Item Number</label>
+			<type>STRING</type>
+		</RequisitionLine_itemNumber>
+		<RequisitionHeader_currencyCode>
+			<label>Req.Curr Code</label>
+			<type>STRING</type>
+		</RequisitionHeader_currencyCode>
+		<PoHeader_currencyCode>
+			<label>PO.Curr Code</label>
+			<type>STRING</type>
+		</PoHeader_currencyCode>
+	</columns>
+  <sqlfrom>PoHeader as PoHeader, PoLine as PoLine ,RequisitionHeader as RequisitionHeader, RequisitionLine as RequisitionLine, UnitOfMeasure as UnitOfMeasure</sqlfrom>
+  <sqlwhere><![CDATA[
+  	(RequisitionHeader.icReqHeader = RequisitionLine.icReqHeader) and
+	(RequisitionLine.icReqLine = PoLine.icReqLine) and
+  	(PoLine.icPoHeader = PoHeader.icPoHeader) and
+  	(RequisitionLine.lineTotal <> PoLine.lineTotal) and
+	(RequisitionLine.umCode = UnitOfMeasure.umCode) AND
+  	(PoHeader.lastRevision = 'C' ) and
+  	(PoLine.status > '3020' ) and
+  	(PoLine.status < '9020' ) and
+  	(PoLine.poNumber <> 'N/A') and
+  	(RequisitionLine.requisitionNumber <> 'N/A')
+  ]]></sqlwhere>
+  <title>Purchase Order Exception Report (Requisitions)</title>
+</r_poex>
+

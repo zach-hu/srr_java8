@@ -23,6 +23,8 @@
 	String	uid = (String) request.getAttribute("userId");
 	String	oid = (String) request.getAttribute("organizationId");
 	String	sid = (String) request.getAttribute("sessionId");
+	String 	userTokenId = (String) request.getAttribute("userTokenId");
+	
 	String	module = (String) request.getAttribute("module");
 	String	moduleType = (String) request.getAttribute("moduleType");
 	String	originalOid = oid;
@@ -38,6 +40,8 @@
 	UserProfile	user = UserManager.getInstance().getUser(oid,uid);
 	UserRole	role = UserManager.getInstance().getUserRole(oid,uid);
 	String userTimeZone = user.getTimeZone();
+// 	String  epmc = HiltonUtility.ckNull((String) request.getAttribute("epmc"));
+	
 	/*if(HiltonUtility.isEmpty(userTimeZone)){
 		userTimeZone = PropertiesManager.getInstance(oid).getProperty("USER DEFAULTS", "TIMEZONE", "EST"); 
 	}*/
@@ -91,18 +95,19 @@
 	<META HTTP-EQUIV="Expires" CONTENT="Sat, 11 Sep 1971 12:00:00 GMT">
 	<META NAME="Description" Content="<%=contextPath%>/system/header.jsp">
 	<meta http-equiv=content-type content="text/html; charset=UTF-8">
-	<script type="text/javascript" src="<%=contextPath%>/scripts/yui/yahoo/yahoo.js"></script>
-	<script type="text/javascript" src="<%=contextPath%>/scripts/yui/dom/dom.js"></script>
-	<script type="text/javascript" src="<%=contextPath%>/scripts/yui/event/event.js"></script>
 	<SCRIPT LANGUAGE="JavaScript1.2" SRC="<%=contextPath%>/scripts/puridiom.js"></SCRIPT>
 	<SCRIPT LANGUAGE="JavaScript1.2" SRC="<%=contextPath%>/scripts/spell.js"></SCRIPT>
 	<script language='Javascript1.2' src="<%=contextPath%>/scripts/filter.js"></script>
 	<TITLE><%=DictionaryManager.getLabelsInstance(oid, language).getLabel(oid, "systemtitle", "Puridiom 4.0, Enabling Self-Service Procurement")%></TITLE>
 	<script type="text/javascript" src="<%=contextPath%>/scripts/subCommon.js"></script>
     <script type="text/javascript" src="<%=contextPath%>/scripts/subModal.js"></script>
-    <script type="text/javascript" src="<%=contextPath%>/scripts/jquery-migrate-1.2.1.js"></script>
     <script type="text/javascript" src="<%=contextPath%>/scripts/jquery-1.11.0.min.js"></script>
-
+    <script type="text/javascript" src="<%=contextPath%>/scripts/jquery-migrate-1.2.1.min.js"></script>
+    <script type="text/javascript" src="<%=contextPath%>/scripts/core-min.js"></script>
+    <script type="text/javascript" src="<%=contextPath%>/scripts/crypto-1.1.min.js"></script>
+    <script type="text/javascript" src="<%=contextPath%>/scripts/md5-min.js"></script>
+ 	<script type="text/javascript" src="<%=contextPath%>/scripts/sha1-min.js"></script>
+    
 <%@ include file="/system/stylesheet_link.jsp" %>
 	<LINK REL=STYLESHEET TYPE="text/css" HREF="<%=contextPath%>/system/styles/subModal.css">
 </HEAD>
@@ -110,6 +115,36 @@
 body {
 	margin:0;
 	padding:0;
+}
+
+@keyframes iconNew {
+ from {
+   background-color:#FFEB3B ;
+   border: 2px solid #F57F17 ;
+ } 
+ to {
+   background-color:#FDD835 ;
+   border: 2px solid #FFEB3B ;
+ }
+}
+.iconNew {
+    border-radius: 5px;
+   width: 42px;
+   padding: 0 3px;
+   background-color:#FFEB3B ;
+   border: 2px solid #F57F17 ;
+    -moz-animation: iconNew 1s infinite alternate; 
+    -webkit-animation: iconNew 1s infinite alternate; 
+    -ms-animation: iconNew 1s infinite alternate; 
+    animation: iconNew 1s infinite alternate; 
+}
+.iconNew:hover {
+    border-radius: 5px;
+   width: 42px;
+   padding: 0 3px;
+    transition: all 0.5s ease;
+     background-color:#FDD835 ;
+   border: 2px solid #FFEB3B ;
 }
 </style>
 
@@ -186,7 +221,13 @@ body {
 <iframe id="getInfoFrame" name="getInfoFrame" src="<%=contextPath%>/system/processing.jsp" frameborder="0" marginheight="0" marginwidth="0" style="position: absolute; border: 1px solid #C0C0C0; display: none; visibility:hidden;"></iframe>
 <tsa:hidden name="strEnableAuditTrail" value="${esapi:encodeForHTMLAttribute(enableAudit)}"/>
 <tsa:hidden name="userDateFormat" value="<%=userDateFormat%>"/>
+<% if (userTokenId != null) { %>
+<tsa:hidden name="userTokenId" value="<%=userTokenId%>"/>
+<% } %>
+
 <tsa:hidden name="<%= TokenProcessor.TOKEN_KEY %>" value="<%= TokenProcessor.getInstance().generateToken(request) %>"/>
 <tsa:hidden name="UserLog_status" value="<%=DocumentStatus.USERLOG_SUCCESSFUL_LOGOUT%>"/>
 <tsa:hidden name="ReturnURL" value="<%=returnUrl%>"/>
+<tsa:hidden name="epmc" value='<%= TokenProcessor.getInstance().generateToken(request, "")%>'/>
+<%-- <tsa:hidden name="sfbm" value='<%= TokenProcessor.getInstance().generateToken(request, "")%>'/> --%>
 <%@ include file="header_menu_options.jsp" %>

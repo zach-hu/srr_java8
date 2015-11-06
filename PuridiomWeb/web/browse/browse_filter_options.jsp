@@ -36,7 +36,7 @@
 <table width=<%=formWidth%> cellpadding=0 cellspacing=0 border=0>
 <tr>
 	<td valign=top width=150px height=30px>
-		<table cellpadding=0 cellspacing=0 border=0 height=100% width=100%>
+		<table cellpadding=0 cellspacing=0 border=0 height=100% width=150px>
 		<tr>
 			<td height=1px class=darkShadow><img src="<%=contextPath%>/images/none.gif" width="1" height="1px" /></td>
 		</tr>
@@ -47,8 +47,8 @@
 		</tr>
 		</table>
 	</td>
-	<td valign=bottom width=3px><img class=hdr12 src="<%=contextPath%>/images/angle.gif" height="31" /></td>
-	<td valign=bottom align=right width=*>
+	<td valign=bottom width=3px><img class="hdr12" src="<%=contextPath%>/images/angle.gif" height="31" /></td>
+	<td valign=bottom align=right width="100%">
 		<table cellpadding="0" cellspacing="0" border=0 width=100%>
 			<tr>
 				<td width=100% height=1px class=lightShadow><img src="<%=contextPath%>/images/none.gif" width="1" height="1" /></td>

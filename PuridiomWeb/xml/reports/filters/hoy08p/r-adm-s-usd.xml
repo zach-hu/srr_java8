@@ -1,0 +1,38 @@
+<r-adm-s-usd>
+  <columns>
+		<UserProfile_userId>
+			<label>User ID</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</UserProfile_userId>
+		
+		<UserProfile_firstName>
+			<label>First Name</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</UserProfile_firstName>
+		
+		<UserProfile_lastName>
+			<label>Last Name</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</UserProfile_lastName>
+		
+		<UserProfile_department>
+			<label>Lab</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</UserProfile_department>
+		
+		<UserProfile_dateEntered>
+			<label>Date Set up</label>
+			<type>DATE</type>
+			<visible>1</visible>		
+		</UserProfile_dateEntered>
+
+	</columns>
+  <sqlfrom>UserProfile as UserProfile</sqlfrom>
+  <sqlwhere><![CDATA[(UserProfile.userId = UserProfile.userId) ]]></sqlwhere>
+  <sqlorderby>UserProfile.userId</sqlorderby>
+  <title>New Users Added Since a Specific Date</title>
+</r-adm-s-usd>

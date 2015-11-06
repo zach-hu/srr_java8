@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rule>	
+	<clause type="lookup">
+		<sql><![CDATA[from CurrCode as CurrCode where CurrCode.currencyCode = '@currencycode@']]></sql>
+		<source>user</source>
+		<arguments>
+			<name>currencycode</name>
+			<source>user</source>
+			<colName>getCurrencyCode</colName>
+		</arguments>
+	</clause>
+</rule>

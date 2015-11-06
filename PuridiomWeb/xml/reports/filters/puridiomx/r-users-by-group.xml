@@ -1,0 +1,94 @@
+<r-users-by-group>
+  <columns>
+		<UserProfile_userId>
+			<label>User Id</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</UserProfile_userId>
+		<UserProfile_mailId>
+			<label>Mail Id</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</UserProfile_mailId>
+		<UserProfile_department>
+			<label>user-department</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</UserProfile_department>callForward
+		<UserProfile_callForward>
+			<label>Call Forward</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</UserProfile_callForward>
+		<UserProfile_functionFlags>
+			<label>Function Flags</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</UserProfile_functionFlags>
+		<UserProfile_approvalAmount>
+			<label>Approval Amount</label>
+			<type>BIGDECIMAL</type>
+			<visible>1</visible>
+		</UserProfile_approvalAmount>
+		<UserProfile_approveByLine>
+			<label>Approve By Line</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</UserProfile_approveByLine>
+		<UserProfile_status>
+			<label>Status</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</UserProfile_status>
+		<UserProfile_title>
+			<label>Title</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</UserProfile_title>
+		<UserProfile_firstName>
+			<label>First Name</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</UserProfile_firstName>
+		<UserProfile_lastName>
+			<label>Last Name</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</UserProfile_lastName>
+		<UserProfile_phoneNumber>
+			<label>user-telephoneNumber</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</UserProfile_phoneNumber>
+		<SecurityGroup_groupId>
+			<label>Group Id</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</SecurityGroup_groupId>
+		<SecurityGroup_groupDescription>
+			<label>Group Description</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</SecurityGroup_groupDescription>
+		<UserProfile_approver>
+			<label>Approver</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</UserProfile_approver>
+		<UserProfile_nameUdf1>
+			<label>Name Udf1</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</UserProfile_nameUdf1>
+		<UserProfile_nameUdf2>
+			<label>Name Udf2</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</UserProfile_nameUdf2>
+	</columns>
+  <sqlfrom>UserProfile as UserProfile, SecurityGroup as SecurityGroup, UserGroupRel as UserGroupRel</sqlfrom>
+  <sqlwhere><![CDATA[(UserProfile.userId = UserGroupRel.id.userId) and (SecurityGroup.groupId = UserGroupRel.id.groupId) ]]></sqlwhere>
+  <sqlorderby>SecurityGroup.groupId ASC, UserProfile.lastName ASC </sqlorderby>
+  <title>User Register by Group Profile Report</title>
+</r-users-by-group>
+

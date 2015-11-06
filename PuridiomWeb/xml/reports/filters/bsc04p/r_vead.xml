@@ -1,0 +1,102 @@
+<r_vead>
+  <columns>
+		<Vendor_vendorId>
+			<label>Supplier Id</label>
+			<type>STRING</type>
+		</Vendor_vendorId>
+		<Vendor_vendorName>
+			<label>Supplier Name</label>
+			<type>STRING</type>
+		</Vendor_vendorName>
+		<Address_addressLine1>
+			<label>Address Line 1</label>
+			<type>STRING</type>
+		</Address_addressLine1>
+ 		<Address_addressLine2>
+			<label>Address Line 2</label>
+			<type>STRING</type>
+		</Address_addressLine2>
+		<Address_addressLine3>
+			<label>Address Line 3</label>
+			<type>STRING</type>
+		</Address_addressLine3>
+		<Address_city>
+			<label>City</label>
+			<type>STRING</type>
+		</Address_city>
+		<Address_state>
+			<label>State</label>
+			<type>STRING</type>
+		</Address_state>
+		<Address_postalCode>
+			<label>Postal Code</label>
+			<type>STRING</type>
+		</Address_postalCode>
+		<Address_country>
+			<label>Country</label>
+			<type>STRING</type>
+		</Address_country>
+		<Vendor_vendorSic>
+			<label>SIC</label>
+			<type>STRING</type>
+		</Vendor_vendorSic>
+		<Vendor_vendorDuns>
+			<label>DUNS</label>
+			<type>STRING</type>
+		</Vendor_vendorDuns>
+		<Vendor_vendorClass>
+			<label>Business Class</label>
+			<type>STRING</type>
+		</Vendor_vendorClass>
+		<Vendor_lastActive>
+			<label>Last Active</label>
+			<type>DATE</type>
+		</Vendor_lastActive>
+		<Vendor_dateEntered>
+			<label>Date Entered</label>
+			<type>DATE</type>
+		</Vendor_dateEntered>
+		<Contact_lastName>
+			<label>Last Name</label>
+			<type>STRING</type>
+		</Contact_lastName>
+		<Contact_firstName>
+			<label>First Name</label>
+			<type>STRING</type>
+		</Contact_firstName>
+		<Contact_middleInit>
+			<label>Middle Initial</label>
+			<type>STRING</type>
+		</Contact_middleInit>
+		<Contact_contactTitle>
+			<label>Title</label>
+			<type>STRING</type>
+		</Contact_contactTitle>
+		<Contact_phoneNumber>
+			<label>Phone Number</label>
+			<type>STRING</type>
+		</Contact_phoneNumber>
+		<Contact_faxNumber>
+			<label>Fax Number</label>
+			<type>STRING</type>
+		</Contact_faxNumber>
+		<Contact_emailAddr>
+			<label>Email</label>
+			<type>STRING</type>
+		</Contact_emailAddr>
+		<Address_id_addressType>
+			<label>Address Type</label>
+			<type>STRING</type>
+			<visible>0</visible>
+		</Address_id_addressType>
+		<Address_id_addressCode>
+			<label>Address Code</label>
+			<type>STRING</type>
+			<visible>0</visible>
+		</Address_id_addressCode>
+	</columns>
+  <sqlfrom> Address as Address , Vendor as Vendor , Contact as Contact</sqlfrom>
+  <sqlwhere><![CDATA[( Vendor.vendorId = Address.id.addressType ) and ( Vendor.vendorId = Contact.id.vendorId ) ]]></sqlwhere>
+  <sqlorderby>Address.id.addressType, Address.id.addressCode</sqlorderby>
+  <title>Supplier Contacts/Addresses Report</title>
+</r_vead>

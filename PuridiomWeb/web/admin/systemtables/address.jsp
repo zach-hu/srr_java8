@@ -359,6 +359,18 @@
 		<% } %>
 		doSubmit('/browse/browse_sys_tables.jsp', handlers);
 	}
+	
+	function getFieldsJquery()
+	{
+		var fieldsToAuditJquery = $(":input:not([type=hidden])[name='Address_']");
+		return fieldsToAuditJquery;
+    }
+
+
+	function buildAuditIc()
+	{
+		return frm.Address_addressCode.value;
+	}
 
 // End Hide script -->
 </SCRIPT>

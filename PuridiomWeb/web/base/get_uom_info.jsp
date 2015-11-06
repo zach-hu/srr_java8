@@ -29,7 +29,7 @@
 </HEAD>
 
 <BODY ONUNLOAD="setWindowNull();" BGCOLOR="#CFCFB8int	">
-<FORM NAME="uomform">
+<FORM NAME="uomform" method="POST">
 <TABLE BORDER="0">
 <TR>
 	<TD ALIGN="CENTER">UOM FACTORS</TD>

@@ -68,7 +68,7 @@
 	{
 		var poolId = "";
 		var poolDesc = "";
-		var radios = document.all("c_radio");
+		var radios = document.getElementsByName("c_radio");
 		if (radios != null)
 		{
 			if (radios.length > 1)
@@ -78,7 +78,7 @@
 					if (radios[i].checked)
 					{
 						poolId = radios[i].value;
-						poolDesc = frm.AppPool_pooldesc[i].value;
+						poolDesc = document.getElementsByName("AppPool_pooldesc")[i].value;
 						break;
 					}
 				}

@@ -94,6 +94,11 @@ As long as the time falls between 12:00 AM and 5:00 AM, the full report will be 
 <SCRIPT value=JavaScript>
 <!-- Hide script
 	frm = document.purchaseform;
+// 	alert(window.parent.frm['epmc'].value + "  " + frm.epmc);
+	if (window.parent.frm['epmc'] && frm.epmc){
+		window.parent.frm['epmc'].value = frm.epmc.value;
+	}
+// 	alert(window.parent.frm['epmc'].value );
 <% if(!isReportExtensive.equalsIgnoreCase("Y")) { %>
 
 	function thisLoadPopup() {

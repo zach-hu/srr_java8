@@ -1,0 +1,58 @@
+<r-backorder>
+  <columns>
+		<RequisitionHeader_itemLocation>
+			<label>Facility</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</RequisitionHeader_itemLocation>
+		<RequisitionLine_itemNumber>
+			<label>itemNumber</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</RequisitionLine_itemNumber>
+		<InvItem_nsnNumber>
+			<label>NSN</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</InvItem_nsnNumber>
+		<RequisitionLine_description>
+			<label>description</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</RequisitionLine_description>
+		<RequisitionLine_requisitionNumber>
+			<label>requisitionNumber</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</RequisitionLine_requisitionNumber>
+		<RequisitionHeader_requisitionerCode>
+			<label>Requisitioner</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</RequisitionHeader_requisitionerCode>
+		<RequisitionHeader_requisitionDate>
+			<label>requisitionDate</label>
+			<type>DATE</type>
+			<visible>1</visible>
+		</RequisitionHeader_requisitionDate>
+		<RequisitionLine_quantity>
+			<label>quantity</label>
+			<type>BIGDECIMAL</type>
+			<visible>1</visible>
+		</RequisitionLine_quantity>
+		<RequisitionLine_backordered>
+			<label>backorder</label>
+			<type>BIGDECIMAL</type>
+			<visible>1</visible>
+		</RequisitionLine_backordered>
+		<RequisitionHeader_departmentCode>
+			<label>deptcode</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</RequisitionHeader_departmentCode>
+	</columns>
+  <sqlfrom> RequisitionLine as RequisitionLine , RequisitionHeader as RequisitionHeader, InvItem as InvItem </sqlfrom>
+  <sqlwhere><![CDATA[(RequisitionLine.icReqHeader = RequisitionHeader.icReqHeader) and ((RequisitionLine.status = '5005' ) and (RequisitionLine.backordered > 0 )) and (RequisitionLine.itemNumber = InvItem.itemNumber)]]></sqlwhere>
+  <title>Inventory Backorder Report</title>
+</r-backorder>
+

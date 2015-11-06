@@ -1,0 +1,107 @@
+<r-vch-d-iap>
+	<columns>
+		<InvoiceHeader_invoiceNumber>
+			<label>Invoice Number</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</InvoiceHeader_invoiceNumber>
+		<InvoiceHeader_poNumber>
+			<label>Po Number</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</InvoiceHeader_poNumber>
+		<PoHeader_poNumber>
+			<label>Po Number</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</PoHeader_poNumber>
+		<Vendor_vendorName>
+			<label>Supplier Name</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</Vendor_vendorName>
+		<InvoiceHeader_invoiceDate>
+			<label>Invoice Date</label>
+			<type>DATE</type>
+			<visible>1</visible>
+		</InvoiceHeader_invoiceDate>
+		<InvoiceHeader_invoiceSubtotal>
+			<label>Subtotal</label>
+			<type>BIGDECIMAL</type>
+			<visible>1</visible>
+		</InvoiceHeader_invoiceSubtotal>
+		<PoHeader_taxAmount>
+			<label>Tax</label>
+			<type>BIGDECIMAL</type>
+			<visible>1</visible>
+		</PoHeader_taxAmount>
+		<PoHeader_shippingTax>
+			<label>Shipping</label>
+			<type>BIGDECIMAL</type>
+			<visible>1</visible>
+		</PoHeader_shippingTax>
+		<PoHeader_otherCharges>
+			<label>Other</label>
+			<type>BIGDECIMAL</type>
+			<visible>1</visible>
+		</PoHeader_otherCharges>
+		<InvoiceHeader_invoiceTotal>
+			<label>Invoice Total</label>
+			<type>BIGDECIMAL</type>
+			<visible>1</visible>
+		</InvoiceHeader_invoiceTotal>
+		<InvoiceLine_lineNumber>
+			<label>Line Number</label>
+			<type>BIGDECIMAL</type>
+			<visible>1</visible>
+		</InvoiceLine_lineNumber>
+		<InvoiceLine_itemNumber>
+			<label>Item Number</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</InvoiceLine_itemNumber>
+		<InvoiceLine_description>
+			<label>Description</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</InvoiceLine_description>
+		<InvoiceLine_quantity>
+			<label>QUantity</label>
+			<type>BIGDECIMAL</type>
+			<visible>1</visible>
+		</InvoiceLine_quantity>
+		<InvoiceLine_umCode>
+			<label>Um Code</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</InvoiceLine_umCode>
+		<InvoiceLine_unitPrice>
+			<label>Unit Price</label>
+			<type>BIGDECIMAL</type>
+			<visible>1</visible>
+		</InvoiceLine_unitPrice>
+		<InvoiceHeader_currencyCode>
+			<label>Currency Code</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</InvoiceHeader_currencyCode>
+		<PoHeader_currencyCode>
+			<label>currency Code</label>
+			<type>STRING</type>
+			<visible>1</visible>
+		</PoHeader_currencyCode>
+		<InvoiceHeader_currencyFactor>
+			<label>Currency Factor</label>
+			<type>BIGDECIMAL</type>
+			<visible>1</visible>
+		</InvoiceHeader_currencyFactor>
+	</columns>
+<sqlfrom> InvoiceHeader as InvoiceHeader , InvoiceLine as InvoiceLine , PoHeader as PoHeader , Vendor as Vendor </sqlfrom>
+<sqlwhere><![CDATA[
+InvoiceHeader.icIvcHeader = InvoiceLine.icIvcHeader and
+InvoiceHeader.icPoHeader = PoHeader.icPoHeader and
+InvoiceHeader.vendorId = Vendor.vendorId
+]]></sqlwhere>
+<sqlorderby>InvoiceHeader.invoiceNumber ASC</sqlorderby>
+<title>Invoices Approved for Payments Report</title>
+</r-vch-d-iap>
